@@ -1,15 +1,1 @@
-Welcome to the freeradius-server wiki!
-
-Having started my journey with FR, I found it to be at times overwhelming and confusing.
-It has come to my attention that there is a lot of hair-pulling and hand-wringing regarding the installation of this wonderful program.
-There is a great need for good documentation concerning FR which will require a small level of commitment from those who are passionate about opensource and  the spread of technology in general. 
-Following is a list of immediate requirements for the use of FR.
-
-*Needed:*
-Freeradius install notes newbies. General and non-specific.
- -A set of guidelines that should be followed for proper installation. 
-List of installation requirements.
-General install for Debian-based systems.
- -Specific for Debian and Ubuntu. 
-General install for RPM-based systems.
- -Specific for Redhat, Fedora and CentOS.
+Please see http://wiki.freeradius.org/ for the official Wiki.
