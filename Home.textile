@@ -7,9 +7,9 @@ Following is a list of immediate requirements for the use of FR.
 
 *Needed:*
 Freeradius install notes newbies. General and non-specific.
- *A set of guidelines that should be followed for proper installation. 
+ -A set of guidelines that should be followed for proper installation. 
 List of installation requirements.
 General install for Debian-based systems.
- *Specific for Debian and Ubuntu. 
+ -Specific for Debian and Ubuntu. 
 General install for RPM-based systems.
- *Specific for Redhat, Fedora and CentOS.
+ -Specific for Redhat, Fedora and CentOS.
