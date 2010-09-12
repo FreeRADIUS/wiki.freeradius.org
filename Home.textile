@@ -5,7 +5,7 @@ It has come to my attention that there is a lot of hair-pulling and hand-wringin
 There is a great need for good documentation concerning FR which will require a small level of commitment from those who are passionate about opensource and  the spread of technology in general. 
 Following is a list of immediate requirements for the use of FR.
 
-Needed:
+*Needed:*
 Freeradius install notes newbies. General and non-specific.
  *A set of guidelines that should be followed for proper installation. 
 List of installation requirements.
