@@ -1,1 +1,2 @@
 Welcome to the freeradius-server wiki!
+Freeradius install for Newbies.
