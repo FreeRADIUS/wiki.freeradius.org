@@ -9,6 +9,7 @@ As the premiere open source RADIUS suite it is included as a [[standard package]
 We also keep a list of [[Acknowledgements]] of contributions to FreeRADIUS development.
 
 ==RADIUS Client Support==
+
 [[FreeRADIUS]] comes with:
 
 * Complete support for RFC 2865 and RFC 2866 attributes.
