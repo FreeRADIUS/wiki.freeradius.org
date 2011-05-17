@@ -1,1 +1,0 @@
-Please see http://wiki.freeradius.org/ for the official Wiki.
