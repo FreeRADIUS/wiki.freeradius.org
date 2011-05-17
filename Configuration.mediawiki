@@ -1,24 +1,30 @@
 ==Configuration of FreeRADIUS==
+
 === Executables ===
+
 * [[Radiusd#Configuration|Radiusd]]
 
 === Features ===
+
 * [[Radacct]]
 * [[Proxy]]
 * [[VMPS]]
 
 === Attributes and attribute manipulation ===
+
 * [[Adding, Removing, Modifying Attributes for further processing]]
 * [[Operators]]
 * [[Run-time variables]]
 * [[Supported Attributes]]
 
 === Virtual Modules ===
+
 * [[Fail-over]]
 * [[Load balancing]]
 * [[Templates]]
 
 === [[Configuration Files]] ===
+
 * [[Radiusd.conf]]
 * [[Clients.conf]]
 * [[Proxy.conf]]
@@ -28,10 +34,12 @@
 * [[Certificates]]
 
 === Device Specific ===
+
 * [[HP|Hewlett Packard]]
 * [[Cisco]]
 * [[Linksys]]
 
 ==See also==
+
 * [[Basic configuration HOWTO]]
 * [[HOWTO]]s for all other kinds of configuration

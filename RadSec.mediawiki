@@ -8,4 +8,5 @@ require mutual authentication of client and server using PKI certificates.
 FreeRADIUS does not yet support RadSec although support is planned for the future.
 
 ==External Links==
+
 * [http://www.open.com.au/radiator/radsec-whitepaper.pdf RadSec - a secure, reliable RADIUS Protocol]

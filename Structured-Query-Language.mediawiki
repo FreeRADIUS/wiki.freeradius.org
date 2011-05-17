@@ -5,4 +5,5 @@ FreeRADIUS Server has a master SQL abstraction module called [[rlm_sql]] which u
 Whereever possible QUERIES in FreeRADIUS use SQL99 syntax although the config files for some shims have been optimized to use proprietary extensions.
 
 ==See Also==
+
 * [[rlm_sql]]

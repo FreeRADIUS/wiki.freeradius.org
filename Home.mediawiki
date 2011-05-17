@@ -22,6 +22,7 @@ All known [[RADIUS Clients]] are supported.
 * [[EAP Clients]]
 
 ==Flexible Configuration==
+
 [[FreeRADIUS]] provides a wide range of methods to select user configurations. The server can select a configuration based on any of the following criteria : 
 
 * [[Attributes]] which have a given value
@@ -40,6 +41,7 @@ All known [[RADIUS Clients]] are supported.
 In addition, FreeRADIUS supports [[virtual server]]s which allow several separate sets of configuration data to coexist inside the same server instance.
 
 ==Documentation==
+
 This wiki collects a large amount of documentation relating to [[FreeRADIUS]] together in one place. Pages of particular interest to newcomers will be the [[FAQ]] and [[HOWTO]] sections, although the [http://www.freeradius.org/doc/ Traditional FreeRADIUS docs page] includes "man" pages, and other documentation.
 
 There are many third-party web sites and HOWTO's that give advice on FreeRADIUS.  They are usually years out of date, and refer to old versions, instead of 2.1. The advice that they give is also wrong.  We ''strongly'' recommend that you avoid most third-party documentation.

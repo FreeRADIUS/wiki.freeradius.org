@@ -23,6 +23,7 @@ Layers of a compelete NAC security deployment
 Policy decision may be separate from policy enforcement - this architecture is often called an out-of-band deployment. When policy decision and policy enforcement occur in the same device, this is called an inline deployment.
 
 ==See Also==
+
 * [[Network Access Protection]]
 * [[Network Admission Control]]
 * [[Trusted Network Connect]]

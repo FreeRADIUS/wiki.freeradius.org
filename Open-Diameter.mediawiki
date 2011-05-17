@@ -5,10 +5,12 @@ The source code of the Open Diameter software is available under the combination
 This implementation is not maintained anymore. 
 
 ==External Links==
+
 * [http://www.opendiameter.org/ Open Diameter Website]
 * [http://www.freediameter.net/ freeDiameter Website, another implementation in C]
 * [http://www.openaaa.org/ Open Source Diameter Java IMS optimised (hosted by Traffix Systems)]
 
 ==See Also==
+
 * [[DIAMETER]]
 * [[RADIUS]]

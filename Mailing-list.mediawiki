@@ -47,4 +47,5 @@ http://lists.freeradius.org/pipermail/freeradius-devel
 This list is for announcements about FreeRADIUS, including new versions, and security issues.
 
 ==See also==
+
 * [http://freeradius.org/list/ Up-to-date information about FreeRADIUS mailing lists]

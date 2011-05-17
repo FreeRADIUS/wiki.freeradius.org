@@ -1,10 +1,13 @@
 ''The content on this page refers to HP ProCurve switches only, not switching products from companies acquired by HP (3Com, H3C).''
 
 == Port authentication mechanisms ==
+
 === Web-Based ===
+
 The switch provides a local captive portal for credential entry. When the user submits their credentials, a hash of the password is then written to the CHAP-Password attribute.
 
 === Mac-Based ===
+
 When the switch receives a ethernet frame from a client which has not yet been authenticated, it copies the value of the ethernet SRC address field into the User-Name attribute of an Access-Request packet. The RADIUS server can then check the User-Name against a list of authorised Mac-Addresses. 
 
 ''Note: A hashed version of the SRC address is also inserted into the CHAP-Password attribute of Access-Request packets.''
@@ -20,6 +23,7 @@ Beware using the unauth-vid where switches rely on RADIUS servers for VLAN assig
 </div>
 
 === 802.1X ===
+
 The switch port acts as an [http://http://en.wikipedia.org/wiki/IEEE_802.1X 802.1X] authenticator, encapsulating/de-encapsulating EAP-Messages as required , and forwarding them between the supplicant and RADIUS server.
 
 When a supplicant connects, the switch will send an EAP Identity-Request packet to the suppliant, to prompt an authentication attempt. Alternatively the supplicant can initiate authentication by sending an EAP Start packet to the switch.
@@ -47,6 +51,7 @@ As the switch is only acting as a pass-through, any EAP Method may be used, so l
        Message-Authenticator = 0x5128a826dfedf51040215eb6fef398df
 
 ==== Port-Based Mode ====
+
 Port based mode is used when the 'client-limit' parameter of the 802.1X authenticator is not set.
 
 In port based mode if a single authentication attempt on the port is successful, the port is fully opened and all packets are allowed to ingress. 
@@ -54,6 +59,7 @@ In port based mode if a single authentication attempt on the port is successful,
 ''Note: This mode may not work correctly when used concurrently with another authentication method.''
 
 ==== Client-Based Mode ====
+
 Client based mode is a HP proprietary extension to the 802.1X standard, and is used when a 'client-limit' of 1 or more is configured for the 802.1X authenticator.
 
 In client based mode a filtering table is maintained for each authenticated port. Only devices which have successfully completed 802.1X authentication have their Mac-Addresses added to the filtering table, so only packets from authenticated devices are allowed to ingress into the network.
@@ -69,7 +75,9 @@ Most supplicants deal with this ok (despite it breaking RFC 3579), but it causes
 </div>
 
 == ProCurve port authentication special features ==
+
 === Capability advertisements ===
+
 Switches running K and W code may include one or more instances of the HP-Capability-Advert VSA (Vendor 11, Type 255) in Access-Requests. This attribute defines the capabilities of the NAS, listing all 'special' RADIUS attributes it supports. The format of HP-Capability-Advert values is loosely based around the RFC 2865 attribute encoding format with the length and value fields stripped and a version field added.
 
 <p>
@@ -82,6 +90,7 @@ Switches running K and W code may include one or more instances of the HP-Capabi
 </p>
 
 ==== Encoding - Standard attributes ====
+
 <pre>
  0                   1
  0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5
@@ -91,6 +100,7 @@ Switches running K and W code may include one or more instances of the HP-Capabi
 </pre>
 
 ==== Encoding - Vendor specific attributes ====
+
 <pre>
  0                   1                   2                   3
  0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
@@ -102,6 +112,7 @@ Switches running K and W code may include one or more instances of the HP-Capabi
 </pre>
 
 === Dual Authentication ===
+
 ProCurve switches (>=2600) can run 802.1X authentication concurrently with either Web-Based or Mac-Based authentication on the same port. Though Web-Based and Mac-Based authentication cannot be used together.
 
 When multiple port-access mechanisms are used, 802.1X based authentication always takes priority. That is, if a device has already authenticated via Mac-Based/Web-Based authentication, and then successfully completes 802.1X authentication, any accounting sessions open for Mac/Web based authentication will be closed, and the PVID assignment will reflect the VLAN assigned by the 802.1X authenticator.
@@ -118,16 +129,19 @@ This usually results in the client being assigned the port-access authenticator 
 </div>
 
 === Open VLANs ===
+
 * Unauthorised VLAN - If no ''port-access'' authentication mechanisms have managed to successfully authenticate the device, the ''unauth-vid'' will be set as the PVID. Although the port will be shown as ''closed'', traffic will be able to flow to/from the connected device on this VLAN. The idea behind this feature is to allow administrators to disseminate resources to connecting users (Installation packages for 802.1X supplicants, instructions etc...), allowing them to configure their computer for the local network and complete authentication successfully.
 
 * Authorised VLAN - If the client successfully completed authentication and no VLAN was specified by the RADIUS server, the ''auth-vid'' will be set as the PVID. If no VLAN was specified by the RADIUS server, and no auth-vid was set, the client is assigned to the untagged VLAN configured for the port.
 
 === Dynamic VLAN Assignment ===
+
 When sending an Access-Accept packet the RADIUS server can specify which PVID should be assigned to the client. Most ProCurve switches that support dynamic VLAN assignment use the standard [http://tools.ietf.org/html/rfc3580#section-3.31 RFC3580] attributes, which allow the assignment of a single untagged VLAN. The latest 'K' series switches however, support [http://tools.ietf.org/html/rfc4675 RFC4675] and [http://tools.ietf.org/html/rfc3580#section-3.31 RFC3580] attributes, allowing full control over the tagged and untagged VLANs set on a port.
 
 The recommended approach for configuring both tagged and untagged VLANs, is to configure the untagged ingress/egress VLAN using RFC 3580 attributes, and use RFC 4675 attributes for tagged VLANs.
 
 ==== RFC 3580 (single untagged VLAN) Assignment ====
+
 <p>
 {| border="2" cellpadding="3" style="border-collapse:collapse"
 !Radius Attribute!!Times used!!Description!!Value String!!Value 
@@ -144,6 +158,7 @@ If the specified Tunnel-Private-Group-ID matches a VLAN present on the switch, t
 On session termination, the ports VLAN membership will revert back to it's statically assigned untagged VLAN. If the specified Tunnel-Private-Group-ID does not much a configured or learned VLAN, authentication will fail.
 
 ==== RFC 4675 (multiple tagged/untagged VLAN) Assignment ====
+
 <p>
 {| border="2" cellpadding="2" style="border-collapse:collapse"
 !Radius Attribute!!Times used!!Description!!Value String!!Value
@@ -158,6 +173,7 @@ On session termination, the ports VLAN membership will revert back to it's stati
 </p>
 
 ===== Alternate HP VSAs for Microsoft RADIUS servers (will be available in future versions of K15) =====
+
 <p>
 {| border="2" cellpadding="2" style="border-collapse:collapse"
 !Radius Attribute!!Times used!!Description!!Value String!!Value
@@ -183,6 +199,7 @@ Supporting this attribute (i.e. allowing promiscuous ingress) would break the Pr
 </div>
 
 === Dynamic CoS (802.1p) Remapping ===
+
 <p>
 {| border="2" cellpadding="2" style="border-collapse:collapse"
 !Radius Attribute!!Times used!!Description!!Value String!!Value
@@ -231,6 +248,7 @@ If the packet egresses from the switch as an untagged VLAN, the switch will hono
 ''Note: There's no way to write a CodePoint value to the DiffServ/ToS field of IPv4 packets using dynamic assignment. HP-COS affects 802.1p priority only.''
 
 === DHCP-Snooping and WMA/802.1X bridge ===
+
 This feature is available on all platforms >=2600 series. When DHCP-Snooping and WMA/802.1X are enabled concurrently the IP address of the client learned in by DHCP-Snooping is included in the Framed-IP-Address attribute of all Accounting-Request packets.
 
 In the current implementation this introduces a delay of ~60 seconds between the client being authenticated and the first Accounting Start packet being sent.
@@ -249,7 +267,8 @@ Unfortunately there is no method to disable this bridging feature so if reliable
 
 ''Note: The Acct-Delay-Time attribute included in Accounting-Requests is not properly incremented, so accounting times really will be off by ~60 seconds''
 
-=== GVRP and Dynamic VLAN assignment === 
+=== GVRP and Dynamic VLAN assignment ===
+ 
 In addition to being able to assign statically configured VLANs, GVRP learned VLANs are also available for dynamic assignment.
 
 
@@ -263,6 +282,7 @@ The default setting for the interface ''unknown-vlan'' option is ''learn'', this
 ''Note: If a GVRP VLAN is no longer advertised to the switch, all clients assigned that VLAN will be forced to re-authenticate.''
 
 ==== Enable the use of GVRP learned VLANs with dynamic VLAN assignment ====
+
 <pre>
 conf
    aaa port-access gvrp-vlans
@@ -318,11 +338,14 @@ For authentication to succeed, Access-Accept packets must also contain a Service
 To deny access, either send an Access-Reject, or omit the Service-Type attribute.
 
 == ProCurve administrative interface authentication special features ==
+
 === Privilege-Mode ===
+
 With all newer (>2600) ProCurve switches, the switch can be instructed to respect the Service-Type sent back from the RADIUS server. In older models an administrator would first authenticate to gain access to the switch, and then again when enabling administrative commands.
 
 ''Note: The privilege-mode feature is not included in the 2500/6108 series.''
 ==== Enable privilege-mode ====
+
 <pre>
 conf
    aaa authentication login privilege-mode
@@ -330,6 +353,7 @@ exit
 </pre>
 
 === Accounting command logging ===
+
 With all newer (>2600) ProCurve switches, the switch can send all commands executed during a session to a RADIUS server in the form of Accounting-Request (Interim-Update) packets.
 
 The command executed will be written to the ''HP-Command-String'' VSA.
@@ -350,6 +374,7 @@ The command executed will be written to the ''HP-Command-String'' VSA.
 	Acct-Delay-Time = 0
 </pre>
 ==== Enable command logging ====
+
 <pre>
 conf
    aaa accounting commands stop-only radius
@@ -357,6 +382,7 @@ exit
 </pre>
 
 == RFC 3576 Change of Authorisation & Disconnect Message ==
+
 RFC3576 operation is currently supported on all K and W branch switches. It is considered to be a 'premium' feature, so is unlikely to be backported, or included in lower end switch models.
 
 A RADIUS request with a Code of either 40 (Disconnect Request) or 43 (CoA Request) is sent to UDP port 3799 (default) on the switch. 
@@ -365,6 +391,7 @@ RFC 3576 also recommends that an Event-Timestamp attribute be present for replay
 
 ''Note: HP switches will silently discard any CoA or DM requests that do not have a valid Event-Timestamp attribute, this behaviour may be disabled on a server by server basis (see below for example).''
 === Session-identification attributes ===
+
 All CoA/DM requests must contain at least one set of Session-Identification attributes.
 <p>
 {| border="2" cellpadding="2" style="border-collapse:collapse"
@@ -395,6 +422,7 @@ All CoA/DM requests must contain at least one set of Session-Identification attr
 If using Mac-Auth the User-Name attribute must match the User-Name provided in the Access-Request.
 
 === NAS-Identification attributes ===
+
 All CoA/DM requests must contain at least one NAS-Identification attribute (NAS-IP-Address appears to be the only one supported so far).
 <p>
 {| border="2" cellpadding="2" style="border-collapse:collapse"
@@ -405,6 +433,7 @@ All CoA/DM requests must contain at least one NAS-Identification attribute (NAS-
 </p>
 
 === Authorisation attributes ===
+
 At least one of these attribute/attribute sets must be present in the CoA request else the NAS will return a CoA-NAK (Missing-Attribute). No authorisation attributes must be included in the disconnect message else the NAS will return a DM-NAK (Unsupported-Attribute).
 <p>
 {| border="2" cellpadding="2" style="border-collapse:collapse"
@@ -429,7 +458,9 @@ At least one of these attribute/attribute sets must be present in the CoA reques
 ''Note: ProCurve switches do not support reauthorization using the "Service-Type = Authorization-Only" AVP''
 
 === Switch configuration ===
+
 ==== Add radius-server as CoA originator ====
+
 <pre>
 conf
     radius-server host <coa_originator_ip> key <coa_key>
@@ -437,6 +468,7 @@ conf
 exit
 </pre>
 ==== Add dedicated CoA originator ====
+
 <pre>
 conf
     radius-server host <auth_server_ip> key <auth_key>
@@ -451,6 +483,7 @@ conf
 exit
 </pre>
 ==== Disable Event-Timestamp check ====
+
 <pre>
 conf
     radius-server host <coa_originator_ip> time-window 0
@@ -458,6 +491,7 @@ exit
 </pre>
 
 === Radclient DM example ===
+
 <pre>
 echo "NAS-IP-Address = 172.0.0.1,\
 User-Name = 'example_user',\
@@ -470,6 +504,7 @@ Received response ID 114, code 41, length = 32
 </pre>
 
 === Radclient CoA example ===
+
 This changes example_user's PVID to 2 and remaps all incoming 802.1p priorities to 7.
 <pre>
 echo "User-Name = 'example_user',\
@@ -491,13 +526,16 @@ configuration mode to run the following commands.
 Most ProCurve wired switches >= 2600 series will support all or a subset of these commands.
 
 === Add servers ===
+
  radius-server host <radius_server_ip1> auth-port 1812 acct-port 1813
  radius-server host <radius_server_ip2> auth-port 1812 acct-port 1813
 
 === Set Server Parameters ===
+
  radius-server key <radius_shared_secret>
 
 === Set general port-access Parameters ===
+
 <pre>
 aaa authentication port-access eap-radius
 aaa port-access gvrp-vlans
@@ -506,6 +544,7 @@ aaa port-access gvrp-vlans
 ''Note: Enabling the use of GVRP vlans is optional.''
 
 === Enable RADIUS Authentication on administrative interfaces ===
+
  aaa authentication ssh login radius local
  aaa authentication ssh enable radius local
  aaa authentication console login radius local
@@ -513,6 +552,7 @@ aaa port-access gvrp-vlans
  aaa authentication login privilege-mode
 
 === Enabling 802.1X/MAC dual authentication on selected ports (single client) ===
+
 <pre>
 aaa port-access authenticator <port range>
 aaa port-access authenticator <port range> logoff-period 862400
@@ -539,6 +579,7 @@ In older versions of K series firmware, and all other branches, the logoff-perio
 ''Note: For security reasons it's better to implement dual authentication with 802.1X and Mac-Auth instead of configuring an unauth-vid. This allows the RADIUS server ultimate control over whether data from a device is allowed to ingress onto the network.''
 
 === Enable Accounting ===
+
  aaa accounting exec start-stop radius
  aaa accounting network start-stop radius
  aaa accounting system start-stop radius
@@ -550,6 +591,7 @@ You must have manager access on the target ap and have entered
 configuration mode to run the following commands.
 
 === Create WPA/WPA2 TKIP/AES 802.1X Authenticated WLAN ===
+
 <pre>
 conf
 
@@ -585,9 +627,11 @@ exit
 </pre>
 
 ==Known Issues==
+
 Many, always update to the latest firmware.
 
 ==See Also==
+
 * [[Cisco]]
 * [[Linksys]]
 * [[Mac-Auth]]

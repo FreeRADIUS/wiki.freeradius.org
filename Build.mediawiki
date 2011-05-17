@@ -1,8 +1,10 @@
 =Building FreeRADIUS=
 ==Supported Platforms==
+
 FreeRADIUS is known to run on a large number of 32 and 64bit [[platforms]], however building on some of them may require following special procedures here
 
 ==Building from Source==
+
 If your operating system has support for a package manager such as .deb or .rpm file format, we recommend that you follow the instructions in the [[Build#Building_Packages|next section]] instead.
 
  bash$ tar zxvf freeradius-[version].tar.gz	 
@@ -32,6 +34,7 @@ and freeradius runs and responds to radtest.
 Please see: [[Solaris]]
 
 ==Building Packages==
+
 If your operating system has a packaging system (dpkg, rpm, tgz), its usually better to install the appropriate packages instead of directly installing from source.
 
 Note: Pre-built [[binary packages]] are available for a number of operating systems.
@@ -39,6 +42,7 @@ Note: Pre-built [[binary packages]] are available for a number of operating syst
 It's usually easier and more reliable to use pre-built packages from standard repositories of the operating system vendor. Build your own packages only if you cannot find the former.
 
 ===Building Debian packages===
+
 If you're using ''Debian GNU/Linux'', you should first check whether your desired version of FreeRADIUS is available in the Debian package repositories, because that will save you the trouble of building packages yourself.
 
 Please see: http://packages.debian.org/freeradius
@@ -79,6 +83,7 @@ For build instructions, please see the Debian section immediately above.
 Please refer to the information on the Red Hat specific page [[Red Hat FAQ]].
 
 ===Building SUSE packages===
+
 On SUSE Linux it should be a simple matter of taking the latest FreeRADIUS release tarball and dropping it in ''/usr/src/packages/SOURCES'' along with the other files from the ''suse/'' directory inside the tarball with the exception of ''freeradius.spec'' which goes in ''/usr/src/packages/SPECS''
 
 Then simply run:
@@ -87,6 +92,7 @@ Then simply run:
 ''rpmbuild'' will tell you if you are missing any build dependencies. If so, simply install them with ''yast2 -i packagename-devel'' then rerun ''rpmbuild''
 
 ===Building SUSE packages with Oracle Support===
+
 If you wish to use Oracle you will need to recompile FreeRADIUS on a machine 
 that has Oracle development libraries installed. FreeRADIUS is known to work both with a full Oracle installation as well as with the [http://www.oracle.com/technology/tech/oci/instantclient/index.html Oracle Instant Client SDK]. Once built the resulting RPM package can be deployed with just the [http://www.oracle.com/technology/tech/oci/instantclient/index.html Oracle Instant Client] (No need for the SDK on production machines)
 
@@ -105,5 +111,6 @@ Then simply run:
  rpmbuild -ba /usr/src/packages/SPECS/freeradius.spec
 
 ==See Also==
+
 * [[Binary packages]]
 * [[Standard package]]

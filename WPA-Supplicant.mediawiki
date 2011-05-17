@@ -17,6 +17,7 @@ The graphical user interface is built on top of the Qt library from Trolltech.
 The command-line tool <tt>eapol_test</tt> can be used to verify whether a FreeRADIUS server is responding to EAP authorization requests.
 
 == EAP methods ==
+
 Supported EAP methods include:
 
 * [[Extensible Authentication Protocol#EAP-TLS|EAP-TLS]]
@@ -30,7 +31,9 @@ Supported EAP methods include:
 * [[Extensible Authentication Protocol#LEAP|LEAP]] (note: requires special support from the driver)
 
 ==See also==
+
 *[[NetworkManager]]
 
 ==External links==
+
 *[http://hostap.epitest.fi/wpa_supplicant/ Official web site]

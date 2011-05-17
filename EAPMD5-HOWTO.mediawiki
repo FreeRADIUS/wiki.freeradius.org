@@ -1,4 +1,5 @@
 ==Very basic understanding==
+
 EAP/MD5 and other types of EAP authentication are part of &quot;Port based network access control&quot;, as defined in the IEEE 802.1X standard. All you have to know at this time are the three main actors:
 
 ;Authentication Server (called [[AS]] or server in this document)
@@ -30,6 +31,7 @@ concerned here are typically in the ''/etc/raddb/'' directory of your [[FreeRADI
 * radiusd.conf
 
 ===User configuration (users)===
+
 Alter the existent user or add another one which will be used for test
 purposes. The simplest possible configuration is given in the example.
 More complicated configurations are out of the scope of this document.
@@ -66,7 +68,9 @@ Finally, the EAP module itself has to be configured at least this way:
 Thats it for [[FreeRADIUS]]
 
 ==Client configuration==
+
 ===Windows XP as supplicant===
+
 First of all: please read the documentation of your client. There are a
 plenty of different clients on the market, we cant provide any help for
 them. Basically, you have to activate &quot;Network port based 802.1X authentication&quot;,
@@ -89,7 +93,9 @@ Deactivate older authentication types (Open, Shared, CHAP, PAP, whatever)
 to prevent misunderstanding during the test.
 
 ==User configuration==
+
 ===Windows XP (before SP1)===
+
 '''Note:''' since WindowsXP SP1 you can't use EAP-MD5 for wireless devices!!! EAP-MD5 is only available for wired devices.
 
 Go to the Network Connections window. Right-click the connection corresponding to the adapter which is going to use EAP authentication. Go to the "Authentication" tab. If it doesnt appear (yes, its weird sometimes) try to unplug and plug your adapter till it does (if PCMCIA...) Otherwise, download the software for the adapter configuration like e.g. ACU for the Cisco adapters and try to de- and reactivate the card.
@@ -130,6 +136,7 @@ with an "EAP Notification" type message instead of "EAP MD5 Challenge" message w
 be issued. <i><b>FreeRadius</b></i> server currently rejects every incoming EAP notification.
 
 ==Exchange and log examples==
+
 Here is an example log of a successful user login
 
 The basic exchange would be like following:

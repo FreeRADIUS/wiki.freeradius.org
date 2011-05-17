@@ -5,6 +5,7 @@ radclient reads radius attribute/value pairs from it standard input, or from a f
 The User-Password and CHAP-Password attributes are automatically encrypted before the packet is sent to the server.
 
 ==Command Line==
+
 : Usage: radclient [options] server[:port] <command> [<secret>]
 ::; <command>  : One of auth, acct, status, coa, or disconnect.
 ::; -c count   : Send each packet 'count' times.
@@ -27,4 +28,5 @@ The User-Password and CHAP-Password attributes are automatically encrypted befor
  echo "User-Name=test,Password=mypass,Framed-Protocol=PPP " | /usr/local/bin/radclient localhost:1812 auth s3cr3t
 
 ==See Also==
+
 * [[radiusclient]]

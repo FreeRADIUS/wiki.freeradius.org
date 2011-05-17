@@ -8,6 +8,7 @@ Extensible Authentication Protocol(EAP), RFC 2284, is a general protocol that al
 RADIUS attribute used for EAP is EAP-Message, 79(RFC 2869). RADIUS communicates all EAP messages by embedding them in this attribute.
 
 ====General Terminology====
+
 ; Supplicant/EAP Client
 : the software on the end-user/client machine (machine with the wireless card).
 
@@ -48,6 +49,7 @@ Currently, EAP is widely used in wireless networks than in wired networks.  In 8
 # The supplicant decrypts the Broadcast key with the Session key and the session continues using the Broadcast and Session keys until the session ends.
 
 ===References===
+
 The Implementation of EAP over RADIUS is based on the following RFCs
 * RFC 2869 -- RADIUS Extensions
 * RFC 2284 -- PPP Extensible Authentication Protocol (EAP)
@@ -86,6 +88,7 @@ To add a new EAP-Type then a new directory should be created as rlm_eap/types/rl
 |}
 
 ===CONFIGURATION===
+
 Add the eap configuration stanza to the modules section in [[radiusd.conf]] to load and control rlm_eap and all the supported EAP-Types:
 
 For example:
@@ -251,6 +254,7 @@ of EAP-START. It blindly responds with EAP-Identity request.
 Proxying is handled only after EAP-Identity response is received.
 
 ==== I want to enable multiple EAP-Types, how can I configure? ====
+
   
 In the module configuration (radiusd.conf or modules/eap)
 
@@ -286,6 +290,7 @@ respond with EAP-Acknowledge(EAP-MD5). Server now responds with
 MD5-Challenge.
 
 ===INSTALLATION===
+
 EAP, EAP-MD5, and Cisco LEAP do not require any additional packages.  [[FreeRADIUS]] contains all the required packages.
 
 For EAP-TLS, [http://www.openssl.org/ OPENSSL] is required to be installed.  Any version from 0.9.7, should fairly work with this module.
@@ -293,6 +298,7 @@ For EAP-TLS, [http://www.openssl.org/ OPENSSL] is required to be installed.  Any
 EAP-SIM should not require any additional packages.
 
 ===CAVEATS===
+
 It probably still has bugs.  Most notably, there is a small memory leak somewhere in the eap_tls code.  I suspect it's because of my misuse of OPENSSL libraries, but I have no proof yet.
 
 ===IMPLEMENTATION (For Developers)===
@@ -312,6 +318,7 @@ initiate() function begins the conversation when EAP-Identity response is receiv
 authenticate() function uses specific EAP-Type authentication mechanism to authenticate the user. During authentication many EAP-Requests and EAP-Responses takes place for each authentication. Hence authenticate() function may be called many times. EAP_HANDLER contains the complete state information required.
 
 ===HOW EAP WORKS===
+
 as posted to the list, by John Lindsay <jlindsay@internode.com.au>
 
 To make it clear for everyone, the supplicant is the software on the client (machine with the wireless card).
@@ -335,6 +342,7 @@ If the response is valid the RADIUS server sends a success message and the sessi
 The client and the AP then begin using session WEP keys. The WEP key used for multicasts is then sent from the AP to the client.  It is encrypted using the session WEP key.
 
 ===ACKNOWLEDGEMENTS===
+
 Primary author - Raghu <raghud@mail.com>
 
 EAP-SIM	 - Michael Richardson <mcr@sandelman.ottawa.on.ca>
@@ -342,4 +350,5 @@ EAP-SIM	 - Michael Richardson <mcr@sandelman.ottawa.on.ca>
 The development of the EAP/SIM support was funded by [http://www.nic.at/ipa Internet Foundation Austria].
 
 ==See also==
+
 * [[EAP module changes]]

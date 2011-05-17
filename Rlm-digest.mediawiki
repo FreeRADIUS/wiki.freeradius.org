@@ -37,6 +37,7 @@ In the ''authorize{}'' section :
  digest
 
 === User configuration ===
+
 This module handles SIP digest authentication requests from a SIP server, in which every user belongs to a given ''realm''.
 
 Clear or encrypted passwords can be stored and a ''User-Password'' or ''Digest-HA1'' attribute will store the value in either case.
@@ -45,10 +46,12 @@ The ''realm'' value is used in the encrypted password computation, as the actual
  H(username:realm:password)
 
 ==== Clear text password storage ====
+
 Example for user "bob" with password "zanzibar"
  bob		Cleartext-Password := "zanzibar"
 
 ==== Encrypted (Digest-HA1) password storage ====
+
 Example for user "bob" with password "zanzibar" and realm "biloxi.com"
  bob		Digest-HA1 := "12af60467a33e8518da5c68bbff12b11"
 

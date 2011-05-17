@@ -78,4 +78,5 @@ See also: [[troubleshooting]].
 If you have a Windows PC handy you may also wish to use NTradPing (downloadable from  MasterSoft) to send test packets instead of radtest. If you do this, or test from any other machine, remember your PC (or other machine) needs to be in your NAS list in clients.conf too!
 
 ==See also==
+
 * [[Configuration files]]

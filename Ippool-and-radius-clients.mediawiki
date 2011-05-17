@@ -1,4 +1,5 @@
 == Creating DEFAULT entries to assign unknown client's a pool address ==
+
 Specifically, the issue I was solving is how to assign an ip from a specific pool to a specific radius client that was configured to route that pool, but have no knowledge of the clients details like user or pass.
 
 Why would anyone want to do such a thing? If you have a wireless device that is authenticating to a sperate process or might even authenticate to the same freeradius server, yet the wireless device itself doesn't request an address. A router or other ethernet device behind the wireless device does this. So, maybe you don't care what device is asking for the ip since you already know the device allowing it onto the network is allowed to be there. Having to enter the MAC of every client and for equipment which you don't own or care to know about would only increase user confusion and add to user downtime if they didn't inform you of an equipment change.

@@ -1,4 +1,5 @@
 ==Description==
+
 This is the [[FreeRADIUS]] implementation of the well known radius server program.  Even though this program is largely compatible with Livingston’s radius version 2.0, it is not based on any part of that code.
 
 FreeRADIUS is a high-performance and highly configurable [[RADIUS]] server.  As a result, it can be difficult to configure in systems with complex requirements.  Our suggestion is to proceed via the following steps:
@@ -10,11 +11,13 @@ FreeRADIUS is a high-performance and highly configurable [[RADIUS]] server.  As 
 # Ask questions on the [[FAQ#Is_there_a_mailing_list_for_FreeRADIUS.3F|mailing list]].  When asking questions, include the output from debugging mode ( radiusd -X ).  This information will allow people to help you.  Without it, your message will get ignored.
 
 ==Background==
+
 [[RADIUS]] is a protocol spoken between an access server, typically a device connected to several modems or ISDN lines, and a radius server.  When a user connects to the access server, (s)he is asked for a loginname and a password.  This information is then sent to the radius server.  The server replies with "access denied", or "access OK".  In the latter case login information is sent along, such as the IP address in the case of a PPP connection.
 
 The access server also sends login and logout records to the radius server so accounting can be done.  These records are kept for each terminal server seperately in a file called detail, and in the wtmp compatible logfile /var/log/radwtmp.
 
 ==Command Line Options==
+
 '''radiusd [-a acct_dir] [-d db_dir] [-l log_dir] [-i address] [-p port] [-AcfnsSvXxyz]'''
 
 ; -A
@@ -89,6 +92,7 @@ The access server also sends login and logout records to the radius server so ac
 : '''This command line option is deprecated'''.  See the log_auth_badpass and the log_auth_goodpass configuration items in the radiusd.conf file.
 
 ==Configuration==
+
 [[Radiusd]] uses a number of configuration files. Each file has it’s own manpage describing the format of the file.  These files are:
 
 ; [[radiusd.conf]]
@@ -118,4 +122,5 @@ The access server also sends login and logout records to the radius server so ac
 : Here the users are defined.  On a typical setup, this file mainly contains DEFAULT entries to process the different types of logins, based on hints from the hints file.  Authentication is then based on the contents of the UNIX /etc/passwd file.  However, it is also possible to define all users, and their passwords, in this file.
 
 ==See Also==
+
 * [[radiusclient]]

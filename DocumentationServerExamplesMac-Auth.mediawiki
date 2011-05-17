@@ -1,4 +1,5 @@
 == Background information ==
+
 In it's most basic form, Mac-Auth is just checking the value of the Calling-Station-Id or User-Name attributes against a list of authorised Mac-Addresses.
 
 This works fine when the RADIUS server is performing Mac-Auth and only Mac-Auth, but when the server is required to perform multiple types of authentication against different credential stores, it may be helpful to determine whether the NAS is really hinting that MAC authentication has been requested.
@@ -18,11 +19,13 @@ If any CHAP-Based protocol is used on the the same RADIUS server that performs M
 </div>
 
 == Basic recipes ==
+
 === Example 1 - basic macauth ===
 
 This example assumes the server is only performing macauth. It checks MAC addresses against a "users" style file
 
 ==== raddb/policy.conf ====
+
 You may (optionally) wish to rewrite the Calling-Station-ID attribute, to remove, or add, a standard set of separators between the octets of the Mac-Address.
 
 <pre>
@@ -42,6 +45,7 @@ rewrite_calling_station_id {
 </pre>
 
 ==== raddb/modules/file ====
+
 <pre>
 files authorized_macs {
         # The default key attribute to use for matches.  The content
@@ -59,12 +63,14 @@ files authorized_macs {
 }
 </pre>
 ==== raddb/authorized_macs ====
+
 <pre>
 00-11-22-33-44-55
 	Reply-Message = "Device with MAC Address %{Calling-Station-Id} authorized for network access"
 </pre>
 
 ==== raddb/sites-available/default ====
+
 <pre>
 authorize {
   preprocess
@@ -106,6 +112,7 @@ As per example 1
 As per example 1
 
 ==== raddb/sites-available/default ====
+
 <pre>
 authorize {
   preprocess
@@ -154,6 +161,7 @@ As per example 1
 As per example 1
 
 ==== raddb/sites-available/default ====
+
 <pre>
 authorize {
   preprocess
@@ -181,6 +189,7 @@ authorize {
 </pre>
 
 === Example 4 - paranoid (checking the contents of the chap password attribute) ===
+
 The examples below are a very rough example of how to perform MAC Based authentication with FreeRADIUS. You may need to add extra conditions to the authorize section, and perform additional canonicalization of the Calling-Station-ID and User-Name attributes, to make it work for your particular NAS.
 
 ==== raddb/policy.conf ====
@@ -196,6 +205,7 @@ As per example 1
 As per example 1
 
 ==== raddb/sites-available/default authorize{} ====
+
 <pre>
 
 #
@@ -229,6 +239,7 @@ if((Service-Type == 'Call-Check') || (User-Name =~ /^%{Calling-Station-ID}$/i)){
 </pre>
 
 ==== raddb/sites-available/default authenticate{} ====
+
 <pre>
 #
 # Authentication based on Calling-Station-ID
@@ -254,6 +265,7 @@ Auth-Type CSID {
 </pre>
 
 ==== raddb/sites-available/default post-auth{} ====
+
 <pre>
 if(control:Auth-Type == 'CSID'){
 	# Authorization happens here
@@ -266,7 +278,9 @@ if(control:Auth-Type == 'CSID'){
 </pre>
 
 == Additional modifications ==
+
 === Mac-Auth authorisation by SSID ===
+
 Follow any of the recipes above and then make the following modifications.
 
 Note: The recipe below will work with any NAS that includes the SSID in the Called-Station-ID string with the format <BSSID>:<SSID> e.g.''"00-11-22-33-44-55:MY_SSID_1"''. There is no standard for this, and vendors may include the SSID in its own vendor specific attribute (VSA). If unsure, run the server in debug mode (-X) and check the contents of incoming requests.
@@ -274,6 +288,7 @@ Note: The recipe below will work with any NAS that includes the SSID in the Call
 If your vendor's NAS uses a VSA, omit the call to 'rewrite_called_station_id', do not add the additional attributes to the dictionary, and insert that VSA into the key attribute in place of '%{Called-Station-SSID}' e.g. ''key = "%{VENDOR_SSID_VSA}.%{Calling-Station-ID}"''.
 
 ==== raddb/dictionary ====
+
 Use next free attribute number between 3000-4000 and insert the following definition.
 <pre>
 # The SSID the supplicant/user device connected to
@@ -281,6 +296,7 @@ ATTRIBUTE	Called-Station-SSID	3010		string
 </pre>
 
 ==== raddb/policy.conf ====
+
 Add the following policy stanza to policy.conf.
 <pre>
 #
@@ -301,6 +317,7 @@ rewrite_called_station_id {
 </pre>
 
 ==== raddb/sites-available/default authorize{} ====
+
 Add the a module call for 'rewrite_calling_station_id' to the authorize section directly above the call to 'rewrite_calling_station_id'.
 <pre>
 authorize {
@@ -314,6 +331,7 @@ authorize {
 </pre>
 
 ==== raddb/modules/file ====
+
 modify the key attribute of the authorized_macs files instance
 <pre>
 files authorized_macs {
@@ -333,6 +351,7 @@ files authorized_macs {
 </pre>
 
 ==== raddb/authorized_macs ====
+
 Entries should now be in the following format.
 <pre>
 MY_SSID_1.00-11-22-33-44-55
@@ -340,11 +359,15 @@ MY_SSID_1.00-11-22-33-44-55
 </pre>
 
 === Mac-Auth authorisation by SSID SQL ===
+
 ==== raddb/dictionary ====
+
 As above.
 ==== raddb/policy.conf ====
+
 As above.
 ==== raddb/sites-available/default authorize{} ====
+
 Add the a module call for 'rewrite_calling_station_id' to the authorize section directly above the call to 'rewrite_calling_station_id'.
 <pre>
 authorize {

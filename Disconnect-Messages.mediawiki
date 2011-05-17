@@ -3,6 +3,7 @@ A Disconnect Message (sometimes known as [[Packet of Disconnect]]) is and unsoli
 To prevent unauthorized servers from disconnecting users, the authorizing agent that issues the [[Disconnect-Request]] packet must include identification attributes (Usually three attributes) in its Disconnect-Request]] packet. For a session to be disconnected, all parameters must match their expected values at the [[NAS]]. If the parameters do not match, the [[NAS]] discards the [[Disconnect-Request]] packet and sends a [[Disconnect-NAK]] (negative acknowledgment message).
 
 ==Disconnect Messages==
+
 To centrally control the disconnection of remote access users, RADIUS clients must be able to receive and process unsolicited disconnect requests from RADIUS servers. The RADIUS disconnect feature uses the existing format of RADIUS disconnect request and response messages.
 
 The code field used in disconnect messages has three codes: 
@@ -11,6 +12,7 @@ The code field used in disconnect messages has three codes:
 * [[Disconnect-NAK]] (42)
 
 ==Message Exchange==
+
 The [[RADIUS]] server (the disconnect client) and the [[NAS]] (the disconnect server) exchange messages using UDP. The [[Disconnect-Request]] sent from the disconnect client is a RADIUS-formatted packet with the [[Disconnect-Request]] and one or more attributes.
 
 The disconnect response is either a Disconnect-ACK or a Disconnect-NAK:
@@ -20,6 +22,7 @@ If [[AAA]] is successful in disconnecting the user, the response is a [[RADIUS]]
 If AAA is unsuccessful in disconnecting the user, the request is malformed, or the request is missing attributes, the response is a RADIUS-formatted packet with a [[Disconnect-NAK]]
 
 ==Example Disconnect-Request==
+
 [[FreeRADIUS]] server ([[radiusd]]) does not currently have internal [[Disconnect-Request]] support however you can send disconnect packets to a Disconnect enabled [[NAS]] with [[radclient]] as follows
 
  # echo "Acct-Session-Id=D91FE8E51802097" > packet.txt
@@ -45,5 +48,6 @@ For Mikrotik try
 where -r 1 means retry only once and give up.
 
 ==See Also==
+
 * [http://www.cisco.com/univercd/cc/td/doc/product/software/ios122/122newft/122t/122t8/ft_pod1.htm RADIUS Packet of Disconnect with Cisco equipment]
 * RFC 3576

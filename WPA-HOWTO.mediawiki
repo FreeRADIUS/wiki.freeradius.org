@@ -1,4 +1,5 @@
 ==Introduction==
+
 ===About this HOWTO===
 
 This document is intended as a practical document with a view to getting WPA authentication up-and-running as quickly and as easily as possible. We therefore gloss over most of the theory behind 802.1x, WPA, cryptosystems, digital signatures and certificates, etc.
@@ -8,14 +9,17 @@ This document is intended as a practical document with a view to getting WPA aut
 In short &mdash; security. '''W'''i-Fi '''P'''rotected '''A'''ccess implements a sub-set (or instance, if you like) of the IEEE's 802.1x authentication standards for wireless networks, and does so in a method compliant with the (at time of writing) forthcoming 802.11i standard. WPA provides for both ''authentication'' (assuring the identity of a client machine, the ''supplicant'') and ''encryption'' (ensuring exchanges between the wireless access point and client are secure).
 
 ====WPA Encryption====
+
 The encryption provided by [[WPA]] is considered to be much more secure than traditional [[WEP]]. [[WEP]] uses [[RC4]] cryptography usually with a ''fixed'' key of 64 to 256 bits in length, and because of this an attack on a WEP-secured network can be mounted by collecting packets for analysis and extracting the key from them. Such a crack can take as long as a matter of days on a small, household network, to a few hours on a busy corporate system. WPA, on the other hand, uses the '''T'''emporal '''K'''ey '''I'''ntegrity '''P'''rotocol system, [[TKIP]]. This has a number of fancy features (with names like "per-packet mixing") that I don't understand, but most importantly the keys are changed over time to make an attack difficult. Some "unofficial" extensions to [[WPA]] (that I've found on my hardware, and will probably be on others' as well) also allow [[AES]] (alias "Rijndael") encryption, which I believe to the strongest of the lot (although I might be wrong here).
 
 ====WPA Authentication====
+
 [[WPA]] Pre-Shared Key ([[WPA-PSK]], or "WPA Personal") is the first kind of WPA, and is trivial to set up (so it's not covered in this document). This uses a password (which can be up to 63 characters in length) to shared between access point and client (a "shared secret") to authenticate, and act as the starting point for the cryptographic process.
 
 [[WPA]] with 802.1x and [[EAP]] authentication ("WPA Enterprise") is the second form, and it's what we'll be setting up in this document. The '''E'''xtensible '''A'''uthentication '''P'''rotocol is a provision of 802.1x that allows a variety of means of authenticating clients, and in our case we will be using TLS. This involves issuing potential client machines with ''digital certificates'' which have been ''signed'' by some authority in such a way that they cannot (for all practical purposes) be forged by an attacker. The access point achieves this by requesting the client's certificate and passing it to a [[RADIUS]] server, which then checks the certificate is genuine and whether the named client is allowed access. These certificates are also used as a starting point for the cryptographic process.
 
 ====My Choice====
+
 Personally, I chose WPA because I realised I had all the necessary hardware and software to hand &mdash; i.e. I did it because I could. I'm currently under the impression that WPA with RADIUS is the most secure way to tie down a wireless LAN. It's also more convenient for me as I don't have to cook up and distribute new WPA-PSK keys every so often; I can also allow friends to use my network with a centrally-managed database and time-limited certificates, and thereby avoid having to divulge network secrets.
 
 OK, so I'm a geek and I did it because I could.
@@ -139,6 +143,7 @@ You will need to adjust the following files in <span class="filename">/etc/raddb
 * '''[[users]]''' - a list of client users, given below
 
 ====FreeRADIUS EAP Configuration====
+
 Please note that there are several settings in this file you will have to enter in accordance with your local network.
 
 In Version 2, the default configuration works with EAP.  The only file you may need to edit is raddb/[[eap.conf]], to update the password to the private keys.  If you have put the certificates in a non-standard location, the filenames need to be updated, too.
@@ -314,6 +319,7 @@ Still not working? Take a look at the client. Windows XP clearly wasn't designed
 ===Questions, Answers and Cry-For-Helps===
 
 ====How can I add more APs?====
+
 Easily. Simply configure the additional APs as described herein, and add corresponding blocks for their IP addresses in the FreeRADIUS ''clients.conf'' file. In the interest of security, I advise you use a different shared secret for each.
 
 ====Can I use something other than WPA?====
@@ -337,6 +343,7 @@ Windows XP will also not present WPA options if your wireless network interface 
 If this is of no help, you could try using something other than WPA in the meantime (see above).
 
 ==See Also==
+
 * [[WPA]]
 * [[EAP]]
 * [[HOWTO]]

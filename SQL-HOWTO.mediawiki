@@ -4,11 +4,13 @@ Unfortunately there are a number of configuration guides available on the intern
 These instructions were originally written for FreeRADIUS Server version 1.1.x and had been tested on openSUSE 10.2, CentOS 5.0 and CentOS 5.1.
 
 ==Before You Start==
+
 Before starting with FreeRADIUS, please make sure your server is up and configured on your network, that you have your [[SQL]] server of choice (MySQL, Postgresql etc) installed and running, and that your [[NAS]] is configured to send [[RADIUS]] requests to your RADIUS server.
 
 We have some sample configs for [[Cisco]] [[NAS]] [[Cisco|available here]].
 
 ==Getting Started==
+
 Firstly, you need to install FreeRADIUS Server on your system. As the premiere open source RADIUS suite it is included as a [[standard package]] with numerous Operating Systems and has [[binary packages]] for many others. Installation is most easily accomplished by installing a binary package (rpm, deb), but if you have a less well known operating system you may need to [[build]] your own.
 
 ==Basic configuration==
@@ -16,11 +18,13 @@ Firstly, you need to install FreeRADIUS Server on your system. As the premiere o
 See [[Basic configuration HOWTO]]
 
 ==Setting up the RADIUS database==
+
 First, you should create a new empty 'radius' database in SQL and a database user with permissions to that database. You could of course call the database and the user anything you like but you probably should stick with 'radius' for both to keep things simple.
 
 Next up, you need to create the schema for your database. There is an SQL script file for each SQL type in doc/examples/ in your operating system's doc directory (or where you untar'd FreeRADIUS). On SUSE this is under /usr/share/doc/packages/freeradius/ 
 
 ===Create MySQL Database===
+
  mysql -uroot -p
    CREATE DATABASE radius;
    GRANT ALL ON radius.* TO radius@localhost IDENTIFIED BY "radpass";
@@ -32,6 +36,7 @@ Next up, you need to create the schema for your database. There is an SQL script
  mysql -uroot -p radius < mysql.sql
 
 ===Create PostgreSQL Database===
+
  su - postgres
  createuser radius --no-superuser --no-createdb --no-createrole -P
  createdb radius --owner=radius
@@ -43,6 +48,7 @@ Next up, you need to create the schema for your database. There is an SQL script
  psql -U radius radius < postgresql.sql
 
 ==Configuring FreeRadius to use SQL==
+
 Edit either /etc/raddb/sql.conf or /etc/raddb/postgresql.conf and enter the server, name and password details to connect to your SQL server and the RADIUS database. The database and table names should be left at the defaults if you used the default schema. For testing/debug purposes, switch on sqltrace if you wish - FreeRadius will dump all SQL commands to the debug output with this on.
 
 In /etc/raddb/radiusd.conf ensure that the line saying:
@@ -93,6 +99,7 @@ Your radiusd.conf should then look something like this:
  }
 
 ==Populating SQL==
+
 You should now created some dummy data in the database to test against. It goes something like this:
 * In usergroup, put entries matching a user account name to a group name.
 * In radcheck, put an entry for each user account name with a 'Cleartext-Password' attribute with a value of their password.
@@ -167,11 +174,13 @@ Note the operator ('op') values used in the various tables. The password check a
 If you're stripping all domain name elements from usernames via realms, remember NOT to include the domain name elements in the usernames you put in the SQL tables - they should get stripped BEFORE the database is checked, so name@domain will NEVER match if you're realm stripping (assuming you follow point 2 above) – you should just have 'name' as a user in the database. Once it's working without, and if you want more complex realm handling, go back to work out not stripping (and keeping name@domain in the db) if you really want to.
 
 ==Test==
+
 Fire up radiusd again in debug mode (radiusd -X). The debug output should show it connecting to the SQL database. Use radtest (or NTradPing) to test again - the user should authenticate and the debug output should show FreeRADIUS talking to SQL.
 
 Congratulations. You're done!
  
 ==Additional Snippets==
+
 * To use encrypted passwords in radcheck use the attribute 'Crypt-Password', instead of 'Cleartext-Password', and just put the encrypted password in the value field. ( i.e. UNIX crypt'd password). 
 * To get NTradPing to send test accounting (e.g. stop) packets it needs arguments, namely acct-session-time. Put something like 'Acct-Session-Time=99999' into the 'Additional RADIUS Attributes' box when sending stops.
 * If you have a [[Cisco]] nas, set the cisco-vsa-hack
@@ -209,6 +218,7 @@ On the subject of backup servers. If you want to run TWO MySQL servers and have 
 Note that if FreeRadius fails over to the second MySQL server and tries to update the accounting table (radacct), nasty things might possibly happen to your replication setup and database integrity as the first MySQL server won't have got the updates...
 
 ==See Also==
+
 * [[SQL]]
 * [[rlm_sql]]
 * [[rlm_sqlcounter]]

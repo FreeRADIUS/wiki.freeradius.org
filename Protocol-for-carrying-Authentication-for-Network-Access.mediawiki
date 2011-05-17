@@ -3,9 +3,11 @@
 Note: PANA is not currently supported by [[FreeRADIUS]] but is supported by [[Open Diameter]]
 
 ==External Links==
+
 * [http://panasec.org/docs/PANA-FAQ.txt PANA FAQ]
 * [http://panasec.org/ PANA Home Page]
 
 ==See Also==
+
 * [[Extensible Authentication Protocol]]
 * [[DIAMETER]]

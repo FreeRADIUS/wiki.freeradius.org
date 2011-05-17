@@ -1,10 +1,13 @@
 ==FreeRADIUS DBM module (rlm_dbm)==
+
 rlm_dbm uses a Berkeley or GDBM database to store use information. It is a lot faster than the files and passwd modules, takes less memory than the fastusers module and does not require additional server software as the LDAP and SQL modules does. In addition it supports groups, and of course multiple entries per user or group.
 
 ===WHAT DOES IT DO===
+
 Basically, it opens the file you specify in radiusd.conf and authenticates users out of it. The file has to be a Berkeley or GDBM &lt;** file database, and may be created by rlm_dbm_parse or by a custom program of your choice. 
 
 ===HOW TO USE IT===
+
 Put the module declaration in your radiusd.conf. It should in general look like this:
 : dbm {
 :: usersfile = ${confdir}/users.db
@@ -19,10 +22,13 @@ Then put "dbm" in the "authorize {}" section of your radiusd.conf:
 : }
 
 ===DBM MODULE OPTIONS===
+
 The only option is "usersfile", which is the path and filename of the database file you want rlm_dbm to look for users and groups in. This file needs to be generated, either by the rlm_dbm_parse program or by some custom program, for instance a Perl program using the DB_File or GDBM_File &lt;** modules.
 
 ===EXTERNAL UTILITIES===
+
 ====rlm_dbm_cat====
+
 rlm_dbm_cat simply lists the definition(s) of the username(s) or group name(s), or the entire database.
 
 : rlm_dbm_cat: [-f file] [-w] [-i number] [-l number] [-v] [username ...]
@@ -33,6 +39,7 @@ rlm_dbm_cat simply lists the definition(s) of the username(s) or group name(s), 
 ::; -v : Print the version number and exit.
 
 ====rlm_dbm_parse====
+
 rlm_dbm_parser reads a file of the syntax defined below, and writes a database file usable by rlm_dbm or edits current database.
 
 : rlm_dbm_parser [-c] [-d raddb] [-i inputfile] [-o outputfile] [-x] [-v] [-q] [username ...]
@@ -45,6 +52,7 @@ rlm_dbm_parser reads a file of the syntax defined below, and writes a database f
 ::; -r : Remove a username or group name from the database.
 
 ===INPUT FORMAT===
+
 rlm_dbm_parse reads a format similar to the one used by the files module. In incomplete RFC 2234 ABNF, it looks like this:
   entries     = *entry
   entry       = identifier TAB definition
@@ -63,10 +71,12 @@ As an example, these are the standard files definitions (files module):
     Fall-Through = Yes
 
   #except who call from number 555-666
-  DEFAULT  Auth-Type := Reject, Service-Type == Framed-User, Calling-Station-ID == "555-666"
+  DEFAULT  Auth-Type := Reject, Service-Type == Framed-User, Calling-Station-ID ==
+ "555-666"
 
   #or call number 555-667
-  DEFAULT  Auth-Type := Reject, Service-Type == Framed-User, Calling-Station-ID == "555-667"
+  DEFAULT  Auth-Type := Reject, Service-Type == Framed-User, Calling-Station-ID ==
+ "555-667"
 
 To be a valid rlm_dbm input file, it should look like:
   DEFAULT   Service-Type == Framed-User                     # (1)
@@ -84,6 +94,7 @@ To be a valid rlm_dbm input file, it should look like:
 This user (the DEFAULT user) contains three entries, 1, 2 and 3. The first entry has a list of reply items, terminated by a reply item without a trailing comma. Entries 2 and 3 has empty reply lists, as indicated by the semicolon. This is necessary to separate an empty line (which is ignored) from the empty list. Definition Fall-Through = Yes used in order to say module to check next record. By default Fall-Through = Yes.
 
 ====Groups====
+
 This is implemented with the special User-Category attribute. Simply set this as a reply item, and rlm_dbm will include the groups definition when evaluating the check and reply items of the user. The group defined the same way as users. Here is a short example:
  # group definitions
  gendialup

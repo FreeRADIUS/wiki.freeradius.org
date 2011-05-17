@@ -138,6 +138,7 @@ Make sure to have radiusd running properly under sql and there must be a "sql" e
 
 
 === Attributes ===
+
 ;check-name
 :This is the name of the radius attribute that describes the limit of the sqlcounter.
 
@@ -249,6 +250,7 @@ normally as the example will only show how to apply sqlcounter
 counters.
 
 ===Scenarios===
+
 * username test0001 have total time limit of 15 hours (user can login as many times as needed but can be online for total time of 15 hours which is 54000 seconds) If using normal users file authentication the entry can look like:
 
 :: test0001  Max-All-Session := 54000, Cleartext-Password := "blah"

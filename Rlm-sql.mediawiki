@@ -1,4 +1,5 @@
 ==FreeRADIUS SQL Module (rlm_sql)==
+
 The SQL module is composed of two parts: a generic SQL front-end ([[rlm_sql]]), and a series of database-dependent back-end drivers.
 
 ===Back-end Drivers===
@@ -62,6 +63,7 @@ For any fairly complex setup, it is likely that most of the actual processing wi
 In the SQL configuration file are _alt queries, these are called when the first SQL query fails or doesn't alter (insert, delete, update) any rows in the Database.
 
 ===What NOT to do===
+
 One of the fields of the SQL schema is named 'op'  This is for the 'operator' used by the attributes.  e.g.:
    Framed-IP-Address  =      1.2.3.4
    ^ ATTRIBUTE ----^  ^ OP   ^ VALUE
@@ -72,6 +74,7 @@ The reason is that with the op field empty, the server does  not know what you w
 So put a value in the field. The value is the string form of the [[Operators|operator]]
 
 ===Authentication vs Authorization===
+
 Many people ask if they can "authenticate" users to their SQL database however the answer is "You are asking the wrong question."
 
 An SQL database stores information. An SQL database is NOT an authentication server. The <span class="T6">only<span class="T5"> users who should be able to authenticate themselves to the database are the people who administer it.  Most administrators do NOT want every user to be able to access the database, which means that most users will not be able to "authenticate" themselves to the database.
@@ -79,9 +82,11 @@ An SQL database stores information. An SQL database is NOT an authentication ser
 Instead, the users will have their authorization information (name, password, configuration) stored in the database.  The configuration files for FreeRADIUS contain a username and password used to authenticate FreeRADIUS to the SQL server.  (See raddb/sql.conf). Once the FreeRADIUS authentication server is connected to the SQL database server, then FreeRADIUS can pull user names and passwords out of the database, and use that information to perform the authentication.
 
 ===Operators===
+
 See [[Operators]]
 
 ===Instances===
+
 Just like any other module, multiple instances of the [[rlm_sql]] module can be defined and used wherever you like.
 
 The default .conf files for the different database types, contain 1 instance without a name like so:
@@ -108,6 +113,7 @@ And then you can use a specific instance in [[radiusd.conf]], like so:
     ...
   }
 ===SQL xlat===
+
 The SQL module now supports SQL queries in xlat strings. That is you can extract  the value of a single field and use it, either as a check item, a request item or a reply item.
 The strings will be of the following form:
  %{sql:SELECT mytable.field1 FROM `mytable` WHERE 1}
@@ -135,5 +141,6 @@ if("%{sql:SELECT COUNT(UserName) FROM `radusergroup` WHERE UserName ="'%{User-Na
 }
 
 ==See Also==
+
 * [[Modules]]
 * [[SQL]]

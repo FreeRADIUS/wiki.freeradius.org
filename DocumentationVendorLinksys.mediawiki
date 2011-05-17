@@ -26,5 +26,6 @@ You can do this with an entry in your users file similar to the following
 According to [https://list.xs4all.nl/pipermail/freeradius-users/2006-November/058449.html some reports], the Linksys family of equipment does not honor the [http://freeradius.org/rfc/rfc2865.html#Session-Timeout Session-Timeout] attribute.
 
 ==See Also==
+
 * [[HP]]
 * [[Cisco]]

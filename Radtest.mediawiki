@@ -4,4 +4,5 @@ Command format:
  radtest {username} {password} {hostname} 10 {radius_secret}
 
 ==See also==
+
 * [[radclient]]

@@ -1,6 +1,7 @@
 Authentication refers to the confirmation that a user who is requesting services is a valid user of the network services requested.  Authentication is accomplished via the presentation of an identity and credentials.  Examples of types of credentials are passwords, one-time tokens, digital certificates, and phone numbers (calling/called).
 
 ==Authentication methods==
+
 The following authentication types are some of the methods which are supported by the server :
 * Clear-text password in local configuration file (PAP) (cf. [[users]] file)
 * Encrypted password in local configuration file
@@ -33,6 +34,7 @@ The following authentication types are some of the methods which are supported b
 ** EAP-PEAP (with tunnelled EAP)
 
 ==See Also==
+
 * RFC 2865
 * [[AAA]]
 * [[AAAA]]

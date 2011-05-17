@@ -3,5 +3,6 @@ In telecommunications, an '''authenticator''' is a symbol or group of symbols, o
 In [[IEEE 802.1X]], an authenticator is an entity at one end of a point-to-point LAN segment that facilitates authentication of the entity attached to the other end of that link.
 
 ==See Also==
+
 * [[Supplicant]]
 * [[IEEE 802.1X]]

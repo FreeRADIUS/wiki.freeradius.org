@@ -1,4 +1,5 @@
 == Introduction ==
+
 Poptop (http://www.poptop.org/) is the PPTP server solution for Linux and is used for establishing VPN (Virtual Private Network) tunnels across the Internet.
 
 It uses pppd to establish the network link and thus can benefit the radius pppd-radius plugin to work with FreeRADIUS:
@@ -59,6 +60,7 @@ Note:
 === Radius settings ===
 
 ====The FreeRADIUS setup part====
+
 * Define the IP Address and secret in the FreeRADIUS /etc/raddb/clients.conf file
 * make sure the mschap module is setup to accept mppe encryption.
 ** in FR1: Go to the /etc/raddb/radiusd.conf file and check the mschap {} subsection in the modules {} section:
@@ -73,6 +75,7 @@ Note:
 * Optionnaly define the IP pools in your FreeRADIUS /etc/raddb/radiusd.conf (in FR1) or /etc/raddb/modules/ippool (in FR2)
 
 ====The radiusclient setup part (on the Poptop server)====
+
 * setup your /etc/radiusclient/radiusclient.conf file for instance with
 <div style="margin-left:50px"><pre>
 auth_order      radius

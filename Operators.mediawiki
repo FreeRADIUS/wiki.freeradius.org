@@ -99,6 +99,7 @@ The following is a list of operators, and their meaning.
 |}
 
 ==EXAMPLES==
+
 : bob  Cleartext-Password := "hello"
 
 Requests containing the User-Name attribute, with value "bob", will be authenticated using the password "hello".  There are no reply items, so the reply will be empty.
@@ -108,7 +109,8 @@ Requests containing the User-Name attribute, with value "bob", will be authentic
 
 For all users reaching this entry, perform authentication against the system, unless Auth-Type has already been set.  Also, process any following entries which may match.
 
-: DEFAULT  Service-Type == Framed-User, Framed-Protocol == PPP
+: DEFAULT  Service-Type == Framed-User, Framed-Protocol ==
+ PPP
 :: Service-Type = Framed-User,
 :: Framed-Protocol = PPP,
 :: Fall-Through = Yes
@@ -120,4 +122,5 @@ That is, give the user what they ask for.  This entry also shows how to specify 
 See the users file supplied with the server for more examples and comments.
 
 ==See Also==
+
 * RADIUS [[Attributes]]

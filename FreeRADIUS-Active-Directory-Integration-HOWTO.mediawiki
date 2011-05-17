@@ -7,6 +7,7 @@
 This article was originally written by Charles Schwartz, Network Security Engineer.
 
 ==Introduction==
+
 This document describes how to set up [[FreeRADIUS]] server in order to authenticate Windows XP network users transparently against Active Directory.
 
 It is a step by step 'quick & dirty' guide to configure FreeRADIUS server, network [[Access Point]]s and WindowsXP [[supplicant]]s.
@@ -71,7 +72,10 @@ In the [global] section
   security = ads
 
 
-#==================== Share Definitions =====================
+#============
+======== Share Definitions ======
+============
+===
    idmap uid = 16777216-33554431
    idmap gid = 16777216-33554431
    template shell = /bin/bash

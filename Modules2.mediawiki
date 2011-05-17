@@ -113,6 +113,7 @@ This example only has one authorization module.  You can have multiple modules f
 The example above indicates one of the least understood aspects of FreeRADIUS’s architecture.  Both the authentication and authorization modules are part of the radius authentication request processing.  However, those two sections are handled quite differently.  Authentication is the checking of the password (or other authentication token) provided by the user to insure the user is who they are claiming to be.  Generally only one authentication module is used.  Authorization is a policy decision - should this request be permitted.  This is generally where local policy issues are addressed.
 
 ==Module Return Codes==
+
 There are a number of return codes possible from each of the rlm modules:
 
 {| class="wikitable"
@@ -282,6 +283,7 @@ Check through the output to be sure the module loaded and initialized itself pro
 See: [[List of modules]]
 
 ==See Also==
+
 * [[Development Roadmap]]
 * [[Modules1]] (old 1.x module syntax)
 * [[CVSWeb]]

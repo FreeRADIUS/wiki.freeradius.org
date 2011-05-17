@@ -29,6 +29,7 @@ The 1.0.x and 1.1.x versions of the server have served us well for the past few 
 :When they respond, they are marked alive again
 
 ==TODO==
+
 ;Rework the rlm_sql module
 :Fix initial connection failure bug: If an SQL server is not available during radiusd startup then it will not be available until FreeRADIUS is restarted. radiusd SHOULD try to reconnect on new requests in the same it does when there is an SQL backend failure during normal operation.
 :Run the auth*_reply queries in the post-auth section instead of authorize.
@@ -43,20 +44,24 @@ The 1.0.x and 1.1.x versions of the server have served us well for the past few 
 :A number of minor fixes sent by dialupadmin users were included in versions 1.0.x and 1.1.y however the whole patcheset doesn't apply cleanly in CVS head.
 
 ===URGENT===
+
 * scan ALL modules, so that they use consistent names for structures and variables in their instantiation (rlm_foo_t *inst), and that they call rlm_foo_detach() if anything goes wrong, instead of just free()'ing 'inst'.  The cf_parse_section().. code may have malloc'd memory, and that needs to be free'd, too.
 * Stop unloading modules on HUP so that we can have persistant handles/socketc/etc from module_init().  Alan D. and Alan C. had a good plan for when to load/reload modules on the list recently...I say run with that.
 * double-check Cistron 'compat' mode, so that all current users of Cistron can upgrade "out of the box" to FreeRADIUS
 
 ===MEDIUM PRIORITY===
+
 * go through all of the code and reformat it, for project standards
 
 ===LOW PRIORITY===
+
 * Write better documentation
 * Manual pages for the daemon, utilities and conffiles (some done)
 * Fix all FIXME's in the source.
 * better SNMP statistics support, for the auth/acct servers, and for each client.
 
 ===WAIT UNTIL NEXT RELEASE===
+
 * UPDATE accounting requests aren't handled as in 1.5.4.3 for wtmp Is this a problem ? Need to fix in rlm_unix.c
 * New module: rlm_fastradwtmp. with a radutmp-style active session database to guarantee wtmp records are always written in matching pairs. Because radlast is slow.
 * replace the module_t method table with a set of register_* functions (so different instances of the same module can offer different methods)
@@ -66,10 +71,12 @@ The 1.0.x and 1.1.x versions of the server have served us well for the past few 
 * New module: rlm_nsupdate (dyndns). Because dynamic addresses are cruel.
 
 ===WILL NOT DO===
+
 * module initialization AFTER forking, not before. (The modules should NOT be setting up any process-dependent information.)
 * there should be a way that radius itself could rotate the wtmp file properly. It should write "logout" records for all users, move the file to wtmp.0, and create a new wtmp file with "login" records for all currently online users. (This work is for an external process to do)
 
 ===DONE===
+
 * Replace the home-made ''strNcpy'' with ''strlcpy''
 * Add IPv6 support for proxy sockets
 * Split home servers away from Realms
@@ -123,6 +130,7 @@ The 1.0.x and 1.1.x versions of the server have served us well for the past few 
 * fix the request list walking code, to scan each element no more than once per second.
 
 ==See Also==
+
 * [[Development Roadmap]]
 * [[Modules]]
 * [[CVSWeb]]

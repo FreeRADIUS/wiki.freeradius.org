@@ -1,14 +1,17 @@
 NAS-Port is one of the basic RADIUS [[attributes]].
 
 == NAS-Port meaning per Vendor ==
+
 This section was populated by knowledge accumulated while trying to support various vendor's equipment in 802.1X / MAC-Authentication in the [http://www.packetfence.org/ PacketFence] open-source [[Network Access Control]].
 
 Refer to PacketFence's source code for the most accurate values.
 
 === Wired switches ===
+
 NAS-Port to ifIndex conversions
 
 ==== 3Com ====
+
 The below worked for the Switch 4200G, E4800G and E5500G. They are now branded as [[HP]]'s.
 
 Here, 4096 NAS-Port slots are reserved per physical port and there is a starting offset of 16781312.
@@ -20,16 +23,19 @@ dot1dPort is convertible into ifIndex using SNMP (A3COM-HUAWEI-LswINF-MIB::hwifX
 Ex: 16855041 is ifIndex 4227289 (dot1dPort 19)
 
 ==== Cisco 2950 and derivatives ====
+
 IfIndex = NAS-Port - 50000
 
 Ex: 50017 is ifIndex 17
 
 ==== Cisco 2960 and derivatives ====
+
 IfIndex = NAS-Port - 40000
 
 Ex: 50023 is ifIndex 10023
 
 ==== Juniper ====
+
 NAS-Port's number is the ifIndex index.
 
 Ex: NAS-Port 115 is the 115th ifIndex entry  which is ifIndex 598.
@@ -39,4 +45,5 @@ Ex: NAS-Port 115 is the 115th ifIndex entry  which is ifIndex 598.
 NAS-Port values have not proven meaningful or useful on Wireless equipment. Management type tasks are often performed using an end-point's MAC address instead of a virtual port id. 
 
 == References ==
+
 * [http://freeradius.org/rfc/rfc2865.html#NAS-Port NAS-Port described in RFC2865]

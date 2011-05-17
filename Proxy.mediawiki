@@ -6,6 +6,7 @@ This article is based on doc/proxy from the server distribution.
 {{Default in the server source|doc/proxy}}
 
 ==Files==
+
 If a user logs in with a defined realm syntax, the "realm" portion is matched against the configuration to determine how the request should be handled. Common realm formats are:
 
   username@realm
@@ -37,6 +38,7 @@ There are several options you can add in both files:
 :By default if a realm is matched, it will be proxied to the server specified.  However, if you are using Replication functionality, you may want to override this behaviour.  This option will prevent a user who enters 'user@foobar' from being proxied if the 'foobar' realm configuration contains 'notrealm'. This function used to be called 'notsuffix', and the old syntax is still supported.
 
 ===Deprecated Files===
+
 '''The [[realms]] file is deprecated and should not be used anymore.'''
 
 ''If'' you use the [[realms]] file to enter [[realm]] configurations you will need to add the hostname and [[secret]] for the remote server in the file [[clients]].
@@ -54,6 +56,7 @@ When your server proxies requests to another server, it acts as a [[NAS]] for th
 As you might not control the remote [[RADIUS]] server, you might want to control the [[attributes]] sent back by the remote server in an [[Access-Accept]] [[packet]]. Have a look at the [[attrs]] file for this!
 
 ==What Happens==
+
 The exact thing that happens is this:
 
 * A user logs in (with a realm).
@@ -71,5 +74,6 @@ The exact thing that happens is this:
 * Then the users file is processed as usual. The username used at this point is the one after hints file processing (regardless of the "hints" option). It also includes the realm (regardless of the setting of the "nostrip" option) unless the realm is LOCAL.
 
 ==See Also==
+
 * [[Configuration files]]
 * [[proxy.conf]]

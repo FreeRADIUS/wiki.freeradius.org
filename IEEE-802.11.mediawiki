@@ -1,4 +1,5 @@
 == Overview ==
+
 '''IEEE 802.11''', the [[Wi-Fi]] standard, denotes a set of [[Wireless LAN]]/WLAN standards developed by working group 11 of the [[Institute of Electrical and Electronics Engineers|IEEE]] LAN/MAN Standards Committee ([[IEEE 802]]). The term 802.11x is also used to denote this set of standards and is not to be mistaken for any one of its elements. There is no single 802.11x standard. The term ''IEEE 802.11'' is also used to refer to the original 802.11, which is now sometimes called "802.11legacy." For the application of these standards see [[Wi-Fi]].(tm)
 
 The 802.11 family currently includes six over-the-air [[modulation]] techniques that all use the same protocol.  The most popular (and prolific) techniques are those defined by the b, a, and g amendments to the original standard; security was originally included and was later enhanced via the 802.11i amendment. 802.11n is another modulation technique under development.  Other standards in the family (c–f, h, j) are service enhancements and extensions or corrections to previous specifications. 802.11b was the first widely accepted wireless networking standard, followed (somewhat counterintuitively) by 802.11a and 802.11g.
@@ -8,6 +9,7 @@ The 802.11 family currently includes six over-the-air [[modulation]] techniques 
 Which part of the [[radio frequency]] spectrum may be used varies between countries, with the strictest limitations in the [[USA]]<!--or so the Wi-Fi article says-->. While it is true that in the USA 802.11a and g devices may be legally operated without a license, it is not true that 802.11a and g operate in an unlicensed portion of the radio frequency spectrum.  Unlicensed (legal) operation of 802.11 a & g is covered under [[Part 15 (FCC rules)|Part 15]] of the [[Federal Communications Commission|FCC]] Rules and Regulations.  Frequencies used by channels one (1) through six (6) (802.11b) fall within the range of the 2.4 [[gigahertz]] [[amateur radio]] band.  Licensed [[amateur radio operator]]s may operate 802.11b devices under [[Part 97 (FCC rules)|Part 97]] of the [[Federal Communications Commission|FCC]] Rules and Regulations that apply.
 
 == Protocols ==
+
 === 802.11 legacy ===
 
 {| class="wikitable"
@@ -265,6 +267,7 @@ The IEEE set up a dedicated task group to create a replacement security solution
 In January 2005, [[IEEE]] set up yet another task group TGw to protect management and broadcast frames, which previously were sent unsecured.  See [[IEEE 802.11w]]
 
 == Non-standard 802.11 extensions and equipment ==
+
 === Non-standard channel bonding ===
 
 Chipmaker [[Atheros]] sells a proprietary [[channel bonding]] feature called [[Super G (wireless networking)|Super G]]<ref>http://www.super-g.com/</ref> for manufacturers of access points and client cards. This feature can boost network speeds up to 108 Mbit/s by using [[channel bonding]]. Also range is increased to 4x the range of 802.11g and 20x the range of 802.11b.  This feature may interfere with other networks and may not support all b and g client cards. In addition, packet bursting techniques are also available in some chipsets and products which will also considerably increase speeds. This feature may not be compatible with other equipment.  [[Broadcom]], another chipmaker, developed a competing proprietary frame bursting feature called "[[125 High Speed Mode]]"<ref>[http://www.54g.org/about_54g_speed.php Broadcom's 125 High Speed Mode consortium]</ref> or [[Linksys]] "[[SpeedBooster]]", in response to criticism of Super G's interference potential.
@@ -286,6 +289,7 @@ After the announcement of the Draft 1.0 of 802.11n, many vendors announced "pre-
 *[[WiMAX]] (also known as 802.16), another wireless protocol designed for [[Metropolitan area network|MAN]]s.
 
 == External links ==
+
 * [http://standards.ieee.org/getieee802/ Get IEEE 802]
 * [http://standards.ieee.org/getieee802/802.11.html Download the 802.11 standards from IEEE]
 * [http://grouper.ieee.org/groups/802/11/Reports/802.11_Timelines.htm Official IEEE 802.11 Work Plan predictions]

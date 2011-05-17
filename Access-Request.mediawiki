@@ -32,13 +32,17 @@ A summary of the Access-Request packet format is shown below. The fields are tra
    +-+-+-+-+-+-+-+-+-+-+-+-+-
 
 ==Code==
+
 1 for Access-Request.
 
 ==Identifier==
+
 The Identifier field MUST be changed whenever the content of the Attributes field changes, and whenever a valid reply has been received for a previous request.  For retransmissions, the Identifier MUST remain unchanged.
 
 ==Request Authenticator==
+
 The Request Authenticator value MUST be changed each time a new Identifier is used.
 
 ==Attributes==
+
 The Attribute field is variable in length, and contains the list of Attributes that are required for the type of service, as well as any desired optional Attributes.

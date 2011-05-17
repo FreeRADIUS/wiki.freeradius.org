@@ -3,6 +3,7 @@
 well-behaved [[NAS]] to do.
 
 ==Shell Access==
+
 To use [[RADIUS]] to authenticate your inbound shell (telnet & ssh) connections you need to create an entry in your users file similar to the following
 
  youruser   Cleartext-Password := "somepass"
@@ -14,7 +15,9 @@ See Configuring Basic AAA on an Access Server for more details:
 [http://www.cisco.com/en/US/tech/tk59/technologies_tech_note09186a0080093c81.shtml]
 
 ===Enable Mode===
+
 ====Global Enable Password====
+
 When a shell user attempts to '''enable''' (or '''enable 15''') on a cisco device, the [[cisco]] issues a [[RADIUS]] [[authentication]] request for the user '''$enable15$'''
 
 If you type '''enable 2''', it will send request for user '$enab2$', if you type '''enable 3''' it will send a request for '$enab3$' and so on.
@@ -26,6 +29,7 @@ These user(s) needs to to be configured on your [[RADIUS]] server with the passw
 
 
 ====Per User Privilege Level====
+
 You can also send the privilege level (enable mode is level 15) for individual users as a reply item to automatically put them into that level with '''cisco-avpair = "shell:priv-lvl=15"'''
 
 You can do this with an entry in your users file similar to the following
@@ -37,6 +41,7 @@ You can do this with an entry in your users file similar to the following
 For more information, see Cisco page "How to Assign Privilege Levels with TACACS+ and RADIUS"[http://www.cisco.com/en/US/tech/tk59/technologies_tech_note09186a008009465c.shtml]
 
 ====Command Authorization====
+
 Cisco claims that there is a complete mapping scheme 
 to translate TACACS+ expressions into Cisco-AVPair Vendor-Specific. This 
 works for example with the priv-lvl attribute:
@@ -86,6 +91,7 @@ This will supersede the need to enable the sending of "Alive" packets as
 described below for IOS versions 11.x
 
 ===Common RADIUS Directives===
+
 IOS allows different ways of entering common config elements.  You can enter them as a single configuration stanza, or as separate items, as demonstrated by the two samples.
 
 ====Config Sample #1====
@@ -127,6 +133,7 @@ Note: Don't use the key of Cis$ko.  Make up your own.
  radius-server auth-port 1812
 
 ====Shared Secret Encryption====
+
 IOS has a feature called the password-encryption service.
  service password-encryption
  no service password-encryption 
@@ -150,6 +157,7 @@ More information about this process can be seen here:
 http://www.cisco.com/en/US/products/sw/iosswrel/ps1834/products_feature_guide09186a00800801bc.html
 
 ===Unique Acct-Session-Id's===
+
 Minimum IOS: ''12.2''
 (Also available as a hidden command in ''12.1(4.1)T'')
 
@@ -190,16 +198,19 @@ Also you might see a lot of "duplicates" in the logfile. That can be fixed by
     radius-server timeout 3
 
 ==Ascend Style==
+
 To enable the Ascend style attributes (which we do '''NOT''' recommend!) add the '''non-standard''' keyword to your ''radius-server'' line(s)
 
  radius-server host X.Y.Z.A auth-port 1812 acct-port 1813 non-standard
 
 ==Cisco VSAs==
+
 To see Cisco-AVPair attributes in the Cisco debugging log
 
  radius-server vsa accounting
 
 ==Static Loopback IP==
+
 The Cisco 36/26 by default selects (it seems at random) any IP address
 assigned to it (serial, ethernet etc.) as it's RADIUS client source
 address, thus the access request may be dropped by the RADIUS server,
@@ -226,6 +237,7 @@ IP address.
 According to [https://list.xs4all.nl/pipermail/freeradius-users/2006-November/058449.html some reports], the Aironet 1200 series of access points works well, and fully supports RADIUS.
 
 ==See Also==
+
 * [[HP]]
 * [[Linksys]]
 * [[VSA|Vendor-Specific Attributes]]

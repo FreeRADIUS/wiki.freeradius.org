@@ -2,13 +2,16 @@
 The Diameter base protocol is intended to provide an [[Authentication]], [[Authorization]] and [[Accounting]] ([[AAA]]) framework for applications such as network access or IP mobility.  Diameter is also intended to work in both local Authentication, Authorization & Accounting and roaming situations.  This document specifies the message format, transport, error reporting, accounting and security services to be used by all Diameter applications.  The Diameter base application needs to be supported by all Diameter implementations.
 
 == History ==
+
 This is the proposed successor of the [[RADIUS]] protocol.
 
 == Protocol dependencies ==
+
 * [[TCP]]: Typically, DIAMETER uses [[TCP]] as its transport protocol. The well known TCP port for DIAMETER traffic is 3868.
 * [[SCTP]]: Typically, DIAMETER uses [[SCTP]] as its transport protocol. The well known SCTP port for DIAMETER traffic is 3868.
 
 == External links ==
+
 * [http://www.ietf.org/rfc/rfc3588.txt RFC 3588] ''Diameter Base Protocol''
 * [http://www.ietf.org/rfc/rfc3589.txt RFC 3589] ''Diameter Command Codes for Third Generation Partnership Project (3GPP) Release 5''
 * [http://www.ietf.org/rfc/rfc4004.txt RFC 4004] ''Diameter Mobile IPv4 Application''
@@ -19,15 +22,18 @@ This is the proposed successor of the [[RADIUS]] protocol.
 * [http://www.ietf.org/html.charters/aaa-charter.html IETF aaa-charter]
 
 ===Internet-Drafts===
+
 * [http://www.ietf.org/internet-drafts/draft-ietf-aaa-diameter-sip-app-09.txt Diameter Session Initiation Protocol (SIP) Application]
 * [http://www.ietf.org/internet-drafts/draft-ietf-marid-csv-intro-02.txt Client SMTP Validation (CSV)]
 
 ==Diameter implementations==
+
 * [[FreeDiameter]]
 * [[Open Diameter]]
 * [http://www.openaaa.org OpenBloX GPL Java Diameter (hosted by Traffix Systems)]
 
 ==See Also==
+
 * [[AAA]]
 * [[RADIUS]]
 * [[PANA]]

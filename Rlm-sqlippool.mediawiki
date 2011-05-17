@@ -2,6 +2,7 @@ Welcome to the SQL Based IP Pool module.
 
 
 ==Important Info==
+
 As of July 2007 this module (from 2.0pre) is has been used in production with Postgresql for over a year at a number of locations and volume levels and hasn't needed any code changes for close to six months. It is therefore considered stable and ready for general use. (Please do not report bugs in the experimental version of rlm_sqlippool in FreeRADIUS Server 1.1.x as major changes have been made to the module in 2.0.0)
 
 Initial support for MySQL has been recently added but not extensively tested by the author. It should also work with other [[SQL]] servers with a simple change of the queries.
@@ -37,6 +38,7 @@ As you may noticed, there is a '''pool-key''' variable in the config file which 
 
 
 ===Multiple sqlippool instances===
+
 Normally, one sqlippool instance can handle multiple pools - pool selection is done by specifying the name of the pool as value of [[Pool-Name]] attribute. This implies that all pools handled by that single instance have to reside in the same database and use the same SQL queries to fetch and update pool data. In most cases this should be enough. 
 
 However, if system design dictates that different services have to use pools stored in different databases and/or use different [[SQL]] queries, multiple instances of sqlippool have to be defined. In that scenario, freeradius may have to be able to differentiate between the case when an instance fails to allocate the address due to the pool depletion and the case when Pool-Name simply doesn't match any of the pools handled by that particular instance.
@@ -55,7 +57,9 @@ This check is disabled by default, and should not be enabled unless you want to 
  pool-check = "SELECT id FROM ${ippool_table} WHERE pool_name='%{check:Pool-Name}' LIMIT 1"
 
 ==Examples==
+
 ===Simple Pool example===
+
 To create an ippool called '''main_pool''' with 4 IPs (192.168.0.1 - 192.168.0.4) simply:
  INSERT INTO radippool (pool_name, framedipaddress) VALUES ('main_pool', '192.168.0.1');
  INSERT INTO radippool (pool_name, framedipaddress) VALUES ('main_pool', '192.168.0.2');
@@ -63,6 +67,7 @@ To create an ippool called '''main_pool''' with 4 IPs (192.168.0.1 - 192.168.0.4
  INSERT INTO radippool (pool_name, framedipaddress) VALUES ('main_pool', '192.168.0.4');
 
 ===Non Contiguous Pool example===
+
 To create a second pool called '''second_pool''' with 4 IPs from one range (192.168.1.1 - 192.168.1.4) and a further 6 IPs from a second range (10.0.0.1 - 10.0.0.6) simply:
  INSERT INTO radippool (pool_name, framedipaddress) VALUES ('second_pool', '192.168.1.1');
  INSERT INTO radippool (pool_name, framedipaddress) VALUES ('second_pool', '192.168.1.2');
@@ -76,6 +81,7 @@ To create a second pool called '''second_pool''' with 4 IPs from one range (192.
  INSERT INTO radippool (pool_name, framedipaddress) VALUES ('second_pool', '10.0.0.6');
 
 ===Multiple sqlippool instance example===
+
 Service provider X offers services A and B that use SERVICE-A-POOL and SERVICE-B-POOL respectively, both stored in the same database, and service C  that uses SERVICE-C-POOL stored on another database server. Post-auth configuration would look something like this:
 
 post-auth {
@@ -137,6 +143,7 @@ On the other hand, if SERVICE-A-POOL is depleted, SQLIPPOOL-INSTANCE1 returns NO
 If pool-check query is left undefined, module instances will always return NOOP in case of a failure and the user will always be granted access, even without an IP address, which would result in working session only if NAS itself is capable of assigning IP addresses as a failover.
 
 ==See Also==
+
 * [[IP Pool]]
 * [[rlm_sql]]
 * [[Modules]]

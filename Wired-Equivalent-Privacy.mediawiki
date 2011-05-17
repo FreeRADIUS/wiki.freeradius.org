@@ -1,7 +1,9 @@
 ==Overview==
+
 '''Wired Equivalent Privacy (WEP)''' is a scheme that is part of the [[IEEE 802.11]] wireless networking standard to secure [[IEEE 802.11]] wireless [[computer network|networks]] (also known as [[Wi-Fi]] networks). Because a wireless network broadcasts messages using [[radio]], it is particularly susceptible to [[eavesdropping]]. WEP was intended to provide comparable [[confidentiality]] to a traditional wired [[local area network|network]] (in particular it doesn't protect users of the network from each other), hence the name. Several serious weaknesses were identified by [[cryptanalysts]], and WEP was superseded by [[Wi-Fi Protected Access]] (WPA) in [[2003]], and then by the full [[IEEE 802.11i]] standard (also known as WPA2) in [[2004]]. Despite the weaknesses, WEP provides a level of security that can deter casual snooping.
 
 ==Details==
+
 WEP is part of the [[IEEE 802.11]] standard ratified in September [[1999]]. WEP uses the stream cipher [[RC4]] for [[confidentiality]] and the [[CRC-32]] checksum for [[integrity]].
 
 Standard 64-bit WEP uses a [[40-bit encryption|40 bit]] key, which is concatenated to a 24-bit [[initialization vector]] (IV) to form the RC4 traffic key.  At the time that the original WEP standard was being drafted, US Government [[export of cryptography|export restrictions on cryptographic technology]] limited the keysize. Once the restrictions were lifted, all of the major manufacturers eventually implemented an extended 128-bit WEP protocol using a 104-bit key size. 
@@ -10,6 +12,7 @@ A 128-bit WEP key is almost always entered by users as a string of 26 Hexadecima
 Key size is not the only major security limitation in WEP. [[Cryptanalysis|Cracking]] a longer key requires interception of more packets, but there are active attacks that stimulate the necessary traffic. There are other weaknesses in WEP, including the possibility of IV collisions and altered packets, that are not helped at all by a longer key. See [[stream cipher attack]].
 
 ==Flaws==
+
 Because RC4 is a [[stream cipher]], the same traffic key must never be used twice. The purpose of an IV, which is transmitted as plaintext, is to prevent any repetition, but a 24-bit IV is not long enough to ensure this on a busy network. The way the IV was used also opened WEP to a [[related key attack]]. For a 24-bit IV, there is a 50% probability the same IV will repeat after 5000 packets. 
 
 Many WEP systems require a key in [[hexadecimal]] format. Some users choose keys that spell words in the limited 0-9, A-F hex character set, for example ''C0DE C0DE C0DE C0DE.'' Such keys are often easily guessed.
@@ -27,18 +30,22 @@ In 2006, Bittau, Handley and Lackey showed that the 802.11 protocol itself can b
 ==Remedies==
 
 === WEP2 ===
+
 A stopgap enhancement to WEP, implementable on ''some'' (not all) hardware not able to handle WPA/WPA2, based on:
 * Enlarged IV value
 * Enforced 128-bit encryption
 However, WEP2 remains vulnerable to known WEP attacks -- at most it will just slow an attacker down a bit -- and thus shouldn't really be considered more secure than WEP.
 
 === WEPplus ===
+
 Also known as WEP+.  A proprietary enhancement to WEP by [[Agere Systems]] (formerly a subsidiary of [[Lucent Technologies]]) that enhances WEP security by avoiding "weak IVs".  It is only completely effective when WEPplus is used at ''both ends'' of the wireless connection. As this cannot easily be enforced, it remains serious limitation.  It is possible that successful attacks against WEPplus will eventually be found. It also does not necessarily prevent [[Replay attack|replay attacks]].
 
 === WPA/WPA2 ===
+
 The most widely recommended solution to WEP security problems is to switch to [[Wi-Fi_Protected_Access|WPA]] or [[Wi-Fi_Protected_Access#WPA2|WPA2]]. Either is much more secure than WEP. Some old WiFi [[access point]]s might need to be replaced to do this or have their operating system, in flash memory, upgraded; however, replacements are relatively inexpensive. Another alternative is to use a tunneling protocol, such as [[IPsec]], although that only protects traffic streams, not the network itself.
 
 ==References==
+
 * Nikita Borisov, [[Ian Goldberg]], [[David Wagner]], "Intercepting mobile communications: the insecurity of 802.11." MOBICOM 2001, pp180&ndash;189.
 * Nancy Cam-Winget, Russell Housley, David Wagner, Jesse Walker: Security flaws in 802.11 data link protocols. [[Communications of the ACM]] 46(5): 35-39 (2003)
 * Scott R. Fluhrer, Itsik Mantin, [[Adi Shamir]], "[http://downloads.securityfocus.com/library/rc4_ksaproc.pdf Weaknesses in the Key Scheduling Algorithm of RC4]". Selected Areas in Cryptography 2001: pp1&ndash;24.
@@ -56,6 +63,7 @@ The most widely recommended solution to WEP security problems is to switch to [[
 * [http://www.cs.virginia.edu/sammyg/CS551/node18.html Replay Attack]
 
 ==External links==
+
 *[http://www.profit42.com/index.php/2006/08/02/92/ This simple but detailled guide describes how to crack wep step by step]
 *[http://www.isaac.cs.berkeley.edu/isaac/wep-faq.html (In)Security of the WEP algorithm]
 *[http://www.drizzle.com/~aboba/IEEE/rc4_ksaproc.pdf Weaknesses in the Key Scheduling Algorithm of RC4]

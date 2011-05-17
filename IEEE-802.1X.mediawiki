@@ -7,10 +7,12 @@ Many vendors are implementing 802.1X for wireless access points, to be used in  
 Upon detection of the new client ([[supplicant]]), the port on the switch (authenticator) will be enabled and set to the "unauthorized" state. In this state, only 802.1X traffic will be allowed; other traffic, such as DHCP and HTTP, will be blocked at the data link layer. The authenticator will send out the EAP-Request identity to the [[supplicant]], the [[supplicant]] will then send out the EAP-response packet that the authenticator will forward to the authenticating server. The authenticating server can accept or reject the EAP-Request; if it accepts the request, the authenticator will set the port to the "authorized" mode and normal traffic will be allowed. When the supplicant logs off, he will send an EAP-logoff message to the authenticator. The authenticator will then set the port to the "unauthorized" state, once again blocking all non-EAP traffic.
 
 ==External links==
+
 * [http://www.ieee802.org/1/pages/802.1x.html IEEE page on 802.1X] 
 * IEEE standard can be retrieved at no charge through the [http://standards.ieee.org/getieee802/ GetIEEE802 program]: [http://standards.ieee.org/getieee802/download/802.1X-2001.pdf].
 
 ==See Also==
+
 * [[Extensible Authentication Protocol]]
 * [[PANA]]
 * [[HOWTO]]s

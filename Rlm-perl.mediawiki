@@ -1,10 +1,13 @@
 ==Freeradius perl module (rlm_perl)==
+
 Embedded Perl interpreter. Supports muliple instances, threads.
 
 ===Supported Methods===
+
 rlm_perl support authentication, authorization, accounting, pre-proxy, post-proxy, session. You can define your own function or use the defaults.
 
 ===Requests===
+
 rlm_perl provide to your perl script following hashes
 * %RAD_REQUEST contains the vp from request
 * %RAD_REPLY contains vp for reply
@@ -16,6 +19,7 @@ rlm_perl provide to your perl script following hashes
 in this hashes keys are the Value-Pair names from the dictionary for example if you want to access User-Name from request then use $RAD_REQUEST{'User-Name'}
 
 ===Logging===
+
 rlm_perl have a wrapper for radlog function that comes with freeradius. In your perl script use call to &radiusd::radlog($type,"Some message"); 
 Where $type can be
 : 0 - Debug
@@ -25,6 +29,7 @@ Where $type can be
 : 4 - Error
 
 ===Return Codes===
+
 You can control what to return to FreeRadius with returning predefined values. 
   use constant    RLM_MODULE_REJECT=>    0;#  /* immediately reject the request */
   use constant    RLM_MODULE_FAIL=>      1;#  /* module failed, don't reply */
@@ -46,9 +51,11 @@ For example if yout want to reject some user in authentication then your auth fu
  }
 
 ===External Perl modules===
+
 You can use any external module with your perl script just do as usuall use Some_Module
 
 ===Threaded Perl===
+
 When your perl is compiled with ithreads (use perl -V | grep USE_ITHREADS) 
 module will have its own pool of perl interpeters. This pool is fully configurable.
 
@@ -64,12 +71,15 @@ In perl section in your config.
 This is the default values.  On startup or later when a new perl interpeter is created a function CLONE is called.  In this function you can initialize some variables that should be local for this thread. For example an Database connection.  Hint: When you want to use threaded perl with Database make sure a pool is fixed size.
 
 ===Threaded vs Non-threaded===
+
 Now a days perl threads have become more stable. When your perl is compiled without threads and a new radius request is coming to your perl module, the next request will be proccessed after proccesing the previous one. When perl is threaded all requests can be poccessed in parallel.
 
 ===Multiple Instances===
+
 You can have multiple instances only if your perl is compiled with  MULTIPLICITY
 
 ===Config===
+
 This is an example <tt>modules/perl</tt> configuration:
 
         perl {
@@ -157,11 +167,13 @@ and then add
 ::  Fall-Through = 1
 
 ===How fast is rlm_perl===
+
 Because the perl interpeter is loaded into memory including the script, it is very fast. You will not be waisting time, waiting for perl to start up and process the script like in case when you use Exec-Program-Wait with perl script. 
 
 ===Detach===
 
 ===Debug===
+
 Install or recompile libperl with debugging symbols. Use "./Configure -Doptimize='-g'" 
 Recompile rlm_perl with -g.
 Recompile FreeRadius with --enable-developer.
@@ -177,6 +189,7 @@ otherwise use this
  printf "%d:%s\n", my_perl->Icurcop->cop_line, my_perl->Icurcop->cop_file
 
 ===Example===
+
  #
  #  This program is free software; you can redistribute it and/or modify
  #  it under the terms of the GNU General Public License as published by
@@ -353,6 +366,7 @@ otherwise use this
  }
 
 ===More examples===
+
 Here are some external examples taken from the Free and Open Source [http://www.packetfence.org PacketFence] project.
 * [http://mtn.inverse.ca/branch/head/file/org.packetfence.1_9/pf/addons/802.1X/rlm_perl_packetfence.pl VLAN assignment by SQL queries and local logic]
 * [http://mtn.inverse.ca/branch/head/file/org.packetfence.trunk/pf/addons/802.1X/rlm_perl_packetfence_soap.pl VLAN assignment by Web Services (SOAP) remote calls]
