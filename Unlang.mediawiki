@@ -1,0 +1,6 @@
+'''unlang''' is the FreeRADIUS processing "un-language" - a simple processing language used in its configuration files.
+
+The [[sites configuration]] can include unlang to accomplish pretty much anything one usually needed the [[users]]/[[hints]]/[[huntgroups]] files for.
+
+==See also==
+* [http://freeradius.org/radiusd/man/unlang.html unlang(5) manual]

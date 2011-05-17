@@ -1,0 +1,25 @@
+==Operating Systems==
+FreeRADIUS is reported to run on the following Operating Systems:
+* [http://www.ibm.com/aix AIX]
+* [http://www.cygwin.com/ Cygwin]
+* [http://www.freebsd.org/ FreeBSD]
+* [http://www.hp.com/products1/unix/ HP-UX]
+* [http://www.kernel.org/ Linux] ([http://www.centos.org/ CentOS], [http://www.debian.org/ Debian], [http://www.mandriva.com/ Mandriva], [http://www.redhat.com/ Red Hat], [http://www.opensuse.org/ SUSE], [http://www.turbolinux.com/ Turbolinux], [http://www.ubuntu.com/ Ubuntu])
+* [http://www.apple.com/server/macosx/ Mac OSX]
+* [http://www.netbsd.org/ NetBSD]
+* [http://www.openbsd.org/ OpenBSD]
+* OSF/Unix
+* [http://www.sun.com/software/solaris/ Solaris]
+
+For information on specific packages, see [[binary packages]].
+
+Porting to other unix-like platforms should be easy. Due to the limited resources of the FreeRADIUS development team, we are not able to test each version on all platforms before release. In general we test on [[binary packages|several versions of Linux]] and Solaris and FreeBSD appears to also be a popular deployment platform for our users so we hear about any issues on those platforms quickly.
+
+==Hardware Platforms==
+FreeRADIUS is reported to run on the following Hardware Architectures:
+* IA-64 (Itanium & Itanium2)
+* PPC (IBM POWER & PowerPC)
+* Sparc
+* Sparc64
+* x86
+* x86_64 (AMD64 & EMT64)

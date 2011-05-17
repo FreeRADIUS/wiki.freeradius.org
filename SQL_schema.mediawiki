@@ -1,0 +1,8 @@
+Freeradius comes with a set of prepared scripts for generating SQL schemas:
+
+#[[MS-SQL DDL script]]
+#[[MySQL DDL script]]
+#[[Oracle DDL script]]
+#[[Postgres DDL script]]
+
+{{Default in the server source|raddb/sql/*/schema.sql|plural}}

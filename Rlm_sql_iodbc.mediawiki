@@ -1,0 +1,3 @@
+iODBC: A generic Database driver. See http://www.iodbc.org/
+
+{{Default in the server source|src/modules/rlm_sql/drivers/rlm_sql_iodbc/}}

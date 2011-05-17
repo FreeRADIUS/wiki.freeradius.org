@@ -1,0 +1,24 @@
+The '''rlm_pap''' module enables local [[PAP]] authentication based on the User-Password attribute.
+
+{{Default in the server source|src/modules/rlm_pap/}}
+
+==Configuration==
+
+{{Default in the server source|raddb/modules/pap}}
+
+<pre>
+	# PAP module to authenticate users based on their stored password
+	#
+	#  Supports multiple encryption/hash schemes.  See "man passwd"
+	#  for details.
+	#
+	#  The "auto_header" configuration item can be set to "yes".
+	#  In this case, the module will look inside of the User-Password
+	#  attribute for the headers {crypt}, {clear}, etc., and will
+	#  automatically create the attribute on the right-hand side,
+	#  with the correct value.  It will also automatically handle
+	#  Base-64 encoded data, hex strings, and binary data.
+	pap {
+		auto_header = no
+	}
+</pre>

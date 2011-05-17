@@ -1,0 +1,19 @@
+FreeRADIUS has several [[IP Pool]] modules which have the ability to assign dynamic IP address to [[RADIUS]] sessions types where the [[NAS]] has control over the the users IP.
+
+This includes [[PPP]] and other types of dialup access ([[GPRS]] for example) but does '''not''' include [[WiFi]], [[WiMAX]] and [[Ethernet]] networks as although they may use [[RADIUS]] for [[AAA]], they typically use a separate protocol called [[DHCP]] to assign IP addresses which is not supported by FreeRADIUS Server.
+
+==Usage==
+IP Pools are assigned with the FreeRADIUS Server specific [[Pool-Name]] attribute. The [[Pool-Name]] is then processed by whichever IP Pool module(s) you have configured.
+
+Note: For any IP Pool module to function correctly it must receive [[accounting]] packets from your [[NAS]], including [[Interim-Update]]s
+
+==IP Pool Modules==
+
+FreeRADIUS Server currently includes the following [[IP Pool]] modules:
+* [[rlm_ippool]]
+* [[rlm_sqlippool]]
+* [[rlm_sqlhpwippool]]
+
+==See Also==
+* [[Pool-Name]]
+* [[DHCP]]

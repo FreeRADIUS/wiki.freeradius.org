@@ -1,0 +1,9 @@
+The '''naspasswd''' file in the FreeRADIUS configuration directory (raddb/) used to contain the list of passwords for some NAS (Network Access Server, also known as terminal server) equipment.
+
+'''This file is obsolete and has been removed in all current releases.'''
+
+The old-style FreeRADIUS used it if ”checkrad” needed to login on your terminal server to check who is on line on a certain port (i.e. it's not possible to use SNMP or finger). In that case one needed to define a login name and password here.
+
+This was normally ONLY needed for USR/3Com Total Control, NetServer and Cyclades PathRAS terminal servers!
+
+'''This functionality is now in /etc/raddb/[[clients.conf]]'''

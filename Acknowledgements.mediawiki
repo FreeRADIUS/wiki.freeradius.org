@@ -1,0 +1,46 @@
+The FreeRADIUS Project is the result of the work done by a large number of people. We would like to publicly thank the following major contributors:
+
+;Adrian Pavlykevych
+:LDAP module.
+
+;Alan Curry
+:Contributed many patches for proxying, replication, realm support.
+
+;Alan DeKok ([[User:Aland]])
+:FreeRADIUS Project Lead. Registered and maintains [http://www.freeradius.org/ freeradius.org].  Wrote the module code.  Made the server threaded.  Maintains the autoconf and libtool scripts for the server. Rewrote most of the server core.
+
+;Brandon Lee Poyner
+:Netscape-MTA-MD5 authentication module.
+
+;Chris Brotsos
+:Memory allocation debugging and proxy enhancements.
+
+;Chris Parker
+:Configuration parser enhancements. 'rlm_attr_filter' module. proxy enhancements. FreeRADIUS Client embedded mode and other enhancements.
+
+;Jeff Carneal, Apex Internet Services, Inc.
+:Wrote the caching support for the Unix module.
+
+;Jochen Friedrich
+:SMUX / SNMP support.
+
+;Kevin Bonner ([[User:KevinBonner]])
+:Contributes significantly to the mailing list and wiki
+
+;Kostas Kalevras
+:Contributed the 'dialup_admin' PHP server administration code.
+
+;Miquel van Smoorenburg
+:Wrote the original Cistron server, and started the FreeRADIUS source tree.
+
+;Mike Machado
+:Author of the SQL module.
+
+;Miguel a.l. Paraz
+:Wrote the original code which was the basis for the PAM module.
+
+;Nathan Neulinger
+:Kerberos authentication module.
+
+;[http://peternixon.net Peter Nixon] ([[User:peter]])
+:Maintains [[rlm_sqlippool]] and hacks on other [[SQL]] related code, maintains openSUSE [[binary packages]] and provides hosting for website, wiki and ftp.

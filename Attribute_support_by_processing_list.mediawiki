@@ -1,0 +1,48 @@
+These are supported attributes by modules and their availability in the three processing lists (request, config and reply) 
+
+{| class="wikitable"
+|-
+! Name
+! Type
+! Request
+! Config
+! Reply
+! Comment
+|- align="center"
+| User-Name
+| String
+| X
+| X
+| X
+|
+|- align="center"
+| Auth-Type
+| String
+|
+| X
+|
+|
+|- align="center"
+| colspan="6" | [[rlm_ldap]]
+|- align="center"
+| Ldap-Group
+| String
+| X
+| X
+| X
+|
+|- align="center"
+| Ldap-UserDN
+| String
+|
+|
+|
+|
+|- align="center"
+| colspan=6 | [[rlm_sql]]
+|-
+|}
+
+model of this page [http://www.chillispot.org/features.html#mozTocId36714 Chillispot Supported Attributes]
+
+For a description of ''generally'' supported attributes in FreeRADIUS, see [[Attributes]].

@@ -1,0 +1,28 @@
+This page lists some changes to the EAP module that I'd like to do/see done to the EAP module:
+
+; Fully break out EAP-TLS code into libeaptls
+: This will allow modules that rely on EAP-TLS to each have their own SSL_CTX
+: The libeaptls code can look for the same option names in each module's config, allowing for modules to have different CA certificates, etc.
+
+; Allow multiple instances of each EAP type module to be configured
+: Allows for "EAP virtual hosting"
+: Modules will be called by their name2 just like other modules
+: Users can be made to use a certain list of modules (called by name2) by the presence of an Allowed-EAP-Types attribute in the config_items.  This way, usera can be made to use peap_module_a while userb can be made to use peap_module_b, allowing for systems who may have different CA certs, etc.
+: This way, only one EAP module needs to be configured, but users can be made to use a different set of EAP options/types within the EAP module.
+
+; Implement "EAP Autz Wrapping"
+: The EAP module would call an autz block (configured in the EAP module configuration from within its code to perform authorization lookups
+: Allows the EAP module to perform both pre and post authorization functions, ie:
+:: Add missing User-Name attribute before calling the autz block
+; By caching the request and output from the autz block, EAP processing can be optimized.
+: Allows us to call the autz block only once if non-EAP-related attributes don't change (Since all attributes should be present in the first request, only one autz call after the first request should be required in most cases)
+: Furthermore, this allows us to only have to make a single call to any external (LDAP, SQL, etc) databases instead of one per round trip in an EAP conversation, removing unnecessary calls and speeding up EAP authentications
+: Finally, Autz caching will also allow us to much more easily implement EAP Notifications based on Reply-Message attributes present in the Autz output
+
+; Alternative to "EAP Autz Wrapping"
+: Update the EAP handlers so that they set a flag when they expect that the *next* EAP packet from the client will require the username && password.
+: This matters most for the TLS types.
+: Looking at debug logs from various machines, the server finishes the TLS tunnel setup in one packet, and the next packet contains the data in the tunnel.
+: The TLS modules can have a flag "tunnel not done", and the EAP module can return "ok" (not currently used by eap autz) in the authorize section.
+: Then, configurable failover can do eap {ok = return} in authorize.
+: The modules needing to do DB lookups, etc. can be listed *after* the EAP module, which means that they won't be called until the TLS tunnel is set up

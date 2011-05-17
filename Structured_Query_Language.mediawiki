@@ -1,0 +1,8 @@
+SQL is an ANSI (American National Standards Institute) standard computer language for accessing and manipulating database systems. SQL statements are used to retrieve and update data in a database. Unfortunately, there are many different versions of the SQL language, but to be in compliance with the ANSI standard, they must support the same major keywords in a similar manner (such as SELECT, UPDATE, DELETE, INSERT, WHERE, and others).
+
+FreeRADIUS Server has a master SQL abstraction module called [[rlm_sql]] which utilizes sub modules (or shims) which work with individual database program servers. These shims include DB2, ODBC, Oracle, PostgreSQL, MySQL and Firebird.
+
+Whereever possible QUERIES in FreeRADIUS use SQL99 syntax although the config files for some shims have been optimized to use proprietary extensions.
+
+==See Also==
+* [[rlm_sql]]

@@ -1,0 +1,7 @@
+Network Access Protection (NAP) is a policy enforcement platform built into the Microsoft Windows Vista and Windows Server Code Name "Longhorn" operating systems that allows you to better protect network assets by enforcing compliance with system health requirements. With Network Access Protection, you can create customized health policies to validate computer health before allowing access or communication, automatically update compliant computers to ensure ongoing compliance, and optionally confine noncompliant computers to a restricted network until they become compliant.
+
+==See Also==
+* [http://www.microsoft.com/nap/ Microsoft.com - Network Access Protection]
+* [[Network Admission Control]]
+* [[Trusted Network Connect]]
+* [[Network Access Control]]

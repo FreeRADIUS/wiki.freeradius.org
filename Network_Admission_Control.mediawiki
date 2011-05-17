@@ -1,0 +1,7 @@
+Network Admission Control (NAC), a set of technologies and solutions built on an industry initiative led by Cisco, uses the network infrastructure to enforce security policy compliance on all devices seeking to access network computing resources, thereby limiting damage from emerging security threats. Customers using NAC can allow network access only to compliant and trusted endpoint devices (PCs, servers, and PDAs, for example) and can restrict the access of noncompliant devices.
+
+==See Also==
+* [http://www.microsoft.com/nap/ Microsoft.com - Network Access Protection]
+* [[Network Access Protection]]
+* [[Trusted Network Connect]]
+* [[Network Access Control]]

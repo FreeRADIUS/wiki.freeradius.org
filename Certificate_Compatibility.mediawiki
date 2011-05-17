@@ -1,0 +1,51 @@
+The certificates created using the scripts in the "raddb/certs" directory are known to be compatible
+with ALL operating systems.
+
+If you see the server send an Access-Challenge, and the client never sends another Access-Request,
+then
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'''''STOP!'''''
+
+The supplicant (client PC) has decided that it doesn't like the server, and has failed to continue the EAP conversation.  This usually happens because the client is a WIndows machine, and you did not follow the recommended way to create and install server certificates.
+
+The server certificate has to have special OIDs in it, or else the Microsoft clients will silently
+fail.  See the file "scripts/xpextensions" file for details, or the following page:
+
+	http://support.microsoft.com/kb/814394/en-us
+
+For additional Windows XP SP2 issues, see:
+
+	http://support.microsoft.com/kb/885453/en-us
+
+The long description of the likely causes is below
+
+* Windows requires certain OID's in the certificates.  If it doesn't see them, it will stop doing EAP.  The most visibile effect is that the client starts EAP, gets a few Access-Challenge packets, and then a little while later re-starts EAP.  If this happens, see the [[FAQ#PEAP_or_EAP-TLS_Doesn.27t_Work_with_a_Windows_machine|FAQ]], and the comments in raddb/eap.conf for how to fix it.
+
+* Windows requires the root certificates to be on the client PC.  If it doesn't have them, you will see the same issue as above.
+
+* Windows XP post SP2 has a bug where it has problems with certificate chains.  i.e. if the server certificate is an intermediate one, and not a root one, then authentication will silently fail, as above.
+
+* Some versions of Windows CE cannot handle 4K RSA certificates.  They will (again) silently fail, as above.
+
+* In none of these cases will Windows give the end user any reasonable error message describing what went wrong.  This leads people to blame the RADIUS server because it doesn't "continue" the EAP conversion. That blame is misplaced.  The server sends an Access-Challenge, and waits for the client to continue.  The client does not, so the server eventually cleans up the EAP session.
+
+* Certificate chains of more than 64K bytes are known to not work.  This is a minor problem in FreeRADIUS.  However, most clients cannot handle 64K certificate chains.  Most Access Points will shut down the EAP session after about 50 round trips, while 64K certificate chains will take about 60 round trips.  So don't use large certificate chains.  They will only work after everyone has upgraded every single client PC and every device in the network.
+
+* All other operating systems are known to work with EAP and FreeRADIUS. This includes Linux, *BSD, Mac OS X, Solaris, Symbian, along with all known embedded systems, phones, WiFi devices, etc.
+
+* Someone needs to ask Microsoft to please stop making life hard for their customers.
+
+For detailed instructions on how to configure EAP, see:
+
+http://deployingradius.com/documents/configuration/eap.html
+
+=EAP Session did not finish=
+
+If you are running version 2.1.10 or later, you may see the following message:
+
+ WARNING: !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+ WARNING: !! EAP session for state 0x3e833be03884222b... did not finish!
+ WARNING: !! Please read http://wiki.freeradius.org/Certificate_Compatibility
+ WARNING: !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+In that case, follow the instructions given above.

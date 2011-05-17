@@ -1,0 +1,18 @@
+Templates were introduced in 2.0 as a way to avoid repetitive configuration directive declarations in configuration stanzas. Templates alter the default value of configuration directives in the target stanza type, and can be overridden by declaring the directive explicitly within the stanza itself.
+
+You may only have one templates stanza per FreeRADIUS configuration, additional templates stanzas will be ignored.
+
+
+'''Templates are declared as:'''
+
+ templates {
+  target_stanza {
+    directives ...
+  }
+ }
+ 
+'''Templates do not currently work with module declarations, such as''' :
+
+ sql sql1{
+      ...
+ }

@@ -1,0 +1,24 @@
+The following [[NAS]] are known to be RFC 2866 incompliant for the ''Accounting-Input-Octets'' and ''Accounting-Output-Octets'' [[attributes]]
+
+{| class="wikitable"
+|-
+! Vendor
+! Notes
+|-
+| Bluesocket
+|
+|-
+| Colubris
+|
+|-
+| CoovaChilli
+| Reversible with option '''swapoctets'''
+|-
+| Gemtek
+| Reversible with option '''Reverse Accounting''' set to ''enabled''
+|-
+| Nomadix
+|
+|}
+
+More info can be found in the [http://coova.org/wiki/index.php/Template:NASVendorAccountingTable Coova NASVendorAccountingTable]

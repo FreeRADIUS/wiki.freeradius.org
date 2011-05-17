@@ -1,0 +1,15 @@
+'''Auth-Type''' is an internal check item (i.e. a special RADIUS attribute) that is used to identify the [[authentication]] type to be used for a particular user (authentication request). It is most commonly seen in the [[users]] file or in [[unlang]] logic.
+
+In modern FreeRADIUS configurations, in general, you '''should not''' set the Auth-Type attribute manually.  The server will figure it out on its own, and will do the right thing. That is, the authentication-related modules that you enable (or leave them enabled by default) will set the Auth-Type on their own.
+
+The most common side effect of erroneously setting the Auth-Type attribute is that one authentication method will work, but the others will not.
+
+The common reasons to set the Auth-Type attribute by hand is to either forcibly reject the user (Auth-Type := Reject), or to or forcibly accept the user (Auth-Type := Accept).
+
+Note that Auth-Type := Accept will NOT work with [[EAP]].
+
+People sometimes read the debug log and notice the message:
+
+ auth: No authenticate method (Auth-Type) configuration found for the request: Rejecting the user
+
+It is ''not'' necessarily a good idea to intervene by explicitly defining Auth-Type. It is more likely that one of the authentication modules (e.g. [[rlm_pap]], [[rlm_chap]], [[rlm_files]], [[rlm_ldap]], ...) has either not been run, or it has been run but the incoming request doesn't satisfy its requirements based on [[protocol compatibility]].

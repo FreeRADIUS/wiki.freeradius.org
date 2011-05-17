@@ -1,0 +1,7 @@
+The '''rlm_otp''' module enables One Time Password authentication methods.
+
+{{Default in the server source|src/modules/rlm_otp/}}
+
+==Configuration==
+
+{{Default in the server source|raddb/modules/otp}}

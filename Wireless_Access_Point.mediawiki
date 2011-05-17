@@ -1,0 +1,8 @@
+A wireless access point (AP or WAP) is a device that connects wireless communication devices together to form a wireless network. The AP usually connects to a wired network, and can relay data between wireless devices and wired devices.  Several APs can link together to form a larger network that allows "roaming". (In contrast, a network where the client devices manage themselves - without the need for any access points - becomes an ad-hoc network.) Wireless access points have IP addresses for configuration.
+
+==Security==
+Wireless access has special security considerations.  Many wired networks base the security on physical access control, trusting all the users on the local network, but if wireless access points are connected to the network, anyone on the street or in the neighbour office could connect.  The most common solution is wireless traffic encryption. Modern access points come with built-in encryption. The first generation encryption scheme [[Wired Equivalent Privacy|WEP]] proved easy to crack; the second and third generation schemes, [[Wi-Fi Protected Access|WPA]] and [[IEEE 802.11i|WPA2]], are considered secure if a strong enough password or passphrase is used.
+
+==See Also==
+* [[WPA HOWTO]]
+* http://www.wi-fi.org/faqs.php

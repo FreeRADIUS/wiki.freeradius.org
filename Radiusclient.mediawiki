@@ -1,0 +1,51 @@
+==Introduction==
+FreeRADIUS Client is a framework and library for writing [[RADIUS Clients]] which additionally includes [[radlogin]], a flexible [[RADIUS]] aware login replacement, a command line program to send RADIUS accounting records, an utility allowing to send RADIUS AAA requests from command line or from shell scripts and a utility to query the status of a (Merit) [[RADIUS]] server. All these programs are based on a library which lets you develop a RADIUS-aware application in less than 50 lines of C code. It is highly portable and runs on Linux, many BSD variants and Solaris.
+
+==Availability==
+FreeRADIUS Client release is available from:
+ ftp://ftp.freeradius.org/pub/freeradius/freeradius-client-1.1.6.tar.bz2
+
+
+FreeRADIUS Client rpms are available from:
+ http://software.opensuse.org/download/network:/aaa/
+
+==Development==
+FreeRADIUS Client snapshot tarballs are available from ftp://ftp.suntel.com.tr/pub/freeradius/snapshots/
+
+FreeRADIUS Client snapshot rpms are available from
+http://software.opensuse.org/download/network:/aaa/
+
+FreeRADIUS Client is also available via CVS checkout for those interested in in contributing to development:
+
+ $ cvs -d :pserver:anoncvs@cvs.freeradius.org:/source login
+  CVS password: anoncvs
+
+ $ cvs -d :pserver:anoncvs@cvs.freeradius.org:/source checkout radiusclient
+
+==License==
+Unlike FreeRADIUS Server which is available under the GPL and [[libradius]] which is available under the LGPL, FreeRADIUS Client is distributed under the BSD license. This is to facilitate the maximum possible use of '''correct''', up-to-date, maintained code in as many other RADIUS Client implimentations as possible.  We want you to use this code in your application whether it is Open Source or otherwise!
+
+Please see the COPYRIGHT file in the radiusclient source code for more details.
+
+==History==
+Radiusclient traces its history to the early RADIUS code developed by the Livingston Enterprises, University of Michigan and Merit Network.
+
+The radiusclient library itself was put together by Lars Fenneberg around 1995 and used to live at http://www.cityline.net/~lf/radius/ but seems to be no longer maintained (Tarballs are still available from ftp://ftp.cityline.net/pub/radiusclient/, latest release is 0.3.2 dated early 2002). It does however still ship with some Linux distributions including SUSE Linux.
+
+A fork of the original radiusclient called [http://developer.berlios.de/projects/radiusclient-ng/ radiusclient-ng] had been created in 2003 by Maxim Sobolev and was used as the basis of the [[RADIUS]] support in [http://www.iptel.org/ser/ SER], [http://www.openser.org/ OpenSER] and [http://www.b2bua.org/ Sippy B2BUA].  The library was significantly improved and refactored in the process, particularly the API was changed to eliminate shared state and make library re-entrant; Vendor Specific Attributes (VSA) support was introduced; support for SIP Digest attributes was added and the new radiusclient utility allowing to send RADIUS AAA requests from command line or from shell scripts was created.  Quite few bugs were fixed in the process with the help from the comunity.
+
+In late 2006 it was decided that the FreeRADIUS Project should adopt the latest code from radiusclient-ng cvs as the basis of a new FreeRADIUS client package. The intention is to roll some of the client functionality of the FreeRADIUS server into this separate client package and to make the FreeRADIUS suite a one stop shop for all people wishing to use and develop RADIUS related applications.
+
+The first version released by the FreeRADIUS project was 1.1.5 which fixed an MD5 related endian issue and introduced a client configuration framework to the library which lends itself to allowing embedded radius client functionality.
+
+Development of the radiusclient-ng and FreeRADIUS client were proceeding in parallel during 2006-2007, with periodic merges of fixes from radiusclient-ng into FreeRADIUS client until in early 2008 it has been decided to merge both projects on the basis of the latest code from the FreeRADIUS client and discontinue radiusclient-ng project.  This would allow to avoid duplicate efforts and produce better package.  All developers from the radiusclient-ng project joined FreeRADIUS team and few remaining fixes from the radiusclient-ng have been merged into FreeRADIUS client package.
+
+Development of the codebase is ongoing.
+
+==See Also==
+* [[radlogin]]
+* [[radacct]]
+* [[radstatus]]
+* [[radclient]]
+* [[radiusd]]
+* [[RADIUS Clients]]

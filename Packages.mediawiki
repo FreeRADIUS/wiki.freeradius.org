@@ -1,0 +1,23 @@
+Pre-built [[binary packages]] for a number of operating systems are available from their respective vendors as well as other sources.
+
+The officially supported list of third-party sites is at http://freeradius.org/download.html and also as follows:
+
+* [http://freeradius.net Cygwin]
+* [http://packages.debian.org/freeradius Debian] ([[Debian|with backports]])
+* [http://pkgsrc.se/net/freeradius DragonFlyBSD] (via NetBSD pkgsrc)
+* [http://koji.fedoraproject.org/koji/packageinfo?packageID=298 Fedora]
+* [http://www.freebsd.org/cgi/ports.cgi?query=freeradius&amp;stype=all&amp;sektion=net FreeBSD]
+* [http://freeradius.darwinports.com/ Mac OSX] (Leopard server <small>[http://www.apple.com/opensource/][http://www.apple.com/server/macosx/leopard/more.html]</small>)
+* [http://download.opensuse.org/repositories/network:/aaa/ Mandriva]
+* [http://pkgsrc.se/net/freeradius NetBSD]
+* [http://ports.openbsd.nu/net/freeradius OpenBSD]
+* [[Solaris]]
+* [http://download.opensuse.org/repositories/network:/aaa/ SUSE and openSUSE] (the Network:AAA repository of the [http://www.opensuse.org OpenSUSE Project])
+* [http://freeradius.org/business/roadmap.html#windows Windows]
+* [http://packages.ubuntu.com/freeradius Ubuntu]
+
+FreeRADIUS is shipped on the installation media of many of the above.
+See also the [[Linux|history if inclusion into various Linux distributions]].
+
+==See Also==
+* [[Build]]

@@ -1,0 +1,32 @@
+'''rlm_unix''' is the FreeRADIUS module that allows authentication/authorization via the Unix-style passwd/shadow/group files.
+
+See also:
+* [http://freeradius.org/radiusd/man/rlm_unix.html rlm_unix(5) manual]
+* [[rlm_passwd]]
+
+{{Default in the server source|src/modules/rlm_unix/}}
+
+==Configuration==
+
+{{Default in the server source|raddb/modules/unix}}
+
+<pre>
+	# Unix /etc/passwd style authentication
+	#
+	unix {
+		#  As of 1.1.0, the Unix module no longer reads,
+		#  or caches /etc/passwd, /etc/shadow, or /etc/group.
+		#  If you wish to cache those files, see the passwd
+		#  module, above.
+		#
+
+		#
+		#  The location of the "wtmp" file.
+		#  This should be moved to it's own module soon.
+		#
+		#  The only use for 'radlast'.  If you don't use
+		#  'radlast', then you can comment out this item.
+		#
+		radwtmp = ${logdir}/radwtmp
+	}
+</pre>

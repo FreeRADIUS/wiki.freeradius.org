@@ -1,0 +1,7 @@
+The '''radtest''' command provides a simple tool for testing the FreeRADIUS server by querying it directly with requests.
+
+Command format:
+ radtest {username} {password} {hostname} 10 {radius_secret}
+
+==See also==
+* [[radclient]]

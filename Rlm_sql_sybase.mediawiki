@@ -1,0 +1,7 @@
+This is the driver of the [[rlm_sql]] [[module]] that connects to Sybase [[SQL]] databases. This includes Microsoft SQL Server. (?)
+
+See also:
+* [[MS-SQL DDL script]]
+
+{{Default in the server source|src/modules/rlm_sql/drivers/rlm_sql_sybase/}}
+{{Default in the server source|raddb/sql/mssql/}}

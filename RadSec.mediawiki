@@ -1,0 +1,11 @@
+RadSec is a RADIUS extension developed by Open Systems Consultants Pty Ltd and implemented in Radiator 3.11 and onwards. It provides a TCP or SCTP connection between a RADIUS client and a RADIUS server. It allows any type of radius request to be proxied from the AuthBy RADSEC to the ServerRADSEC  and 
+then handled as configured in the RadSec server. Replies will be carried back 
+to the RadSec client and thence to the original requester. It was designed to work as similarly to standard RADIUS as possible.
+
+RadSec connections can optionally be encrypted with TLS and optionally 
+require mutual authentication of client and server using PKI certificates.
+
+FreeRADIUS does not yet support RadSec although support is planned for the future.
+
+==External Links==
+* [http://www.open.com.au/radiator/radsec-whitepaper.pdf RadSec - a secure, reliable RADIUS Protocol]

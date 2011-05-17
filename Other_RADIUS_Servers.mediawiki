@@ -1,0 +1,41 @@
+While we firmly believe that [http://www.freeradius.org FreeRADIUS] is the best RADIUS server in existence, for completeness here is a list of other Open Source servers.  For those investigating Open Source servers,  only FreeRADIUS supports EAP (required for Wifi), and has has the largest feature set, user community and most frequent releases.
+
+==BSDRadius==
+[http://www.bsdradius.org/ BSDRadius] is open source (BSD licensed) RADIUS server written in python (Uses [http://wiki.freeradius.org/index.php/RADIUS_Clients#Pyrad Pyrad]) targeted for use in Voice over IP (VoIP) applications.
+Most commonly used VoIP protocols (SIP and H.323) use a small number of Authentication methods (e.g. CHAP and Digest), and this allows for reduced processing overhead and code size in [http://www.bsdradius.org/ BSDRadius].
+
+==FreeRADIUS.net==
+[http://www.freeradius.net/ FreeRADIUS.net] is a win32 distribution of [http://www.freeradius.org FreeRADIUS] which runs on Microsoft Windows XP.
+
+==GNU RADIUS==
+[http://www.gnu.org/software/radius/ GNU RADIUS] is a GPL-licensed (Cistron variant) RADIUS implementation that supports a wide variety of authentication schemes including system database, internal database, SQL database and PAM authentication. Much of the code has been rewritten with Lex and Yacc used extensively. The re-write configuration file is *incredibly* useful
+
+==JRadius==
+[http://jradius.sourceforge.net JRadius] is a Java plugin for FreeRADIUS, which talks to a Java server, allowing you to write RADIUS handlers in Java.
+
+==OpenRADIUS==
+[http://www.xs4all.nl/~evbergen/openradius-index.html/ OpenRADIUS] is a GPL-licensed implementation of the RADIUS protocol with an ability to get shared secrets, authentication information, policies and user profiles from any available external data source, and which supports Unix password databases (including NIS/NIS+), Livingston-style ASCII files and LDAP directories out of the box.
+
+==See Also==
+* [[RADIUS Clients]]
+
+=Defunct RADIUS Servers=
+
+There have been a number of Open Source RADIUS servers developed over the years.  Some are no longer in active development, and are listed below.
+
+==Cistron RADIUS==
+[http://www.radius.cistron.nl/ Cistron RADIUS] is an authentication and accounting server for terminal servers that speak the RADIUS protocol based on the Livingston RADIUS server. It was also the parent of the [http://www.freeradius.org FreeRADIUS project].
+
+==IC-RADIUS==
+[http://radius.innercite.com/ IC-RADIUS] is a variant if Cistron RADIUS, but with a MySQL backend. It includes a web interface for user management, as well as a CGI for your users to check their usage history. IC-RADIUS conforms to RFC 2865 and RFC 2866. IC-RADIUS is released under the GPL.
+
+==Lucent RADIUS==
+[http://portmasters.com/www.livingston.com/tech/docs/radius/1185title.html Lucent (nee Livingston) RADIUS server] is the original BSD-licensed implementation of the radius protocol designed to operate with Livingston (and other) terminal servers. It handles user authentication and accounting.
+
+Although Lucent no longer supports this code, a number of security patches and other updates are available from [http://www.vergenet.net/linux/radius/ Verge Networks] thanks to [http://www.vergenet.net/~horms/about_me.shtml Horms]
+
+==XtRadius==
+[http://xtradius.sourceforge.net/ XtRadius] is a freeware (Cistron variant) radius server implementation with extensions for running external programs for accounting or authentication. It does not appear to be actively maintained, and has not had a release in many years.
+
+==YARD RADIUS==
+[http://sourceforge.net/projects/yardradius Yet Another Radius Daemon] (i.e. YARD RADIUS) is a free RADIUS RFC compliant daemon for accounting and authorization which is derived from original Livingston Enterprise Inc. RADIUS daemon release 2.1. It adds a number of useful features to the Livingston daemon.  It is not actively maintained, and has not had a release in many years.

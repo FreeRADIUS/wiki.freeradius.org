@@ -1,0 +1,16 @@
+[[IEEE 802.1X]] is an IEEE standard for port-based [[Network Access Control]]; it is part of the [[IEEE 802]] ([[IEEE 802.1|802.1]]) group of protocols. It provides [[authentication]] to devices attached to a [[Local area network|LAN]] port, establishing a point-to-point connection or preventing access from that port if authentication fails. It is also used for certain closed wireless [[access point]]s, and is based on the [[Extensible Authentication Protocol|EAP]], Extensible Authentication Protocol (RFC 2284). RFC 2284 has been obsoleted by RFC 3748.
+
+802.1X is available on certain network switches, and can be configured to authenticate hosts which are equipped with supplicant software, denying unauthorized access to the network at the data link layer.
+
+Many vendors are implementing 802.1X for wireless access points, to be used in  situations where an access point needs to be operated as a closed access point, addressing the security vulnerabilities of [[Wired Equivalent Privacy|WEP]] (see [[802.11i]]). The authentication is usually done a [[RADIUS]] server. This provides for client-only authentication, or more appropriately, strong mutual authentication using protocols such as [[Extensible_Authentication_Protocol#EAP-TLS|EAP-TLS]].
+
+Upon detection of the new client ([[supplicant]]), the port on the switch (authenticator) will be enabled and set to the "unauthorized" state. In this state, only 802.1X traffic will be allowed; other traffic, such as DHCP and HTTP, will be blocked at the data link layer. The authenticator will send out the EAP-Request identity to the [[supplicant]], the [[supplicant]] will then send out the EAP-response packet that the authenticator will forward to the authenticating server. The authenticating server can accept or reject the EAP-Request; if it accepts the request, the authenticator will set the port to the "authorized" mode and normal traffic will be allowed. When the supplicant logs off, he will send an EAP-logoff message to the authenticator. The authenticator will then set the port to the "unauthorized" state, once again blocking all non-EAP traffic.
+
+==External links==
+* [http://www.ieee802.org/1/pages/802.1x.html IEEE page on 802.1X] 
+* IEEE standard can be retrieved at no charge through the [http://standards.ieee.org/getieee802/ GetIEEE802 program]: [http://standards.ieee.org/getieee802/download/802.1X-2001.pdf].
+
+==See Also==
+* [[Extensible Authentication Protocol]]
+* [[PANA]]
+* [[HOWTO]]s

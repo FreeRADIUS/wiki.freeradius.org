@@ -1,0 +1,30 @@
+For every part of FreeRADIUS, in the configuration directory (/etc/raddb, /etc/freeradius or similar) there is a fully commented example file included, that explains what it does, and how to use it. Read those sample files too!
+
+Again, many of the configuration files are '''ONLY''' documented in the comments included in the files.
+
+Reading the configuration files is '''REQUIRED''' to fully understand how to create complex configurations of the server.
+
+{{Default in the server source|raddb/}}
+
+==Main configuration files==
+
+* [[radiusd.conf]]
+* [[clients.conf]]
+* [[modules configuration]]
+* [[sites configuration]]
+* [[proxy.conf]]
+* [[policy.conf]]
+
+==Common module configuration==
+* [[users]]
+* [[hints]]
+* [[huntgroups]]
+
+==Old-style configuration files==
+* [[clients]]
+* [[naslist]]
+* [[naspasswd]]
+
+==See also==
+* [[Installation]]
+* [[HOWTO]]

@@ -1,0 +1,296 @@
+== Overview ==
+'''IEEE 802.11''', the [[Wi-Fi]] standard, denotes a set of [[Wireless LAN]]/WLAN standards developed by working group 11 of the [[Institute of Electrical and Electronics Engineers|IEEE]] LAN/MAN Standards Committee ([[IEEE 802]]). The term 802.11x is also used to denote this set of standards and is not to be mistaken for any one of its elements. There is no single 802.11x standard. The term ''IEEE 802.11'' is also used to refer to the original 802.11, which is now sometimes called "802.11legacy." For the application of these standards see [[Wi-Fi]].(tm)
+
+The 802.11 family currently includes six over-the-air [[modulation]] techniques that all use the same protocol.  The most popular (and prolific) techniques are those defined by the b, a, and g amendments to the original standard; security was originally included and was later enhanced via the 802.11i amendment. 802.11n is another modulation technique under development.  Other standards in the family (c–f, h, j) are service enhancements and extensions or corrections to previous specifications. 802.11b was the first widely accepted wireless networking standard, followed (somewhat counterintuitively) by 802.11a and 802.11g.
+
+802.11b and 802.11g standards use the 2.4 [[gigahertz]] (GHz) band, operating (in the USA) under [[Part 15 (FCC rules)|Part 15]] of the [[Federal Communications Commission|FCC]] Rules and Regulations. Because of this choice of frequency band, 802.11b and 802.11g equipment can incur interference from [[microwave oven]]s, [[cordless telephone]]s, [[Bluetooth]] devices, and other appliances using this same band. The 802.11a standard uses the 5 GHz band, and is therefore not affected by products operating on the 2.4 GHz band.
+
+Which part of the [[radio frequency]] spectrum may be used varies between countries, with the strictest limitations in the [[USA]]<!--or so the Wi-Fi article says-->. While it is true that in the USA 802.11a and g devices may be legally operated without a license, it is not true that 802.11a and g operate in an unlicensed portion of the radio frequency spectrum.  Unlicensed (legal) operation of 802.11 a & g is covered under [[Part 15 (FCC rules)|Part 15]] of the [[Federal Communications Commission|FCC]] Rules and Regulations.  Frequencies used by channels one (1) through six (6) (802.11b) fall within the range of the 2.4 [[gigahertz]] [[amateur radio]] band.  Licensed [[amateur radio operator]]s may operate 802.11b devices under [[Part 97 (FCC rules)|Part 97]] of the [[Federal Communications Commission|FCC]] Rules and Regulations that apply.
+
+== Protocols ==
+=== 802.11 legacy ===
+
+{| class="wikitable"
+! Release Date
+! Op. Frequency
+! Data Rate (Typ)
+! Data Rate (Max)
+! Range (Indoor)
+|-
+| 1997
+| 2.4 GHz
+| 1 Mbit/s
+| 2 Mbit/s
+| ?
+|}
+
+The original version of the standard IEEE 802.11 released in 1997 specifies two raw [[Data signaling rate|data rate]]s of 1 and 2 [[mega]][[Bit rate|bits per second]] (Mbit/s) to be transmitted via [[infrared]] (IR) signals or by either [[Frequency hopping]] or [[Direct-sequence spread spectrum]] in the [[ISM band|Industrial Scientific Medical frequency band]] at 2.4 GHz. IR remains a part of the standard but has no actual implementations.  
+
+The original standard also defines [[Carrier Sense Multiple Access]] with Collision Avoidance ([[Carrier sense multiple access with collision avoidance|CSMA/CA]]) as the medium access method. A significant percentage of the available raw channel capacity is sacrificed (via the CSMA/CA mechanisms) in order to improve the reliability of data transmissions under diverse and adverse environmental conditions.
+
+At least six different, somewhat-interoperable, commercial products appeared using the original specification, from companies like Alvarion (PRO.11 and BreezeAccess-II), [[BreezeCom]], [[Lucent]], [[Netwave Technologies]] (AirSurfer Plus and AirSurfer Pro), [[Symbol Technologies]] (Spectrum24), and [[Proxim]] (OpenAir).  A weakness of this original specification was that it offered so many choices that interoperability was sometimes challenging to realize.  It is really more of a "beta-specification" than a rigid specification, allowing individual product vendors the flexibility to differentiate their products.  Legacy 802.11 was rapidly supplemented (and popularized) by 802.11b.    Widespread adoption of 802.11 networks only occurred after 802.11b was ratified and as a result few networks ran on the 802.11-1997 standard.
+
+=== 802.11b ===
+
+{| class="wikitable"
+! Release Date
+! Op. Frequency
+! Data Rate (Typ)
+! Data Rate (Max)
+! Range (Indoor)
+|-
+| 1999
+| 2.4 GHz
+| 6.5 Mbit/s
+| 11 Mbit/s
+| ~30 meters (~100 feet)
+|}
+
+The 802.11b amendment to the original standard was ratified in 1999.  802.11b has a maximum raw data rate of 11 Mbit/s and uses the same [[Carrier sense multiple access with collision avoidance|CSMA/CA]] media access method defined in the original standard. Due to the CSMA/CA protocol overhead, in practice the maximum 802.11b throughput that an application can achieve is about 5.9 Mbit/s over [[Transmission Control Protocol|TCP]] and 7.1 Mbit/s over [[User Datagram Protocol|UDP]].
+
+802.11b products appeared on the market very quickly, since 802.11b is a direct extension of the [[Direct-sequence spread spectrum|DSSS]] (Direct-sequence spread spectrum) modulation technique defined in the original standard.  Technically, the 802.11b standard uses [[Complementary code keying]] (CCK) as its modulation technique, which is a variation on [[Code division multiple access|CDMA]]. Hence, chipsets and products were easily upgraded to support the 802.11b enhancements.  The dramatic increase in throughput of 802.11b (compared to the original standard) along with substantial price reductions led to the rapid acceptance of 802.11b as the definitive wireless LAN technology.
+
+802.11b is usually used in a point-to-multipoint configuration, wherein an access point communicates via an omni-directional antenna with one or more clients that are located in a coverage area around the access point. Typical indoor range is 30 m (100 ft) at 11 Mbit/s and 90 m (300 ft) at 1 Mbit/s. With high-gain external antennas, the protocol can also be used in fixed point-to-point arrangements, typically at ranges up to 8 [[kilometer]]s (5 [[mile]]s) although some report success at ranges up to 80–120 km (50–75 miles) where [[line of sight]] can be established. This is usually done in place of costly leased lines or very cumbersome microwave communications equipment. Designers of such installations who wish to remain within the law must however be careful about legal limitations on [[effective radiated power]].
+
+802.11b cards can operate at 11 Mbit/s, but will scale back to 5.5, then 2, then 1 Mbit/s (also known as Adaptive Rate Selection), if signal quality becomes an issue. Since the lower data rates use less complex and more redundant methods of encoding the data, they are less susceptible to corruption due to interference and signal attenuation.  Extensions have been made to the 802.11b protocol (for example, channel bonding and burst transmission techniques) in order to increase speed to 22, 33, and 44 Mbit/s, but the extensions are proprietary and have not been endorsed by the IEEE.  Many companies call enhanced versions "802.11b+".  These extensions have been largely obviated by the development of 802.11g, which has data rates up to 54 Mbit/s and is backwards-compatible with 802.11b.
+
+=== 802.11a ===
+
+{| class="wikitable"
+! Release Date
+! Op. Frequency
+! Data Rate (Typ)
+! Data Rate (Max)
+! Range (Indoor)
+|-
+| 1999
+| 5 GHz
+| 25 Mbit/s
+| 54 Mbit/s
+| ~30 meters (~100 feet)
+|}
+
+The 802.11a amendment to the original standard was ratified in 1999.  The 802.11a standard uses the same core protocol as the original standard, operates in 5 GHz band, and uses a 52-subcarrier [[orthogonal frequency-division multiplexing]] (OFDM) with a maximum raw data rate of 54 Mbit/s, which yields realistic net achievable throughput in the mid-20 Mbit/s. The data rate is reduced to 48, 36, 24, 18, 12, 9 then 6 Mbit/s if required. 802.11a has 12 non-overlapping channels, 8 dedicated to indoor and 4 to point to point. It is not interoperable with 802.11b, except if using equipment that implements both standards.  
+
+Since the 2.4 GHz band is heavily used, using the 5 GHz band gives 802.11a the advantage of less interference. However, this high carrier frequency also brings disadvantages.  It restricts the use of 802.11a to almost line of sight, necessitating the use of more access points; it also means that 802.11a cannot penetrate as far as 802.11b since it is absorbed more readily, other things (such as power) being equal.
+
+Different countries have different regulatory support, although a 2003 World Radiotelecommunications Conference made it easier for use worldwide.  802.11a is now approved by regulations in the [[United States]] and [[Japan]], but in other areas, such as the [[European Union]], it had to wait longer for approval.  European regulators were considering the use of the European [[HIPERLAN]] standard, but in mid-2002 cleared 802.11a for use in Europe.  In the US, a mid-2003 [[Federal Communications Commission|FCC]] decision may open more spectrum to 802.11a channels.
+
+Of the 52 OFDM subcarriers, 48 are for data and 4 are pilot subcarriers with a carrier separation of 0.3125 MHz (20 MHz/64). Each of these subcarriers can be a BPSK, QPSK, 16-QAM or 64-QAM. The total bandwidth is 20 MHz with an occupied bandwidth of 16.6 MHz. Symbol duration is 4 [[micro]][[second]]s with a guard interval of 0.8 microseconds. The actual generation and decoding of orthogonal components is done in baseband using DSP which is then upconverted to 5 GHz at the transmitter. Each of the subcarriers could be represented as a complex number. The time domain signal is generated by taking an Inverse [[Fast Fourier transform]] (IFFT). Correspondingly the receiver downconverts, samples at 20 MHz and does an FFT to retrieve the original coefficients. The advantages of using OFDM include reduced multipath effects in reception and increased spectral efficiency.  
+
+802.11a products started shipping in 2001, lagging 802.11b products due to the slow availability of the 5 GHz components needed to implement products.  802.11a was not widely adopted overall because 802.11b was already widely adopted, because of 802.11a's disadvantages, because of poor initial product implementations, making its range even shorter, and because of regulations.  Manufacturers of 802.11a equipment responded to the lack of market success by improving the implementations (current-generation 802.11a technology has range characteristics much closer to those of 802.11b), and by making technology that can use more than one 802.11 standard. There are dual-band, or dual-mode or tri-mode cards that can automatically handle 802.11a and b, or a, b and g, as available.  Similarly, there are mobile adapters and access points which can support all these standards simultaneously.
+
+{| class="wikitable"
+! Data rate<br />''(Mbit/s)''
+! Modulation
+! Coding rate
+! ''Ndbps''
+! 1472 byte<br />transfer duration<br />''(µs)''
+|-
+| 6
+| BPSK
+| 1/2
+| 24
+| 2012
+|-
+| 9
+| BPSK
+| 3/4
+| 36
+| 1344
+|-
+| 12
+| QPSK
+| 1/2
+| 48
+| 1008
+|-
+| 18
+|QPSK
+| 3/4
+| 72
+| 672
+|-
+| 24
+| 16-QAM
+| 1/2
+| 96
+| 504
+|-
+| 36
+| 16-QAM
+| 3/4
+| 144
+| 336
+|-
+| 48
+| 64-QAM
+| 2/3
+| 192
+| 252
+|-
+| 54
+| 64-QAM
+| 3/4
+| 216
+| 224
+|}
+
+=== 802.11g ===
+
+{| class="wikitable"
+! Release Date
+! Op. Frequency
+! Data Rate (Typ)
+! Data Rate (Max)
+! Range (Indoor)
+|-
+| June 2003
+| 2.4 GHz
+| 25 Mbit/s
+| 54 Mbit/s
+| ~30 meters (~100 feet)
+|}
+
+In June 2003, a third modulation standard was ratified: 802.11g. This flavor works in the 2.4 GHz band (like 802.11b) but operates at a maximum raw data rate of 54 Mbit/s, or about 24.7 Mbit/s net throughput like 802.11a. 802.11g hardware will work with 802.11b hardware.  Details of making b and g work well together occupied much of the lingering technical process. In older networks, however, the presence of an 802.11b participant significantly reduces the speed of an 802.11g network.  The modulation scheme used in 802.11g is [[orthogonal frequency-division multiplexing]] (OFDM) for the data rates of 6, 9, 12, 18, 24, 36, 48, and 54 Mbit/s, and reverts to (like the 802.11b standard) CCK for 5.5 and 11 Mbit/s and DBPSK/DQPSK+DSSS for 1 and 2 Mbit/s.  Even though 802.11g operates in the same frequency band as 802.11b, it can achieve higher data rates because of its similarities to 802.11a. The maximum range of 802.11g devices is slightly greater than that of 802.11b devices, but the range in which a client can achieve full (54 Mbit/s) data rate speed is much shorter than that of 802.11b.
+
+The 802.11g standard swept the consumer world of early adopters starting in January 2003, well before ratification. The corporate users held back and Cisco and other big equipment makers waited until ratification. By summer 2003, announcements were flourishing. Most of the dual-band 802.11a/b products became dual-band/tri-mode, supporting a, b, and g in a single mobile adapter card or access point.  Despite its major acceptance, 802.11g suffers from the same interference as 802.11b in the already crowded 2.4 GHz range.  Devices operating in this range include microwave ovens, Bluetooth devices, and cordless telephones.
+
+=== 802.11n ===
+
+{| class="wikitable"
+! Release Date
+! Op. Frequency
+! Data Rate (Typ)
+! Data Rate (Max)
+! Range (Indoor)
+|-
+| April 2008
+| 2.4 GHz or 5 GHz
+| 200 Mbit/s
+| 540 Mbit/s
+| ~50 meters (~160 ft)
+|}
+
+In January 2004 IEEE announced that it had formed a new 802.11 Task Group (TGn) to develop a new amendment to the 802.11 standard for wireless local-area networks. The real data throughput is estimated to reach a theoretical 540 Mbit/s (which may require an even higher raw data rate at the [[physical layer]]), and should be up to 100 times faster than 802.11b, and well over 10 times faster than 802.11a or 802.11g.
+
+Previous competitors TGn Sync, WWiSE, and a third group, [[MITMOT]], said in late July 2005 that they would merge their respective proposals as a draft which would be sent to the IEEE in September; a final version will be submitted in November. The standardization process is expected to be completed by the second half of 2006.
+
+802.11n builds upon previous 802.11 standards by adding MIMO ([[multiple-input multiple-output]]).  MIMO uses multiple [[transmitter]] and [[receiver (radio)|receiver]] [[Antenna (radio)|antennas]] to allow for increased data throughput through spatial multiplexing and increased range by exploiting the spatial diversity, perhaps through coding schemes like [[Space–time block code|Alamouti coding]].
+
+The Enhanced Wireless Consortium (EWC)<ref>http://www.enhancedwirelessconsortium.org/ Enhanced Wireless Consortium</ref> was formed to help accelerate the IEEE 802.11n development process and promote a technology specification for interoperability of next-generation wireless local area networking (WLAN) products.
+
+On [[January 19]], [[2006]], the IEEE 802.11n Task Group approved the Joint Proposal's specification, based on EWC's specification as the confirmed 802.11n proposal.
+
+At the March 2006 meeting, the IEEE 802.11 Working Group sent the 802.11n Draft to its first letter ballot,  which means that the 500+ 802.11 voters get to review the document and suggest bugfixes, changes and improvements.
+
+On [[May 2]], [[2006]], the IEEE 802.11 Working Group voted not to forward Draft 1.0 of the proposed 802.11n standard for a sponsor ballot. Only 46.6% voted to accept the proposal. To proceed to the next step in the IEEE process, a majority vote of 75% is required. This letter ballot also generated approximately 12000 comments -- much more than anticipated.
+
+According to the IEEE 802.11 Working Group Project Timelines,<ref name="timeline">{{cite web|url=http://grouper.ieee.org/groups/802/11/Reports/802.11_Timelines.htm|accessdate=2006-06-14|date=[[2006-05-31]]|title=802.11 Timelines|work=IEEE 802.11: Working Group for WLAN standards}}</ref> the 802.11n standard is not due for final approval until July 2007.
+
+It has been reported that 802.11n interferes with existing 802.11b and g wireless networks. It has also been reported that the range of the 802.11n has reached up to 1/4 of a mile. Interference on this scale is a major setback for 802.11n.{{fact}}
+
+== Channels and international compatibility ==
+
+* See also ''[[Wi-Fi#Wi-Fi: How it works|Wi-Fi: How it works]]''.
+
+802.11b and 802.11g divide the 2.4 GHz spectrum into 14 overlapping, staggered [[channel (communications)|channels]] whose center frequencies are 5 megahertz (MHz) apart. It is a common misconception that channels 1, 6 and 11 (and, if available in the regulatory domain, channel 14) do not overlap and those channels (or other sets with similar gaps) can be used so that multiple networks can operate in close proximity without interfering with each other, but this statement is somewhat over-simplified. The 802.11b and 802.11g standards do not specify the width of a channel; rather, they specify the center frequency of the channel and a [[spectral mask]] for that channel. The spectral mask for 802.11b requires that the signal be [[wiktionary:attenuated|attenuated]] by at least 30 [[decibel|dB]] from its peak energy at ±11 MHz from the center frequency, and attenuated by at least 50 dB from its peak energy at ±22 MHz from the center frequency.
+
+Since the spectral mask only defines power output restrictions up to ±22 MHz from the center frequency, it is often assumed that the energy of the channel extends no further than these limits. In reality, if the transmitter is sufficiently powerful, the signal can be quite strong even beyond the ±22 MHz point.  Therefore, it is not correct to say that channels 1, 6, and 11 do not overlap.  It is more correct to say that, given the separation between channels 1, 6, and 11, the signal on any channel should be sufficiently attenuated to minimally interfere with a transmitter on any other channel. However, this is not universally true; for example, a powerful transmitter on channel 1 can easily overwhelm a weaker transmitter on channel 6.  In one lab test, throughput on a file transfer on channel 11 decreased slightly when a similar transfer began on channel 1, indicating that even channels 1 and 11 can interfere with each other to some extent.
+
+Although the statement that channels 1, 6, and 11 are "non-overlapping" is incomplete, the 1, 6, 11 guideline has merit.  If transmitters are closer together than channels 1, 6, and 11 (for example, 1, 4, 7, and 10), overlap between the channels will probably cause unacceptable degradation of signal quality and throughput.
+
+The channels that are available for use in a particular country differ according to the regulations of that country.  In the [[United States]], for example, [[Federal Communications Commission|FCC]] regulations only allow channels 1 through 11 to be used. In Europe channels 1-13 are licensed for 802.11b operation but only allow lower transmitted power (only 100 mW) to reduce the interference with other ISM band users.
+
+== Certification ==
+
+Because the IEEE only sets specifications but does not test equipment for compliance with them, a trade group called the [[Wi-Fi Alliance]] runs a certification program that members pay to participate in. Virtually all companies selling 802.11 equipment are members. The Wi-Fi trademark, owned by the group and usable only on compliant equipment, is intended to guarantee interoperability. Currently, "Wi-Fi" can mean any of 802.11a, b, or g. As of fall 2003, Wi-Fi also includes the security standard [[Wi-Fi Protected Access]] or WPA. Eventually "Wi-Fi" will also mean equipment which  implements the [[IEEE 802.11i]] security standard (also known as WPA2). Products that say they are Wi-Fi are supposed to also indicate the frequency band in which they operate (2.4 or 5 GHz).
+
+== Standards ==
+
+The following [[IEEE Standards Association|IEEE Standards]] and task groups exist within the IEEE 802.11 working group<ref name="timeline" />: 
+
+<!--Please do not add a standard to this list unless it is an IEEE standard and you have a reference back to IEEE's website -->
+*IEEE 802.11 - The original 1 Mbit/s and 2 Mbit/s, 2.4 GHz RF and IR standard (1999)
+*[[#802.11a|IEEE 802.11a]] - 54 Mbit/s, 5 GHz standard (1999, shipping products in 2001)
+*[[#802.11b|IEEE 802.11b]] - Enhancements to 802.11 to support 5.5 and 11 Mbit/s (1999)
+*[[IEEE 802.11c]] - Bridge operation procedures; included in the [[IEEE 802.1D]] standard (2001)
+*[[IEEE 802.11d]] - International (country-to-country) roaming extensions (2001)
+*[[IEEE 802.11e]] - Enhancements: [[Quality of service|QoS]], including packet bursting (2005)
+*[[IEEE 802.11F]] - [[Inter-Access Point Protocol]] (2003) '''Withdrawn February 2006'''
+*[[#802.11g|IEEE 802.11g]] - 54 Mbit/s, 2.4 GHz standard (backwards compatible with b) (2003)
+*[[IEEE 802.11h]] - Spectrum Managed 802.11a (5 GHz) for European compatibility (2004)
+*[[IEEE 802.11i]] - Enhanced security (2004)
+*[[IEEE 802.11j]] - Extensions for Japan (2004)
+*[[IEEE 802.11k]] - Radio resource measurement enhancements
+*IEEE 802.11l - (reserved and will not be used)
+*[[IEEE 802.11m]] - Maintenance of the standard; odds and ends.
+*[[#802.11n|IEEE 802.11n]] - Higher throughput improvements
+*IEEE 802.11o - (reserved and will not be used)
+*[[IEEE 802.11p]] - WAVE - Wireless Access for the Vehicular Environment (such as ambulances and passenger cars)
+*IEEE 802.11q - (reserved and will not be used, can be confused with [[IEEE 802.1Q|802.1Q]] VLAN trunking)
+*[[IEEE 802.11r]] - Fast [[roaming]]
+*[[IEEE 802.11s]] - ESS Mesh Networking
+*[[IEEE 802.11T]] - Wireless Performance Prediction (WPP) - test methods and metrics
+*[[IEEE 802.11u]] - Interworking with non-802 networks (for example, cellular)
+*[[IEEE 802.11v]] - Wireless [[network management]]
+*[[IEEE 802.11w]] - Protected Management Frames
+*IEEE 802.11x - (reserved and will not be used)
+*[[IEEE 802.11y]] - 3650-3700 Operation in USA
+
+There is no standard or task group named "802.11x".  Rather, this term is used informally to denote any current or future 802.11 standard, in cases where further precision is not necessary.  (The [[IEEE 802.1X]] standard for port-based network access control, is often mistakenly called "802.11x" when used in the context of wireless networks.)
+
+802.11F and 802.11T are stand-alone documents, rather than amendments to the 802.11 standard and are capitalized as such.
+
+=== Standard or Amendment? ===
+
+Both the terms "standard" and "amendment" are used when referring to the different variants of '''IEEE 802.11'''.  Which is correct?
+
+As far as the [[IEEE]] is concerned there is only one standard - '''IEEE 802.11'''.  This standard is continuously updated by means of amendments such as [[IEEE 802.11a]], [[IEEE 802.11b]] etc.  Periodically a new version of the '''IEEE 802.11''' standard is produced combining the previous version of the standard and all amendments published up to that date.  For example, there is a 2003 edition of the standard available for purchase<ref>[http://shop.ieee.org/ieeestore/Product.aspx?product_no=SH95357 Purchase 802.11-2003]</ref> that incorporates the [[IEEE 802.11a]], [[IEEE 802.11b]], and [[IEEE 802.11d]] amendments.  It is possible that at some point, only this version will be made available for free download replacing the six year old version of the base standard and the first three amendments.
+
+So the correct term for the base standard called "802.11 legacy" on this page would in fact be 802.11-1999.  But outside the working group that produces '''IEEE 802.11''' such accuracy is probably unnecessary.
+
+== Community networks ==
+
+With the proliferation of [[cable modem]]s and [[Digital Subscriber Line|DSL]], there is an ever-increasing market of people who wish to establish small networks in their homes to share their high speed [[Internet]] connection.
+
+Wireless office networks are often unsecured or secured with [[Wired Equivalent Privacy|WEP]], which is said to be easily broken. These networks frequently allow anyone within range, including passersby on the street outside, to connect to the Internet. There are also efforts by volunteer groups to establish [[wireless community network]]s to provide free wireless connectivity to the public.
+
+== Security ==
+
+In 2001, a group from the [[University of California, Berkeley]] presented a paper describing weaknesses in the [[802.11]] [[Wired Equivalent Privacy]] (WEP) security mechanism defined in the original standard; they were followed by Fluhrer, Mantin, and Shamir's paper entitled "Weaknesses in the Key Scheduling Algorithm of RC4".  Not long after, Adam Stubblefield and AT&T publicly announced the first verification of the attack. In the attack they were able to intercept transmissions and gain unauthorized access to wireless networks.
+
+The IEEE set up a dedicated task group to create a replacement security solution, 802.11i (previously this work was handled as part of a broader 802.11e effort to enhance the [[Media Access Control|MAC]] layer). The Wi-Fi Alliance announced an interim specification called [[Wi-Fi Protected Access]] ([[Wi-Fi Protected Access|WPA]]) based on a subset of the then current IEEE 802.11i draft.  These started to appear in products in mid-2003. [[IEEE 802.11i]] (also known as [[WPA2]]) itself was ratified in June 2004, and uses the [[Advanced Encryption Standard]], instead of [[RC4]], which was used in WEP and [[Wi-Fi Protected Access|WPA]].
+
+In January 2005, [[IEEE]] set up yet another task group TGw to protect management and broadcast frames, which previously were sent unsecured.  See [[IEEE 802.11w]]
+
+== Non-standard 802.11 extensions and equipment ==
+=== Non-standard channel bonding ===
+
+Chipmaker [[Atheros]] sells a proprietary [[channel bonding]] feature called [[Super G (wireless networking)|Super G]]<ref>http://www.super-g.com/</ref> for manufacturers of access points and client cards. This feature can boost network speeds up to 108 Mbit/s by using [[channel bonding]]. Also range is increased to 4x the range of 802.11g and 20x the range of 802.11b.  This feature may interfere with other networks and may not support all b and g client cards. In addition, packet bursting techniques are also available in some chipsets and products which will also considerably increase speeds. This feature may not be compatible with other equipment.  [[Broadcom]], another chipmaker, developed a competing proprietary frame bursting feature called "[[125 High Speed Mode]]"<ref>[http://www.54g.org/about_54g_speed.php Broadcom's 125 High Speed Mode consortium]</ref> or [[Linksys]] "[[SpeedBooster]]", in response to criticism of Super G's interference potential.
+
+[[US Robotics]] also has a "MAXg" line of wireless products boasting 125 Mbit/s (actual throughout 35 Mbit/s) and about a 75% increase in signal range from the 802.11g standard.<ref>http://www.usr.com/maxg/maxg.asp?loc=unst</ref>  Based on tests performed by KeyLabs on [[March 23]], [[2005]] the MAXg series consistently outperformed the equivalent proprietary solutions and some of the "Draft 802.11n" solutions from other developers.<ref>http://www.usr.com/download/whitepapers/maxg-keylabs.pdf</ref>
+
+=== Pre-n equipment ===
+
+After the announcement of the Draft 1.0 of 802.11n, many vendors announced "pre-n" transceivers and routers based upon that document.
+
+*On [[April 14]], [[2006]], the first 802.11n routers became commercially available from manufacturers Linksys, Netgear, Buffalo Technology, Belkin, and D-link.  These might more accurately be called pre-.11n routers, with speeds in excess of 300 Mbit/s.
+*On [[May 1]], [[2006]], Belkin unveiled their Belkin N1 router line. The line is scheduled to be released in North America in early June 2006. Linksys 802.11n products were released in some stores as of June 2006.
+*On [[June 24]], [[2006]], Dell began shipping 802.11n draft wireless LAN cards in the US for its XPS and Inspiron laptops.
+
+== See also ==
+
+*[[Bluetooth]], another wireless protocol primarily designed for shorter range applications.
+*[[Ultra-wideband]]
+*[[WiMAX]] (also known as 802.16), another wireless protocol designed for [[Metropolitan area network|MAN]]s.
+
+== External links ==
+* [http://standards.ieee.org/getieee802/ Get IEEE 802]
+* [http://standards.ieee.org/getieee802/802.11.html Download the 802.11 standards from IEEE]
+* [http://grouper.ieee.org/groups/802/11/Reports/802.11_Timelines.htm Official IEEE 802.11 Work Plan predictions]
+* [http://grouper.ieee.org/groups/802/11/Reports/tgn_update.htm Status of the 802.11n standard]
+* [http://www.ieee802.org/11/ IEEE 802.11 working group]
+* [http://ftp.die.net/mirror/papers/802.11/wep_attack.pdf "Using the Fluhrer, Mantin, and Shamir Attack to Break WEP" (2001)], paper by Stubblefield (PDF)
+* [http://www.oreillynet.com/pub/a/wireless/2005/05/20/80211map.html 802.11 Protocol Map] O'Reilly Network article by Matthew Gast that includes a map outlining the relationship between the various 802.11 protocols, standards and regulatory bodies.
+* [http://www.oreilly.com/catalog/802dot112/chapter/ch15.pdf Chapter 15: A Peek Ahead at 802.11n: MIMO-OFDM] 802.11 Wireless Networks: The Definitive Guide, Second Edition (PDF)

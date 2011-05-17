@@ -1,0 +1,53 @@
+Here is how things work:
+
+The client sends you a radius authentication request, you don't get to decide what's in it, the client does.
+
+The radius server looks the request and says:
+
+''Hmmm... lets see what do we have here? What can I do with this?''
+
+The answer to that is what authentication types you have enabled, what the server can lookup, and what is in the request.
+
+The server will do something like this:
+
+''Unix module, can you handle this one?''
+
+''Pap module, can you handle this one?''
+
+''Mschap module, can you handle this one?''
+
+At some point hopefully one of the modules will say:
+
+''No problem, I have it.''
+
+The decision as to whether a module can handle the request is made by the module. looking at the data available to it.
+
+Let's say that the client sends a request with a password and pap enabled (as in the default configuration). The pap module looks at the request and says
+
+''Hmmm ... do I have a password for this user?''
+
+If so, it then compares the local copy of the password to what the user sent in the request.
+
+How does radius find a user's password? By consulting it's backend data store which can be the users file, a SQL database, or ldap.
+
+So before the pap module runs ldap will run.   The ldap module will do:
+
+''Hmm... Can I find a password for this user?''
+
+If so, it will add the password to the request as a control item so that the pap module can use them, you know that pap guy, he's always looking for passwords.
+
+But WAIT! What if the client sends a MSCHAP request? What does the radius server say then?
+
+''Well that's a fine kettle of fish! That client has really really tied my hands on this one!''
+
+The only thing the server can do is run the mschap logic.
+
+The mshap module looks the request to see if there is a check item with either a clear text password or nt-hash (why? look at the [http://deployingradius.com/documents/protocols/compatibility.html protocol table]). If those haven't been added by one of the datastores the mschap module says:
+
+''Sorry, no can do.''
+
+But now the server has run out of options, it's only choice was mschap because that's what the client sent it and the mscap module can't handle it. So the server replies:
+
+'Go away! You're not getting in here with those credentials''
+
+Well, really Access-Reject.  But that's the idea.

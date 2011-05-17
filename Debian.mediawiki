@@ -1,0 +1,32 @@
+To install up-to-date FreeRADIUS packages on Debian stable systems, use the backports repository. For example:
+
+* Add a [http://backports.debian.org/Mirrors/ backports mirror] to <tt>/etc/apt/sources.list</tt> like this:
+
+ deb http://backports.debian.org/debian-backports lenny-backports main
+
+* Update the package indices:
+
+ sudo apt-get update
+
+* Install FreeRADIUS packages:
+
+ sudo apt-get -t lenny-backports install freeradius
+
+* If everything went all right, make sure you will upgrade these from the same repository, by pinning it through <tt>/etc/apt/preferences</tt> like this:
+
+<pre>
+Package: freeradius
+Pin: release a=lenny-backports
+Pin-Priority: 500
+
+Package: freeradius-common
+Pin: release a=lenny-backports
+Pin-Priority: 500
+
+[...]
+</pre>
+
+Add whichever other FR package you are using to the list in the same format.
+
+==See also==
+* [[Build#Building Debian packages|How to build Debian packages of FreeRADIUS]]

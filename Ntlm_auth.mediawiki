@@ -1,0 +1,5 @@
+'''ntlm_auth''' is a program provided in the Winbind software package (from Samba) that FreeRADIUS can use to authorize against Active Directory LDAP.
+
+See also:
+* [[FreeRADIUS Active Directory Integration HOWTO]]
+* [[Combining authentication of AD accounts (ntlm auth) with accounts stored elsewhere]]

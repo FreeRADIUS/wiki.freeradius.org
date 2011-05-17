@@ -1,0 +1,23 @@
+==[[FreeRADIUS]] HOWTOs==
+
+* [[Basic configuration HOWTO]]
+* [[SQL HOWTO]]
+* [[EAP/MD5 HOWTO]]
+* [[EAP/TLS HOWTO]]
+* [[WPA HOWTO]] (Using FreeRadius to secure your wireless network)
+* [[SNMP HOWTO]]
+* [[FreeRADIUS Active Directory Integration HOWTO]]
+* [[Syslog HOWTO]]
+* [[Informix]]
+* [[SQL Huntgroup HOWTO]] (How to implement huntgroups in SQL)
+
+==Offsite HOWTOs==
+Here is a list of known offsite [[HOWTO]]s. Where ever possible (When the authors give us permission) these have been incorporated into the wiki.
+* [http://deployingradius.com/documents/configuration/ Deploying RADIUS - Practices and Principles for AAA solutions]
+* [http://www.hep.phys.soton.ac.uk/~jhe/documents/WPA-Authentication+RADIUS-HOWTO.html WPA Authentication for Windows XP Clients with RADIUS HOWTO]
+* [http://www.missl.cs.umd.edu/wireless/eaptls/ HOWTO on EAP/TLS authentication between FreeRADIUS and XSupplicant]
+* [http://www.freeradius.org/doc/EAP-MD5.html FreeRADIUS EAP/MD5: Windows XP as supplicant]
+* [http://www.freeradius.org/doc/EAPTLS.pdf EAP/TLS Setup for FreeRADIUS and Windows XP Supplicant]
+* [http://homepages.lu/charlesschwartz/radius/freeRadius_AD_tutorial.pdf Tutorial for AD integration]
+* [http://blog.derjohn.de/snipsnap/space/start/2006-09-27/1#Freeradius_und_MySQL FreeRADIUS, L2TPD and MySQL]
+* [http://web.pip.com.au/brads-howtos/freeradius-informix.html FreeRADIUS and Informix]

@@ -1,0 +1,42 @@
+The '''hints''' file is the FreeRADIUS configuration file that defines attributes added to certain RADIUS requests.
+
+{{Default in the server source|raddb/hints}}
+
+This file is usually located at /etc/raddb/hints on a server system. This file is used to give users a different login type based on a prefix/suffix of their login name.
+
+For example, logging in as "user" may result in a rlogin session to a Unix system, and logging in as "Puser" could start a PPP session. But, this exact kind of usage is old, and it's commented out by default.
+It confuses too many people when "Peter" logs in, and the server thinks that the user "eter" is asking for PPP.
+
+The parsing of the hints file is activated by the module named '''preprocess'''.
+
+== Examples ==
+
+Here are a couple of examples for what one might do with the hints file. These are used in one form or another on my servers and with some changes might be useful for others.
+
+The entry below would look for requests from the localhost and rewrite the User-Name attribute by adding the realm to it. This modified (or radius_xlat) attribute would then be used for further processing.
+
+     DEFAULT NAS-IP-Address == "127.0.0.1"
+          User-Name := "%{User-Name}@realm.com"
+
+This example checks to see if the "@" symbol, which denotes a realm, is present. If it is, leave the User-Name attrbute as is. If it is not present, add a realm.
+
+     DEFAULT User-Name !~ ".*@", NAS-IP-Address == "192.168.1.254"
+          User-Name := "%{User-Name}@realm.com"
+
+This example demonstrates how to remove a realm from a User-Name attribute.
+
+     DEFAULT User-Name =~ "^([^@]+)@realm.com", NAS-IP-Address == "127.0.0.1"
+          User-Name := "%{1}"
+
+Note the operator is of utmost importance in these instances.
+
+*<nowiki>:=</nowiki> replaces an existing attribute with the value given.
+*!~ evaluates a regular expression and is true if it does not match.
+*=~ evaluates a regular expression and is true on match.
+*== can only be used as a check attribute and matches if it exists in the request and matches the value given.
+
+See [[Operators]] for a full description of all operators.
+
+==See also==
+* [[radiusd.conf]]
+* [[unlang]]

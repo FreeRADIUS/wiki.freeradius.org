@@ -1,0 +1,3 @@
+This is the driver of the [[rlm_sql]] [[module]] that connects to IBM DB2 [[SQL]] databases.
+
+{{Default in the server source|src/modules/rlm_sql/drivers/rlm_sql_db2/}}

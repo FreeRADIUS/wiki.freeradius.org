@@ -1,0 +1,9 @@
+This module connects to the Microsoft SQL Server databases.
+
+It uses the FreeTDS library.
+
+{{Default in the server source|src/modules/rlm_sql/drivers/rlm_sql_freetds/}}
+{{Default in the server source|raddb/sql/mssql/}}
+
+See also:
+* [[MS-SQL DDL script]]

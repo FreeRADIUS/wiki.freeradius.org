@@ -1,0 +1,52 @@
+The '''rlm_krb5''' FreeRADIUS [[module]] enables the use of [[Kerberos]] 5.
+
+{{Default in the server source|src/modules/rlm_krb5/}}
+
+== Compilation issues ==
+
+{{Default in the server source|doc/rlm_krb5}}
+
+=== MIT libraries ===
+The rlm_krb5 module, by default, presumes you have the MIT Kerberos 5
+distribution. Notes from that distribution:
+
+On linux, you may have to change:
+
+ deplibs_test_method="pass_all"
+
+in <tt>../libtool</tt>
+
+Otherwise, it complains if the krb5 libs aren't shared.
+
+=== Heimdal libraries ===
+
+If you are using the Heimdal Kerberos 5 distribution, pass a
+<tt>--enable-heimdal-krb5</tt> to the configure line. With Heimdal, you'll need
+to have a <tt>radius/your.hostname.example.org</tt> key in your keytab (which needs
+to be readable by the user running the RADIUS server).
+
+== Configuration parameters ==
+
+{{Default in the server source|raddb/modules/krb5}}
+
+You can configure the module with the following parameters:
+
+ krb5 {
+
+     # keytab containing the key used by rlm_krb5
+     keytab = /path/to/keytab
+    
+     # principal that is used by rlm_krb5
+     service_principal = radius/some.host.com
+ }
+
+Make sure the keytab is readable by the user that is used to run <tt>radiusd</tt> and that your authorization configuration really uses 
+<tt>rlm_krb5</tt> to do the authentication.  You will need to add the following to the 'authenticate' section of your radiusd.conf file:
+
+ Auth-Type Kerberos {
+     krb5
+ }
+
+== Links ==
+
+* [http://archives.free.net.ph/message/20060104.153134.68c5be76.en.html Configure radius to authenticate on an Active Directory server]

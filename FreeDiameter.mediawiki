@@ -1,0 +1,13 @@
+FreeDiameter is another open-source implementation that supports both RFC3588 and rfc3588bis flavors of the Diameter protocol. 
+
+The source code of freeDiameter framework is available under the BSD License. 
+The base protocol implementation is available as a C library + daemon and  currently supports Linux and BSD systems. 
+
+A few extensions are distributed in the freeDiameter package, for example a [[RADIUS]]/Diameter gateway agent implementation, or a Diameter EAP server component.
+
+==External Links==
+* [http://www.freediameter.net/ The freeDiameter Website]
+
+==See Also==
+* [[DIAMETER]]
+* [[RADIUS]]

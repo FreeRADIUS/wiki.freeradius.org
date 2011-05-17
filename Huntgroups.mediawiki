@@ -1,0 +1,14 @@
+The '''huntgroups''' file is the FreeRADIUS configuration file that defines groups of clients (NASes) by default.
+
+{{Default in the server source|raddb/huntgroups}}
+
+This is usually located at /etc/raddb/huntgroups on a server system. Here you can define different huntgroups. These can be used to: 
+*restrict access to certain huntgroups to certain users/groups of users (define this in the huntgroups file itself)
+*match a login name with a huntgroup in /etc/raddb/[[users]]. One use for this is to give a user a static IP address based on the huntgroup / Point of Presence the user dials in to.
+
+The parsing of the huntgroups file is activated by the module named '''preprocess'''.
+
+==See also==
+* [[radiusd.conf]]
+* [[unlang]]
+* [[SQL Huntgroup HOWTO]]

@@ -1,0 +1,34 @@
+=Status of [[FreeRADIUS]] server=
+
+Since SNMP support went away in at least in version 2 of the server software (see: [[SNMP_HOWTO]] administrators have to geather information about the status and statistics of the server by other means. FreeRADIUS offers a special status server. This (virtual) server can be asked and it provides a wide range of information about the actual state and packages processed. So please use it to monitor your installation.
+
+==Configuration==
+The configuration for the status server is automatically created in the sites-available directory. By default this server is enabled and can be questioned from every client. This behavior is controlled in the security section of the main config file. If you do not want this behavior you have to change the according line to:
+
+<tt>status_server = no</tt>
+
+Then the configuration of the security server is only controlled from the configuration file of the status server itself. Create a link from the sites-enabled directory to the status file in the sites-available directory:
+
+<pre>cd sites-enabled
+ln -s ../sites-available/status status</pre>
+
+and <tt>restart/reload</tt> your RADIUS server. You will notice that a new server listens on port 18120/udp of localhost. If you want other clients than localhost to question this server change the listen section of the new server. Probably you also want to change the default password in the client section of the server. Add more clients as needed.
+
+== Asking with radclient==
+The next step is to ask the status server questions about the state of the server. There are some hints in the manual page of the radclient program and the configuration file of the status server itself. Combining both information you can ask i.e. about all authentication packet to and from the server:
+
+<pre># echo "Message-Authenticator = 0x00, FreeRADIUS-Statistics-Type = 1" | \
+radclient localhost:18120 status adminsecret
+Received response ID 180, code 2, length = 140
+  FreeRADIUS-Total-Access-Requests = 3
+  FreeRADIUS-Total-Access-Accepts = 1
+  FreeRADIUS-Total-Access-Rejects = 0
+  FreeRADIUS-Total-Access-Challenges = 0
+  FreeRADIUS-Total-Auth-Responses = 1
+  FreeRADIUS-Total-Auth-Duplicate-Requests = 0
+  FreeRADIUS-Total-Auth-Malformed-Requests = 0
+  FreeRADIUS-Total-Auth-Invalid-Requests = 0
+  FreeRADIUS-Total-Auth-Dropped-Requests = 3
+  FreeRADIUS-Total-Auth-Unknown-Types = 0</pre>
+
+The same applies for accounting packets if you pass <tt>FreeRADIUS-Statistics-Type = "2"</tt>. For more samples about attributes to ask for see the status file. All possible attributes are defined in <tt>share/freeradius/dictionary.freeradius</tt>.

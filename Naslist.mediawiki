@@ -1,0 +1,37 @@
+The '''naslist''' file in the FreeRADIUS configuration directory (raddb/) used to contain the list of every NAS (Network Access Server, also known as terminal server), with an abbreviated name and the type of NAS it is.
+
+'''This file is obsolete and has been removed in all current releases.'''
+
+The old-style FreeRADIUS supported the following NAS types:
+
+{| class="wikitable"
+! Terminal Server !! Type in naslist
+|-
+| 3Com/USR Hiper Arc Total Control || usrhiper
+|-
+| 3Com/USR NetServer || netserver
+|-
+| 3Com/USR TotalControl || tc
+|-
+| Ascend Max 4000 family || max40xx
+|-
+| Ascend MaxTNT || ascend
+|-
+| Cisco Access Server family || cisco
+|-
+| Cistron PortSlave || portslave
+|-
+| Computone PowerRack || computone
+|-
+| Cyclades PathRAS || pathras
+|-
+| Livingston PortMaster || livingston
+|-
+| Multitech CommPlete Server || multitech
+|-
+| Patton 2800 family || patton
+|}
+
+Usually this was the same list as in the "[[clients]]" file, but not every NAS is a client and not every client is a NAS.
+
+'''This functionality is now in /etc/raddb/[[clients.conf]]'''

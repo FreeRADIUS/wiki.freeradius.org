@@ -1,0 +1,25 @@
+The '''rlm_always''' module enables some debugging.
+
+{{Default in the server source|src/modules/rlm_always/}}
+
+==Configuration==
+
+{{Default in the server source|raddb/modules/always}}
+
+<pre>
+	#
+	# The "always" module is here for debugging purposes. Each
+	# instance simply returns the same result, always, without
+	# doing anything.
+	always fail {
+		rcode = fail
+	}
+	always reject {
+		rcode = reject
+	}
+	always ok {
+		rcode = ok
+		simulcount = 0
+		mpp = no
+	}
+</pre>
