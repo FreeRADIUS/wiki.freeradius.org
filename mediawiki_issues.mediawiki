@@ -1,0 +1,6 @@
+== Foo title ==
+* Bullet one
+* Bullet two
+* Bullet three
+
+== [[Foo title]] ==
