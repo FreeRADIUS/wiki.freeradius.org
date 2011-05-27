@@ -78,18 +78,18 @@ Yes - there are several ways to accomplish this.
 * The deprecated old way is to specify an IP address with the `_-i {IP}` command-line option.
 * The better way is to use the `listen` directive in [[radiusd.conf]]. Something like this will work:
 
-    listen {
-        ipaddr = 192.168.1.250
-        port = 1817
-        type = auth
-    }
+	listen {
+		ipaddr = 192.168.1.250
+		port = 1817
+		type = auth
+	}
 
 You may specify multiple `listen` directives.
 
 * The third way is to use:
 
-    bind_address = 192.168.1.250
-    port = 1817
+	bind_address = 192.168.1.250
+	port = 1817
 
 **Note!**
 
@@ -101,55 +101,54 @@ Then the server will always respond with the correct address.
 ### Can I run FreeRADIUS under daemontools control?
 
 Yes, you can. Assuming you already have daemontools installed, configured and running in your system (see [[http://cr.yp.to/daemontools.html]]), you will have to make two decisions:
-
 * The log account and group name (I use log.log in this example). Logging programs run under this account.group. If this account.group pair do not exist yet, create it now.
 
 * The radiusd local service directory (I use /etc/radiusd in this example). This is where radiusd will store logs and a few configuration files.
 
 Here are the steps I did (just once):
 
-    groupadd log
-    useradd -g log log
-    mkdir /etc/radiusd
-    mkdir /etc/radiusd/log
-    mkdir /etc/radiusd/log/main
-    chmod +t+s /etc/radiusd /etc/radiusd/log
-    chown log.log /etc/radiusd/log/main
+	groupadd log
+	useradd -g log log
+	mkdir /etc/radiusd
+	mkdir /etc/radiusd/log
+	mkdir /etc/radiusd/log/main
+	chmod +t+s /etc/radiusd /etc/radiusd/log
+	chown log.log /etc/radiusd/log/main
 
 The supervise program starts radiusd by running a shell script called "run" from _/etc/radiusd_. Here are the contents of _/etc/radiusd/run_:
 
-    shell# cd /etc/radiusd
-    shell# cat run
-    #!/bin/sh
-    exec 2&gt;&amp;1
-    exec /usr/sbin/radiusd -fyz -lstderr
+	shell# cd /etc/radiusd
+	shell# cat run
+	#!/bin/sh
+	exec 2&gt;&amp;1
+	exec /usr/sbin/radiusd -fyz -lstderr
 
 It is important to add -f and -l stderr to argument list of radiusd or svc and logging functions will not work properly.
 
 The logging feature is also started by a "run" script. This one is located in _/etc/radiusd/log_. Here are the contents of _/etc/radiusd/log/run_
 
-    shell# cd /etc/radiusd/log
-    shell# cat run
-    #!/bin/sh
-    exec setuidgid log multilog t ./main
+	shell# cd /etc/radiusd/log
+	shell# cat run
+	#!/bin/sh
+	exec setuidgid log multilog t ./main
 
 To make the service start issue the command (just once):
 
-    ln -sf /etc/radiusd /service
+	ln -sf /etc/radiusd /service
 
 Now you can send signals to radiusd using the svc program. Here are some interesting ones:
 
 To hang-up (HUP) it, reloading the config, do:
 
-    svc -h /service/radiusd
+	svc -h /service/radiusd
 
 To temporarly disable it (down) do:
 
-    svc -d /service/radiusd
+	svc -d /service/radiusd
 
 To reenable it (up) do:
 
-    svc -u /service/radius
+	svc -u /service/radius
 
 ## Common problems and their solutions
 ### Incoming Authentication-Request passwords are all garbage. Why?
@@ -158,15 +157,15 @@ The shared secret is incorrect. This is a text string which is a "secret" (in th
 
 Run the server in debugging mode:
 
-    radiusd -X
+	radiusd -X
 
 The first password you see will be in a RADIUS attribute:
 
-    Password = "dsa2\2223jdfjs"'
+	Password = "dsa2\2223jdfjs"'
 
 The second password will be in a log message, e.g.:
 
-    Login failed [user/password] ...
+	Login failed [user/password] ...
 
 If the text AFTER the slash is garbage then the shared secret is wrong. Delete it on BOTH the NAS and the raddb/clients file and re-enter it. Do NOT check to see if they are the same, as there may be hidden spaces or other characters.
 
@@ -182,7 +181,7 @@ Some NAS do not send "Gigawords" attributes by default. Read your NAS documentat
 
 For [[Cisco]] IOS, this usually achieved by entering
 
-    aaa accounting gigawords
+	aaa accounting gigawords
 
 (which, by "ingenious" design, requires a reload of the device on certain IOS versions).
 
@@ -204,13 +203,13 @@ Firstly, modify the _radacct_ table schema to be able to store 64bit integers (o
 
 #### MySQL
 
-    ALTER TABLE radacct CHANGE AcctInputOctets AcctInputOctets BIGINT(20);
-    ALTER TABLE radacct CHANGE AcctOutputOctets AcctOutputOctets BIGINT(20);
+	ALTER TABLE radacct CHANGE AcctInputOctets AcctInputOctets BIGINT(20);
+	ALTER TABLE radacct CHANGE AcctOutputOctets AcctOutputOctets BIGINT(20);
 
 #### Oracle
 
-    ALTER TABLE radacct MODIFY (AcctInputOctets NUMERIC(19));
-    ALTER TABLE radacct MODIFY (AcctOutputOctets NUMERIC(19));
+	ALTER TABLE radacct MODIFY (AcctInputOctets NUMERIC(19));
+	ALTER TABLE radacct MODIFY (AcctOutputOctets NUMERIC(19));
 
 ### Modify FreeRADIUS Queries
 
@@ -218,11 +217,11 @@ Secondly, modify the accounting queries in sql.conf to make the SQL database per
 
 All occurences of `'%{Acct-Input-Octets}'` need to be replaced with:
 
-    '%{Acct-Input-Gigawords:-0}' << 32 | '%{Acct-Input-Octets:-0}'
+	'%{Acct-Input-Gigawords:-0}' << 32 | '%{Acct-Input-Octets:-0}'
 
 The same thing needs to be done for `'%{Acct-Output-Octets}'`:
 
-    '%{Acct-Output-Gigawords:-0}' << 32 | '%{Acct-Output-Octets:-0}'
+	'%{Acct-Output-Gigawords:-0}' << 32 | '%{Acct-Output-Octets:-0}'
 
 ### Why does the NAS ignore the RADIUS server's reply?
 
@@ -273,11 +272,11 @@ The CHAP protocol requires a plaintext password on the radius server side, for P
 
 So, if you're using CHAP, for each user entry you must use:
 
-    Auth-Type = Local, Password = "stealme"
+	Auth-Type = Local, Password = "stealme"
 
 If you're using only PAP, you can get away with:
 
-    Auth-Type = System
+	Auth-Type = System
 
 or anything else that tickles your fancy.
 
@@ -314,13 +313,12 @@ This is a limitation of the CHAP protocol itself, not the [[RADIUS]] protocol.  
 
 Commas link lists of attributes together. The general format for a raddb/users file entry is:
 
-
-    name Check-Item = Value, ..., Check-Item = Value
-        Reply-Item = Value,
-        .
-        .
-        .
-        Reply-Item = Value
+	name Check-Item = Value, ..., Check-Item = Value
+		Reply-Item = Value,
+		.
+		.
+		.
+		Reply-Item = Value
 
 Where the dots means repetition of attributes.
 
@@ -341,7 +339,7 @@ All the attribute operators `:=,==,+=` and their meanings are listed in _man 5 u
 
 I'm using a 3Com/USR HiPerArc and I keep getting this message on radius.log:
 
-    Mon Jul 26 15:18:54 1999: Error: Accounting: logout: entry for NAS tc-if5 port 1 has wrong ID
+	Mon Jul 26 15:18:54 1999: Error: Accounting: logout: entry for NAS tc-if5 port 1 has wrong ID
 
 What should I do to get rid of these messages?
 
@@ -362,7 +360,7 @@ The radius server calls the checkrad script when it thinks the user is already l
 
 This method successfully prevents a user from logging in multiple times across multiple NAS boxes.
 
-###= 3Com/USR HiPerArc Simultaneous-Use doesn't work
+#### 3Com/USR HiPerArc Simultaneous-Use doesn't work
 
 by Robert Dalton [mailto:support-at-accesswest-dot-com support at accesswest dot com]
 
@@ -370,29 +368,29 @@ Verify if you are using HiPerArc software version V4.2.32 release date 09/09/99
 
 In order for simultaneous logins to be prevented reported port density must be set to 256 using the command :
 
-    set pbus reported_port_density 256
+	set pbus reported_port_density 256
 
 Otherwise it changes the calculations of the SNMP object ID's.
 
 There is a bug in effected versions of checkrad namely the line under the subroutine "sub_usrhiper". The line that should be commented out is:
 
-    ($login) = /^.*\"([^"]+)".*$/;
+	($login) = /^.*\"([^"]+)".*$/;
 
 #### Cisco Simultaneous-Use doesn't work
 
 Q: I am getting the following in radius.log file:
 
-    Thu Oct 21 10:59:01 1999: Error: Check-TS: timeout waiting for checkrad
+	Thu Oct 21 10:59:01 1999: Error: Check-TS: timeout waiting for checkrad
 
 What's wrong?
 
 A: Verify if you have SNMP enabled on your CISCO router, check the existence of the following line:
 
-    snmp-server community public RO 97
+	snmp-server community public RO 97
 
 where 97 is the access-list that specifies who gets access to the SNMP info. You should also have a line like this:
 
-    access-list 97 permit A.B.C.D
+	access-list 97 permit A.B.C.D
 
 where A.B.C.D is the ip address of the host running the radius server.
 
@@ -406,13 +404,13 @@ What's wrong?
 
 A: Verify that you have the MAX 4048 setup in your naslist as max40xx and that you have Finger turned on.
 
-    Ethernet->Mod Config->Finger=Yes
+	Ethernet->Mod Config->Finger=Yes
 
 ### The server is complaining about invalid user route-bps-asc1-1, along with lots of others
 
 Ascend decided to have the 4000 series NAS boxes retrieve much of their configuration from the RADIUS server. To disable this "feature", set:
 
-    Ethernet->Mod Config->Auth->Allow Auth Config Rqsts = No
+	Ethernet->Mod Config->Auth->Allow Auth Config Rqsts = No
 
 ### Why FreeRADIUS is taking so long to start?
 
@@ -497,22 +495,22 @@ Use 'tcpdump' (http://www.tcpdump.org) to snoop the RADIUS responses from each s
 
 You may see an error message like the one below, when you try to run the server:
 
-    Module: Loaded SQL
-    rlm_sql: Could not link driver rlm_sql_mysql: file not found
-    rlm_sql: Make sure it (and all its dependent libraries!) are in the search path of your system's ld.
-    radiusd.conf[50]: sql: Module instantiation failed.
+	Module: Loaded SQL
+	rlm_sql: Could not link driver rlm_sql_mysql: file not found
+	rlm_sql: Make sure it (and all its dependent libraries!) are in the search path of your system's ld.
+	radiusd.conf[50]: sql: Module instantiation failed.
 
 There are only a few things that can be happening:
 
 1) The 'mysql_config' cannot be found in $PATH. Try running "./configure | grep mysql_config" and see if you get the following:
 
-    checking for mysql_config... no
-    configure: WARNING: mysql libraries not found. Use --with-mysql-lib-dir=<path>.
-    configure: WARNING: sql submodule 'mysql' disabled
+	checking for mysql_config... no
+	configure: WARNING: mysql libraries not found. Use --with-mysql-lib-dir=<path>.
+	configure: WARNING: sql submodule 'mysql' disabled
 
 If it is, simply do something like "export $PATH=$PATH:/usr/local/mysql/bin" and "./configure | grep mysql_config" again to make sure you get:
 
-    checking for mysql_config... yes
+	checking for mysql_config... yes
 
 
 Then you should run "make;make install" again.
@@ -546,9 +544,9 @@ See also the 'libdir' configuration directive in the 'radiusd.conf' file which i
 
 If none of these solutions work, then your ONLY option is to build FreeRADIUS without dynamic libraries. This may be done via:
 
-    ./configure --disable-shared
-    make
-    make install
+	./configure --disable-shared
+	make
+	make install
 
 Please READ the messages produced during the 'make' and 'make install' stages. While there is a lot of text to wade through, these messages may be the ONLY source of information as to what's wrong your system.
 
@@ -588,31 +586,31 @@ You need to use the Group check item to match a group. You also need to use the 
 
 The following entry denies access to one specific user. Note that it MUST be put before ANY other entry with an Auth-Type attribute.
 
-    foo Auth-Type := Reject
-        Reply-Msg = "foo is not allowed to dial-in"
+	foo Auth-Type := Reject
+		Reply-Msg = "foo is not allowed to dial-in"
 
 The following entry denies access to a group of users. The same restrictions as above on location in the raddb/users file also apply:
 
-    DEFAULT Group == "disabled", Auth-Type := Reject
-        Reply-Message = "Your account has been disabled"
+	DEFAULT Group == "disabled", Auth-Type := Reject
+		Reply-Message = "Your account has been disabled"
 
 ### How do I log failed login attempts in a SQL database?
 
 You may run a SQL query each time a user has an access denied. First you need to write your SQL statement in the directive '''postauth_query''' of the module [[rlm_sql]]. For example:
 
-    postauth_query = "INSERT into radpostauth (user, pass, date) values ('%{User-Name}', '%{User-Password:-Chap-Password}', '%S')"
+	postauth_query = "INSERT into radpostauth (user, pass, date) values ('%{User-Name}', '%{User-Password:-Chap-Password}', '%S')"
 
 Then add the [[sql]] module to the '''post-auth''' section of [[radiusd.conf|rlm_sql]]. Since we want to run the SQL query only on failed login, we need to use the sub-section [http://freeradius.org/radiusd/doc/Post-Auth-Type Post-Auth-Type REJECT]. For example:
 
-    post-auth {
-        # Login successful: get an address from the IP pool.
-        ippool
-        
-        Post-Auth-Type REJECT {
-        # Login failed: log to SQL database.
-            sql
-        }
-    }
+	post-auth {
+		# Login successful: get an address from the IP pool.
+		ippool
+		
+		Post-Auth-Type REJECT {
+		# Login failed: log to SQL database.
+			sql
+		}
+	}
 
 Note: This option is usable if you want to detect fraud or similar activities from your users. Keep in mind that this table can became a very large in case you disable to much user accounts, in case of ddos attack, etc. Every rejected attempt will be logged.
 
@@ -620,19 +618,19 @@ Note: This option is usable if you want to detect fraud or similar activities fr
 
 Limit logons between 08:00am and 08:00pm for Unix group "daysonly"
 
-    DEFAULT Group == "daysonly", Login-Time := "0800-2000"
-    
+	DEFAULT Group == "daysonly", Login-Time := "0800-2000"
+	
 or
 
-    DEFAULT Group == "daysonly", Login-Time := "Any0800-2000"
+	DEFAULT Group == "daysonly", Login-Time := "Any0800-2000"
 
 Limit logons between 08:00am and 08:00pm, from Monday to Friday for Unix group "weekdays"
 
-    DEFAULT Group == "weekdays", Login-Time := "Wk0800-2000"
+	DEFAULT Group == "weekdays", Login-Time := "Wk0800-2000"
 
 Limit logons between 08:00am and 08:00pm, in Saturday and Sunday for Unix group "weekends"
 
-    DEFAULT Group == "weekends", Login-Time := "Sa-Su0800-2000"
+	DEFAULT Group == "weekends", Login-Time := "Sa-Su0800-2000"
 
 ### How do I enable FreeRADIUS to log accounting attribute type X?
 
@@ -644,7 +642,7 @@ You must configure your NAS to send the information you want to the RADIUS serve
 
 Edit raddb/users, on top of it put
 
-DEFAULT Auth-Type := Accept
+    DEFAULT Auth-Type := Accept
 
 That will accept everybody. If you want this to apply to a single user replace DEFAULT with username. You can also add Auth-Type Accept to radcheck or radgroupcheck entries in order to accept that user/group. This only works for PAP, and does not work for EAP-TLS, CHAP, or MSCHAP authentication.
 
@@ -658,18 +656,18 @@ Make sure you have RADIUS authorization enabled on your NAS.
 
 Example user entry in raddb/users file:
 
-* foo Auth-Type := System
-** Framed-Filter-Id += "160.in"
-** Framed-Filter-Id += "161.out"
-** Fall-Through = Yes
+    foo Auth-Type := System
+        Framed-Filter-Id += "160.in"
+        Framed-Filter-Id += "161.out"
+        Fall-Through = Yes
 
 CISCO's config must have:
 
-    aaa authorization network default radius
-    ip access-list extended 160
-    permit ip ...
-    ip access-list extended 161
-    permit ip ...
+	aaa authorization network default radius
+	ip access-list extended 160
+	permit ip ...
+	ip access-list extended 161
+	permit ip ...
 
 The access list 160 gets applied on inbound packets and 161 on outbound packets.
 
@@ -679,19 +677,19 @@ You'll need the redhat/radiusd.pam file from the distribution. It should go into
 
 If you have 100's to 1000's of users in /etc/passwd, you'll want to replace the pam_pwdb.so entries with pam_unix_auth.so, pam_unix_acct.so etc. The pam_pwdb module is INCREDIBLY SLOW for authenticating users from a large /etc/passwd file.
 
-[[mailto:bruno-at-openline-dot-com-dot-br|Bruno Lopes F. Cabral]] also says:
+[[Bruno Lopes F. Cabral|mailto:bruno-at-openline-dot-com-dot-br]] also says:
 
 Now I can emulate group behaviour using just PAM and some tricks, like
 
-    auth required /lib/security/pam_userdb.so crypt db=/etc/raddb/data/users
-    auth required /lib/security/pam_listfile.so item=user sense=allow file=/etc/raddb/data/somehunt.allow onerr=fail
-    auth required /lib/security/pam_nologin.so
-    account required /lib/security/pam_userdb.so
+	auth required /lib/security/pam_userdb.so crypt db=/etc/raddb/data/users
+	auth required /lib/security/pam_listfile.so item=user sense=allow file=/etc/raddb/data/somehunt.allow onerr=fail
+	auth required /lib/security/pam_nologin.so
+	account required /lib/security/pam_userdb.so
 
 and
 
-    DEFAULT Huntgroup-Name ="somehunt", Auth-Type=PAM, Pam-Auth="radhunt", Simultaneous-Use=1
-        Fall-Through = Yes
+	DEFAULT Huntgroup-Name ="somehunt", Auth-Type=PAM, Pam-Auth="radhunt", Simultaneous-Use=1
+		Fall-Through = Yes
 
 this way I have NO users on /etc/password and NO need for lots of lines on /etc/raddb/users. time to search for a db enabled pam_listfile module
 
@@ -701,21 +699,21 @@ this way I have NO users on /etc/password and NO need for lots of lines on /etc/
 The server reads the config files just once, at startup. This is very efficient, but you need to tell the server somehow to re-read its config files after you made a change. This can be done by sending the server a SIGHUP (signal '1' on almost if not all UNIX systems). The server writes its PID in
 `/var/run/radiusd.pid`, so a simple UNIX command to do this would be:
 
-    kill -1 `cat /var/run/radiusd.pid`
+	kill -1 `cat /var/run/radiusd.pid`
 
 
 Some people would be tempted to do this every 5 minutes so that changes come âthrough automatically. That is not a good idea as it might take some time to re-read the config files and the server may drop a few authentication requests at that time. A better idea is to use a so-called "timestamp file" and only send a SIGHUP if the raddb/users file changed since the last time. For example a script like this, to be run every 5 minutes:
 
-    #! /bin/sh
-    cd /etc/raddb
-    if [ ! -e .last-reload ] || [ "`find users -nt .last-reload`" ]; then
-        if radiusd -C &gt; .last-reload 2&gt;&amp;1; then
-            kill -1 `cat /var/run/radiusd.pid`
-        else
-            mail -s "radius reload failed!" root &lt; .last-reload
-        fi
-    fi
-    touch .last-reload
+	#! /bin/sh
+	cd /etc/raddb
+	if [ ! -e .last-reload ] || [ "`find users -nt .last-reload`" ]; then
+		if radiusd -C &gt; .last-reload 2&gt;&amp;1; then
+			kill -1 `cat /var/run/radiusd.pid`
+		else
+			mail -s "radius reload failed!" root &lt; .last-reload
+		fi
+	fi
+	touch .last-reload
 
 Of course a Makefile is suited perfectly for this kind of stuff.
 
@@ -737,23 +735,23 @@ and limitations of the -C option. Related posts on freeradius-users:
 
 #### Example for broken configuration (users) file:
 
-    shell# freeradius -XC; echo $?
-    FreeRADIUS Version 2.0.0-beta, for host i486-pc-linux-gnu, built on Nov 12 2007 at 17:25:45
-    [...]
-    /etc/freeradius/users[5]: Syntax error: Previous line is missing a trailing comma for entry DEFAULT
-    Errors reading /etc/freeradius/users
-    /etc/freeradius/radiusd.conf[1033]: Instantiation failed for module "files"
-    [...]
-    Errors initializing modules
-    1
+	shell# freeradius -XC; echo $?
+	FreeRADIUS Version 2.0.0-beta, for host i486-pc-linux-gnu, built on Nov 12 2007 at 17:25:45
+	[...]
+	/etc/freeradius/users[5]: Syntax error: Previous line is missing a trailing comma for entry DEFAULT
+	Errors reading /etc/freeradius/users
+	/etc/freeradius/radiusd.conf[1033]: Instantiation failed for module "files"
+	[...]
+	Errors initializing modules
+	1
 
 #### Example for working configuration:
 
-    shell# freeradius -XC; echo $?
-    FreeRADIUS Version 2.0.0-beta, for host i486-pc-linux-gnu, built on Nov 12 2007 at 17:25:45
-    [...]
-    Configuration appears OK.
-    0
+	shell# freeradius -XC; echo $?
+	FreeRADIUS Version 2.0.0-beta, for host i486-pc-linux-gnu, built on Nov 12 2007 at 17:25:45
+	[...]
+	Configuration appears OK.
+	0
 
 Note however, that this option is not available in freeradius 1.x. The freeradius distribution contains a _check-radiusd-config_ script which checks the configuration by starting a second server on a different port and waiting for it to crash or not to crash...
 
@@ -761,17 +759,17 @@ Note however, that this option is not available in freeradius 1.x. The freeradiu
 
 Use the following configuration :
 
-    Framed-Route := "10.130.1.252/32 0.0.0.0  5",
-    Framed-Route += "10.130.0.252/32 0.0.0.0 10",</pre>
+	Framed-Route := "10.130.1.252/32 0.0.0.0  5",
+	Framed-Route += "10.130.0.252/32 0.0.0.0 10",</pre>
 
 Which gives : (tcpdump output)
 
-    Framed Route Attribute (22), length: 28, Value: 10.130.1.252/32 0.0.0.0  5
-      0x0000:  3130 2e31 3330 2e31 2e32 3532 2f33 3220
-      0x0010:  302e 302e 302e 3020 2035
-    Framed Route Attribute (22), length: 28, Value: 10.130.0.252/32 0.0.0.0 10
-      0x0000:  3130 2e31 3330 2e30 2e32 3532 2f33 3220
-      0x0010:  302e 302e 302e 3020 3130
+	Framed Route Attribute (22), length: 28, Value: 10.130.1.252/32 0.0.0.0  5
+	  0x0000:  3130 2e31 3330 2e31 2e32 3532 2f33 3220
+	  0x0010:  302e 302e 302e 3020 2035
+	Framed Route Attribute (22), length: 28, Value: 10.130.0.252/32 0.0.0.0 10
+	  0x0000:  3130 2e31 3330 2e30 2e32 3532 2f33 3220
+	  0x0010:  302e 302e 302e 3020 3130
 
 ### How do I tell the user what to use for an IP netmask?
 
@@ -785,17 +783,17 @@ Many [[NAS]] interpret a left-out [[Framed-IP-Netmask]] as if it were set to 255
 
 For example, the following entries do almost the same on most [[NAS]]:
 
-    user Cleartext-Password := "blegh"
-        Service-Type = Framed-User,
-        Framed-Protocol = PPP,
-        Framed-IP-Address = 192.168.5.78,
-        Framed-IP-Netmask = 255.255.255.240
+	user Cleartext-Password := "blegh"
+		Service-Type = Framed-User,
+		Framed-Protocol = PPP,
+		Framed-IP-Address = 192.168.5.78,
+		Framed-IP-Netmask = 255.255.255.240
 
-    user Cleartext-Password := "blegh"
-        Service-Type = Framed-User,
-        Framed-Protocol = PPP,
-        Framed-IP-Address = 192.168.5.78,
-        Framed-Route = "192.168.5.64/28 0.0.0.0 1"
+	user Cleartext-Password := "blegh"
+		Service-Type = Framed-User,
+		Framed-Protocol = PPP,
+		Framed-IP-Address = 192.168.5.78,
+		Framed-Route = "192.168.5.64/28 0.0.0.0 1"
 
 The result is that the end user gets IP address 192.168.5.78 and that the whole network with IP addresses 192.168.5.64 - 195.64.5.79 is	routed over the PPP link to the user (see the [[RADIUS]] [[RFC]]s for the exact syntax of the Framed-Route attribute).
 
@@ -854,4 +852,6 @@ FreeRADIUS Server 2.0.0 and greater has full support for both IPv6 attributes an
 
 ## Acknowledgments
 
-FreeRADIUS is the result of the work done by a large number of people.  The major contributors are listed on the [[Acknowledgments]] page.
+FreeRADIUS is the result of the work done by a large number of people.
+
+The major contributors are listed on the [[Acknowledgments]] page.
