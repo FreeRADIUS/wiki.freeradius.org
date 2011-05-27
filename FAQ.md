@@ -301,18 +301,18 @@ So what do ISP with (tens of?) thousands of customers do?
 
 You have 2 choices:
 
-* You allow CHAP and store all the passwords plaintext.
-++ Advantage: passwords don't go cleartext over the phone line between the user and the terminal server.
-++ Disadvantage: You have to store the passwords in cleartext on the server.
+* You allow CHAP and store all the passwords plaintext
+** Advantage: passwords don't go cleartext over the phone line between the user and the terminal server
+** Disadvantage: You have to store the passwords in cleartext on the server
 
-* You don't allow CHAP, just PAP.
-++ Advantage: you don't store cleartext passwords on your system.
-++ Disadvantage: passwords going cleartext over the phone line between the user and the terminal server.
+* You don't allow CHAP, just PAP
+** Advantage: you don't store cleartext passwords on your system
+** Disadvantage: passwords going cleartext over the phone line between the user and the terminal server
 
 Now, people say CHAP is more secure. Now you decide which is more likely:
 
-* the phone line between the user and the terminal server gets sniffed and a cracker (a GOOD one) intercepts just one password
-* your radius server is hacked into and a cracker gets ALL passwords of ALL users.
+* The phone line between the user and the terminal server gets sniffed and a cracker (a GOOD one) intercepts just one password
+* Your radius server is hacked into and a cracker gets ALL passwords of ALL users.
 
 Right. Still think CHAP is more secure? I thought so.
 
