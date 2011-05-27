@@ -1,3 +1,4 @@
+
 ## FreeRADIUS Frequently Asked Questions
 
 This is the FAQ (Frequently Asked Questions) for the [[FreeRADIUS]] Server (freeradius for short) development project. It contains both general and technical information about the FreeRADIUS projects' status, what it is and what it does, how to obtain and configure and run it, and more. Please read this FAQ carefully before you post questions about FreeRADIUS to the mailing lists to see if your question is already answered here first.
@@ -76,7 +77,9 @@ See the instructions on [[how to build FreeRADIUS|Build]].
 Yes - there are several ways to accomplish this.
 
 * The deprecated old way is to specify an IP address with the `_-i {IP}` command-line option.
-* The better way is to use the `listen` directive in [[radiusd.conf]]. Something like this will work:
+* The better way is to use the `listen` directive in [[radiusd.conf]].
+
+Something like this will work:
 
 	listen {
 		ipaddr = 192.168.1.250
@@ -86,7 +89,9 @@ Yes - there are several ways to accomplish this.
 
 You may specify multiple `listen` directives.
 
-* The third way is to use:
+* The third way
+
+Is to use something like this: 
 
 	bind_address = 192.168.1.250
 	port = 1817
@@ -293,12 +298,12 @@ So what do ISP with (tens of?) thousands of customers do?
 You have 2 choices:
 
 * You allow CHAP and store all the passwords plaintext
-** Advantage: passwords don't go cleartext over the phone line between the user and the terminal server
-** Disadvantage: You have to store the passwords in cleartext on the server
+    * Advantage: passwords don't go cleartext over the phone line between the user and the terminal server
+    * Disadvantage: You have to store the passwords in cleartext on the server
 
 * You don't allow CHAP, just PAP
-** Advantage: you don't store cleartext passwords on your system
-** Disadvantage: passwords going cleartext over the phone line between the user and the terminal server
+    * Advantage: you don't store cleartext passwords on your system
+    * Disadvantage: passwords going cleartext over the phone line between the user and the terminal server
 
 Now, people say CHAP is more secure. Now you decide which is more likely:
 
@@ -348,15 +353,16 @@ You are using HiPer ARC 4.1.11, right? Version 4.1.11 has a problem reporting NA
 ### Simultaneous-Use doesn't work
 
 Here is a check list:
-1. Check that you added your NAS to raddb/clients.conf and selected correct NAS type, also check the password
-2. Run radiusd -X and see if it parses the Simultaneous-Use line.
-3. Try to run checkrad manually; maybe you may have a wrong version of perl, don't have cmu-snmp installed etc.
-4. run "radwho".  If it says no one is logged in, Simultaneous-Use won't work.
+
+1. Check that you added your NAS to _raddb/clients.conf_ and selected correct NAS type, also check the password
+2. Run `radiusd -X` and see if it parses the Simultaneous-Use line.
+3. Try to run `checkrad` manually; maybe you may have a wrong version of perl, don't have cmu-snmp installed etc.
+4. run `radwho`.  If it says no one is logged in, Simultaneous-Use won't work.
 5. Verify that the NAS is sending accounting packets.  Without accounting packets, Simultaneous-Use will NOT work.
 6. Verify that the accounting packets are accepted by the radutmp module.  If the module returns "noop", it means that the accounting packets do not have enough information for the server to perform Simultaneous-Use enforcement.
 7. In case you have SQL as a database, and you have accounting records in radacct table, you'll need to uncomment sql in session section of radiusd.conf file. Also, you'll need to uncomment Simutaneus check query in sql.conf file.
 
-The radius server calls the checkrad script when it thinks the user is already logged on on one or more other ports/terminal servers to verify that the user is indeed still online on that *other* port/server. If Simultaneous-Use &gt; 1, then it might be that checkrad is called several times to verify each existing session.
+The radius server calls the checkrad script when it thinks the user is already logged on on one or more other ports/terminal servers to verify that the user is indeed still online on that *other* port/server. If Simultaneous-Use > 1, then it might be that checkrad is called several times to verify each existing session.
 
 This method successfully prevents a user from logging in multiple times across multiple NAS boxes.
 
@@ -448,39 +454,40 @@ Stop right there. Before going any further, be sure that you have included the f
 
 Too many people post questions saying "something's wrong, how do I fix it?" with NO background information. This is worse than useless, it's annoying.
 
-Now that you have prepared all the information, post your question to the [[http://lists.freeradius.org/mailman/listinfo/freeradius-users|freeradius-users mailing list]]
+Now that you have prepared all the information, post your question to the [[freeradius-users mailing list|http://lists.freeradius.org/mailman/listinfo/freeradius-users]]
 
 ### Debugging it yourself
 
 If you're REALLY interested in knowing how to debug the RADIUS server yourself, then the following steps will help you:
 
 1. Install "screen" (if not already installed).
-2. Run a new screen and name it something convenient (eg. "screen -S radiusd")
+2. Run a new screen and name it something convenient (eg. `screen -S radiusd`)
 3. Hit "Ctrl+A-H" to log all console output to a file.
-4. Start "radiusd -X" (FreeRADIUS is now running in this screen, and everything is being stored to log file. At any time, you can detach from the screen with Ctrl+A-d and reattach to the screen (both from local and over SSH) with "screen -r" to see what is going on in real time.)
+4. Start "radiusd -X" (FreeRADIUS is now running in this screen, and everything is being stored to log file. At any time, you can detach from the screen with Ctrl+A-d and reattach to the screen (both from local and over SSH) with `screen -r` to see what is going on in real time.)
 5. The server SHOULD print out:
-6.: Ready to process requests.
-7.* If it doesn't, then it should print out an error message. Read it.
-7.* If it takes a long time to start up, and THEN prints out the message, then your DNS is broken.
-9. Ensure that you have localhost in your raddb/clients file. FreeRADIUS comes configured this way, so it should be there.
-10. Ensure you have a valid user in your raddb/users file. If everything else fails, go to the top of the file and add the following entry:
-11. <pre>bob Cleartext-Password := "bob"
-Reply-Message = "Hello, bob"</pre>
+    <pre>Ready to process requests.</pre>
+    * If it doesn't, then it should print out an error message. Read it.
+    * If it takes a long time to start up, and THEN prints out the message, then your DNS is broken.
+8. Ensure that you have localhost in your _raddb/clients_ file. FreeRADIUS comes configured this way, so it should be there.
+9. Ensure you have a valid user in your _raddb/users_ file. If everything else fails, go to the top of the file and add the following entry:
+    <pre>bob Cleartext-Password := "bob"
+    Reply-Message = "Hello, bob"
+    </pre>
 12. Run the radtest program from the LOCAL machine, in another window. This will tell you if the server is alive and is answering requests.
-13. `radtest bob bob localhost 0 testing123`
+    <pre>radtest bob bob localhost 0 testing123</pre>
 14. Ensure that you see the Reply-Message above and that you do NOT see an "Access denied" message. If you get an Access-Accept message, this means that the server is running properly.
 15. Configure another machine as a RADIUS client and run radtest from that machine too. You SHOULD see the server receive the request and send a reply.
-15.* If the server does NOT receive the request then the ports are confused. RADIUS historically uses 1645/UDP, where RFC 2138 and many new systems use the proper value of 1812/UDP. See /etc/services or use the -p option to specify a different port.
-15. Run tcpdump in another window on the RADIUS client machine. Use the command:
-15. `tcpdump udp`
-15. Look CAREFULLY at the packets coming from the RADIUS server. Which address are they coming from? Which port?
+    * If the server does NOT receive the request then the ports are confused. RADIUS historically uses 1645/UDP, where RFC 2138 and many new systems use the proper value of 1812/UDP. See _/etc/services_ or use the -p option to specify a different port.
+    * Run tcpdump in another window on the RADIUS client machine. Use the command:
+    * `tcpdump udp`
+    * Look CAREFULLY at the packets coming from the RADIUS server. Which address are they coming from? Which port?
 16. If authentication works from a different machine then you have the server set up correctly.
 17. Now you should use a more complicated configuration to see if the server receives and replies with the attributes you want. There is little information that can be offered here in the FAQ as your individual systems configuration can not be predicted.  However, a few hints can help:
-18. * ALWAYS test your configurations running the server in debugging mode if you want to debug a problem. If you do not do so then DO NOT expect anyone else to be able to help you.
-18.* `radiusd -X`
-18.* Read RFC 2138 to see what the RADIUS attributes are and how they work
-18.* ALWAYS starts with a simple configuration in place of a more complicated one.  You should not expect to be able to debug a complicated configuration entry by sending one packet, and looking at the trace.
-18.* Make the configuration as simple as possible, EVEN IF it doesn't do exactly what you want. Then, repeatedly, try to authenticate and see if it works. If authentication succeeds, then you can gradually add more attributes to the configuration to get the entry you desire.
+    * ALWAYS test your configurations running the server in debugging mode if you want to debug a problem. If you do not do so then DO NOT expect anyone else to be able to help you.
+    * `radiusd -X`
+    * Read RFC 2138 to see what the RADIUS attributes are and how they work
+    * ALWAYS starts with a simple configuration in place of a more complicated one.  You should not expect to be able to debug a complicated configuration entry by sending one packet, and looking at the trace.
+    * Make the configuration as simple as possible, EVEN IF it doesn't do exactly what you want. Then, repeatedly, try to authenticate and see if it works. If authentication succeeds, then you can gradually add more attributes to the configuration to get the entry you desire.
 
 ### But it worked with another RADIUS server!
 
@@ -488,7 +495,7 @@ After upgrading to FreeRADIUS, you may discover that some users are unable to fu
 
 The NAS has no idea which RADIUS server you use, and it doesn't care. The entire problem is that the responses to the NAS from the servers are different. Since FreeRADIUS only sends the attributes in a response that you tell it to send, the conclusion is that your local configuration of FreeRADIUS is incomplete.
 
-Use 'tcpdump' (http://www.tcpdump.org) to snoop the RADIUS responses from each server. Once you discover which attributes are missing from the response of FreeRADIUS, you can add them to it's configuration. Re-start the server, and your users should have full access to the network again.
+Use 'tcpdump' [[http://www.tcpdump.org]] to snoop the RADIUS responses from each server. Once you discover which attributes are missing from the response of FreeRADIUS, you can add them to it's configuration. Re-start the server, and your users should have full access to the network again.
 
 
 ### It says "Could not link ... file not found", what do I do?
@@ -552,15 +559,17 @@ Please READ the messages produced during the 'make' and 'make install' stages. W
 
 ### I see only one radiusd in the process list.  What is wrong?
 
-If you have configured [[FreeRADIUS]] to use threads, then nothing is wrong.  Newer Linux kernels / procps utilities report one thread by default.  You can execute '''ps''' in the following ways to see all threads:
+If you have configured [[FreeRADIUS]] to use threads, then nothing is wrong.  Newer Linux kernels / procps utilities report one thread by default.  You can execute `ps` in the following ways to see all threads:
 
-For older versions of ps / kernel (2.4), use:
-* ps -efm
-* ps auxm
+For older versions of `ps` / kernel (2.4), use:
+
+* `ps -efm`
+* `ps auxm`
 
 For newer versions of ps / kernel (2.6+), you may prefer to use:
-* ps -efL
-* ps auxH
+
+* `ps -efL`
+* `ps auxH`
 
 ## How do I ... ?
 ### How do I send a message to PPP users?
@@ -702,7 +711,7 @@ The server reads the config files just once, at startup. This is very efficient,
 	kill -1 `cat /var/run/radiusd.pid`
 
 
-Some people would be tempted to do this every 5 minutes so that changes come âthrough automatically. That is not a good idea as it might take some time to re-read the config files and the server may drop a few authentication requests at that time. A better idea is to use a so-called "timestamp file" and only send a SIGHUP if the raddb/users file changed since the last time. For example a script like this, to be run every 5 minutes:
+Some people would be tempted to do this every 5 minutes so that changes come through automatically. That is not a good idea as it might take some time to re-read the config files and the server may drop a few authentication requests at that time. A better idea is to use a so-called "timestamp file" and only send a SIGHUP if the raddb/users file changed since the last time. For example a script like this, to be run every 5 minutes:
 
 	#! /bin/sh
 	cd /etc/raddb
