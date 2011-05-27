@@ -1,45 +1,45 @@
-==Configuration of FreeRADIUS==
+# Configuration of FreeRADIUS
 
-=== Executables ===
+## Executables
 
 * [[Radiusd#Configuration|Radiusd]]
 
-=== Features ===
+## Features
 
 * [[Radacct]]
 * [[Proxy]]
 * [[VMPS]]
 
-=== Attributes and attribute manipulation ===
+## Attributes and attribute manipulation
 
-* [[Adding Removing Modifying Attributes for further processing|Adding, Removing, Modifying Attributes for further processing]]
+* [[Adding, Removing, Modifying Attributes for further processing|Adding Removing Modifying Attributes for further processing]]
 * [[Operators]]
 * [[Run-time variables]]
 * [[Supported Attributes]]
 
-=== Virtual Modules ===
+## Virtual Modules
 
 * [[Fail-over]]
 * [[Load balancing]]
 * [[Templates]]
 
-=== [[Configuration Files]] ===
+## [[Configuration Files]]
 
 * [[Radiusd.conf]]
 * [[Clients.conf]]
 * [[Proxy.conf]]
 
-=== EAP, 802.1X ===
+## EAP, 802.1X
 
 * [[Certificates]]
 
-=== Device Specific ===
+## Device Specific
 
-* [[HP|Hewlett Packard]]
+* [[Hewlett Packard|HP]]
 * [[Cisco]]
 * [[Linksys]]
 
-==See also==
+## See also
 
 * [[Basic configuration HOWTO]]
 * [[HOWTO]]s for all other kinds of configuration
