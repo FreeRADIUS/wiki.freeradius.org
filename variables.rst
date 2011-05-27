@@ -140,6 +140,3 @@ release.  They also do NOT permit the use of conditional syntax
 |           |except password            |                       |
 |           |(must have a big buffer)   |                       |
 +-----------+---------------------------+-----------------------+
-
-
- $Id$
