@@ -1,3 +1,6 @@
+About the FreeRADIUS project
+============================
+
 Overview
 --------
 [[FreeRADIUS]] is a modular, high performance and feature-rich [[RADIUS]] suite including [[radiusd|server]], [[radiusclient|clients]], development libraries and numerous additional [[RADIUS]] related utilities.
