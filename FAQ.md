@@ -281,11 +281,11 @@ The CHAP protocol requires a plaintext password on the radius server side, for P
 
 So, if you're using CHAP, for each user entry you must use:
 
-`Auth-Type = Local, Password = "stealme"`
+    Auth-Type = Local, Password = "stealme"
 
 If you're using only PAP, you can get away with:
 
-`Auth-Type = System`
+    Auth-Type = System
 
 or anything else that tickles your fancy.
 
@@ -302,12 +302,12 @@ So what do ISP with (tens of?) thousands of customers do?
 You have 2 choices:
 
 * You allow CHAP and store all the passwords plaintext.
-** Advantage: passwords don't go cleartext over the phone line between the user and the terminal server.
-** Disadvantage: You have to store the passwords in cleartext on the server.
+++ Advantage: passwords don't go cleartext over the phone line between the user and the terminal server.
+++ Disadvantage: You have to store the passwords in cleartext on the server.
 
 * You don't allow CHAP, just PAP.
-** Advantage: you don't store cleartext passwords on your system.
-** Disadvantage: passwords going cleartext over the phone line between the user and the terminal server.
+++ Advantage: you don't store cleartext passwords on your system.
+++ Disadvantage: passwords going cleartext over the phone line between the user and the terminal server.
 
 Now, people say CHAP is more secure. Now you decide which is more likely:
 
