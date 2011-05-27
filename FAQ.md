@@ -1,4 +1,3 @@
-
 ## FreeRADIUS Frequently Asked Questions
 
 This is the FAQ (Frequently Asked Questions) for the [[FreeRADIUS]] Server (freeradius for short) development project. It contains both general and technical information about the FreeRADIUS projects' status, what it is and what it does, how to obtain and configure and run it, and more. Please read this FAQ carefully before you post questions about FreeRADIUS to the mailing lists to see if your question is already answered here first.
@@ -471,8 +470,7 @@ If you're REALLY interested in knowing how to debug the RADIUS server yourself, 
 8. Ensure that you have localhost in your _raddb/clients_ file. FreeRADIUS comes configured this way, so it should be there.
 9. Ensure you have a valid user in your _raddb/users_ file. If everything else fails, go to the top of the file and add the following entry:
     <pre>bob Cleartext-Password := "bob"
-    Reply-Message = "Hello, bob"
-    </pre>
+        Reply-Message = "Hello, bob"</pre>
 12. Run the radtest program from the LOCAL machine, in another window. This will tell you if the server is alive and is answering requests.
     <pre>radtest bob bob localhost 0 testing123</pre>
 14. Ensure that you see the Reply-Message above and that you do NOT see an "Access denied" message. If you get an Access-Accept message, this means that the server is running properly.
