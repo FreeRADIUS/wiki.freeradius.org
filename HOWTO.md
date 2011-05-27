@@ -14,6 +14,7 @@
 ## Offsite HOWTOs
 
 Here is a list of known offsite [[HOWTO]]s. Where ever possible (When the authors give us permission) these have been incorporated into the wiki.
+
 * [[Deploying RADIUS - Practices and Principles for AAA solutions|http://deployingradius.com/documents/configuration/]]]
 * [[WPA Authentication for Windows XP Clients with RADIUS HOWTO|http://www.hep.phys.soton.ac.uk/~jhe/documents/WPA-Authentication+RADIUS-HOWTO.html]]]
 * [[HOWTO on EAP/TLS authentication between FreeRADIUS and XSupplicant|http://www.missl.cs.umd.edu/wireless/eaptls/]]]
