@@ -77,23 +77,17 @@ Yes - there are several ways to accomplish this.
 
 * The deprecated old way is to specify an IP address with the `_-i {IP}` command-line option.
 * The better way is to use the `listen` directive in [[radiusd.conf]].
-
-Something like this will work:
-
-	listen {
-		ipaddr = 192.168.1.250
-		port = 1817
-		type = auth
-	}
+	    listen {
+		    ipaddr = 192.168.1.250
+		    port = 1817
+		    type = auth
+	    }
 
 You may specify multiple `listen` directives.
 
 * The third way
-
-Is to use something like this: 
-
-	bind_address = 192.168.1.250
-	port = 1817
+	    bind_address = 192.168.1.250
+	    port = 1817
 
 **Note!**
 
@@ -105,11 +99,11 @@ Then the server will always respond with the correct address.
 ### Can I run FreeRADIUS under daemontools control?
 
 Yes, you can. Assuming you already have daemontools installed, configured and running in your system (see [[http://cr.yp.to/daemontools.html]]), you will have to make two decisions:
-* The log account and group name (I use log.log in this example). Logging programs run under this account.group. If this account.group pair do not exist yet, create it now.
+1. The log account and group name (_log.log_ is used in this example). Logging programs run under this _account.group_. If this _account.group pair_ does not exist yet, create it now.
 
-* The radiusd local service directory (I use /etc/radiusd in this example). This is where radiusd will store logs and a few configuration files.
+2. The radiusd local service directory (_/etc/radiusd_ is used in this example). This is where radiusd will store logs and a few configuration files.
 
-Here are the steps I did (just once):
+Then perform these steps:
 
 	groupadd log
 	useradd -g log log
@@ -136,11 +130,11 @@ The logging feature is also started by a "run" script. This one is located in _/
 	#!/bin/sh
 	exec setuidgid log multilog t ./main
 
-To make the service start issue the command (just once):
+To set the service to start, issue the following command:
 
 	ln -sf /etc/radiusd /service
 
-Now you can send signals to radiusd using the svc program. Here are some interesting ones:
+Now you can send signals to radiusd using the `svc` program. Here are some interesting ones:
 
 To hang-up (HUP) it, reloading the config, do:
 
@@ -464,15 +458,15 @@ If you're REALLY interested in knowing how to debug the RADIUS server yourself, 
 3. Hit "Ctrl+A-H" to log all console output to a file.
 4. Start "radiusd -X" (FreeRADIUS is now running in this screen, and everything is being stored to log file. At any time, you can detach from the screen with Ctrl+A-d and reattach to the screen (both from local and over SSH) with `screen -r` to see what is going on in real time.)
 5. The server SHOULD print out:
-    <pre>Ready to process requests.</pre>
+        Ready to process requests.
     * If it doesn't, then it should print out an error message. Read it.
     * If it takes a long time to start up, and THEN prints out the message, then your DNS is broken.
 8. Ensure that you have localhost in your _raddb/clients_ file. FreeRADIUS comes configured this way, so it should be there.
 9. Ensure you have a valid user in your _raddb/users_ file. If everything else fails, go to the top of the file and add the following entry:
-    <pre>bob Cleartext-Password := "bob"
-        Reply-Message = "Hello, bob"</pre>
+        bob Cleartext-Password := "bob"
+        Reply-Message = "Hello, bob"
 12. Run the radtest program from the LOCAL machine, in another window. This will tell you if the server is alive and is answering requests.
-    <pre>radtest bob bob localhost 0 testing123</pre>
+        radtest bob bob localhost 0 testing123
 14. Ensure that you see the Reply-Message above and that you do NOT see an "Access denied" message. If you get an Access-Accept message, this means that the server is running properly.
 15. Configure another machine as a RADIUS client and run radtest from that machine too. You SHOULD see the server receive the request and send a reply.
     * If the server does NOT receive the request then the ports are confused. RADIUS historically uses 1645/UDP, where RFC 2138 and many new systems use the proper value of 1812/UDP. See _/etc/services_ or use the -p option to specify a different port.
