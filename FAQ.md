@@ -663,11 +663,12 @@ can then log it.
 	 
 ### How do I permit access to any user regardless of password?
 	 
-	 
+Edit raddb/users, on top of it put
+
 DEFAULT Auth-Type := Accept
 
-That will accept everybody. If you want this to apply to a single user replace DEFAULT with username. You can also add Auth-Type Accept to radcheck or radgroupcheck entries in order to accept that user/group. This does not work for EAP-TLS (certificate) authentication.
-
+That will accept everybody. If you want this to apply to a single user replace DEFAULT with username. You can also add Auth-Type Accept to radcheck or radgroupcheck entries in order to accept that user/group.
+This only works for PAP, and does not work for EAP-TLS, CHAP, or MSCHAP authentication.
 ### How do I limit access to only POP3 and SMTP?
 
 Q: I need to limit some users to be able only to use our POP3 and SMTP server.
