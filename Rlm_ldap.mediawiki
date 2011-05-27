@@ -18,7 +18,7 @@ The mapping between RADIUS [[attributes]] and [[LDAP]] attributes is in raddb/ld
 All ldap entries containing radius attributes should contain at least "objectclass: radiusprofile"
 
 radiusCheckItem and radiusReplyItem are special. They allow the administrator to add any check or reply item respectively without adding it in the ldap schema. The format should be:
- &lt;ldap-attribute&gt;: &lt;radius-attribute&gt; &lt;operator&gt; &lt;value&gt;
+ <ldap-attribute>: <radius-attribute> <operator> <value>
 For Example:
  radiusReplyItem: Cisco-AVPair := "ip:addr-pool=dialin_pool"
 

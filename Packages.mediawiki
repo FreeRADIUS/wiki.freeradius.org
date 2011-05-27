@@ -2,6 +2,7 @@ Pre-built [[binary packages]] for a number of operating systems are available fr
 
 The officially supported list of third-party sites is at http://freeradius.org/download.html and also as follows:
 
+* [[Red Hat FAQ#wiki-Current_Prebuilt_RPMs_for_RHEL_5_and_CentOS_5|CentOS]] 
 * [http://freeradius.net Cygwin]
 * [http://packages.debian.org/freeradius Debian] ([[Debian|with backports]])
 * [http://pkgsrc.se/net/freeradius DragonFlyBSD] (via NetBSD pkgsrc)
@@ -11,10 +12,11 @@ The officially supported list of third-party sites is at http://freeradius.org/d
 * [http://download.opensuse.org/repositories/network:/aaa/ Mandriva]
 * [http://pkgsrc.se/net/freeradius NetBSD]
 * [http://ports.openbsd.nu/net/freeradius OpenBSD]
-* [[Solaris]]
+* [[Red Hat FAQ|Red Hat Enterprise Linux]]
+* [[Solaris#wiki-Solaris_Packages|Solaris]]
 * [http://download.opensuse.org/repositories/network:/aaa/ SUSE and openSUSE] (the Network:AAA repository of the [http://www.opensuse.org OpenSUSE Project])
-* [http://freeradius.org/business/roadmap.html#windows Windows]
 * [http://packages.ubuntu.com/freeradius Ubuntu]
+* [http://freeradius.org/business/roadmap.html#windows Windows]
 
 FreeRADIUS is shipped on the installation media of many of the above.
 See also the [[Linux|history if inclusion into various Linux distributions]].
