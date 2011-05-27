@@ -1,6 +1,5 @@
 ## FreeRADIUS Frequently Asked Questions
 	 
-			
 This is the FAQ (Frequently Asked Questions) for the [[FreeRADIUS]] Server (freeradius for short) development project. It contains both general and technical information about FreeRADIUS: project status, what it is and what it does, how to obtain and configure and run it, and more. Please read this FAQ carefully before you post questions about FreeRADIUS to the mailing lists to see if your question is already answered here first.
 
 ## FreeRADIUS Overview
@@ -58,11 +57,11 @@ Please see the [[description of FreeRADIUS mailing lists|mailing list]].
 
 You can find it, along with some useful links and documentation, at the	 official FreeRADIUS WWW site:
 
-* http://www.freeradius.org/	 
+* [[http://www.freeradius.org/]]
 	 
 Sources are available at:	 
 	 
-* ftp://ftp.freeradius.org/pub/radius/
+* [[ftp://ftp.freeradius.org/pub/radius/]]
 	 
 ### Where can I get binary packages of FreeRADIUS
 
@@ -127,11 +126,11 @@ Here are the steps I did (just once):
 	 
 The supervise program starts radiusd by running a shell script called "run" from ''/etc/radiusd''. Here are the contents of ''/etc/radiusd/run'':
 
- <pre>bash# cd /etc/radiusd	 
- bash# cat run	 
- #!/bin/sh	 
- exec 2&gt;&amp;1	 
- exec /usr/sbin/radiusd -fyz -lstderr
+<pre>bash_shell# cd /etc/radiusd	 
+bash_shell# cat run	 
+#!/bin/sh	 
+exec 2&gt;&amp;1	 
+exec /usr/sbin/radiusd -fyz -lstderr
 </pre> 
 	 
 It is important to add -f and -l stderr to argument list of radiusd or svc	 
@@ -140,30 +139,30 @@ and logging functions will not work properly.
 The logging feature is also started by a "run" script. This one is located in	 
 /etc/radiusd/log. Here are the contents of /etc/radiusd/log/run	 
 	 
- <pre>bash# cd /etc/radiusd/log	 
- bash# cat run	 
- #!/bin/sh	 
- exec setuidgid log multilog t ./main
+<pre>bash# cd /etc/radiusd/log	 
+bash# cat run	 
+#!/bin/sh	 
+exec setuidgid log multilog t ./main
 </pre>	 
 	 
 To make service starts do (just once):	 
 	 
- bash# ln -sf /etc/radiusd /service	 
+<pre>ln -sf /etc/radiusd /service</pre>
 	 
 Now you can send signals to radiusd using the svc program. Here are some 	 
 interesting ones:	 
 	 
 To hang-up it (reload config) do:	 
 	 
- bash# svc -h /service/radiusd	 
+<pre>svc -h /service/radiusd</pre>
 	 
 To temporarly disable it (down) do:	 
 	 
- bash# svc -d /service/radiusd	 
+<pre>svc -d /service/radiusd</pre>
 	 
 To reenable it (up) do:	 
 	 
- bash# svc -u /service/radius
+<pre>svc -u /service/radius</pre>
 
 ## Common problems and their solutions
 
@@ -174,15 +173,15 @@ The shared secret is incorrect. This is a text string which is a "secret" (in th
 
 Run the server in debugging mode:
 
- radiusd -X
+<pre>radiusd -X</pre>
 
 The first password you see will be in a RADIUS attribute:
 
- Password = "dsa2\2223jdfjs"'
+<pre>Password = "dsa2\2223jdfjs"'</pre>
 
 The second password will be in a log message, e.g.:
 
- Login failed [user/password] ...
+<pre>Login failed [user/password] ...</pre>
 
 If the text AFTER the slash is garbage then the shared secret is wrong. Delete it on BOTH the NAS and the raddb/clients file and re-enter it. Do NOT check to see if they are the same, as there may be hidden spaces or other characters.
 
@@ -192,12 +191,13 @@ Another cause of garbage passwords being logged is the secret being too long.  C
 
 There are two possible causes of this problem.
 
-### =Gigawords not enabled on NAS=
+#### Gigawords not enabled on NAS
 
 Some NAS do not send "Gigawords" attributes by default. Read your NAS documentation and configure it to send the attributes Acct-Input-Gigawords and Acct-Output-Gigawords.
 
 For [[Cisco]] IOS, this usually achieved by entering
- aaa accounting gigawords
+
+<pre>aaa accounting gigawords</pre>
 (which, by "ingenious" design, requires a reload of the device on certain IOS versions).
 
 ### =Old FreeRADIUS SQL Queries and Table Structure=
@@ -212,31 +212,32 @@ FreeRADIUS 1.1.7 and greater supports 64-bit counters in other SQL modules, with
 
 The following procedure is recommended to enable proper support for 64-bit counters in FreeRADIUS 1.1.6 and earlier:
 
-### ## Modify Database Schema
+### Modify Database Schema
 
-Firstly, modify the '''radacct''' table schema to be able to store 64bit integers (or 19 digit numeric fields on databases not supporting BIGINT) in the AcctInputOctets and AcctOutputOctets columns using the "ALTER TABLE" command:
+Firstly, modify the _radacct_ table schema to be able to store 64bit integers (or 19 digit numeric fields on databases not supporting BIGINT) in the AcctInputOctets and AcctOutputOctets columns using the "ALTER TABLE" command:
 
-### ## =MySQL=
+#### MySQL
 
- ALTER TABLE radacct CHANGE AcctInputOctets AcctInputOctets BIGINT(20);
- ALTER TABLE radacct CHANGE AcctOutputOctets AcctOutputOctets BIGINT(20);
-
-### ## =Oracle=
+<pre>
+ALTER TABLE radacct CHANGE AcctInputOctets AcctInputOctets BIGINT(20);
+ALTER TABLE radacct CHANGE AcctOutputOctets AcctOutputOctets BIGINT(20);
+</pre>
+#### Oracle
 
  ALTER TABLE radacct MODIFY (AcctInputOctets NUMERIC(19));
  ALTER TABLE radacct MODIFY (AcctOutputOctets NUMERIC(19));
 
-### ## Modify FreeRADIUS Queries
+### Modify FreeRADIUS Queries
 
 Secondly, modify the accounting queries in sql.conf to make the SQL database perform the computation that is required to merge the two values sent as attributes by the [[NAS]] into one single 64-bit integer stored in the database.
 
-All occurences of '%{Acct-Input-Octets}' need to be replaced with:
+All occurences of <pre>'%{Acct-Input-Octets}'</pre> need to be replaced with:
 
- '%{Acct-Input-Gigawords:-0}'  << 32 | '%{Acct-Input-Octets:-0}'
+<pre>'%{Acct-Input-Gigawords:-0}'  << 32 | '%{Acct-Input-Octets:-0}'</pre>
 
-The same thing needs to be done for '%{Acct-Output-Octets}':
+The same thing needs to be done for <pre>'%{Acct-Output-Octets}'</pre>:
 
- '%{Acct-Output-Gigawords:-0}'  << 32 | '%{Acct-Output-Octets:-0}'
+<pre>'%{Acct-Output-Gigawords:-0}'  << 32 | '%{Acct-Output-Octets:-0}'</pre>
 
 ### Why does the NAS ignore the RADIUS server's reply?
 
@@ -247,17 +248,16 @@ Perhaps your server has multiple IP addresses, perhaps even multiple network car
 The simplest solution is to have radiusd bind to a specific address.
 It will only listen to that address and replies will always go out with that address as the source address. See [[#Is there a way to bind FreeRADIUS to a specific IP address?]]
 
-The above solution is not always possible. If you have multiple IPs and want FreeRADIUS to listen on all of them. Make sure that 
- ./configure  --with-udpfromto
+The above solution is not always possible. If you have multiple IPs and want FreeRADIUS to listen on all of them. Make sure that <pre>./configure  --with-udpfromto</pre>
 was specified during compilation ([[#Is there a way to bind FreeRADIUS to a specific IP address?]]). On Linux and FreeBSD this will make FreeRADIUS to respond from the IP the initial request was received to.
 
 ### VSA in Access-Reject
 
 Symptom: FreeRADIUS is not including VSA attributes in Access-Reject packets. (but it worked in earlier versions of FreeRADIUS)
 
-According [http://www.ietf.org/rfc/rfc2865.txt RFC 2865] (section 5.44)  Vendor-Specific Attributes aren't allow in Access-Reject packets.
+According [[http://www.ietf.org/rfc/rfc2865.txt|RFC 2865]] (section 5.44)  Vendor-Specific Attributes aren't allow in Access-Reject packets.
 
-This behaviour was [http://bugs.freeradius.org/show_bug.cgi?id=207 fixed in newer versions of FreeRADIUS]
+This behaviour was [[http://bugs.freeradius.org/show_bug.cgi?id=207|fixed in newer versions of FreeRADIUS]]
 
 ### How can I disconnect user with FreeRADIUS?
 
@@ -265,15 +265,15 @@ The RADIUS server receives information about user sessions from your [[NAS]] but
 
 Depending on your [[NAS]] type and it's configuration there are a number of ways to disconnect sessions.
 
-### =Packet of Disconnect=
+#### Packet of Disconnect
 
 [[Packet of Disconnect]] is the standard and recommended method to disconnect users. It is supported by many newer [[NAS]] and uses a [[RADIUS]] packet (usually sent to port 3799 although some NAS use 1700 (Mikrotik for example)) to signal that a NAS should terminate an active session.
 
-### =SNMP=
+#### SNMP
 
 Many [[NAS]] support [[SNMP]] which can usually (among other things) be used to disconnect users, however implimentation details vary. Read your NAS documentation to find out whether it supports this, and which [[MIB]] to use.
 
-### =radkill=
+#### radkill
 
 radkill is a TCL program written by Jason Straight for FreeRADIUS users that monitors ISP users' online times and disconnects them if they are over their call limit. It also monitors the number of users online and will disconnect the users with the least time left to always keep lines open. It's very configurable for multiple NAS setups.
 
@@ -288,15 +288,15 @@ The CHAP protocol requires a plaintext password on the radius server side, for P
 
 So, if you're using CHAP, for each user entry you must use:
 
- Auth-Type = Local, Password = "stealme"
+<pre>Auth-Type = Local, Password = "stealme"</pre>
 
 If you're using only PAP, you can get away with:
 
- Auth-Type = System
+<pre>Auth-Type = System</pre>
 
 or anything else that tickles your fancy.
 
-### = But CHAP is more secure, isn't it? =
+#### But CHAP is more secure, isn't it?
 
 Not really.
 
@@ -322,7 +322,7 @@ Now, people say CHAP is more secure. Now you decide which is more likely:
 
 Right. Still think CHAP is more secure? I thought so.
 
-This is a limitation of the CHAP protocol itself, not the [[RADIUS]] protocol.  The CHAP protocol *requires* that you store the passwords in plain-text format.
+This is a limitation of the CHAP protocol itself, not the [[RADIUS]] protocol.  The CHAP protocol **requires** that you store the passwords in plain-text format.
 
 ### What's with the commas in the raddb/users file?
 
@@ -348,34 +348,34 @@ Check-items are used to match attributes in a request packet or to set server pa
 
 ### How do the Attribute Operators work?
 
-All the attribute operators (<nowiki>:=</nowiki>,==, +=) and their meanings are listed in '''man 5 users''' on machines that have FreeRADIUS installed and at the [[Operators]] page in the wiki.
+All the attribute operators (:=,==, +=) and their meanings are listed in _man 5 users_ on machines that have FreeRADIUS installed and at the [[Operators]] page in the wiki.
 
 ### 3Com/USR HiPerArc doesn't work
 
 I'm using a 3Com/USR HiPerArc and I keep getting this message on radius.log:
 
- Mon Jul 26 15:18:54 1999: Error: Accounting: logout: entry for NAS tc-if5 port 1 has wrong ID
+<pre>Mon Jul 26 15:18:54 1999: Error: Accounting: logout: entry for NAS tc-if5 port 1 has wrong ID</pre>
 
 What should I do to get rid of these messages?
 
-You are using HiPer ARC 4.1.11, right? Version 4.1.11 has a problem reporting NAS-port numbers to Radius. Upgrade the firmware from http://totalservice.usr.com to at least 4.1.59. If you are in Europe you can telephone to 3Com Global Response Center (phone number: 800 879489), and tell them that you have bought it in the last 90 days. They will help you, step by step, to do the upgrade.
+You are using HiPer ARC 4.1.11, right? Version 4.1.11 has a problem reporting NAS-port numbers to Radius. Upgrade the firmware from [[http://totalservice.usr.com]] to at least 4.1.59. If you are in Europe you can telephone to 3Com Global Response Center (phone number: 800 879489), and tell them that you have bought it in the last 90 days. They will help you, step by step, to do the upgrade.
 
 ### Simultaneous-Use doesn't work
 
 Here is a check list:
-# Check that you added your NAS to raddb/clients.conf and selected correct NAS type, also check the password
-# Run radiusd -X and see if it parses the Simultaneous-Use line.
-# Try to run checkrad manually; maybe you may have a wrong version of perl, don't have cmu-snmp installed etc.
-# run "radwho".  If it says no one is logged in, Simultaneous-Use won't work.
-# Verify that the NAS is sending accounting packets.  Without accounting packets, Simultaneous-Use will NOT work.
-# Verify that the accounting packets are accepted by the radutmp module.  If the module returns "noop", it means that the accounting packets do not have enough information for the server to perform Simultaneous-Use enforcement.
-# In case you have SQL as a database, and you have accounting records in radacct table, you'll need to uncomment sql in session section of radiusd.conf file. Also, you'll need to uncomment Simutaneus check query in sql.conf file. 
+1. Check that you added your NAS to raddb/clients.conf and selected correct NAS type, also check the password
+2. Run radiusd -X and see if it parses the Simultaneous-Use line.
+3. Try to run checkrad manually; maybe you may have a wrong version of perl, don't have cmu-snmp installed etc.
+4. run "radwho".  If it says no one is logged in, Simultaneous-Use won't work.
+5. Verify that the NAS is sending accounting packets.  Without accounting packets, Simultaneous-Use will NOT work.
+6. Verify that the accounting packets are accepted by the radutmp module.  If the module returns "noop", it means that the accounting packets do not have enough information for the server to perform Simultaneous-Use enforcement.
+7. In case you have SQL as a database, and you have accounting records in radacct table, you'll need to uncomment sql in session section of radiusd.conf file. Also, you'll need to uncomment Simutaneus check query in sql.conf file. 
 
 The radius server calls the checkrad script when it thinks the user is already logged on on one or more other ports/terminal servers to verify that the user is indeed still online on that *other* port/server. If Simultaneous-Use &gt; 1, then it might be that checkrad is called several times to verify each existing session.
 
 This method successfully prevents a user from logging in multiple times across multiple NAS boxes.
 
-### =3Com/USR HiPerArc Simultaneous-Use doesn't work=
+###= 3Com/USR HiPerArc Simultaneous-Use doesn't work
 
 by Robert Dalton [mailto:support-at-accesswest-dot-com support at accesswest dot com]
 
@@ -383,33 +383,33 @@ Verify if you are using HiPerArc software version V4.2.32 release date 09/09/99
 
 In order for simultaneous logins to be prevented reported port density must be set to 256 using the command :
 
- set pbus reported_port_density 256
+<pre>set pbus reported_port_density 256</pre>
 
 Otherwise it changes the calculations of the SNMP object ID's.
 
 There is a bug in effected versions of checkrad namely the line under the subroutine "sub_usrhiper". The line that should be commented out is:
 
- <nowiki>($login) = /^.*\"([^"]+)".*$/;</nowiki>
+<pre>($login) = /^.*\"([^"]+)".*$/;</pre>
 
-### =Cisco Simultaneous-Use doesn't work=
+#### Cisco Simultaneous-Use doesn't work
 
 Q: I am getting the following in radius.log file:
 
-Thu Oct 21 10:59:01 1999: Error: Check-TS: timeout waiting for checkrad
+<pre>Thu Oct 21 10:59:01 1999: Error: Check-TS: timeout waiting for checkrad</pre>
 
 What's wrong?
 
 A: Verify if you have SNMP enabled on your CISCO router, check the existence of the following line:
 
- snmp-server community public RO 97
+<pre>snmp-server community public RO 97</pre>
 
 where 97 is the access-list that specifies who gets access to the SNMP info. You should also have a line like this:
 
- access-list 97 permit A.B.C.D
+<pre>access-list 97 permit A.B.C.D</pre>
 
 where A.B.C.D is the ip address of the host running the radius server.
 
-### =Ascend MAX 4048 Simultaneous-Use doesn't work=
+#### Ascend MAX 4048 Simultaneous-Use doesn't work
 
 Q: I am getting the following in radius.log file:
 
@@ -419,13 +419,13 @@ What's wrong?
 
 A: Verify that you have the MAX 4048 setup in your naslist as max40xx and that you have Finger turned on.
 
- Ethernet-&gt;Mod Config-&gt;Finger=Yes
+<pre>Ethernet->Mod Config->Finger=Yes</pre>
 
 ### The server is complaining about invalid user route-bps-asc1-1, along with lots of others
 
 Ascend decided to have the 4000 series NAS boxes retrieve much of their configuration from the RADIUS server. To disable this "feature", set:
 
- Ethernet-&gt;Mod Config-&gt;Auth-&gt;Allow Auth Config Rqsts = No
+<pre>Ethernet->Mod Config->Auth->Allow Auth Config Rqsts = No</pre>
 
 ### Why FreeRADIUS is taking so long to start?
 
@@ -447,11 +447,11 @@ If you see this happening STOP!
 
 The RAIDUS server certificate has to have special OID's in it, or else the Microsoft clients will silently fail.  See the "scripts/xpextensions" file in the server "tar" file for examples, and the following page on Microsoft's site:
                 
-[http://support.microsoft.com/kb/814394/en-us http://support.microsoft.com/kb/814394/en-us]
+p[http://support.microsoft.com/kb/814394/en-us]]
 
 If the clients are running Windows XP SP2, see also:
 
-[http://support.microsoft.com/kb/885453/en-us http://support.microsoft.com/kb/885453/en-us]
+p[http://support.microsoft.com/kb/885453/en-us]]
 
 You MUST follow the instructions on the first page, and install the hot fix from the second page for PEAP or EAP-TLS to work with a Windows machine.
 
@@ -465,39 +465,39 @@ Stop right there. Before going any further, be sure that you have included the f
 
 Too many people post questions saying "something's wrong, how do I fix it?" with NO background information. This is worse than useless, it's annoying.
 
-Now that you have prepared all the information, post your question to the [http://lists.freeradius.org/mailman/listinfo/freeradius-users freeradius-users mailing list]
+Now that you have prepared all the information, post your question to the [[http://lists.freeradius.org/mailman/listinfo/freeradius-users|freeradius-users mailing list]]
 
 ### Debugging it yourself
 
 If you're REALLY interested in knowing how to debug the RADIUS server yourself, then the following steps will help you:
 
-# Install "screen" (if not already installed).
-# Run a new screen and name it something convenient (eg. "screen -S radiusd")
-# Hit "Ctrl+A-H" to log all console output to a file.
-# Start "radiusd -X" (FreeRADIUS is now running in this screen, and everything is being stored to log file. At any time, you can detach from the screen with Ctrl+A-d and reattach to the screen (both from local and over SSH) with "screen -r" to see what is going on in real time.)
-# The server SHOULD print out:
-#: Ready to process requests.
-#* If it doesn't, then it should print out an error message. Read it.
-#* If it takes a long time to start up, and THEN prints out the message, then your DNS is broken.
-# Ensure that you have localhost in your raddb/clients file. FreeRADIUS comes configured this way, so it should be there.
-# Ensure you have a valid user in your raddb/users file. If everything else fails, go to the top of the file and add the following entry:
-#: bob Cleartext-Password := "bob"
-#:: Reply-Message = "Hello, bob"
-# Run the radtest program from the LOCAL machine, in another window. This will tell you if the server is alive and is answering requests.
-#: radtest bob bob localhost 0 testing123
-# Ensure that you see the Reply-Message above and that you do NOT see an "Access denied" message. If you get an Access-Accept message, this means that the server is running properly.
-# Configure another machine as a RADIUS client and run radtest from that machine too. You SHOULD see the server receive the request and send a reply.
-#* If the server does NOT receive the request then the ports are confused. RADIUS historically uses 1645/UDP, where RFC 2138 and many new systems use the proper value of 1812/UDP. See /etc/services or use the -p option to specify a different port.
-#* Run tcpdump in another window on the RADIUS client machine. Use the command:
-#*: tcpdump udp
-#** Look CAREFULLY at the packets coming from the RADIUS server. Which address are they coming from? Which port?
-# If authentication works from a different machine then you have the server set up correctly.
-# Now you should use a more complicated configuration to see if the server receives and replies with the attributes you want. There is little information that can be offered here in the FAQ as your individual systems configuration can not be predicted.  However, a few hints can help:
-#* ALWAYS test your configurations running the server in debugging mode if you want to debug a problem. If you do not do so then DO NOT expect anyone else to be able to help you.
-#*: radiusd -X
-#* Read RFC 2138 to see what the RADIUS attributes are and how they work 
-#* ALWAYS starts with a simple configuration in place of a more complicated one.  You should not expect to be able to debug a complicated configuration entry by sending one packet, and looking at the trace.
-#* Make the configuration as simple as possible, EVEN IF it doesn't do exactly what you want. Then, repeatedly, try to authenticate and see if it works. If authentication succeeds, then you can gradually add more attributes to the configuration to get the entry you desire.
+1. Install "screen" (if not already installed).
+2. Run a new screen and name it something convenient (eg. "screen -S radiusd")
+3. Hit "Ctrl+A-H" to log all console output to a file.
+4. Start "radiusd -X" (FreeRADIUS is now running in this screen, and everything is being stored to log file. At any time, you can detach from the screen with Ctrl+A-d and reattach to the screen (both from local and over SSH) with "screen -r" to see what is going on in real time.)
+5. The server SHOULD print out:
+6.: Ready to process requests.
+7.* If it doesn't, then it should print out an error message. Read it.
+* If it takes a long time to start up, and THEN prints out the message, then your DNS is broken.
+9. Ensure that you have localhost in your raddb/clients file. FreeRADIUS comes configured this way, so it should be there.
+10. Ensure you have a valid user in your raddb/users file. If everything else fails, go to the top of the file and add the following entry:
+11. <pre>bob Cleartext-Password := "bob"
+Reply-Message = "Hello, bob"</pre>
+12. Run the radtest program from the LOCAL machine, in another window. This will tell you if the server is alive and is answering requests.
+13. <pre>radtest bob bob localhost 0 testing123</pre>
+14. Ensure that you see the Reply-Message above and that you do NOT see an "Access denied" message. If you get an Access-Accept message, this means that the server is running properly.
+15. Configure another machine as a RADIUS client and run radtest from that machine too. You SHOULD see the server receive the request and send a reply.
+* If the server does NOT receive the request then the ports are confused. RADIUS historically uses 1645/UDP, where RFC 2138 and many new systems use the proper value of 1812/UDP. See /etc/services or use the -p option to specify a different port.
+* Run tcpdump in another window on the RADIUS client machine. Use the command:
+* <pre>tcpdump udp</pre>
+* Look CAREFULLY at the packets coming from the RADIUS server. Which address are they coming from? Which port?
+16. If authentication works from a different machine then you have the server set up correctly.
+17. Now you should use a more complicated configuration to see if the server receives and replies with the attributes you want. There is little information that can be offered here in the FAQ as your individual systems configuration can not be predicted.  However, a few hints can help:
+18. * ALWAYS test your configurations running the server in debugging mode if you want to debug a problem. If you do not do so then DO NOT expect anyone else to be able to help you.
+* <pre>radiusd -X</pre>
+* Read RFC 2138 to see what the RADIUS attributes are and how they work 
+* ALWAYS starts with a simple configuration in place of a more complicated one.  You should not expect to be able to debug a complicated configuration entry by sending one packet, and looking at the trace.
+* Make the configuration as simple as possible, EVEN IF it doesn't do exactly what you want. Then, repeatedly, try to authenticate and see if it works. If authentication succeeds, then you can gradually add more attributes to the configuration to get the entry you desire.
 
 ### But it worked with another RADIUS server!
 
@@ -512,20 +512,22 @@ Use 'tcpdump' (http://www.tcpdump.org) to snoop the RADIUS responses from each s
 
 You may see an error message like the one below, when you try to run the server:
 	 
-Module: Loaded SQL
+<pre>Module: Loaded SQL
 rlm_sql: Could not link driver rlm_sql_mysql: file not found
 rlm_sql: Make sure it (and all its dependent libraries!) are in the search path of your system's ld.
-radiusd.conf[50]: sql: Module instantiation failed.
+radiusd.conf[50]: sql: Module instantiation failed.</pre>
 
 There are only a few things that can be happening:
 
-1) The 'mysql_config' cannot be found in $PATH. Try running "./configure | grep mysql_config" and see if you get the follows:
-  checking for mysql_config... no
-  configure: WARNING: mysql libraries not found. Use --with-mysql-lib-dir=<path>.
-  configure: WARNING: sql submodule 'mysql' disabled
+1) The 'mysql_config' cannot be found in $PATH. Try running "./configure | grep mysql_config" and see if you get the following:
+
+<pre>checking for mysql_config... no
+configure: WARNING: mysql libraries not found. Use --with-mysql-lib-dir=<path>.
+configure: WARNING: sql submodule 'mysql' disabled</pre>
 
 If it is, simply do something like "export $PATH=$PATH:/usr/local/mysql/bin" and "./configure | grep mysql_config" again to make sure you get:
-  checking for mysql_config... yes
+
+<pre>checking for mysql_config... yes</pre>
 
 Then you should run "make;make install" again.
 
@@ -533,7 +535,7 @@ Then you should run "make;make install" again.
 
 Everyone blames FreeRADIUS because it's the one printing the error message. But it just gets the error message from your linker.
 
-3) You don't have static libraries for SQL clients on your system.  So doing "./configure --disable-shared;make" doesn't help.
+3) You don't have static libraries for SQL clients on your system.  So doing <pre>./configure --disable-shared;make</pre> doesn't help.
 
 The 'make' process WILL print out error messages saying it's creating a static library which links to a dynamic one. If your linker is misconfigured (see #1), then FreeRADIUS still won't work.
 
@@ -559,9 +561,10 @@ See also the 'libdir' configuration directive in the 'radiusd.conf' file which i
 
 If none of these solutions work, then your ONLY option is to build FreeRADIUS without dynamic libraries. This may be done via:
 
- ./configure --disable-shared
- make
- make install
+<pre>./configure --disable-shared
+make
+make install
+</pre>
 
 Please READ the messages produced during the 'make' and 'make install' stages. While there is a lot of text to wade through, these messages may be the ONLY source of information as to what's wrong your system.
 
@@ -578,12 +581,8 @@ For newer versions of ps / kernel (2.6+), you may prefer to use:
 * ps auxH
 
 ## How do I ... ?
-	 
-	 
-	 
 ### How do I send a message to PPP users?
-	 
-	 
+
 On Windows, the short answer is that you don't.	 
 	 
 RADIUS defines a Reply-Message attribute, which you can often use to	 
@@ -700,7 +699,7 @@ You'll need the redhat/radiusd.pam file from the distribution. It should go into
 
 If you have 100's to 1000's of users in /etc/passwd, you'll want to replace the pam_pwdb.so entries with pam_unix_auth.so, pam_unix_acct.so etc. The pam_pwdb module is INCREDIBLY SLOW for authenticating users from a large /etc/passwd file.
 
-[mailto:bruno-at-openline-dot-com-dot-br Bruno Lopes F. Cabral] also says:
+[[mailto:bruno-at-openline-dot-com-dot-br|Bruno Lopes F. Cabral]] also says:
 
 Now I can emulate group behaviour using just PAM and some tricks, like
 
@@ -724,21 +723,22 @@ this way I have NO users on /etc/password and NO need for lots of lines on /etc/
 The server reads the config files just once, at startup. This is very efficient, but you need to tell the server somehow to re-read its config files after you made a change. This can be done by sending the server a SIGHUP (signal '1' on almost if not all UNIX systems). The server writes its PID in	 
 ''/var/run/radiusd.pid'', so a simple UNIX command to do this would be:	 
 	 
- kill -1 `cat /var/run/radiusd.pid`	 
+<pre>kill -1 `cat /var/run/radiusd.pid`</pre>
 	 
 Some people would be tempted to do this every 5 minutes so that changes come âthrough automatically. That is not a good idea as it might take some time to re-read the config files and the server may drop a few authentication requests at that time. A better idea is to use a so-called "timestamp file" and only send a SIGHUP if the raddb/users file changed since the last time. For example a script like this, to be run every 5 minutes:	 
-	 
- #! /bin/sh	 
- cd /etc/raddb	 
- if [ ! -e .last-reload ] || [ "`find users -nt .last-reload`" ]; then	 
- if radiusd -C &gt; .last-reload 2&gt;&amp;1; then	 
- kill -1 `cat /var/run/radiusd.pid`	 
- else	 
- mail -s "radius reload failed!" root &lt; .last-reload	 
- fi	 
- fi	 
- touch .last-reload	 
-	 
+
+<pre>#! /bin/sh	 
+cd /etc/raddb	 
+if [ ! -e .last-reload ] || [ "`find users -nt .last-reload`" ]; then	 
+if radiusd -C &gt; .last-reload 2&gt;&amp;1; then	 
+kill -1 `cat /var/run/radiusd.pid`	 
+else	 
+mail -s "radius reload failed!" root &lt; .last-reload	 
+fi	 
+fi	 
+touch .last-reload	 
+</pre>
+
 Of course a Makefile is suited perfectly for this kind of stuff.
 
 ### How do I check the configuration before sending a HUP to the server?
@@ -754,8 +754,8 @@ file may cause your main radius server to die. Therefore there should be some pr
 With FreeRADIUS 2.0.0 and up you can use the -C option for radiusd to check
 certain parts of your configuration files. See the radiusd(8) manpage for further details
 and limitations of the -C option. Related posts on freeradius-users:
-[http://lists.freeradius.org/pipermail/freeradius-users/2007-November/067362.html 067362]
-[http://lists.freeradius.org/pipermail/freeradius-users/2007-November/067279.html 067279] 
+[[http://lists.freeradius.org/pipermail/freeradius-users/2007-November/067362.html|067362]]
+[[http://lists.freeradius.org/pipermail/freeradius-users/2007-November/067279.html|067279]]
 
 '''Example for broken configuration (users) file:'''
  ~> freeradius -XC; echo $?
@@ -781,18 +781,18 @@ Note however, that this option is not available in freeradius 1.x. The freeradiu
 
 Use the following configuration :
 
-                Framed-Route := "10.130.1.252/32 0.0.0.0  5",
-                Framed-Route += "10.130.0.252/32 0.0.0.0 10", 
+<pre>Framed-Route := "10.130.1.252/32 0.0.0.0  5",
+Framed-Route += "10.130.0.252/32 0.0.0.0 10",</pre>
 
-Which give : (tcpdump output)
-
+Which gives : (tcpdump output)
+<pre>
           Framed Route Attribute (22), length: 28, Value: 10.130.1.252/32 0.0.0.0  5
             0x0000:  3130 2e31 3330 2e31 2e32 3532 2f33 3220
             0x0010:  302e 302e 302e 3020 2035
           Framed Route Attribute (22), length: 28, Value: 10.130.0.252/32 0.0.0.0 10
             0x0000:  3130 2e31 3330 2e30 2e32 3532 2f33 3220
             0x0010:  302e 302e 302e 3020 3130
-
+</pre>
 
 ### How do I tell the user what to use for an IP netmask?
 
@@ -860,17 +860,17 @@ FreeRADIUS Server 2.0.0 and greater has full support for both IPv6 attributes an
 
 ### [[FreeRADIUS]] Related Web Pages
 
-* [http://www.freeradius.org/ FreeRADIUS Web Page]
-* [http://wiki.freeradius.org/ FreeRADIUS Wiki]
-* [http://www.radius.cistron.nl/ Cistron RADIUS Web Page]
+* [[http://www.freeradius.org/|FreeRADIUS Web Page]]
+* [[http://wiki.freeradius.org/|FreeRADIUS Wiki]]
+* [[http://www.radius.cistron.nl/|Cistron RADIUS Web Page]]
 * [[FreeRADIUS on Red Hat systems|Red Hat FAQ]]
 
 ### Mailing Lists
 
-* [http://lists.freeradius.org/mailman/listinfo/freeradius-users FreeRADIUS Users Mailing List Subscription]
-* [http://lists.freeradius.org/pipermail/freeradius-users/ FreeRADIUS Users Mailing List Archive]
-* [http://lists.freeradius.org/mailman/listinfo/freeradius-devel FreeRADIUS Developers Mailing List Subscription]
-* [http://lists.freeradius.org/pipermail/freeradius-devel/ FreeRADIUS Developers Mailing List Archive]
+* [[http://lists.freeradius.org/mailman/listinfo/freeradius-users|FreeRADIUS Users Mailing List Subscription]]
+* [[http://lists.freeradius.org/pipermail/freeradius-users/|FreeRADIUS Users Mailing List Archive]]
+* [[http://lists.freeradius.org/mailman/listinfo/freeradius-devel|FreeRADIUS Developers Mailing List Subscription]]
+* [[http://lists.freeradius.org/pipermail/freeradius-devel/|FreeRADIUS Developers Mailing List Archive]]
 
 ### [[RADIUS]] RFC and Drafts
 
@@ -878,5 +878,5 @@ FreeRADIUS Server 2.0.0 and greater has full support for both IPv6 attributes an
 * http://www.freeradius.org/rfc/
 
 ## Acknowledgments
-
 FreeRADIUS is the result of the work done by a large number of people.  The major contributors are listed on the [[Acknowledgments]] page.
+
