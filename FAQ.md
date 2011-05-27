@@ -1,10 +1,9 @@
 ## FreeRADIUS Frequently Asked Questions
-	 
-This is the FAQ (Frequently Asked Questions) for the [[FreeRADIUS]] Server (freeradius for short) development project. It contains both general and technical information about FreeRADIUS: project status, what it is and what it does, how to obtain and configure and run it, and more. Please read this FAQ carefully before you post questions about FreeRADIUS to the mailing lists to see if your question is already answered here first.
+	 		
+This is the FAQ (Frequently Asked Questions) for the [[FreeRADIUS]] Server (freeradius for short) development project. It contains both general and technical information about the FreeRADIUS projects' status, what it is and what it does, how to obtain and configure and run it, and more. Please read this FAQ carefully before you post questions about FreeRADIUS to the mailing lists to see if your question is already answered here first.
 
 ## FreeRADIUS Overview
-	 
-	 
+	  
 ### What is FreeRADIUS and what is it supposed to do
 	 
 The FreeRADIUS Server is a daemon for unix and unix like operating systems which allows one to set up a radius protocol server, which can be used for Authentication and Accounting various types of network access.
@@ -13,13 +12,10 @@ To use the server, you also need a correctly setup client which will talk to it,
 FreeRADIUS is being developed by a group of people who call themselves "the FreeRADIUS project".
 
 ### How does it differ from other radius servers?
+	  
+First of all, FreeRADIUS is an open-source product, and has all the benefits open-source provides.	 
 	 
-	 
-First of all, FreeRADIUS is an open-source product, and has all the 	 
-benefits open-source provides.	 
-	 
-Also, it has many features not found in free servers and many commercial	 
-ones, like:	 
+Also, it has many features not found in free servers and many commercial ones, like:	 
 	 
 * Access based on huntgroups	 
 * Multiple DEFAULT entries in raddb/users file	 
@@ -35,14 +31,14 @@ ones, like:
 * Exec-Program-Wait, allows you to set up an external program which is executed after authentication and outputs a list of A/V pairs which is then added to the reply.	 
 * Supports PAM
 
-### On what platforms does it run?
+### What platforms does it run on?
 	  
 FreeRADIUS runs on a [[large number of 32 and 64bit Unix-like platforms|platforms]].
 
 ## Where to get information
 ### Is there a FreeRADIUS Web site?
 
-Yes, the FreeRADIUS Server WWW site is at http://www.freeradius.org/	 
+Yes, the FreeRADIUS Server site is at [[http://www.freeradius.org/]]	 
 
 It contains the server, documentation, and additional [[RADIUS]] programs.
 
@@ -50,28 +46,28 @@ It contains the server, documentation, and additional [[RADIUS]] programs.
 
 Yes, there are mailing lists for announcements, users and developers, they can all be subscribed to freely, and they all have web archives.
 
-Please see the [[description of FreeRADIUS mailing lists|mailing list]].
+Please see the description of FreeRADIUS [[mailing lists|mailing list]].
 
-## How to Find and Install FreeRADIUS
-### Where can I get FreeRADIUS
+## How to Find and Install FreeRADIUS?
+### Where can I get FreeRADIUS?
 
-You can find it, along with some useful links and documentation, at the	 official FreeRADIUS WWW site:
+You can find it, along with some useful links and documentation, at the	official FreeRADIUS WWW site:
 
 * [[http://www.freeradius.org/]]
 	 
 Sources are available at:	 
 	 
-* [[ftp://ftp.freeradius.org/pub/radius/]]
+* ftp://ftp.freeradius.org/pub/radius/
 	 
 ### Where can I get binary packages of FreeRADIUS
 
-Please see the [[list of available binary packages|binary packages]].
+Please see the list of [[available binary packages|binary packages]].
 
-You may also easily [[build a package from sources|Build#Building_Packages]].
+You may also easily [[build a package from source|Build#Building_Packages]].
 
 ### How do I build and install FreeRADIUS from source?
 
-See the [[instructions on how to build FreeRADIUS|Build]].
+See the instructions on [[how to build FreeRADIUS|Build]].
 
 ## Common system setup issues
 
@@ -79,35 +75,33 @@ See the [[instructions on how to build FreeRADIUS|Build]].
 	 
 Yes - there are several ways to accomplish this. 
 
-* The deprecated old way is to specify an IP address with the ''-i {IP}'' command-line option.
-* The better way is to use the <code>listen</code> directive in [[radiusd.conf]]. Something like this will work:
+* The deprecated old way is to specify an IP address with the <pre>_-i {IP}</pre> command-line option.
+* The better way is to use the <pre>listen</pre> directive in [[radiusd.conf]]. Something like this will work:
 
 <pre>listen { 
        ipaddr = 192.168.1.250
        port = 1817
        type = auth
 }</pre>
-You may specify multiple <code>listen</code> directives.
 
-* The third way is to use 
+You may specify multiple <pre>listen</pre> directives.
+
+* The third way is to use:
 <pre>bind_address = 192.168.1.250
 port = 1817</pre>
 
 **Note!**
 
-If you have a multi-homed server and specify an explicit address to bind to. 
-It may happen that the server does not respond with the right source ip address.
-Thus the client will likely ignore the server's response. 
-On Linux and FreeBSD you can solve this by specifying 
-<code>./configure --with-udpfromto</code> during compilation.
+If you have a multi-homed server and specify an explicit address to bind to. It may happen that the server does not respond with the right source ip address. Thus the client will likely ignore the server's response.
+On Linux and FreeBSD you can solve this by specifying:
+
+<pre>./configure --with-udpfromto</pre> during compilation.
+
 Then the server will always respond with the correct address.
 
 ### Can I run FreeRADIUS under daemontools control?
 	 
-
-Yes, you can. Assuming you already have daemontools installed, configured and	 
-running in your system (see http://cr.yp.to/daemontools.html), you will	 
-have to make two decisions: 	 
+Yes, you can. Assuming you already have daemontools installed, configured and running in your system (see [[http://cr.yp.to/daemontools.html]]), you will have to make two decisions: 	 
 	 
 * The log account and group name (I use log.log in this example). Logging programs run under this account.group. If this account.group pair do not exist yet, create it now.	 
 	 
@@ -115,19 +109,19 @@ have to make two decisions:
 	 
 Here are the steps I did (just once):	 
 	 
- <pre>bash# groupadd log	 
- bash# useradd -g log log	 
- bash# mkdir /etc/radiusd	 
- bash# mkdir /etc/radiusd/log	 
- bash# mkdir /etc/radiusd/log/main	 
- bash# chmod +t+s /etc/radiusd /etc/radiusd/log	 
- bash# chown log.log /etc/radiusd/log/main
+<pre>groupadd log	 
+useradd -g log log	 
+mkdir /etc/radiusd	 
+mkdir /etc/radiusd/log	 
+mkdir /etc/radiusd/log/main	 
+chmod +t+s /etc/radiusd /etc/radiusd/log	 
+chown log.log /etc/radiusd/log/main
 </pre>
 	 
-The supervise program starts radiusd by running a shell script called "run" from ''/etc/radiusd''. Here are the contents of ''/etc/radiusd/run'':
+The supervise program starts radiusd by running a shell script called "run" from _/etc/radiusd_. Here are the contents of _/etc/radiusd/run_:
 
-<pre>bash_shell# cd /etc/radiusd	 
-bash_shell# cat run	 
+<pre>shell# cd /etc/radiusd	 
+shell# cat run	 
 #!/bin/sh	 
 exec 2&gt;&amp;1	 
 exec /usr/sbin/radiusd -fyz -lstderr
@@ -137,22 +131,21 @@ It is important to add -f and -l stderr to argument list of radiusd or svc
 and logging functions will not work properly.	 
 	 
 The logging feature is also started by a "run" script. This one is located in	 
-/etc/radiusd/log. Here are the contents of /etc/radiusd/log/run	 
+_/etc/radiusd/log_. Here are the contents of _/etc/radiusd/log/run_
 	 
 <pre>bash# cd /etc/radiusd/log	 
-bash# cat run	 
+shekk# cat run	 
 #!/bin/sh	 
 exec setuidgid log multilog t ./main
 </pre>	 
 	 
-To make service starts do (just once):	 
+To make the service start issue the command (just once):	 
 	 
 <pre>ln -sf /etc/radiusd /service</pre>
 	 
-Now you can send signals to radiusd using the svc program. Here are some 	 
-interesting ones:	 
+Now you can send signals to radiusd using the svc program. Here are some interesting ones:	 
 	 
-To hang-up it (reload config) do:	 
+To hang-up (HUP) it, reloading the config, do:	 
 	 
 <pre>svc -h /service/radiusd</pre>
 	 
@@ -165,8 +158,6 @@ To reenable it (up) do:
 <pre>svc -u /service/radius</pre>
 
 ## Common problems and their solutions
-
-
 ### Incoming Authentication-Request passwords are all garbage. Why?
 
 The shared secret is incorrect. This is a text string which is a "secret" (in the raddb/clients file) shared by both the NAS and the server. It is used to authenticate and to encrypt/decrypt packets.
@@ -200,7 +191,7 @@ For [[Cisco]] IOS, this usually achieved by entering
 <pre>aaa accounting gigawords</pre>
 (which, by "ingenious" design, requires a reload of the device on certain IOS versions).
 
-### =Old FreeRADIUS SQL Queries and Table Structure=
+#### Old FreeRADIUS SQL Queries and Table Structure
 
 Older versions of FreeRADIUS  (prior to 1.1.7) include support for logging 64-Bit counters to both the detail file and SQL modules but only the PostgreSQL module had this support configured by default.
 
@@ -214,18 +205,19 @@ The following procedure is recommended to enable proper support for 64-bit count
 
 ### Modify Database Schema
 
-Firstly, modify the _radacct_ table schema to be able to store 64bit integers (or 19 digit numeric fields on databases not supporting BIGINT) in the AcctInputOctets and AcctOutputOctets columns using the "ALTER TABLE" command:
+Firstly, modify the _radacct_ table schema to be able to store 64bit integers (or 19 digit numeric fields on databases not supporting BIGINT) in the AcctInputOctets and AcctOutputOctets columns using the <pre>ALTER TABLE</pre> command:
 
 #### MySQL
 
-<pre>
-ALTER TABLE radacct CHANGE AcctInputOctets AcctInputOctets BIGINT(20);
+<pre>ALTER TABLE radacct CHANGE AcctInputOctets AcctInputOctets BIGINT(20);
 ALTER TABLE radacct CHANGE AcctOutputOctets AcctOutputOctets BIGINT(20);
 </pre>
+
 #### Oracle
 
- ALTER TABLE radacct MODIFY (AcctInputOctets NUMERIC(19));
- ALTER TABLE radacct MODIFY (AcctOutputOctets NUMERIC(19));
+<pre>ALTER TABLE radacct MODIFY (AcctInputOctets NUMERIC(19));
+ALTER TABLE radacct MODIFY (AcctOutputOctets NUMERIC(19));
+</pre>
 
 ### Modify FreeRADIUS Queries
 
@@ -233,7 +225,7 @@ Secondly, modify the accounting queries in sql.conf to make the SQL database per
 
 All occurences of <pre>'%{Acct-Input-Octets}'</pre> need to be replaced with:
 
-<pre>'%{Acct-Input-Gigawords:-0}'  << 32 | '%{Acct-Input-Octets:-0}'</pre>
+`'%{Acct-Input-Gigawords:-0}' << 32 | '%{Acct-Input-Octets:-0}'`
 
 The same thing needs to be done for <pre>'%{Acct-Output-Octets}'</pre>:
 
@@ -878,5 +870,5 @@ FreeRADIUS Server 2.0.0 and greater has full support for both IPv6 attributes an
 * http://www.freeradius.org/rfc/
 
 ## Acknowledgments
-FreeRADIUS is the result of the work done by a large number of people.  The major contributors are listed on the [[Acknowledgments]] page.
 
+FreeRADIUS is the result of the work done by a large number of people.  The major contributors are listed on the [[Acknowledgments]] page.
