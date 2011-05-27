@@ -133,8 +133,8 @@ and logging functions will not work properly.
 The logging feature is also started by a "run" script. This one is located in	 
 _/etc/radiusd/log_. Here are the contents of _/etc/radiusd/log/run_
 	 
-<pre>bash# cd /etc/radiusd/log	 
-shekk# cat run	 
+<pre>shell# cd /etc/radiusd/log	 
+shell# cat run	 
 #!/bin/sh	 
 exec setuidgid log multilog t ./main
 </pre>	 
@@ -189,6 +189,7 @@ Some NAS do not send "Gigawords" attributes by default. Read your NAS documentat
 For [[Cisco]] IOS, this usually achieved by entering
 
 `aaa accounting gigawords`
+
 (which, by "ingenious" design, requires a reload of the device on certain IOS versions).
 
 #### Old FreeRADIUS SQL Queries and Table Structure
@@ -229,7 +230,7 @@ All occurences of `'%{Acct-Input-Octets}'` need to be replaced with:
 
 The same thing needs to be done for `'%{Acct-Output-Octets}'`:
 
-`'%{Acct-Output-Gigawords:-0}'  << 32 | '%{Acct-Output-Octets:-0}'`
+`'%{Acct-Output-Gigawords:-0}' << 32 | '%{Acct-Output-Octets:-0}'`
 
 ### Why does the NAS ignore the RADIUS server's reply?
 
@@ -247,9 +248,9 @@ was specified during compilation ([[#Is there a way to bind FreeRADIUS to a spec
 
 Symptom: FreeRADIUS is not including VSA attributes in Access-Reject packets. (but it worked in earlier versions of FreeRADIUS)
 
-According [[http://www.ietf.org/rfc/rfc2865.txt|RFC 2865]] (section 5.44)  Vendor-Specific Attributes aren't allow in Access-Reject packets.
+According [[RFC 2865|http://www.ietf.org/rfc/rfc2865.txt]] (section 5.44)  Vendor-Specific Attributes aren't allow in Access-Reject packets.
 
-This behaviour was [[http://bugs.freeradius.org/show_bug.cgi?id=207|fixed in newer versions of FreeRADIUS]]
+This behaviour was [[fixed in newer versions of FreeRADIUS|http://bugs.freeradius.org/show_bug.cgi?id=207]]
 
 ### How can I disconnect user with FreeRADIUS?
 
@@ -309,6 +310,7 @@ You have 2 choices:
 ** Disadvantage: passwords going cleartext over the phone line between the user and the terminal server.
 
 Now, people say CHAP is more secure. Now you decide which is more likely:
+
 * the phone line between the user and the terminal server gets sniffed and a cracker (a GOOD one) intercepts just one password
 * your radius server is hacked into and a cracker gets ALL passwords of ALL users.
 
@@ -320,12 +322,13 @@ This is a limitation of the CHAP protocol itself, not the [[RADIUS]] protocol.  
 
 Commas link lists of attributes together. The general format for a raddb/users file entry is:
 
-: name Check-Item = Value, ..., Check-Item = Value
-:: Reply-Item = Value,
-:: .
-:: .
-:: .
-:: Reply-Item = Value
+
+    name Check-Item = Value, ..., Check-Item = Value
+        Reply-Item = Value,
+        .
+        .
+        .
+        Reply-Item = Value
 
 Where the dots means repetition of attributes.
 
