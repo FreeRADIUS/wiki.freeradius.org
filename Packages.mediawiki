@@ -8,7 +8,7 @@ The officially supported list of third-party sites is at http://freeradius.org/d
 * [http://pkgsrc.se/net/freeradius DragonFlyBSD] (via NetBSD pkgsrc)
 * [http://koji.fedoraproject.org/koji/packageinfo?packageID=298 Fedora]
 * [http://www.freebsd.org/cgi/ports.cgi?query=freeradius&amp;stype=all&amp;sektion=net FreeBSD]
-* [http://freeradius.darwinports.com/ Mac OSX] (Leopard server <small>[http://www.apple.com/opensource/][http://www.apple.com/server/macosx/leopard/more.html]</small>)
+* [http://freeradius.darwinports.com/ Mac OSX] (Leopard server <small>[http://www.apple.com/opensource/] [http://www.apple.com/server/macosx/leopard/more.html]</small>)
 * [http://download.opensuse.org/repositories/network:/aaa/ Mandriva]
 * [http://pkgsrc.se/net/freeradius NetBSD]
 * [http://ports.openbsd.nu/net/freeradius OpenBSD]
