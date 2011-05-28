@@ -57,7 +57,7 @@ The following is an overview of the types of information available:
 * [[Base Modules|List of Modules]]
 * Creating your own [[Modules for FreeRADIUS Version 2|Modules2]]
 * Creating your own [[Modules for FreeRADIUS Version 1|Modules1]]
-* [[Radius Tools]]
+* [[Radius Clients]]
 * [[FAQ]]
 * [[HOWTO]]
 * [[Example Setups]] Cookbook
