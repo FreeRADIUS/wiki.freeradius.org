@@ -1,4 +1,3 @@
-
 _The content on this page refers to HP ProCurve switches only, not switching products from companies acquired by HP (3Com, H3C)._
 
 ## Port authentication mechanisms
@@ -21,7 +20,7 @@ Beware using the _unauth-vid_ where switches rely on RADIUS servers for VLAN ass
 
 ### 802.1X 
 
-The switch port acts as an [http://http://en.wikipedia.org/wiki/IEEE_802.1X](802.1X) authenticator, encapsulating/de-encapsulating EAP-Messages as required , and forwarding them between the supplicant and RADIUS server.
+The switch port acts as an [802.1X](http://http://en.wikipedia.org/wiki/IEEE_802.1X) authenticator, encapsulating/de-encapsulating EAP-Messages as required , and forwarding them between the supplicant and RADIUS server.
 
 When a supplicant connects, the switch will send an EAP Identity-Request packet to the suppliant, to prompt an authentication attempt. Alternatively the supplicant can initiate authentication by sending an EAP Start packet to the switch.
 
@@ -118,7 +117,7 @@ _Note: Setting unath-vid for 802.1X when concurrent 802.1X/MAC authentication is
 
 ### Dynamic VLAN Assignment 
 
-When sending an Access-Accept packet the RADIUS server can specify which PVID should be assigned to the client. Most ProCurve switches that support dynamic VLAN assignment use the standard [http://tools.ietf.org/html/rfc3580#section-3.31](RFC3580) attributes, which allow the assignment of a single untagged VLAN. The latest 'K' series switches however, support [http://tools.ietf.org/html/rfc4675](RFC4675) and [http://tools.ietf.org/html/rfc3580#section-3.31](RFC3580) attributes, allowing full control over the tagged and untagged VLANs set on a port.
+When sending an Access-Accept packet the RADIUS server can specify which PVID should be assigned to the client. Most ProCurve switches that support dynamic VLAN assignment use the standard [RFC3580](http://tools.ietf.org/html/rfc3580#section-3.31](RFC3580) attributes, which allow the assignment of a single untagged VLAN. The latest 'K' series switches however, support [http://tools.ietf.org/html/rfc4675](RFC4675) and [http://tools.ietf.org/html/rfc3580#section-3.31) attributes, allowing full control over the tagged and untagged VLANs set on a port.
 
 The recommended approach for configuring both tagged and untagged VLANs, is to configure the untagged ingress/egress VLAN using RFC 3580 attributes, and use RFC 4675 attributes for tagged VLANs.
 
