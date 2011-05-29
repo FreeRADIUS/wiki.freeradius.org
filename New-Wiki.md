@@ -22,12 +22,12 @@ If you want to help out, please do the following:
 2. Pick a page where the MediaWiki format doesn't render correctly
 3. Click the 'Edit page' button
 4. Change edit mode from MediaWiki to reStructuredText or arkdown
-5. Convert markup to [[reStructuredText|http://docutils.sourceforge.net/docs/ref/rst/restructuredtext.htm] or [[MarkDown|http://daringfireball.net/projects/markdown/syntax#precode]] ([Markdown cheatsheet|http://hw.libsyn.com/p/8/3/3/8339a864bb8faa83/Markdown_Cheat_Sheet.pdf]])
+5. Convert markup to [reStructuredText](http://docutils.sourceforge.net/docs/ref/rst/restructuredtext.htm) or [Markdown](http://daringfireball.net/projects/markdown/syntax#precode) ([Cheat sheet](http://hw.libsyn.com/p/8/3/3/8339a864bb8faa83/Markdown_Cheat_Sheet.pdf))
 6. Save the page
 7. Get warm fuzzy glow from contributing to open source
 
 Also please report any bugs here:
-[[https://github.com/github/gollum/issues?_pjax=true&state=open]]
+[gollum issue tracker](https://github.com/github/gollum/issues?_pjax=true&state=open)
 
 ## Known Issues
 * Last commit for pages reflect the last person to commit to the repo
