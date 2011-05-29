@@ -28,3 +28,22 @@ If you want to help out, please do the following:
 
 Also please report any bugs here:
 [[https://github.com/github/gollum/issues?_pjax=true&state=open]]
+
+## Known Issues
+* Markdown pages don't display TOC, this is a upstream bug in the 1.3.0 version of gollum
+* When creating pages, you are only prompted to login after attempting to submit modifications; this is somewhat of a design flaw in gollum, not specify a get url for creating pages. A workaround will be written and implemented soon.
+
+## Pages that need converting as a priority (please mark here when converted)
+
+### Pages to convert to markdown
+http://wiki.freeradius.org/Build
+http://wiki.freeradius.org/Modules1
+http://wiki.freeradius.org/RADIUS-Clients
+http://wiki.freeradius.org/Cisco
+http://wiki.freeradius.org/PopTop
+http://wiki.freeradius.org/Attribute%20support%20by%20processing%20list
+http://wiki.freeradius.org/Attrs
+
+
+### Pages to convert to RST
+http://wiki.freeradius.org/Modules2
