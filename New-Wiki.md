@@ -37,14 +37,20 @@ Also please report any bugs here:
 ## Pages that need converting as a priority (please mark here when converted)
 
 ### Pages to convert to markdown
-http://wiki.freeradius.org/Build
-http://wiki.freeradius.org/Modules1
-http://wiki.freeradius.org/RADIUS-Clients
-http://wiki.freeradius.org/Cisco
-http://wiki.freeradius.org/PopTop
-http://wiki.freeradius.org/Attribute%20support%20by%20processing%20list
-http://wiki.freeradius.org/Attrs
-
+* http://wiki.freeradius.org/Build
+* http://wiki.freeradius.org/Modules1
+* http://wiki.freeradius.org/RADIUS-Clients
+* http://wiki.freeradius.org/Cisco
+* http://wiki.freeradius.org/PopTop
+* http://wiki.freeradius.org/Attribute%20support%20by%20processing%20list
+* http://wiki.freeradius.org/Attrs
 
 ### Pages to convert to RST
-http://wiki.freeradius.org/Modules2
+* http://wiki.freeradius.org/Modules2
+
+## Todo
+* Add google as omniauth provider - Arran CB
+* Implement proper fix for page creation - Arran CB
+* Fix TOC for markdown pages - Arran CB
+* Set up anonymous git access for wiki - Alan D
+* Set up commit log to user mailing list - Alan D
