@@ -31,6 +31,7 @@ Also please report any bugs here:
 
 ## Known Issues
 * Markdown pages don't display TOC, this is a upstream bug in the 1.3.0 version of gollum
+* No delete or rename functionality, this is a upstream bug in the 1.3.0 version of gollum
 * When creating pages, you are only prompted to login after attempting to submit modifications; this is somewhat of a design flaw in gollum, not specifying a get url for creating pages. A workaround will be written and implemented soon.
 
 ## Pages that need converting as a priority (please mark here when converted)
