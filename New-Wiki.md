@@ -22,7 +22,7 @@ If you want to help out, please do the following:
 2. Pick a page where the MediaWiki format doesn't render correctly
 3. Click the 'Edit page' button
 4. Change edit mode from MediaWiki to reStructuredText
-5. Convert markup to [[reStructuredText|http://docutils.sourceforge.net/docs/ref/rst/restructuredtext.htm]
+5. Convert markup to [[reStructuredText|http://docutils.sourceforge.net/docs/ref/rst/restructuredtext.htm] or MarkDown
 6. Save the page
 7. Get warm fuzzy glow from contributing to open source
 
