@@ -92,7 +92,7 @@ Then simply run:
 ###Building SUSE packages with Oracle Support
 
 If you wish to use Oracle you will need to recompile FreeRADIUS on a machine 
-that has Oracle development libraries installed. FreeRADIUS is known to work both with a full Oracle installation as well as with the [http://www.oracle.com/technology/tech/oci/instantclient/index.html](Oracle Instant Client SDK). Once built the resulting RPM package can be deployed with just the [http://www.oracle.com/technology/tech/oci/instantclient/index.html](Oracle Instant Client) (No need for the SDK on production machines)
+that has Oracle development libraries installed. FreeRADIUS is known to work both with a full Oracle installation as well as with the [Oracle Instant Client SDK](http://www.oracle.com/technology/tech/oci/instantclient/index.html). Once built the resulting RPM package can be deployed with just the [Oracle Instant Client](http://www.oracle.com/technology/tech/oci/instantclient/index.html) (No need for the SDK on production machines)
 
 Most rpm packages available do not included oraclesql.conf due to the fact that they also don't contain the Oracle driver module (due to copyright reasons)
 
