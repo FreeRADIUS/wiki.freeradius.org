@@ -21,8 +21,8 @@ If you want to help out, please do the following:
 1. Sign up for Facebook, Twitter or GitHub
 2. Pick a page where the MediaWiki format doesn't render correctly
 3. Click the 'Edit page' button
-4. Change edit mode from MediaWiki to reStructuredText
-5. Convert markup to [[reStructuredText|http://docutils.sourceforge.net/docs/ref/rst/restructuredtext.htm] or MarkDown
+4. Change edit mode from MediaWiki to reStructuredText or arkdown
+5. Convert markup to [[reStructuredText|http://docutils.sourceforge.net/docs/ref/rst/restructuredtext.htm] or [[MarkDown|http://daringfireball.net/projects/markdown/syntax#precode]] ([Markdown cheatsheet|http://hw.libsyn.com/p/8/3/3/8339a864bb8faa83/Markdown_Cheat_Sheet.pdf]])
 6. Save the page
 7. Get warm fuzzy glow from contributing to open source
 
