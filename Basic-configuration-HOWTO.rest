@@ -37,13 +37,6 @@ Lots of output will scroll by, and it will eventually say::
 
   Read to process requests.
 
-Troubleshooting
-------------------
-
-The initial setup is usually sufficient, but if you get an error,  then **read the debug messages**.   Check the docs, check that you have followed the above steps to the letter, and try again.  Try posting the output into the [[Network RADIUS Debug colorizer|http://networkradius.com/freeradius.html]], it will group the debug output into request/reply sections, and will colorize portions of text that *you should pay attention to*.  While many of the debug messages can be ignore (they are for more in-depth debugging), a number of them contain **detailed descriptions** of what is going on.  Read them, and follow the instructions.
-
-If you need to edit [[configuration files]], read them carefully and edit them as little as possible. See ``man radiusd`` for a guide.  Start with [[radiusd.conf]].
-
 Sometimes people want to change default port to run on 1645, the old RADIUS port (the new one is 1812), if replacing a legacy RADIUS server. Other than that, it's possible that the [[EAP Module|rlm_eap]]  initial setup will fail.
 
 Simple test
@@ -87,8 +80,8 @@ If you made changes to the default configuration, odds are that one or more of t
 
 The next step is to add more users, and/or to configure directories and databases.
 
-Troubleshooting test failures
----------------------------------
+Troubleshooting
+-------------------
 
 If you don't get an Access-Accept, go back and check everything.
 
@@ -97,6 +90,10 @@ If you don't get an Access-Accept, go back and check everything.
 See also the [[Troubleshooting]] guide.
 
 For configuring EAP, see the external [[EAP Howto|http://deployingradius.com/documents/configuration/eap.html]].  It offers a step-by-step guide which is *guaranteed* to work.
+
+The initial setup is usually sufficient, but if you get an error,  then **read the debug messages**.   Check the docs, check that you have followed the above steps to the letter, and try again.  Try posting the output into the [[Network RADIUS Debug colorizer|http://networkradius.com/freeradius.html]], it will group the debug output into request/reply sections, and will colorize portions of text that *you should pay attention to*.  While many of the debug messages can be ignore (they are for more in-depth debugging), a number of them contain **detailed descriptions** of what is going on.  Read them, and follow the instructions.
+
+If you need to edit [[configuration files]], read them carefully and edit them as little as possible. See ``man radiusd`` for a guide.  Start with [[radiusd.conf]].
 
 More testing
 ---------------
