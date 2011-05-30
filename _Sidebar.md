@@ -8,4 +8,4 @@
 * [Main web site](http://freeradius.org)
 * [Browse the Source](https://github.com/alandekok/freeradius-server)
 
-Remember, always run 'radiusd -X' for debugging!
+Remember, always use `radiusd -X` when debugging problems!
