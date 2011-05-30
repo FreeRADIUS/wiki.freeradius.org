@@ -51,8 +51,8 @@ Where ``testing`` is the user name configured above, and ``password`` is the pas
 You should see output like::
 
       Sending Access-Request of id 226 to 127.0.0.1:1812
-            User-Name = 'fred'
-            User-Password = '\304\2323\326B\017\376\322?K\332\350Z;}'
+            User-Name = 'testing'
+            User-Password = 'password'
             NAS-IP-Address = radius.domain.com
             NAS-Port = 10
   
