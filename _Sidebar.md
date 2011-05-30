@@ -1,6 +1,6 @@
 ## Quick Links
 * [Installation](Installation)
- * [Package Install](Packages)
+ * [Pre-built packages](Packages)
  * [Source Code Install](Build)
 * [Basic Configuration](Basic configuration Howto)
 * [Troubleshooting](Troubleshooting)
