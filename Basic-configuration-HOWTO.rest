@@ -5,8 +5,8 @@ Always start with the "default" configuration.  It will work everywhere, and do 
 
 Making a lot of changes to the configuration files is the best way to break the server.  Don't do that.
 
-Defining a Client IP
-----------------------
+Define a Client IP
+--------------------
 
 For initial testing from localhost with [[radtest]], the server comes with a default definition for ``127.0.0.1`` and ``::1``
 
