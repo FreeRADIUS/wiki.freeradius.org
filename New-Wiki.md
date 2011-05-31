@@ -2,13 +2,13 @@ One of the largest complaints with FreeRADIUS is the lack of comprehensive docum
 
 The previous wiki  has served its purpose, but has ultimately failed to provide an up-to-date, well organised source of documentation.
 
-The current major problems with the wiki are:
+The major problems with the previous wiki were:
 
 * spam users - which meant we had to lock registration, and discouraged new users from contributing
-* exporting information - all pages are stored in an sql lite instance, which makes it hard to automatically roll pages into releases
-* formatting information - Information stored in the wiki is in the Media wiki format, whereas the documentation bundled with FreeRADIUS is either unformatted or in rst format.
+* exporting information - all pages are stored in an sql lite instance, which made it hard to automatically roll pages into releases
+* formatting information - Information stored in the wiki was/is in the Media wiki format, whereas the documentation bundled with FreeRADIUS is either unformatted or in rst format.
 
-To try and solve these issues and glue everything together a bit more, we've been working to set up a new wiki based on Gollum. Gollum is a ruby on rails application which exposes a git repository as wiki site. Gollum can render files in many markup languages including plaintext, RST and Mediawiki format, which means we can import all current server documentation, all current wiki documentation and have them neatly presented in a single wiki site. Neat huh?
+To try and solve these issues and glue everything together a bit more, we setup this new wiki based on Gollum. Gollum is a ruby on rails application which exposes a git repository as wiki site. Gollum can render files in many markup languages including plaintext, RST and Mediawiki format, which means we can import all current server documentation, all current wiki documentation and have them neatly presented in a single wiki site. Neat huh?
 
 But what about spam and registration? Well by default gollum doesn't authenticate anyone. But because it's a rails application we can drop in a library called 'OmniAuth' which uses Oauth to authenticate a bunch of providers.
 
