@@ -282,3 +282,54 @@ Note that the following configuration will NOT work::
 
 In this example, client "two" is hidden inside of the virtual
 server, where the "listen" section cannot find it.
+
+Outlined examples
+^^^^^^^^^^^^^^^^^
+
+  This section outlines a number of examples, with alternatives.
+
+  One server, multiple sockets
+	- multiple "listen" sections in a "server" section
+
+  one server per client
+	- define multiple servers
+	- have a global "listen" section
+	- have multiple global "clients", each with "virtual_server = X"
+
+  two servers, each with their own sockets
+	- define multiple servers
+	- put "client" sections into each "server"
+	- put a "listen" section into each "server"
+
+	Each server can list the same client IP, and the secret
+	can be different
+
+  two sockets, sharing a list of clients, but pointing to different servers
+	- define global "listen" sections
+	- in each, set "virtual_server = X"
+	- in each, set "clients = Y"
+	- define "clients Y" section, containing multiple clients.
+
+	This also means that you can have a third socket, which
+	doesn't share any of these clients.
+
+
+How to decide what to do
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+If you want *completely* separate policies for a socket or a client,
+then create a separate virtual server.  Then, map the request to that
+server by setting configuration entries in a "listen" section or in a
+"client" section.
+
+Start off with the common cases first.  If most of the clients
+and/or sockets get a particular policy, make that policy the default.
+Configure it without paying attention to the sockets or clients you
+want to add later, and without adding a second virtual server.  Once
+it works, then add the second virtual server.
+
+If you want to re-use the previously defined sockets with the second
+virtual server, then you will need one or more global "client"
+sections.  Those clients will contain a "virtual_server = ..." entry
+that will direct requests from those clients to the appropriate
+virtual server.
