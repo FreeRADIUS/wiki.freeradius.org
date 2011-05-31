@@ -1,4 +1,3 @@
-
 Virtual Servers
 ===============
 
@@ -76,3 +75,45 @@ mode (``radiusd -X``), and in another terminal window, type::
   $ radtest bob bob localhost:2000 0 testing123
 
 You should see the server return an Access-Accept.
+
+Capabilities and limitations
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+The only sub-sections that can appear in a virtual server section
+are::
+
+  	listen
+  	client
+  	authorize
+  	authenticate
+  	post-auth
+  	pre-proxy
+  	post-proxy
+  	preacct
+  	accounting
+  	session
+
+All other configuration parameters (modules, etc.) are global.
+
+Inside of a virtual server, the authorize, etc. sections have their
+normal meaning, and can contain anything that an authorize section
+could contain in 1.x.
+
+When a "listen" section is inside of a virtual server definition, it
+means that all requests sent to that IP/port will be processed through
+the virtual server.  There cannot be two "listen" sections with the
+same IP address and port number.
+
+When a "client" section is inside of a virtual server definition, it
+means that that client is known only to the "listen" sections that are
+also inside of that virtual server.  Not only is this client
+definition available only to this virtual server, but the details of
+the client configuration is also available only to this virtual
+server.
+
+i.e. Two virtual servers can listen on different IP address and
+ports, but both can have a client with IP address 127.0.0.1.  The
+shared secret for that client can be different for each virtual
+server.
+
