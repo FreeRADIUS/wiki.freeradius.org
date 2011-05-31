@@ -1,6 +1,6 @@
 ==radeapclient==
 
-The FreeRADIUS servers ships with an "radeapclient" that can do EAP-MD5 (passwords), as well as EAP-SIM.
+FreeRADIUS servers ships with an "radeapclient" that can do EAP-MD5 (passwords), as well as EAP-SIM.
 
 {{Default in the server source|src/modules/rlm_eap/}}
 
