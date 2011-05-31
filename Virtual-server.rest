@@ -1,45 +1,36 @@
 Virtual Servers
 ===============
-| FreeRADIUS 2.0 supports virtual servers.  This is probably the single largest change that is NOT backwards compatible with 1.x.
-| 
-| The virtual servers do NOT have to be set up with the "sites-available" and "sites-enabled" directories.  You can still have one "radiusd.conf" file and put the server configuration there:
+FreeRADIUS 2.0 supports virtual servers.  This is probably the single largest change that is NOT backwards compatible with 1.x.
+
+The virtual servers do NOT have to be set up with the "sites-available" and "sites-enabled" directories.  You can still have one "radiusd.conf" file and put the server configuration there::
  
  	...
-
  	server {
-
  		authorize {
-
  			...
-
  		}
-
+  
  		authenticate {
-
  			...
-
  		}
-
  		...
-
  	}
-
  	...
  
 | The power of virtual servers lies in their ability to separate policies.  A policy can be placed into a virtual server, where it is guaranteed to affect only the requests that are passed through that virtual server.  In 1.x, the policies were global, and it sometimes took much effort to write a policy so that it only applied in certain limited situations.
 
 What do we mean by "virtual server"?
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-| A virtual server is a (nearly complete) RADIUS server, just like a configuration for FreeRADIUS 1.x.  However, FreeRADIUS can now run multiple virtual servers at the same time.  The virtual servers can even proxy requests to each other!
-| 
-| The simplest way to create a virtual server is to take the all of the request processing sections from radius.conf, ("authorize", "authenticate", etc.) and wrap them in a "server {}" block, as above.
-| 
-| You can create another virtual server by:
+A virtual server is a (nearly complete) RADIUS server, just like a configuration for FreeRADIUS 1.x.  However, FreeRADIUS can now run multiple virtual servers at the same time.  The virtual servers can even proxy requests to each other!
 
-	1) defining a new "server foo {...}" section in radiusd.conf
-	2) Putting the normal "authorize", etc. sections inside of it
-	3) Adding a "listen" section *inside* of the "server" section.
+The simplest way to create a virtual server is to take the all of the request processing sections from radius.conf, ("authorize", "authenticate", etc.) and wrap them in a "server {}" block, as above.
+
+You can create another virtual server by
+
+1. defining a new "server foo {...}" section in radiusd.conf
+2. Putting the normal "authorize", etc. sections inside of it
+3. Adding a "listen" section *inside* of the "server" section.
 
 | e.g.
 
