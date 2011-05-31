@@ -1,3 +1,5 @@
+Sites configuration
+==============
 The FreeRADIUS 2.0.x+ `virtual hosts <http://wiki.freeradius.org/Virtual-server>`_ have configuration put in the sites-available/ subdirectory of the main configuration directory. One file is used per site.
 
 The files from sites-available/ are then symbolically linked (symlinked) from the sites-enabled/ directory. That way the administrator can separate the active sites from the inactive ones.
@@ -635,5 +637,7 @@ This is the default sites configuration file::
   #	}
   }
 
+See Also
+--------
 * Virtual-Server_
 .. _Virtual-Server: http://wiki.freeradius.org/Virtual-server
