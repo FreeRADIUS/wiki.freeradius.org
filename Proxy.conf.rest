@@ -1,3 +1,5 @@
+Proxy.conf
+========
 ::
 
   ##
@@ -799,5 +801,10 @@
   #realm "~.*\\.example\\.net$" {
   #}
 
-* [[Configuration files]]
-* [[Proxy]]ing
+See Also
+--------
+`Configuration files
+<http://wiki.freeradius.org/Configuration-files>`_
+
+`Proxying
+<http://wiki.freeradius.org/Proxy>`_
