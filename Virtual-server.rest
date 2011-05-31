@@ -171,3 +171,25 @@ servers.
 		client.  It will NOT use both clients.
 
 
+More complex "client" capabilities
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The "client" sections have a few additional configuration items that
+were not in 1.x, and were not mentioned above.  These configuration
+items enable almost any mapping of IP / port to clients to virtual
+servers.
+
+The configuration items are:
+
+	virtual_server = <name>
+
+		If set, all requests from this client are processed
+		through the named virtual server.
+
+		This directive can be used only for "client" sections
+		that are global.  i.e. It CANNOT be used if the
+		"client" section is inside of a virtual server.
+
+If the "listen" section has a "server" entry, and a matching
+client is found ALSO with a "server" entry, then the clients server is
+used for that request.
