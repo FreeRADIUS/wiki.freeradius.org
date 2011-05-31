@@ -1,3 +1,6 @@
+Radiusd.conf
+==========
+
 ::
   
   ##
@@ -779,4 +782,7 @@
   #
   ######################################################################
 
-* [[Configuration files]]
+See Also
+--------
+`Configuration files
+<http://wiki.freeradius.org/Configuration-files>`_
