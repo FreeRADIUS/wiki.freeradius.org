@@ -193,3 +193,92 @@ The configuration items are:
 If the "listen" section has a "server" entry, and a matching
 client is found ALSO with a "server" entry, then the clients server is
 used for that request.
+
+Worked examples
+^^^^^^^^^^^^^^^
+
+Listening on one socket, and mapping requests from two clients to
+two different servers::
+
+  	listen {
+  		...
+  	}
+  	client one {
+  		...
+  		virtual_server = server_one
+  	}
+  	client two {
+  		...
+  		virtual_server = server_two
+  	}
+  	server server_one {
+  		authorize {
+  			...
+  		}
+  		...
+  	}
+  	server server_two {
+  		authorize {
+  			...
+  		}
+  		...
+  	}
+
+This could also be done as::
+
+  	listen {
+  		...
+  		virtual_server = server_one
+  	}
+  	client one {
+  		...
+  	}
+  	client two {
+  		...
+  		virtual_server = server_two
+  	}
+  	server server_one {
+  		authorize {
+  			...
+  		}
+  		...
+  	}
+  	server server_two {
+  		authorize {
+  			...
+  		}
+  		...
+  	}
+
+In this case, the default server for the socket is "server_one", so
+there is no need to set that in the client "one" configuration.  The
+"server_two" configuration for client "two" over-rides the default
+setting for the socket.
+
+Note that the following configuration will NOT work::
+
+  	listen {
+  		...
+  		virtual_server = server_one
+  	}
+  	client one {
+  		...
+  	}
+  	server server_one {
+  		authorize {
+  			...
+  		}
+  		...
+  	}
+  	server server_two {
+  		client two {
+  			...
+  		}
+  		authorize {
+  			...
+  		}
+  		...
+  	}
+
+In this example, client "two" is hidden inside of the virtual
+server, where the "listen" section cannot find it.
