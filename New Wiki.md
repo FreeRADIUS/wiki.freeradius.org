@@ -47,7 +47,7 @@ Also please report any bugs here:
 * http://wiki.freeradius.org/Attrs
 
 ### Pages to convert to RST
-* http://wiki.freeradius.org/Modules2
+* http://wiki.freeradius.org/Modules2 - completed (JC).
 
 ## Todo
 * Add google as omniauth provider - Arran CB
