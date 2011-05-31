@@ -4,7 +4,7 @@ The files from sites-available/ are then symbolically linked (symlinked) from th
 
 This is then $INCLUDE'd from [[radiusd.conf]].
 
-This is the default site configuration file::
+This is the default sites configuration file::
 
   ######################################################################
   #
@@ -634,3 +634,5 @@ This is the default site configuration file::
   #	}
   }
 
+* Virtual-Server_
+.. _Virtual-Server: http://wiki.freeradius.org/Virtual-server
