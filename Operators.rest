@@ -1,4 +1,3 @@
-
 Operators
 =========
 
@@ -57,19 +56,19 @@ The following is a list of operators, and their meaning.
 EXAMPLES
 --------
 
-  bob  Cleartext-Password := "hello"
+    bob  Cleartext-Password := "hello"
 
 Requests containing the User-Name attribute, with value "bob", will be authenticated using the password "hello".  There are no reply items, so the reply will be empty.
 
-  DEFAULT  Auth-Type = System
-    Fall-Through = Yes
+    DEFAULT  Auth-Type = System
+      Fall-Through = Yes
 
 For all users reaching this entry, perform authentication against the system, unless Auth-Type has already been set.  Also, process any following entries which may match.
 
-  DEFAULT  Service-Type == Framed-User, Framed-Protocol == PPP
-    Service-Type = Framed-User,
-    Framed-Protocol = PPP,
-    Fall-Through = Yes
+    DEFAULT  Service-Type == Framed-User, Framed-Protocol == PPP
+      Service-Type = Framed-User,
+      Framed-Protocol = PPP,
+      Fall-Through = Yes
 
 If the request packet contains the attributes Service-Type and Framed-Protocol, with the given values, then include those attributes in the reply.
 
