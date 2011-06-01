@@ -77,17 +77,17 @@ Yes - there are several ways to accomplish this.
 
 * The deprecated old way is to specify an IP address with the `_-i {IP}` command-line option.
 * The better way is to use the `listen` directive in [[radiusd.conf]].
-	    listen {
-		    ipaddr = 192.168.1.250
-		    port = 1817
-		    type = auth
-	    }
+        listen {
+            ipaddr = 192.168.1.250
+            port = 1817
+            type = auth
+        }
 
 You may specify multiple `listen` directives.
 
 * The third way
-	    bind_address = 192.168.1.250
-	    port = 1817
+        bind_address = 192.168.1.250
+        port = 1817
 
 **Note!**
 
