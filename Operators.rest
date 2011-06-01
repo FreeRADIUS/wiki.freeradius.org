@@ -8,48 +8,48 @@ The following is a list of operators, and their meaning.
 +----------+-------------------------+------------------------------------------------------------------------+------------------------------------------------------------------------+
 | Operator |         Example         |  Use with 'check' items                                                |  Use with 'reply' items                                                |
 +==========+=========================+========================================================================+========================================================================+
-| =        | Attribute = Value       | Not allowed as a check item for RADIUS protocol attributes.            | As a reply item, it means "add the item to the reply list, but only    |
+| **=**    | Attribute = Value       | Not allowed as a check item for RADIUS protocol attributes.            | As a reply item, it means "add the item to the reply list, but only    |
 |          |                         | It is allowed for server configuration attributes (Auth-Type, etc),    | if there is no other item of the same attribute."                      |
 |          |                         | and sets the value of on attribute, only if there is no other item of  |                                                                        |
 |          |                         | the same attribute.                                                    |                                                                        |
 +----------+-------------------------+------------------------------------------------------------------------+------------------------------------------------------------------------+
-| :=       | Attribute := value      | Always matches as a check item, and replaces in the configuration      | As a reply item, it has an identical meaning, but for the reply items, |
+| **:=**   | Attribute := value      | Always matches as a check item, and replaces in the configuration      | As a reply item, it has an identical meaning, but for the reply items, |
 |          |                         | items any attribute of the same name.                                  | instead of the request items.                                          |
 |          |                         | If no attribute of that name appears in the request, then this         |                                                                        |                                                       
 |          |                         | attribute is added.                                                    |                                                                        |
 +----------+-------------------------+------------------------------------------------------------------------+------------------------------------------------------------------------+
-| ==       | Attribute == Value      | As a check item, it matches if the named attribute is present in the   | Not allowed as a reply item.                                           |
+| **==**   | Attribute == Value      | As a check item, it matches if the named attribute is present in the   | Not allowed as a reply item.                                           |
 |          |                         | request, AND has the given value.                                      |                                                                        |
 +----------+-------------------------+------------------------------------------------------------------------+------------------------------------------------------------------------+
-| +=       | Attribute += Value      | Always matches as a check item, and adds the current attribute with    | As a reply item, it has an identical meaning, but the attribute is     |
+| **+=**   | Attribute += Value      | Always matches as a check item, and adds the current attribute with    | As a reply item, it has an identical meaning, but the attribute is     |
 |          |                         | value to the list of configuration items.                              | added to the reply items.                                              |
 +----------+-------------------------+------------------------------------------------------------------------+------------------------------------------------------------------------+
-| !=       | Attribute != Value      | As a check item, matches if the given attribute is in the request, AND | Not allowed as a reply item.                                           |
+| **!=**   | Attribute != Value      | As a check item, matches if the given attribute is in the request, AND | Not allowed as a reply item.                                           |
 |          |                         | does not have the given value.                                         |                                                                        |
 +----------+-------------------------+------------------------------------------------------------------------+------------------------------------------------------------------------+
-| >        | Attribute > Value       | As a check item, it matches if the request contains an attribute with  | Not allowed as a reply item.                                           |
+| **>**    | Attribute > Value       | As a check item, it matches if the request contains an attribute with  | Not allowed as a reply item.                                           |
 |          |                         | a value greater than the one given.                                    |                                                                        |
 +----------+-------------------------+------------------------------------------------------------------------+------------------------------------------------------------------------+
-| >=       | Attribute >= Value      | As a check item, it matches if the request contains an attribute with  | Not allowed as a reply item.                                           |
+| **>=**   | Attribute >= Value      | As a check item, it matches if the request contains an attribute with  | Not allowed as a reply item.                                           |
 |          |                         | a value greater than, or equal to the one given.                       |                                                                        |
 +----------+-------------------------+------------------------------------------------------------------------+------------------------------------------------------------------------+
-| <        | Attribute < Value       | As a check item, it matches if the request contains an attribute with  | Not allowed as a reply item.                                           |
+| **<**    | Attribute < Value       | As a check item, it matches if the request contains an attribute with  | Not allowed as a reply item.                                           |
 |          |                         | a value less than the one given.                                       |                                                                        |
 +----------+-------------------------+------------------------------------------------------------------------+------------------------------------------------------------------------+
-| <=       | Attribute <= Value      | As a check item, it matches if the request contains an attribute with  | Not allowed as a reply item.                                           |
+| **<=**   | Attribute <= Value      | As a check item, it matches if the request contains an attribute with  | Not allowed as a reply item.                                           |
 |          |                         | a value less than, or equal to the one given.                          |                                                                        |
 +----------+-------------------------+------------------------------------------------------------------------+------------------------------------------------------------------------+
-| =~       | Attribute =~ Expression | As a check item, it matches if the request contains an attribute which | Not allowed as a reply item.                                           |
+| **=~**   | Attribute =~ Expression | As a check item, it matches if the request contains an attribute which | Not allowed as a reply item.                                           |
 |          |                         | matches the given regular expression.  This operator may only be       |                                                                        |
 |          |                         | applied to string attributes.                                          |                                                                        |
 +----------+-------------------------+------------------------------------------------------------------------+------------------------------------------------------------------------+
-| !~       | Attribute !~ Expression | As a check item, it matches if the request contains an attribute which | Not allowed as a reply item.                                           |
+| **!~**   | Attribute !~ Expression | As a check item, it matches if the request contains an attribute which | Not allowed as a reply item.                                           |
 |          |                         | does not match the given regular expression.                           |                                                                        |
 +----------+-------------------------+------------------------------------------------------------------------+------------------------------------------------------------------------+
-| =*       | Attribute =* Value      | As a check item, it matches if the request contains the named          | Not allowed as a reply item.                                           |
+| **=***   | Attribute =* Value      | As a check item, it matches if the request contains the named          | Not allowed as a reply item.                                           |
 |          |                         | attribute, no matter what the value is.                                |                                                                        |
 +----------+-------------------------+------------------------------------------------------------------------+------------------------------------------------------------------------+
-| !*       | Attribute !* Value      | As a check item, it matches if the request does not contain the named  | Not allowed as a reply item.                                           |
+| **!***   | Attribute !* Value      | As a check item, it matches if the request does not contain the named  | Not allowed as a reply item.                                           |
 |          |                         | attribute, no matter what the value is.                                |                                                                        |    
 +----------+-------------------------+------------------------------------------------------------------------+------------------------------------------------------------------------+
 
