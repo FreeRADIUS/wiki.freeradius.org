@@ -1,4 +1,5 @@
- ###########################################################################
+<pre> 
+###########################################################################
  #  db_mysql.sql                     rlm_sql - FreeRADIUS SQL Module       #
  #                                                                         #
  #     Database schema for MySQL rlm_sql module                            #
@@ -162,3 +163,4 @@
    PRIMARY KEY (id),
    KEY nasname (nasname)
  );
+</pre>
