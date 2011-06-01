@@ -198,3 +198,8 @@ Policy.conf
   		}
   	}
   }
+
+See Also
+--------
+`Configuration files
+<http://wiki.freeradius.org/Configuration-files>`_
