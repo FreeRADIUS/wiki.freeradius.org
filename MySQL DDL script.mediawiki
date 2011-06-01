@@ -1,5 +1,3 @@
-{{Default in the server source|raddb/sql/mysql/schema.sql}}
-
  ###########################################################################
  #  db_mysql.sql                     rlm_sql - FreeRADIUS SQL Module       #
  #                                                                         #
