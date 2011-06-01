@@ -48,6 +48,8 @@ Also please report any bugs here:
 
 ### Pages to convert to RST
 * http://wiki.freeradius.org/Modules2 - completed (JC).
+* http://wiki.freeradius.org/Operators - ACB 01/06/11
+* http://wiki.freeradius.org/FreeRADIUS Active Directory Integration HOWTO
 
 ## Todo
 * Fix external links - Arran CB - Done 31/05/11 (see here https://github.com/github/gollum/pull/166)
