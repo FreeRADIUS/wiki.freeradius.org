@@ -172,7 +172,7 @@ Creating Debug Entries
 ----------------------
 FreeRADIUS has a very helpful debug capability.  You can certainly use trace commands like ktrace, strace, or truss.  However, those are limited in what the show you about how your module is working.  It is much easier to add debug statements into your module.  If your FreeRADIUS is compiled with enable-debug then you can start it with::
 
-  /.../FreeRADIUS -X
+  radiusd -X
 
 and it will generate lots of debug entries on the console to show you what it is doing.  To add debug information to your modules you can use the following command::
 
