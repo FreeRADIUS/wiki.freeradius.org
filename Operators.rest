@@ -6,7 +6,7 @@ Additional operators other than = may be used for the attributes in either the c
 The following is a list of operators, and their meaning.
 
 +----------+-------------------------+------------------------------------------------------------------------+------------------------------------------------------------------------+
-| Operator |         Example         |  Use with 'check' items                                                |  Use with 'reply' items                                                |
+| Operator |         Example         |  Use with 'check' items (users et al), or in unlang conditions         |  Use with 'reply' items (users et al), or in unlang update blocks      |
 +==========+=========================+========================================================================+========================================================================+
 | **=**    | Attribute = Value       | Not allowed as a check item for RADIUS protocol attributes.            | As a reply item, it means "add the item to the reply list, but only    |
 |          |                         | It is allowed for server configuration attributes (Auth-Type, etc),    | if there is no other item of the same attribute."                      |
