@@ -50,6 +50,7 @@ Also please report any bugs here:
 * http://wiki.freeradius.org/Modules2 - completed (JC).
 
 ## Todo
+* Fix external links - Arran CB - Done 31/05/11 (see here https://github.com/github/gollum/pull/166)
 * Add google as omniauth provider - Arran CB
 * Implement proper fix for page creation - Arran CB
 * Fix TOC for markdown pages - Arran CB
