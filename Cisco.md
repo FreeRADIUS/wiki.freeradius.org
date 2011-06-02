@@ -122,7 +122,7 @@ IOS has a feature called the password-encryption service.
     service password-encryption
     no service password-encryption 
 
-From the [Cisco Guide to Harden Cisco IOS Devices](http://www.cisco.com/en/US/tech/tk648/tk361/technologies_tech_note09186a0080120f48.shtml#plane)
+From the ["Cisco Guide to Harden Cisco IOS Devices"](http://www.cisco.com/en/US/tech/tk648/tk361/technologies_tech_note09186a0080120f48.shtml#plane).
 
 The actual encryption process occurs when the current configuration is written or when a password is configured. Password encryption is applied to all passwords, including username passwords, authentication key passwords, the privileged command password, console and virtual terminal line access passwords, and Border Gateway Protocol neighbor passwords. This command is primarily useful for keeping unauthorized individuals from viewing your password in your configuration file.
 
@@ -137,7 +137,7 @@ Remember if your using password encryption, you '''cannot''' paste the encrypted
     aaa accounting nested
 
 results in sending a second accounting start message, possibly causing problems with total usage counters.  Cisco NAS devices issue an Accounting Start packet when the user is authenticated, and again when a PPP session is initiated.  They send an Accounting Stop packet at the end of the PPP session, and a second at the conclusion of the call (usually nearly simultaneously).  Because of this, programs such as RadiusReport may see this as two connections, and would account for approximately twice the total time used.  Not using this nested command causes the NAS device to send an Accounting Stop packet followed almost immediately by an Accounting Start packet when a PPP connection is chosen, thereby eliminating the overlap.  This is particularly useful for those organizations interested in monitoring user usage accurately.
-More information about this process can be seen here:  [[http://www.cisco.com/en/US/products/sw/iosswrel/ps1834/products_feature_guide09186a00800801bc.html]]
+More information about this process can be seen [here](http://www.cisco.com/en/US/docs/ios/12_1/security/command/reference/srdacct.html#wp1022328).
 
 ## Unique Acct-Session-Id's
 
@@ -215,5 +215,5 @@ According to [some reports](https://list.xs4all.nl/pipermail/freeradius-users/20
 * [[HP]]
 * [[Linksys]]
 * [[VSA|Vendor-Specific Attributes]]
-* [Cisco's RADIUS VSA Voice Implementation Guide](http://www.cisco.com/univercd/cc/td/doc/product/access/acs_serv/vapp_dev/vsaig3.htm)
+* [Cisco's Configuring AAA for Cisco Voice Gateways](http://www.cisco.com/en/US/docs/ios/voice/aaa/configuration/guide/va_aaa_overview_ps10591_TSD_Products_Configuration_Guide_Chapter.html)
 * [Cisco's Configuring RADIUS with Livingston Server](http://www.cisco.com/en/US/tech/tk59/technologies_tech_note09186a008009467e.shtml)
