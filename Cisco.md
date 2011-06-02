@@ -122,7 +122,7 @@ IOS has a feature called the password-encryption service.
     service password-encryption
     no service password-encryption 
 
-From the Cisco Command reference: [[http://www.cisco.com/en/US/products/sw/iosswrel/ps5207/products_command_reference_chapter09186a00801a7fa1.html#wp1204790]]
+From the [Cisco Guide to Harden Cisco IOS Devices](http://www.cisco.com/en/US/tech/tk648/tk361/technologies_tech_note09186a0080120f48.shtml#plane)
 
 The actual encryption process occurs when the current configuration is written or when a password is configured. Password encryption is applied to all passwords, including username passwords, authentication key passwords, the privileged command password, console and virtual terminal line access passwords, and Border Gateway Protocol neighbor passwords. This command is primarily useful for keeping unauthorized individuals from viewing your password in your configuration file.
 
