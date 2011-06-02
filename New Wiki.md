@@ -44,10 +44,10 @@ Also please report any bugs here:
 * http://wiki.freeradius.org/Cisco
 * http://wiki.freeradius.org/PopTop
 * http://wiki.freeradius.org/Attribute%20support%20by%20processing%20list
-* http://wiki.freeradius.org/Attrs
+* http://wiki.freeradius.org/Attrs - JC 01/06/11
 
 ### Pages to convert to RST
-* http://wiki.freeradius.org/Modules2 - completed (JC).
+* http://wiki.freeradius.org/Modules2 - JC 31/05/11
 * http://wiki.freeradius.org/Operators - ACB 01/06/11
 * http://wiki.freeradius.org/FreeRADIUS Active Directory Integration HOWTO
 
