@@ -41,7 +41,7 @@ Also please report any bugs here:
 * http://wiki.freeradius.org/Build - ACB 29/05/11
 * http://wiki.freeradius.org/Modules1
 * http://wiki.freeradius.org/RADIUS-Clients
-* http://wiki.freeradius.org/Cisco
+* http://wiki.freeradius.org/Cisco - JC 01/06/11
 * http://wiki.freeradius.org/PopTop
 * http://wiki.freeradius.org/Attribute%20support%20by%20processing%20list
 * http://wiki.freeradius.org/Attrs - JC 01/06/11
