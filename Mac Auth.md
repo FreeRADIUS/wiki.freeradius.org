@@ -29,7 +29,7 @@ rewrite_calling_station_id {
 }
 </pre>
 
-#### raddb/modules/file
+### raddb/modules/file
 
 <pre>
 files authorized_macs {
@@ -48,14 +48,14 @@ files authorized_macs {
 }
 </pre>
 
-#### raddb/authorized_macs
+### raddb/authorized_macs
 
 <pre>
 00-11-22-33-44-55
   Reply-Message = "Device with MAC Address %{Calling-Station-Id} authorized for network access"
 </pre>
 
-#### raddb/sites-available/default
+### raddb/sites-available/default
 
 <pre>
 authorize {
@@ -78,26 +78,26 @@ authorize {
 }
 </pre>
 
-### Example 2 - macauth or 802.1x
+## Mac-Auth or 802.1x
 
 This example shows how to mix 802.1x and macauth. The example does the following:
 
  1. If not using 802.1x, mac address must be known
  2. If using 802.1x, anyone with valid credentials can login (no mac address restrictions)
 
-#### raddb/policy.conf
+### raddb/policy.conf
 
 As per example 1
 
-#### raddb/modules/file
+### raddb/modules/file
 
 As per example 1 
 
-#### raddb/authorized_macs
+### raddb/authorized_macs
 
 As per example 1
 
-#### raddb/sites-available/default
+### raddb/sites-available/default
 
 <pre>
 authorize {
@@ -127,26 +127,26 @@ authorize {
 }
 </pre>
 
-### Example 3 - macauth and 802.1x 
+## Mac-Auth and 802.1x 
 
 This example shows how to perform both 802.1x and macauth. The example does the following:
 
  1. If not using 802.1x, mac address must be known
  2. If using 802.1x, mac address must be known and valid credential given
 
-#### raddb/policy.conf
+### raddb/policy.conf
 
 As per example 1
 
-#### raddb/modules/file
+### raddb/modules/file
 
 As per example 1 
 
-#### raddb/authorized_macs
+### raddb/authorized_macs
 
 As per example 1
 
-#### raddb/sites-available/default
+### raddb/sites-available/default
 
 <pre>
 authorize {
@@ -174,90 +174,90 @@ authorize {
 }
 </pre>
 
-### Example 4 - paranoid (checking the contents of the chap password attribute)
+## Older examples
+
+N.B. these examples pre-date the material above. I don't understand why they're written like this, and I think some of it might be specific to the HP implementation of Mac-Auth?
 
 The examples below are a very rough example of how to perform MAC Based authentication with FreeRADIUS. You may need to add extra conditions to the authorize section, and perform additional canonicalization of the Calling-Station-ID and User-Name attributes, to make it work for your particular NAS.
 
-#### raddb/policy.conf
+### raddb/policy.conf
 
 As per example 1
 
-#### raddb/modules/file
+### raddb/modules/file
 
 As per example 1 
 
-#### raddb/authorized_macs
+### raddb/authorized_macs
 
 As per example 1
 
-#### raddb/sites-available/default authorize{}
+### raddb/sites-available/default
 
 <pre>
-#
-# (Optional) May help if your NAS doesn't let you specify separators for the User-Name value
-#
+authorize {
+    #
+    # (Optional) May help if your NAS doesn't let you specify separators for the User-Name value
+    #
 
-#rewrite_calling_station_id
+    #rewrite_calling_station_id
 
-#
-# The EAP module should be listed before the Mac-Auth section if concurrent 802.1X/MAC authentication
-# (Mac-Auth bypass etc...) is being used.
-#
-eap
+    #
+    # The EAP module should be listed before the Mac-Auth section if concurrent 802.1X/MAC authentication
+    # (Mac-Auth bypass etc...) is being used.
+    #
+    eap
 
-#
-# Machine (Calling-Station-ID based) authentication
-#
-# RFC 2865 says that a Service-Type value of Call Check is used
-# to specify this kind of authentication (though were now dealing with ethernet ports instead of lines).
-#
-if((Service-Type == 'Call-Check') || (User-Name =~ /^%{Calling-Station-ID}$/i)){
+    #
+    # Machine (Calling-Station-ID based) authentication
+    #
+    # RFC 2865 says that a Service-Type value of Call Check is used
+    # to specify this kind of authentication (though were now dealing with ethernet ports instead of lines).
+    #
+    if((Service-Type == 'Call-Check') || (User-Name =~ /^%{Calling-Station-ID}$/i)){
         update control {
                 Auth-Type = 'CSID'
         }
+    }
+
+    #
+    # If the CHAP module is called, it must be *after* the check for CSID authentication
+    #
+    # chap
 }
 
-#
-# If the CHAP module is called, it must be *after* the check for CSID authentication
-#
-# chap
-</pre>
-
-#### raddb/sites-available/default authenticate{}
-
-<pre>
-#
-# Authentication based on Calling-Station-ID
-#      
-# Calling-Station-ID authentication is usually done by comparing normalised
-# forms of the Calling-Station-ID and User-name fields.
-#
-Auth-Type CSID {
-        #
-        # Optionally a CHAP-Password attribute is included which is
-        # md5(ChapID + Calling-Station-ID + Request Authenticator).
-        #
-        if(Chap-Password){
-                update control {
+authenticate {
+    #
+    # Authentication based on Calling-Station-ID
+    #      
+    # Calling-Station-ID authentication is usually done by comparing normalised
+    # forms of the Calling-Station-ID and User-name fields.
+    #
+    Auth-Type CSID {
+            #
+            # Optionally a CHAP-Password attribute is included which is
+            # md5(ChapID + Calling-Station-ID + Request Authenticator).
+            #
+            if(Chap-Password){
+                    update control {
                         Cleartext-Password := "%{User-Name}"
-                }
-                chap
-        }
-        else{
+                    }
+                    chap
+            }
+            else {
                 ok  
-        }  
+            }  
+    }
 }
-</pre>
 
-#### raddb/sites-available/default post-auth{}
-
-<pre>
-if(control:Auth-Type == 'CSID'){
+post-auth {
+    if(control:Auth-Type == 'CSID'){
         # Authorization happens here
         authorized_macs.authorize
         if(!ok){
                 reject
         }
+    }
 }
 </pre>
 
