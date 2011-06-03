@@ -48,25 +48,29 @@ rewrite_calling_station_id {
 
 #### raddb/modules/file
 
-        files authorized_macs {
-                # The default key attribute to use for matches.  The content
-                # of this attribute is used to match the "name" of the
-                # entry.
-                key = "%{Calling-Station-ID}"
+<pre>
+files authorized_macs {
+        # The default key attribute to use for matches.  The content
+        # of this attribute is used to match the "name" of the
+        # entry.
+        key = "%{Calling-Station-ID}"
 
-                usersfile = ${confdir}/authorized_macs
+        usersfile = ${confdir}/authorized_macs
 
-                #  If you want to use the old Cistron 'users' file
-                #  with FreeRADIUS, you should change the next line
-                #  to 'compat = cistron'.  You can the copy your 'users'
-                #  file from Cistron.
-                compat = no
-        }
+        #  If you want to use the old Cistron 'users' file
+        #  with FreeRADIUS, you should change the next line
+        #  to 'compat = cistron'.  You can the copy your 'users'
+        #  file from Cistron.
+        compat = no
+}
+</pre>
 
 #### raddb/authorized_macs
 
-        00-11-22-33-44-55
-                Reply-Message = "Device with MAC Address %{Calling-Station-Id} authorized for network access"
+<pre>
+00-11-22-33-44-55
+  Reply-Message = "Device with MAC Address %{Calling-Station-Id} authorized for network access"
+</pre>
 
 #### raddb/sites-available/default
 
