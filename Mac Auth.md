@@ -1,10 +1,9 @@
-## Basic recipes
+## Contents
 
- * [Plain Mac-Auth][basic]
- * [Mac-Auth & 802.1x][dot1x]
- * 
+ * [Plain Mac-Auth](#plain)
+ * [Mac-Auth & 802.1x](#dot1x)
 
-[basic]: Plain Mac-Auth
+## Plain Mac-Auth {#plain}
 
 This example assumes the server is only performing macauth. It checks MAC addresses against a [[users]] style file
 
