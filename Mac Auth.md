@@ -4,7 +4,9 @@
  * [Mac-Auth & 802.1x][dot1x]
  * 
 
-[basic]: This example assumes the server is only performing macauth. It checks MAC addresses against a [users] style file
+[basic]:
+
+This example assumes the server is only performing macauth. It checks MAC addresses against a [users] style file
 
 #### raddb/policy.conf
 
