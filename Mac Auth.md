@@ -1,14 +1,8 @@
-## Contents
-
- * [Plain Mac-Auth](#plain)
- * [Mac-Auth & 802.1x](#dot1x)
-
 ## Plain Mac-Auth
-<a name=plain></a>
 
 This example assumes the server is only performing macauth. It checks MAC addresses against a [[users]] style file
 
-#### raddb/policy.conf
+### raddb/policy.conf
 
 NAS usually send the MAC address in the Calling-Station-ID attribute. There are several common formats:
 
