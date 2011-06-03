@@ -30,19 +30,21 @@ This example assumes the server is only performing macauth. It checks MAC addres
 
 You may (optionally) wish to rewrite the Calling-Station-ID attribute, to remove, or add, a standard set of separators between the octets of the Mac-Address.
 
-        #
-        # Rewrite called station id attribute into a standard format.
-        #
-        rewrite_calling_station_id {
-                if(request:Calling-Station-Id =~ /([0-9a-f]{2})[-:]?([0-9a-f]{2})[-:]?([0-9a-f]{2})[-:]?([0-9a-f]{2})[-:]?([0-9a-f]{2})[-:]?([0-9a-f]{2})/i){
-                        update request {
-                                Calling-Station-Id := "%{1}-%{2}-%{3}-%{4}-%{5}-%{6}"
-                        }
-                }
-                else {
-                        noop
+<pre>
+#
+# Rewrite called station id attribute into a standard format.
+#
+rewrite_calling_station_id {
+        if(request:Calling-Station-Id =~ /([0-9a-f]{2})[-:]?([0-9a-f]{2})[-:]?([0-9a-f]{2})[-:]?([0-9a-f]{2})[-:]?([0-9a-f]{2})[-:]?([0-9a-f]{2})/i){
+                update request {
+                        Calling-Station-Id := "%{1}-%{2}-%{3}-%{4}-%{5}-%{6}"
                 }
         }
+        else {
+                noop
+        }
+}
+</pre>
 
 #### raddb/modules/file
 
