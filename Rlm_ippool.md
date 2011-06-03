@@ -2,13 +2,10 @@ The '''rlm_ippool''' [[module]] helps manage [[IP Pool]]s.
 
 {{Default in the server source|src/modules/rlm_ippool}}
 
-__TOC__
-
-==Default configuration==
+## Default configuration
 
 {{Default in the server source|raddb/modules/ippool}}
 
-<pre>
 	#  Do server side ip pool management. Should be added in post-auth and
 	#  accounting sections.
 	#
@@ -62,10 +59,8 @@ __TOC__
 		# normally it should just be the nas  ip/port (which is the default)
 		#key = "%{NAS-IP-Address} %{NAS-Port}"
 	}
-</pre>
 
-==Custom configuration==
-
+## Custom configuration
 
         ippool main_pool {
                 range-start = 192.168.10.1
@@ -98,7 +93,7 @@ Override tells the server not to overwrite an existing entry - for instance if t
 
 At least one example of how to use the pools is located at [[ippool and radius clients]].
 
-==See Also==
+## See Also
 
 * [[Ippool and radius clients]]
 * [[rlm_ippool_tool]]
