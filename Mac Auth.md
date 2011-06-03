@@ -3,7 +3,7 @@
  * [Plain Mac-Auth](#plain)
  * [Mac-Auth & 802.1x](#dot1x)
 
-## Plain Mac-Auth {#plain}
+## Plain Mac-Auth {plain}
 
 This example assumes the server is only performing macauth. It checks MAC addresses against a [[users]] style file
 
