@@ -209,68 +209,74 @@ As per example 1
 
 #### raddb/sites-available/default authorize{}
 
-        #
-        # (Optional) May help if your NAS doesn't let you specify separators for the User-Name value
-        #
+<pre>
+#
+# (Optional) May help if your NAS doesn't let you specify separators for the User-Name value
+#
 
-        #rewrite_calling_station_id
+#rewrite_calling_station_id
 
-        #
-        # The EAP module should be listed before the Mac-Auth section if concurrent 802.1X/MAC authentication
-        # (Mac-Auth bypass etc...) is being used.
-        #
-        eap
+#
+# The EAP module should be listed before the Mac-Auth section if concurrent 802.1X/MAC authentication
+# (Mac-Auth bypass etc...) is being used.
+#
+eap
 
-        #
-        # Machine (Calling-Station-ID based) authentication
-        #
-        # RFC 2865 says that a Service-Type value of Call Check is used
-        # to specify this kind of authentication (though were now dealing with ethernet ports instead of lines).
-        #
-        if((Service-Type == 'Call-Check') || (User-Name =~ /^%{Calling-Station-ID}$/i)){
-                update control {
-                        Auth-Type = 'CSID'
-                }
+#
+# Machine (Calling-Station-ID based) authentication
+#
+# RFC 2865 says that a Service-Type value of Call Check is used
+# to specify this kind of authentication (though were now dealing with ethernet ports instead of lines).
+#
+if((Service-Type == 'Call-Check') || (User-Name =~ /^%{Calling-Station-ID}$/i)){
+        update control {
+                Auth-Type = 'CSID'
         }
+}
 
-        #
-        # If the CHAP module is called, it must be *after* the check for CSID authentication
-        #
-        # chap
+#
+# If the CHAP module is called, it must be *after* the check for CSID authentication
+#
+# chap
+</pre>
 
 #### raddb/sites-available/default authenticate{}
 
+<pre>
+#
+# Authentication based on Calling-Station-ID
+#      
+# Calling-Station-ID authentication is usually done by comparing normalised
+# forms of the Calling-Station-ID and User-name fields.
+#
+Auth-Type CSID {
         #
-        # Authentication based on Calling-Station-ID
-        #      
-        # Calling-Station-ID authentication is usually done by comparing normalised
-        # forms of the Calling-Station-ID and User-name fields.
+        # Optionally a CHAP-Password attribute is included which is
+        # md5(ChapID + Calling-Station-ID + Request Authenticator).
         #
-        Auth-Type CSID {
-                #
-                # Optionally a CHAP-Password attribute is included which is
-                # md5(ChapID + Calling-Station-ID + Request Authenticator).
-                #
-                if(Chap-Password){
-                        update control {
-                                Cleartext-Password := "%{User-Name}"
-                        }
-                        chap
+        if(Chap-Password){
+                update control {
+                        Cleartext-Password := "%{User-Name}"
                 }
-                else{
-                        ok  
-                }  
+                chap
         }
+        else{
+                ok  
+        }  
+}
+</pre>
 
 #### raddb/sites-available/default post-auth{}
 
-        if(control:Auth-Type == 'CSID'){
-                # Authorization happens here
-                authorized_macs.authorize
-                if(!ok){
-                        reject
-                }
+<pre>
+if(control:Auth-Type == 'CSID'){
+        # Authorization happens here
+        authorized_macs.authorize
+        if(!ok){
+                reject
         }
+}
+</pre>
 
 ## Additional modifications
 
@@ -286,60 +292,68 @@ If your vendor's NAS uses a VSA, omit the call to 'rewrite_called_station_id', d
 
 Use next free attribute number between 3000-4000 and insert the following definition.
 
-        # The SSID the supplicant/user device connected to
-        ATTRIBUTE        Called-Station-SSID        3010                string
+<pre>
+# The SSID the supplicant/user device connected to
+ATTRIBUTE        Called-Station-SSID        3010                string
+</pre>
 
 #### raddb/policy.conf
 
 Add the following policy stanza to policy.conf.
 
-        #
-        # Rewrite called station id attribute into a standard format.
-        # If a 6th seperator is present, write the trailing chars into Called-Station-SSID
-        #
-        rewrite_called_station_id {
-                if(Called-Station-Id =~ /^([0-9a-f]{2})[-:]?([0-9a-f]{2})[-:.]?([0-9a-f]{2})[-:]?([0-9a-f]{2})[-:.]?([0-9a-f]{2})[-:]?([0-9a-f]{2})[-:]?([-a-z0-9_.]*)?/i){
-                        update request {
-                                Called-Station-Id := "%{1}%{2}%{3}%{4}%{5}%{6}"
-                                Called-Station-SSID := "%{7}"
-                        }
-                }
-                else {
-                        noop
+<pre>
+#
+# Rewrite called station id attribute into a standard format.
+# If a 6th seperator is present, write the trailing chars into Called-Station-SSID
+#
+rewrite_called_station_id {
+        if(Called-Station-Id =~ /^([0-9a-f]{2})[-:]?([0-9a-f]{2})[-:.]?([0-9a-f]{2})[-:]?([0-9a-f]{2})[-:.]?([0-9a-f]{2})[-:]?([0-9a-f]{2})[-:]?([-a-z0-9_.]*)?/i){
+                update request {
+                        Called-Station-Id := "%{1}%{2}%{3}%{4}%{5}%{6}"
+                        Called-Station-SSID := "%{7}"
                 }
         }
+        else {
+                noop
+        }
+}
+</pre>
 
 #### raddb/sites-available/default authorize{}
 
 Add the a module call for 'rewrite_calling_station_id' to the authorize section directly above the call to 'rewrite_calling_station_id'.
 
-        authorize {
-          ...
-          # break called station ID into the BSSID and SSID
-          rewrite_called_station_id
-          # if cleaning up the Calling-Station-Id...
-          rewrite_calling_station_id
-          ...
-        }
+<pre>
+authorize {
+  ...
+  # break called station ID into the BSSID and SSID
+  rewrite_called_station_id
+  # if cleaning up the Calling-Station-Id...
+  rewrite_calling_station_id
+  ...
+}
+</pre>
 
 #### raddb/modules/file
 
 modify the key attribute of the authorized_macs files instance
 
-        files authorized_macs {
-                # The default key attribute to use for matches.  The content
-                # of this attribute is used to match the "name" of the
-                # entry.
-                key = "%{Called-Station-SSID}.%{Calling-Station-ID}"
+<pre>
+files authorized_macs {
+        # The default key attribute to use for matches.  The content
+        # of this attribute is used to match the "name" of the
+        # entry.
+        key = "%{Called-Station-SSID}.%{Calling-Station-ID}"
 
-                usersfile = ${confdir}/authorized_macs
+        usersfile = ${confdir}/authorized_macs
 
-                #  If you want to use the old Cistron 'users' file
-                #  with FreeRADIUS, you should change the next line
-                #  to 'compat = cistron'.  You can the copy your 'users'
-                #  file from Cistron.
-                compat = no
-        }
+        #  If you want to use the old Cistron 'users' file
+        #  with FreeRADIUS, you should change the next line
+        #  to 'compat = cistron'.  You can the copy your 'users'
+        #  file from Cistron.
+        compat = no
+}
+</pre>
 
 #### raddb/authorized_macs
 
