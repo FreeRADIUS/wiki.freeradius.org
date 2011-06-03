@@ -6,7 +6,7 @@
 
 [basic]:
 
-This example assumes the server is only performing macauth. It checks MAC addresses against a [users] style file
+This example assumes the server is only performing macauth. It checks MAC addresses against a [[users]] style file
 
 #### raddb/policy.conf
 
