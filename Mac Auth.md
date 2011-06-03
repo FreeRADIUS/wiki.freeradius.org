@@ -165,29 +165,31 @@ As per example 1
 
 #### raddb/sites-available/default
 
-        authorize {
-          preprocess
+<pre>
+authorize {
+  preprocess
 
-          # if cleaning up the Calling-Station-Id...
-          rewrite_calling_station_id
+  # if cleaning up the Calling-Station-Id...
+  rewrite_calling_station_id
 
-          # always check against the authorized_macs file first
-          authorized_macs
-          if (!ok) {
-            reject
-          }
-          # If this is NOT 802.1x, mac-auth
-          if (!EAP-Message) {
-            # mac has already been checked, accept
-            update control {
-              Auth-Type := Accept
-            }
-          }
-          else {
-            # normal FreeRadius virtual server config goes here e.g.
-            eap
-          }
-        }
+  # always check against the authorized_macs file first
+  authorized_macs
+  if (!ok) {
+    reject
+  }
+  # If this is NOT 802.1x, mac-auth
+  if (!EAP-Message) {
+    # mac has already been checked, accept
+    update control {
+      Auth-Type := Accept
+    }
+  }
+  else {
+    # normal FreeRadius virtual server config goes here e.g.
+    eap
+  }
+}
+</pre>
 
 ### Example 4 - paranoid (checking the contents of the chap password attribute)
 
