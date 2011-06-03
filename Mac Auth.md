@@ -1,30 +1,10 @@
-[TOC]
-
-## Background information
-
-In it's most basic form, Mac-Auth is just checking the value of the Calling-Station-Id or User-Name attributes against a list of authorised Mac-Addresses.
-
-This works fine when the RADIUS server is performing Mac-Auth and only Mac-Auth, but when the server is required to perform multiple types of authentication against different credential stores, it may be helpful to determine whether the NAS is really hinting that MAC authentication has been requested.
-
-Common Mac-Auth attribute schemes are listed below. A NAS may use one, or a combination of these schemes to hint that Mac-Auth is required.
-
-* '''User-Name value matches Calling-Station-Id''' - The NAS includes a User-Name value which matches the Calling-Station-Id value. Many NAS include the option to change the separators used between the octets of the Mac-Address when it's written to the User-Name attribute, this allows a straight comparison to be performed.
-
-* '''Service-Type value matches Call-Check''' - NAS may include the Service-Type attribute with a value of Call-Check as a hint.
-
-* '''(User-Name value matches Calling-Station-Id) AND  ((Chap-Password is taken from the User-Name) OR (Chap-Password is taken from the Calling-Station-Id))''' - The NAS may include a Chap-Password with the value of the User-Name or Calling-Station-ID attribute.
-
-<div style='background-color: #C0C0C0; padding: 1em;'>
-'''Using locally terminated EAP (encapsulated as CHAP-RADIUS) or other CHAP based protocols may allow circumvention of policy.'''
-
-If any CHAP-Based protocol is used on the the same RADIUS server that performs Mac-Based authentication (e.g for Management authentication, or for locally terminated EAP methods), the ''User-Name == Calling-Station-ID'' check should not be used, as this may allow circumvention of policy. Instead the ''Service-Type'' attribute should be used to determine the authentication method being requested.
-</div>
-
 ## Basic recipes
 
-### Example 1 - basic macauth
+ * [Plain Mac-Auth][basic]
+ * [Mac-Auth & 802.1x][dot1x]
+ * 
 
-This example assumes the server is only performing macauth. It checks MAC addresses against a "users" style file
+[basic]: This example assumes the server is only performing macauth. It checks MAC addresses against a [users] style file
 
 #### raddb/policy.conf
 
