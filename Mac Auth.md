@@ -359,8 +359,10 @@ files authorized_macs {
 
 Entries should now be in the following format.
 
-        MY_SSID_1.00-11-22-33-44-55
-                Reply-Message = "Device with MAC Address %{Calling-Station-Id} authorized for network access on SSID %{Called-Station-SSID}"
+<pre>
+MY_SSID_1.00-11-22-33-44-55
+    Reply-Message = "Device with MAC Address %{Calling-Station-Id} authorized for network access on SSID %{Called-Station-SSID}"
+</pre>
 
 ### Mac-Auth authorisation by SSID SQL
 
@@ -374,17 +376,20 @@ As above.
 
 Add the a module call for 'rewrite_calling_station_id' to the authorize section directly above the call to 'rewrite_calling_station_id'.
 
-        authorize {
-            preprocess
-            rewrite_calling_station_id
-            rewrite_called_station_id
-            if("%{sql:SELECT COUNT(*) FROM `SSIDMACAUTH` WHERE macaddress = '%{Calling-Station-ID}' AND SSID = '%{Called-Station-SSID}'}" >= 1){
-                  ok
-                update control {
-                    Auth-Type := Accept
-                }
-            }
-            else{
-                reject
-            }
+<pre>
+
+authorize {
+    preprocess
+    rewrite_calling_station_id
+    rewrite_called_station_id
+    if("%{sql:SELECT COUNT(*) FROM `SSIDMACAUTH` WHERE macaddress = '%{Calling-Station-ID}' AND SSID = '%{Called-Station-SSID}'}" >= 1){
+          ok
+        update control {
+            Auth-Type := Accept
         }
+    }
+    else{
+        reject
+    }
+}
+</pre>
