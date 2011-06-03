@@ -74,24 +74,26 @@ files authorized_macs {
 
 #### raddb/sites-available/default
 
-        authorize {
-          preprocess
+<pre>
+authorize {
+  preprocess
 
-          # if cleaning up the Calling-Station-Id...
-          rewrite_calling_station_id
+  # if cleaning up the Calling-Station-Id...
+  rewrite_calling_station_id
 
-          # now check against the authorized_macs file
-          authorized_macs
-          if (!ok) {
-            reject
-          }
-          else {
-            # accept
-            update control {
-              Auth-Type := Accept
-            }
-          }
-        }
+  # now check against the authorized_macs file
+  authorized_macs
+  if (!ok) {
+    reject
+  }
+  else {
+    # accept
+    update control {
+      Auth-Type := Accept
+    }
+  }
+}
+</pre>
 
 ### Example 2 - macauth or 802.1x
 
@@ -114,31 +116,33 @@ As per example 1
 
 #### raddb/sites-available/default
 
-        authorize {
-          preprocess
+<pre>
+authorize {
+  preprocess
 
-          # if cleaning up the Calling-Station-Id...
-          rewrite_calling_station_id
+  # if cleaning up the Calling-Station-Id...
+  rewrite_calling_station_id
 
-          # If this is NOT 802.1x, assume mac-auth
-          if (!EAP-Message) {
-            # now check against the authorized_macs file
-            authorized_macs
-            if (!ok) {
-              reject
-            }
-            else {
-              # accept
-              update control {
-                Auth-Type := Accept
-              }
-            }
-          }
-          else {
-            # normal FreeRadius virtual server config goes here e.g.
-            eap
-          }
-        }
+  # If this is NOT 802.1x, assume mac-auth
+  if (!EAP-Message) {
+    # now check against the authorized_macs file
+    authorized_macs
+    if (!ok) {
+      reject
+    }
+    else {
+      # accept
+      update control {
+        Auth-Type := Accept
+      }
+    }
+  }
+  else {
+    # normal FreeRadius virtual server config goes here e.g.
+    eap
+  }
+}
+</pre>
 
 ### Example 3 - macauth and 802.1x 
 
