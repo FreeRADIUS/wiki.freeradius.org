@@ -1,5 +1,4 @@
-Quick Links
-=========
+## Quick Links
 
 * [[Pre-built packages|Packages]]
 * [[Installing from source code|Build]]
