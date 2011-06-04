@@ -1,3 +1,5 @@
+__NOTOC__
+
 ==radeapclient==
 
 FreeRADIUS servers ships with an "radeapclient" that can do EAP-MD5 (passwords), as well as EAP-SIM.
