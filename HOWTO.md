@@ -23,3 +23,4 @@ Here is a list of known offsite [[HOWTO]]s. Where ever possible (When the author
 * [[Tutorial for AD integration|http://homepages.lu/charlesschwartz/radius/freeRadius_AD_tutorial.pdf]]
 * [[FreeRADIUS, L2TPD and MySQL|http://blog.derjohn.de/snipsnap/space/start/2006-09-27/1#Freeradius_und_MySQL]]
 * [[FreeRADIUS and Informix|http://web.pip.com.au/brads-howtos/freeradius-informix.html]]
+* [[FreeRADIUS with Oracle support on Debian|http://www.horoa.net/2011/06/installation-de-freeradius-avec-le-support-oracle/?lang=eng]]
