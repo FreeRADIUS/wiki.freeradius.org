@@ -1,0 +1,119 @@
+Native SNMP support in FreeRADIUS version 2
+======================================
+Native SNMP support in [[FreeRADIUS]] version 2 and later is broken. Please see Alan's mail regarding this topic:
+http://www.mail-archive.com/freeradius-users%40lists.freeradius.org/msg46012.html
+
+At the moment there is only one option to get information about the status and statistics of the server. Please enable the [[status]] server (see: virtual servers). All information is geathered with radius requests to this status server. Please *read man radclient* and the documentation of the status virtual server (*raddb/sites-available/status*). 
+
+Stanislav Sawa from Sky Network Services wrote a *perl* interface to act as a SNMP subagent with the modern AgentX protocol to provide all needed data via that status server interface. Please see *scripts/snmp-proxy*.
+ 
+Including status' server results in SNMP
+-----------------------------------------------------
+net-snmp offers the possibility to extend the snmp-Agent with simple scripts. You can use this method to query the SNMP agent for results of the status server.
+
+Make your status server work and script the query
+-----------------------------------------------------------------
+First you need to make your status server work. Please read the comments in the sites-available/status file. Please make sure that you can extract the status information you are interested in with a command like::
+
+  # echo "Message-Authenticator = 0x00,FreeRADIUS-Statistics-Type = 1" | \
+  radclient localhost:18120 status adminsecret
+
+Then copy your query command to a script (i.e. ''/usr/local/sbin/radstat.sh''). Please make sure that user that SNMP agent is running as can execute the script. In Debian Lenny for instance you would have to make the script executable for the user snmp with the commands::
+
+  # chown snmp /usr/local/sbin/radstat.sh
+  # chmod u+x /usr/local/sbin/radstat.sh
+
+Extend Your SNMP Agent
+-----------------------------------
+In the configuration file of the SNMP agent just add the line::
+
+  extend radstat /usr/local/sbin/radstat.sh
+
+and restart your SNMP agent. 
+
+Query Your Agent
+------------------------
+Now you can ask your SNMP agent over the network for the status of the RADIUS server::
+
+  # snmpwalk -v ''version'' -c ''community'' ''server'' nsExtensions
+
+You wil receive a table representing all the lines from the output of the status server. It should be easy to parse the output in your network managment station to get some nice graphs.
+
+Please note that the the nsExtend-table is indexed with the name "radstat". To get the total number of Access-Requests you would have the ask for nsExtendOutLine."radtest".
+
+
+
+**Please DO NOT READ THE TEXT BELOW. It is left here only for historical reasons.**
+
+Build FreeRADIUS with SNMP Support
+-------------------------------------------------------
+The configure option ''--with-snmp'' is enabled by default, so if you have the SNMP libraries correctly installed on your system, your [[FreeRADIUS]] build should include SNMP support.
+
+Configuration
+------------------
+Items in bold can be changed per your requirements.
+
+raddb/radiusd.conf
+------------------------
+ snmp = '''yes'''
+ $INCLUDE  ${confdir}/snmp.conf
+
+raddb/snmp.conf
+----------------------
+ smux_password = '''verysecret'''
+ snmp_write_access = '''no'''
+
+snmpd.conf
+---------------
+NOTE: This example uses Net-SNMP 5.1.2 built with ucd-snmp compatibility.  It should work with most versions of net-snmp and ucd-snmp::
+
+  smuxpeer .1.3.6.1.4.1.3317.1.3.1 '''verysecret'''
+
+For FreeRADIUS versions 2.0.0-pre1 and higher, use the line below.  Some versions of 2.0.0-pre0 used 3317 or 11344 as the SNMP enterprise number.  The output from debug mode should identify which number to use:
+
+  smuxpeer .1.3.6.1.4.1.11344.1.3.1 '''verysecret'''
+
+Verification
+---------------
+When running [[FreeRADIUS]] in debug mode (radiusd -X), you should see output similar to the following::
+
+  main: smux_password = "verysecret"
+  main: snmp_write_access = no
+ SMUX connect try 1
+ SMUX open oid: 1.3.6.1.4.1.3317.1.3.1
+ SMUX open progname: radiusd
+ SMUX open password: verysecret
+ SMUX register oid: 1.3.6.1.2.1.67.1.1.1.1
+ SMUX register priority: -1
+ SMUX register operation: 1
+ SMUX register oid: 1.3.6.1.2.1.67.2.1.1.1
+ SMUX register priority: -1
+ SMUX register operation: 1
+ SMUX read start
+ SMUX read len: 12
+ SMUX message received type: 67 rest len: 4
+ SMUX_RRSP
+ SMUX_RRSP value: 0 errstat: 0
+
+SNMP Query
+-----------------
+The SNMP MIB files for [[RADIUS]] are located in the mibs directory of the [[FreeRADIUS]] source.  Once your server is configured and connected to the local SNMP server, you can begin gathering useful information.
+::
+
+ $ snmpwalk -v 1 -m ''/path/to/RADIUS-AUTH-SERVER-MIB.txt'' -c ''snmp_read_key'' ''your.radius.host'' radiusAuth
+ RADIUS-AUTH-SERVER-MIB::radiusAuthServIdent.0 = STRING: FreeRADIUS Version 2.0.0-pre0, for host i686-pc-linux-gnu, built on Sep 14 2006 at 13:51:51
+ RADIUS-AUTH-SERVER-MIB::radiusAuthServUpTime.0 = Timeticks: (1100) 0:00:11.00
+ RADIUS-AUTH-SERVER-MIB::radiusAuthServResetTime.0 = Timeticks: (1100) 0:00:11.00
+ RADIUS-AUTH-SERVER-MIB::radiusAuthServConfigReset.0 = INTEGER: running(4)
+ RADIUS-AUTH-SERVER-MIB::radiusAuthServTotalAccessRequests.0 = Counter32: 0
+ RADIUS-AUTH-SERVER-MIB::radiusAuthServTotalInvalidRequests.0 = Counter32: 0
+ RADIUS-AUTH-SERVER-MIB::radiusAuthServTotalDupAccessRequests.0 = Counter32: 0
+ RADIUS-AUTH-SERVER-MIB::radiusAuthServTotalAccessAccepts.0 = Counter32: 0
+ RADIUS-AUTH-SERVER-MIB::radiusAuthServTotalAccessRejects.0 = Counter32: 0
+ RADIUS-AUTH-SERVER-MIB::radiusAuthServTotalAccessChallenges.0 = Counter32: 0
+ RADIUS-AUTH-SERVER-MIB::radiusAuthServTotalMalformedAccessRequests.0 = Counter32: 0
+ RADIUS-AUTH-SERVER-MIB::radiusAuthServTotalBadAuthenticators.0 = Counter32: 0
+ RADIUS-AUTH-SERVER-MIB::radiusAuthServTotalPacketsDropped.0 = Counter32: 0
+ RADIUS-AUTH-SERVER-MIB::radiusAuthServTotalUnknownTypes.0 = Counter32: 0
+ RADIUS-AUTH-SERVER-MIB::radiusAuthClientAddress.1 = IpAddress: ...
+ ''radiusAuthClient output removed''
