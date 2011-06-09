@@ -6,7 +6,7 @@ The '''rlm_linelog''' module enables a method of customized logging to a textual
 
 {{Default in the server source|raddb/modules/linelog}}
 
-<code>
+<pre>
 #
 #  The "linelog" module will log one line of text to a file.
 #  Both the filename and the line of text are dynamically expanded.
@@ -86,4 +86,4 @@ linelog {
 	}
 
 }
-</code>
+</pre>
