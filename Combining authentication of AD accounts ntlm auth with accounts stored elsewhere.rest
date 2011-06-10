@@ -1,0 +1,43 @@
+Combining authentication of AD accounts (ntlm_auth) with accounts stored elsewhere
+===============================================================
+Prerequsites
+-----------------
+It is assumed that you have followed AD integration document on Alan's site ([http://deployingradius.com/documents/configuration/active_directory.html]) and got AD accounts working for both PAP and MSCHAP/PEAP requests. It is also assumed that server is configured so that it can sucessfully authenticate accounts stored elsewhere (users file, sql, ldap, ...) also using PAP and MSCHAP/PEAP.
+
+Combining authentication for MSCHAP/PEAP requests
+-------------------------------------------------------------------------
+Rename default mschap instance to mschap_default::
+
+  mschap mschap_default {
+  }
+
+Rename mschap instance configured to use ntlm_auth to mschap_ad::
+
+  mschap mschap_ad {
+      ntlm_auth = "/path/to/ntlm_auth --request-nt-key --username=%{Stripped-User-Name:-%{User-Name:-None}} --challenge=%{mschap:Challenge:-00} --nt-response=%{mschap:NT-Response:-00}"<br>
+  }
+
+Replace all mschap entries in default and inner-tunnel (and any other if you are using more) virtual servers with mschap_default. Edit Auth-Type MS-CHAP and create failover to AD accounts (authenticate section of default virtual server for MSCHAP requests and inner-tunnel virtual server for PEAP requests)::
+
+  Auth-Type MS-CHAP {
+      mschap_default {
+          reject = 2
+      }
+      if (reject) {
+          mschap_ad
+      }
+  }
+
+In case that majority of your accounts are stored in AD, list mschap_ad first and fail over to mschap_default.
+
+Combining authentication for PAP requests
+---------------------------------------------------------
+AD integration document suggests to force Auth-Type ntlm_auth in users file. Instead of doing that enter this bit of unlang after pap in authorize section of default virtual server::
+
+  if (!control:Auth-Type) {
+      update control {
+          Auth-Type = "ntlm_auth"
+      }
+  }
+
+You can add the same to inner-tunnel virtual server to combine AD accounts for EAP-TLS/PAP requests.
