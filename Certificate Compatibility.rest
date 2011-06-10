@@ -4,7 +4,7 @@ with ALL operating systems.
 If you see the server send an Access-Challenge, and the client never sends another Access-Request,
 then
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'''''STOP!'''''
+**'''''STOP!'''''**
 
 The supplicant (client PC) has decided that it doesn't like the server, and has failed to continue the EAP conversation.  This usually happens because the client is a WIndows machine, and you did not follow the recommended way to create and install server certificates.
 
@@ -41,7 +41,7 @@ http://deployingradius.com/documents/configuration/eap.html
 
 =EAP Session did not finish=
 
-If you are running version 2.1.10 or later, you may see the following message:
+If you are running version 2.1.10 or later, you may see the following message::
 
  WARNING: !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
  WARNING: !! EAP session for state 0x3e833be03884222b... did not finish!
