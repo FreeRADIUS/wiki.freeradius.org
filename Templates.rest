@@ -14,7 +14,7 @@ You may only have one templates stanza per FreeRADIUS configuration, additional 
  
 Templates do not currently work with module declarations, such as::
 
- sql sql1{
+ sql sql1 {
       ...
  }
 See Also
