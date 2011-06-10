@@ -19,7 +19,7 @@
 
 ## Virtual Modules
 
-* [[Fail-over]]
+* [[Fail over]]
 * [[Load balancing]]
 * [[Templates]]
 
