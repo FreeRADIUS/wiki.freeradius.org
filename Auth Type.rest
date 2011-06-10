@@ -8,7 +8,7 @@ The common reasons to set the Auth-Type attribute by hand is to either forcibly 
 
 Note that Auth-Type := Accept will NOT work with [[EAP]].
 
-People sometimes read the debug log and notice the message:
+People sometimes read the debug log and notice the message::
 
  auth: No authenticate method (Auth-Type) configuration found for the request: Rejecting the user
 
