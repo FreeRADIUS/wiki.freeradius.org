@@ -518,4 +518,4 @@ Many, always update to the latest firmware.
 
 * [[Cisco]]
 * [[Linksys]]
-* [[Mac-Auth]]
+* [[Mac-Auth|Mac Auth]]
