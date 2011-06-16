@@ -68,6 +68,14 @@ Notes:
 * The default Debian / Ubuntu build rules include OpenSSL support.  As of version 2.1.8, OpenSSL support is included by default in the debian build rules shipped with FreeRADIUS, but it still requires you to install the OpenSSL libraries manually.  Version 2.1.9 does not have this problem. Using pre-built packages also avoids this problem. You can install the needed OpenSSL libraries by doing:
         apt-get install libssl-dev
 
+###Building Debian packages with Oracle support.
+
+If you wish to use Oracle you will need to recompile FreeRADIUS on a machine 
+that has Oracle development libraries installed. FreeRADIUS is known to work both with a full Oracle installation as well as with the [Oracle Instant Client SDK](http://www.oracle.com/technology/tech/oci/instantclient/index.html). Once built the resulting DEB packages can be deployed with just the [Oracle Instant Client](http://www.oracle.com/technology/tech/oci/instantclient/index.html) (No need for the SDK on production machines)
+
+Basicly, you'll need to add dpkg files in order to build a freeradius-oracle package, add the '--with-rlm_sql_oracle', '--with-oracle-include-dir=', '--with-oracle-lib-dir='  (pointing to your oracle installation directory) and 'freeradius-oracle' to the modulelist in debian/rules.
+Here are more detailled instructions on [how to build debian package of freeradius with Oracle support](http://www.horoa.net/2011/06/installation-de-freeradius-avec-le-support-oracle/?lang=eng )
+
 ###Building Ubuntu packages
 
 If you're using Ubuntu, you should first check whether your desired version of FreeRADIUS is available in the Ubuntu package repositories, because that will save you the trouble of building packages yourself.
