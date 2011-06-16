@@ -30,7 +30,7 @@ The following setup controls the rlm_ldap module.
 
 <pre>
 	# Lightweight Directory Access Protocol (LDAP)
-	#
+	#  
 	#  This module definition allows you to use LDAP for
 	#  authorization and authentication.
 	#
@@ -175,8 +175,7 @@ The following setup controls the rlm_ldap module.
 		# set_auth_type = yes
 	}
 </pre>
-
-<p class="P10">NOTE: As LDAP is case insensitive, you should probably also set "lower_user = yes" and "lower_time = before" in main section of radiusd.conf, to get limits on simultaneous logins working correctly. Otherwise, users will be able get large number of sessions, capitalizing parts of their login names.
+<p class="P10">NOTE: As LDAP is case insensitive, you should probably also set "lower_user = yes" and "lower_time = before" in main section of radiusd.conf, to get limits on simultaneous logins working correctly. Otherwise, users will be able get large number of sessions, capitalizing parts of their login names.</p>
 
 ====LDAP Module Messages====
 
@@ -216,7 +215,7 @@ Also if you are using multiple ldap module instances a per instance Ldap-Group a
 
  ldap myname { [...] } 
 
-we can then use the myname-Ldap-Group attribute to match user groups. Make sure though that the ldap module is instantiated <span class="T4">before the files module so that it will have time to register the corresponding attribute. One solution would be to add the ldap module in the instantiate{} block in radiusd.conf
+we can then use the myname-Ldap-Group attribute to match user groups. Make sure though that the ldap module is instantiated before the files module so that it will have time to register the corresponding attribute. One solution would be to add the ldap module in the instantiate{} block in radiusd.conf
 
 ====USERDN Attribute====
 
