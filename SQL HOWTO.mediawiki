@@ -24,12 +24,12 @@ First, you should create a new empty 'radius' database in SQL and a database use
 Next up, you need to create the schema for your database. There is an SQL script file for each SQL type in doc/examples/ in your operating system's doc directory (or where you untar'd FreeRADIUS). On SUSE this is under /usr/share/doc/packages/freeradius/ 
 
 ===Create MySQL Database===
-
+ <nowiki>
  mysql -uroot -p
    CREATE DATABASE radius;
    GRANT ALL ON radius.* TO radius@localhost IDENTIFIED BY "radpass";
    exit
-
+</nowiki>
 '''Note:''' use a  more secure password that "radpass" in the above example
 
  cd /usr/share/doc/packages/freeradius/doc/examples/
@@ -37,10 +37,12 @@ Next up, you need to create the schema for your database. There is an SQL script
 
 ===Create PostgreSQL Database===
 
+ <nowiki>
  su - postgres
  createuser radius --no-superuser --no-createdb --no-createrole -P
  createdb radius --owner=radius
  exit
+</nowiki>
 
 '''Note:''' choose a secure password when prompted for one by the ''createuser'' command.
 
@@ -80,6 +82,7 @@ Optionally add or uncomment 'sql' to the post-auth{} section if you want to log 
 
 Your radiusd.conf should then look something like this:
 
+ <nowiki>
  authorise {
         preprocess
         chap
@@ -91,12 +94,13 @@ Your radiusd.conf should then look something like this:
         sql
         pap
  }
- 
+
  accounting {
         # We leave "detail" enabled to _additionally_ log accounting to /var/log/radius/radacct
         detail
         sql
  }
+ </nowiki>
 
 ==Populating SQL==
 
@@ -110,6 +114,7 @@ Here's a dump of some example 'radius' tables from a MySQL database (With Postgr
 
 This example includes three users, one with a dynamically assigned IP by the NAS (fredf), one assigned a static IP (barney), and one representing a dial-up routed connection (dialrouter):
 
+ <nowiki>
       mysql> select * from usergroup;
       +----+---------------+-----------+
       | id | UserName      | GroupName |
@@ -159,7 +164,8 @@ This example includes three users, one with a dynamically assigned IP by the NAS
       | 42 | netdial   | Framed-Protocol    | PPP                 | :=   |
       +----+-----------+--------------------+---------------------+------+
       12 rows in set (0.01 sec)
- 
+</nowiki>
+
 
 In this example, 'barney' (who is a single user dialup) only needs an attribute for IP address in radreply so he gets his static IP - he does not need any other attributes here as all the others get picked up from the 'static' group entries in radgroupreply.
 
@@ -189,7 +195,7 @@ Congratulations. You're done!
 
 On the subject of backup servers. If you want to run TWO MySQL servers and have FreeRadius fall over between them, you'll need to do something like this: duplicate your sql.conf and edit the second copy to reflect connecting to your backup server ; then name the files something like sql1.conf and sql2.conf ; in radiusd.conf change and duplicate the include line for sql.conf to include sql1.conf and sql2.conf instead ; in the 'authorize' section of radiusd.conf change the 'sql' entry to a 'group' one, like this:
  
-<code>
+ <nowiki>
   group {
     sql1 {
       fail  = 1
@@ -214,7 +220,7 @@ On the subject of backup servers. If you want to run TWO MySQL servers and have 
       handled = 6
     }
   }
-</code>
+</nowiki>
  
 Note that if FreeRadius fails over to the second MySQL server and tries to update the accounting table (radacct), nasty things might possibly happen to your replication setup and database integrity as the first MySQL server won't have got the updates...
 
