@@ -189,6 +189,7 @@ Congratulations. You're done!
 
 On the subject of backup servers. If you want to run TWO MySQL servers and have FreeRadius fall over between them, you'll need to do something like this: duplicate your sql.conf and edit the second copy to reflect connecting to your backup server ; then name the files something like sql1.conf and sql2.conf ; in radiusd.conf change and duplicate the include line for sql.conf to include sql1.conf and sql2.conf instead ; in the 'authorize' section of radiusd.conf change the 'sql' entry to a 'group' one, like this:
  
+<code>
   group {
     sql1 {
       fail  = 1
@@ -213,7 +214,7 @@ On the subject of backup servers. If you want to run TWO MySQL servers and have 
       handled = 6
     }
   }
-
+</code>
  
 Note that if FreeRadius fails over to the second MySQL server and tries to update the accounting table (radacct), nasty things might possibly happen to your replication setup and database integrity as the first MySQL server won't have got the updates...
 
