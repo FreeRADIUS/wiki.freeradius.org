@@ -54,6 +54,7 @@ Also please report any bugs here:
 ## Todo
 * Enable renaming wiki pages - JC
 * Fix external links - Arran CB - Done 31/05/11 (see here https://github.com/github/gollum/pull/166)
+* Fix per page committer info - Arran CB - Done 22/06/11 
 * Add google as omniauth provider - Arran CB
 * Implement proper fix for page creation - Arran CB - Done 20/06/11
 * Fix TOC for markdown pages - Arran CB - Done 20/06/11
