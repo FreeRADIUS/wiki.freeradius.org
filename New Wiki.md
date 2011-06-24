@@ -30,7 +30,6 @@ Also please report any bugs here:
 [gollum issue tracker](https://github.com/github/gollum/issues?_pjax=true&state=open)
 
 ## Known Issues
-* Markdown pages don't display TOC, this is a upstream bug in the 1.3.0 version of gollum
 * No delete or rename functionality, this is a upstream bug in the 1.3.0 version of gollum
 
 ## Pages that need converting as a priority (please mark here when converted)
