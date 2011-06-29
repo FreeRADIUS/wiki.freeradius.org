@@ -2,7 +2,6 @@
 [[Cisco]] [[NAS]] equipment is quite popular, but being Cisco equipment running [[IOS]], the configuration can be a bit non-obvious to the unfamiliar. This document aims to describe the most common configuration options to make your Ciscos interoperate with [[radius]] as you would expect a well-behaved [[NAS]] to do.
 
 ## Shell Access
-
 To use [[RADIUS]] to authenticate your inbound shell (telnet & ssh) connections you need to create an entry in your users file similar to the following
 
     youruser   Cleartext-Password := "somepass"
