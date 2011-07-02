@@ -134,16 +134,16 @@ On session termination, the ports VLAN membership will revert back to it's stati
 
 RADIUS Attribute              |Times Used|Description                                           |Value String | Value
 :-----------------------------|:--------:|:-----------------------------------------------------|:------------|:------
-Egress-VLANID                 |1-*       |Allow egress traffic for specified VID                |-            |<tagged/untagged(0x31 or 0x32)>000<VLAN_ID (as hex)>
-Egress-VLAN-Name              |1-*       |Allow egress traffic for specified VLAN Name          |-            |<tagged/untagged(1 or 2)><VLAN Name String>
+Egress-VLANID                 |1-*       |Allow egress traffic for specified VID                |-            |``<tagged/untagged(0x31 or 0x32)>000<VLAN_ID (as hex)>``
+Egress-VLAN-Name              |1-*       |Allow egress traffic for specified VLAN Name          |-            |``<tagged/untagged(1 or 2)><VLAN Name String>``
 Ingress-Filters               |1         |Drop ingress traffic for VIDs not enabled for egress  |Enabled      |1
 
 #### Alternate HP VSAs for Microsoft RADIUS servers (will be available in future versions of K15)
 
 RADIUS Attribute              |Times Used|Description                                           |Value String | Value
 :-----------------------------|:--------:|:-----------------------------------------------------|:------------|:------
-HP-Egress-VLANID (11.64)      |1-*       |Alternate VSA for Egress-VLANID                       |-            |<tagged/untagged(0x31 or 0x32)>000<VLAN_ID (as hex)>
-HP-Egress-VLAN-Name (11.65)   |1-*       |Alternate VSA for Egress-VLAN-Name                    |-            |<tagged/untagged(1 or 2)><VLAN Name String>
+HP-Egress-VLANID (11.64)      |1-*       |Alternate VSA for Egress-VLANID                       |-            |``<tagged/untagged(0x31 or 0x32)>000<VLAN_ID (as hex)>``
+HP-Egress-VLAN-Name (11.65)   |1-*       |Alternate VSA for Egress-VLAN-Name                    |-            |``<tagged/untagged(1 or 2)><VLAN Name String>``
 
 The value of Egress-VLANID is a bit string, the first 8 bits specify whether the VLAN is tagged or untagged and must be either 0x31 (tagged) or 0x32 (untagged). The next 12 bits are padding 0x000, and the final 12 bits are the VLAN ID as an integer value. For example the value to set VLAN 17 as a tagged egress VLAN would be 0x31000011.
 
@@ -157,7 +157,7 @@ Supporting this attribute (i.e. allowing promiscuous ingress) would break the Pr
 
 RADIUS Attribute              |Times Used|Description                                           |Value String | Value 
 :-----------------------------|:--------:|:-----------------------------------------------------|:------------|:------
-HP-COS (11.40)                |1         |Assign 802.1p priority to all inbound packets on port |-            |<CoS_0><CoS_1><CoS_2><CoS_3><CoS_4><CoS_5><CoS_6><Cos_7>
+HP-COS (11.40)                |1         |Assign 802.1p priority to all inbound packets on port |-            |``<CoS_0><CoS_1><CoS_2><CoS_3><CoS_4><CoS_5><CoS_6><Cos_7>``
 
 The VSA 'HP-COS' or the RFC 4674 attribute 'User-Priority-Table' can be used to write an 802.1p CoS value into the 802.1Q header of all packets received on port-access authenticator enabled port. This attribute should contain the desired CoS priority (as a string) repeated 8 times. The reason for the repetition is that this attribute is meant to form a map to translate different COS priorities in packets egressing on the port. Unfortunately this feature has not yet been implemented in hardware, so whatever value is used for the first (left most) byte is applied for all priorities.
 
@@ -196,7 +196,7 @@ Unfortunately there is no method to disable this bridging feature so if reliable
 
 RADIUS Attribute              |Times Used|Description                                           |Value String | Value                                 
 :-----------------------------|:--------:|:-----------------------------------------------------|:------------|:--------------------------------------
-Framed-IP-Address             |1         |IP Address learned via DHCP-Snooping                  |-            |<ip_oct1>.<ip_oct2>.<ip_oct3>.<ip_oct4>
+Framed-IP-Address             |1         |IP Address learned via DHCP-Snooping                  |-            |``<ip_oct1>.<ip_oct2>.<ip_oct3>.<ip_oct4>``
 
 _Note: The Acct-Delay-Time attribute included in Accounting-Requests is not properly incremented, so accounting times really will be off by ~60 seconds_
 
@@ -312,15 +312,15 @@ All CoA/DM requests must contain at least one set of Session-Identification attr
 
 RADIUS Attribute              |Times Used|Description                                                               |Value String | Value
 :-----------------------------|:--------:|:-------------------------------------------------------------------------|:------------|:------
-User-Name                     |1         |User-Name provided in Access-Accept, or used in Authentication            |-            |<user-name>
-Acct-session-ID               |1         |Accounting session ID provided in Accounting-Requests                     |-            |<session_id>
+User-Name                     |1         |User-Name provided in Access-Accept, or used in Authentication            |-            |``<user-name>``
+Acct-session-ID               |1         |Accounting session ID provided in Accounting-Requests                     |-            |``<session_id>``
 
 **OR**
 
 RADIUS Attribute              |Times Used|Description                                                               |Value String | Value
 :-----------------------------|:--------:|:-------------------------------------------------------------------------|:------------|:------
-User-Name                     |1         |User-Name provided in Access-Accept, or used in Authentication            |-            |<user-name>
-Calling-Station-ID            |1         |Clients Mac-Address (hyphens must be used to delimit octets)              |-            |<oct1>-<oct2>-<oct3>-<oct4>-<oct5>-<oct6>
+User-Name                     |1         |User-Name provided in Access-Accept, or used in Authentication            |-            |``<user-name>``
+Calling-Station-ID            |1         |Clients Mac-Address (hyphens must be used to delimit octets)              |-            |``<oct1>-<oct2>-<oct3>-<oct4>-<oct5>-<oct6>``
 
 **OR**
 
@@ -338,7 +338,7 @@ All CoA/DM requests must contain at least one NAS-Identification attribute (NAS-
 
 RADIUS Attribute              |Times Used|Description                                                               |Value String | Value
 :-----------------------------|:--------:|:-------------------------------------------------------------------------|:------------|:------
-NAS-IP-Address                |1         |Source IP for RADIUS requests (sent from the switch)                      |-            |<ip-address>
+NAS-IP-Address                |1         |Source IP for RADIUS requests (sent from the switch)                      |-            |``<ip-address>``
 
 ### Authorisation attributes
 
