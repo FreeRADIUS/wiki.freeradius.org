@@ -326,9 +326,9 @@ Calling-Station-ID            |1         |Clients Mac-Address (hyphens must be u
 
 RADIUS Attribute              |Times Used|Description                                                               |Value String | Value
 :-----------------------------|:--------:|:-------------------------------------------------------------------------|:------------|:------
-User-Name                     |1         |User-Name provided in Access-Accept, or used in Authentication            |-            |<user-name>
-Calling-Station-ID            |1         |Clients Mac-Address (hyphens must be used to delimit octets)              |-            |<oct1>-<oct2>-<oct3>-<oct4>-<oct5>-<oct6>
-NAS-Port-ID                   |1         |Port on which the client is authenticated e.g. 1 or A1 (modular)          |-            |<port>
+User-Name                     |1         |User-Name provided in Access-Accept, or used in Authentication            |-            |``<user-name>``
+Calling-Station-ID            |1         |Clients Mac-Address (hyphens must be used to delimit octets)              |-            |``<oct1>-<oct2>-<oct3>-<oct4>-<oct5>-<oct6>``
+NAS-Port-ID                   |1         |Port on which the client is authenticated e.g. 1 or A1 (modular)          |-            |``<port>``
 
 If using Mac-Auth the User-Name attribute must match the User-Name provided in the Access-Request.
 
