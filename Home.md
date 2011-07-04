@@ -2,6 +2,9 @@
 
 The Wiki is now hosted on a new server, with a new front end, and is backed by "git".  It is now easier to login and make changes.  Please see the [[New Wiki]] Page for details.
 
+A read only version of the wiki can be checked out using git:
+    git clone git://git.freeradius.org/wiki.freeradius.org.git
+
 ## Overview
 
 [[FreeRADIUS]] is a modular, high performance and feature-rich [[RADIUS]] suite including [[server|radiusd]], [[radius client|radiusclient]], development libraries and numerous additional [[RADIUS]] related utilities.
