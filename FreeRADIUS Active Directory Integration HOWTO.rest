@@ -16,7 +16,7 @@ It is a step by step 'quick & dirty' guide to configure FreeRADIUS server, netwo
 
 [[FreeRADIUS]] offers authentication via port based access control. A user can connect to the network only if its credentials have been validated by the authentication server. User credentials are verified by using special authentication protocols which belong to the 802.1X standard. 
 
-[[Image:10000000000001E30000017DC650BE65.png]]
+[[10000000000001E30000017DC650BE65.png]]
 
 Refer to the graphic. Network access is only granted to the workstation if the user credentials have been authenticated by the [[FreeRADIUS]] server. Otherwise the switch port will be down for any network traffic. 
 The RADIUS server is allowed to contact the domain controller for user authentication. 
@@ -426,16 +426,16 @@ First, for enhanced security install the FreeRADIUS server CA certificate (the C
 
 Open the network configuration panel select the network card and enter the properties. 
 
-[[Image:100000000000016F000001C2635CCC4B.png]]
+[[100000000000016F000001C2635CCC4B.png]]
 
 Select the « Authentication » tab.
 
-[[Image:100000000000016F000001C275BF1151.png]]
+[[100000000000016F000001C275BF1151.png]]
 
 Activate « Enable IEEE 802.1X authentication for this network »
 For EAP type, chose « Protected EAP » from the list and then click the « Properties » button.
 
-[[Image:100000000000017F000001D2C7856F9F.png]]
+[[100000000000017F000001D2C7856F9F.png]]
 
 Certificate validation is strongly recommended for wireless configurations, and optional for wired deployments. 
 
@@ -445,7 +445,7 @@ If you are configuring a wired ethernet interface, you can leave certificate ver
 
 Either way, select « EAP-MSCHAP v2 » as authentication method. Click the « Configure » button next.
 
-[[Image:1000000000000123000000ACD751931D.png]]
+[[1000000000000123000000ACD751931D.png]]
 
 Check if « Automatically use my Windows logon name and password (and domain if any) » is activated. Otherwise the user will be prompted to authenticate after Windows login.
 IX Self-signed certificates
