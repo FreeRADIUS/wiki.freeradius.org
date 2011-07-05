@@ -1,4 +1,4 @@
-== How to Implement Huntgroups in SQL with FreeRADIUS 2.x ==
+## How to Implement Huntgroups in SQL with FreeRADIUS 2.x
 
 Huntgroups provide a mechanism to group NAS's into groups. Each NAS
 can be a member of a particular hunt group. When a user authentication
@@ -21,9 +21,9 @@ implement huntgroups using SQL.
 These are the following steps necessary. The example uses MySQL as the
 backend database, but it's easy to adjust for another SQL server.
 
-1) Create a huntgroup table where we store each NAS and the huntgroup
+1. Create a huntgroup table where we store each NAS and the huntgroup
 it is a member of, we'll call this table radhuntgroup.
-
+    <pre>
 CREATE TABLE radhuntgroup (
   id int(11) unsigned NOT NULL auto_increment,
   groupname varchar(64) NOT NULL default '',
@@ -32,32 +32,30 @@ CREATE TABLE radhuntgroup (
   PRIMARY KEY  (id),
   KEY nasipaddress (nasipaddress)
 ) ;
+    </pre>
 
-2) Populate the radhuntgroup table with your NAS information. For our
+2. Populate the radhuntgroup table with your NAS information. For our
 example we'll add one NAS whose ip-address is 2.2.2.2 and put it in
 the huntgroup "foo".
-
-<pre>
+    <pre>
 insert into radhuntgroup (groupname, nasipaddress) values ("foo", "2.2.2.2");
-
 select * from radhuntgroup;
 +----+-----------+--------------+-----------+
 | id | groupname | nasipaddress | nasportid |
 +----+-----------+--------------+-----------+
 |  1 | foo       | 2.2.2.2      | NULL      | 
 +----+-----------+--------------+-----------+
-</pre>
+    </pre>
 
 
-3) Locate the authorize section in your radiusd.conf or
+3. Locate the authorize section in your radiusd.conf or
 sites-enabled/defaut configuration file and edit it. At the top of
 the authorize section after the preprocess module insert these lines:
-
-<pre>
+    <pre>
 update request {
     Huntgroup-Name := "%{sql:select groupname from radhuntgroup where nasipaddress=\"%{NAS-IP-Address}\"}"
 }
-</pre>
+    </pre>
 
 What this does is perform a lookup in the radhuntgroup table using the
 ip-address as a key to return the huntgroup name. It then adds
@@ -98,27 +96,26 @@ select * from radgroupcheck
 
 Now lets trace through the sequence of events.
 
-1) A new request arrives, in the request are the following
+1. A new request arrives, in the request are the following
 attribute/value pairs (along with other attribute/value pairs)
+    <pre>
+User-Name,"Bob"
+NAS-IP-Address,2.2.2.2
+    </pre>
 
-<pre>
-<User-Name,"Bob">
-<NAS-IP-Address,2.2.2.2>
-</pre>
-
-2) The authorize section executes and the "update request" we added in
+2. The authorize section executes and the "update request" we added in
 step 3 performs a SQL query on the radhuntgroup table. The value
 2.2.2.2 is substituted for the variable %{NAS-IP-Address} in the query
 string. This matches row 1 in our radhuntgroup table and the query
 returns "foo" as the huntgroup name. Then the request is updated with
 the attribute/value pair <Huntgroup-Name,"foo">.
 
-3) Later the SQL modules runs. If group checking is enabled the first
+3. Later the SQL modules runs. If group checking is enabled the first
 thing it does is lookup the user name in the radusergroup. In our
 example Bob is looked up and the group name FOO-AUTH-ONLY is
 returned. We now know Bob is in the FOO-AUTH-ONLY group.
 
-4) Next the sql group check runs. The radgroupcheck table is
+4. Next the sql group check runs. The radgroupcheck table is
 consulted, for every group the user is a member of an
 <attribute,operator,value> tuple are returned and those are then
 compared to the attribute/value pairs in the request to see if there
