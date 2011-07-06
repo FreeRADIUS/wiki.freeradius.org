@@ -4,7 +4,7 @@ This is the driver of the [[rlm_sql]] [[module]] that connects to Oracle [[SQL]]
 This procedure can be used where an rlm_sql_oracle package is not available, and you're using a package management system to install the server.
 
 1. Download and install the Oracle instant client
-2. Download and decompress the FreeRADIUS src tarball
+2. Download and decompress the FreeRADIUS src tarball version that matches your installed package
 3. In src/modules/rlm_sql/drivers/rlm_sql_oracle
     * Run ``autoconf``
     * ``./configure --with-oracle-lib-dir=/usr/lib/oracle/11.2/client64/lib --with-oracle-include-dir=/usr/lib/oracle/11.2/client64``
