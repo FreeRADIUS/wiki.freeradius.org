@@ -14,8 +14,8 @@ This procedure can be used where an rlm_sql_oracle package is not available, and
 6. vi /etc/raddb/modules sql
     *     :%s/database = ".*"/database = "oracle"/g
 7. from the decopressed archive cp -r raddb/sql/oracle /etc/raddb/sql/
-8. Be sure that environmental variables ``LD_LIBRARY_PATH=/usr/lib/oracle/11.2/client64/lib`` and ``ORACLE_HOME=/usr/include/oracle/11.2/client64`` are set if not add them in the /etc/init.d/radiusd file
-9. Launch freeradius (radiusd -X for debug and if ok service radiusd start)
+8. Be sure that the environmental variable ``LD_LIBRARY_PATH`` contains the path ``/usr/lib/oracle/11.2/client64/lib`` and that ORACLE_HOME``  contains the path ``/usr/include/oracle/11.2/client64``, if they don't add them in the /etc/init.d/radiusd file
+9. Launch freeradius (``radiusd -X`` for debug and if ok service radiusd start)
 
 ## See also
 * [[Oracle DDL script]]
