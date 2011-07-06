@@ -1,11 +1,9 @@
-== Python module for freeradius ==
+## Python module for freeradius
 
-=== PURPOSE ===
-
+### Purpose
 To allow module writers to write modules in a high-level language, for implementation or for prototyping.
 
-=== NOTE ===
-
+### Gotchas
 The module rlm_python isn't built by default in FreeRADIUS. To include it you should use the following command line:
 
- $ ./configure --with-experimental-modules
+ ``./configure --with-experimental-modules``
