@@ -1,7 +1,0 @@
-This is the driver of the [[rlm_sql]] [[module]] that connects to Oracle [[SQL]] databases.
-
-See also:
-* [[Oracle DDL script]]
-
-{{Default in the server source|src/modules/rlm_sql/drivers/rlm_sql_oracle/}}
-{{Default in the server source|raddb/sql/oracle/}}
