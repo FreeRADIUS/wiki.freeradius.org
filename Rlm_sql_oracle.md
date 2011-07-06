@@ -8,7 +8,7 @@ This procedure can be used where an rlm_sql_oracle package is not available, and
 3. In src/modules/rlm_sql/drivers/rlm_sql_oracle
     * Run ``autoconf``
     * ``./configure --with-oracle-lib-dir=/usr/lib/oracle/11.2/client64/lib --with-oracle-include-dir=/usr/lib/oracle/11.2/client64``
-    * ``make`` and you should have a ./libs directory with a file rlm_sql_oracle-<fr_version>.so
+    * ``make`` and you should have a ./libs directory with a file ``rlm_sql_oracle-<fr_version>.so``
 4.     cp ./libs/rlm_sql_oracle-<fr_version>.so /usr/lib64/freeradius/
 6.     ln -s  /usr/lib64/freeradius/rlm_sql_oracle-<fr_version>.so /usr/lib64/freeradius/rlm_sql_oracle.so
 6. vi /etc/raddb/modules sql
