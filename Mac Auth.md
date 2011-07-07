@@ -174,11 +174,21 @@ authorize {
 }
 </pre>
 
-## Older examples
+## Web-Auth safe Mac-Auth
 
-N.B. these examples pre-date the material above. I don't understand why they're written like this, and I think some of it might be specific to the HP implementation of Mac-Auth?
+Although this configuration is more complex, you should probably use it if the server is going to process both web-auth and mac-auth requests, here is the rationale:
 
-The examples below are a very rough example of how to perform MAC Based authentication with FreeRADIUS. You may need to add extra conditions to the authorize section, and perform additional canonicalization of the Calling-Station-ID and User-Name attributes, to make it work for your particular NAS.
+* Some NAS vendors allow both Web-Auth and Mac-Auth to occur on the same NAS on the same port, and do not provide attributes to distinguish between the two.
+* This allows users to enter a username and password in the format of a Mac-Address and the RADIUS server would assume the NAS was requesting Mac-Auth.
+* This makes Mac-Spoofing even more trivial as the Mac-Address of the NIC doesn't need to be overridden (not every OS/NIC supports this).
+* Where a site implements Web-Auth for guest wireless connections, and Mac-Auth for wired connections, it allows malicious users to get wireless access by using Mac formatted credentials.
+
+This configuration attempts to prevent this kind of spoofing:
+* Checks for the presence of a Service-Type == 'Call-Check' as an explicit indication that the NAS wants to do Mac-Auth. If your NAS sends this in Access-Request packets, you should remove the ``User-Name =~ /^%{Calling-Station-ID}$/i`` condition from the authorize section.
+* Verifies that the CHAP-Password attribute matches the Calling-Station-ID of the station - this prevents users from spoofing macs via the web form. 
+
+#### Note
+For this configuration to work, you must configure the password format for Mac-Auth to use the same octet separator as the Calling-Station-ID attribute.
 
 ### raddb/policy.conf
 
@@ -240,7 +250,7 @@ authenticate {
             #
             if(Chap-Password){
                     update control {
-                        Cleartext-Password := "%{User-Name}"
+                        Cleartext-Password := "%{Calling-Station-ID}"
                     }
                     chap
             }
