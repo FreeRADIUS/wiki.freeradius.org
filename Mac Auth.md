@@ -185,7 +185,7 @@ Although this configuration is more complex, you should probably use it if the s
 
 This configuration attempts to prevent this kind of spoofing:
 
-* Checks for the presence of a Service-Type == 'Call-Check' AVP as an explicit indication that the NAS wants to do Mac-Auth. If your NAS sends this in Access-Request packets, you should remove the ``User-Name =~ /^%{Calling-Station-ID}$/i`` sub-condition from the authorize section.
+* Checks for the presence of a ``Service-Type == 'Call-Check'`` AVP as an explicit indication that the NAS wants to do Mac-Auth. If your NAS sends this in Access-Request packets, you should remove the ``User-Name =~ /^%{Calling-Station-ID}$/i`` sub-condition from the authorize section.
 * Verifies that the CHAP-Password attribute matches the Calling-Station-ID of the station - this prevents users from spoofing macs via the web form. 
 
 #### Note
@@ -278,9 +278,9 @@ post-auth {
 
 Follow any of the recipes above and then make the following modifications.
 
-Note: The recipe below will work with any NAS that includes the SSID in the Called-Station-ID string with the format <BSSID>:<SSID> e.g.''"00-11-22-33-44-55:MY_SSID_1"''. There is no standard for this, and vendors may include the SSID in its own vendor specific attribute (VSA). If unsure, run the server in debug mode (-X) and check the contents of incoming requests.
+Note: The recipe below will work with any NAS that includes the SSID in the Called-Station-ID string with the format **<BSSID>:<SSID>** e.g. ``00-11-22-33-44-55:MY_SSID_1``. There is no standard for this, and vendors may include the SSID in its own vendor specific attribute (VSA). If unsure, run the server in debug mode (-X) and check the contents of incoming requests.
 
-If your vendor's NAS uses a VSA, omit the call to 'rewrite_called_station_id', do not add the additional attributes to the dictionary, and insert that VSA into the key attribute in place of '%{Called-Station-SSID}' e.g. ''key = "%{VENDOR_SSID_VSA}.%{Calling-Station-ID}"''.
+If your vendor's NAS uses a VSA, omit the call to 'rewrite_called_station_id', do not add the additional attributes to the dictionary, and insert that VSA into the key attribute in place of '%{Called-Station-SSID}' e.g. ``key = "%{VENDOR_SSID_VSA}.%{Calling-Station-ID}"``.
 
 #### raddb/dictionary
 
