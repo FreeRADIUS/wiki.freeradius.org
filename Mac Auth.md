@@ -181,7 +181,7 @@ Although this configuration is more complex, you should probably use it if the s
 * Some NAS vendors allow both Web-Auth and Mac-Auth to occur on the same NAS on the same port, and do not provide attributes to distinguish between the two.
 * This allows users to enter a username and password in the format of a Mac-Address and the RADIUS server would assume the NAS was requesting Mac-Auth.
 * This makes Mac-Spoofing even more trivial as the Mac-Address of the NIC doesn't need to be overridden (not every OS/NIC supports this).
-* Where a site implements Web-Auth for guest wireless connections, and Mac-Auth for wired connections, it allows malicious users to get wireless access by using Mac formatted credentials.
+* Where a site implements Web-Auth for guest wireless connections, and Mac-Auth for wired connections, it allows malicious users to get wireless access by using Mac formatted credentials (If the policy does not check NAS-Port-Type).
 
 This configuration attempts to prevent this kind of spoofing:
 
