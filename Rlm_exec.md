@@ -1,10 +1,8 @@
 The '''rlm_exec''' module enables execution of external programs.
 
-{{Default in the server source|src/modules/rlm_exec/}}
+# Configuration
 
-==Configuration==
-
-{{Default in the server source|raddb/modules/exec}}
+Default in the server source: raddb/modules/exec
 
 <pre>
 	#
@@ -32,9 +30,7 @@ The '''rlm_exec''' module enables execution of external programs.
 	}
 </pre>
 
-==echo==
-
-{{Default in the server source|raddb/modules/echo}}
+Default in the server source: raddb/modules/echo
 
 <pre>
 	#
