@@ -185,7 +185,7 @@ Although this configuration is more complex, you should probably use it if the s
 
 This configuration attempts to prevent this kind of spoofing:
 
-* Checks for the presence of a Service-Type == 'Call-Check' as an explicit indication that the NAS wants to do Mac-Auth. If your NAS sends this in Access-Request packets, you should remove the ``User-Name =~ /^%{Calling-Station-ID}$/i`` condition from the authorize section.
+* Checks for the presence of a Service-Type == 'Call-Check' AVP as an explicit indication that the NAS wants to do Mac-Auth. If your NAS sends this in Access-Request packets, you should remove the ``User-Name =~ /^%{Calling-Station-ID}$/i`` sub-condition from the authorize section.
 * Verifies that the CHAP-Password attribute matches the Calling-Station-ID of the station - this prevents users from spoofing macs via the web form. 
 
 #### Note
