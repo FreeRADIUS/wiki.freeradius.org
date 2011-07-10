@@ -458,11 +458,12 @@ _Note: Enabling the use of GVRP vlans is optional._
 
 In older versions of K series firmware, and all other branches, the logoff-period timer for both 802.1X and WMA was implemented using a single H/W timer. If different values were used for the logoff-period timers in 802.1X and WMA, the timer would reflect the value set by the last authenticator to be initialised. For predictable behavior it is higly recommended that the same value be used for both, if either of the authenticator logoff-period timers are changed from their default of 300 seconds._
 
-_Note: The use of port-based 802.1X and WMA concurrently is not recommended, not well supported, and not allowed in recent versions of K branch software. It is recommended to set a 802.1X client limit of 1 or more when using concurrent authentication. This puts the port into client-based 802.1X mode._
+###### Hints and tips
+* The use of port-based 802.1X and WMA concurrently is not recommended, not well supported, and not allowed in recent versions of K branch software. It is recommended to set a 802.1X client limit of 1 or more when using concurrent authentication. This puts the port into client-based 802.1X mode.
 
-_Note: The default logoff-period is too low for embedded devices such as printers that may 'sleep' for long periods; if the value is not increased devices that enter a sleep/power-saving mode may become unreachable. It's recommended that devices using Mac-Auth also run a DHCP client, to ensure that they periodically wake up and send packets to the authenticating switch, thus keeping their session alive._
+* The default logoff-period is too low for embedded devices such as printers that may 'sleep' for long periods; if the value is not increased devices that enter a sleep/power-saving mode may become unreachable. It's recommended that devices using Mac-Auth also run a DHCP client, to ensure that they periodically wake up and send packets to the authenticating switch, thus keeping their session alive.
 
-_Note: For security reasons it's better to implement dual authentication with 802.1X and Mac-Auth instead of configuring an unauth-vid. This allows the RADIUS server ultimate control over whether data from a device is allowed to ingress onto the network._
+* For security reasons it's better to implement dual authentication with 802.1X and Mac-Auth instead of configuring an unauth-vid. This allows the RADIUS server ultimate control over whether data from a device is allowed to ingress onto the network.
 
 ### Enable Accounting
 
