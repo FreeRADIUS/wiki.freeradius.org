@@ -1,5 +1,6 @@
 ## Quick Links
 
+* [[Contributing with GitHub|GitHub]]
 * [[Pre-built packages|Packages]]
 * [[Installing from source code|Build]]
 * [[Basic Configuration|Basic configuration Howto]]
