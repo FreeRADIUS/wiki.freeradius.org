@@ -90,11 +90,11 @@ Before you start hacking away, you must create a new branch. This branch will se
 @todo
 
 ### Generating a pull request
-The reason why the FreeRADIUS core developers love GitHub is because of pull requests. Once you've committed a set of modifications to your fork, you can generate a _pull request_ to let one of the developers know you have code to merge.
+The reason why the FreeRADIUS core developers love GitHub is because of _pull requests_. Once you've committed a set of modifications to your fork, you can generate a _pull request_ to let the core developers know you have code to merge.
 
-If your code merges cleanly (which it should as you just pulled down the upstream commits, right?), then its a couple of clicks to get it merged into the main repository. This is **significantly** easier for core developers, compared with attempting to apply mangled patches sent on the mailing lists.
+If your code merges cleanly (which it should as you just pulled down the upstream commits, right?), then its a couple of clicks to get it merged into the project repository. This is **significantly** easier for core developers, compared with attempting to apply mangled patches sent on the mailing lists.
 
-Pull requests are generated from within GitHub with a commit hash.
+Pull requests are generated from within GitHub using a commit hash.
 
 * Navigate to your local git repo
       cd ~/repositories/freeradius-server
