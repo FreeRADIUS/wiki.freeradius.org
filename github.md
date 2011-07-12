@@ -20,7 +20,7 @@ In order to let your local machine talk to GitHub, you must first lodge the publ
 ### What is a RSA keypair?
 See [here](http://en.wikipedia.org/wiki/Public-key_cryptography) and [here](http://en.wikipedia.org/wiki/RSA)
 ### How do I generate a keypair?
-If you're on a Mac or Linux use the following command
+If you're using Mac OSX or Linux use the following command
     ssh-keygen -t rsa
 And save the keys if their default locations (just hit return)
 
