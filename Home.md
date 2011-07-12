@@ -1,12 +1,10 @@
 ## New Wiki
-
 The Wiki is now hosted on a new server, with a new front end, and is backed by "git".  It is now easier to login and make changes.  Please see the [[New Wiki]] Page for details.
 
 A read only version of the wiki can be checked out using git:
     git clone git://git.freeradius.org/wiki.freeradius.org.git
 
 ## Overview
-
 [[FreeRADIUS]] is a modular, high performance and feature-rich [[RADIUS]] suite including [[server|radiusd]], [[radius client|radiusclient]], development libraries and numerous additional [[RADIUS]] related utilities.
 
 As the premiere open source RADIUS suite it is included as a [[standard package]] with numerous Operating Systems, has [[binary packages]] for many others and has source available which is known to [[build]] on almost anything. Production deployments include large scale installations comprising multiple [[AAA]] servers with over ten million users and millions of requests per day. It supports request [[proxying|proxy]], with [[fail-over]] and [[load balancing]], as well as the ability to access many types of back-end [[databases]]. Different classes of [[Authentication]] requests can trigger access of different [[Authentication]] and [[Authorization]] [[databases]] (with cascaded fall back), and [[Accounting]] records can be simultaneously recorded in multiple different storage [[databases]] and [[directories]].
