@@ -837,14 +837,14 @@ FreeRADIUS Server 2.0.0 and greater has full support for both IPv6 attributes an
 * [[FreeRADIUS Web Page|http://www.freeradius.org/]]
 * [[FreeRADIUS Wiki|http://wiki.freeradius.org/]]
 * [[Cistron RADIUS Web Page|http://www.radius.cistron.nl/]]
-* [[Red Hat FAQ|FreeRADIUS on Red Hat systems]]
+* [[FreeRADIUS on Red Hat systems|Red Hat FAQ]]
 
 ### Mailing Lists
 
 * [[FreeRADIUS Users Mailing List Subscription|http://lists.freeradius.org/mailman/listinfo/freeradius-users]]
 * [[FreeRADIUS Users Mailing List Archive|http://lists.freeradius.org/pipermail/freeradius-users/]]
 * [[FreeRADIUS Developers Mailing List Subscription|http://lists.freeradius.org/mailman/listinfo/freeradius-devel]]
-* [[FreeRADIUS Developers Mailing List Archive|FreeRADIUS Developers Mailing List Subscription]]
+* [[FreeRADIUS Developers Mailing List Archive|http://lists.freeradius.org/pipermail/freeradius-devel/]]
 
 ### [[RADIUS]] RFC and Drafts
 
