@@ -34,7 +34,7 @@ And save the keys if their default locations (just hit return)
 * Paste your public key into the Key field
 * Click _Add key_
 
-## Linking your commits with your GitHub account
+## Linking commits with your GitHub account
 Once you've established a history of providing good patches, the FreeRADIUS core developers are more likely to pull your modifications into the project repository. To establish this history it's important to configure your local git client to insert the correct information into commit meta-data. This will mean that your commits are linked to you and your GitHub account.
 
 To correct the default commit user.name and user.email, enter the following commands
@@ -44,9 +44,12 @@ To correct the default commit user.name and user.email, enter the following comm
 ## Forking
 In order to contribute code you must first fork the server. Forking is the process of creating your own copy of the FreeRADIUS repository on GitHub, which you can then clone and _push_ your modifications to.
 
-To fork the FreeRADIUS server, login to GitHub, then go to the [project site](https://github.com/alandekok/freeradius-server) and click the 'Fork' button. You'll see the current URL change to ``/<your github username>/freeradius-server`` this means you're now browsing your own copy of the FreeRADIUS source code.
+To fork the FreeRADIUS server
+* Login to GitHub
+* Go to the [project site](https://github.com/alandekok/freeradius-server)
+* Click the 'Fork' button. 
 
-From this point on changes to the original repository will not be reflected in your fork unless you explicitly sync up with the _origin_ repository.
+You'll see the current URL change to ``/<your github username>/freeradius-server`` this means you're now browsing your own copy of the FreeRADIUS source code. From this point on changes to the original repository will not be reflected in your fork unless you explicitly pull from the _origin_ repository.
 
 ## Using your shiny new fork
 GitHub doesn't allow you to login to their servers with an interactive prompt. Instead you must use one of the protocols Git supports (SSH, HTTP, or Git (native protocol)) to modify the contents of your fork, and in order to do that you must first _clone_ it (create a copy of it on your local machine).
