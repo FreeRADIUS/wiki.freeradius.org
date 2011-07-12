@@ -84,7 +84,7 @@ Before you start hacking away, you must create a new branch. This branch will se
 * Tell Git which files you want to include in the commit using ``git add <path>``. If you add subdirectories, all files and directories in that subdirectory will also be added.
 * Commit your changes
       git commit --message '<description of changes>'
-* Sync your branch up with upstream to make sure there are no conflicts
+* Pull from upstream to make sure there are no conflicts, and to merge the latest commits from the project repository
       git pull --rebase upstream master 
 * Push your changes back to your fork
       git push
