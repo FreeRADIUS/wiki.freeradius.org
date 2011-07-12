@@ -97,6 +97,6 @@ Pull requests are generated from within GitHub with a commit hash.
       cd ~/repositories/freeradius-server
 * Use the following command to get the hash of the last commit on the current branch, then copy it
       git log -n 1 --pretty=format:%H
-* Go to your fork on GitHub _https://github.com/<your github username>/freeradius-server_
+* Go to your fork on GitHub _https://github.com/your github username/freeradius-server_
 * Click the 'Pull request' button 
 * Follow the instructions...
