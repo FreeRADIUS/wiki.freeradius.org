@@ -2,7 +2,9 @@
 ## Introduction
 GitHub is a social coding site allowing many developers to come together and work on projects simultaneously.
 
-GitHub is based on the Git version control system. What makes Git different from other version control systems (like CVS and SVN), is that there is no need for a central master repository. When you _clone_ (checkout) a repository, you get your own private repository containing all the commits and branches of the original. You can then create new branches and commit new revisions completely independently of the _origin_ repository. Git then allows you _pull_ (get new commits), and _push_ (send your commits) to/from other repositories, allowing you to get the latest version of the code and to distribute your modifications.
+GitHub is based on the Git version control system. What makes Git different from other version control systems (like CVS and SVN), is that there is no need for a central master repository. When you _clone_ (checkout) a repository, you get your own private repository containing all the commits and branches of the original. 
+
+After cloning a repository you can create new branches and commit new revisions completely independently of the _origin_ repository. To distribute and receive changes you can use the _git pull_ (to get new commits from remote repositories), and _git push_ (to send your commits to remote repositories).
 
 ## Installing Git
 See [here](http://book.git-scm.com/2_installing_git.html)
