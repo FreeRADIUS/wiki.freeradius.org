@@ -4,7 +4,7 @@ GitHub is a social coding site allowing many developers to come together and wor
 
 GitHub is based on the Git version control system. What makes Git different from other version control systems (like CVS and SVN), is that there is no need for a central master repository. When you _clone_ (checkout) a repository, you get your own private repository containing all the commits and branches of the original. 
 
-After cloning a repository you can create new branches and commit new revisions completely independently of the _origin_ repository. To distribute and receive changes you can use the ``git pull`` (to get new commits from remote repositories), and ``git push`` (to send your commits to remote repositories).
+After cloning a repository you can create new branches and commit new revisions completely independently of the _origin_ repository. To distribute and receive changes you can use the ``git pull`` command (to get new commits from remote repositories), and ``git push`` command (to send your commits to remote repositories).
 
 ## Installing Git
 See [here](http://book.git-scm.com/2_installing_git.html)
@@ -67,7 +67,7 @@ GitHub doesn't allow you to login to their servers with an interactive prompt. I
       git fetch upstream
     
 ### Making modifications
-Before you start hacking away, you must create a new branch. This branch will serve to group your commits together so that they can be merged back to the project repository later.
+Before you start hacking away you must create a new branch. This branch will serve to group your commits together so that they can be merged back to the project repository later.
 
 #### Branching 
 * Think of a descriptive name for your branch, something like 'rlm_foo_segfault_issues'
@@ -96,7 +96,7 @@ Before you start hacking away, you must create a new branch. This branch will se
 ### Generating a pull request
 The reason why the FreeRADIUS core developers love GitHub is because of _pull requests_. Once you've committed a set of modifications to your fork, you can generate a _pull request_ to let the core developers know you have code to merge.
 
-If your code merges cleanly (which it should as you just pulled down the upstream commits, right?), then its a couple of clicks to get it merged into the project repository. This is **significantly** easier for core developers, compared with attempting to apply mangled patches sent on the mailing lists.
+If your code merges cleanly, then its a couple of clicks to get it merged into the project repository. This is **significantly** easier for core developers, compared with applying mangled patches sent on the mailing lists.
 
 Pull requests are generated from within GitHub using a commit hash.
 
