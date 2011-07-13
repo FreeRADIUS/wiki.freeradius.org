@@ -1,4 +1,4 @@
-# How to Implement Huntgroups in SQL with FreeRADIUS 2.x
+# How to Implement Huntgroups in SQL with FreeRADIUS 2.x/3.x
 
 ## What are Huntgroups?
 Huntgroups provide a mechanism to group NAS's into groups. Each NAS can be a member of a particular hunt group. When a user authentication request arrives you can then tag the request with the hunt group name the NAS is a member of. This is done by adding the attribute value pair <Huntgroup-Name,name> to the list of request pairs. 
