@@ -94,6 +94,7 @@ Before you start hacking away you must create a new branch. This branch will ser
 Another rather unique feature of Git is the concept of rebasing. Rebase allows you to rewind the state of your repository to an earlier revision, then re-apply ranges of commits. 
 
 In the section above the ``git pull --rebase`` command is used, heres what that command actually does
+
 * It finds the point of divergence between your branch and the upstream branch you're pulling from
 * rewinds your branch to this point (as if you'd checked out that specific revision)
 * gets a list of commits from this point of divergence to the HEAD on the upstream branch
