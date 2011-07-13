@@ -1,131 +1,88 @@
-## How to Implement Huntgroups in SQL with FreeRADIUS 2.x
+# How to Implement Huntgroups in SQL with FreeRADIUS 2.x
 
-Huntgroups provide a mechanism to group NAS's into groups. Each NAS
-can be a member of a particular hunt group. When a user authentication
-request arrives you can then tag the request with the hunt group name
-the NAS is a member of. This is done by adding the attribute value pair
-<Huntgroup-Name,name> to the list of request pairs. During request
-processing the Huntgroup-Name attribute can be checked to make
-decisions about how to handle the request. For example you may want to
-restrict the authentication mechansim based on the type of NAS.
+## What are Huntgroups?
+Huntgroups provide a mechanism to group NAS's into groups. Each NAS can be a member of a particular hunt group. When a user authentication request arrives you can then tag the request with the hunt group name the NAS is a member of. This is done by adding the attribute value pair <Huntgroup-Name,name> to the list of request pairs. 
 
-Traditionally in FreeRADIUS huntgroups were implemented in the
-preprocess module (rlm_preprocess) which at start up read the
-configuration file /etc/raddb/huntgroups to associate each NAS with a
-huntgroup. But what if you want to configure FreeRADIUS to use SQL to
-store your data for users, groups, NAS's, etc? It would be awkward
-to have to rely on a flat file for huntgroups when everything else is
-in SQL. With the introduction of ulang in FreeRADIUS 2.0 it is easy to
-implement huntgroups using SQL.
+During request processing the Huntgroup-Name attribute can be checked to make decisions about how to handle the request. For example you may want to restrict the authentication mechansim based on the type of NAS.
 
-These are the following steps necessary. The example uses MySQL as the
-backend database, but it's easy to adjust for another SQL server.
+## Using unlang to emulate huntgroup behaviour in SQL
+Traditionally in FreeRADIUS huntgroups were implemented in the preprocess module (rlm_preprocess) which at start up read the configuration file /etc/raddb/huntgroups to associate each NAS with a huntgroup. But what if you want to configure FreeRADIUS to use SQL to store your data for users, groups, NAS's, etc? It would be awkward to have to rely on a flat file for huntgroups when everything else is in SQL.
 
-1. Create a huntgroup table where we store each NAS and the huntgroup
-it is a member of, we'll call this table radhuntgroup.
-    <pre>
-CREATE TABLE radhuntgroup (
-  id int(11) unsigned NOT NULL auto_increment,
-  groupname varchar(64) NOT NULL default '',
-  nasipaddress varchar(15) NOT NULL default '',
-  nasportid varchar(15) default NULL,
-  PRIMARY KEY  (id),
-  KEY nasipaddress (nasipaddress)
-) ;
-    </pre>
+With the introduction of ulang in FreeRADIUS 2.0 it is easy to implement huntgroups using SQL XLAT. This example uses MySQL as the backend database, but it's easy to adjust for another SQL server.
 
-2. Populate the radhuntgroup table with your NAS information. For our
-example we'll add one NAS whose ip-address is 2.2.2.2 and put it in
-the huntgroup "foo".
-    <pre>
-insert into radhuntgroup (groupname, nasipaddress) values ("foo", "2.2.2.2");
-select * from radhuntgroup;
-+----+-----------+--------------+-----------+
-| id | groupname | nasipaddress | nasportid |
-+----+-----------+--------------+-----------+
-|  1 | foo       | 2.2.2.2      | NULL      | 
-+----+-----------+--------------+-----------+
-    </pre>
+### Building the table
+Create a huntgroup table where we store each NAS and the huntgroup it is a member of, we'll call this table radhuntgroup.
+
+    CREATE TABLE radhuntgroup (
+        id int(11) unsigned NOT NULL auto_increment,
+        groupname varchar(64) NOT NULL default '',
+        nasipaddress varchar(15) NOT NULL default '',
+        nasportid varchar(15) default NULL,
+        PRIMARY KEY  (id),
+        KEY nasipaddress (nasipaddress)
+    ) ;
+
+### Inserting entries
+Populate the radhuntgroup table with your NAS information. For our example we'll insert an entry for a NAS whose ip-address is 192.168.0.10 and put it in the huntgroup "private".
+
+    INSERT INTO `radhuntgroup` (groupname, nasipaddress) VALUES ("example", "192.168.0.10");
+ 
+The contents of the table show now look like this
+    SELECT * FROM `radhuntgroup`;
+       +----+-----------+--------------+-----------+
+       | id | groupname | nasipaddress | nasportid |
+       +----+-----------+--------------+-----------+
+       |  1 | foo       | 2.2.2.2      | NULL      | 
+       +----+-----------+--------------+-----------+
+
+### Configuring FreeRADIUS
+* Set up your database configuration in sql.conf (if you haven't done so already)
+* Locate the ``authorize { }`` section in your radiusd.conf or sites-enabled/defaut configuration.
+* After the preprocess module insert the following
+      update request {
+          Huntgroup-Name := "%{sql:SELECT `groupname` FROM `radhuntgroup` WHERE nasipaddress='%{NAS-IP-Address}'}"
+      }
 
 
-3. Locate the authorize section in your radiusd.conf or
-sites-enabled/defaut configuration file and edit it. At the top of
-the authorize section after the preprocess module insert these lines:
-    <pre>
-update request {
-    Huntgroup-Name := "%{sql:select groupname from radhuntgroup where nasipaddress=\"%{NAS-IP-Address}\"}"
-}
-    </pre>
+This performs a lookup in the radhuntgroup table using the ip-address as a key to return the huntgroup name. 
+It then adds an attribute/value pair to the request where the name of the attribute is Huntgroup-Name and it's value is whatever was returned from the SQL query. 
 
-What this does is perform a lookup in the radhuntgroup table using the
-ip-address as a key to return the huntgroup name. It then adds
-an attribute/value pair to the request where the name of the attribute
-is Huntgroup-Name and it's value is whatever was returned from the SQL
-query. If the query did not find anything then the value is the empty
-string.
+If the query did not find anything then the value is the empty string. You can check for this using the unlang statement ``if(Huntgroup-Name == ''){``.
 
-Thats all you need to do. Now let's finsh the example by seeing how
-you might use the huntgroup information. Suppose you want to assure
-any user who is in the group FOO-AUTH-ONLY is coming in on a NAS for
-which FOO-AUTH is a requirement. You could use the group checking
-feature in the SQL module. Let's start by putting the user Bob in the
-FOO-AUTH-ONLY group. We do this by adding him in the radusergroup
-table:
+## More examples
+Suppose you want to only allow the group **site_a_admins** to be used when logging into a NAS' at **site_a** .
 
-<pre>
-select * from radusergroup;
-+----------+----------------+----------+
-| username | groupname      | priority |
-+----------+----------------+----------+
-| Bob      | FOO-AUTH-ONLY  |        0 | 
-+----------+----------------+----------+
-</pre>
+Assuming **example_user** was already a member of **site_a_admins**, you would follow the steps below.
 
-Then let's define a rule in the radgroupcheck table which says if the
-user is in the FOO-AUTH-ONLY group then they must have a
-Huntgroup-Name whose attribute is "foo".
+    SELECT * FROM `radusergroup`;
+       +--------------+---------------+----------+
+       | username     | groupname     | priority |
+       +--------------+---------------+----------+
+       | example_user | site_a_admins |        0 | 
+       +---------------+---------------+----------+
 
-<pre>
-select * from radgroupcheck
-+----+----------------+----------------+----+----------+
-| id | groupname      | attribute      | op | value    |
-+----+----------------+----------------+----+----------+
-|  1 | FOO-AUTH-ONLY  | Huntgroup-Name | == | foo      | 
-+----+----------------+----------------+----+----------+
-</pre>
+* First add a list of the IP addresses of NAS' at **site_a** into the `radhuntgroup` table.
+      INSERT INTO `radhuntgroup` (groupname, nasipaddress) VALUES ("site_a", "192.168.0.10");
+      INSERT INTO `radhuntgroup` (groupname, nasipaddress) VALUES ("site_a", "192.168.0.11");
+      INSERT INTO `radhuntgroup` (groupname, nasipaddress) VALUES ("site_a", "192.168.0.12");
 
-Now lets trace through the sequence of events.
+* Now add an entry in the `radgroupcheck` table which says for the **site_a_admins** group only matches, when a Huntgroup-Name attribute with a value of **site_a** exists in the request.
 
-1. A new request arrives, in the request are the following
-attribute/value pairs (along with other attribute/value pairs)
-    <pre>
-User-Name,"Bob"
-NAS-IP-Address,2.2.2.2
-    </pre>
+      SELECT * FROM `radgroupcheck`
+          +----+----------------+----------------+----+----------+
+          | id | groupname      | attribute      | op | value    |
+          +----+----------------+----------------+----+----------+
+          |  1 | site_a_admins  | Huntgroup-Name | == | site_a   | 
+          +----+----------------+----------------+----+----------+
 
-2. The authorize section executes and the "update request" we added in
-step 3 performs a SQL query on the radhuntgroup table. The value
-2.2.2.2 is substituted for the variable %{NAS-IP-Address} in the query
-string. This matches row 1 in our radhuntgroup table and the query
-returns "foo" as the huntgroup name. Then the request is updated with
-the attribute/value pair <Huntgroup-Name,"foo">.
+Lets trace through the sequence of events.
 
-3. Later the SQL modules runs. If group checking is enabled the first
-thing it does is lookup the user name in the radusergroup. In our
-example Bob is looked up and the group name FOO-AUTH-ONLY is
-returned. We now know Bob is in the FOO-AUTH-ONLY group.
+* A new request arrives, in the request are the following attribute/value pairs (along with other attribute/value pairs)
+      User-Name = "example_user"
+      NAS-IP-Address = 192.168.0.10
 
-4. Next the sql group check runs. The radgroupcheck table is
-consulted, for every group the user is a member of an
-<attribute,operator,value> tuple are returned and those are then
-compared to the attribute/value pairs in the request to see if there
-is a match by applying the operator to the value(s) found in the
-request to the value in the radgroupcheck row. In our example the
-radgroupcheck table has a row whose groupname is FOO-AUTH-ONLY which
-Bob is a member of, that row has an attribute called
-Huntgroup-Name. The request also has an attribute named Huntgroup-Name
-which was added earlier by our huntgroup table query. Because both the
-request and the radgroupcheck rule have an attribute named
-Huntgroup-Name their values are then evaluated with the operator in
-the rule (equality in this instance, e.g. ==) and since the operator
-test succeeds the radgroupcheck test succeeds.
+* The authorize section executes and the "update request" we added performs a SQL query on the `radhuntgroup table`. The variable `%{NAS-IP-Address}` is replaced with the value of NAS-IP-Address in the request.
+* SQL XLAT query runs and matches the first row in our `radhuntgroup` table and returns **site_a** as the huntgroup name. The request is then updated with the attribute/value pair ``Huntgroup-Name = "site_a"``.
+* SQL modules runs. If group checking is enabled the first thing it does is lookup the user name in the radusergroup table. In our example **example_user** is looked up and is found to belong to the group **site_a_admins**.
+* SQL group check runs. The `radgroupcheck` table is consulted; for every group the user is a member of a list of <attribute,operator,value> tuples are returned. These tuples are then compared to the attribute/value pairs in the request using the operator specified.
+* If all the check items match, the `radgroupreply` table is consulted, and all attributes listed there for the group are added to the reply.
