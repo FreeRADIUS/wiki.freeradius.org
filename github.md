@@ -87,10 +87,25 @@ Before you start hacking away you must create a new branch. This branch will ser
       git commit --message '<description of changes>'
 * Pull from upstream to make sure there are no conflicts, and to merge the latest commits from the project repository
       git pull --rebase upstream master 
-* Push your changes back to your fork
+* Push changes back to your fork
       git push
       
 #### Rebasing
+Another rather unique feature of Git is the concept of rebasing. Rebase allows you to rewind the state of your repository to an earlier revision, then re-apply ranges of commits. 
+
+In the section above the ``git pull --rebase`` command is used, heres what that command actually does
+* It finds the point of divergence between your branch and the upstream branch you're pulling from
+* rewinds your branch to this point (as if you'd checked out that specific revision)
+* gets a list of commits from this point of divergence to the HEAD on the upstream branch
+* applies those commits to your branch
+* re-applies all your commits from the point of divergence
+
+So long as as there were no _merge conflicts_ your branch should now contain the latest version of the source from the upstream branch and your additional modifications.
+
+##### Fixing up code with interactive rebase
+@todo
+
+##### Merge conflicts
 @todo
 
 ### Generating a pull request
