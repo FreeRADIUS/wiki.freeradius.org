@@ -4,7 +4,7 @@ GitHub is a social coding site allowing many developers to come together and wor
 
 GitHub is based on the Git version control system. What makes Git different from other version control systems (like CVS and SVN), is that there is no need for a central master repository. When you _clone_ (checkout) a repository, you get your own private repository containing all the commits and branches of the original. 
 
-After cloning a repository you can create new branches and commit new revisions completely independently of the _origin_ repository. To distribute and receive changes you can use the _git pull_ (to get new commits from remote repositories), and _git push_ (to send your commits to remote repositories).
+After cloning a repository you can create new branches and commit new revisions completely independently of the _origin_ repository. To distribute and receive changes you can use the ``git pull`` (to get new commits from remote repositories), and ``git push`` (to send your commits to remote repositories).
 
 ## Installing Git
 See [here](http://book.git-scm.com/2_installing_git.html)
@@ -42,9 +42,10 @@ To correct the default commit user.name and user.email, enter the following comm
     git config --global user.email "<Email you used to signup with GitHub>"
 
 ## Forking
-In order to contribute code you must first fork the server. Forking is the process of creating your own copy of the FreeRADIUS repository on GitHub, which you can then clone and _push_ your modifications to.
+In order to contribute code you must first fork the server. Forking is the process of creating your own copy of the FreeRADIUS repository on GitHub, which you can then _clone_ and _push_ your modifications to.
 
 To fork the FreeRADIUS server
+
 * Login to GitHub
 * Go to the [project site](https://github.com/alandekok/freeradius-server)
 * Click the 'Fork' button. 
