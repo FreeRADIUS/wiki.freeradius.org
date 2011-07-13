@@ -49,8 +49,8 @@ It then adds an attribute/value pair to the request where the name of the attrib
 
 If the query did not find anything then the value is the empty string. You can check for this using the unlang statement ``if(Huntgroup-Name == ''){``.
 
-## More examples
-### Combining with SQL authorisation
+# More examples
+## Combining with SQL authorisation
 Suppose you want to only allow the group **site_a_admins** to be used when logging into a NAS' at **site_a** .
 
 Assuming **example_user** was already a member of **site_a_admins**, you would follow the steps below.
