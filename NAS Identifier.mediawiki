@@ -1,4 +1,0 @@
-'''NAS-Identifier''' is one of the basic RADIUS [[attributes]].
-
-See:
-* [http://freeradius.org/rfc/rfc2865.html#NAS-Identifier NAS-Identifier in RFC 2865]
