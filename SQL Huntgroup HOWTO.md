@@ -50,39 +50,37 @@ It then adds an attribute/value pair to the request where the name of the attrib
 If the query did not find anything then the value is the empty string. You can check for this using the unlang statement ``if(Huntgroup-Name == ''){``.
 
 ## More examples
+### Combining with SQL authorisation
 Suppose you want to only allow the group **site_a_admins** to be used when logging into a NAS' at **site_a** .
 
 Assuming **example_user** was already a member of **site_a_admins**, you would follow the steps below.
-
     SELECT * FROM `radusergroup`;
        +--------------+---------------+----------+
        | username     | groupname     | priority |
        +--------------+---------------+----------+
        | example_user | site_a_admins |        0 | 
        +---------------+---------------+----------+
-
 * First add a list of the IP addresses of NAS' at **site_a** into the `radhuntgroup` table.
       INSERT INTO `radhuntgroup` (groupname, nasipaddress) VALUES ("site_a", "192.168.0.10");
       INSERT INTO `radhuntgroup` (groupname, nasipaddress) VALUES ("site_a", "192.168.0.11");
       INSERT INTO `radhuntgroup` (groupname, nasipaddress) VALUES ("site_a", "192.168.0.12");
-
 * Now add an entry in the `radgroupcheck` table which says for the **site_a_admins** group only matches, when a Huntgroup-Name attribute with a value of **site_a** exists in the request.
-
+@todo insert query example
       SELECT * FROM `radgroupcheck`
           +----+----------------+----------------+----+----------+
           | id | groupname      | attribute      | op | value    |
           +----+----------------+----------------+----+----------+
           |  1 | site_a_admins  | Huntgroup-Name | == | site_a   | 
           +----+----------------+----------------+----+----------+
+* @todo reply table example
 
-Lets trace through the sequence of events.
+***
 
-* A new request arrives, in the request are the following attribute/value pairs (along with other attribute/value pairs)
+1. A new request arrives, in the request are the following attribute/value pairs (along with other attribute/value pairs)
       User-Name = "example_user"
       NAS-IP-Address = 192.168.0.10
-
-* The authorize section executes and the "update request" we added performs a SQL query on the `radhuntgroup table`. The variable `%{NAS-IP-Address}` is replaced with the value of NAS-IP-Address in the request.
-* SQL XLAT query runs and matches the first row in our `radhuntgroup` table and returns **site_a** as the huntgroup name. The request is then updated with the attribute/value pair ``Huntgroup-Name = "site_a"``.
-* SQL modules runs. If group checking is enabled the first thing it does is lookup the user name in the radusergroup table. In our example **example_user** is looked up and is found to belong to the group **site_a_admins**.
+1. The authorize section executes and the "update request" we added performs a SQL query on the `radhuntgroup table`. The variable `%{NAS-IP-Address}` is replaced with the value of NAS-IP-Address in the request.
+1. SQL XLAT query runs and matches the first row in our `radhuntgroup` table and returns **site_a** as the huntgroup name. The request is then updated with the attribute/value pair ``Huntgroup-Name = "site_a"``.
+1. SQL modules runs. If group checking is enabled the first thing it does is lookup the user name in the radusergroup table. In our example **example_user** is looked up and is found to belong to the group **site_a_admins**.
 * SQL group check runs. The `radgroupcheck` table is consulted; for every group the user is a member of a list of <attribute,operator,value> tuples are returned. These tuples are then compared to the attribute/value pairs in the request using the operator specified.
 * If all the check items match, the `radgroupreply` table is consulted, and all attributes listed there for the group are added to the reply.
