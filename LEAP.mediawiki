@@ -1,4 +1,4 @@
-#Lightweight Extensible Authentication Protocol
+# Lightweight Extensible Authentication Protocol
 
 The '''Lightweight Extensible Authentication Protocol''' (LEAP) is a proprietary wireless LAN authentication method developed by Cisco Systems.  Important features of LEAP are dynamic [[WEP]] keys and mutual [[authentication]] (between a wireless client and a [[RADIUS]] server). LEAP allows for clients to reauthenticate frequently; upon each successful authentication, the clients acquire a new WEP key (with the hope that the WEP keys don't live long enough to be cracked).
 
