@@ -6,7 +6,7 @@ Huntgroups provide a mechanism to group NAS's into groups. Each NAS can be a mem
 During request processing the Huntgroup-Name attribute can be checked to make decisions about how to handle the request. For example you may want to restrict the authentication mechansim based on the type of NAS.
 
 ## Using unlang to emulate huntgroup behaviour in SQL
-Traditionally in FreeRADIUS huntgroups were implemented in the preprocess module (rlm_preprocess) which at start up read the configuration file /etc/raddb/huntgroups to associate each NAS with a huntgroup. But what if you want to configure FreeRADIUS to use SQL to store your data for users, groups, NAS's, etc? It would be awkward to have to rely on a flat file for huntgroups when everything else is in SQL.
+Traditionally in FreeRADIUS huntgroups were implemented in the preprocess module (rlm_preprocess), which on start up, read the configuration file /etc/raddb/huntgroups to associate each NAS with a huntgroup. This worked well for configurations using flat files, but if your configuration relied heavily on SQL, it was a bit awkward.
 
 With the introduction of ulang in FreeRADIUS 2.0 it is easy to implement huntgroups using SQL XLAT. This example uses MySQL as the backend database, but it's easy to adjust for another SQL server.
 
