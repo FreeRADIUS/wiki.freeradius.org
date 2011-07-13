@@ -17,7 +17,7 @@ Another advantage of having a GitHub account is its one of the providers this wi
 ## Authorising your local machine to talk to GitHub
 In order to let your local machine talk to GitHub, you must first lodge the public portion of a RSA keypair with the GitHub servers.
 
-### What is an RSA keypair?
+### What is a RSA keypair?
 See [here](http://en.wikipedia.org/wiki/Public-key_cryptography) and [here](http://en.wikipedia.org/wiki/RSA)
 ### How do I generate a keypair?
 If you're using Mac OSX or Linux use the following command
