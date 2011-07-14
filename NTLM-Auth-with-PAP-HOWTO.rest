@@ -4,7 +4,7 @@ NTLM Auth with PAP
 Setting up ntlm_auth
 ===============
 
-To setup NTLM Auth against Active Directory, Follow the guide [[here|http://deployingradius.com/documents/configuration/active_directory.html]]. Once you have ntlm_auth working correctly via the exec module you can continue with these instructions.
+To setup ntlm_auth against Active Directory, follow this guide [[here|http://deployingradius.com/documents/configuration/active_directory.html]]. Once you have ntlm_auth working correctly via the exec module, you can continue with these instructions.
 
 Using ntlm_auth in place of PAP
 =======================
