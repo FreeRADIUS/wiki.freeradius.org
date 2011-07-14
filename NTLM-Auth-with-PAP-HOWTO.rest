@@ -1,0 +1,42 @@
+NTLM Auth with PAP
+------------------------
+
+Setting up ntlm_auth
+===============
+
+To setup NTLM Auth against Active Directory, Follow the guide [[here|http://deployingradius.com/documents/configuration/active_directory.html]]. Once you have ntlm_auth working correctly via the exec module you can continue with these instructions.
+
+Using ntlm_auth in place of PAP
+=======================
+Creating an 'ntlm_auth' exec instance does not instruct the server to actually use ntlm_auth when it gets a request that could be authenticated by it (e.g. a request containing a User-Password attribute).
+
+With the default config, the pap module in the ``authorize {}`` section will be called, will see that there's a User-Password attribute in the request and set the Auth-Type to PAP. In the ``authenticate{ Auth-Type PAP {} }`` section the PAP module will again be called, see that there's no credentials added to check the User-Password value against, and reject the user.
+
+The simplest way to get PAP working with ntlm_auth is to edit the ``authenticate{ Auth-Type PAP {} }`` so that instead of calling the pap module for authentication, it instead calls the ntlm_auth instance of the exec module.
+
+To do this, change
+::
+
+    authenticate {
+        ...
+        Auth-Type PAP {
+            pap
+        }
+        ...
+    }
+
+To
+
+::
+
+    authenticate {
+        ...
+        Auth-Type PAP {
+            ntlm_auth
+        }
+        ...
+    }
+
+Now whenever the PAP module listed in ``authorize {}`` thinks the servers processing a PAP request, ntlm_auth will be called instead.
+
+Note: For this to work the pap module **must** be listed in the authorize section, so that it can set the Auth-type correctly.
