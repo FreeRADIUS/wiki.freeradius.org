@@ -9,7 +9,7 @@ To enable LDAP in your FreeRADIUS server, you can:
 
 {{Default in the server source|doc/rlm_ldap}}
 
-===LDAP ATTRIBUTES===
+# LDAP ATTRIBUTES
 
 The mapping between RADIUS [[attributes]] and [[LDAP]] attributes is in raddb/ldap.attrmap. You can edit that file and add any new mapping that you may need. The LDAP-schema file is located in doc/RADIUS-LDAPv3.schema. Before adding any radius attributes the ldap server schema should be updated.
 
@@ -22,7 +22,7 @@ radiusCheckItem and radiusReplyItem are special. They allow the administrator to
 For Example:
  radiusReplyItem: Cisco-AVPair := "ip:addr-pool=dialin_pool"
 
-===CONFIGURATION===
+## CONFIGURATION
 
 The following setup controls the rlm_ldap module.
 
@@ -177,7 +177,7 @@ The following setup controls the rlm_ldap module.
 </pre>
 <p class="P10">NOTE: As LDAP is case insensitive, you should probably also set "lower_user = yes" and "lower_time = before" in main section of radiusd.conf, to get limits on simultaneous logins working correctly. Otherwise, users will be able get large number of sessions, capitalizing parts of their login names.</p>
 
-====LDAP Module Messages====
+### LDAP Module Messages
 
 On user rejection rlm_ldap will return the following module messages:
  "rlm_ldap: User not found" "rlm_ldap: Access Attribute denies access" 
@@ -185,7 +185,7 @@ On user rejection rlm_ldap will return the following module messages:
 
 These messages will be visible in radius.log as additional information in "Login incorrect" and "Invalid user" log messages.
 
-====LDAP xlat====
+### LDAP xlat
 
 The ldap module now supports LDAP URLs in xlat strings. That is you can now add LDAP URLs in the configuration options and hopefully shortly also in the users file. The strings will be of the following form:
  %{ldap:ldap:///dc=company,dc=com?uid?sub?uid=%u}
@@ -194,39 +194,51 @@ The requested attributes list MUST contain only ONE attribute. In case this attr
 For example:
  ${ldap_company1:ldap:///dc=company1,dc=com?uid?sub?uid=%u}
 
-====User-Profile Attribute====
+### User-Profile Attribute
 
 The module can use the User-Profile attribute. If it is set, it will assume that it contains the DN of a profile entry containing radius attributes. This entry will _replace_ the default profile directive. That way we can use different profiles based on checks on the radius attributes contained in the Access-Request packets. For example (users file):
- DEFAULT Service-Type == Outbound-User, User-Profile := "uid=outbound-dialup,dc=company,dc=com"
+DEFAULT Service-Type == Outbound-User, User-Profile := "uid=outbound-dialup,dc=company,dc=com"
 
-====Group Support====
+### Group Support
 
 The module supports searching for ldap groups by use of the Ldap-Group attribute. As long as the module has been instanciated it can be used to do group membership checks through other modules. For example in the users file:
 
-: DEFAULT Ldap-Group == "disabled", Auth-Type := Reject
-:: Reply-Message = "Sorry, you are not allowed to have dialup access"
+<pre>
+DEFAULT Ldap-Group == "disabled", Auth-Type := Reject
+  Reply-Message = "Sorry, you are not allowed to have dialup access"
+</pre>
 
 DNs are also accepted as Ldap-Group values, i.e.:
 
-: DEFAULT Ldap-Group == "cn=disabled,dc=company,dc=com", Auth-Type := Reject
-:: Reply-Message = "Sorry, you are not allowed to have dialup access"
+<pre>
+DEFAULT Ldap-Group == "cn=disabled,dc=company,dc=com", Auth-Type := Reject
+  Reply-Message = "Sorry, you are not allowed to have dialup access"
+</pre>
 
 Also if you are using multiple ldap module instances a per instance Ldap-Group attribute is registered and can be used. It is of the form &lt;instance_name&gt;-Ldap-Group. In other words if in radiusd.conf we configure an ldap module instance like:
 
+<pre>
  ldap myname { [...] } 
+</pre>
 
 we can then use the myname-Ldap-Group attribute to match user groups. Make sure though that the ldap module is instantiated before the files module so that it will have time to register the corresponding attribute. One solution would be to add the ldap module in the instantiate{} block in radiusd.conf
 
-====USERDN Attribute====
+### USERDN Attribute
 
 When rlm_ldap has found the DN corresponding to the username provided in the access-request (all this happens in the authorize section) it will add an Ldap-UserDN attribute in the check items list containing that DN. The attribute will be searched for in the authenticate section and if present will be used for authentication (ldap bind with the user DN/password). Otherwise a search will be performed to find the user dn. If the administrator wishes to use rlm_ldap only for authentication or does not wish to populate the identity,password configuration attributes he can set this attribute by other means and avoid the ldap search completely. For instance it can be set through the users file in the authorize section:
  DEFAULT Ldap-UserDN := `uid=%{User-Name},ou=people,dc=company,dc=com`
 
-====Directory Compatibility====
+### Directory Compatibility
 
 If you use LDAP only for authorization and authentication (e.g. you can not afford schema extension), we suggest you set all necessary attributes in raddb/users file with following authorize section of radiusd.conf :
- authorize { ldap { notfound = return } files  }
+<pre>
+ authorize {
+  ldap {
+    notfound = return
+  }
+  files
+}
 
-==See Also==
+# See Also
 
 * [[LDAP]]
