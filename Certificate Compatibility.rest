@@ -1,10 +1,12 @@
+Certificate Compatibility
+=================
 The certificates created using the scripts in the "raddb/certs" directory are known to be compatible
 with ALL operating systems.
 
 If you see the server send an Access-Challenge, and the client never sends another Access-Request,
 then
 
-**'''''STOP!'''''**
+**STOP!**
 
 The supplicant (client PC) has decided that it doesn't like the server, and has failed to continue the EAP conversation.  This usually happens because the client is a WIndows machine, and you did not follow the recommended way to create and install server certificates.
 
@@ -19,7 +21,7 @@ For additional Windows XP SP2 issues, see:
 
 The long description of the likely causes is below
 
-* Windows requires certain OID's in the certificates.  If it doesn't see them, it will stop doing EAP.  The most visibile effect is that the client starts EAP, gets a few Access-Challenge packets, and then a little while later re-starts EAP.  If this happens, see the [[FAQ#PEAP_or_EAP-TLS_Doesn.27t_Work_with_a_Windows_machine|FAQ]], and the comments in raddb/eap.conf for how to fix it.
+* Windows requires certain OID's in the certificates.  If it doesn't see them, it will stop doing EAP.  The most visibile effect is that the client starts EAP, gets a few Access-Challenge packets, and then a little while later re-starts EAP.  If this happens, see the [[FAQ|http://wiki.freeradius.org/FAQ#PEAP+or+EAP-TLS+Doesn%27t+Work+with+a+Windows+machine]], and the comments in raddb/eap.conf for how to fix it.
 
 * Windows requires the root certificates to be on the client PC.  If it doesn't have them, you will see the same issue as above.
 
@@ -39,7 +41,8 @@ For detailed instructions on how to configure EAP, see:
 
 http://deployingradius.com/documents/configuration/eap.html
 
-=EAP Session did not finish=
+EAP Session did not finish
+-------------------------------
 
 If you are running version 2.1.10 or later, you may see the following message::
 
