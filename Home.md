@@ -53,7 +53,7 @@ There are many third-party web sites and HOWTO's that give advice on FreeRADIUS.
 
 The following is an overview of the types of information available:
 
-* [[Installation]]
+* [[Installation|Build]]
 * [[Configuration]]
 * [[Base Modules|List of Modules]]
 * Creating your own [[Modules for FreeRADIUS Version 2|Modules2]]
