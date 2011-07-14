@@ -14,7 +14,7 @@ With the default config, when the server receives a request and enters the ``aut
 
 Next in the ``authenticate{ Auth-Type PAP {} }`` section, the PAP module will again be called, see that there's no credentials added to check the User-Password value against, and reject the user.
 
-The simplest way to get PAP working with ntlm_auth is to edit the ``authenticate{ Auth-Type PAP {} }`` section so that instead of calling the pap module for authentication, it instead calls the ntlm_auth instance of the exec module.
+The simplest way to get PAP working with ntlm_auth is to edit the ``authenticate{ Auth-Type PAP {} }`` section, so that instead of calling the pap module for authentication, it instead calls the ntlm_auth instance of the exec module.
 
 To do this, change
 ::
