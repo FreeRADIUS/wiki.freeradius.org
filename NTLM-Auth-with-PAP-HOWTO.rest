@@ -8,7 +8,7 @@ To setup ntlm_auth against Active Directory, follow this guide [[here|http://dep
 
 Using ntlm_auth in place of PAP
 =======================
-Creating an 'ntlm_auth' exec instance does not instruct the server to actually use ntlm_auth when it gets a request that could be authenticated by it (e.g. a request containing a User-Password attribute).
+Creating an ntlm_auth exec instance does not instruct the server to actually use ntlm_auth when it gets a request that could be authenticated by it (e.g. a request containing a User-Password attribute).
 
 With the default config, when the server receives a request and enters the ``authorize {}`` section the pap module will be called. The pap module will check to see if a User-Password attribute is present in the request, and if it is, will set the Auth-Type to PAP. 
 
