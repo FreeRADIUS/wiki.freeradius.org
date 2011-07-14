@@ -14,8 +14,9 @@ All ldap entries containing radius attributes should contain at least "objectcla
 
 radiusCheckItem and radiusReplyItem are special. They allow the administrator to add any check or reply item respectively without adding it in the ldap schema. The format should be:
 <pre>
- <ldap-attribute>: <radius-attribute> <operator> <value>
+ ldap-attribute: radius-attribute operator value
 </pre>
+
 For Example:
 <pre>
  radiusReplyItem: Cisco-AVPair := "ip:addr-pool=dialin_pool"
