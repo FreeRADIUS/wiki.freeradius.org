@@ -1,1 +1,0 @@
-How to upgrade freeradius from 1.13 to 2.1.11
