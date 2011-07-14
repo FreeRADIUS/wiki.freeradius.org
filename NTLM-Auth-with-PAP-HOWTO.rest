@@ -5,8 +5,8 @@ This guide assumes you have already have ntlm_auth configured correctly and work
 
 FreeRADIUS 2.1.11 and later
 ---------------------------
-1. Edit raddb/modules/ntlm_auth to contain the correct path and domain
-2. Add the following to raddb/policy.conf
+1. Edit 'raddb/modules/ntlm_auth' to contain the correct path and domain
+2. Add the following to 'raddb/policy.conf'
 ::
 
     policy {
@@ -20,7 +20,7 @@ FreeRADIUS 2.1.11 and later
             }
         }
     }
-3. Add the following to your outer server ('raddb/sites-enabled/default' is the default)
+3. Add the following to your outer server ('raddb/sites-enabled/default' by default)
 ::
 
     authorize {
@@ -42,8 +42,8 @@ Use **one** of the methods listed below
 
 Unlang-based
 ~~~~~~~~~~~~
-1. Edit raddb/modules/ntlm_auth to contain the correct path and domain
-2. Add the following to your outer server ('raddb/sites-enabled/default' is the default)
+1. Edit 'raddb/modules/ntlm_auth' to contain the correct path and domain
+2. Add the following to your outer server ('raddb/sites-enabled/default' by default)
 ::
 
     authorize {
@@ -64,8 +64,8 @@ Unlang-based
 
 Using the PAP module
 ~~~~~~~~~~~~~~~~~~~~
-1. Edit raddb/modules/ntlm_auth to contain the correct path and domain
-2. Add the following to your outer server ('raddb/sites-enabled/default' is the default)
+1. Edit 'raddb/modules/ntlm_auth' to contain the correct path and domain
+2. Add the following to your outer server ('raddb/sites-enabled/default' by default)
 ::
 
     authorize {
