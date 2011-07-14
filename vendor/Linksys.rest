@@ -23,14 +23,15 @@ Administrative Access
 Quite likely, at some point you will also need administrative access to your Linksys (Even if only to disable RADIUS Authentication). This requires that you send "Service-Type = Administrative-User" to the device as a reply attribute. (I cannot find this documented ANYWHERE on the Linksys website!)
 
 You can do this with an entry in your users file similar to the following
+::
 
- youruser   Cleartext-Password := "somepass"
-            Service-Type = Administrative-User
+    youruser   Cleartext-Password := "somepass"
+        Service-Type = Administrative-User
 
 Problems
 =======
 
-According to [https://list.xs4all.nl/pipermail/freeradius-users/2006-November/058449.html some reports], the Linksys family of equipment does not honor the [http://freeradius.org/rfc/rfc2865.html#Session-Timeout Session-Timeout] attribute.
+According to [[some reports|https://list.xs4all.nl/pipermail/freeradius-users/2006-November/058449.html]], the Linksys family of equipment does not honor the [[Session-Timeout|http://freeradius.org/rfc/rfc2865.html#Session-Timeout]] attribute.
 
 See Also
 =======
