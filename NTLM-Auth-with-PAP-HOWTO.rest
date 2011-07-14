@@ -25,7 +25,7 @@ FreeRADIUS 2.1.11 and later
 ::
 
     authorize {
-    ...
+        ...
         ntlm_auth
     }
     
@@ -33,7 +33,7 @@ FreeRADIUS 2.1.11 and later
         Auth-Type ntlm_auth {
             ntlm_auth
         }
-    ...
+        ...
     }
 
 FreeRADIUS 2.1.10 and earlier
