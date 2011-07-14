@@ -7,7 +7,7 @@ A read only version of the wiki can be checked out using git:
 ## Overview
 [[FreeRADIUS]] is a modular, high performance and feature-rich [[RADIUS]] suite including [[server|radiusd]], [[radius client|radiusclient]], development libraries and numerous additional [[RADIUS]] related utilities.
 
-As the premiere open source RADIUS suite it is included as a [[standard package]] with numerous Operating Systems, has [[binary packages]] for many others and has source available which is known to [[build]] on almost anything. Production deployments include large scale installations comprising multiple [[AAA]] servers with over ten million users and millions of requests per day. It supports request [[proxying|proxy]], with [[fail-over]] and [[load balancing]], as well as the ability to access many types of back-end [[databases]]. Different classes of [[Authentication]] requests can trigger access of different [[Authentication]] and [[Authorization]] [[databases]] (with cascaded fall back), and [[Accounting]] records can be simultaneously recorded in multiple different storage [[databases]] and [[directories]].
+As the premiere open source RADIUS suite it is included as a [[standard package|packages]] with numerous Operating Systems, has binary packages for many others and has source available which is known to [[build]] on almost anything. Production deployments include large scale installations comprising multiple [[AAA]] servers with over ten million users and millions of requests per day. It supports request [[proxying|proxy]], with [[fail-over]] and [[load balancing]], as well as the ability to access many types of back-end databases. Different classes of [[Authentication]] requests can trigger access of different [[Authentication]] and [[Authorization]] databases (with cascaded fall back), and [[Accounting]] records can be simultaneously recorded in multiple different storage databases and directories.
 
 [[Other RADIUS Servers]] are available.
 
@@ -69,4 +69,4 @@ For beginners, there is also a short [[Concepts]] page, which can help clarify h
 ## Contributing
 FreeRADIUS is an open source project and as such depends on contributions from its users. Even if you don't know C you can still contribute to the project by editing documentation on the wiki, posting bugs on [[GitHub|https://github.com/alandekok/freeradius-server/issues]] or helping out on the [[users mailing list|http://wiki.freeradius.org/Mailing-list#Users+list]].
 
-If you are comfortable coding in C, and have a patch or new module you'd like to see included in the main distribution, please see the [[submitting patches via GitHub|GitHub]] page for instructions on generating a 'pull request'.
+If you are comfortable coding in C and have a patch or new module you'd like to see included in the main distribution, please see the [[submitting patches via GitHub|GitHub]] page for instructions on generating a 'pull request'.
