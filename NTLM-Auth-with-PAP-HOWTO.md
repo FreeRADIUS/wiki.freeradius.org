@@ -8,8 +8,8 @@ Do the following:
 2. Add the following to raddb/policy.conf:
 <pre>
 policy {
-  # override the ntlm_auth exec module to set Auth-Type to itself
-  # but only if it's a valid PAP request, and Auth-Type in unset
+  # give the ntlm_auth exec module and "authorize" method that sets Auth-Type to itself
+  # but only if it's a valid PAP request, and Auth-Type is not already set to something
   ntlm_auth.authorize {
     if (!control:Auth-Type && User-Password) {
       update control {
