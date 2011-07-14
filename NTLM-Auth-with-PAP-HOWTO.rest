@@ -20,7 +20,7 @@ FreeRADIUS 2.1.11 and later
             }
         }
     }
-3. Add the following to your outer server (``raddb/sites-enabled/default`` is the default)
+3. Add the following to your outer server ('raddb/sites-enabled/default' is the default)
 ::
 
     authorize {
@@ -43,7 +43,7 @@ Use **one** of the methods listed below
 Unlang-based
 ~~~~~~~~~~~~
 1. Edit raddb/modules/ntlm_auth to contain the correct path and domain
-2. Add the following to your outer server (``raddb/sites-enabled/default`` is the default)
+2. Add the following to your outer server ('raddb/sites-enabled/default' is the default)
 ::
 
     authorize {
@@ -65,7 +65,7 @@ Unlang-based
 Using the PAP module
 ~~~~~~~~~~~~~~~~~~~~
 1. Edit raddb/modules/ntlm_auth to contain the correct path and domain
-2. Add the following to your outer server (``raddb/sites-enabled/default`` is the default)
+2. Add the following to your outer server ('raddb/sites-enabled/default' is the default)
 ::
 
     authorize {
