@@ -454,6 +454,13 @@ _Note: Enabling the use of GVRP vlans is optional._
     # This improves compatibility with devices that use WOL
     aaa port-access <port range> controlled-direction in
 
+### Enable Accounting
+
+    aaa accounting exec start-stop radius
+    aaa accounting network start-stop radius
+    aaa accounting system start-stop radius
+    aaa accounting update periodic 15
+
 ###### Hints and tips
 * If dual authentication is used with different logoff-period timer values, timer behaviour is unpredictable.
 In older versions of K series firmware, and all other branches, the logoff-period timer for both 802.1X and WMA was implemented using a single H/W timer. If different values were used for the logoff-period timers in 802.1X and WMA, the timer would reflect the value set by the last authenticator to be initialised. For predictable behavior it is higly recommended that the same value be used for both, if either of the authenticator logoff-period timers are changed from their default of 300 seconds.
@@ -463,13 +470,6 @@ In older versions of K series firmware, and all other branches, the logoff-perio
 * The default logoff-period is too low for embedded devices such as printers that may 'sleep' for long periods; if the value is not increased devices that enter a sleep/power-saving mode may become unreachable. It's recommended that devices using Mac-Auth also run a DHCP client, to ensure that they periodically wake up and send packets to the authenticating switch, thus keeping their session alive.
 
 * For security reasons it's better to implement dual authentication with 802.1X and Mac-Auth instead of configuring an unauth-vid. This allows the RADIUS server ultimate control over whether data from a device is allowed to ingress onto the network.
-
-### Enable Accounting
-
-    aaa accounting exec start-stop radius
-    aaa accounting network start-stop radius
-    aaa accounting system start-stop radius
-    aaa accounting update periodic 15
 
 ## Configuration - WAP 530
 
