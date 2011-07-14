@@ -35,4 +35,44 @@ authenticate {
 
 # Earlier versions
 
-TODO
+## Unlang-based
+
+Do the following:
+
+1. Edit raddb/modules/ntlm_auth to contain the correct path and domain
+2. Add the following to raddb/sites-enabled/XXX:
+<pre>
+authorize {
+  ...
+  if (!control:Auth-Type && User-Password) {
+    update control {
+      Auth-Type := ntlm_auth
+    }
+  }
+}
+authenticate {
+  Auth-Type ntlm_auth {
+    ntlm_auth
+  }
+ ...
+}
+</pre>
+
+## Using PAP module
+
+Do the following:
+
+1. Edit raddb/modules/ntlm_auth to contain the correct path and domain
+2. Add the following to raddb/sites-enabled/XXX:
+<pre>
+authorize {
+  ...
+  pap
+}
+authenticate {
+  Auth-Type PAP {
+    ntlm_auth
+  }
+ ...
+}
+</pre>
