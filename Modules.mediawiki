@@ -1,5 +1,0 @@
-See:
-
-* [[Modules2]] - for the current FreeRADIUS version 2.x
-
-* [[Modules1]] - for the old FreeRADIUS version 1.x

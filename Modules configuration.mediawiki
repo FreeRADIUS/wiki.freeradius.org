@@ -1,8 +1,0 @@
-The FreeRADIUS 2.1.x+ [[modules]] have configuration put in the modules/ subdirectory of the main configuration directory. One file is used per module.
-
-This is then $INCLUDE'd from [[radiusd.conf]].
-
-{{Default in the server source|raddb/modules/}}
-
-For the actual modules and their configurations, please refer to:
-* [[List of modules]]
