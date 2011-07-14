@@ -1,3 +1,5 @@
+## But what was wrong with the old wiki?
+
 One of the largest complaints with FreeRADIUS is the lack of comprehensive documentation.
 
 The previous wiki  has served its purpose, but has ultimately failed to provide an up-to-date, well organised source of documentation.
