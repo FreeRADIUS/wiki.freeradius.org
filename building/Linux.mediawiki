@@ -19,8 +19,7 @@ FreeRADIUS is expected to be compatible with all [http://www.linux.org/ Linux]  
 *** openSUSE 10.3
 *** openSUSE 11
 * Ubuntu (all current releases)
-* CentOS 5.0 (v 1.1.3)
-* CentOS 5.1 (v 1.1.3)
+* CentOS 5.x (v 1.1.3) (also, FreeRadius 2.1.7 is available via: yum install freeradius2)
 
 ==Linux Distributions Confirmed to work with FreeRADIUS==
 
@@ -31,5 +30,4 @@ FreeRADIUS is expected to be compatible with all [http://www.linux.org/ Linux]  
 * Fedora Core 7
 * Slackware 10.2
 * Slackware 11
-* CentOS 5.0
-* CentOS 5.1
+* CentOS 5.x
