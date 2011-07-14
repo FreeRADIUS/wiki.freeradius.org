@@ -1,20 +1,14 @@
 The '''rlm_ldap''' FreeRADIUS module enables authentication via [[LDAP]].
 
-{{Default in the server source|src/modules/rlm_ldap/}}
-
 To enable LDAP in your FreeRADIUS server, you can:
 
 * instantiate an ldap module - which sets up the server name, the base DN, etc
 * authenticate using an ldap module instance - which makes the FreeRADIUS server verify the user's identity in the LDAP directory, usually involving some form of checking the validity of the password
 * authorize using an ldap module instance - which makes the FreeRADIUS server verify the user's level of authorization in the LDAP directory, usually involving verifying group membership or similar
 
-{{Default in the server source|doc/rlm_ldap}}
-
 # LDAP ATTRIBUTES
 
 The mapping between RADIUS [[attributes]] and [[LDAP]] attributes is in raddb/ldap.attrmap. You can edit that file and add any new mapping that you may need. The LDAP-schema file is located in doc/RADIUS-LDAPv3.schema. Before adding any radius attributes the ldap server schema should be updated.
-
-{{Default in the server source|raddb/ldap.attrmap}}
 
 All ldap entries containing radius attributes should contain at least "objectclass: radiusprofile"
 
@@ -30,8 +24,6 @@ For Example:
 ## CONFIGURATION
 
 The following setup controls the rlm_ldap module.
-
-{{Default in the server source|raddb/modules/ldap}}
 
 <pre>
 	# Lightweight Directory Access Protocol (LDAP)
@@ -209,7 +201,9 @@ For example:
 ### User-Profile Attribute
 
 The module can use the User-Profile attribute. If it is set, it will assume that it contains the DN of a profile entry containing radius attributes. This entry will _replace_ the default profile directive. That way we can use different profiles based on checks on the radius attributes contained in the Access-Request packets. For example (users file):
+<pre>
 DEFAULT Service-Type == Outbound-User, User-Profile := "uid=outbound-dialup,dc=company,dc=com"
+</pre>
 
 ### Group Support
 
