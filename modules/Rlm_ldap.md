@@ -179,8 +179,10 @@ The following setup controls the rlm_ldap module.
 ### LDAP Module Messages
 
 On user rejection rlm_ldap will return the following module messages:
- "rlm_ldap: User not found" "rlm_ldap: Access Attribute denies access" 
- "rlm_ldap: Bind as user failed"
+
+* rlm_ldap: User not found
+* rlm_ldap: Access Attribute denies access
+* rlm_ldap: Bind as user failed
 
 These messages will be visible in radius.log as additional information in "Login incorrect" and "Invalid user" log messages.
 
