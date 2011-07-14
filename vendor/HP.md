@@ -461,7 +461,7 @@ _Note: Enabling the use of GVRP vlans is optional._
     aaa accounting system start-stop radius
     aaa accounting update periodic 15
 
-###### Hints and tips
+### Hints and tips
 * If dual authentication is used with different logoff-period timer values, timer behaviour is unpredictable.
 In older versions of K series firmware, and all other branches, the logoff-period timer for both 802.1X and WMA was implemented using a single H/W timer. If different values were used for the logoff-period timers in 802.1X and WMA, the timer would reflect the value set by the last authenticator to be initialised. For predictable behavior it is higly recommended that the same value be used for both, if either of the authenticator logoff-period timers are changed from their default of 300 seconds.
 
