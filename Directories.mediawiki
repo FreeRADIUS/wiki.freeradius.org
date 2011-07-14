@@ -1,4 +1,0 @@
-FreeRADIUS currently supports directory lookups with [[LDAP]]. It is known to work with:
-* eDirectory
-* Fedora Directory Server
-* OpenLDAP

@@ -1,3 +1,0 @@
-FreeRADIUS supports a variety of [[SQL]] database connection types.
-
-Please see the [[rlm_sql#Back-end Drivers|list of database back-ends to the FreeRADIUS SQL module]].
