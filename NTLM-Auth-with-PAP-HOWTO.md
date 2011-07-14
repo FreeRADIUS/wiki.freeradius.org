@@ -1,6 +1,6 @@
 If you are already using Samba/ntlm_auth to check EAP/MSCHAP requests, you might also want to authenticate PAP
 
-# FreeRADIUS 2.1.11
+# FreeRADIUS 2.1.11 and later
 
 Do the following:
 
