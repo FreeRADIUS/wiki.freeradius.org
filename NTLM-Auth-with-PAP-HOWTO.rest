@@ -1,0 +1,83 @@
+NTLM Auth with PAP
+==================
+
+This guide assumes you have already have ntlm_auth configured correctly and working.  If you haven't and need instructions on setting it up, follow the guide [[here|http://deployingradius.com/documents/configuration/active_directory.html]]  . 
+
+FreeRADIUS 2.1.11 and later
+---------------------------
+
+Do the following:
+
+1. Edit raddb/modules/ntlm_auth to contain the correct path and domain
+2. Add the following to raddb/policy.conf
+::
+
+    policy {
+        # Give the ntlm_auth exec module an "authorize" method that sets Auth-Type to itself
+        # but only if it's a valid PAP request, and Auth-Type is not already set to something
+        ntlm_auth.authorize {
+            if (!control:Auth-Type && User-Password) {
+                update control {
+                   Auth-Type := ntlm_auth
+                }
+            }
+        }
+    }
+
+3. Add the following to raddb/sites-enabled/default
+::
+
+    authorize {
+    ...
+        ntlm_auth
+    }
+    
+    authenticate {
+        Auth-Type ntlm_auth {
+            ntlm_auth
+        }
+    ...
+    }
+
+FreeRADIUS 2.1.10 and earlier
+-----------------------------
+
+Unlang-based
+~~~~~~~~~~~~
+1. Edit raddb/modules/ntlm_auth to contain the correct path and domain
+2. Add the following to your outer server (by default: raddb/sites-enabled/default)
+::
+
+    authorize {
+       ...
+        if (!control:Auth-Type && User-Password) {
+            update control {
+                Auth-Type := ntlm_auth
+            }
+        }
+    }
+    
+    authenticate {
+        Auth-Type ntlm_auth {
+            ntlm_auth
+        }
+        ...
+    }
+
+Using the PAP module
+~~~~~~~~~~~~~~~~~~~~
+1. Edit raddb/modules/ntlm_auth to contain the correct path and domain
+2. Add the following to your outer server (by default: raddb/sites-enabled/default)
+::
+
+    authorize {
+        ...
+        pap
+    }
+
+    authenticate {
+        Auth-Type PAP {
+            ntlm_auth
+        }
+        ...
+    }
