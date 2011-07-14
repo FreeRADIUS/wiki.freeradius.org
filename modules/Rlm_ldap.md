@@ -3,6 +3,7 @@ The '''rlm_ldap''' FreeRADIUS module enables authentication via [[LDAP]].
 {{Default in the server source|src/modules/rlm_ldap/}}
 
 To enable LDAP in your FreeRADIUS server, you can:
+
 * instantiate an ldap module - which sets up the server name, the base DN, etc
 * authenticate using an ldap module instance - which makes the FreeRADIUS server verify the user's identity in the LDAP directory, usually involving some form of checking the validity of the password
 * authorize using an ldap module instance - which makes the FreeRADIUS server verify the user's level of authorization in the LDAP directory, usually involving verifying group membership or similar
@@ -18,9 +19,13 @@ The mapping between RADIUS [[attributes]] and [[LDAP]] attributes is in raddb/ld
 All ldap entries containing radius attributes should contain at least "objectclass: radiusprofile"
 
 radiusCheckItem and radiusReplyItem are special. They allow the administrator to add any check or reply item respectively without adding it in the ldap schema. The format should be:
+<pre>
  <ldap-attribute>: <radius-attribute> <operator> <value>
+</pre>
 For Example:
+<pre>
  radiusReplyItem: Cisco-AVPair := "ip:addr-pool=dialin_pool"
+</pre>
 
 ## CONFIGURATION
 
@@ -175,7 +180,8 @@ The following setup controls the rlm_ldap module.
 		# set_auth_type = yes
 	}
 </pre>
-<p class="P10">NOTE: As LDAP is case insensitive, you should probably also set "lower_user = yes" and "lower_time = before" in main section of radiusd.conf, to get limits on simultaneous logins working correctly. Otherwise, users will be able get large number of sessions, capitalizing parts of their login names.</p>
+
+**NOTE**: As LDAP is case insensitive, you should probably also set "lower_user = yes" and "lower_time = before" in main section of radiusd.conf, to get limits on simultaneous logins working correctly. Otherwise, users will be able get large number of sessions, capitalizing parts of their login names.</p>
 
 ### LDAP Module Messages
 
@@ -188,11 +194,17 @@ These messages will be visible in radius.log as additional information in "Login
 ### LDAP xlat
 
 The ldap module now supports LDAP URLs in xlat strings. That is you can now add LDAP URLs in the configuration options and hopefully shortly also in the users file. The strings will be of the following form:
+<pre>
  %{ldap:ldap:///dc=company,dc=com?uid?sub?uid=%u}
+</pre>
 The requested attributes list MUST contain only ONE attribute. In case this attribute is multi valued which value is returned is considered UNDEFINED. Also, adding the host:port information SHOULD be avoided unless there are more than one ldap module instances in which case the host,port information can be used to distinguish which module will actually return the information (the xlat function will return NULL if the host,port information does not correspond to the configured attributes).  If there are more than one instances the module instance name can be used instead of the string 'ldap' before the ldap url to decide which instance will return the information. That is the xlat string will be of the form:
+<pre>
  %{$instance_name:ldap:///dc=comapny,dc=com?uid?sub?uid=%u}
+</pre>
 For example:
- ${ldap_company1:ldap:///dc=company1,dc=com?uid?sub?uid=%u}
+<pre>
+ %{ldap_company1:ldap:///dc=company1,dc=com?uid?sub?uid=%u}
+</pre>
 
 ### User-Profile Attribute
 
@@ -226,7 +238,9 @@ we can then use the myname-Ldap-Group attribute to match user groups. Make sure 
 ### USERDN Attribute
 
 When rlm_ldap has found the DN corresponding to the username provided in the access-request (all this happens in the authorize section) it will add an Ldap-UserDN attribute in the check items list containing that DN. The attribute will be searched for in the authenticate section and if present will be used for authentication (ldap bind with the user DN/password). Otherwise a search will be performed to find the user dn. If the administrator wishes to use rlm_ldap only for authentication or does not wish to populate the identity,password configuration attributes he can set this attribute by other means and avoid the ldap search completely. For instance it can be set through the users file in the authorize section:
+<pre>
  DEFAULT Ldap-UserDN := `uid=%{User-Name},ou=people,dc=company,dc=com`
+</pre>
 
 ### Directory Compatibility
 
