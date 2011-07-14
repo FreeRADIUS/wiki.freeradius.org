@@ -14,6 +14,7 @@ But what about spam and registration? Well by default gollum doesn't authenticat
 
 This allows us to leverage authentication and spam account prevention services of providers like GitHub, Facebook and Twitter.
 
+## Helping out
 Unfortunately the new wiki needs some fixes. The mediawiki page format renderer in gollum isn't perfect, so we need to convert the pages which don't render correctly to RST as a priority.
 
 If you want to help out, please do the following:
