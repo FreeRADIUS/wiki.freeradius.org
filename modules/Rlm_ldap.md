@@ -249,7 +249,7 @@ If you use LDAP only for authorization and authentication (e.g. you can not affo
   }
   files
 }
-<pre>
+</pre>
 
 # See Also
 
