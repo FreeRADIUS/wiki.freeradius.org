@@ -10,9 +10,11 @@ Using ntlm_auth in place of PAP
 =======================
 Creating an 'ntlm_auth' exec instance does not instruct the server to actually use ntlm_auth when it gets a request that could be authenticated by it (e.g. a request containing a User-Password attribute).
 
-With the default config, the pap module in the ``authorize {}`` section will be called, will see that there's a User-Password attribute in the request and set the Auth-Type to PAP. In the ``authenticate{ Auth-Type PAP {} }`` section the PAP module will again be called, see that there's no credentials added to check the User-Password value against, and reject the user.
+With the default config, when the server receives a request and enters the ``authorize {}`` section the pap module will be called. The pap module will check to see if a User-Password attribute is present in the request, and if it is, will set the Auth-Type to PAP. 
 
-The simplest way to get PAP working with ntlm_auth is to edit the ``authenticate{ Auth-Type PAP {} }`` so that instead of calling the pap module for authentication, it instead calls the ntlm_auth instance of the exec module.
+Next in the ``authenticate{ Auth-Type PAP {} }`` section, the PAP module will again be called, see that there's no credentials added to check the User-Password value against, and reject the user.
+
+The simplest way to get PAP working with ntlm_auth is to edit the ``authenticate{ Auth-Type PAP {} }`` section so that instead of calling the pap module for authentication, it instead calls the ntlm_auth instance of the exec module.
 
 To do this, change
 ::
