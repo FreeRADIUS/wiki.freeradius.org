@@ -1,13 +1,10 @@
 NTLM Auth with PAP
 ==================
 
-This guide assumes you have already have ntlm_auth configured correctly and working.  If you haven't and need instructions on setting it up, follow the guide [[here|http://deployingradius.com/documents/configuration/active_directory.html]]  . 
+This guide assumes you have already have ntlm_auth configured correctly and working.  If you haven't and need instructions on setting it up, please follow the guide [[here|http://deployingradius.com/documents/configuration/active_directory.html]]  . 
 
 FreeRADIUS 2.1.11 and later
 ---------------------------
-
-Do the following:
-
 1. Edit raddb/modules/ntlm_auth to contain the correct path and domain
 2. Add the following to raddb/policy.conf
 ::
@@ -41,6 +38,7 @@ Do the following:
 
 FreeRADIUS 2.1.10 and earlier
 -----------------------------
+Use **one** of the methods listed below
 
 Unlang-based
 ~~~~~~~~~~~~
