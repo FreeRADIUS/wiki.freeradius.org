@@ -65,3 +65,8 @@ The following is an overview of the types of information available:
 * [[Glossary]]
 
 For beginners, there is also a short [[Concepts]] page, which can help clarify how the server works.
+
+## Contributing
+FreeRADIUS is an open source project and as such depends on contributions from its users. Even if you don't know C you can still contribute to the project by editing documentation on the wiki, posting bugs on [[GitHub|https://github.com/alandekok/freeradius-server/issues]] or helping out on the [[users mailing list|http://wiki.freeradius.org/Mailing-list#Users+list]].
+
+If you are comfortable coding in C, and have a patch or new module you'd like to see included in the main distribution, please see the [[submitting patches via GitHub|GitHub]] page for instructions on generating a 'pull request'.
