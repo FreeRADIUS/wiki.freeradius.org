@@ -119,4 +119,4 @@ Then simply run:
 ##See Also
 
 * [[Binary packages]]
-* [[Standard package|package]]
+* [[Standard package|packages]]
