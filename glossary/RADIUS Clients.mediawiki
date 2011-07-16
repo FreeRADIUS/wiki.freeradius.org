@@ -9,13 +9,13 @@ The FreeRADIUS server software package includes several tools to assist in testi
 
 Additionally FreeRADIUS Server is known to work with the following clients:
 
-==ChilliSpot / [http://coova.org/wiki/index.php/CoovaChilli CoovaChilli]==
+==ChilliSpot / [http://coova.org/CoovaChilli CoovaChilli]==
 
 [http://www.chillispot.org/ ChilliSpot] is an open source access controller for wired or wireless LAN access points. It is used for authenticating users of a wireless LAN. It supports web based login by way of a captive portal, which is today's standard for public HotSpots, and it supports Wireless Protected Access (WPA), which is the standard for wireless security. [[Authentication]], [[Authorization]] and [[Accounting]] ([[AAA]]) is handled by your favorite radius server.
 
 The ChilliSpot website is no longer active as the original author has abandoned the project.
 
-[http://coova.org/wiki/index.php/CoovaChilli CoovaChilli] is an active project based on ChilliSpot, maintained by a ChilliSpot contributor, with many new features, fixes, and support. Note, however, you may require the ''swapoctets'' option when replacing your ChilliSpot installation. See [[NAS Accounting Differences]] for details.
+[http://coova.org/CoovaChilli CoovaChilli] is an active project based on ChilliSpot, maintained by a ChilliSpot contributor, with many new features, fixes, and support. Note, however, you may require the ''swapoctets'' option when replacing your ChilliSpot installation. See [[NAS Accounting Differences]] for details.
 
 ==JRadius==
 
