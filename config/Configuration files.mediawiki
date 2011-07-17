@@ -28,8 +28,3 @@ Reading the configuration files is '''REQUIRED''' to fully understand how to cre
 * [[clients]]
 * [[naslist]]
 * [[naspasswd]]
-
-==See also==
-
-* [[Installation]]
-* [[HOWTO]]
