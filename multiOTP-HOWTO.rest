@@ -1,0 +1,61 @@
+Configuring multiOTP
+====================
+
+Introduction
+------------
+This guide shows the configuration necessary to make the [[multiOTP|http://www.multiotp.net/]] system work with recent versions of FreeRADIUS, it doesn't detail actually setting the tokens up, but there's plenty of documentation on that already.
+
+[[multiOTP|http://www.multiotp.net/]] tokens will work with any type of PAP based authentication, including EAP-TTLS-PAP, so with the correct OS/Supplicant software they can also be used for 802.1X authentication, just make the changes described in the inner server. This guide closely follows the [[NTLM Auth with PAP HOWTO|NTLM Auth with PAP HOWTO]] but with a little extra validation.
+
+Before starting or asking for help
+----------------------------------
+* Make sure the otp script is executable ``chmod +x /path/to/multiotp.php``
+* Verify multiotp is setup correctly by calling the script from the commandline with the appropriate arguments
+
+FreeRADIUS 3.x.x
+----------------
+1. Create 'raddb/modules/multiotp' and add the following, this will create a new instance of the exec module::
+
+    # Exec module instance for multiOTP
+    # Replace '/path/to' with the actual path to the multiotp.php file
+    exec multiotp {
+            wait = yes
+            program = "/path/to/multiotp.php %{User-Name} %{User-Password}"
+    }
+2. Edit 'raddb/policy.conf' and add the following to override the authorize method of the exec module::
+
+    policy {
+        # Change to a specific prefix if you want to deal with normal PAP authentication as well as OTP
+        # e.g. "multiotp_prefix = 'otp:'" 
+        multiotp_prefix = ''
+        multiotp.authorize {
+            if (!control:Auth-Type && User-Password =~ /^${policy.multiotp_prefix}([0-9]{10})$/) {
+                update control {
+                    Auth-Type := ntlm_auth
+                }
+            }
+        }
+    }
+3. Edit your virtual server file, the default for the outer server is 'raddb/sites-available/default'
+4. Add a call to multiotp **before** the pap module in authorize::
+
+    authorize {
+        ...
+        # Handle multiotp authentication
+        multiotp
+        
+        # Handle other PAP authentication
+        pap
+        ...
+    }
+5. Create the multiotp sub-section in authenticate::
+
+    authenticate {
+        Auth-Type multiotp {
+            multiotp
+        }
+    }
+6. Start the server up in debug mode ``radiusd -X`` and test authentication
+
+
+    
