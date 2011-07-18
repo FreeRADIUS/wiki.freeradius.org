@@ -7,7 +7,6 @@
 * [[SNMP HOWTO]]
 * [[FreeRADIUS Active Directory Integration HOWTO]]
 * [[Syslog HOWTO]]
-* [[Informix]]
 * [[SQL Huntgroup HOWTO]] (How to implement huntgroups in SQL)
 
 ## Offsite HOWTOs
