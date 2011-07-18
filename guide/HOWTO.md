@@ -3,7 +3,6 @@
 * [[Basic configuration HOWTO]]
 * [[SQL HOWTO]]
 * [[EAP/MD5 HOWTO|EAPMD5 HOWTO]]
-* [[EAP/TLS HOWTO|EAP/TLS HOWTO]]
 * [[WPA HOWTO]] (Using FreeRadius to secure your wireless network)
 * [[SNMP HOWTO]]
 * [[FreeRADIUS Active Directory Integration HOWTO]]
