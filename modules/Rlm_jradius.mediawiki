@@ -8,4 +8,4 @@ To allow module writers to write modules in the Java language.
 
 The rlm_jradius module is only available in the CVS head (FreeRADIUS 2.0).
 
-See [http://jradius.net http://jradius.net] for details.
+See [http://coova.org/JRadius/FreeRADIUS http://coova.org/JRadius/FreeRADIUS] for details.
