@@ -1,3 +1,0 @@
-==See Also==
-
-* [http://web.pip.com.au/brads-howtos/freeradius-informix.html FreeRADIUS and Informix]
