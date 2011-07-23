@@ -7,7 +7,6 @@ FreeRADIUS Client is a framework and library for writing [[RADIUS Clients]] whic
 FreeRADIUS Client release is available from:
  ftp://ftp.freeradius.org/pub/freeradius/freeradius-client-1.1.6.tar.bz2
 
-
 FreeRADIUS Client rpms are available from:
  http://software.opensuse.org/download/network:/aaa/
 
