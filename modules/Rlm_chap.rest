@@ -2,16 +2,16 @@ The '''rlm_chap''' module enables local [[CHAP]] authentication based on the CHA
 
 {{Default in the server source|src/modules/rlm_chap/}}
 
-==Configuration==
-
+Configuration
+------------------
 {{Default in the server source|raddb/modules/chap}}
 
-<pre>
-	# CHAP module
-	#
-	#  To authenticate requests containing a CHAP-Password attribute.
-	#
-	chap {
-		authtype = CHAP
-	}
-</pre>
+::
+
+  # CHAP module
+  #
+  #  To authenticate requests containing a CHAP-Password attribute.
+  #
+  chap {
+      authtype = CHAP
+  }
