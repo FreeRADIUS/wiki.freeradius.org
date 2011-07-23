@@ -1,11 +1,15 @@
-#Building FreeRADIUS
-##Supported Platforms
+Building FreeRADIUS
+===================
+
+Supported Platforms
+-------------------
 
 FreeRADIUS is known to run on a large number of 32 and 64bit [[platforms]], however building on some of them may require following special procedures here
 
-##Building from Source
+Building from Source
+--------------------
 
-If your operating system has support for a package manager such as .deb or .rpm file format, we recommend that you follow the instructions in the [next section](Build#Building_Packages) instead.
+If your operating system has support for a package manager such as .deb or .rpm file format, we recommend that you follow the instructions in the [[next section|Build#Building_Packages]] instead::
 
     tar zxvf freeradius-<version>.tar.gz	 
     ./configure	 
@@ -15,13 +19,15 @@ If your operating system has support for a package manager such as .deb or .rpm 
 
 Don't forget to read supplied documentation first, including the configuration files. As with many free software projects, FreeRADIUS could use more documentation. Until such documentation is available, the only place that configuration items are documented is in the configuration files themselves.	 
 	 
-If you have problems when trying to run FreeRADIUS, and you see error messages like:	 
+If you have problems when trying to run FreeRADIUS, and you see error messages like::
 
     rlm_sql: Could not link driver rlm_sql_mysql: file not found	 
 
 Then the shared libraries on your system are misconfigured.
 
-###Building on MAC OSX
+Building on MAC OSX
+^^^^^^^^^^^^^^^^^^^
+::
 
     ./configure --enable-developer
     make
@@ -29,11 +35,13 @@ Then the shared libraries on your system are misconfigured.
 
 and freeradius runs and responds to radtest.
 
-###Building on Solaris
+Building on Solaris
+^^^^^^^^^^^^^^^^^^^
 
 Please see: [[Solaris]]
 
-##Building Packages
+Building Packages
+-----------------
 
 If your operating system has a packaging system (dpkg, rpm, tgz), its usually better to install the appropriate packages instead of directly installing from source.
 
@@ -41,42 +49,50 @@ Note: Pre-built [[binary packages]] are available for a number of operating syst
 
 It's usually easier and more reliable to use pre-built packages from standard repositories of the operating system vendor. Build your own packages only if you cannot find the former.
 
-###Building Debian packages
+Building Debian packages
+^^^^^^^^^^^^^^^^^^^^^^^^
 
 If you're using _Debian GNU/Linux_, you should first check whether your desired version of FreeRADIUS is available in the Debian package repositories, because that will save you the trouble of building packages yourself.
 
-Please see: [http://packages.debian.org/freeradius]
+Please see: [[http://packages.debian.org/freeradius]]
 
 For instructions how to set up Debian backports, see: [[Debian]]
 
-It is possible to build FreeRADIUS packages from the source, using _dpkg-buildpackage_. Using packages avoids installing directly from source, which would confuse _dpkg_ about the files installed on the system and make it impossible to uninstall the files later.
+It is possible to build FreeRADIUS packages from the source, using *dpkg-buildpackage*. Using packages avoids installing directly from source, which would confuse *dpkg* about the files installed on the system and make it impossible to uninstall the files later.
+::
 
     tar zxf freeradius-server-2.X.Y.tar.gz
     cd freeradius-server-2.X.Y
     fakeroot dpkg-buildpackage -b -uc	 
     sudo dpkg -i ../*freeradius*_2.X.Y-*_*.deb
 
-Notes:
-* If you don't have _dpkg-buildpackage_ do the following :
-        apt-get install dpkg-dev
+* If you don't have *dpkg-buildpackage* do the following:
+::
 
+    apt-get install dpkg-dev
 * If you don't have a pre-requisite package, dpkg-buildpackage will warn you. Install any listed packages that are missing, or run:
-        apt-get build-dep freeradius
+::
 
-* If you build the package as root -- which is not recommended! -- omit the `fakeroot` and `sudo` from the above calls.
+    apt-get build-dep freeradius
+
+* If you build the package as root -- which is not recommended! -- omit the ``fakeroot`` and ``sudo`` from the above calls.
 
 * The default Debian / Ubuntu build rules include OpenSSL support.  As of version 2.1.8, OpenSSL support is included by default in the debian build rules shipped with FreeRADIUS, but it still requires you to install the OpenSSL libraries manually.  Version 2.1.9 does not have this problem. Using pre-built packages also avoids this problem. You can install the needed OpenSSL libraries by doing:
+::
+
         apt-get install libssl-dev
 
-###Building Debian packages with Oracle support.
+Building Debian packages with Oracle support.
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 If you wish to use Oracle you will need to recompile FreeRADIUS on a machine 
-that has Oracle development libraries installed. FreeRADIUS is known to work both with a full Oracle installation as well as with the [Oracle Instant Client SDK](http://www.oracle.com/technology/tech/oci/instantclient/index.html). Once built the resulting DEB packages can be deployed with just the [Oracle Instant Client](http://www.oracle.com/technology/tech/oci/instantclient/index.html) (No need for the SDK on production machines)
+that has Oracle development libraries installed. FreeRADIUS is known to work both with a full Oracle installation as well as with the [[Oracle Instant Client SDK|http://www.oracle.com/technology/tech/oci/instantclient/index.html]]. Once built the resulting DEB packages can be deployed with just the [[Oracle Instant Client|http://www.oracle.com/technology/tech/oci/instantclient/index.html]] (No need for the SDK on production machines)
 
 Basicly, you'll need to add dpkg files in order to build a freeradius-oracle package, add the '--with-rlm_sql_oracle', '--with-oracle-include-dir=', '--with-oracle-lib-dir='  (pointing to your oracle installation directory) and 'freeradius-oracle' to the modulelist in debian/rules.
-Here are more detailled instructions on [how to build debian package of freeradius with Oracle support](http://www.horoa.net/2011/06/installation-de-freeradius-avec-le-support-oracle/?lang=eng )
+Here are more detailled instructions on [[how to build debian package of freeradius with Oracle support|http://www.horoa.net/2011/06/installation-de-freeradius-avec-le-support-oracle/?lang=eng]]
 
-###Building Ubuntu packages
+Building Ubuntu packages
+^^^^^^^^^^^^^^^^^^^^^^^^
 
 If you're using Ubuntu, you should first check whether your desired version of FreeRADIUS is available in the Ubuntu package repositories, because that will save you the trouble of building packages yourself.
 
@@ -84,39 +100,46 @@ Please see: [[http://packages.ubuntu.com/freeradius]]
 
 For build instructions, please see the Debian section immediately above.
 
-###Building RedHat packages
+Building RedHat packages
+^^^^^^^^^^^^^^^^^^^^^^^^
 
 Please refer to the information on the Red Hat specific page [[Red Hat FAQ]].
 
-###Building SUSE packages
+Building SUSE packages
+^^^^^^^^^^^^^^^^^^^^^^
+On SUSE Linux it should be a simple matter of taking the latest FreeRADIUS release tarball and dropping it in */usr/src/packages/SOURCES* along with the other files from the *suse/* directory inside the tarball with the exception of *freeradius.spec* which goes in */usr/src/packages/SPECS*
 
-On SUSE Linux it should be a simple matter of taking the latest FreeRADIUS release tarball and dropping it in _/usr/src/packages/SOURCES_ along with the other files from the _suse/_ directory inside the tarball with the exception of _freeradius.spec_ which goes in _/usr/src/packages/SPECS_
+Then simply run::
 
-Then simply run:
     rpmbuild -ba /usr/src/packages/SPECS/freeradius.spec
 
-`rpmbuild` will tell you if you are missing any build dependencies. If so, simply install them with `yast2 -i packagename-devel` then rerun `rpmbuild`
+``rpmbuild`` will tell you if you are missing any build dependencies. If so, simply install them with ``yast2 -i packagename-devel`` then rerun ``rpmbuild``
 
-###Building SUSE packages with Oracle Support
+Building SUSE packages with Oracle Support
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 If you wish to use Oracle you will need to recompile FreeRADIUS on a machine 
-that has Oracle development libraries installed. FreeRADIUS is known to work both with a full Oracle installation as well as with the [Oracle Instant Client SDK](http://www.oracle.com/technology/tech/oci/instantclient/index.html). Once built the resulting RPM package can be deployed with just the [Oracle Instant Client](http://www.oracle.com/technology/tech/oci/instantclient/index.html) (No need for the SDK on production machines)
+that has Oracle development libraries installed. FreeRADIUS is known to work both with a full Oracle installation as well as with the [[Oracle Instant Client SDK|http://www.oracle.com/technology/tech/oci/instantclient/index.html]]. Once built the resulting RPM package can be deployed with just the [[Oracle Instant Client|http://www.oracle.com/technology/tech/oci/instantclient/index.html]] (No need for the SDK on production machines)
 
 Most rpm packages available do not included oraclesql.conf due to the fact that they also don't contain the Oracle driver module (due to copyright reasons)
 
 On SUSE Linux if you have the Oracle header files in a sane location it should 
 be a simple matter of taking the latest FreeRADIUS release tarball and 
-dropping it in _/usr/src/packages/SOURCES_ along with the other files from the _suse/_ directory inside the tarball with the exception of _freeradius.spec_ which goes in _/usr/src/packages/SPECS_
+dropping it in */usr/src/packages/SOURCES* along with the other files from the *suse/* directory inside the tarball with the exception of *freeradius.spec* which goes in */usr/src/packages/SPECS*
 
-Then edit _/usr/src/packages/SPECS/freeradius.spec_ and change
+Then edit */usr/src/packages/SPECS/freeradius.spec* and change::
+
     %define _oracle_support 0
-to
+to::
+
     %define _oracle_support 1
 
-Then simply run:
+Then simply run::
+
     rpmbuild -ba /usr/src/packages/SPECS/freeradius.spec
 
-##See Also
+See Also
+--------
 
 * [[Binary packages]]
 * [[Standard package|packages]]
