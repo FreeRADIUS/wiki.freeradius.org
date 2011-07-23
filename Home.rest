@@ -1,10 +1,16 @@
-## New Wiki
+Wiki Home
+=========
+
+New Wiki
+--------
 The Wiki is now hosted on a new server, with a new front end, and is backed by "git".  It is now easier to login and make changes.  Please see the [[New Wiki]] Page for details.
 
-A read only version of the wiki can be checked out using git:
+A read only version of the wiki can be checked out using git::
+
     git clone git://git.freeradius.org/wiki.freeradius.org.git
 
-## Overview
+Overview
+--------
 [[FreeRADIUS]] is a modular, high performance and feature-rich [[RADIUS]] suite including [[server|radiusd]], [[radius client|radiusclient]], development libraries and numerous additional [[RADIUS]] related utilities.
 
 As the premiere open source RADIUS suite it is included as a [[standard package|packages]] with numerous Operating Systems, has binary packages for many others and has source available which is known to [[build]] on almost anything. Production deployments include large scale installations comprising multiple [[AAA]] servers with over ten million users and millions of requests per day. It supports request [[proxying|proxy]], with [[fail-over]] and [[load balancing]], as well as the ability to access many types of back-end databases. Different classes of [[Authentication]] requests can trigger access of different [[Authentication]] and [[Authorization]] databases (with cascaded fall back), and [[Accounting]] records can be simultaneously recorded in multiple different storage databases and directories.
@@ -13,9 +19,10 @@ As the premiere open source RADIUS suite it is included as a [[standard package|
 
 We also keep a list of [[Acknowledgements]] of contributions to FreeRADIUS development.
 
-## RADIUS Client Support
+RADIUS Client Support
 
 [[FreeRADIUS]] comes with:
+--------------------------
 
 * Complete support for RFC 2865 and RFC 2866 attributes.
 * [[EAP]] with EAP-MD5, EAP-SIM, EAP-TLS, EAP-TTLS, [[EAP-PEAP]], and Cisco [[LEAP]] EAP sub-types
@@ -26,7 +33,8 @@ All known [[RADIUS Clients]] are supported.
 * [[RADIUS Clients]] 
 * [[EAP Clients]]
 
-## Flexible Configuration
+Flexible Configuration
+----------------------
 
 [[FreeRADIUS]] provides a wide range of methods to select user configurations. The server can select a configuration based on any of the following criteria : 
 
@@ -45,7 +53,8 @@ All known [[RADIUS Clients]] are supported.
 
 In addition, FreeRADIUS supports [[virtual server]]s which allow several separate sets of configuration data to coexist inside the same server instance.
 
-## Documentation
+Documentation
+-------------
 
 This wiki collects a large amount of documentation relating to [[FreeRADIUS]] together in one place. Pages of particular interest to newcomers will be the [[FAQ]] and [[HOWTO]] sections, although the [[Traditional FreeRADIUS docs page|http://www.freeradius.org/doc/]] includes "man" pages, and other documentation.
 
@@ -66,7 +75,8 @@ The following is an overview of the types of information available:
 
 For beginners, there is also a short [[Concepts]] page, which can help clarify how the server works.
 
-## Contributing
+Contributing
+------------
 FreeRADIUS is an open source project and as such depends on contributions from its users. Even if you don't know C you can still contribute to the project by editing documentation on the wiki, posting bugs on [[GitHub|https://github.com/alandekok/freeradius-server/issues]] or helping out on the [[users mailing list|http://wiki.freeradius.org/Mailing-list#Users+list]].
 
 If you are comfortable coding in C and have a patch or new module you'd like to see included in the main distribution, please see the [[submitting patches via GitHub|GitHub]] page for instructions on generating a 'pull request'.
