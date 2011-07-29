@@ -2,13 +2,13 @@
 # dictionary.brocade
 
 #
-### Written by Wagner Pereira wpereiratecnologia[at]gmail[dot]com in July,2011 ###
+# Written by Wagner Pereira wpereiratecnologia[at]gmail[dot]com in July,2011
 #
 
 VENDOR Brocade 1588
 
 #
-### attributes ###
+# attributes
 #
 
 ATTRIBUTE Brocade-Auth-Role 1 string Brocade
