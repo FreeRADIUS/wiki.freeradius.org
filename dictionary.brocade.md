@@ -1,0 +1,20 @@
+#
+# dictionary.brocade
+
+#
+# Written by Wagner Pereira wpereiratecnologia[at]gmail[dot]com in July,2011
+#
+
+VENDOR Brocade 1588
+
+#
+# attributes
+#
+
+ATTRIBUTE Brocade-Auth-Role 1 string Brocade
+ATTRIBUTE Brocade-AVPairs1 2 string Brocade
+ATTRIBUTE Brocade-AVPairs2 3 string Brocade
+ATTRIBUTE Brocade-AVPairs3 4 string Brocade
+ATTRIBUTE Brocade-AVPairs4 5 string Brocade
+ATTRIBUTE Brocade-Passwd-ExpiryDate 6 string Brocade
+ATTRIBUTE Brocade-Passwd-WarnPeriod 7 string Brocade
