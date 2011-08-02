@@ -70,7 +70,7 @@ To fork the FreeRADIUS server
 * Go to the [[project site|https://github.com/alandekok/freeradius-server]]
 * Click the 'Fork' button. 
 
-You'll see the current URL change to ``/<your github username>/freeradius-server`` this means you're now browsing your own copy of the FreeRADIUS source code. From this point on changes to the original repository will not be reflected in your fork unless you explicitly pull from the *origin* repository.
+You'll see the current URL change to ``/<your github username>/freeradius-server`` this means you're now browsing your own copy of the FreeRADIUS source code. From this point on changes to the *origin* repository will not be reflected in your fork unless you explicitly pull from the *origin* repository on the local clone of your fork, and push back to GitHub.
 
 Using your shiny new fork
 =========================
