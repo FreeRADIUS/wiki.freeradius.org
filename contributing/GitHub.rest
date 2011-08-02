@@ -6,7 +6,7 @@ GitHub is a social coding site allowing many developers to come together and wor
 
 GitHub is based on the Git version control system. What makes Git different from other version control systems (like CVS and SVN), is that there is no need for a central master repository. When you *clone* (checkout) a repository, you get your own private repository containing all the commits and branches of the original. 
 
-After cloning a repository you can create new branches and commit new revisions completely independently of the *origin* repository. To distribute and receive changes you can use the ``git pull`` command (to get new commits from remote repositories), and ``git push`` command (to send your commits to remote repositories).
+After cloning a repository you can create new branches and commit new revisions completely independently of the *upstream* repository. To distribute and receive changes you can use the ``git pull`` command (to get new commits from remote repositories), and ``git push`` command (to send your commits to remote repositories).
 
 Installing Git
 ==============
@@ -70,7 +70,7 @@ To fork the FreeRADIUS server
 * Go to the [[project site|https://github.com/alandekok/freeradius-server]]
 * Click the 'Fork' button. 
 
-You'll see the current URL change to ``/<your github username>/freeradius-server`` this means you're now browsing your own copy of the FreeRADIUS source code. From this point on changes to the *origin* repository will not be reflected in your fork, unless you explicitly pull from the *origin* repository using the local clone of your fork, and push back to GitHub.
+You'll see the current URL change to ``/<your github username>/freeradius-server`` this means you're now browsing your own copy of the FreeRADIUS source code. From this point on changes to the *upstream* repository will not be reflected in your fork, unless you explicitly pull from the *upstream* repository using the local clone of your fork, and push back to GitHub.
 
 Using your shiny new fork
 =========================
