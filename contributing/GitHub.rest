@@ -62,7 +62,7 @@ To correct the default commit user.name and user.email, enter the following comm
 
 Forking
 =======
-In order to contribute code you must first fork the server. Forking is the process of creating your own copy of the FreeRADIUS repository on GitHub, which you can then *clone*, and then *push* your modifications to.
+In order to contribute code you must first fork the server. Forking is the process of creating your own copy of the FreeRADIUS repository on GitHub, which you can *clone*, and then *push* your modifications to.
 
 To fork the FreeRADIUS server
 
