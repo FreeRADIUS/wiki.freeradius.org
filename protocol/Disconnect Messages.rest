@@ -29,7 +29,6 @@ Example Disconnect-Request
 
   # echo "Acct-Session-Id=D91FE8E51802097" > packet.txt
   # echo "User-Name=somebody" >> packet.txt
-  # echo "X-Ascend-Session-Svr-Key=4235DAD8" >> packet.txt
   # echo "NAS-IP-Address=10.0.0.1" >> packet.txt
   
   # cat packet.txt | radclient -x 10.0.0.1:3799 disconnect ''secret''
@@ -37,7 +36,6 @@ Example Disconnect-Request
   Sending Disconnect-Request of id 214 to 10.0.0.1 port 3799
         Acct-Session-Id = "D91FE8E51802097"
         User-Name = "somebody"
-        X-Ascend-Session-Svr-Key = "4235DAD8"
         NAS-IP-Address = 10.0.0.1
   rad_recv: Disconnect-ACK packet from host 10.0.0.1 port 3799, id=214, length=20
 
