@@ -9,6 +9,7 @@ Disconnect Requests
 To centrally control the disconnection of remote access users, RADIUS clients must be able to receive and process unsolicited disconnect requests from RADIUS servers. The RADIUS disconnect feature uses the existing format of RADIUS disconnect request and response messages.
 
 The code field used in disconnect messages has three codes: 
+
 *  [[Disconnect-Request]] (40)
 *  [[Disconnect-ACK]] (41) 
 *  [[Disconnect-NAK]] (42)
