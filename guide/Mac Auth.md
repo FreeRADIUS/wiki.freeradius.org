@@ -371,7 +371,6 @@ As above.
 Add the a module call for 'rewrite_calling_station_id' to the authorize section directly above the call to 'rewrite_calling_station_id'.
 
 <pre>
-
 authorize {
     preprocess
     rewrite_calling_station_id
