@@ -12,8 +12,6 @@ FreeRADIUS is reported to run on the following Operating Systems:
 * OSF/Unix
 * [http://www.sun.com/software/solaris/ Solaris]
 
-For information on specific packages, see [[binary packages]].
-
 Porting to other unix-like platforms should be easy. Due to the limited resources of the FreeRADIUS development team, we are not able to test each version on all platforms before release. In general we test on [[binary packages|several versions of Linux]] and Solaris and FreeBSD appears to also be a popular deployment platform for our users so we hear about any issues on those platforms quickly.
 
 ==Hardware Platforms==
