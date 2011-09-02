@@ -61,7 +61,7 @@ Sources are available at:
 
 ### Where can I get binary packages of FreeRADIUS
 
-Please see the list of [[available binary packages|binary packages]].
+Please see the list of [[available packages|Packages]].
 
 You may also easily [[build a package from source|Build#Building_Packages]].
 
