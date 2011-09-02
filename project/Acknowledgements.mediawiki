@@ -43,4 +43,4 @@ The FreeRADIUS Project is the result of the work done by a large number of peopl
 :Kerberos authentication module.
 
 ;[http://peternixon.net Peter Nixon]
-:Maintains [[rlm_sqlippool]] and hacks on other [[SQL]] related code, maintains openSUSE [[binary packages]]. 
+:Maintains [[rlm_sqlippool]] and hacks on other SQL related code, maintains openSUSE binary packages. 
