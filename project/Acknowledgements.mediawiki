@@ -6,7 +6,7 @@ The FreeRADIUS Project is the result of the work done by a large number of peopl
 ;Alan Curry
 :Contributed many patches for proxying, replication, realm support.
 
-;Alan DeKok ([[User:Aland]])
+;Alan DeKok
 :FreeRADIUS Project Lead. Registered and maintains [http://www.freeradius.org/ freeradius.org].  Wrote the module code.  Made the server threaded.  Maintains the autoconf and libtool scripts for the server. Rewrote most of the server core.
 
 ;Brandon Lee Poyner
@@ -24,7 +24,7 @@ The FreeRADIUS Project is the result of the work done by a large number of peopl
 ;Jochen Friedrich
 :SMUX / SNMP support.
 
-;Kevin Bonner ([[User:KevinBonner]])
+;Kevin Bonner
 :Contributes significantly to the mailing list and wiki
 
 ;Kostas Kalevras
@@ -42,5 +42,5 @@ The FreeRADIUS Project is the result of the work done by a large number of peopl
 ;Nathan Neulinger
 :Kerberos authentication module.
 
-;[http://peternixon.net Peter Nixon] ([[User:peter]])
-:Maintains [[rlm_sqlippool]] and hacks on other [[SQL]] related code, maintains openSUSE [[binary packages]] and provides hosting for website, wiki and ftp.
+;[http://peternixon.net Peter Nixon]
+:Maintains [[rlm_sqlippool]] and hacks on other [[SQL]] related code, maintains openSUSE [[binary packages]]. 
