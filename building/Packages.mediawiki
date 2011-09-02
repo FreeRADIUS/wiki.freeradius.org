@@ -1,4 +1,4 @@
-Pre-built [[binary packages]] for a number of operating systems are available from their respective vendors as well as other sources.
+Pre-built binary packages for a number of operating systems are available from their respective vendors as well as other sources.
 
 The officially supported list of third-party sites is at http://freeradius.org/download.html and also as follows:
 
