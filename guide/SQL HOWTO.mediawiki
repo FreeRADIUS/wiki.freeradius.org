@@ -11,7 +11,7 @@ We have some sample configs for [[Cisco]] [[NAS]] [[Cisco|available here]].
 
 ==Getting Started==
 
-Firstly, you need to install FreeRADIUS Server on your system. As the premiere open source RADIUS suite it is included as a [[standard package]] with numerous Operating Systems and has [[binary packages]] for many others. Installation is most easily accomplished by installing a binary package (rpm, deb), but if you have a less well known operating system you may need to [[build]] your own.
+Firstly, you need to install FreeRADIUS Server on your system. As the premiere open source RADIUS suite it is included as a standard package with numerous Operating Systems and has [[packages]] for many others. Installation is most easily accomplished by installing a binary package (rpm, deb), but if you have a less well known operating system you may need to [[build]] your own.
 
 ==Basic configuration==
 
