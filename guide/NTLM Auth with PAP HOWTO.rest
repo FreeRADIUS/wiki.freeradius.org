@@ -1,5 +1,5 @@
-NTLM Auth with PAP
-==================
+NTLM Auth (Active Directory) with PAP
+=========================
 This guide assumes you have already have ntlm_auth configured correctly and working.  If you haven't and need instructions on setting it up, please follow the guide [[here|http://deployingradius.com/documents/configuration/active_directory.html]]  . 
 
 FreeRADIUS 2.1.11 and later
