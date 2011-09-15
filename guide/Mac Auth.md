@@ -301,7 +301,7 @@ Add the following policy stanza to policy.conf.
 # If a 6th seperator is present, write the trailing chars into Called-Station-SSID
 #
 rewrite_called_station_id {
-        if(Called-Station-Id =~ /^([0-9a-f]{2})[-:]?([0-9a-f]{2})[-:.]?([0-9a-f]{2})[-:]?([0-9a-f]{2})[-:.]?([0-9a-f]{2})[-:]?([0-9a-f]{2})[-:]?([-a-z0-9_.]*)?/i){
+        if(Called-Station-Id =~ /^([0-9a-f]{2})[-:]?([0-9a-f]{2})[-:]?([0-9a-f]{2})[-:]?([0-9a-f]{2})[-:]?([0-9a-f]{2})[-:]?([0-9a-f]{2})[-:]?([-a-z0-9_.]*)?/i){
                 update request {
                         Called-Station-Id := "%{1}%{2}%{3}%{4}%{5}%{6}"
                         Called-Station-SSID := "%{7}"
