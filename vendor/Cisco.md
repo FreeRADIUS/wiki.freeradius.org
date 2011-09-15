@@ -7,7 +7,7 @@ To use [[RADIUS]] to authenticate your inbound shell (telnet & ssh) connections 
     youruser   Cleartext-Password := "somepass"
             Service-Type = NAS-Prompt-User
 
-This will let a user (called ''youruser'') in for the first level of access to your Cisco. You will still need to **enable** to perform any configuration changes or anything requiring a higher level of access.
+This will let a user (called _youruser_) in for the first level of access to your Cisco. You will still need to **enable** to perform any configuration changes or anything requiring a higher level of access.
 
 See [Configuring Basic AAA on an Access Server](http://www.cisco.com/en/US/tech/tk59/technologies_tech_note09186a0080093c81.shtml) for more details.
 
@@ -15,9 +15,9 @@ See [Configuring Basic AAA on an Access Server](http://www.cisco.com/en/US/tech/
 
 ### Global Enable Password
 
-When a shell user attempts to '''enable''' (or '''enable 15''') on a cisco device, the [[cisco]] issues a [[RADIUS]] [[authentication]] request for the user '''$enable15$'''
+When a shell user attempts to **enable** (or **enable 15**) on a cisco device, the [[cisco]] issues a [[RADIUS]] [[authentication]] request for the user **$enable15$**
 
-If you type '''enable 2''', it will send request for user '$enab2$', if you type '''enable 3''' it will send a request for '$enab3$' and so on.
+If you type **enable 2**, it will send request for user '$enab2$', if you type **enable 3** it will send a request for '$enab3$' and so on.
 
 These user(s) needs to to be configured on your [[RADIUS]] server with the password you wish to use to allow enable access.
 
@@ -27,7 +27,7 @@ These user(s) needs to to be configured on your [[RADIUS]] server with the passw
 
 ### Per User Privilege Level
 
-You can also send the privilege level (enable mode is level 15) for individual users as a reply item to automatically put them into that level with '''cisco-avpair = "shell:priv-lvl=15"'''
+You can also send the privilege level (enable mode is level 15) for individual users as a reply item to automatically put them into that level with **cisco-avpair = "shell:priv-lvl=15"**
 
 You can do this with an entry in your users file similar to the following
 
@@ -127,9 +127,9 @@ The actual encryption process occurs when the current configuration is written o
 
 When password encryption is enabled, the encrypted form of the passwords is displayed when a more system:running-config command is entered.
 
-'''Caution This command does not provide a high level of network security. If you use this command, you should also take additional network security measures.'''
+**Caution This command does not provide a high level of network security. If you use this command, you should also take additional network security measures.**
 
-Remember if your using password encryption, you '''cannot''' paste the encrypted password into the FreeRADIUS clients.conf file, It will not be the same shared secret.
+Remember if your using password encryption, you **cannot** paste the encrypted password into the FreeRADIUS clients.conf file, It will not be the same shared secret.
 
 ## Nested Accounting
 
@@ -140,10 +140,10 @@ More information about this process can be seen [here](http://www.cisco.com/en/U
 
 ## Unique Acct-Session-Id's
 
-Minimum IOS: ''12.2''
-(Also available as a hidden command in ''12.1(4.1)T'')
+Minimum IOS: _12.2_
+(Also available as a hidden command in _12.1(4.1)T_)
 
-To enable RFC 2866 compliance (and stop duplicate ''Acct-Session-Id'' values) on [[Cisco]] devices you need to issue the following command:
+To enable RFC 2866 compliance (and stop duplicate _Acct-Session-Id_ values) on [[Cisco]] devices you need to issue the following command:
 
     radius-server unique-ident 1
 
@@ -180,7 +180,7 @@ Also you might see a lot of "duplicates" in the logfile. That can be fixed by
 
 ## Ascend Style
 
-To enable the Ascend style attributes (which we do '''NOT''' recommend!) add the '''non-standard''' keyword to your ''radius-server'' line(s)
+To enable the Ascend style attributes (which we do **NOT** recommend!) add the **non-standard** keyword to your _radius-server_ line(s)
 
     radius-server host X.Y.Z.A auth-port 1812 acct-port 1813 non-standard
 
