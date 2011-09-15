@@ -7,7 +7,7 @@ To use [[RADIUS]] to authenticate your inbound shell (telnet & ssh) connections 
     youruser   Cleartext-Password := "somepass"
             Service-Type = NAS-Prompt-User
 
-This will let a user (called ''youruser'') in for the first level of access to your Cisco. You will still need to '''''enable''''' to perform any configuration changes or anything requiring a higher level of access.
+This will let a user (called ''youruser'') in for the first level of access to your Cisco. You will still need to **enable** to perform any configuration changes or anything requiring a higher level of access.
 
 See [Configuring Basic AAA on an Access Server](http://www.cisco.com/en/US/tech/tk59/technologies_tech_note09186a0080093c81.shtml) for more details.
 
