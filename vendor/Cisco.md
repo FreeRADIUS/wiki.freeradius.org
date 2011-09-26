@@ -216,3 +216,4 @@ According to [some reports](https://list.xs4all.nl/pipermail/freeradius-users/20
 * [[VSA|Vendor-Specific Attributes]]
 * [Cisco's Configuring AAA for Cisco Voice Gateways](http://www.cisco.com/en/US/docs/ios/voice/aaa/configuration/guide/va_aaa_overview_ps10591_TSD_Products_Configuration_Guide_Chapter.html)
 * [Cisco's Configuring RADIUS with Livingston Server](http://www.cisco.com/en/US/tech/tk59/technologies_tech_note09186a008009467e.shtml)
+* [Cisco Online Training Video](http://www.ciscotube.tk)
