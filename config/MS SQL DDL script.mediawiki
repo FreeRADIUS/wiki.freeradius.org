@@ -1,5 +1,5 @@
 {{Default in the server source|raddb/sql/mssql/schema.sql}}
-
+```sql
 /***************************************************************************
   * db_mssql.sql                 					   *
   *                                                                         *
@@ -210,3 +210,4 @@
  
   CREATE  INDEX [UserName] ON [usergroup]([UserName]) ON [PRIMARY]
  GO
+```
