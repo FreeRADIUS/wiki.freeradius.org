@@ -1,5 +1,5 @@
 {{Default in the server source|raddb/sql/postgresql/schema.sql}}
-
+```sql
  /*
   * $Id: postgresql.sql,v 1.1.2.2 2006/04/11 13:14:41 pnixon Exp $
   *
@@ -243,3 +243,4 @@
                  to_date($1 - var2::interval, ''YYYY-MM-DD'');
  RETURN var1;
  END;' LANGUAGE 'plpgsql';
+```
