@@ -9,5 +9,4 @@ Note: PANA is not currently supported by [[FreeRADIUS]] but is supported by [[Op
 
 ==See Also==
 
-* [[Extensible Authentication Protocol]]
 * [[DIAMETER]]
