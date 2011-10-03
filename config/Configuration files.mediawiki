@@ -1,5 +1,3 @@
-__NOTOC__
-
 For every part of FreeRADIUS, in the configuration directory (/etc/raddb, /etc/freeradius or similar) there is a fully commented example file included, that explains what it does, and how to use it. Read those sample files too!
 
 Again, many of the configuration files are '''ONLY''' documented in the comments included in the files.
