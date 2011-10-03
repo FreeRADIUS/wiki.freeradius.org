@@ -1,4 +1,4 @@
-<pre> 
+```sql
 ###########################################################################
  #  db_mysql.sql                     rlm_sql - FreeRADIUS SQL Module       #
  #                                                                         #
@@ -163,4 +163,4 @@
    PRIMARY KEY (id),
    KEY nasname (nasname)
  );
-</pre>
+```
