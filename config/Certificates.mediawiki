@@ -16,7 +16,7 @@ In Version 2.0 and later, the certificates are stored in the directory ''raddb/c
 ;server.cnf
 :Configuration for sample server certificate.
 
-;ca.cnf
+;client.cnf
 :Configuration for sample client certificate.  (Only needed for EAP-TLS.)
 
 ;xpextensions
