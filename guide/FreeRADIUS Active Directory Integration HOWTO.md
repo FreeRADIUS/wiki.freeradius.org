@@ -1,8 +1,10 @@
+<pre>
 {| width="100%" class="wikitable"
 | Updated tutorial for freeradius 2.x is at:
 |-
 | http://deployingradius.com/documents/configuration/active_directory.html
 |}
+</pre>
 
 This article was originally written by Charles Schwartz, Network Security Engineer.
 
