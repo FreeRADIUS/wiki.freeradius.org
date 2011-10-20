@@ -82,6 +82,7 @@ The FreeRADIUS setup part
     }
 
 *Note: use_mppe must not be set to no. Default params work well, but you can tune require_encryption and require_strong to better customize the setup.*
+
 * Double check that the mschap module is not commented out in the authorize nor in the authenticate section.
 * Optionally define the IP pools in your FreeRADIUS /etc/raddb/radiusd.conf (in FR1) or /etc/raddb/modules/ippool (in FR2).
 
