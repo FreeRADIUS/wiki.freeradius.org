@@ -218,6 +218,7 @@ Where myradius.mydomain.com is the DNS name of your FreeRADIUS server.
 That's not working
 -------------------------
 Ok, so you've followed the above steps and it's still not working. So lets double check things before you post to FreeRADIUS mailing lists:
+
 * First, check that you have NOT modified any dictionary on the FreeRADIUS server. A common mistake is to use the above dictionary (formatted for radiusclient) on FreeRADIUS. If you have done this, restore the dictionary files from FreeRADIUS package
 * Check that you are using the INLCUDE keyword in /etc/radiuclient/dictionary file and not "$INCLUDE"
 
