@@ -124,7 +124,7 @@ Where myradius.mydomain.com is the DNS name of your FreeRADIUS server.
 #
 #       $Id: poptop_ads_howto_8.htm,v 1.8 2008/10/02 08:11:48 wskwok Exp $
 #
-VENDOR          Microsoft       311     Microsoft
+ VENDOR          Microsoft       311     Microsoft
 BEGIN VENDOR    Microsoft
 ATTRIBUTE       MS-CHAP-Response        1       string  Microsoft
 ATTRIBUTE       MS-CHAP-Error           2       string  Microsoft
