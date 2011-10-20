@@ -74,6 +74,7 @@ The FreeRADIUS setup part
     - in FR2: Go to the /etc/raddb/modules/mschap file and check the module setup
 
 ::
+
     mschap {
         use_mppe = yes
         require_encryption = yes
