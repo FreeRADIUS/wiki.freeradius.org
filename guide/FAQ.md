@@ -822,7 +822,7 @@ If you have control over NAS, then set it to accept only PAP authentication. If 
 
 ### How do I enable logging of 64 bit counters, a.k.a. `Acct-{Input|Output}-Gigawords?`
 
-Please see: [[#Why do Acct-Input-Octets and Acct-Output-Octets wrap at 4 GB?]]
+Please see: [[Why do Acct-Input-Octets and Acct-Output-Octets wrap at 4 GB?|FAQ#Why+do+Acct-Input-Octets+and+Acct-Output-Octets+wrap+at+4+GB%3F]]
 
 ### Does FreeRADIUS Support IPv6?
 
