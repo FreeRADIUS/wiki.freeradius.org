@@ -1,4 +1,4 @@
-# -*- text -*-
+> # -*- text -*-
 ##############################################################################
 #
 #	HP ProCurve VSA's
@@ -81,3 +81,4 @@ VALUE	Service-Type			HP-Oper			252
 VALUE	Service-Type			HP-User			255
 
 END-VENDOR	HP
+> 
