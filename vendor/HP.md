@@ -516,6 +516,7 @@ Many, always update to the latest firmware.
 
 ##See Also
 
+* [[HP Radius Attributes]]
 * [[Cisco]]
 * [[Linksys]]
 * [[Mac-Auth|Mac Auth]]
