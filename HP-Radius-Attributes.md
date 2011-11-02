@@ -82,3 +82,7 @@
 	VALUE		Service-Type			HP-User			255
 
 	END-VENDOR	HP
+
+##See Also
+
+*[[HP Radius Information|HP]]
