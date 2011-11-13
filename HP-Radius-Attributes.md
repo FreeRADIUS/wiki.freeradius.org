@@ -1,5 +1,5 @@
 ##Example Definitions
-*Example*:
+```c
 	# -*- text -*-
 	##############################################################################
 	#
@@ -83,7 +83,7 @@
 	VALUE		Service-Type			HP-User			255
 
 	END-VENDOR	HP
-
+```
 ##See Also
 
 * [[HP ProCurve|HP]]
