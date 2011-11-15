@@ -2,13 +2,13 @@
 
 ## Executables
 
-* [[Radiusd#Configuration|Radiusd]]
+* [[Radiusd|Radiusd#Configuration]]
 
 ## Features
 
-* [[Radacct]]
+* Radacct
 * [[Proxy]]
-* [[VMPS]]
+* VMPS
 
 ## Attributes and attribute manipulation
 
