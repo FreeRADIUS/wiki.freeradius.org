@@ -80,4 +80,3 @@ We suggest you use either mgetty or getty_ps. mgetty even has a nice automatic P
 ==See Also==
 
 * [[Radiusclient]]
-* [[radacct]]
