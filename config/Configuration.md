@@ -12,10 +12,8 @@
 
 ## Attributes and attribute manipulation
 
-* [[Adding, Removing, Modifying Attributes for further processing|Adding Removing Modifying Attributes for further processing]]
 * [[Operators]]
 * [[Run-time variables]]
-* [[Supported Attributes]]
 
 ## Virtual Modules
 
