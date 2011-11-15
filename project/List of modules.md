@@ -66,7 +66,3 @@ FreeRADIUS (v2.1.x) includes the following [[modules|modules2]]:
 * [[rlm_sql_log]]
 * [[rlm_unix]]
 * [[rlm_x99_token]]
-
-## See also
-
-* [[Modules configuration]]
