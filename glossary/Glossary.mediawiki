@@ -29,7 +29,7 @@
 * [[Packet of Disconnect]]
 * [[PAM]]
 * [[PAP]]
-* PEAP (Protected Extensible Authentication Protocol)
+* [[EAP PEAP]] (Protected Extensible Authentication Protocol)
 * [[RADIUS]]
 * [[RadSec]]
 * RAS
