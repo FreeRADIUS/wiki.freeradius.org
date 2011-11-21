@@ -32,4 +32,4 @@ PEAPv1/EAP-GTC was created by Cisco as an alternative to PEAPv0/EAP-MSCHAPv2. It
 
 ==See Also==
 
-* [[Extensible Authentication Protocol]]
+* [[EAP]]
