@@ -4,7 +4,7 @@
 
 EAP is an authentication framework, not a specific authentication mechanism. The EAP provides some common functions and a negotiation of the desired authentication mechanism. Such mechanisms are called EAP methods and there are currently about 40 different methods. Methods defined in IETF RFCs include EAP-MD5, EAP-OTP, EAP-GTC, EAP-TLS, [[#EAP-IKEv2|EAP-IKEv2]], EAP-SIM, and EAP-AKA, and in addition a number of vendor specific methods and new proposals exist. Commonly used modern methods capable of operating in wireless networks include EAP-TLS, EAP-SIM, EAP-AKA, PEAP, LEAP and EAP-TTLS.  Requirements for EAP methods used in wireless LAN authentication are described in RFC 4017. 
 
-When EAP is invoked by an [[802.1X]] enabled [[Network Access Server|NAS]] (Network Access Server) device such as an [[802.11]] a/b/g Wireless Access Point, modern EAP methods can provide a secure authentication mechanism and negotiate a secure PMK (Pair-wise Master Key) between the client and NAS.  The PMK can then be used for the wireless encryption session which uses [[TKIP]] or [[Advanced Encryption Standard|AES]] encryption. 
+When EAP is invoked by an [[802.1X]] enabled [[NAS]] (Network Access Server) device such as an [[802.11]] a/b/g Wireless Access Point, modern EAP methods can provide a secure authentication mechanism and negotiate a secure PMK (Pair-wise Master Key) between the client and NAS.  The PMK can then be used for the wireless encryption session which uses [[TKIP]] or [[Advanced Encryption Standard|AES]] encryption. 
 
 ==FreeRADIUS Support==
 
