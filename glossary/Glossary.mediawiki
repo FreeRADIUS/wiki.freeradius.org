@@ -2,10 +2,9 @@
 
 * [[AAA]]
 * [[AAAA]]
-* [[Access point]]
 * [[Access-Request]]
 * [[Accounting]]
-* [[AP]]
+* [[AP]] (Access point)
 * [[Attributes]]
 * [[Auditing]]
 * [[Authentication]]
@@ -13,33 +12,27 @@
 * [[Authenticator]]
 * [[DHCP]]
 * [[DIAMETER]]
-* [[Disconnect-Request]]
-* [[EAP]]
+* Disconnect-Request
+* [[EAP]] (Extensible Authentication Protocol)
 * [[EAP-PEAP]]
-* [[Extensible Authentication Protocol]]
 * [[FreeRADIUS]]
 * [[IEEE 802.11]]
 * [[IEEE 802.11i]]
 * [[IEEE 802.1X]]
 * [[LDAP]]
-* [[LEAP]]
-* [[Lightweight Extensible Authentication Protocol]]
-* [[NAS]]
+* [[LEAP]] (Lightweight Extensible Authentication Protocol)
+* [[NAS]] (Network Access Server)
 * [[Network Access Control]]
 * [[Network Access Protection]]
-* [[Network Access Server]]
 * [[Network Admission Control]]
 * [[Open Diameter]]
 * [[Packet of Disconnect]]
 * [[PAM]]
-* [[PANA]]
 * [[PAP]]
-* [[Protected Extensible Authentication Protocol]]
-* [[Protocol for carrying Authentication for Network Access]]
+* PEAP (Protected Extensible Authentication Protocol)
 * [[RADIUS]]
 * [[RadSec]]
-* [[RAS]]
-* [[rlm sql iodbc]]
+* RAS
 * [[SIP]]
 * [[SQL]]
 * [[Structured Query Language]]
@@ -54,5 +47,5 @@
 * [[WPA]]
 * [[WPA2]]
 * [[VSA]]
-* [[WEP | Wired Equivalent Privacy]]
+* [[WEP]] (Wired Equivalent Privacy)
 * [[Wireless Access Point]]
