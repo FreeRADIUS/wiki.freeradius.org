@@ -1,4 +1,4 @@
-Robust dynamic IPv4 pools for FreeRADIUS Server allowing arbitrary groups of [[Network Access Server]]s to share IP address blocks in an efficient and flexible manner.
+Robust dynamic IPv4 pools for FreeRADIUS Server allowing arbitrary groups of [[NAS]]s to share IP address blocks in an efficient and flexible manner.
 
 == Features ==
 
