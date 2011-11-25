@@ -511,47 +511,6 @@ In older versions of K series firmware, and all other branches, the logoff-perio
 
 * For security reasons it's better to implement dual authentication with 802.1X and Mac-Auth instead of configuring an unauth-vid. This allows the RADIUS server ultimate control over whether data from a device is allowed to ingress onto the network.
 
-## Configuration - WAP 530
-
-You must have manager access on the target ap and have entered
-configuration mode to run the following commands.
-
-### Create WPA/WPA2 TKIP/AES 802.1X Authenticated WLAN
-
-```
-conf
-
-radio 1
-
-wlan <wlan_index>
-ssid <desired_ssid>
-description "802.1X auth wpa/wpa2 tkip BSSID."
-security wpa-8021x
-wpa-allowed
-wpa-cipher-aes
-wpa-cipher-tkip
-wpa2-allowed
-radius primary key <radius_shared_secret>
-radius primary ip <radius_server_ip1>
-radius primary port 1812
-radius secondary key <radius_shared_secret>
-radius secondary ip <radius_server_ip2>
-radius secondary port 1812
-radius-accounting primary key <radius_shared_secret>
-radius-accounting primary ip <radius_server_ip1>
-radius-accounting primary port 1813
-radius-accounting secondary key <radius_shared_secret>
-radius-accounting secondary ip <radius_server_ip2>
-radius-accounting secondary port 1813
-enable
-exit
-
-enable
-exit
-
-exit
-```
-
 ##Known Issues
 
 Many, always update to the latest firmware.
