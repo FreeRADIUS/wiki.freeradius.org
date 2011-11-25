@@ -28,23 +28,25 @@ As the switch is only acting as a pass-through, any EAP Method may be used, so l
 
 **Example Packet (Access-Request)**:
 
-    Framed-MTU = 1480            
-    NAS-IP-Address = 192.168.0.1 
-    NAS-Identifier = "hp-e-its-dev8021X-sw1" 
-    User-Name = "user" 
-    Service-Type = Framed-User 
-    Framed-Protocol = PPP 
-    NAS-Port = 2 
-    NAS-Port-Type = Ethernet 
-    NAS-Port-Id = "2" 
-    Called-Station-Id = "00-14-38-fb-94-3e" 
-    Calling-Station-Id = "00-18-8b-1f-ea-c3"     
-    Connect-Info = "CONNECT Ethernet 100Mbps Full duplex" 
-    Tunnel-Type:0 = VLAN                 
-    Tunnel-Medium-Type:0 = IEEE-802       
-    Tunnel-Private-Group-Id:0 = "700"        
-    EAP-Message = 0x0201000a0175736572   
-    Message-Authenticator = 0x5128a826dfedf51040215eb6fef398df
+```
+Framed-MTU = 1480            
+NAS-IP-Address = 192.168.0.1 
+NAS-Identifier = "hp-e-its-dev8021X-sw1" 
+User-Name = "user" 
+Service-Type = Framed-User 
+Framed-Protocol = PPP 
+NAS-Port = 2 
+NAS-Port-Type = Ethernet 
+NAS-Port-Id = "2" 
+Called-Station-Id = "00-14-38-fb-94-3e" 
+Calling-Station-Id = "00-18-8b-1f-ea-c3"     
+Connect-Info = "CONNECT Ethernet 100Mbps Full duplex" 
+Tunnel-Type:0 = VLAN                 
+Tunnel-Medium-Type:0 = IEEE-802       
+Tunnel-Private-Group-Id:0 = "700"        
+EAP-Message = 0x0201000a0175736572   
+Message-Authenticator = 0x5128a826dfedf51040215eb6fef398df
+```
 
 #### Port-Based Mode
 
@@ -77,21 +79,25 @@ HP-Capability-Advert (11.255) |0+        |Capability advertisement |Binary encod
 
 #### Encoding - Standard attributes
 
-     0                   1
-     0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5
-    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-    |    Version    |      Type     |
-    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+```
+ 0                   1
+ 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|    Version    |      Type     |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+```
 
 #### Encoding - Vendor specific attributes
 
-     0                   1                   2                   3
-     0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
-    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-    |    Version    |      Type     |           Vendor-Id
-    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-         Vendor-Id (cont)           |  Vendor-Type  |
-    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+```
+ 0                   1                   2                   3
+ 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|    Version    |      Type     |           Vendor-Id
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+     Vendor-Id (cont)           |  Vendor-Type  |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+```
 
 ### Dual Authentication
 
@@ -229,21 +235,25 @@ When a user attempts to authenticate, the users password is encrypted (using a s
 
 _Example (PAP Login)_:
 
-    User-Name = "user"
-    User-Password = "pasphrase"
-    NAS-IP-Address = 192.168.0.1
-    NAS-Identifier = "hp-e-its-dev8021X-sw1"
-    NAS-Port-Type = Virtual
-    Service-Type = NAS-Prompt-User
+```
+User-Name = "user"
+User-Password = "pasphrase"
+NAS-IP-Address = 192.168.0.1
+NAS-Identifier = "hp-e-its-dev8021X-sw1"
+NAS-Port-Type = Virtual
+Service-Type = NAS-Prompt-User
+```
 
 _Example (PAP Enable)_:
 
-    User-Name = "user"
-    User-Password = "pasphrase"
-    NAS-IP-Address = 192.168.0.1
-    NAS-Identifier = "hp-e-its-dev8021X-sw1"
-    NAS-Port-Type = Virtual
-    Service-Type = Administrative-User
+```
+User-Name = "user"
+User-Password = "pasphrase"
+NAS-IP-Address = 192.168.0.1
+NAS-Identifier = "hp-e-its-dev8021X-sw1"
+NAS-Port-Type = Virtual
+Service-Type = Administrative-User
+```
 
 Typically the request _Service-Type_ will be _NAS-Prompt-User_, however if the user either demotes themselves by exiting the administrative session, and tries to escalate themselves to manager; or logs in as an operator and tries to escalate to manager; the switch will send _Administrative-User_ as the requested _Service-Type_.
 
@@ -265,9 +275,11 @@ With all newer (>2600) ProCurve switches, the switch can be instructed to respec
 _Note: The privilege-mode feature is not included in the 2500/6108 series._
 #### Enable privilege-mode
 
-    conf
-       aaa authentication login privilege-mode
-    exit
+```
+conf
+   aaa authentication login privilege-mode
+exit
+```
 
 ### Accounting command logging
 
@@ -279,22 +291,26 @@ _Note: The account command logging feature is not included in the 2500/6108 seri
 
 **Example:**
 
-    User-Name = "user"
-    NAS-IP-Address = 192.168.0.1
-    NAS-Identifier = "hp-e-its-dev8021x-sw1"
-    NAS-Port-Type = Virtual
-    Calling-Station-Id = "192.168.0.2"
-    Acct-Status-Type = Interim-Update
-    Acct-Authentic = RADIUS
-    Service-Type = NAS-Prompt-User
-    HP-Command-String = "show system-information"
-    Acct-Delay-Time = 0
+```
+User-Name = "user"
+NAS-IP-Address = 192.168.0.1
+NAS-Identifier = "hp-e-its-dev8021x-sw1"
+NAS-Port-Type = Virtual
+Calling-Station-Id = "192.168.0.2"
+Acct-Status-Type = Interim-Update
+Acct-Authentic = RADIUS
+Service-Type = NAS-Prompt-User
+HP-Command-String = "show system-information"
+Acct-Delay-Time = 0
+```
 
 #### Enable command logging
 
-    conf
-       aaa accounting commands stop-only radius
-    exit
+```
+conf
+   aaa accounting commands stop-only radius
+exit
+```
 
 ## RFC 3576 Change of Authorisation & Disconnect Message
 
@@ -360,55 +376,65 @@ _Note: ProCurve switches do not support reauthorization using the "Service-Type 
 
 #### Add radius-server as CoA originator
 
-    conf
-        radius-server host <coa_originator_ip> key <coa_key>
-        radius-server host <coa_originator_ip> dyn-authorization
-    exit
-    
-#### Add dedicated CoA originator
-
-    conf
-    radius-server host <auth_server_ip> key <auth_key>
+```
+conf
     radius-server host <coa_originator_ip> key <coa_key>
     radius-server host <coa_originator_ip> dyn-authorization
-    aaa server-group radius 'rad_auth' host <auth_server_ip>
-    
-    aaa authentication port-access eap-radius server-group 'rad_auth'
-    # repeat for other authentication methods
-    aaa accounting network start-stop radius 'rad_auth'
-    # repeat for other accounting methods
-    exit
+exit
+```
+
+#### Add dedicated CoA originator
+
+```
+conf
+radius-server host <auth_server_ip> key <auth_key>
+radius-server host <coa_originator_ip> key <coa_key>
+radius-server host <coa_originator_ip> dyn-authorization
+aaa server-group radius 'rad_auth' host <auth_server_ip>
+
+aaa authentication port-access eap-radius server-group 'rad_auth'
+# repeat for other authentication methods
+aaa accounting network start-stop radius 'rad_auth'
+# repeat for other accounting methods
+exit
+```
 
 #### Disable Event-Timestamp check (if required)
 
-    conf
-        radius-server host <coa_originator_ip> time-window 0
-    exit
+```
+conf
+    radius-server host <coa_originator_ip> time-window 0
+exit
+```
 
 ### Radclient DM example
 
-    echo "NAS-IP-Address = 172.0.0.1,\
-    User-Name = 'example_user',\
-    NAS-Port = 1,\
-    Calling-Station-ID = '00-10-00-10-00-10'" | radclient 172.0.0.1:3799 40 testing123
-    
-    Received response ID 114, code 41, length = 32
-        Event-Timestamp = "Sep  2 2018 10:26:40 PDT"
-        Acct-Terminate-Cause = Admin-Reset
-        
+```
+echo "NAS-IP-Address = 172.0.0.1,\
+User-Name = 'example_user',\
+NAS-Port = 1,\
+Calling-Station-ID = '00-10-00-10-00-10'" | radclient 172.0.0.1:3799 40 testing123
+
+Received response ID 114, code 41, length = 32
+    Event-Timestamp = "Sep  2 2018 10:26:40 PDT"
+    Acct-Terminate-Cause = Admin-Reset
+```
+
 ### Radclient CoA example
 
 This changes example_user's PVID to 2 and remaps all incoming 802.1p priorities to 7.
 
-    echo "User-Name = 'example_user',\
-    Acct-Session-ID = '000100006F',\
-    Tunnel-Type = VLAN,\
-    Tunnel-Medium-Type = IEEE-802,\
-    Tunnel-Private-Group-Id = '2',\
-    HP-COS = '7777777'" | radclient 172.0.0.1:3799 43 testing123
-    
-    Received response ID 193, code 44, length = 26
-        Event-Timestamp = "Sep  2 2018 10:42:29 PDT"
+```
+echo "User-Name = 'example_user',\
+Acct-Session-ID = '000100006F',\
+Tunnel-Type = VLAN,\
+Tunnel-Medium-Type = IEEE-802,\
+Tunnel-Private-Group-Id = '2',\
+HP-COS = '7777777'" | radclient 172.0.0.1:3799 43 testing123
+
+Received response ID 193, code 44, length = 26
+    Event-Timestamp = "Sep  2 2018 10:42:29 PDT"
+```
 
 ## Configuration - Wired switches
 
@@ -419,47 +445,59 @@ Most ProCurve wired switches >= 2600 series will support all or a subset of thes
 
 ### Add servers
 
-    radius-server host <radius_server_ip1> auth-port 1812 acct-port 1813
-    radius-server host <radius_server_ip2> auth-port 1812 acct-port 1813
+```
+radius-server host <radius_server_ip1> auth-port 1812 acct-port 1813
+radius-server host <radius_server_ip2> auth-port 1812 acct-port 1813
+```
 
 ### Set Server Parameters
 
-    radius-server key <radius_shared_secret>
+```
+radius-server key <radius_shared_secret>
+```
 
 ### Set general port-access Parameters
 
-    aaa authentication port-access eap-radius
-    aaa port-access gvrp-vlans
+```
+aaa authentication port-access eap-radius
+aaa port-access gvrp-vlans
+```
 
 _Note: Enabling the use of GVRP vlans is optional._
 
 ### Enable RADIUS Authentication on administrative interfaces
 
-    aaa authentication ssh login radius local
-    aaa authentication ssh enable radius local
-    aaa authentication console login radius local
-    aaa authentication console enable radius local
-    aaa authentication login privilege-mode
+```
+aaa authentication ssh login radius local
+aaa authentication ssh enable radius local
+aaa authentication console login radius local
+aaa authentication console enable radius local
+aaa authentication login privilege-mode
+```
 
 ### Enabling 802.1X/MAC dual authentication on selected ports (single client)
 
-    aaa port-access authenticator <port range>
-    aaa port-access authenticator <port range> logoff-period 862400
-    aaa port-access authenticator <port range> quiet-period 30
-    aaa port-access authenticator <port range> client-limit 1
-    aaa port-access authenticator active
-    aaa port-access mac-based <port range>
-    aaa port-access mac-based <port range> logoff-period 862400
-    aaa port-access mac-based <port range> quiet-period 30
-    # This improves compatibility with devices that use WOL
-    aaa port-access <port range> controlled-direction in
+```
+aaa port-access authenticator <port range>
+aaa port-access authenticator <port range> logoff-period 862400
+aaa port-access authenticator <port range> quiet-period 30
+aaa port-access authenticator <port range> client-limit 1
+aaa port-access authenticator active
+aaa port-access mac-based <port range>
+aaa port-access mac-based <port range> logoff-period 862400
+aaa port-access mac-based <port range> quiet-period 30
+# This improves compatibility with devices that use WOL
+aaa port-access <port range> controlled-direction in
+```
 
 ### Enable Accounting
 
-    aaa accounting exec start-stop radius
-    aaa accounting network start-stop radius
-    aaa accounting system start-stop radius
-    aaa accounting update periodic 15
+```
+aaa accounting exec start-stop radius
+aaa accounting network start-stop radius
+aaa accounting system start-stop radius
+aaa accounting update periodic 15
+```
 
 ### Hints and tips
 * If dual authentication is used with different logoff-period timer values, timer behaviour is unpredictable.
@@ -478,37 +516,39 @@ configuration mode to run the following commands.
 
 ### Create WPA/WPA2 TKIP/AES 802.1X Authenticated WLAN
 
-    conf
-    
-    radio 1
-    
-    wlan <wlan_index>
-    ssid <desired_ssid>
-    description "802.1X auth wpa/wpa2 tkip BSSID."
-    security wpa-8021x
-    wpa-allowed
-    wpa-cipher-aes
-    wpa-cipher-tkip
-    wpa2-allowed
-    radius primary key <radius_shared_secret>
-    radius primary ip <radius_server_ip1>
-    radius primary port 1812
-    radius secondary key <radius_shared_secret>
-    radius secondary ip <radius_server_ip2>
-    radius secondary port 1812
-    radius-accounting primary key <radius_shared_secret>
-    radius-accounting primary ip <radius_server_ip1>
-    radius-accounting primary port 1813
-    radius-accounting secondary key <radius_shared_secret>
-    radius-accounting secondary ip <radius_server_ip2>
-    radius-accounting secondary port 1813
-    enable
-    exit
-    
-    enable
-    exit
-    
-    exit
+```
+conf
+
+radio 1
+
+wlan <wlan_index>
+ssid <desired_ssid>
+description "802.1X auth wpa/wpa2 tkip BSSID."
+security wpa-8021x
+wpa-allowed
+wpa-cipher-aes
+wpa-cipher-tkip
+wpa2-allowed
+radius primary key <radius_shared_secret>
+radius primary ip <radius_server_ip1>
+radius primary port 1812
+radius secondary key <radius_shared_secret>
+radius secondary ip <radius_server_ip2>
+radius secondary port 1812
+radius-accounting primary key <radius_shared_secret>
+radius-accounting primary ip <radius_server_ip1>
+radius-accounting primary port 1813
+radius-accounting secondary key <radius_shared_secret>
+radius-accounting secondary ip <radius_server_ip2>
+radius-accounting secondary port 1813
+enable
+exit
+
+enable
+exit
+
+exit
+```
 
 ##Known Issues
 
