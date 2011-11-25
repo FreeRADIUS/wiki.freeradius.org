@@ -212,10 +212,12 @@ In addition to being able to assign statically configured VLANs, GVRP learned VL
 
 #### Enable the use of GVRP learned VLANs with dynamic VLAN assignment
 
-    conf
-        aaa port-access gvrp-vlans
-        int <authenticated port range> unknown-vlans disable
-    exit
+``` 
+conf
+    aaa port-access gvrp-vlans
+    int <authenticated port range> unknown-vlans disable
+exit
+```
 
 ###### Default edge port GVRP settings are insecure, and may allow circumvention of network policy.
 
