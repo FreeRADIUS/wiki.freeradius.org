@@ -2,7 +2,7 @@
 
 '''Extensible Authentication Protocol''', or '''EAP''', is a universal [[authentication]] framework frequently used in [[wireless LAN|wireless networks]] and [[Point-to-Point_Protocol|Point-to-Point connections]].  It is defined by RFC 3748. Although the EAP protocol is not limited to wireless LAN networks and can be used for wired LAN authentication, it is most often used in wireless LAN networks.  Recently, the [[Wi-Fi Protected Access|WPA]] and [[WPA2]] standard has officially adopted five EAP types as its official authentication mechanisms.  
 
-EAP is an authentication framework, not a specific authentication mechanism. The EAP provides some common functions and a negotiation of the desired authentication mechanism. Such mechanisms are called EAP methods and there are currently about 40 different methods. Methods defined in IETF RFCs include EAP-MD5, EAP-OTP, EAP-GTC, EAP-TLS, [[#EAP-IKEv2|EAP-IKEv2]], EAP-SIM, and EAP-AKA, and in addition a number of vendor specific methods and new proposals exist. Commonly used modern methods capable of operating in wireless networks include EAP-TLS, EAP-SIM, EAP-AKA, PEAP, LEAP and EAP-TTLS.  Requirements for EAP methods used in wireless LAN authentication are described in RFC 4017. 
+EAP is an authentication framework, not a specific authentication mechanism. The EAP provides some common functions and a negotiation of the desired authentication mechanism. Such mechanisms are called EAP methods and there are currently about 40 different methods. Methods defined in IETF RFCs include EAP-MD5, EAP-OTP, EAP-GTC, EAP-TLS, [[EAP#EAP-IKEv2|EAP-IKEv2]], EAP-SIM, and EAP-AKA, and in addition a number of vendor specific methods and new proposals exist. Commonly used modern methods capable of operating in wireless networks include EAP-TLS, EAP-SIM, EAP-AKA, PEAP, LEAP and EAP-TTLS.  Requirements for EAP methods used in wireless LAN authentication are described in RFC 4017. 
 
 When EAP is invoked by an [[802.1X]] enabled [[NAS]] (Network Access Server) device such as an [[802.11]] a/b/g Wireless Access Point, modern EAP methods can provide a secure authentication mechanism and negotiate a secure PMK (Pair-wise Master Key) between the client and NAS.  The PMK can then be used for the wireless encryption session which uses [[TKIP]] or [[Advanced Encryption Standard|AES]] encryption. 
 
@@ -22,7 +22,7 @@ When EAP is invoked by an [[802.1X]] enabled [[NAS]] (Network Access Server) dev
 
 The Lightweight Extensible Authentication Protocol ([[LEAP]]) is a proprietary EAP method developed by Cisco Systems.
 
-There is no native support for LEAP in any Windows operating system but is supported by third party [[supplicants]]. The protocol is known to be vulnerable to dictionary attacks however Cisco still maintains that LEAP can be secure if sufficiently complex passwords are used. Newer protocols like [[#EAP-TTLS]] and [[#PEAP]] do not have this problem and can operate on Cisco and non-Cisco Access Points.
+There is no native support for LEAP in any Windows operating system but is supported by third party [[supplicants]]. The protocol is known to be vulnerable to dictionary attacks however Cisco still maintains that LEAP can be secure if sufficiently complex passwords are used. Newer protocols like [[EAP#EAP-TTLS]] and [[EAP#PEAP]] do not have this problem and can operate on Cisco and non-Cisco Access Points.
 
 === EAP-TLS ===
 
