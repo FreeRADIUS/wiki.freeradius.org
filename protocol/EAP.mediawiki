@@ -22,7 +22,7 @@ When EAP is invoked by an [[802.1X]] enabled [[NAS]] (Network Access Server) dev
 
 The Lightweight Extensible Authentication Protocol ([[LEAP]]) is a proprietary EAP method developed by Cisco Systems.
 
-There is no native support for LEAP in any Windows operating system but is supported by third party [[supplicants]]. The protocol is known to be vulnerable to dictionary attacks however Cisco still maintains that LEAP can be secure if sufficiently complex passwords are used. Newer protocols like [[EAP#EAP-TTLS]] and [[EAP#PEAP]] do not have this problem and can operate on Cisco and non-Cisco Access Points.
+There is no native support for LEAP in any Windows operating system but is supported by third party [[supplicants]]. The protocol is known to be vulnerable to dictionary attacks however Cisco still maintains that LEAP can be secure if sufficiently complex passwords are used. Newer protocols like [[EAP#EAP-TTLS|EAP-TTLS]] and [[EAP#PEAP|EAP-PEAP]] do not have this problem and can operate on Cisco and non-Cisco Access Points.
 
 === EAP-TLS ===
 
