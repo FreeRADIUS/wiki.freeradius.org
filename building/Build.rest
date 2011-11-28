@@ -140,6 +140,4 @@ Then simply run::
 
 See Also
 --------
-
-* [[Binary packages]]
 * [[Standard package|packages]]
