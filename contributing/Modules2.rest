@@ -13,31 +13,8 @@ Establishing the Environment
 ----------------------------
 There are two ways to compile your module: inside FreeRADIUS or separately.  I have not tried the inside approach with Version 2.  However, it should be quite similar to that used with Version 1.  This page realy addresses compiling the modules searately from FreeRADIUS.  
 
-The simple approach is to build your module outside of the FreeRADIUS environment and then move the resulting .so file into the library.  To do that you need a Makefile.  Here is one that works for a module named rlm_xxx::
-
-  	VERS = 2.0.5
-  
-  	CFLAGS  =  -DNDEBUG -Wall -I/usr/include -I/usr/local/msql3/include \
-  		   -I/usr/ports/net/freeradius2/work/freeradius-server-$(VERS)/src
-  
-  	LIBS    =  -lc -L/usr/local/msql3/lib -lmsql
-  
-  	ALL:    rlm_xxx.o rlm_xxx-$(VERS).so
-  
-  	rlm_xxx.o:     rlm_xxx.c
-  		cc -g -fPIC -DPIC -c $(CFLAGS) rlm_xxx.c
-  
-  	rlm_xxx-$(VERS).so:    rlm_xxx.o
-  		cc -g -shared -Wl,-soname,rlm_xxx-$(VERS).so \
-  		   -o rlm_xxx-$(VERS).so rlm_xxx.o $(LIBS)
-  
-  	install:        ALL
-  		install rlm_xxx-$(VERS).so /usr/local/lib/freeradius-$(VERS)
-  		ln -fs rlm_xxx-$(VERS).so /usr/local/lib/freeradius-$(VERS)/rlm_xxx.so
-  
-  	clean:
-  		rm rlm_xxx*.o rlm_xxx*.so
-             
+The simple approach is to build your module outside of the FreeRADIUS environment and then move the resulting .so file into the library.  To do that you need a Makefile.    Use the file from ``src/modules/rlm_example/Makefile``.  Copy it to ``src/modules/rlm_foo/Makefile``.  Change ``example`` to ``foo``, and add the various libraries and headers needed by your module.  Then type ``make``
+          
 The FreeRADIUS package is located at: /usr/local/ports/freeradius/2/work/freeradius-server-2.0.5.  You will need to change that to your location.
 
 Note, you need access to the various include files used by FreeRADIUS.  Change the location above for the include directory to match where they are on your system.  Note, in Version 2 the include structure is a bit unusual.  You need to reference the src directory and not the more obvious include directory.  The reason is that all the FreeRADIUS source modules use includes of the form "freeradius-dev/module" which is linked to the proper place.  You need to follow that convention for things to work properly.  The version numbering I am using for the module is that of FreeRADIUS but you can use any you want.  This example shows how to link to a static library from the module.  The second cc command is quite touchy about the ordering of items.  There may be issues with libraries if they are not after the module source name.  
