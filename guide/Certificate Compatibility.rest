@@ -57,5 +57,5 @@ In that case
 
 * follow the instructions given above.
 
-* consider to decrease MTU on tunnel
+* consider to decrease tunnel MTU
 
