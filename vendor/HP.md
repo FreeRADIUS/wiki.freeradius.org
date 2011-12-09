@@ -130,7 +130,7 @@ RADIUS Attribute              |Times Used|Description                           
 :-----------------------------|:--------:|:-----------------------------------------------------|:------------|:------
 Tunnel-Type                   |1         |Type of tunnel                                        |VLAN         |13
 Tunnel-Medium-Type            |1         |Tunnel transport medium                               |IEEE-802     |6
-Tunnel-Private-Group-ID       |1         |Numeric ingress/egress VLAN ID to be assigned         |IEEE-802     |6
+Tunnel-Private-Group-ID       |1         |Numeric ingress/egress VLAN ID to be assigned         |<vlan id>    |<vlan id>
 
 If the specified Tunnel-Private-Group-ID matches a VLAN present on the switch, the PVID of the port the client is connected to will be temporarily altered to reflect the assigned PVID. At the end of the session the port will revert back to its static PVID assignment.
 
