@@ -53,4 +53,9 @@ If you are running version 2.1.10 or later, you may see the following message::
  WARNING: !! Please read http://wiki.freeradius.org/Certificate_Compatibility
  WARNING: !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-In that case, follow the instructions given above.
+In that case
+
+* follow the instructions given above.
+
+* consider to decrease MTU on tunnel
+
