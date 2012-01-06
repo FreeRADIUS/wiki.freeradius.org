@@ -30,6 +30,7 @@ The process to get FreeRADIUS to start using syslog is fairly straight forward. 
  On the distro we use it is - services restart sysklogd
  RedHat - service syslog restart
  Ubuntu - ?
+ FreeBSD - /etc/rc.d/syslogd restart
 
 
 ===Modify /etc/raddb/radiusd.conf:===
