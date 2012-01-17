@@ -55,7 +55,6 @@ If you are running version 2.1.10 or later, you may see the following message::
 
 In that case
 
-* follow the instructions given above.
-
-* consider to decrease tunnel MTU
+* Follow the instructions given above.
+* Consider to decreasing the tunnel MTU
 
