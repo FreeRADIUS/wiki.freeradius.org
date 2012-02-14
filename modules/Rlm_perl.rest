@@ -61,33 +61,6 @@ External Perl modules
 
 You can use any external module with your perl script just do as usuall use Some_Module
 
-Threaded Perl
--------------
-
-When your perl is compiled with ithreads (use ``perl -V | grep USE_ITHREADS``) 
-module will have its own pool of perl interpeters. This pool is fully configurable.
-
-In perl section in your config::
-
-    #max_clones = 32
-    #start_clones = 32
-    #min_spare_clones = 0
-    #max_spare_clones = 32
-    #cleanup_delay = 5
-    #max_request_per_clone = 0
-
-This is the default values.  On startup or later when a new perl interpeter is created a function CLONE is called.  In this function you can initialize some variables that should be local for this thread. For example an Database connection.  Hint: When you want to use threaded perl with Database make sure a pool is fixed size.
-
-Threaded vs Non-threaded
-~~~~~~~~~~~~~~~~~~~~~~~~
-
-Now a days perl threads have become more stable. When your perl is compiled without threads and a new radius request is coming to your perl module, the next request will be proccessed after proccesing the previous one. When perl is threaded all requests can be poccessed in parallel.
-
-Multiple Instances
-------------------
-
-You can have multiple instances only if your perl is compiled with  MULTIPLICITY
-
 Config
 ------
 
@@ -142,17 +115,6 @@ This is an example 'modules/perl' configuration::
           #
           #func_start_accounting = accounting_start
           #func_stop_accounting = accounting_stop
-    
-          #  Uncomment the following lines if your perl is
-          #  compiled with ithreads support.
-          #  the settings bellow are the default one.
-          #
-          #max_clones = 32
-          #start_clones = 32
-          #min_spare_clones = 0
-          #max_spare_clones = 32
-          #cleanup_delay = 5
-          #max_request_per_clone = 0
     }
 
 
