@@ -26,11 +26,14 @@ Logging
 rlm_perl have a wrapper for radlog function that comes with freeradius. In your perl script use call to ``&radiusd::radlog($type,"Some message");`` 
 Where $type can be ::
 
-    0 - Debug
-    1 - Auth
-    2 - Proxy
-    3 - Info
-    4 - Error
+    1 - Debug
+    2 - Auth
+    3 - Proxy
+    4 - Info
+    5 - Error
+    6 - Acct
+
+These are the same values as defined in src/include/radiusd.h, L_DBG, L_AUTH, etc.
 
 Return Codes
 ------------
