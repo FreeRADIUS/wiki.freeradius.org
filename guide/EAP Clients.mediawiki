@@ -13,7 +13,7 @@ XP - FreeRADIUS EAP/TLS notes may be found at:
 
 ==SecureW2==
 
-[http://www.securew2.com/ SecureW2] is a powerful open source [[Extensible Authentication Protocol#EAP-TTLS|EAP-TTLS]] Client for Windows.
+[http://www.securew2.com/ SecureW2] was a powerful open source 802.1x Client for Windows. It is now available as a commercial product only.
 
 '''Features'''
 * Most robust and EAP-TTLS Client available today 
