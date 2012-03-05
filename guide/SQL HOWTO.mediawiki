@@ -35,6 +35,8 @@ Next up, you need to create the schema for your database. There is an SQL script
  cd /usr/share/doc/packages/freeradius/doc/examples/ *(Sorry, I can't find this directory in my centOS + freeradius 2.1.10)
  mysql -uroot -p radius < mysql.sql
 
+(I think you're probably needing to look for /etc/raddb/sql/mysql/schema.sql on CentOS/RHEL)
+
 ===Create PostgreSQL Database===
 
  su - postgres
