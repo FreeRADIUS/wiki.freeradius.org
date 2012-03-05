@@ -72,6 +72,8 @@ If you're stripping all realm names (i.e. you want user joe@domain.com to authen
 
 Edit /etc/raddb/sites-available/default and uncomment the line containing 'sql' in the authorize{} section. The best place to put it is just after the 'files' entry. Indeed, if you'll just be using SQL, and not falling back to text files, you could comment out or delete the 'files' entry altogether.
 
+Additionally, edit /etc/raddb/sites-available/inner-tunnel and uncomment the line containing 'sql' under "authorize {}". [[#Notes1|See below]].
+
 Also uncomment the line saying 'sql' in the accounting{} section to tell FreeRADIUS to store accounting records in SQL as well.
 
 Optionally add or uncomment 'sql' to the session{} section if you want to do Simultaneous-Use detection.
@@ -218,6 +220,10 @@ On the subject of backup servers. If you want to run TWO MySQL servers and have 
 
  
 Note that if FreeRadius fails over to the second MySQL server and tries to update the accounting table (radacct), nasty things might possibly happen to your replication setup and database integrity as the first MySQL server won't have got the updates...
+
+<div id="Notes1">EAP utilizes an inner-tunnel authentication mechanism. I was curious why I wasn't seeing an attempt to use my password after completing the EAP-TLS authentication but a local radclient test showed the correct password. I uncommented "sql" in sites-enabled/inner-tunnel and that was all that was needed to pass authentication.
+
+Obviously, this could be explained further or better but if you're stuck give this a try. I'll try to add to this note at a later time.</div>
 
 ==See Also==
 
