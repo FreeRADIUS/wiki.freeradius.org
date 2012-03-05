@@ -30,7 +30,7 @@ Next up, you need to create the schema for your database. There is an SQL script
    GRANT ALL ON radius.* TO radius@localhost IDENTIFIED BY "radpass";
    exit
 
-'''Note:''' use a  more secure password that "radpass" in the above example
+'''Note:''' use a  more secure password than "radpass" in the above example
 
  cd /usr/share/doc/packages/freeradius/doc/examples/ *(Sorry, I can't find this directory in my centOS + freeradius 2.1.10)
  mysql -uroot -p radius < mysql.sql
