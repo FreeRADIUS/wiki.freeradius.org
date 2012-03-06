@@ -106,10 +106,10 @@
  
  
  #
- # Table structure for table 'usergroup'
+ # Table structure for table 'radusergroup'
  #
  
- CREATE TABLE usergroup (
+ CREATE TABLE radusergroup (
    UserName varchar(64) NOT NULL default &#39;&#39;,
    GroupName varchar(64) NOT NULL default &#39;&#39;,
    priority int(11) NOT NULL default '1',
