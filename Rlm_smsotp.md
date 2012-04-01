@@ -13,3 +13,24 @@ The smsotp module is not installed by default, but can be compiled and installed
     make install
 
 # Configuration
+In order to active smsotp, first of all the Auth-Type must be set to smsotp for the user. In order to that to all users, add the following line to the users file:
+
+    DEFAULT Auth-Type := smsotp
+
+In order that radius knows what to do with the Auth-Type the file sites-enabled/default need to be modified to include the following in the sections authenticate and Authorize:
+
+
+        authenticate {
+                Auth-Type smsotp {
+                        ntlm_auth
+                        smsotp
+                }
+        
+                Auth-Type smsotp-reply {
+                        smsotp
+                }
+        }
+        
+        Authorize {
+                smsotp
+        }
