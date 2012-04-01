@@ -34,3 +34,7 @@ In order that radius knows what to do with the Auth-Type the file sites-enabled/
         Authorize {
                 smsotp
         }
+
+# Tripwires
+
+* Smsotp can only be used with pap and ntlm_auth (which is pap with active directory backend) but it can not be used with CHAP, MSCHAPv1 and MSCHAPv2.
