@@ -22,7 +22,7 @@ In order that radius knows what to do with the Auth-Type the file sites-enabled/
 
         authenticate {
                 Auth-Type smsotp {
-                        ntlm_auth
+                        pap or ntlm_auth
                         smsotp
                 }
         
