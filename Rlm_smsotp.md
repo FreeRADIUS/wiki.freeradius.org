@@ -2,7 +2,7 @@ Smsotp (Short Message Service One Time Password) is a freeradius module written 
 
 # Architecture
 Smsotp ships as a module which can be compiled and dynamically loaded. It connects to a unix domain socket where a daemon (smsotpd) listens. Holger Wollf did not provide his deamon,
-so Thomas Glanzmann modified a perl POE (Perl Object Event) script to provide a smsotpd implementation. Smsotpd is contacted by the smsotp module after a user provided a valid username and password using PAP. It than sends the otp via SMS. Thomas Glanzmann used SIPGATE (a german VOIP provider) but any service can be used including a mobile phone by adopting the code in smsotpd. Afterwards the daemon is contacted again in order to verify that the provided otp is correct.
+so Thomas Glanzmann modified a perl POE (Perl Object Event) script to provide a smsotpd implementation. Smsotpd is contacted by the smsotp module after an user provided a valid username and password using PAP. It than sends the otp via SMS. Thomas Glanzmann used SIPGATE (a german VOIP provider) but any service can be used including a mobile phone by adopting the code in smsotpd. Afterwards the daemon is contacted again in order to verify that the provided otp is correct.
 
 # Installation
 The smsotp module is not installed by default, but can be compiled and installed by running the following commands:
