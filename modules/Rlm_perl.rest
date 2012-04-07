@@ -28,9 +28,9 @@ Where $type can be ::
 
     1 - Debug
     2 - Auth
-    3 - Proxy
-    4 - Info
-    5 - Error
+    3 - Info
+    4 - Error
+    5 - Proxy
     6 - Acct
 
 These are the same values as defined in src/include/radiusd.h, L_DBG, L_AUTH, etc.
