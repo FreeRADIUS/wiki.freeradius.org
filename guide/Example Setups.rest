@@ -1,0 +1,18 @@
+Cookbook - Recipes and Examples
+==========================
+
+FR Configuration
+^^^^^^^^^^^^
+* [[Configuration files]]
+* [[Mac-Auth]]
+
+Device configuration examples
+^^^^^^^^^^^^^^^^^^^^^^
+* [[HP ProCurve|HP]]
+* [[Cisco]]
+* [[Linksys]]
+
+Recipes for 3rd party software
+^^^^^^^^^^^^^^^^^^^^^^
+* [[PopTop]]
+* [[Git]]
