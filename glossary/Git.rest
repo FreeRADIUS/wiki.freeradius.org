@@ -7,26 +7,26 @@ As well as being an excellent SCM (Source control management) tool, git is also 
 
 The basics
 ~~~~~~~~
-For basic configuration management one only has to ::
+For basic configuration management one only has to::
  
  cd <config_dir>/raddb
  git init
  git add .
  git commit --message 'Initial commit of FreeRADIUS configuration'
 
-Then every time a change is made ::
+Then every time a change is made::
 
  git commit -a --message 'Added support for xyz'
 
-To see a list of changes ::
+To see a list of changes::
 
  git log
 
-To know who to blame ::
+To know who to blame::
 
  git blame
 
-And if it's all gone horribly wrong ::
+And if it's all gone horribly wrong::
 
  git log # To find the last known good commit id
  git revert <commit id>
@@ -39,7 +39,7 @@ They can be as simple or complex as you want to make them, but the server source
 
 To install it convert your raddb folder to a git repository (as show above)
 
-Copy the post-receive hook script to the .git/hooks dir ::
+Copy the post-receive hook script to the .git/hooks dir::
 
  cd <config_dir>/raddb/.git/hooks
  wget https://github.com/alandekok/freeradius-server/blob/master/scripts/git/post-receive
@@ -47,24 +47,24 @@ Copy the post-receive hook script to the .git/hooks dir ::
 
 Edit parameters at the top of the file to work with with your system (defaults are for Ubuntu 10.04 LTS)
 
-Tweak the git configuration to allow commits to the currently checked out branch ::
+Tweak the git configuration to allow commits to the currently checked out branch::
 
  cd <config_dir>/raddb
  git config receive.denyCurrentBranch ignore
 
-Clone the servers remote repository to your local machine ::
+Clone the servers remote repository to your local machine::
 
  mkdir <respositories>
  cd <repositories>
  git clone ssh://<user>@<server>/<config_dir>/raddb
 
-Make your local modifications ::
+Make your local modifications::
 
  echo "foouser    Cleartext-Password := 'foopass'" >> users
  commit -a --message 'Add foouser'
  git push
 
-And if all goes well you should see something like ::
+And if all goes well you should see something like::
 
  Counting objects: 7, done.
  Delta compression using up to 4 threads.
