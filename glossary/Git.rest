@@ -37,6 +37,9 @@ The basic functionality of git is useful on its own, but one of the features tha
 
 They can be as simple or complex as you want to make them, but the server source contains a particularly compelling example_.
 
+Installation
+------------
+
 To install it convert your raddb folder to a git repository (as show above)
 
 Copy the post-receive hook script to the .git/hooks dir::
@@ -105,4 +108,4 @@ Extending the idea further you can add multiple cluster servers as remotes and p
 See Also
 ^^^^^^
 * [[Contributing with GitHub|GitHub]]
-* [[http://git.freeradius.org|git.freeradius.org]]
+* http://git.freeradius.org
