@@ -31,6 +31,8 @@ And if it's all gone horribly wrong::
  git log # To find the last known good commit id
  git revert <commit id>
 
+There are many many tutorials available if you want to learn more generic git administration, this one is extra pretty: http://gitimmersion.com.
+
 Remote administration
 ~~~~~~~~~~~~~~~~
 The basic functionality of git is useful on its own, but one of the features that really makes git shine among the SCMs is its support for commit hooks. Hooks don't require anything special to function (like gitosis or the git-daemon), they work just as well over straight SSH.
