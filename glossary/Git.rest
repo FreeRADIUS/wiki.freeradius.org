@@ -78,14 +78,19 @@ And if all goes well you should see something like::
  To ssh://<user>@<server>/usr/local/etc/raddb
    ae98fa8..f4419ec  master -> master
 
-**So what happened there?**
+What just happened
+-----------------------
 
 First the commit was transferred to the remote server and merged with the commits already there, then our post-receive hook was executed. The post receive hook updated the working copy to the repository HEAD **(throwing away any local changes, be careful)**.
 
 ``radiusd -C`` was called to check the new config was valid, it appeared to be valid so the server was restarted to load in the new config parameters, restart seemed to go ok so the *stable* tag was updated to point to the new commit (tags are user assigned aliases for particular commits).
 
+The stable tag
+----------------
 The stable tag actually provides two functions here. If ``radiusd -C`` passed the config, but the server failed to restart correctly, the hook script uses it to roll back the config automatically to a known good version and start the server. If the server started ok, but unfortunately so have the angry emails; to rapidly revert the server back to a known good configuration ``git revert stable``.
 
+With multiple servers
+------------------------
 Extending the idea further you can add multiple cluster servers as remotes and push the new configuration out to each of them (or write a simple script to do that for you)::
 
  git remote rename master server0
