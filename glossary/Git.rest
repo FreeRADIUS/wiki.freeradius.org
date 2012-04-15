@@ -81,8 +81,8 @@ And if all goes well you should see something like::
  To ssh://<user>@<server>/usr/local/etc/raddb
    ae98fa8..f4419ec  master -> master
 
-What just happened
------------------------
+What just happened?
+-------------------------
 
 First the commit was transferred to the remote server and merged with the commits already there, then our post-receive hook was executed. The post receive hook updated the working copy to the repository HEAD **(throwing away any local changes, be careful)**.
 
