@@ -1,3 +1,5 @@
+__NOTOC__
+
 While we firmly believe that [http://www.freeradius.org FreeRADIUS] is the best RADIUS server in existence, for completeness here is a list of other Open Source servers.  For those investigating Open Source servers,  only FreeRADIUS supports EAP (required for Wifi), and has has the largest feature set, user community and most frequent releases.
 
 ==BSDRadius==
