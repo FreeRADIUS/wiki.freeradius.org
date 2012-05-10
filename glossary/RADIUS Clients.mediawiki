@@ -1,3 +1,5 @@
+__NOTOC__
+
 The FreeRADIUS server works with any reasonably well-written RADIUS client.
 
 The FreeRADIUS server software package includes several tools to assist in testing and using the server. They are:
