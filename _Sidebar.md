@@ -1,6 +1,5 @@
 ## Quick Links
 
-* [[Requests for Articles|RFA]]
 * [[Contributing with GitHub|GitHub]]
 * [[Pre-built packages|Packages]]
 * [[Installing from source code|Build]]
