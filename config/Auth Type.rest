@@ -12,4 +12,4 @@ People sometimes read the debug log and notice the message::
 
  auth: No authenticate method (Auth-Type) configuration found for the request: Rejecting the user
 
-It is ''not'' necessarily a good idea to intervene by explicitly defining Auth-Type. It is more likely that one of the authentication modules (e.g. [[rlm_pap]], [[rlm_chap]], [[rlm_files]], [[rlm_ldap]], ...) has either not been run, or it has been run but the incoming request doesn't satisfy its requirements based on [[protocol compatibility]].
+It is ''not'' necessarily a good idea to intervene by explicitly defining Auth-Type. It is more likely that one of the authentication modules (e.g. [[rlm_pap]], [[rlm_chap]], [[rlm_files]], [[rlm_ldap]], ...) has either not been run, or it has been run but the incoming request doesn't satisfy its requirements based on protocol compatibility.
