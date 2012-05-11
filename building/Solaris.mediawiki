@@ -1,3 +1,5 @@
+__NOTOC__
+
 ==Standard Method==
 
  ./configure
