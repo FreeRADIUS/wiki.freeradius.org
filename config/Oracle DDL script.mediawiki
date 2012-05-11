@@ -1,5 +1,6 @@
 {{Default in the server source|raddb/sql/oracle/schema.sql}}
 
+```sql
  /*
   * $Id: oracle.sql,v 1.1.2.1 2006/04/11 13:14:41 pnixon Exp $
   *
@@ -195,3 +196,4 @@
  	options		VARCHAR(128)
  );
  CREATE SEQUENCE realms_seq START WITH 1 INCREMENT BY 1;
+```
