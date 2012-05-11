@@ -1,3 +1,4 @@
+__NOTOC__
 ==Overview==
 
 '''Extensible Authentication Protocol''', or '''EAP''', is a universal [[authentication]] framework frequently used in [[wireless LAN|wireless networks]] and [[Point-to-Point_Protocol|Point-to-Point connections]].  It is defined by RFC 3748. Although the EAP protocol is not limited to wireless LAN networks and can be used for wired LAN authentication, it is most often used in wireless LAN networks.  Recently, the [[Wi-Fi Protected Access|WPA]] and [[WPA2]] standard has officially adopted five EAP types as its official authentication mechanisms.  
