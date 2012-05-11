@@ -7,4 +7,4 @@ There is no native support for LEAP in any Windows operating system but is suppo
 Some 3rd party vendors also support LEAP through the [Cisco Compatible Extensions Program](http://www.cisco.com/web/partners/pr46/pr147/partners_pgm_concept_home.html).
 
 ## See Also
-* [[Extensible Authentication Protocol]]
+* [[EAP]]
