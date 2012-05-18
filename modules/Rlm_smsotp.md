@@ -6,6 +6,7 @@ so Thomas Glanzmann modified a perl POE (Perl Object Event) script to provide a 
 
 # Installation
 The smsotp module is not installed by default, but can be compiled and installed by running the following commands:
+
     cd src/modules/rlm_smsotp
     chmod +x configure
     ./configure --prefix=/path/to/installation
