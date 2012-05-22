@@ -39,3 +39,9 @@ Freeradius needs to know what to do with the Auth-Type smsotp so the file sites-
 # Tripwires
 
 * Smsotp can only be used with pap and ntlm_auth (which is pap with active directory backend) but it can not be used with CHAP, MSCHAPv1 and MSCHAPv2.
+
+# Downloads
+
+* http://thomas.glanzmann.de/smsotpd.2012-05-21.tar.gz - smsotpd and a few scripts and a README
+* http://thomas.glanzmann.de/smsotp.swf - Flash Video showing the setup
+* http://thomas.glanzmann.de/smsotp.pdf - Slides from the flash video
