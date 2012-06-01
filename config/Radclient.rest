@@ -33,7 +33,7 @@ Example
 ::
 
    echo "User-Name = test" | /usr/local/bin/radclient localhost:1812 auth s3cr3t
-   echo "User-Name=test,Password=mypass,Framed-Protocol=PPP " | /usr/local/bin/radclient localhost:1812 auth s3cr3t
+   echo "User-Name=test,User-Password=mypass,Framed-Protocol=PPP " | /usr/local/bin/radclient localhost:1812 auth s3cr3t
 
 See Also
 =======
