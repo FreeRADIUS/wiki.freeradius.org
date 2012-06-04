@@ -42,6 +42,6 @@ Freeradius needs to know what to do with the Auth-Type smsotp so the file sites-
 
 # Downloads
 
-* http://thomas.glanzmann.de/smsotpd.2012-05-21.tar.gz - smsotpd and a few scripts and a README
+* http://thomas.glanzmann.de/smsotpd.2012-06-04.tar.bz2 - smsotpd perl, c implementation and a few scripts and a README
 * http://thomas.glanzmann.de/smsotp.swf - Flash Video showing the setup
 * http://thomas.glanzmann.de/smsotp.pdf - Slides from the flash video
