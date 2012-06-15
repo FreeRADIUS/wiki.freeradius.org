@@ -113,7 +113,7 @@ export LD_OPTIONS='-L/usr/local/openldap/lib/ -R/usr/local/openldap/lib -L/usr/l
 ./configure --prefix=/usr/local/freeradius-1.1.2-mysql-ldap --with-ldap --with-mysql-dir=/usr/local/mysql-5.0.21
 gmake
 gmake install
-````
+```
 ## Running
 
 SMF manifests and installation instructions for Solaris 10 can be found [here](https://github.com/alandekok/freeradius-server/tree/master/scripts/solaris).
