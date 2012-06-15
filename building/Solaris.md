@@ -9,19 +9,12 @@ make install
 This works on most Solaris systems.  You will need to have a compiler installed, and libraries for any services you intend to use. (OpenSSL, LDAP, Oracle, etc.)
 
 ## Building/Installing
-
 ### Method 1
+These instructions should also work on Solaris 10 (x86_64) with minimal changes.
 
-I am quite pleased to report I have, with minimal discomfort, version
-1.1.3 running on Solaris 10 (sparc). These instructions should also work on Solaris 10 (x86_64) with minimal changes.
-
-The source actually compiles perfectly once OS dependencies etc. are met.
-I will share a few tips here for any who may be attempting the same.
-My main goal was LDAP functionality.  Other bells and whistles might require
-additional steps.
+The source compiles perfectly once OS dependencies etc. are met. The main additional modules compiled here were ``rlm_ldap`` and ``rlm_sql`.`
 
 #### Solaris System Headers
-
 Solaris 10 will likely require you to fix the system headers.
 
 http://sunfreeware.com/indexsparc10.html
@@ -32,8 +25,7 @@ cd /usr/local/lib/gcc-lib/sparc-sun-solaris2.10/3.3.2/install-tools/
 vi mkheaders.conf
 ```
 
-Then put the line "SHELL=/bin/sh" on the first line of the mkheaders.conf
-file. It should look something like the following:
+Then put the line ``SHELL=/bin/sh`` on the first line of the ``mkheaders.conf`` file. It should look something like the following:
 ```bash
 SHELL=/bin/sh
 SYSTEM_HEADER_DIR="/usr/include"
@@ -43,67 +35,51 @@ STMP_FIXPROTO="stmp-fixproto"
 STMP_FIXINC="stmp-fixinc"
 ```
 
-Then you run the following command as root. It may take several minutes to
-rebuild the headers.
+Then run the following command as root. It may take several minutes to rebuild the headers.
 ```bash
 ./mkheaders
 ```
 
 #### Solaris Packages
+Solaris 10 has versions of Openssl and OpenLDAP installed, however they do not fullfill the compile requirements for freeradius functionality.
+You should go to http://sunfreeware.com/ and get the packages there, and also resolve any unmet dependencies.
 
-Solaris 10 has versions of openssl and openLDAP installed I believe with the
-system however they do not fullfill the compile requirements for freeradius
-functionality.
-You should go to [[http://sunfreeware.com/]] and get the packages there, and
-also resolve any unmet dependencies.
-
-If you have other modules you are concerned with that are not building
-correctly, don't trust the OS packages.  Look for equiv packages and try the
-build with them installed as well.
+If you have other modules you are concerned with that are not building correctly, don't trust the OS packages.  Look for equiv packages and try the build with them installed as well.
 ```bash
 download package
 gunzip packagename.gz
 sudo pkgadd -d packagename
 ```
 #### Installing FreeRadius
-
 ```bash
 ./configure
 make
 sudo make install
 ```
-
-No problems except I needed the packages so rlm_ldap would compile properly.
-
 #### Runtime Environment
 
-In order for the ldap queries to work, the following needs to be set as an
-environmental variable, OR if you're handy with compiler flags you can take
-care of it during the compile with the ''`-RLIBDIR''' linker flag.
+In order for the ldap queries to work, the following needs to be set as an environmental variable, OR if you're handy with compiler flags you can take care of it during the compile with the ``-RLIBDIR`` linker flag.
 
 ```bash
-export LD_LIBRARY_PATH="/usr/local/lib/;/usr/local/freeradius-1.1.3/lib"
+export LD_LIBRARY_PATH="/usr/local/lib/;/usr/local/freeradius/lib"
 ```
 
-The two locations in the above path are for access to the ``libgcc_s.so.1``
-libraries and the ``rlm_ldap`` libraries respectively.
+The two locations in the above path are for access to the ``libgcc_s.so.1`` libraries and the ``rlm_ldap`` libraries respectively.
 
 ### Method 2
 
 Notes for building on Solaris. (SPARC or x86 shouldn't matter)
 
 #### Specific info for this method.
-
-* I get some packages and libraries from [http://www.blastwave.org Blastwave] which installs everything into the base /opt/csw
-
-* For this I built my own mysql, installed in /usr/local.
-
-* Solaris uses a different runtime link loading method than linux (which uses ldconfig). For this reason, you either set -R (runtime flags) alongside -L flags during compilation and loading OR set ``LD_LIBRARY_PATH`` at runtime, which then defines a pathlike structure for loading libs at runtime. NOTE. Setting ``LD_LIBRARY_PATH`` negates and runtime paths already encoded in binaries.
-** I use -R for the same reason I build most software server from source. I want to know what,which and where stuff goes and which versions of such my stuff is linked to....
+* I get some packages and libraries from [Blastwave](http://www.blastwave.org) which installs everything into the base ``/opt/csw``
+* For this MySQL was built and installed in ``/usr/local``.
+* Solaris uses a different runtime link loading method than linux (which uses ldconfig). For this reason, you either set -R (runtime flags) alongside -L flags during compilation and loading OR set ``LD_LIBRARY_PATH`` at runtime, which then defines a pathlike structure for loading libs at runtime. 
+If you build most server software from source, -R is recommended if you want to know what, which and where stuff goes and which versions of of libraries are linked to.
+_Note: Setting ``LD_LIBRARY_PATH`` negates and runtime paths already encoded in binaries._
 
 #### Building
 
-From the above the next few lines can be used to build freeradius on solaris. (realistically I use this approach to build any software.)
+From the above the next few lines can be used to build freeradius on solaris (you can use this approach to build any software.)
 
 ```bash
 export PATH='/usr/sbin:/usr/bin:/opt/csw/bin:/opt/csw/gcc3/bin:/usr/ccs/bin:/opt/SUNWspro/bin'
