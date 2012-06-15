@@ -1,5 +1,5 @@
 ## Building/Installing
-#### Standard Method
+### Standard Method
 ```bash
 ./configure
 make
