@@ -21,7 +21,7 @@ We also keep a list of [[Acknowledgements]] of contributions to FreeRADIUS devel
 
 RADIUS Client Support
 
-[[FreeRADIUS]] comes with:
+[[FreeRADIUS]] features
 --------------------------
 
 * Complete support for RFC 2865 and RFC 2866 attributes.
