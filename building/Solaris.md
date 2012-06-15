@@ -1,5 +1,4 @@
 # Standard Method
-
 ```bash
 ./configure
 make
@@ -51,13 +50,9 @@ gunzip packagename.gz
 sudo pkgadd -d packagename
 ```
 #### Installing FreeRadius
-```bash
-./configure
-make
-sudo make install
-```
-#### Runtime Environment
+Now you can use the standard, configure make sudo make install.
 
+#### Runtime Environment
 In order for the ldap queries to work, the following needs to be set as an environmental variable, OR if you're handy with compiler flags you can take care of it during the compile with the ``-RLIBDIR`` linker flag.
 
 ```bash
@@ -70,15 +65,14 @@ The two locations in the above path are for access to the ``libgcc_s.so.1`` libr
 
 Notes for building on Solaris. (SPARC or x86 shouldn't matter)
 
-#### Specific info for this method.
-* I get some packages and libraries from [Blastwave](http://www.blastwave.org) which installs everything into the base ``/opt/csw``.
+#### Specific info for this method
+* Many packes are available from [Blastwave](http://www.blastwave.org) which installs everything into the base ``/opt/csw``.
 * For this MySQL was built and installed in ``/usr/local``.
 * Solaris uses a different runtime link loading method than linux (which uses ldconfig). For this reason, you either set -R (runtime flags) alongside -L flags during compilation and loading OR set ``LD_LIBRARY_PATH`` at runtime, which then defines a pathlike structure for loading libs at runtime. 
 If you build most server software from source, -R is recommended if you want to know what, which and where stuff goes and which versions of of libraries are linked to.
 _Note: Setting ``LD_LIBRARY_PATH`` negates and runtime paths already encoded in binaries._
 
 #### Building
-
 From the above the next few lines can be used to build freeradius on solaris (you can use this approach to build any software).
 
 ```bash
@@ -91,5 +85,4 @@ gmake
 gmake install
 ```
 ## Running
-
 SMF manifests and installation instructions for Solaris 10 can be found [here](https://github.com/alandekok/freeradius-server/tree/master/scripts/solaris).
