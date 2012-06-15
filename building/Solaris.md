@@ -71,7 +71,7 @@ The two locations in the above path are for access to the ``libgcc_s.so.1`` libr
 Notes for building on Solaris. (SPARC or x86 shouldn't matter)
 
 #### Specific info for this method.
-* I get some packages and libraries from [Blastwave](http://www.blastwave.org) which installs everything into the base ``/opt/csw``
+* I get some packages and libraries from [Blastwave](http://www.blastwave.org) which installs everything into the base ``/opt/csw``.
 * For this MySQL was built and installed in ``/usr/local``.
 * Solaris uses a different runtime link loading method than linux (which uses ldconfig). For this reason, you either set -R (runtime flags) alongside -L flags during compilation and loading OR set ``LD_LIBRARY_PATH`` at runtime, which then defines a pathlike structure for loading libs at runtime. 
 If you build most server software from source, -R is recommended if you want to know what, which and where stuff goes and which versions of of libraries are linked to.
@@ -79,7 +79,7 @@ _Note: Setting ``LD_LIBRARY_PATH`` negates and runtime paths already encoded in 
 
 #### Building
 
-From the above the next few lines can be used to build freeradius on solaris (you can use this approach to build any software.)
+From the above the next few lines can be used to build freeradius on solaris (you can use this approach to build any software).
 
 ```bash
 export PATH='/usr/sbin:/usr/bin:/opt/csw/bin:/opt/csw/gcc3/bin:/usr/ccs/bin:/opt/SUNWspro/bin'
