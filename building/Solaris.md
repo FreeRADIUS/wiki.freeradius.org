@@ -106,7 +106,7 @@ Notes for building on Solaris. (SPARC or x86 shouldn't matter)
 From the above the next few lines can be used to build freeradius on solaris. (realistically I use this approach to build any software.)
 
 ```bash
-export PATH=/usr/sbin:/usr/bin:/opt/csw/bin:/opt/csw/gcc3/bin:/usr/ccs/bin:/opt/SUNWspro/bin
+export PATH='/usr/sbin:/usr/bin:/opt/csw/bin:/opt/csw/gcc3/bin:/usr/ccs/bin:/opt/SUNWspro/bin'
 export CFLAGS='-I/usr/local/openldap/include/ -I/usr/local/mysql/include/mysql/ -I/opt/csw/include/'
 export LDFLAGS='-L/usr/local/openldap/lib/ -R/usr/local/openldap/lib -L/usr/local/mysql/lib -R/usr/local/mysql/lib -L/opt/csw/lib -R/opt/csw/lib'
 export LD_OPTIONS='-L/usr/local/openldap/lib/ -R/usr/local/openldap/lib -L/usr/local/mysql/lib -R/usr/local/mysql/lib -L/opt/csw/lib -R/opt/csw/lib'
