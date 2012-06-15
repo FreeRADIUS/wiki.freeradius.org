@@ -1,4 +1,4 @@
-I wanted to add a wiki to help others configure a new dictionary that contains the Vendor ID and VSAs for the Palo Alto Networks firewalls, as this vendor does not currently have a dictionary included with your FreeRadius install.
+This dictionary contains the Vendor ID and VSAs for the Palo Alto Networks firewalls. This vendors dictionary is not currently included in FreeRADIUS packages.
 
 ```
 VENDOR          PaloAlto         25461
