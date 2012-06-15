@@ -1,16 +1,16 @@
-__NOTOC__
+# Standard Method
 
-==Standard Method==
-
- ./configure
- make
- make install
+```bash
+./configure
+make
+make install
+```
 
 This works on most Solaris systems.  You will need to have a compiler installed, and libraries for any services you intend to use. (OpenSSL, LDAP, Oracle, etc.)
 
-==Success stories==
+## Building/Installing
 
-===Method 1===
+### Method 1
 
 I am quite pleased to report I have, with minimal discomfort, version
 1.1.3 running on Solaris 10 (sparc). These instructions should also work on Solaris 10 (x86_64) with minimal changes.
@@ -20,87 +20,100 @@ I will share a few tips here for any who may be attempting the same.
 My main goal was LDAP functionality.  Other bells and whistles might require
 additional steps.
 
-====Solaris System Headers====
+#### Solaris System Headers
 
 Solaris 10 will likely require you to fix the system headers.
 
 http://sunfreeware.com/indexsparc10.html
 
 Do the following as root:
- cd /usr/local/lib/gcc-lib/sparc-sun-solaris2.10/3.3.2/install-tools/
- vi mkheaders.conf
+```bash
+cd /usr/local/lib/gcc-lib/sparc-sun-solaris2.10/3.3.2/install-tools/
+vi mkheaders.conf
+```
 
 Then put the line "SHELL=/bin/sh" on the first line of the mkheaders.conf
 file. It should look something like the following:
- SHELL=/bin/sh
- SYSTEM_HEADER_DIR="/usr/include"
- OTHER_FIXINCLUDES_DIRS=""
- FIXPROTO_DEFINES=""
- STMP_FIXPROTO="stmp-fixproto"
- STMP_FIXINC="stmp-fixinc"
+```bash
+SHELL=/bin/sh
+SYSTEM_HEADER_DIR="/usr/include"
+OTHER_FIXINCLUDES_DIRS=""
+FIXPROTO_DEFINES=""
+STMP_FIXPROTO="stmp-fixproto"
+STMP_FIXINC="stmp-fixinc"
+```
 
 Then you run the following command as root. It may take several minutes to
 rebuild the headers.
- ./mkheaders
+```bash
+./mkheaders
+```
 
-====Solaris Packages====
+#### Solaris Packages
 
 Solaris 10 has versions of openssl and openLDAP installed I believe with the
 system however they do not fullfill the compile requirements for freeradius
 functionality.
-You should go to http://sunfreeware.com/ and get the packages there, and
+You should go to [[http://sunfreeware.com/]] and get the packages there, and
 also resolve any unmet dependencies.
 
 If you have other modules you are concerned with that are not building
 correctly, don't trust the OS packages.  Look for equiv packages and try the
 build with them installed as well.
- download package
- gunzip packagename.gz
- sudo pkgadd -d packagename
+```bash
+download package
+gunzip packagename.gz
+sudo pkgadd -d packagename
+```
+#### Installing FreeRadius
 
-====Installing FreeRadius====
-
-Installing actually went off without a hitch.  ./configure, make, sudo make
-install
+```bash
+./configure
+make
+sudo make install
+```
 
 No problems except I needed the packages so rlm_ldap would compile properly.
 
-====Runtime Environment====
+#### Runtime Environment
 
 In order for the ldap queries to work, the following needs to be set as an
 environmental variable, OR if you're handy with compiler flags you can take
 care of it during the compile with the ''`-RLIBDIR''' linker flag.
 
- export LD_LIBRARY_PATH="/usr/local/lib/;/usr/local/freeradius-1.1.3/lib"
+```bash
+export LD_LIBRARY_PATH="/usr/local/lib/;/usr/local/freeradius-1.1.3/lib"
+```
 
-The two locations in the above path are for access to the ''libgcc_s.so.1''
-libraries and the ''rlm_ldap'' libraries respectively.
+The two locations in the above path are for access to the ``libgcc_s.so.1``
+libraries and the ``rlm_ldap`` libraries respectively.
 
-===Method 2===
+### Method 2
 
 Notes for building on Solaris. (SPARC or x86 shouldn't matter)
 
-======Specific info for this method.======
+#### Specific info for this method.
 
 * I get some packages and libraries from [http://www.blastwave.org Blastwave] which installs everything into the base /opt/csw
 
 * For this I built my own mysql, installed in /usr/local.
 
-* Solaris uses a different runtime link loading method than linux (which uses ldconfig). For this reason, you either set -R (runtime flags) alongside -L flags during compilation and loading OR set LD_LIBRARY_PATH at runtime, which then defines a pathlike structure for loading libs at runtime. NOTE. Setting LD_LIBRARY_PATH negates and runtime paths already encoded in binaries.
+* Solaris uses a different runtime link loading method than linux (which uses ldconfig). For this reason, you either set -R (runtime flags) alongside -L flags during compilation and loading OR set ``LD_LIBRARY_PATH`` at runtime, which then defines a pathlike structure for loading libs at runtime. NOTE. Setting ``LD_LIBRARY_PATH`` negates and runtime paths already encoded in binaries.
 ** I use -R for the same reason I build most software server from source. I want to know what,which and where stuff goes and which versions of such my stuff is linked to....
 
-====Building====
+#### Building
 
 From the above the next few lines can be used to build freeradius on solaris. (realistically I use this approach to build any software.)
 
- # export PATH=/usr/sbin:/usr/bin:/opt/csw/bin:/opt/csw/gcc3/bin:/usr/ccs/bin:/opt/SUNWspro/bin
- # export CFLAGS='-I/usr/local/openldap/include/ -I/usr/local/mysql/include/mysql/ -I/opt/csw/include/'
- # export LDFLAGS='-L/usr/local/openldap/lib/ -R/usr/local/openldap/lib -L/usr/local/mysql/lib -R/usr/local/mysql/lib -L/opt/csw/lib -R/opt/csw/lib'
- # export LD_OPTIONS='-L/usr/local/openldap/lib/ -R/usr/local/openldap/lib -L/usr/local/mysql/lib -R/usr/local/mysql/lib -L/opt/csw/lib -R/opt/csw/lib'
- # ./configure --prefix=/usr/local/freeradius-1.1.2-mysql-ldap --with-ldap --with-mysql-dir=/usr/local/mysql-5.0.21
- # gmake
- # gmake install
+```bash
+export PATH=/usr/sbin:/usr/bin:/opt/csw/bin:/opt/csw/gcc3/bin:/usr/ccs/bin:/opt/SUNWspro/bin
+export CFLAGS='-I/usr/local/openldap/include/ -I/usr/local/mysql/include/mysql/ -I/opt/csw/include/'
+export LDFLAGS='-L/usr/local/openldap/lib/ -R/usr/local/openldap/lib -L/usr/local/mysql/lib -R/usr/local/mysql/lib -L/opt/csw/lib -R/opt/csw/lib'
+export LD_OPTIONS='-L/usr/local/openldap/lib/ -R/usr/local/openldap/lib -L/usr/local/mysql/lib -R/usr/local/mysql/lib -L/opt/csw/lib -R/opt/csw/lib'
+./configure --prefix=/usr/local/freeradius-1.1.2-mysql-ldap --with-ldap --with-mysql-dir=/usr/local/mysql-5.0.21
+gmake
+gmake install
+````
+## Running
 
-====Running====
-
-* to follow... an SMF manifest to run freeradius in solaris 10.
+SMF manifests and installation instructions for Solaris 10 can be found [here](https://github.com/alandekok/freeradius-server/tree/master/scripts/solaris).
