@@ -11,7 +11,7 @@ This works on most Solaris systems.  You will need to have a compiler installed,
 ### Method 1
 These instructions should also work on Solaris 10 (x86_64) with minimal changes.
 
-The source compiles perfectly once OS dependencies etc. are met. The main additional modules compiled here were ``rlm_ldap`` and ``rlm_sql`.`
+The source compiles perfectly once OS dependencies etc. are met. The main additional modules compiled here were ``rlm_ldap`` and ``rlm_sql``.
 
 #### Solaris System Headers
 Solaris 10 will likely require you to fix the system headers.
