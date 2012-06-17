@@ -8,6 +8,8 @@ make install
 
 This works on most Solaris systems.  You will need to have a compiler installed, and libraries for any services you intend to use. (OpenSSL, LDAP, Oracle, etc.)
 
+If you're using OpenCSW you can just do ``sudo pkg-util -i -y gcc4-core``, to get GCC and the other required utilities.
+
 ### Method 1
 These instructions should also work on Solaris 10 (x86_64) with minimal changes.
 
