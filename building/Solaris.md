@@ -85,4 +85,4 @@ gmake
 gmake install
 ```
 ## Running
-SMF manifests and installation instructions for Solaris 10 can be found [here](https://github.com/alandekok/freeradius-server/tree/master/scripts/solaris).
+SMF manifest and installation instructions for Solaris 10 can be found [here](https://github.com/alandekok/freeradius-server/tree/master/scripts/solaris).
