@@ -10,7 +10,7 @@ Define a Client IP
 
 For initial testing from localhost with [[radtest]], the server comes with a default definition for ``127.0.0.1`` and ``::1``
 
-For testing from external machines, edit /etc/raddb/[[clients.conf]] and add an entry. There are many examples and the syntax is easy::
+For testing from external machines, edit /etc/freeradius/[[clients.conf]] and add an entry. There are many examples and the syntax is easy::
 
   client NAME {
     ipaddr = IPADDRESS
@@ -20,7 +20,7 @@ For testing from external machines, edit /etc/raddb/[[clients.conf]] and add an 
 Define a User and Password
 ----------------------------------
 
-Edit /etc/raddb/[[users]] and create an example user account as the *first* entry.  i.e. at the *top* of the file, such as::
+Edit /etc/freeradius/[[users]] and create an example user account as the *first* entry.  i.e. at the *top* of the file, such as::
 
  testing Cleartext-Password := "password"
 
@@ -29,7 +29,7 @@ Start the server in debugging mode
 
 At this point you should be able to manually start [[radiusd]]. You should do this with the debugging enabled so that you can see what happens::
 
-  $ radiusd -X
+  $ freeradius -X
 
 The location and the name of the FreeRADIUS server executable may vary, for example it could be ``/usr/sbin/freeradius``. But the ``-X`` parameter is essential, always use it!
 
