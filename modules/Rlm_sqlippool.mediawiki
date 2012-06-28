@@ -85,54 +85,54 @@ To create a second pool called '''second_pool''' with 4 IPs from one range (192.
 Service provider X offers services A and B that use SERVICE-A-POOL and SERVICE-B-POOL respectively, both stored in the same database, and service C  that uses SERVICE-C-POOL stored on another database server. Post-auth configuration would look something like this:
 
 post-auth {
-
+    
         Post-Auth-Type ISP-X-SERVICES {
-
+    
             group {
                 group {
-
+    
                     SQLIPPOOL-INSTANCE1 {
                         ok       = return
                         notfound = return
                     }
-
+    
                     SQLIPPOOL-INSTANCE2 {
                         ok       = return
                         notfound = return
                     }
-
+    
                     ok       = return
                     noop     = return
                     notfound = 2
                 }
-
+    
                 # This point can only be reached if some of the instances
                 # returned NOTFOUND, which happens when an instance finds
                 # the pool, but can't get any address from it.
-
+    
                 # Log allocation failure to some database
                 some_database_instance {
                     fail = 1            # if operation fails, just go on
                 }
-
+     
                 # Log to detail
                 auth_log {
                     fail = 1
                 }
-
+    
                 # Reject the user. 
                 reject
             }
-
+    
             #  Log to detail in case all went well
             auth_log
-
+    
             #  Do other stuff
             ....
         }
-
+    
         ....
-}
+    }
 
 SQLIPPOOL-INSTANCE1 handles pools SERVICE-A-POOL and SERVICE-B-POOL, while  SQLIPPOOL-INSTANCE2 handles pool SERVICE-C-POOL.
 
