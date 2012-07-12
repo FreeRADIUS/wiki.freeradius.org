@@ -147,32 +147,65 @@ One-character variables
 --------------------------------
 The following one-character variables are also defined.  However, they are duplicates of the previous general cases, and are only provided for backwards compatibility.  They WILL BE removed in a future release.  They also do NOT permit the use of conditional syntax (':-'), as described above.
 
-=========    ===============================================================   ======================
-Variable     Description                                                       Proper Equivalent
-=========    ===============================================================   ======================
-%a           Protocol (SLIP/PPP)                                               %{Framed-Protocol}
-%c           Callback-Number                                                   %{Callback-Number}
-%d           request day (DD)
-%f           Framed IP address                                                 %{Framed-IP-Address}
-%i           Calling Station ID                                                %{Calling-Station-Id}
-%l           request timestamp
-%m           request month (MM)
-%n           NAS IP address                                                    %{NAS-IP-Address}
-%p           Port number %{NAS-Port}
-%s           Speed (PW_CONNECT_INFO)                                           %{Connect-Info}
-%t           request in ctime format
-%u           User name                                                         %{User-Name}
-%A           radacct_dir                                                       %{config:radacctdir}
-%C           clientname
-%D           request date (YYYYMMDD)
-%H           request hour
-%L           radlog_dir                                                        %{config:logdir}
-%M           MTU                                                               %{Framed-MTU}
-%R           radius_dir                                                        %{config:raddbdir}
-%S           request timestamp in SQL format
-%T           request timestamp in database format
-%U           Stripped User name                                                %{Stripped-User-Name}
-%V           Request-Authenticator (Verified/None)
-%Y           request year (YYYY)
-%Z           All request attributes except password (must have a big buffer)
-=========    ===============================================================   ======================
++-----------+---------------------------+-----------------------+
+| Variable  | Description               | Proper Equivalent     |
++===========+===========================+=======================+
+|%a         |Protocol (SLIP/PPP)        |%{Framed-Protocol}	|
++-----------+---------------------------+-----------------------+
+|%c         |Callback-Number		|%{Callback-Number}	|
++-----------+---------------------------+-----------------------+
+|%d         |request day (DD)           |                 	|
++-----------+---------------------------+-----------------------+
+|%f         |Framed IP address	  	|%{Framed-IP-Address}	|
++-----------+---------------------------+-----------------------+
+|%i         |Calling Station ID	  	|%{Calling-Station-Id}	|
++-----------+---------------------------+-----------------------+
+|%l         |request timestamp          |		        |
++-----------+---------------------------+-----------------------+
+|%m         |request month (MM)         |	                |
++-----------+---------------------------+-----------------------+
+|%n         |NAS IP address		|%{NAS-IP-Address}	|
++-----------+---------------------------+-----------------------+
+|%p         |Port number		|%{NAS-Port}            |
++-----------+---------------------------+-----------------------+
+|%s         |Speed (PW_CONNECT_INFO)    |%{Connect-Info}	|
++-----------+---------------------------+-----------------------+
+|%t         |request in ctime format	|		        |
++-----------+---------------------------+-----------------------+
+|%u         |User name		  	|%{User-Name}           |
++-----------+---------------------------+-----------------------+
+|%A         |radacct_dir		|%{config:radacctdir}	|
++-----------+---------------------------+-----------------------+
+|%C         |clientname	                |                       |
++-----------+---------------------------+-----------------------+
+|%D         |request date (YYYYMMDD)	|	                |
++-----------+---------------------------+-----------------------+
+|%G         |request minute	        |                       |
++-----------+---------------------------+-----------------------+
+|%H         |request hour	        |                       |
++-----------+---------------------------+-----------------------+
+|%I         |request ID		  	|			|
++-----------+---------------------------+-----------------------+
+|%L         |radlog_dir		  	|%{config:logdir}	|
++-----------+---------------------------+-----------------------+
+|%M         |MTU			|%{Framed-MTU}          |
++-----------+---------------------------+-----------------------+
+|%R         |radius_dir		  	|%{config:raddbdir}	|
++-----------+---------------------------+-----------------------+
+|%S         |request timestamp          |                       |
+|           |in SQL format              |                       |
++-----------+---------------------------+-----------------------+
+|%T         |request timestamp          |                       |
+|           |in database format         |                       |
++-----------+---------------------------+-----------------------+
+|%U         |Stripped User name	  	|%{Stripped-User-Name}	|
++-----------+---------------------------+-----------------------+
+|%V         |Request-Authenticator      |                       |
+|           |(Verified/None)            |                       |
++-----------+---------------------------+-----------------------+
+|%Y         |request year (YYYY)        |                       |
++-----------+---------------------------+-----------------------+
+|%Z         |All request attributes     |                       |
+|           |except password            |                       |
+|           |(must have a big buffer)   |                       |
++-----------+---------------------------+-----------------------+
