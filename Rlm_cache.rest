@@ -53,7 +53,7 @@ authorize {
 }
 ```
 
-or if the number of sessions is very large
+or to forcibly remove entries at he end of the session
 
 ```
 authorize {
@@ -71,3 +71,5 @@ authorize {
     }
 }
 ```
+
+Feel free to add additional use cases if you think of new and interesting ways to use this module.
