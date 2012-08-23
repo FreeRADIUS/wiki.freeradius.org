@@ -6,7 +6,7 @@ Configuration
 ---------------
 See `here <https://github.com/alandekok/freeradius-server/blob/master/raddb/mods-available/cache>`_ for the default configuration file. The config file described the module operation adequately, so it won't be repeated here.
 
-There are three obvious ways to use to rlm_cache:
+There are multiple interesting ways to use rlm_cache, here are some potentially useful ones...
 
 One call caching
 ~~~~~~~~~~~~
