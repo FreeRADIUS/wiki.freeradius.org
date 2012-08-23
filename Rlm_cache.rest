@@ -2,6 +2,8 @@ The rlm_cache module allows values of arbitrary attributes to be stored against 
 
 The key value itself is an xlat expansion, meaning it can be made up from multiple attributes from any list, or from SQL queries, LDAP searches or the return from any other rlm_* that provides an xlat function.
 
+Feel free to add additional use cases if you think of new and interesting ways to use this module.
+
 Configuration
 ---------------
 See `here <https://github.com/alandekok/freeradius-server/blob/master/raddb/mods-available/cache>`_ for the default configuration file. The config file described the module operation adequately, so it won't be repeated here.
@@ -71,5 +73,3 @@ authorize {
     }
 }
 ```
-
-Feel free to add additional use cases if you think of new and interesting ways to use this module.
