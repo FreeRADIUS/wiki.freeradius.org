@@ -73,3 +73,10 @@ authorize {
     }
 }
 ```
+
+Crappy rate limiting
+~~~~~~~~~~~~~~
+
+Setting the ``add-stats`` configuration item to ``yes`` will add the attribute ``Cache-Entry-Hits``, using this you can determine the number of packets matching the key within the ttl, and make a decision whether to respond or not. 
+
+There are numerous reasons as to why this is a bad way to rate limit, the main one being is the packet queue can still become a bottleneck and result in packets being dropped.
