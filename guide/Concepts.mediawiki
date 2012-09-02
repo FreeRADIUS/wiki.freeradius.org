@@ -42,7 +42,7 @@ But WAIT! What if the client sends a MSCHAP request? What does the radius server
 
 ''Well that's a fine kettle of fish! That client has really really tied my hands on this one!''
 
-In this case, the mcshap module looks the request, and finds the MS-CHAP attributes.  It sets the "Auth-Type" to itself (mschap).  A database modules (such as LDAP, above) gets the "known good" password, and adds it to the request.  The mschap module is then run for authentication.  It looks for either a clear text password or nt-hash (why? look at the [http://deployingradius.com/documents/protocols/compatibility.html protocol table]). If one of those haven't been added by a datastore, the mschap module says:
+In this case, the mschap module looks the request, and finds the MS-CHAP attributes.  It sets the "Auth-Type" to itself (mschap).  A database modules (such as LDAP, above) gets the "known good" password, and adds it to the request.  The mschap module is then run for authentication.  It looks for either a clear text password or nt-hash (why? look at the [http://deployingradius.com/documents/protocols/compatibility.html protocol table]). If one of those haven't been added by a datastore, the mschap module says:
 
 ''Sorry, I can't authenticate the user, because I don't have the information I need to validate MSCHAP''
 
