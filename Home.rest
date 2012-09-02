@@ -15,35 +15,35 @@ Overview
 
 As the premiere open source RADIUS suite it is included as a [[standard package|packages]] with numerous Operating Systems, has binary packages for many others and has source available which is known to [[build]] on almost anything. Production deployments include large scale installations comprising multiple [[AAA]] servers with over ten million users and millions of requests per day. It supports request [[proxying|proxy]], with [[fail-over]] and [[load balancing]], as well as the ability to access many types of back-end databases. Different classes of [[Authentication]] requests can trigger access of different [[Authentication]] and [[Authorization]] databases (with cascaded fall back), and [[Accounting]] records can be simultaneously recorded in multiple different storage databases and directories.
 
-[[Other RADIUS Servers]] are available.
+[[glossary/Other RADIUS Servers]] are available.
 
-We also keep a list of [[Acknowledgements]] of contributions to FreeRADIUS development.
+We also keep a list of [[project/Acknowledgements]] of contributions to FreeRADIUS development.
 
 RADIUS Client Support
 
-[[FreeRADIUS]] features
+[[glossary/FreeRADIUS]] features
 --------------------------
 
 * Complete support for RFC 2865 and RFC 2866 attributes.
-* [[EAP]] with EAP-MD5, EAP-SIM, EAP-TLS, EAP-TTLS, [[EAP-PEAP]], and Cisco [[LEAP]] EAP sub-types
-* [[Vendor-Specific Attributes]] for almost one hundred vendors, including BinTec, Foundry, [[Cisco]], Juniper, Lucent/Ascend, [[HP ProCurve|HP]], Microsoft, USR/3Com, Acc/Newbridge and many more.
+* [[protocol/EAP]] with EAP-MD5, EAP-SIM, EAP-TLS, EAP-TTLS, [[protocol/EAP-PEAP]], and Cisco [[protocol/LEAP]] EAP sub-types
+* [[glossary/Vendor-Specific Attributes]] for almost one hundred vendors, including BinTec, Foundry, [[vendor/Cisco]], Juniper, Lucent/Ascend, [[HP ProCurve|vendor/HP]], Microsoft, USR/3Com, Acc/Newbridge and many more.
 
-All known [[RADIUS Clients]] are supported.
+All known [[guide/RADIUS Clients]] are supported.
 
-* [[RADIUS Clients]] 
-* [[EAP Clients]]
+* [[guide/RADIUS Clients]] 
+* [[guide/EAP Clients]]
 
 Flexible Configuration
 ----------------------
 
-[[FreeRADIUS]] provides a wide range of methods to select user configurations. The server can select a configuration based on any of the following criteria : 
+[[glossary/FreeRADIUS]] provides a wide range of methods to select user configurations. The server can select a configuration based on any of the following criteria : 
 
-* [[Attributes]] which have a given value
-* [[Attributes]] which do not have a given value
-* [[Attributes]] which are in the request (independent of their value)
-* [[Attributes]] which are not in the request
-* String [[attributes]] which match a regular expression
-* Integer [[attributes]] which match a range (e.g. , =)
+* [[protocol/Attributes]] which have a given value
+* [[protocol/Attributes]] which do not have a given value
+* [[protocol/Attributes]] which are in the request (independent of their value)
+* [[protocol/Attributes]] which are not in the request
+* String [[protocol/attributes]] which match a regular expression
+* Integer [[protocol/attributes]] which match a range (e.g. , =)
 * Source IP address of the request. (This can be different from the NAS-IP-Address)
 * Shortname defined for a NAS box. (This can be different from the NAS-Identifier)
 * Group of NAS boxes. (These may be grouped based on Source IP address, NAS-IP-Address, or any other configuration)
@@ -56,27 +56,27 @@ In addition, FreeRADIUS supports [[virtual server]]s which allow several separat
 Documentation
 -------------
 
-This wiki collects a large amount of documentation relating to [[FreeRADIUS]] together in one place. Pages of particular interest to newcomers will be the [[FAQ]] and [[HOWTO]] sections, although the [[Traditional FreeRADIUS docs page|http://www.freeradius.org/doc/]] includes "man" pages, and other documentation.
+This wiki collects a large amount of documentation relating to [[glossary/FreeRADIUS]] together in one place. Pages of particular interest to newcomers will be the [[guide/FAQ]] and [[guide/HOWTO]] sections, although the [[Traditional FreeRADIUS docs page|http://www.freeradius.org/doc/]] includes "man" pages, and other documentation.
 
 There are many third-party web sites and HOWTO's that give advice on FreeRADIUS.  They are usually years out of date, and refer to old versions, instead of 2.1. The advice that they give is also wrong.  We **strongly** recommend that you avoid most third-party documentation.
 
 The following is an overview of the types of information available:
 
-* [[Building/Compiling|Build]]
-* [[Configuration]]
-* [[Base Modules|List of Modules]]
-* Creating your own [[Modules for FreeRADIUS Version 2|Modules2]]
-* Creating your own [[Modules for FreeRADIUS Version 1|Modules1]]
-* [[Radius Clients]]
-* [[FAQ]]
-* [[HOWTO]]
-* [[Example Setups]] Cookbook
-* [[Glossary]]
+* [[Building/Compiling|building/Build]]
+* [[Configuration|config/Configuration]]
+* [[Base Modules|modules/List of Modules]]
+* Creating your own [[Modules for FreeRADIUS Version 2|contributing/Modules2]]
+* Creating your own [[Modules for FreeRADIUS Version 1|contributing/Modules1]]
+* [[Radius Clients|glossary/Radius Clients]]
+* [[FAQ|guide/FAQ]]
+* [[HOWTO|guide/HOWTO]]
+* [[Example Setups|guide/Example Setups]] Cookbook
+* [[glossary|glossary/Glossary]]
 
-For beginners, there is also a short [[Concepts]] page, which can help clarify how the server works.
+For beginners, there is also a short [[concepts|guide/Concepts]] page, which can help clarify how the server works.
 
 Contributing
 ------------
 FreeRADIUS is an open source project and as such depends on contributions from its users. Even if you don't know C you can still contribute to the project by editing documentation on the wiki, posting bugs on [[GitHub|https://github.com/alandekok/freeradius-server/issues]] or helping out on the [[users mailing list|http://wiki.freeradius.org/Mailing-list#Users+list]].
 
-If you are comfortable coding in C and have a patch or new module you'd like to see included in the main distribution, please see the [[submitting patches via GitHub|GitHub]] page for instructions on generating a 'pull request'. 
+If you are comfortable coding in C and have a patch or new module you'd like to see included in the main distribution, please see the [[submitting patches via GitHub|contributing/GitHub]] page for instructions on generating a 'pull request'. 
