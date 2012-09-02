@@ -1,1 +1,0 @@
-user cleartext-password := "password"
