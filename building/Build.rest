@@ -4,7 +4,7 @@ Building FreeRADIUS
 Supported Platforms
 -------------------
 
-FreeRADIUS is known to run on a large number of 32 and 64bit [[platforms]], however building on some of them may require following special procedures here
+FreeRADIUS is known to run on a large number of 32 and 64bit [[platforms|building/Platforms]], however building on some of them may require following special procedures here
 
 Building from Source
 --------------------
@@ -38,7 +38,7 @@ and freeradius runs and responds to radtest.
 Building on Solaris
 ^^^^^^^^^^^^^^^^^^^
 
-Please see: [[Solaris]]
+Please see: [[Solaris|building/Solaris]]
 
 Building Packages
 -----------------
@@ -56,7 +56,7 @@ If you're using _Debian GNU/Linux_, you should first check whether your desired 
 
 Please see: [[http://packages.debian.org/freeradius]]
 
-For instructions how to set up Debian backports, see: [[Debian]]
+For instructions how to set up Debian backports, see: [[Debian|building/Debian]]
 
 It is possible to build FreeRADIUS packages from the source, using *dpkg-buildpackage*. Using packages avoids installing directly from source, which would confuse *dpkg* about the files installed on the system and make it impossible to uninstall the files later.
 ::
@@ -103,7 +103,7 @@ For build instructions, please see the Debian section immediately above.
 Building RedHat packages
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-Please refer to the information on the Red Hat specific page [[Red Hat FAQ]].
+Please refer to the information on the Red Hat specific page [[Red Hat FAQ|guide/Red Hat FAQ]].
 
 Building SUSE packages
 ^^^^^^^^^^^^^^^^^^^^^^
@@ -140,4 +140,4 @@ Then simply run::
 
 See Also
 --------
-* [[Standard package|packages]]
+* [[Standard package|building/packages]]
