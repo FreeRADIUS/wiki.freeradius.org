@@ -8,7 +8,7 @@ Making a lot of changes to the configuration files is the best way to break the 
 Define a Client IP
 --------------------
 
-For initial testing from localhost with [[radtest]], the server comes with a default definition for ``127.0.0.1`` and ``::1``
+For initial testing from localhost with [[radtest|guide/Radtest]], the server comes with a default definition for ``127.0.0.1`` and ``::1``
 
 For testing from external machines, edit /etc/raddb/[[clients.conf]] and add an entry. There are many examples and the syntax is easy::
 
@@ -20,14 +20,14 @@ For testing from external machines, edit /etc/raddb/[[clients.conf]] and add an 
 Define a User and Password
 ----------------------------------
 
-Edit /etc/raddb/[[users]] and create an example user account as the *first* entry.  i.e. at the *top* of the file, such as::
+Edit /etc/raddb/[[users|config/Users]] and create an example user account as the *first* entry.  i.e. at the *top* of the file, such as::
 
  testing Cleartext-Password := "password"
 
 Start the server in debugging mode
 -----------------------------------------
 
-At this point you should be able to manually start [[radiusd]]. You should do this with the debugging enabled so that you can see what happens::
+At this point you should be able to manually start [[radiusd|config/Radiusd]]. You should do this with the debugging enabled so that you can see what happens::
 
   $ radiusd -X
 
@@ -37,12 +37,12 @@ Lots of output will scroll by, and it will eventually say::
 
   Read to process requests.
 
-Sometimes people want to change default port to run on 1645, the old RADIUS port (the new one is 1812), if replacing a legacy RADIUS server. Other than that, it's possible that the [[EAP Module|rlm_eap]]  initial setup will fail.
+Sometimes people want to change default port to run on 1645, the old RADIUS port (the new one is 1812), if replacing a legacy RADIUS server. Other than that, it's possible that the [[EAP Module|modules/Rlm_eap]]  initial setup will fail.
 
 Simple test
 -------------
 
-Once the FreeRADIUS server is operational, you can use [[radtest]] to test an account from the command line::
+Once the FreeRADIUS server is operational, you can use [[radtest|guide/Radtest]] to test an account from the command line::
 
   $ radtest testing password localhost 0 testing123
 
@@ -87,13 +87,13 @@ If you don't get an Access-Accept, go back and check everything.
 
 **Read the relevant documentation including comments, and read the debug messages!**
 
-See also the [[Troubleshooting]] guide.
+See also the [[Troubleshooting|guide/Troubleshooting]] guide.
 
 For configuring EAP, see the external [[EAP Howto|http://deployingradius.com/documents/configuration/eap.html]].  It offers a step-by-step guide which is *guaranteed* to work.
 
 The initial setup is usually sufficient, but if you get an error,  then **read the debug messages**.   Check the docs, check that you have followed the above steps to the letter, and try again.  Try posting the output into the [[Network RADIUS Debug colorizer|http://networkradius.com/freeradius.html]], it will group the debug output into request/reply sections, and will colorize portions of text that *you should pay attention to*.  While many of the debug messages can be ignore (they are for more in-depth debugging), a number of them contain **detailed descriptions** of what is going on.  Read them, and follow the instructions.
 
-If you need to edit [[configuration files]], read them carefully and edit them as little as possible. See ``man radiusd`` for a guide.  Start with [[radiusd.conf]].
+If you need to edit [[configuration files|config/Configuration files]], read them carefully and edit them as little as possible. See ``man radiusd`` for a guide.  Start with [[radiusd.conf]].
 
 More testing
 ---------------
@@ -103,4 +103,4 @@ If you have a Windows PC handy you may also wish to use NTradPing (downloadable 
 See also
 ----------
 
-* [[Configuration files]]
+* [[Configuration files|config/Configuration files]]
