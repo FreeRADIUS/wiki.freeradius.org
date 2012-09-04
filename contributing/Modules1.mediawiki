@@ -1,3 +1,4 @@
+__NOTOC__
 : '''This page addresses the old FreeRADIUS version 1.x'''
 
 : '''For the current FreeRADIUS version 2.x see this page: [[Modules2]].'''
