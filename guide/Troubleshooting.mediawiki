@@ -19,7 +19,7 @@ If you encounter a problem with server configuration, observe the following set 
 
 * If you can't make any progress, try to replace your configuration with a saved copy of a "known working" configuration, and start again. This process can clean up errors caused by temporary edits, or edits that you have forgotten.
 
-* If you get stuck, ask for help on the freeradius-users [[mailing list]]. Include a description of what you are trying to do, and the entire debugging output, especially output showing the server receiving and processing test packets.
+* If you get stuck, ask for help on the freeradius-users [[project/Mailing list|mailing list]]. Include a description of what you are trying to do, and the entire debugging output, especially output showing the server receiving and processing test packets.
 ** You may want to scrub "secret" information from the output before posting it - shared secrets, passwords, etc
 ** Please do '''not''' scrub all the exact addresses and similar data, because often the process of obfuscating can introduce more errors
 
