@@ -5,4 +5,4 @@ Command format:
 
 ==See also==
 
-* [[radclient]]
+* [[config/Radclient|radclient]]
