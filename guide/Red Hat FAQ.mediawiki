@@ -89,7 +89,7 @@ perform a local build on your RHEL system from the Fedora SRPM. This
 will produce a collection of FreeRADIUS RPM's and should guarantee the
 resulting packages conform to the requirements of Red Hat based
 distributions. Instructions on how to do this and the reasons why can
-be found later in this FAQ, please see [[#How to build an SRPM]].
+be found later in this FAQ, please see [[Red-Hat-FAQ#How-to-build-an-SRPM|How to build an SRPM]].
 
 == Current Pre-built RPM's for RHEL 5 and CentOS 5 ==
 
@@ -298,7 +298,7 @@ Use the yum package installer to perform a query.
 
  % yum info freeradius\*
 
-However, RHEL5 and CentOS5 users should refer to [[#Current Pre-built RPM's for RHEL 5 and CentOS 5]]
+However, RHEL5 and CentOS5 users should refer to [[Red-Hat-FAQ#Current-Pre-built-RPM|current pre-built RPM]].
 
 === How does RPM version naming work? How do I look at an RPM name and understand what FreeRADIUS version it represents? ===
 
@@ -369,8 +369,7 @@ From above you'll see that yum has told you there are 3 different packages which
 
 === Why should I use Red Hat RPM's instead of the raw FreeRADIUS source? ===
 
-Note, you may want to refer to the FAQ entry [[#What is the difference
-between building from source and building from an SRPM?]].
+Note, you may want to refer to the FAQ entry [[Red-Hat-FAQ#What-is-the-difference-between-building-from-source-and-building-from-an-SRPM%253F|What is the difference between building from source and building from an SRPM?]]
 
 When you build from the raw source code you will have many decisions
 to make such as what to build, setting up the pre-requisites for
@@ -562,7 +561,7 @@ Fedora/RHEL/CentOS.
 
 First please read the FAQ entry concerning building from sources
 vs. building from SRPM. To build from an SRPM you will need to execute
-the following sequences of steps described in [[#How to build an SRPM]]
+the following sequences of steps described in [[Red-Hat-FAQ#How-to-build-an-SRPM|How to build an SRPM]]
 
 === FreeRADIUS stopped working after an RPM upgrade. What's wrong? ===
 
