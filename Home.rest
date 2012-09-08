@@ -21,8 +21,8 @@ We also keep a list of [[acknowledgements|project/Acknowledgements]] of contribu
 
 RADIUS Client Support
 
-[[FreeRADIUS|glossary/FreeRADIUS]] features
---------------------------
+Features
+----------
 
 * Complete support for RFC 2865 and RFC 2866 attributes.
 * [[EAP|protocol/EAP]] with EAP-MD5, EAP-SIM, EAP-TLS, EAP-TTLS, [[EAP-PEAP|protocol/EAP-PEAP]], and Cisco [[LEAP|protocol/LEAP]] EAP sub-types
