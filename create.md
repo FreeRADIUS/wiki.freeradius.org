@@ -1,1 +1,0 @@
-I'm currently using freeradius in a telecom compagny in every day life
