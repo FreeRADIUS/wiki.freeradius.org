@@ -1,3 +1,4 @@
+__NOTOC__
 == Overview ==
 
 '''IEEE 802.11''', the [[Wi-Fi]] standard, denotes a set of [[Wireless LAN]]/WLAN standards developed by working group 11 of the [[Institute of Electrical and Electronics Engineers|IEEE]] LAN/MAN Standards Committee ([[IEEE 802]]). The term 802.11x is also used to denote this set of standards and is not to be mistaken for any one of its elements. There is no single 802.11x standard. The term ''IEEE 802.11'' is also used to refer to the original 802.11, which is now sometimes called "802.11legacy." For the application of these standards see [[Wi-Fi]].(tm)
