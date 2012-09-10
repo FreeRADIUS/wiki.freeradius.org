@@ -1,3 +1,4 @@
+__NOTOC__
 It is possible to use [[FreeRADIUS]] as a [[proxy]] [[RADIUS]] server. This
 means that it can consult a remote [[RADIUS]] server to validate a user.
 This is handy for roaming setups, or for renting ports to someone else.
