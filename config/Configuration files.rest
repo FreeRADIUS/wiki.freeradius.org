@@ -21,7 +21,7 @@ Common module configuration
 * [[hints|https://github.com/alandekok/freeradius-server/blob/master/raddb/hints]]
 * [[huntgroups|https://github.com/alandekok/freeradius-server/blob/master/raddb/huntgroups]]
 
-Old-style (v1.1.x) configuration files
+Old-style (<= 1.x.x) configuration files
 --------------------------------
 
 * [[clients|https://github.com/alandekok/freeradius-server/blob/v1.1.x/raddb/clients]]
