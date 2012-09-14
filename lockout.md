@@ -30,3 +30,5 @@ policy.conf:
         Tmp-Integer-0 := "%{sql:insert into failed (username,authdate) values ('%{User-Name}', now())}"
       }
     }
+
+In some cases, you might want to change the schema - the username might not be visible for anonymous outer EAP identities, for example. In this case, extend the SQL schema and SQL queries to compare on attributes that are available, for example, Calling-Station-Id
