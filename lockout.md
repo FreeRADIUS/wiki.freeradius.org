@@ -28,6 +28,8 @@ policy.conf:
     lockout_incr {
       update control {
         Tmp-Integer-0 := "%{sql:insert into failed (username,authdate) values ('%{User-Name}', now())}"
+        # clean up the table
+        Tmp-Integer-1 := "%{sql:delete from failed where now()-authdate > '1 hour'}"
       }
     }
 
