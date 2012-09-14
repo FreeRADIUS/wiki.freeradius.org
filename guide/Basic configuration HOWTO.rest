@@ -10,7 +10,7 @@ Define a Client IP
 
 For initial testing from localhost with [[radtest|guide/Radtest]], the server comes with a default definition for ``127.0.0.1`` and ``::1``
 
-For testing from external machines, edit /etc/raddb/[[clients.conf]] and add an entry. There are many examples and the syntax is easy::
+For testing from external machines, edit /etc/raddb/clients.conf and add an entry. There are many examples and the syntax is easy::
 
   client NAME {
     ipaddr = IPADDRESS
@@ -93,7 +93,7 @@ For configuring EAP, see the external [[EAP Howto|http://deployingradius.com/doc
 
 The initial setup is usually sufficient, but if you get an error,  then **read the debug messages**.   Check the docs, check that you have followed the above steps to the letter, and try again.  Try posting the output into the [[Network RADIUS Debug colorizer|http://networkradius.com/freeradius.html]], it will group the debug output into request/reply sections, and will colorize portions of text that *you should pay attention to*.  While many of the debug messages can be ignore (they are for more in-depth debugging), a number of them contain **detailed descriptions** of what is going on.  Read them, and follow the instructions.
 
-If you need to edit [[configuration files|config/Configuration files]], read them carefully and edit them as little as possible. See ``man radiusd`` for a guide.  Start with [[radiusd.conf]].
+If you need to edit [[configuration files|config/Configuration files]], read them carefully and edit them as little as possible. See ``man radiusd`` for a guide.  Start with radiusd.conf.
 
 More testing
 ---------------
