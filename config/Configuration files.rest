@@ -9,7 +9,7 @@ Main configuration files
 
 * [[radiusd.conf|https://github.com/alandekok/freeradius-server/blob/master/raddb/radiusd.conf.in]]
 * [[clients.conf|https://github.com/alandekok/freeradius-server/blob/master/raddb/clients.conf]]
-* [[modules configuration|pages/modules]]
+* [[modules configuration|pages/modules/]]
 * [[sites configuration|config/sites configuration]]
 * [[proxy.conf|https://github.com/alandekok/freeradius-server/blob/master/raddb/proxy.conf]]
 * [[policy.conf|https://github.com/alandekok/freeradius-server/blob/v2.1.x/raddb/policy.conf]] (now [[policy.d|https://github.com/alandekok/freeradius-server/blob/master/raddb/policy.d]] in >= 3.0.0)
