@@ -1,17 +1,17 @@
 ## [[FreeRADIUS]] HOWTOs
 
-* [[Basic configuration HOWTO]]
-* [[SQL HOWTO]]
-* [[EAP/MD5 HOWTO|EAPMD5 HOWTO]]
-* [[WPA HOWTO]] (Using FreeRadius to secure your wireless network)
-* [[SNMP HOWTO]]
-* [[FreeRADIUS Active Directory Integration HOWTO]]
-* [[Syslog HOWTO]]
-* [[SQL Huntgroup HOWTO]] (How to implement huntgroups in SQL)
+* [[Basic configuration HOWTO|guide/Basic configuration HOWTO]]
+* [[SQL HOWTO|guide/SQL HOWTO]]
+* [[EAP/MD5 HOWTO|guide/EAPMD5 HOWTO]]
+* [[WPA HOWTO|guide/WPA HOWTO]] (Using FreeRadius to secure your wireless network)
+* [[SNMP HOWTO|guide/SNMP HOWTO]]
+* [[FreeRADIUS Active Directory Integration HOWTO|guide/FreeRADIUS Active Directory Integration HOWTO]]
+* [[Syslog HOWTO|guide/Syslog HOWTO]]
+* [[SQL Huntgroup HOWTO|guide/SQL Huntgroup HOWTO]] (How to implement huntgroups in SQL)
 
 ## Offsite HOWTOs
 
-Here is a list of known offsite [[HOWTO]]s. Where ever possible (When the authors give us permission) these have been incorporated into the wiki.
+Here is a list of known offsite HOWTOs. Where ever possible (When the authors give us permission) these have been incorporated into the wiki.
 
 * [[Deploying RADIUS - Practices and Principles for AAA solutions|http://deployingradius.com/documents/configuration/]]
 * [[WPA Authentication for Windows XP Clients with RADIUS HOWTO|http://www.hep.phys.soton.ac.uk/~jhe/documents/WPA-Authentication+RADIUS-HOWTO.html]]
