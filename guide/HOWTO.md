@@ -1,4 +1,4 @@
-## [[FreeRADIUS]] HOWTOs
+## [[FreeRADIUS|glossary/FreeRADIUS]] HOWTOs
 
 * [[Basic configuration HOWTO|guide/Basic configuration HOWTO]]
 * [[SQL HOWTO|guide/SQL HOWTO]]
@@ -8,6 +8,7 @@
 * [[FreeRADIUS Active Directory Integration HOWTO|guide/FreeRADIUS Active Directory Integration HOWTO]]
 * [[Syslog HOWTO|guide/Syslog HOWTO]]
 * [[SQL Huntgroup HOWTO|guide/SQL Huntgroup HOWTO]] (How to implement huntgroups in SQL)
+* [[Lockout HOWTO|guide/lockout]]
 
 ## Offsite HOWTOs
 
