@@ -1,14 +1,14 @@
 ## [[FreeRADIUS|glossary/FreeRADIUS]] HOWTOs
 
-* [[Basic configuration HOWTO|guide/Basic configuration HOWTO]]
-* [[SQL HOWTO|guide/SQL HOWTO]]
-* [[EAP/MD5 HOWTO|guide/EAPMD5 HOWTO]]
-* [[WPA HOWTO|guide/WPA HOWTO]] (Using FreeRadius to secure your wireless network)
-* [[SNMP HOWTO|guide/SNMP HOWTO]]
-* [[FreeRADIUS Active Directory Integration HOWTO|guide/FreeRADIUS Active Directory Integration HOWTO]]
-* [[Syslog HOWTO|guide/Syslog HOWTO]]
-* [[SQL Huntgroup HOWTO|guide/SQL Huntgroup HOWTO]] (How to implement huntgroups in SQL)
-* [[Lockout HOWTO|guide/lockout]]
+* [[Basic configuration|guide/Basic configuration HOWTO]]
+* [[SQL|guide/SQL HOWTO]]
+* [[EAP/MD5|guide/EAPMD5 HOWTO]]
+* [[WPA|guide/WPA HOWTO]] (Using FreeRadius to secure your wireless network)
+* [[SNMP|guide/SNMP HOWTO]]
+* [[FreeRADIUS Active Directory Integration|guide/FreeRADIUS Active Directory Integration HOWTO]]
+* [[Syslog|guide/Syslog HOWTO]]
+* [[SQL Huntgroup|guide/SQL Huntgroup HOWTO]] (How to implement huntgroups in SQL)
+* [[Lockout|guide/lockout]]
 
 ## Offsite HOWTOs
 
