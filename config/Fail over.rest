@@ -317,4 +317,4 @@ but the latter is just a whole lot easier to read.
 
 See Also
 ------------
-* [[load balancing]]
+* [[load balancing|config/load balancing]]
