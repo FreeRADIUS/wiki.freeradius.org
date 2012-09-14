@@ -178,7 +178,7 @@ These virtual modules are full-fledged objects in and of themselves.  One virtua
 
 Redundancy and Load-Balancing
 ---------------------------------------------
-See [[load balancing]] for information on simple redundancy (fail-over) and [[load balancing]].
+See [[load balancing|guide/load balancing]] for information on simple redundancy (fail-over) and [[load balancing|guide/load balancing]].
 
 The Gory Details
 -----------------------
