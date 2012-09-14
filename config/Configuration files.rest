@@ -1,0 +1,29 @@
+For every part of FreeRADIUS, in the configuration directory (``/etc/raddb``, ``/etc/freeradius`` or similar) there is a fully commented example file included, that explains what it does, and how to use it. Read those sample files too!
+
+Again, many of the configuration files are **ONLY** documented in the comments included in the files.
+
+Reading the configuration files is **REQUIRED** to fully understand how to create complex configurations of the server.
+
+Main configuration files
+---------------------------
+
+* [[radiusd.conf|https://github.com/alandekok/freeradius-server/blob/master/raddb/radiusd.conf.in]]
+* [[clients.conf|https://github.com/alandekok/freeradius-server/blob/master/raddb/clients.conf]]
+* [[modules configuration|pages/modules]]
+* [[sites configuration|config/sites configuration]]
+* [[proxy.conf|https://github.com/alandekok/freeradius-server/blob/master/raddb/proxy.conf]]
+* [[policy.conf|https://github.com/alandekok/freeradius-server/blob/master/raddb/polict.conf]]
+
+Common module configuration
+-----------------------------------
+
+* [[users|https://github.com/alandekok/freeradius-server/blob/master/raddb/users]]
+* [[hints|https://github.com/alandekok/freeradius-server/blob/master/raddb/hints]]
+* [[huntgroups|https://github.com/alandekok/freeradius-server/blob/master/raddb/huntgroups]]
+
+Old-style (v1.1.x) configuration files
+--------------------------------
+
+* [[clients|https://github.com/alandekok/freeradius-server/blob/v1.1.x/raddb/clients]]
+* [[naslist|https://github.com/alandekok/freeradius-server/blob/v1.1.x/raddb/naslist]]
+* [[naspasswd|https://github.com/alandekok/freeradius-server/blob/v1.1.x/raddb/naspasswd]]
