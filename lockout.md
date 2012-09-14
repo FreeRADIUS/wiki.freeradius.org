@@ -2,6 +2,8 @@ FreeRADIUS doesn't have a built-in lockout (disable account after X auth fails i
 
 The following does it using SQL - it assumes Postgresql-style syntax for "datetime" datatypes. Configure SQL, then create a table as follows `create table failed (username text, authdate timestamptz);`
 
+sites-enabled/NAME:
+
     authorize {
       lockout_check
       ...
@@ -15,6 +17,7 @@ The following does it using SQL - it assumes Postgresql-style syntax for "dateti
 policy.conf:
 
     lockout_check {
+      # checks for 5 failed auths in the last 10 minutes
       update control {
         Tmp-Integer-0 := "%{sql:select count(*) from failed where username='%{User-Name}' and now()-authdate < '10 minutes'}"
       }
@@ -27,5 +30,3 @@ policy.conf:
         Tmp-Integer-0 := "%{sql:insert into failed (username,authdate) values ('%{User-Name}', now())}"
       }
     }
-
-`
