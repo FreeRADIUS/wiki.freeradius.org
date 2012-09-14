@@ -12,7 +12,7 @@ Main configuration files
 * [[modules configuration|pages/modules]]
 * [[sites configuration|config/sites configuration]]
 * [[proxy.conf|https://github.com/alandekok/freeradius-server/blob/master/raddb/proxy.conf]]
-* [[policy.conf|https://github.com/alandekok/freeradius-server/blob/master/raddb/polict.conf]]
+* [[policy.conf|https://github.com/alandekok/freeradius-server/blob/master/raddb/policy.conf]]
 
 Common module configuration
 -----------------------------------
