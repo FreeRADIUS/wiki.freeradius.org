@@ -125,7 +125,7 @@ were not in 1.x, and were not mentioned above.  These configuration
 items enable almost any mapping of IP / port to clients to virtual
 servers.
 
-  The configuration items are:
+The configuration items are::
 
 	virtual_server = <name>
 
@@ -179,7 +179,7 @@ were not in 1.x, and were not mentioned above.  These configuration
 items enable almost any mapping of IP / port to clients to virtual
 servers.
 
-The configuration items are:
+The configuration items are::
 
 	virtual_server = <name>
 
@@ -286,32 +286,32 @@ server, where the "listen" section cannot find it.
 Outlined examples
 ^^^^^^^^^^^^^^^^^
 
-  This section outlines a number of examples, with alternatives.
+This section outlines a number of examples, with alternatives.
 
-  One server, multiple sockets
-	- multiple "listen" sections in a "server" section
+One server, multiple sockets
+    - multiple "listen" sections in a "server" section
 
-  one server per client
-	- define multiple servers
-	- have a global "listen" section
-	- have multiple global "clients", each with "virtual_server = X"
+one server per client
+    - define multiple servers
+    - have a global "listen" section
+    - have multiple global "clients", each with "virtual_server = X"
 
-  two servers, each with their own sockets
-	- define multiple servers
-	- put "client" sections into each "server"
-	- put a "listen" section into each "server"
+two servers, each with their own sockets
+    - define multiple servers
+    - put "client" sections into each "server"
+    - put a "listen" section into each "server"
 
-	Each server can list the same client IP, and the secret
-	can be different
+    Each server can list the same client IP, and the secret
+    can be different
 
-  two sockets, sharing a list of clients, but pointing to different servers
-	- define global "listen" sections
-	- in each, set "virtual_server = X"
-	- in each, set "clients = Y"
-	- define "clients Y" section, containing multiple clients.
+two sockets, sharing a list of clients, but pointing to different servers
+    - define global "listen" sections
+    - in each, set "virtual_server = X"
+    - in each, set "clients = Y"
+    - define "clients Y" section, containing multiple clients.
 
-	This also means that you can have a third socket, which
-	doesn't share any of these clients.
+    This also means that you can have a third socket, which
+    doesn't share any of these clients.
 
 
 How to decide what to do
