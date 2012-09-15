@@ -1,4 +1,3 @@
-
 *Protected Extensible Authentication Protocol*, *Protected EAP*, or simply *PEAP* (pronounced *peep*), is a method to securely transmit [[authentication|glossary/authentication]] information, including passwords, over wireless LANs. It was jointly developed by Microsoft, RSA Security and [[Cisco|vendor/Cisco]].
 It is an IETF open standard.
 
@@ -32,7 +31,7 @@ Even though Microsoft co-invented the PEAP standard, Microsoft never added suppo
 
 Since [[Cisco|vendor/Cisco]] has always favored the use of its own less secure proprietary LEAP and EAP-FAST protocols over PEAP and markets them as simpler certificate-less solutions, standardized PEAP is rarely promoted by Cisco.
 
-Cisco stands to gain a monopoly in the access point market if LEAP or EAP-FAST is universally adopted. As a result, most Cisco customers run Cisco's proprietary LEAP or EAP-FAST authentication protocols due to their promotion by Cisco. With no interest from Microsoft to support PEAPv1 and little interest from Cisco to promote PEAP in general, PEAPv1 authentication is rarely used. There is no native [[OS]] support for this EAP protocol.
+Cisco stands to gain a monopoly in the access point market if LEAP or EAP-FAST is universally adopted. As a result, most Cisco customers run Cisco's proprietary LEAP or EAP-FAST authentication protocols due to their promotion by Cisco. With no interest from Microsoft to support PEAPv1 and little interest from Cisco to promote PEAP in general, PEAPv1 authentication is rarely used. There is no native OS support for this EAP protocol.
 
 *Note*: The PEAP standard was created by Microsoft, Cisco, and RSA after EAP-TTLS had already come on the market. Even with its late start, Microsoft’s and Cisco’s size allowed them to quickly overtake EAP-TTLS in the market.
 
@@ -48,7 +47,7 @@ Microsoft supports another form of PEAPv0 (which Microsoft calls PEAP-EAP-TLS) t
 
 Since few third-party clients and servers support PEAP-EAP-TLS, users should probably avoid it unless they only intend to use Microsoft desktop clients and servers.
 
-Ultimately, PEAPv0/EAP-MSCHAPv2 is the only form of PEAP that most people will ever know. PEAP is so successful in the market place that even Funk Software, the inventor and backer of [[EAP-TTLS]], had no choice but to support PEAP in their server and client software for wireless networks.
+Ultimately, PEAPv0/EAP-MSCHAPv2 is the only form of PEAP that most people will ever know. PEAP is so successful in the market place that even Funk Software, the inventor and backer of EAP-TTLS, had no choice but to support PEAP in their server and client software for wireless networks.
 
 References
 ----------
