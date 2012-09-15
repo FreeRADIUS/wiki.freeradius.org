@@ -1,7 +1,7 @@
 *Protected Extensible Authentication Protocol*, *Protected EAP*, or simply *PEAP* (pronounced *peep*), is a method to securely transmit [[authentication|glossary/authentication]] information, including passwords, over wireless LANs. It was jointly developed by Microsoft, RSA Security and [[Cisco|vendor/Cisco]].
 It is an IETF open standard.
 
-*PEAP* is *not* an encryption protocol; as with other EAP types it only authenticates a client into a network. 
+PEAP is **not** an encryption protocol; as with other EAP types it only authenticates a client into a network. 
 
 PEAP uses only server-side public key certificates to authenticate clients by creating an encrypted SSL/TLS tunnel between the client and the authentication server, which protects the ensuing exchange of authentication information from casual inspection.
 
