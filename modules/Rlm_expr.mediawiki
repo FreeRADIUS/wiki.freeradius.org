@@ -1,25 +1,49 @@
-The '''rlm_expr''' module enables 'xlat' handling.
+The **rlm_expr** module enables 'xlat' handling.
 
-{{Default in the server source|src/modules/rlm_expr/}}
+Configuration
+---------------
 
-==Configuration==
+See default [[here|https://github.com/alandekok/freeradius-server/blob/master/raddb/mods-available/expr]].
 
-{{Default in the server source|raddb/modules/expr}}
-<pre>
-	#
-	#  The 'expression' module currently has no configuration.
-	#
-	#  This module is useful only for 'xlat'.  To use it,
-	#  put 'exec' into the 'instantiate' section.  You can then
-	#  do dynamic translation of attributes like:
-	#
-	#  Attribute-Name = `%{expr:2 + 3 + %{exec: uid -u}}`
-	#
-	#  The value of the attribute will be replaced with the output
-	#  of the program which is executed.  Due to RADIUS protocol
-	#  limitations, any output over 253 bytes will be ignored.
-	#
-	#  The module also registers a few paircompare functions
-	expr {
-	}
-</pre>
+Expansions
+-------------
+
+expr
+===
+Implements the majority of standard expr functions, see the configuration above or ``man rlm_expr`` for details.
+
+rand
+===
+Returns a random number between 0 and the number passed.
+
+For example::
+  %{rand:9} 
+
+Could expand to 0,1,2,3,4,5,6,7,8 or 9.
+
+randstr
+=====
+Expands to a random string of characters. Uses the same pattern characters as the [[String::Random|http://search.cpan.org/~steve/String-Random-0.20/Random.pm]] cpan module.
+
+Returns a random char for each pattern char passed.
+
+Pattern chars are
+
+=========  ============
+Pattern char  Character range
+=========  ============
+c                  Any lowercase character [a-z]
+C                  Any uppercase character [A-Z]
+n                  Any digit [0-9]
+a                  Any alpha numeric character [A-Za-z0-9]
+!                   A punctuation character [~`!@$%^&*()-_+={}[]|\:;"'.<>?/#,]
+.                   Any printable character
+s                  A "salt" character [A-Za-z0-9./]
+b                  Any binary data (excluding NULL)
+
+For example::
+  %{randstr:CCcc!ccn}
+
+Could expand to::
+  UDwp$tj5
+
