@@ -232,6 +232,22 @@ Also if you are using multiple ldap module instances a per instance Ldap-Group a
 
 we can then use the myname-Ldap-Group attribute to match user groups. Make sure though that the ldap module is instantiated before the files module so that it will have time to register the corresponding attribute. One solution would be to add the ldap module in the instantiate{} block in radiusd.conf
 
+You can also define the logic around LDAP groups inside the "post-auth" section in the sites-available/default file. The following example rejects the auth attempt if the user does not belong to either "LDAP Group One" or "MyGroupTwo".
+
+<pre>
+post-auth {
+        if (LDAP-Group == "LDAP Group One") {
+                noop
+        }
+        elsif (LDAP-Group == "MyGroupTwo") {
+                noop
+        }
+        else {
+                reject
+        }
+}
+</pre>
+
 ### USERDN Attribute
 
 When rlm_ldap has found the DN corresponding to the username provided in the access-request (all this happens in the authorize section) it will add an Ldap-UserDN attribute in the check items list containing that DN. The attribute will be searched for in the authenticate section and if present will be used for authentication (ldap bind with the user DN/password). Otherwise a search will be performed to find the user dn. If the administrator wishes to use rlm_ldap only for authentication or does not wish to populate the identity,password configuration attributes he can set this attribute by other means and avoid the ldap search completely. For instance it can be set through the users file in the authorize section:
