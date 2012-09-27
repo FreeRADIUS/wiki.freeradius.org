@@ -67,7 +67,7 @@ In order to contribute code you must first fork the server. Forking is the proce
 To fork the FreeRADIUS server
 
 * Login to GitHub
-* Go to the [[project site|https://github.com/alandekok/freeradius-server]]
+* Go to the [[project site|https://github.com/FreeRADIUS/freeradius-server]]
 * Click the 'Fork' button. 
 
 You'll see the current URL change to ``/<your github username>/freeradius-server`` this means you're now browsing your own copy of the FreeRADIUS source code. From this point on changes to the *upstream* repository will not be reflected in your fork, unless you explicitly pull from the *upstream* repository using the local clone of your fork, and push back to GitHub.
@@ -93,7 +93,7 @@ Cloning
 * Add the original FreeRADIUS repository as a remote branch (you need this to pull new commits from the project repository):
 ::
 
-    git remote add upstream git://github.com/alandekok/freeradius-server.git
+    git remote add upstream git://github.com/FreeRADIUS/freeradius-server.git
     git fetch upstream
     
 Making modifications
