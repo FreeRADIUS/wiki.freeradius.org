@@ -5,6 +5,7 @@ FR Configuration
 ^^^^^^^^^^^^
 * [[Configuration files]]
 * [[Mac-Auth]]
+* [[LDAP-Auth Example]]
 
 Device configuration examples
 ^^^^^^^^^^^^^^^^^^^^^^
