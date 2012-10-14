@@ -71,7 +71,7 @@ The following is an overview of the types of information available:
 * [[FAQ|guide/FAQ]]
 * [[HOWTO|guide/HOWTO]]
 * [[Example Setups|guide/Example Setups]] Cookbook
-* [[glossary|glossary/Glossary]]
+* [[glossary|pages/glossary/]]
 
 For beginners, there is also a short [[concepts|guide/Concepts]] page, which can help clarify how the server works.
 
