@@ -15,5 +15,5 @@ Device configuration examples
 
 Recipes for 3rd party software
 ^^^^^^^^^^^^^^^^^^^^^^
-* [[PopTop]]
+* [[config/PopTop]]
 * [[Git]]
