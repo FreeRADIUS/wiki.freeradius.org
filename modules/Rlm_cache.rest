@@ -55,21 +55,21 @@ authorize {
 }
 ```
 
-or to forcibly remove entries at he end of the session
+It may also be advisable to remove entries at the end of a session:
 
 ```
 authorize {
-    if (Acct-Status-Type == 'stop') {
-        update control {
-            Cache-TTL = 0
-        }
-        cache
-    }
-    else {
+    if (Acct-Status-Type == 'Interim-Update') {
         cache
         if (updated) {
             sql
         }
+    }
+    else {
+       update control {
+            Cache-TTL = 0
+        }
+        cache
     }
 }
 ```
