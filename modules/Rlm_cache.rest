@@ -66,10 +66,11 @@ authorize {
         }
     }
     else {
-       update control {
+        update control {
             Cache-TTL = 0
         }
         cache
+        sql
     }
 }
 ```
