@@ -46,7 +46,7 @@ The cache module can also be used for de-duplication. If key is set to something
 For this an empty attribute list may be configured. 
 
 ```
-authorize {
+accounting {
     # Limit the number of interim updates processed by our database
     cache
     if (updated) {
@@ -58,7 +58,7 @@ authorize {
 It may also be advisable to remove entries at the end of a session:
 
 ```
-authorize {
+accounting {
     if (Acct-Status-Type == 'Interim-Update') {
         cache
         if (updated) {
