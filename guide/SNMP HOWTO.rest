@@ -1,6 +1,6 @@
 Native SNMP support in FreeRADIUS version 2
 ======================================
-Native SNMP support in [[FreeRADIUS]] version 2 and later is broken. Please see Alan's mail regarding this topic:
+Native SNMP support in FreeRADIUS version 2 and later is broken. Please see Alan's mail regarding this topic:
 http://www.mail-archive.com/freeradius-users%40lists.freeradius.org/msg46012.html
 
 At the moment there is only one option to get information about the status and statistics of the server. Please enable the [[config/Status]] server (see: [[config/Virtual server]]). All information is geathered with radius requests to this status server. Please *read man radclient* and the documentation of the status virtual server (*raddb/sites-available/status*). 
