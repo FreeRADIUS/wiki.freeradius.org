@@ -80,3 +80,7 @@ Contributing
 FreeRADIUS is an open source project and as such depends on contributions from its users. Even if you don't know C you can still contribute to the project by editing documentation on the wiki, posting bugs on [[GitHub|https://github.com/alandekok/freeradius-server/issues]] or helping out on the [[users mailing list|Mailing-list#Users+list]].
 
 If you are comfortable coding in C and have a patch or new module you'd like to see included in the main distribution, please see the [[submitting patches via GitHub|contributing/GitHub]] page for instructions on generating a 'pull request'. 
+
+Bug reports
+------------
+If you find an issue in the server please report it so that it can be fixed in a future release. The procedure for reporting defects can be found [[here|project/bug-reports]].
