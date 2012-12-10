@@ -51,7 +51,7 @@ FreeRADIUS provides a wide range of methods to select user configurations. The s
 * DEFAULT template configuration
 * multiple cascading DEFAULT template configurations
 
-In addition, FreeRADIUS supports [[virtual server|config/virtual server]]s which allow several separate sets of configuration data to coexist inside the same server instance.
+In addition, FreeRADIUS supports [[virtual servers|config/virtual server]] which allow several separate sets of configuration data to coexist inside the same server instance.
 
 Documentation
 -------------
