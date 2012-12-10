@@ -1,6 +1,6 @@
 Load balancing
 ============
-As of version 1.1.0, FreeRADIUS supports load balancing in module sections.  Please read about configurable [[Fail-over]] for a more complete description of module sections.
+As of version 1.1.0, FreeRADIUS supports load balancing in module sections.  Please read about configurable [[Fail-over|config/Fail-over]] for a more complete description of module sections.
 
 The short summary is that you can use a "load-balance" section in any place where a module name may be used.  The semantics of the "load-balance" section are that one of the modules in the section will be chosen at random, evenly spread over the modules in the list.
 
@@ -157,4 +157,4 @@ e.g. "redundant" can contain "load-balance", but not "if", "else", or "elsif".  
 
 See Also
 -----------------
-* [[Fail-over]]
+* [[Fail-over|config/Fail-over]]
