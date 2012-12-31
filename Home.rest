@@ -62,6 +62,7 @@ There are many third-party web sites and HOWTO's that give advice on FreeRADIUS.
 
 The following is an overview of the types of information available:
 
+* [[API and internal functions|http://doc.freeradius.org]]
 * [[Building/Compiling|building/Build]]
 * [[Configuration|config/Configuration files]]
 * [[Base Modules|project/List of Modules]]
