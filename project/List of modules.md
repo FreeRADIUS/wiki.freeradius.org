@@ -5,7 +5,7 @@ FreeRADIUS (v2.1.x) includes the following [[modules|modules2]]:
 * [[rlm_always]]
 * [[rlm_attr_filter]]
 * [[rlm_attr_rewrite]]
-* [[rlm_caching]]
+* [[rlm_cache]]
 * [[rlm_chap]]
 * [[rlm_checkval]]
 * [[rlm_counter]]
