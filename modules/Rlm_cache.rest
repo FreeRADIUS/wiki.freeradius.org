@@ -11,13 +11,13 @@ See `here <https://github.com/alandekok/freeradius-server/blob/master/raddb/mods
 There are multiple interesting ways to use rlm_cache, here are some potentially useful ones...
 
 One call caching
-~~~~~~~~~~~~
+============
 This is how the module operates by default. If no cache entry is found, the attributes listed will be expanded, stored and added to the current list. If a cache entry is found and has not expired, it will be merged with the current request.
 
 This is useful where values from a request or reply need to be cached, or values from a small number of queries performed via xlat expansion need to be cached, for example, retrieving a users password.
 
 Two call caching
-~~~~~~~~~~~~
+============
 First we call the module in ``Cache-Status-Only`` mode, to find out whether it already has an entry, if it doesn't, we run other modules to retrieve additional values, then call the cache module again to add the entry.
 
 This should be used where entire user entries from directories like LDAP are being cached, and multiple attributes are retrieved at once.
@@ -40,7 +40,7 @@ authorize {
 ```
 
 Deduplication
-~~~~~~~~~~
+==========
 The cache module can also be used for de-duplication. If key is set to something like ``%{Acct-Unique-ID}.%{Acct-Status-Type}``, the number of interim-update packets may be limited to one every ``ttl``.
 
 For this an empty attribute list may be configured. 
@@ -76,7 +76,7 @@ accounting {
 ```
 
 Crappy rate limiting
-~~~~~~~~~~~~~~
+==============
 
 Setting the ``add-stats`` configuration item to ``yes`` will add the attribute ``Cache-Entry-Hits``, using this you can determine the number of packets matching the key within the ttl, and make a decision whether to respond or not. 
 
