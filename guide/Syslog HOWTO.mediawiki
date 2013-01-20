@@ -38,7 +38,7 @@ The process to get FreeRADIUS to start using syslog is fairly straight forward. 
  logdir = syslog
  log_destination = syslog
 
-Because of the logdir entry above, you must locate all references to ${logdir}, comment the line out and replace it with an absolute path.  There must be better ways to do this, but it isn't immediatedly obvious.
+Because of the logdir entry above, you must locate all references to ${logdir}, comment the line out and replace it with an absolute path.  There must be better ways to do this, but it isn't immediately obvious.
 
 
  Start radius with the -l syslog and -g <facility>:
