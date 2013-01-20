@@ -1,0 +1,79 @@
+The FreeRADIUS Project is the result of the work done by a large number of people. 
+
+We would like to publicly thank the following major contributors:
+
++--------------------+-----------------------------------------------------------+----------------+
+|     Contributor    |                         Details                           |     Active     |
++====================+===========================================================+================+
+| Adrian Pavlykevych | Wrote the original pre v3 rlm_ldap module.                | no             |
++--------------------+-----------------------------------------------------------+----------------+
+| Arran Cudbard-Bell | Wrote rlm_rest. Rewrote rlm_krb5. Maintains the wiki.     | yes            |
+|                    | Helps maintain the build system.                          |                |
++--------------------+-----------------------------------------------------------+----------------+
+| Alan Curry         | Contributed many patches for proxying, replication,       | no             |
+|                    | realm support.                                            |                |
++--------------------+-----------------------------------------------------------+----------------+
+| Alan DeKok         | FreeRADIUS Project Lead.                                  | yes            |
+|                    | Registered and maintains                                  |                |
+|                    | [[freeradius.org|http://www.freeradius.org/]].            |                |
+|                    | Wrote the module code. Made the server threaded.          |                |
+|                    | Rewrote and refactored the majority of the server core.   |                |
+|                    | Maintains the build system.                               |                |
+|                    | Is the CEO of [[Network RADIUS|http://networkradius.com]] |                |
+|                    | which for most intents and purposes represents the        |                |
+|                    | commercial side of the project.                           |                |
++--------------------+-----------------------------------------------------------+----------------+
+| Brandon Lee Poyner | Netscape-MTA-MD5 authentication module.                   | no             |
++--------------------+-----------------------------------------------------------+----------------+
+| Chris Brotsos      | Memory allocation debugging and proxy enhancements.       | no             |
++--------------------+-----------------------------------------------------------+----------------+
+| Chris Parker       | Configuration parser enhancements.                        | no             |
+|                    | rlm_attr_filter module. Proxy enhancements.               |                |
+|                    | FreeRADIUS Client embedded mode and other enhancements.   |                |
++--------------------+-----------------------------------------------------------+----------------+
+| Jeff Carneal of    | Wrote the caching support for the Unix module.            | no             |
+| Apex Internet      |                                                           |                |
+| Services, Inc.     |                                                           |                |
++--------------------+-----------------------------------------------------------+----------------+
+| Jochen Friedrich   | v1 SMUX / SNMP support (since removed).                   | no             |
++--------------------+-----------------------------------------------------------+----------------+
+| John Dennis        | Maintains RHEL RPMs and acts as liaison with RH.          | yes            |
++--------------------+-----------------------------------------------------------+----------------+
+| Kevin Bonner       | Contributed significantly to the mailing list and wiki.   | no             |
++--------------------+-----------------------------------------------------------+----------------+
+| Kostas Kalevras    | Contributed the 'dialup_admin' PHP server administration  | no             |
+|                    | code.                                                     |                |
++--------------------+-----------------------------------------------------------+----------------+ 
+| Matthew Newton     | Many patches and bug fixes.                               | yes            |
++--------------------+-----------------------------------------------------------+----------------+
+| Miquel van         | Wrote the original Cistron server, and started the        | no             |
+| Smoorenburg        | FreeRADIUS source tree.                                   |                |
++--------------------+-----------------------------------------------------------+----------------+
+| Mike Machado       | Author of the SQL module.                                 | no             |
++--------------------+-----------------------------------------------------------+----------------+
+| Miguel a.l. Paraz  | Wrote the original code which was the basis for the       | no             |
+|                    | PAM module.                                               |                |
++--------------------+-----------------------------------------------------------+----------------+
+| Nathan Neulinger   | pre v3 rlm_krb5                                           | no             |
++--------------------+-----------------------------------------------------------+----------------+
+| Peter Nixon        | Maintains rlm_sqlippool and hacks on other SQL related    | partially      |
+|                    | code, maintains openSUSE binary packages.                 |                |
++--------------------+-----------------------------------------------------------+----------------+
+| Phil Mayers        | Wrote the SoH code, and added many enhancements to        | yes            |
+|                    | rlm_eap.                                                  |                |
++--------------------+-----------------------------------------------------------+----------------+
+
+The following individuals also get honourable mentions for contributing significantly to the wiki or mailing list:
+
++--------------------+-----------------------------------------------------------+----------------+
+|     Contributor    |                         Details                           |     Active     |
++====================+===========================================================+================+
+| Alan Buxey         | For services to FreeRADIUS users.                         | yes            |
++--------------------+-----------------------------------------------------------+----------------+
+| Alex Clouter       | For services to FreeRADIUS users.                         | no (lost to    |
+|                    |                                                           | the dark side) |
++--------------------+-----------------------------------------------------------+----------------+
+| Brian Candler      | For services to FreeRADIUS users.                         | yes            |
++--------------------+-----------------------------------------------------------+----------------+
+| Fajar A Nugraha    | For services to FreeRADIUS users.                         | yes            |
++--------------------+-----------------------------------------------------------+----------------+
