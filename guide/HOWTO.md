@@ -1,5 +1,5 @@
-## [[FreeRADIUS|glossary/FreeRADIUS]] HOWTOs
-
+[[FreeRADIUS|glossary/FreeRADIUS]] HOWTOs
+-----------------------------------------
 * [[Basic configuration|guide/Basic configuration HOWTO]]
 * [[SQL|guide/SQL HOWTO]]
 * [[EAP/MD5|guide/EAPMD5 HOWTO]]
@@ -9,9 +9,21 @@
 * [[Syslog|guide/Syslog HOWTO]]
 * [[SQL Huntgroup|guide/SQL Huntgroup HOWTO]] (How to implement huntgroups in SQL)
 * [[Lockout|guide/lockout]]
+* [[Mac-Auth|guide/Mac Auth]]
 
-## Offsite HOWTOs
+Device configuration examples
+-----------------------------
+* [[HP ProCurve|vendor/HP]]
+* [[Cisco|vendor/Cisco]]
+* [[Linksys|vendor/Linksys]]
 
+Guides for 3rd party software
+-----------------------------
+* [[PopTop|guide/PopTop HOWTO]]
+* [[Git]]
+
+Offsite HOWTOs
+--------------
 Here is a list of known offsite HOWTOs. Where ever possible (When the authors give us permission) these have been incorporated into the wiki.
 
 * [[Deploying RADIUS - Practices and Principles for AAA solutions|http://deployingradius.com/documents/configuration/]]
