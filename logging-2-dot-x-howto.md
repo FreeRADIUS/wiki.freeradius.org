@@ -1,4 +1,4 @@
-The "log" section of the radiusd.conf file is where primary logging for the FreeRADIUS server is configured.
+The "log" section of the radiusd.conf file is where the primary logging configuration for the FreeRADIUS server is located.
 
     log {
     	destination = files
