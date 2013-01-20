@@ -33,7 +33,7 @@ Also please report any bugs here:
 [gollum issue tracker](https://github.com/github/gollum/issues?_pjax=true&state=open)
 
 ## Known Issues
-* The majority of links are now broken 
+* The majority of links are now broken, you can help by editing pages and fixing the links. The pages are now in a directory hierarchy and the links need to be updated. Links are in the format ``[[<name>|<path>/<page>]]``. You'll have to search to figure out where the pages now live.
 
 ## Pages that need converting as a priority (please mark here when converted)
 
