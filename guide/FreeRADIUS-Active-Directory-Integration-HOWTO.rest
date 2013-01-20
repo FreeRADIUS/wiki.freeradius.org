@@ -1,6 +1,4 @@
-Updated tutorial for freeradius 2.x is at: http://deployingradius.com/documents/configuration/active_directory.html
-
-This article was originally written by Charles Schwartz, Network Security Engineer.
+An alternative for freeradius 2.x is at: http://deployingradius.com/documents/configuration/active_directory.html
 
 Introduction
 ------------
@@ -391,8 +389,6 @@ First, for enhanced security install the FreeRADIUS server CA certificate (the C
 
 Open the network configuration panel select the network card and enter the properties. 
 
-[[/100000000000016F000001C2635CCC4B.png]]
-
 Select the « Authentication » tab.
 
 [[/100000000000016F000001C275BF1151.png]]
@@ -425,7 +421,6 @@ Replace/add the following lines.
 Note that the config file contains the password < whatever >. It’s the certificate password.
 
 Please replace the green items with the ones that correspond to your country and company
-
 ::
   # req_extensions = v3_req
   
@@ -497,3 +492,5 @@ When executing CA.all, we produce the 9 following certificates
 The server needs the files root.pem and cert.srv.pem in order to work with PEAP.
 
 Move all the files to /etc/raddb/certs/. Do not forget the demoCA directory.
+
+The original article was written by Charles Schwartz, Network Security Engineer.
