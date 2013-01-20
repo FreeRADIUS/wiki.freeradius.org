@@ -14,7 +14,7 @@ Principles
 
 FreeRADIUS offers authentication via port based access control. A user can connect to the network only if its credentials have been validated by the authentication server. User credentials are verified by using special authentication protocols which belong to the 802.1X standard. 
 
-[[10000000000001E30000017DC650BE65.png]]
+[[/10000000000001E30000017DC650BE65.png|alt=Network diagram]]
 
 Refer to the graphic. Network access is only granted to the workstation if the user credentials have been authenticated by the FreeRADIUS server. Otherwise the switch port will be down for any network traffic. 
 The RADIUS server is allowed to contact the domain controller for user authentication. 
