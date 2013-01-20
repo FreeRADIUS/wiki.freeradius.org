@@ -29,7 +29,7 @@ The next step is to query the daemon using status-server messages. There are som
 Here is an example of querying the server to retrieve authentication counters with radclient::
 
   echo "Message-Authenticator = 0x00, FreeRADIUS-Statistics-Type = 1" | \
-  radclient localhost:18120 status adminsecret
+  radclient localhost:18121 status adminsecret
   Received response ID 180, code 2, length = 140
     FreeRADIUS-Total-Access-Requests = 3
     FreeRADIUS-Total-Access-Accepts = 1
