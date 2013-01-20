@@ -19,8 +19,6 @@ As the premiere open source RADIUS suite it is included as a [[standard package|
 
 We also keep a list of [[acknowledgements|project/Acknowledgements]] of contributions to FreeRADIUS development.
 
-RADIUS Client Support
-
 Features
 --------
 
