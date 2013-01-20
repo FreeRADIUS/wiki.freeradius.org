@@ -6,7 +6,7 @@ Using git to administer FreeRADIUS server configurations
 As well as being an excellent SCM (Source control management) tool, git is also very useful for tracking changes to configuration files, and even for performing remote administration of servers.
 
 The basics
-~~~~~~~~
+``````````
 For basic configuration management one only has to::
  
  cd <config_dir>/raddb
