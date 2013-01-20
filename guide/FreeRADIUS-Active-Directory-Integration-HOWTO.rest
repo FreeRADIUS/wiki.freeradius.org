@@ -364,13 +364,12 @@ Please use the secret that you have specified in the ``clients.conf`` file.
 Next we must configure each interface (port) to operate in [[802.1X]] mode.
 
 Repeat this procedure for each port that should do access control
-
 ::
- configure terminal
- (config)#interface FastEthernet1/0/12
- (config-if)# switchport mode access
- (config-if)# dot1x port-control auto
- (config-if)# end
+  configure terminal
+  (config)#interface FastEthernet1/0/12
+  (config-if)# switchport mode access
+  (config-if)# dot1x port-control auto
+  (config-if)# end
 
 The command ``show dot1x<`` allows to check [[802.1X]] settings.
 
