@@ -68,8 +68,7 @@ The following is an overview of the types of information available:
 * Creating your own [[Modules for FreeRADIUS Version 1|contributing/Modules1]]
 * [[Radius Clients|glossary/Radius Clients]]
 * [[FAQ|guide/FAQ]]
-* [[HOWTO|guide/HOWTO]]
-* [[Example Setups|guide/Example Setups]] Cookbook
+* [[HOWTO|guide/HOWTO]] example setups, vendor docs, and cookbooks.
 * [[glossary|pages/glossary/]]
 
 For beginners, there is also a short [[concepts|guide/Concepts]] page, which can help clarify how the server works.
