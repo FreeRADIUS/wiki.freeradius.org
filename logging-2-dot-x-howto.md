@@ -120,7 +120,7 @@ The strings below are dynamically expanded, which means that you can put anythin
 Log Additional Debug Information
 --------------------------------
 
-Logging can also be enabled for an individual request by a special dynamic expansion macro:  %{debug: 1}, where the debug level for this request is set to '1' (or 2, 3, etc.).  For example:
+Logging can also be enabled for an individual request by a special dynamic expansion macro:  **%{debug: #}**, where # is the debug level for this request (1, 2, 3, etc.).  For example:
 
     ...
     update control {
