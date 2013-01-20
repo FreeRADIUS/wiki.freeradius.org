@@ -61,7 +61,7 @@ Virtual-Server or Packet-Src-IP-Address.  Otherwise, the log messages will be di
 Syslog Facility
 ---------------
 
-This option determines which syslog facility to use, if destination == "syslog"  The exact values permitted here are OS-dependent.  You probably don't want to change this.
+This option determines which syslog facility to use, if destination == "syslog"  The exact values permitted here are OS-dependent.
 
 **Default:**
 
