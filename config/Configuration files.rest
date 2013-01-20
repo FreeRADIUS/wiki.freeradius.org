@@ -7,23 +7,23 @@ Reading the configuration files is **REQUIRED** to fully understand how to creat
 Main configuration files
 ---------------------------
 
-* [[radiusd.conf|https://github.com/alandekok/freeradius-server/blob/master/raddb/radiusd.conf.in]]
-* [[clients.conf|https://github.com/alandekok/freeradius-server/blob/master/raddb/clients.conf]]
+* [[radiusd.conf|https://github.com/FreeRADIUS/freeradius-server/blob/master/raddb/radiusd.conf.in]]
+* [[clients.conf|https://github.comFreeRADIUS/freeradius-server/blob/master/raddb/clients.conf]]
 * [[modules configuration|pages/modules/]]
 * [[sites configuration|config/sites configuration]]
-* [[proxy.conf|https://github.com/alandekok/freeradius-server/blob/master/raddb/proxy.conf]]
-* [[policy.conf|https://github.com/alandekok/freeradius-server/blob/v2.1.x/raddb/policy.conf]] (now [[policy.d|https://github.com/alandekok/freeradius-server/blob/master/raddb/policy.d]] in >= 3.0.0)
+* [[proxy.conf|https://github.com/FreeRADIUS/freeradius-server/blob/master/raddb/proxy.conf]]
+* [[policy.conf|https://github.com/FreeRADIUS/freeradius-server/blob/v2.1.x/raddb/policy.conf]] (now [[policy.d|https://github.com/FreeRADIUS/freeradius-server/blob/master/raddb/policy.d]] in >= 3.0.0)
 
 Common module configuration
 -----------------------------------
 
-* [[users|https://github.com/alandekok/freeradius-server/blob/master/raddb/users]]
-* [[hints|https://github.com/alandekok/freeradius-server/blob/master/raddb/hints]]
-* [[huntgroups|https://github.com/alandekok/freeradius-server/blob/master/raddb/huntgroups]]
+* [[users|https://github.com/FreeRADIUS/freeradius-server/blob/master/raddb/users]]
+* [[hints|https://github.com/FreeRADIUS/freeradius-server/blob/master/raddb/hints]]
+* [[huntgroups|https://github.com/FreeRADIUS/freeradius-server/blob/master/raddb/huntgroups]]
 
 Old-style (<= 1.x.x) configuration files
 --------------------------------
 
-* [[clients|https://github.com/alandekok/freeradius-server/blob/v1.1.x/raddb/clients]]
-* [[naslist|https://github.com/alandekok/freeradius-server/blob/v1.1.x/raddb/naslist]]
-* [[naspasswd|https://github.com/alandekok/freeradius-server/blob/v1.1.x/raddb/naspasswd]]
+* [[clients|https://github.com/FreeRADIUS/freeradius-server/blob/v1.1.x/raddb/clients]]
+* [[naslist|https://github.com/FreeRADIUS/freeradius-server/blob/v1.1.x/raddb/naslist]]
+* [[naspasswd|https://github.com/FreeRADIUS/freeradius-server/blob/v1.1.x/raddb/naspasswd]]
