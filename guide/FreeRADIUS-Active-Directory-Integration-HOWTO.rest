@@ -196,7 +196,6 @@ __________
 When called by *radiusd* (thus directly setting the challenge value) the **ntlm_auth** program needs permission to access winbindd's ``winbindd_privileged`` directory (somewhere under ``/var``). Read access will usually be sufficient.
 
 The ``radiusd.conf`` file sets the uid and gid your *radiusd* process will run as (by the *user* and *group* directives, respectively). The *ntlm_auth* process will have the same identity. If your filesystem containing the *winbindd_privileged* directory supports POSIX ACLs, you can safely grant *ntlm_auth* the necessary permissions, in case your disribution's default setting were insufficient. If *radiusd* runs as the user *radiusd* for example, then you should use setfacl the following way
-
 ::
   setfacl -m u:radiusd:rx winbindd_privileged
 
