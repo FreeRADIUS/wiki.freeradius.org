@@ -49,7 +49,7 @@ Also please report any bugs here:
 ### Pages to convert to RST
 * http://wiki.freeradius.org/Modules2 - JC 31/05/11
 * http://wiki.freeradius.org/Operators - ACB 01/06/11
-* http://wiki.freeradius.org/FreeRADIUS Active Directory Integration HOWTO
+* http://wiki.freeradius.org/FreeRADIUS Active Directory Integration HOWTO - ACB 20/01/13
 
 ## Todo
 * Enable renaming wiki pages - JC
