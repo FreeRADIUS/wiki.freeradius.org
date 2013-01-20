@@ -1,265 +1,251 @@
-__NOTOC__
-
 Updated tutorial for freeradius 2.x is at: http://deployingradius.com/documents/configuration/active_directory.html
 
 This article was originally written by Charles Schwartz, Network Security Engineer.
 
-==Introduction==
+Introduction
+------------
 
-This document describes how to set up [[FreeRADIUS]] server in order to authenticate Windows XP network users transparently against Active Directory.
+This document describes how to set up FreeRADIUS server in order to authenticate Windows XP network users transparently against Active Directory.
 
-It is a step by step 'quick & dirty' guide to configure FreeRADIUS server, network [[Access Point]]s and WindowsXP [[supplicant]]s.
+It is a step by step 'quick & dirty' guide to configure FreeRADIUS server, network Access Points and WindowsXP supplicants.
 
-==Principles==
+Principles
+==========
 
-[[FreeRADIUS]] offers authentication via port based access control. A user can connect to the network only if its credentials have been validated by the authentication server. User credentials are verified by using special authentication protocols which belong to the 802.1X standard. 
+FreeRADIUS offers authentication via port based access control. A user can connect to the network only if its credentials have been validated by the authentication server. User credentials are verified by using special authentication protocols which belong to the 802.1X standard. 
 
 [[10000000000001E30000017DC650BE65.png]]
 
-Refer to the graphic. Network access is only granted to the workstation if the user credentials have been authenticated by the [[FreeRADIUS]] server. Otherwise the switch port will be down for any network traffic. 
+Refer to the graphic. Network access is only granted to the workstation if the user credentials have been authenticated by the FreeRADIUS server. Otherwise the switch port will be down for any network traffic. 
 The RADIUS server is allowed to contact the domain controller for user authentication. 
 Although the switch port is down, the workstation can communicate with the RADIUS server via an authentication protocol.
 The RADIUS server is able to check on the domain controller if the user exists and if its password is correct. If this is the case, the RADIUS server tells the switch to open the port and the user will get access to the network.
 
-==Prerequisites==
-
+Prerequisites
+=============
 
 The following components are required to install the access control solution:
 
-* A Linux server
-* FREERADIUS 1.0.x
+* A Linux/Unix server (only Linux is covered)
+* FreeRADIUS 3.0.x
 * Samba 3.0.x
 * Openssl
 * Cisco Catalyst Switch
-* Windows XP clients (Win2k is not supported!)
+* Windows >= Win2K SP4 XP
 
-The Linux distribution used is this context was Fedora Core 3.
 
-Updated tutorial for freeradius 2.x is at:
+Set up the Linux server
+=======================
 
-http://deployingradius.com/documents/configuration/active_directory.html
-
-==Set up the Linux server==
-
-Linux must be configured in order to belong to a Windows domain.
+Linux must be configured to join a Windows domain.
 This is done by using the Samba file server which offers several interesting tools.
 The goal is not to create a Samba file server but only to use some tools which come with this server.
 
 Samba server contains among others the following components:
-
 * Winbind, a daemon which permits connectivity to Windows –NT environment.
+* ntlm_auth, a tool which uses winbind for evaluating NTLM (NT Lan Manager) requests. This tool allows verifying user credentials on the domain controller and returns either a success or an error message. 
 
-* Ntlm_auth, a tool which uses winbind for evaluating NTLM (NT Lan Manager) requests. This tool allows verifying user credentials on the domain controller and returns either a success or an error message. 
+Please have a look at your Linux box and check if Samba is already installed
+::
+  rpm –qa | grep samba 
 
-Please have a look at your Linux box and check if Samba is already installed.
-
- [root@radiussrv1]# rpm –qa | grep samba 
-
-Find the file smb.conf and open it with your preferred editor.
+Find the file ``smb.conf`` and open it with your preferred editor.
 
 The file must contain the following lines:
 
 In the [global] section
-
-<pre>
-# workgroup = NT-Domain-Name or Workgroup-Name
-  workgroup = XYZDOM  //the name of your domain
-
-# Security mode. Most people will want user level
-# security. See security_level.txt for details.
-  security = ads
-
-
-#============
-======== Share Definitions ======
-============
-===
-   idmap uid = 16777216-33554431
-   idmap gid = 16777216-33554431
-   template shell = /bin/bash
+::
+  # workgroup = NT-Domain-Name or Workgroup-Name
+    workgroup = XYZDOM  //the name of your domain
+  
+  # Security mode. Most people will want user level
+  # security. See security_level.txt for details.
+    security = ads
+  
+  
+  ======== Share Definitions ========
+  
+   ...
    winbind use default domain = no
    password server = XYZSRV.XYZ-COMPANY.COM //your AD-server
    realm = XYZ-COMPANY.COM	//your realm
 
+Verify the following lines in the ``[homes]`` section
+::
+  comment = Home Directories
+  browseable = no
+  writable = yes
 
-Verify the following lines in the [homes] section
-   comment = Home Directories
-   browseable = no
-   writable = yes
-</pre>
-
-
-Next, find the file krb5.conf.
-Normally it should be found in /etc/krb5.conf.
+Next, find the file ``krb5.conf``.
+Normally it should be found in ``/etc/krb5.conf``.
 
 Edit this file with the following information: (Watch out for case sensitivity)
+::
+  [logging]
+   default = FILE:/var/log/krb5libs.log
+   kdc = FILE:/var/log/krb5kdc.log
+   admin_server = FILE:/var/log/kadmind.log
+  
+  [libdefaults]
+   default_realm = EXAMPLE.COM
+   dns_lookup_realm = false
+   dns_lookup_kdc = false
+  
+  [realms]
+   EXAMPLE.COM = {
+    kdc = kerberos.example.com:88
+    admin_server = kerberos.example.com:749
+    default_domain = example.com
+   }
+  
+   XYZ-COMPANY.COM = {
+    kdc = XYZSRV.XYZ-COMPANY.COM
+   }
+  
+  [domain_realm]
+   .example.com = EXAMPLE.COM
+   example.com = EXAMPLE.COM
+  
+  [kdc]
+    profile = /var/kerberos/krb5kdc/kdc.conf
+  
+  [appdefaults]
+   pam = {
+    debug = false
+    ticket_lifetime = 36000
+    renew_lifetime = 36000
+    forwardable = true
+    krb4_convert = false
+   }
 
-<pre>
-[logging]
- default = FILE:/var/log/krb5libs.log
- kdc = FILE:/var/log/krb5kdc.log
- admin_server = FILE:/var/log/kadmind.log
+Edit the file ``/etc/nsswitch.conf`` and add *winbind* at the end of each line shown below
+::
+  passwd:     files winbind
+  shadow:     files winbind
+  group:      files winbind
+  
+  protocols:  files winbind
+  
+  services:   files winbind
+  
+  netgroup:   files winbind
+  
+  automount:  files winbind
 
-[libdefaults]
- default_realm = EXAMPLE.COM
- dns_lookup_realm = false
- dns_lookup_kdc = false
-
-[realms]
- EXAMPLE.COM = {
-  kdc = kerberos.example.com:88
-  admin_server = kerberos.example.com:749
-  default_domain = example.com
- }
-
- XYZ-COMPANY.COM = {
-  kdc = XYZSRV.XYZ-COMPANY.COM
- }
-
-[domain_realm]
- .example.com = EXAMPLE.COM
- example.com = EXAMPLE.COM
-
-[kdc]
- profile = /var/kerberos/krb5kdc/kdc.conf
-
-[appdefaults]
- pam = {
-   debug = false
-   ticket_lifetime = 36000
-   renew_lifetime = 36000
-   forwardable = true
-   krb4_convert = false
- }
-</pre>
-
-Edit the file /etc/nsswitch.conf and add ''winbind'' at the end of each line shown below:
-<pre>
-passwd:     files winbind
-shadow:     files winbind
-group:      files winbind
-
-protocols:  files winbind
-
-services:   files winbind
-
-netgroup:   files winbind
-
-automount:  files winbind
-</pre>
 
 Restart the machine.
 
-Verify if the Samba service is running by typing:
- ps –ef | grep nmbd
- ps –ef | grep smbd
+Verify if the Samba service is running by typing
+::
+  ps –ef | grep nmbd
+  ps –ef | grep smbd
 
 Execute the following command line (you must be connected as root)
+::
+  net join –U Administrator
 
- net join –U Administrator
+*Administrator* is the name of the domain controller admin.  Enter your password when prompted.  If everything works fine, the Linux server has been registered to the Windows domain.
 
-''Administrator'' is the name of the domain controller admin.  Enter your password when prompted.  If everything works fine, the Linux server has been registered to the Windows domain.
+Verify now if the winbindd daemon is running
+::
+  ps –ef | grep winbindd
 
-Verify now if the winbindd daemon is running:
- ~#ps –ef | grep winbindd
+Try next if you can authenticate a user from the domain
+::
+  wbinfo –a user%password
 
-Try next if you can authenticate a user from the domain:
- ~#wbinfo –a user%password
+The output should be something like the following
+::
+  wbinfo –a example_user%mypassword
+  plaintext password authentication failed
+  error code was NT_STATUS_NO_SUCH_USER (0xc0000064)
+  error message was: No such user
+  Could not authenticate user example_user%mypassword with plaintext password
 
-The output should be something like the following:
-
-<pre>
-[root@radiussrv1]# wbinfo –a CHSchwartz%mypassword
-plaintext password authentication failed
-error code was NT_STATUS_NO_SUCH_USER (0xc0000064)
-error message was: No such user
-Could not authenticate user CHSchwartz%mypassword with plaintext password
-</pre>
-
-The error is absolutely normal in this case because there are no cleartext user credentials on the domain Controller (Active Directory) for this user.
-
-challenge/response password authentication succeeded
+The error is absolutely normal in this case because there are no cleartext user credentials on the domain Controller (Active Directory) for this user
+::
+  challenge/response password authentication succeeded
 
 As cleartext authentication fails, wbinfo tries a challenge/response.
 If a challenge/response succeeds, the Linux server is configured correctly to authenticate users against Active Directory, however despite of the succes of this test, you may need to set some extra permissions on the winbindd_privileged directory (see below at WARNING)!
 
 Let’s try to authenticate with NTLM, which is necessary for using FREERADIUS with Active Directory.
 
-Type the following line:
- [root@radiussrv1]# ntlm_auth –-request-nt-key –-domain=<your domain> –-username= <your username>
+Type the following line
+::
+  ntlm_auth –-request-nt-key –-domain=<your domain> –-username=<your username>
 
-For me, the command would look like this:
- [root@radiussrv1]# ntlm_auth –-request-nt-key –-domain=XYZDOM –-username= CHSchwartz
+For example
+::
+  ntlm_auth –-request-nt-key –-domain=XYZDOM –-username=example_user
 
 You will be prompted for your password.
 
 The command line returns
+::
+  NT_STATUS_OK : Success (0x0)
 
- NT_STATUS_OK : Success (0x0)
- [root@radiussrv1]#
+If the username and password are the same as those stored in Active Directory.
 
-if the username and password are the same as those stored in Active Directory. Note that this mechanism is based on a challenge/response of the nt-key, a character string that has been encrypted with information taken from the username and password. 
+Note that this mechanism is based on a challenge/response of the nt-key, a character string that has been encrypted with information taken from the username and password. 
 
 During this operation, no exchange of user information takes place. Everything is based upon a comparison of encrypted strings.
 
-'''WARNING!!!'''
+WARNING!!!
+__________
 
-When called by ''radiusd'' - thus directly setting the challenge value - the ''ntlm_auth'' program needs permission to access winbindd's ''winbindd_privileged'' directory (somewhere under ''/var''). According to my experiences read access will suffice. 
+When called by *radiusd* (thus directly setting the challenge value) the **ntlm_auth** program needs permission to access winbindd's ``winbindd_privileged`` directory (somewhere under ``/var``). Read access will usually be sufficient.
 
-The ''radiusd.conf'' file sets the uid and gid your ''radiusd'' process will run as (by the ''user'' and ''group'' directives, respectively). The ''ntlm_auth'' process will have the same identity. If your filesystem containing the ''winbindd_privileged'' directory supports POSIX ACLs, you can safely grant ''ntlm_auth'' the necessary permissions, in case your disribution's default setting were insufficient. If ''radiusd'' runs as the user ''radiusd'' for example, then you should use setfacl the following way:
+The ``radiusd.conf`` file sets the uid and gid your *radiusd* process will run as (by the *user* and *group* directives, respectively). The *ntlm_auth* process will have the same identity. If your filesystem containing the *winbindd_privileged* directory supports POSIX ACLs, you can safely grant *ntlm_auth* the necessary permissions, in case your disribution's default setting were insufficient. If *radiusd* runs as the user *radiusd* for example, then you should use setfacl the following way
 
- setfacl -m u:radiusd:rx winbindd_privileged
+::
+  setfacl -m u:radiusd:rx winbindd_privileged
 
-Or something like that. See http://www.suse.de/~agruen/acl/linux-acls/online/ or ''man setfacl'' about POSIX ACLs!
+Or something similar. See [[http://www.suse.de/~agruen/acl/linux-acls/online/]] or ``man setfacl`` for more information on POSIX ACLs!
 
-==Installation of FreeRADIUS==
+Installation of FreeRADIUS
+==========================
 
-Download first the latest source of Openssl (0.9.7f was used for my tests).
+Download first the latest source of Openssl (0.9.7f was used for this HOWTO).
 
 Extract the source files from tarball
+::
+  tar –zxvf openssl-0.9.7f.tar
 
- ~# tar –zxvf openssl-0.9.7f.tar
+Install openssl in ``/usr/local/openssl/``
+::
+  ./config --prefix=/usr/local/openssl shared
+  make
+  make install
 
-Install openssl in /usr/local/openssl/
+Download the latest version of FreeRADIUS from [[www.freeradius.org]].
 
- ~# ./config --prefix=/usr/local/openssl shared
- ~# make
- ~# make install
+This document refers to version 3.0.0 of FreeRADIUS.
 
-Download the latest version of FreeRADIUS from www.freeradius.org.
-
-This document refers to version 1.0.3 of FreeRADIUS.
-
-Install FreeRADIUS with the following option: 
-
- ~# ./configure –sysconfdir=/etc/
- ~# make
- ~# make install
+Install FreeRADIUS with the following option
+::
+  ./configure
+  make
+  make install
 
 In order to get FreeRADIUS working, the following files must be configured:
-
 * clients.conf
 * radiusd.conf
 * eap.conf
 * users
 
-===Configuration of clients.conf===
+Configuration of clients.conf
+=============================
 
-Open the file clients.conf with your preferred editor.
-It is located in /etc/raddb/.
+Please refer to the documentation contained within ``clients.conf`` to authorize additional NAS to connect to the server.
 
-Now we add a first Cisco switch which will be charged for access control.
-
-Add:
-<pre>
-# admswi3 cisco 3750
-
-client 192.168.2.44 {
-        secret          	= 2!34r&dp0t
-        shortname		= 192.168.2.44
-        nastype         	= cisco
-}
-</pre>
+Your entry should look something like this example
+::
+  client 192.168.2.44 {
+          secret          	= 2!34r&dp0t
+          shortname		= 192.168.2.44
+          nastype         	= cisco
+  }
 
 The secret is a common password between the switch and RADIUS server. It is necessary to prevent the installation of wild access points. (Remember to set up the secret as well on your switch!)
 
@@ -267,16 +253,12 @@ Shortname is the IP address of your switch. (Watch out to use the correct one an
 
 Nastype indicates the type of access point. In our case it is Cisco hardware.
 
-Specify now the network(s) from which the access control is activated.
-
-<pre>
-client 192.168.2.0/24 {
-        secret          = 2!34r&dp0t
-        shortname      	= network1
-}
-</pre>
-
-Any computers that have an IP address outside this range will not be authorised for authentication. (Again, please use your networks addresses!)
+If you have many NAS, it may be easier to specify a range and use the same shared secret for them all
+::
+  client 192.168.2.0/24 {
+          secret          = 2!34r&dp0t
+          shortname       = network1
+  }
 
 ===Configuration of radiusd.conf===
 
