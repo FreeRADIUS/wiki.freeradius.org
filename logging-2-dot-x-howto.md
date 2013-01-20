@@ -1,5 +1,18 @@
 The "log" section of the radiusd.conf file is where primary logging for the FreeRADIUS server is configured.
 
+    log {
+    	destination = files
+    	file = ${logdir}/radius.log
+    #	requests = ${logdir}/radiusd-%{%{Virtual-Server}:-DEFAULT}-%Y%m%d.log
+    	syslog_facility = daemon
+    	stripped_names = no
+    	auth = no
+    	auth_badpass = no
+    	auth_goodpass = no
+    #	msg_goodpass = ""
+    #	msg_badpass = ""
+    }
+
 
 Log Destination
 ---------------
@@ -98,7 +111,7 @@ Log additional text at the end of the "Login OK" messages.  For these to work, t
 
 The strings below are dynamically expanded, which means that you can put anything you want in them.  However, note that this expansion can be slow, and can negatively impact server performance.
 
-**Default:**
+**Default (disabled):**
 
     msg_goodpass = ""
     msg_badpass = ""
