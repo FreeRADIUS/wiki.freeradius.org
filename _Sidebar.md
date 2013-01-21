@@ -1,11 +1,12 @@
 ## Quick Links
-* [[Contributing with GitHub|contributing/GitHub]]
+* [[Wiki Home|Home]]
+* [[Concepts for beginners|guide/Concepts]]
+* [[Basic Configuration|guide/Basic configuration Howto]]
 * [[Pre-built packages|building/Packages]]
 * [[Installing from source code|building/Build]]
-* [[Basic Configuration|guide/Basic configuration Howto]]
 * [[Troubleshooting|guide/Troubleshooting]]
-* [[Wiki Home|Home]]
-* [[Main web site|http://freeradius.org]]
+* [[Contributing with GitHub|contributing/GitHub]]
 * [[Browse the Source|https://github.com/FreeRADIUS/freeradius-server]]
+* [[Main web site|http://freeradius.org]]
 
 Always use ``radiusd -X`` when debugging!
