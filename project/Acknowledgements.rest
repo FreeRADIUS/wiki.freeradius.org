@@ -7,8 +7,9 @@ We would like to publicly thank the following major contributors:
 +==============================+===========================================================+================+
 | Adrian Pavlykevych           | Wrote the original pre v3 rlm_ldap module.                | no             |
 +------------------------------+-----------------------------------------------------------+----------------+
-| Arran Cudbard-Bell           | - Wrote rlm_rest.                                         | yes            |
-| http://www.rm-rfi.com        | - Rewrote v3 rlm_krb5.                                    |                |
+| Arran Cudbard-Bell           | - FreeRADIUS maintainer.                                  | yes            |
+| http://www.rm-rfi.com        | - Wrote rlm_rest.                                         |                |
+| http://github.com/arr2036    | - Rewrote v3 rlm_krb5.                                    |                |
 |                              | - Rewrote v3 rlm_sql acct.                                |                |
 |                              | - Added the neat parts of v3 rlm_cache.                   |                |
 |                              | - Added v3 rlm_ldap update support.                       |                |
@@ -21,12 +22,12 @@ We would like to publicly thank the following major contributors:
 | Alan DeKok                   | - FreeRADIUS Project Lead.                                | yes            |
 | http://www.freeradius.org    | - Registered and maintains freeradius.org.                |                |
 | http://www.networkradius.com | - Wrote the module code.                                  |                |
-|                              | - Made the server threaded.                               |                |
+| http://github.com/alandekok  | - Made the server threaded.                               |                |
 |                              | - Rewrote and refactored the majority of the server core. |                |
 |                              | - Wrote and contributed to many modules.                  |                |
 |                              | - Maintains the build system.                             |                |
 |                              | - Is the CEO of Network RADIUS                            |                |
-|                              |   (commercial side of the project.)                       |                |
+|                              |   (a commercial entity representing the project).         |                |
 +------------------------------+-----------------------------------------------------------+----------------+
 | Brandon Lee Poyner           | Netscape-MTA-MD5 authentication module.                   | no             |
 +------------------------------+-----------------------------------------------------------+----------------+
@@ -49,6 +50,7 @@ We would like to publicly thank the following major contributors:
 |                              | code.                                                     |                |
 +------------------------------+-----------------------------------------------------------+----------------+ 
 | Matthew Newton               | Many patches and bug fixes.                               | yes            |
+| http://github.com/mcnewton   |                                                           |                |
 +------------------------------+-----------------------------------------------------------+----------------+
 | Miquel van                   | Wrote the original Cistron server, and started the        | no             |
 | Smoorenburg                  | FreeRADIUS source tree.                                   |                |
@@ -63,8 +65,9 @@ We would like to publicly thank the following major contributors:
 | Peter Nixon                  | Maintains rlm_sqlippool and hacks on other SQL related    | yes            |
 | http://www.peternixon.net    | code, maintains openSUSE binary packages.                 |                |
 +------------------------------+-----------------------------------------------------------+----------------+
-| Phil Mayers                  | Wrote the SoH code. Added many enhancements to            | yes            |
-|                              | rlm_eap.                                                  |                |
+| Phil Mayers                  | - Wrote the SoH code.                                     | yes            |
+| http://github.com/philmayers | - Added many enhancements to rlm_eap.                     |                |
+|                              | - Started the code documentation effort.                  |                |
 +------------------------------+-----------------------------------------------------------+----------------+
 
 The following individuals also get honourable mentions for contributing significantly to the wiki or mailing list:
@@ -81,5 +84,5 @@ The following individuals also get honourable mentions for contributing signific
 +------------------------------+-----------------------------------------------------------+----------------+
 | Fajar A Nugraha              | For services to FreeRADIUS users.                         | yes            |
 +------------------------------+-----------------------------------------------------------+----------------+
-| Kevin Bonner                 | Contributed significantly to the mailing list and wiki.   | no             |
+| Kevin Bonner                 | For services to FreeRADIUS users, and the wiki.           | no             |
 +------------------------------+-----------------------------------------------------------+----------------+
