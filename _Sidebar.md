@@ -6,6 +6,6 @@
 * [[Troubleshooting|guide/Troubleshooting]]
 * [[Wiki Home|Home]]
 * [[Main web site|http://freeradius.org]]
-* [[Browse the Source|https://github.com/alandekok/freeradius-server]]
+* [[Browse the Source|https://github.com/FreeRADIUS/freeradius-server]]
 
 Always use ``radiusd -X`` when debugging!
