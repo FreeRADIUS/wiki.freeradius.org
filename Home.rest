@@ -53,6 +53,7 @@ In addition, FreeRADIUS supports [[virtual servers|config/virtual server]] which
 
 Documentation
 -------------
+**Beginners are strongly recommended to read the short [[concepts|guide/Concepts]] page, which provides a very light overview of how the server works.**
 
 This wiki collects a large amount of documentation relating to [[glossary|pages/glossary/]] together in one place. Pages of particular interest to newcomers will be the [[FAQ|guide/FAQ]] and [[HOWTO|guide/HOWTO]] sections, although the [[Traditional FreeRADIUS docs page|http://www.freeradius.org/doc/]] includes "man" pages, and other documentation.
 
@@ -70,8 +71,6 @@ The following is an overview of the types of information available:
 * [[FAQ|guide/FAQ]]
 * [[HOWTO|guide/HOWTO]] example setups, vendor docs, and cookbooks.
 * [[glossary|pages/glossary/]]
-
-For beginners, there is also a short [[concepts|guide/Concepts]] page, which can help clarify how the server works.
 
 Contributing
 ------------
