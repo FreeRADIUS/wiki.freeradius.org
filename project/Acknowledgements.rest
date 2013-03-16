@@ -9,8 +9,9 @@ We would like to publicly thank the following major contributors:
 +------------------------------+-----------------------------------------------------------+----------------+
 | Arran Cudbard-Bell           | - FreeRADIUS maintainer.                                  | yes            |
 | http://www.rm-rfi.com        | - Wrote rlm_rest.                                         |                |
-| http://github.com/arr2036    | - Rewrote v3 rlm_krb5.                                    |                |
+| http://github.com/arr2036    | - Wrote rlm_yubikey.                                      |                |
 |                              | - Rewrote v3 rlm_sql acct.                                |                |
+|                              | - Rewrote v3 rlm_krb5.                                    |                |
 |                              | - Added the neat parts of v3 rlm_cache.                   |                |
 |                              | - Added v3 rlm_ldap update support.                       |                |
 |                              | - Maintains the wiki.                                     |                |
