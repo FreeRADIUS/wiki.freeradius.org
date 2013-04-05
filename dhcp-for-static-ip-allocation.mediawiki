@@ -138,11 +138,11 @@ This use mac-address as username.
         }
     }
 
-- Start testing:
+==Start testing==
     /usr/local/sbin/radiusd -X
 
 
-===Troubleshooting===
+==Troubleshooting==
 
 - /usr/local/sbin/radiusd: error while loading shared libraries:
 libfreeradius-radius-2.2.0.so: cannot open shared object file: No such
