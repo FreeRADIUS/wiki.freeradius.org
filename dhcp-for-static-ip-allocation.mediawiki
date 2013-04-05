@@ -101,9 +101,7 @@ This use mac-address as username.
             port = 67
             interface = eth1
             broadcast = yes
-        }
-    
-        dhcp DHCP-Discover {
+        }        dhcp DHCP-Discover {
             update reply {
                 DHCP-Message-Type = DHCP-Offer
             }
