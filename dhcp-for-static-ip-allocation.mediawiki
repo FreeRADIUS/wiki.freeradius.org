@@ -12,8 +12,7 @@ network adapter.
 
 ==Before You Start==
 
-This example assumes that:
-        The network adapter where is connected freeradius have the following settings:
+This example assumes that the network adapter where is connected freeradius have the following settings:
 
     auto eth1
     iface eth1 inet static
