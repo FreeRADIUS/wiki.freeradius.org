@@ -63,31 +63,27 @@ libmysqld-dev libmysqld-pic
 - Modify sql.conf
 configure login/password for access to mysql database and leave dialup.conf included
 
+===Prepare mysql database===
 - Create database "radius"
     mysql -u user -p pass (login in mysql console)
         create database radius
 
-===Prepare mysql database===
 - Load schema for mysql
     mysql -u user -p pass radius < schema.sql
 
 - Add this in radius database:
     mysql -u user -p pass (login in mysql console)
         use radius;
-        INSERT INTO `radcheck` (`username`, `attribute`, `op`, `value`) VALUES ('00:11:22:00:33:44', 'Cleartext-Password', ':=', '');
-        INSERT INTO `radreply` (`username`, `attribute`, `op`, `value`) VALUES ('00:11:22:00:33:44', 'DHCP-Your-IP-Address', '=',
-'192.168.10.10');
+        INSERT INTO `radcheck` (`username`, `attribute`, `op`, `value`) VALUES ('00:11:22:00:33:44',  Cleartext-Password', ':=', '');
+        INSERT INTO `radreply` (`username`, `attribute`, `op`, `value`) VALUES ('00:11:22:00:33:44', 'DHCP-Your-IP-Address', '=', '192.168.10.10');
 
 optionally included as example:
 
         INSERT INTO `radreply` (`username`, `attribute`, `op`, `value`) VALUES ('00:11:22:00:33:44', 'DHCP-Subnet-Mask', '=',
 '255.255.255.0');
-        INSERT INTO `radreply` (`username`, `attribute`, `op`, `value`) VALUES ('00:11:22:00:33:44', 'DHCP-Router-Address', '=',
-'192.168.10.1');
-        INSERT INTO `radreply` (`username`, `attribute`, `op`, `value`) VALUES ('00:11:22:00:33:44', 'DHCP-Bootp-Extensions-Path', '=',
-'modem.acf');
-        INSERT INTO `radreply` (`username`, `attribute`, `op`, `value`) VALUES ('00:11:22:00:33:44', 'DHCP-TFTP-Server-Name', '=',
-'172.31.1.1');
+        INSERT INTO `radreply` (`username`, `attribute`, `op`, `value`) VALUES ('00:11:22:00:33:44', 'DHCP-Router-Address', '=', '192.168.10.1');
+        INSERT INTO `radreply` (`username`, `attribute`, `op`, `value`) VALUES ('00:11:22:00:33:44', 'DHCP-Bootp-Extensions-Path', '=', 'modem.acf');
+        INSERT INTO `radreply` (`username`, `attribute`, `op`, `value`) VALUES ('00:11:22:00:33:44', 'DHCP-TFTP-Server-Name', '=', '172.31.1.1');
 
 - Modify /usr/local/etc/raddb/sql/dialup.conf, replace:
     sql_user_name = "%{User-Name}"
