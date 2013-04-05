@@ -101,43 +101,42 @@ This use mac-address as username.
             port = 67
             interface = eth1
             broadcast = yes
-    }
-    
-    dhcp DHCP-Discover {
-        update reply {
-            DHCP-Message-Type = DHCP-Offer
         }
     
-        update reply {
-            DHCP-Domain-Name-Server = 0.0.0.0
-            DHCP-IP-Address-Lease-Time = 7200
-            DHCP-DHCP-Server-Identifier = 192.168.10.1
+        dhcp DHCP-Discover {
+            update reply {
+                DHCP-Message-Type = DHCP-Offer
+            }
+    
+            update reply {
+                DHCP-Domain-Name-Server = 0.0.0.0
+                DHCP-IP-Address-Lease-Time = 7200
+                DHCP-DHCP-Server-Identifier = 192.168.10.1
+            }
+    
+            sql.authorize
+            ok
         }
     
-        sql.authorize
-        ok
-    }
+        dhcp DHCP-Request {
+            update reply {
+                DHCP-Message-Type = DHCP-Ack
+            }
     
-    dhcp DHCP-Request {
-        update reply {
-            DHCP-Message-Type = DHCP-Ack
+            update reply {
+                DHCP-Domain-Name-Server = 0.0.0.0
+                DHCP-IP-Address-Lease-Time = 7200
+                DHCP-DHCP-Server-Identifier = 192.168.10.1
+            }
+    
+            sql.authorize
+            sql.post-auth
+            ok
         }
     
-        update reply {
-            DHCP-Domain-Name-Server = 0.0.0.0
-            DHCP-IP-Address-Lease-Time = 7200
-            DHCP-DHCP-Server-Identifier = 192.168.10.1
+        dhcp {
+            reject
         }
-    
-        sql.authorize
-        sql.post-auth
-        ok
-    }
-    
-    dhcp {
-        reject
-    }
-    
     }
 
 - Start testing:
