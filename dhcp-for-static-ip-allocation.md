@@ -1,4 +1,4 @@
-# Example based on Debian.
+Example based on Debian.
 
 Freeradius as DHCP server for static ip allocation from MySQL, with
 use of DHCP options.
