@@ -143,15 +143,12 @@ This use mac-address as username.
 
 ==Troubleshooting==
 
--''/usr/local/sbin/radiusd: error while loading shared libraries:
-libfreeradius-radius-2.2.0.so: cannot open shared object file: No such
-file or directory''
+-''/usr/local/sbin/radiusd: error while loading shared libraries: libfreeradius-radius-2.2.0.so: cannot open shared object file: No such file or directory''
 
 this solves the problem:
     /sbin/ldconfig -v
 
--''Could not link driver rlm_sql_mysql: rlm_sql_mysql.so: cannot open
-shared object file: No such file or directory''
+-''Could not link driver rlm_sql_mysql: rlm_sql_mysql.so: cannot open shared object file: No such file or directory''
     Missing mysql devel extra packages. Install before compile!
 
 '''TIP:''' You can use dhcpdump to see DHCP request and responses in your server.
