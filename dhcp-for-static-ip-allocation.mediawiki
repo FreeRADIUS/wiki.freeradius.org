@@ -26,9 +26,10 @@ Also:
     Client mac-address is 00:11:22:00:33:44
 
 
-Let's start:
+==Let's start==
 
-From sources:
+===Install from sources===
+
 - Download sources from Freeradius:
         wget ftp://ftp.freeradius.org/pub/freeradius/freeradius-server-2.2.0.tar.gz
 
