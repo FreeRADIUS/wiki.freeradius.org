@@ -3,7 +3,7 @@ use of DHCP options.
 Might work for provision of cable modems.
 Example based on Debian.
 
-One important thing! (specially Ubuntu users):  (*)
+One important thing! (specially Ubuntu users):
 DHCP functionality will not work when installed from PPA, or at least
 the package version 2.2.0 + dfsg-ppa10 not work.
 Reason: I dont know. I installed and configured without errors, seems
@@ -40,7 +40,7 @@ Also:
 - Configure it:
     ./configure --with-dhcp
 
-- Add dictionary:           (**)
+- Add dictionary:
 edit share/dictionary (in sources files) and add a line containing
     "$INCLUDE dictionary.dhcp" whithout quotes.
 
@@ -155,17 +155,4 @@ this solves the problem:
 shared object file: No such file or directory
     Missing mysql devel extra packages. Install before compile!
 
-
-clarifications:
-        (*) - I installed PPA version in 3 different servers with no luck.
-Same configuration, in sources version, works fine. Someone can
-confirm this?
-        (**) - In http://freeradius.org/features/dhcp.html says "un-comment",
-but this line not exist.
-        (***) -  installed (mysql-devel libmysqld-dev libmysqlclient-dev
-libmysqld-dev libmysqld-pic) packages, surely one or more of them are
-not necessary. If anyone knows which of them are the strictly
-necessary, tell me, so I remove the rest.
-
-
-TIP: You can use dhcpdump to see DHCP request and responses in your server.
+'''TIP:''' You can use dhcpdump to see DHCP request and responses in your server.
