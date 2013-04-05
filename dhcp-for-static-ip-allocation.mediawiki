@@ -31,48 +31,48 @@ Also:
 ===Install from sources===
 
 - Download sources from Freeradius:
-        wget ftp://ftp.freeradius.org/pub/freeradius/freeradius-server-2.2.0.tar.gz
+    wget ftp://ftp.freeradius.org/pub/freeradius/freeradius-server-2.2.0.tar.gz
 
 - Unpack sources, then enter in new directory:
-        tar -xvzf freeradius-server-2.2.0.tar.gz
-        cd freeradius-server-2.2.0
+    tar -xvzf freeradius-server-2.2.0.tar.gz
+    cd freeradius-server-2.2.0
 
 - Configure it:
-        ./configure --with-dhcp
+    ./configure --with-dhcp
 
 - Add dictionary:           (**)
-        edit share/dictionary (in sources files) and add a line containing
+    edit share/dictionary (in sources files) and add a line containing
 "$INCLUDE dictionary.dhcp" whithout quotes.
 
 - If mysql is not installed, install it:
-        apt-get install mysql-server
+    apt-get install mysql-server
 
 - Also, with mysql need some extra packages:    (***)
-        apt-get install mysql-devel libmysqld-dev libmysqlclient-dev
+    apt-get install mysql-devel libmysqld-dev libmysqlclient-dev
 libmysqld-dev libmysqld-pic
 
 - Compile:
-        make
-        make install (do as root)
+    make
+    make install (do as root)
 
 - Modify radiusd.conf (the configuration files is located in
 /usr/local/etc/raddb)
-        uncomment "$INCLUDE sql.conf"
-        set "user = root" and "group = root"
+    uncomment "$INCLUDE sql.conf"
+    set "user = root" and "group = root"
 
 - Modify sql.conf
-        configure login/password for access to mysql database
-        leave dialup.conf included
+    configure login/password for access to mysql database
+    leave dialup.conf included
 
 - Create database "radius"
-        mysql -u user -p pass (login in mysql console)
+    mysql -u user -p pass (login in mysql console)
                 create database radius
 
 - Load schema for mysql
-        mysql -u user -p pass radius < schema.sql
+    mysql -u user -p pass radius < schema.sql
 
 - Add this in radius database:
-        mysql -u user -p pass (login in mysql console)
+    mysql -u user -p pass (login in mysql console)
                 use radius;
                 INSERT INTO `radcheck` (`username`, `attribute`, `op`, `value`)
 VALUES ('00:11:22:00:33:44', 'Cleartext-Password', ':=', '');
