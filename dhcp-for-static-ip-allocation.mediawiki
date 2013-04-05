@@ -53,7 +53,7 @@ libmysqld-dev libmysqld-pic
 
 - Compile:
     make
-    make install (do as root)
+    make install _(do as root)_
 
 - Modify radiusd.conf (the configuration files is located in
 /usr/local/etc/raddb)
@@ -91,8 +91,7 @@ for...
 This use mac-address as username.
 
 - create a /usr/local/etc/raddb/sites-enabled/dhcp_static and add this:
-(you can find the original example in
-/usr/local/etc/raddb/sites-available/dhcp)
+(you can find the original example in /usr/local/etc/raddb/sites-available/dhcp)
     server dhcp {
         listen {
             type = dhcp
@@ -144,15 +143,15 @@ This use mac-address as username.
 
 ==Troubleshooting==
 
-- /usr/local/sbin/radiusd: error while loading shared libraries:
+- _/usr/local/sbin/radiusd: error while loading shared libraries:
 libfreeradius-radius-2.2.0.so: cannot open shared object file: No such
-file or directory
+file or directory_
 
 this solves the problem:
     /sbin/ldconfig -v
 
-- Could not link driver rlm_sql_mysql: rlm_sql_mysql.so: cannot open
-shared object file: No such file or directory
+- _Could not link driver rlm_sql_mysql: rlm_sql_mysql.so: cannot open
+shared object file: No such file or directory_
     Missing mysql devel extra packages. Install before compile!
 
 '''TIP:''' You can use dhcpdump to see DHCP request and responses in your server.
