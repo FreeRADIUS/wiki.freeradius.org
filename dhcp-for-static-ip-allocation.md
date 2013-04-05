@@ -13,14 +13,14 @@ network adapter.
 This example assumes that:
         The network adapter where is connected freeradius have the following settings:
 
-auto eth1
-iface eth1 inet static
-address 192.168.10.1
-netmask 255.255.255.0
-network 192.168.10.0
-broadcast 192.168.10.255
+    auto eth1
+    iface eth1 inet static
+    address 192.168.10.1
+    netmask 255.255.255.0
+    network 192.168.10.0
+    broadcast 192.168.10.255
 
-Client mac-address is 00:11:22:00:33:44
+    Client mac-address is 00:11:22:00:33:44
 
 
 Let's start:
