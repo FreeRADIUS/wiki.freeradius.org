@@ -41,13 +41,13 @@ Also:
     ./configure --with-dhcp
 
 - Add dictionary:           (**)
-    edit share/dictionary (in sources files) and add a line containing
-"$INCLUDE dictionary.dhcp" whithout quotes.
+edit share/dictionary (in sources files) and add a line containing
+    "$INCLUDE dictionary.dhcp" whithout quotes.
 
 - If mysql is not installed, install it:
     apt-get install mysql-server
 
-- Also, with mysql need some extra packages:    (***)
+- Also, with mysql need some extra packages:
     apt-get install mysql-devel libmysqld-dev libmysqlclient-dev
 libmysqld-dev libmysqld-pic
 
@@ -61,12 +61,12 @@ libmysqld-dev libmysqld-pic
     set "user = root" and "group = root"
 
 - Modify sql.conf
-    configure login/password for access to mysql database
-    leave dialup.conf included
+configure login/password for access to mysql database
+leave dialup.conf included
 
 - Create database "radius"
     mysql -u user -p pass (login in mysql console)
-                create database radius
+        create database radius
 
 - Load schema for mysql
     mysql -u user -p pass radius < schema.sql
