@@ -10,6 +10,8 @@ Reason: I dont know. I installed and configured without errors, seems
 to respond correctly OFFER and ACK but this packets never leaves the
 network adapter.
 
+==Before You Start==
+
 This example assumes that:
         The network adapter where is connected freeradius have the following settings:
 
