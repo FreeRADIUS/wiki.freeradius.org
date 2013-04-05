@@ -1,8 +1,7 @@
-Example based on Debian.
-
 Freeradius as DHCP server for static ip allocation from MySQL, with
 use of DHCP options.
 Might work for provision of cable modems.
+Example based on Debian.
 
 One important thing! (specially Ubuntu users):  (*)
 DHCP functionality will not work when installed from PPA, or at least
