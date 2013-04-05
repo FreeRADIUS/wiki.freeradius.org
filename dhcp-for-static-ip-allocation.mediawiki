@@ -79,8 +79,7 @@ configure login/password for access to mysql database and leave dialup.conf incl
 
 optionally included as example:
 
-        INSERT INTO `radreply` (`username`, `attribute`, `op`, `value`) VALUES ('00:11:22:00:33:44', 'DHCP-Subnet-Mask', '=',
-'255.255.255.0');
+        INSERT INTO `radreply` (`username`, `attribute`, `op`, `value`) VALUES ('00:11:22:00:33:44', 'DHCP-Subnet-Mask', '=', '255.255.255.0');
         INSERT INTO `radreply` (`username`, `attribute`, `op`, `value`) VALUES ('00:11:22:00:33:44', 'DHCP-Router-Address', '=', '192.168.10.1');
         INSERT INTO `radreply` (`username`, `attribute`, `op`, `value`) VALUES ('00:11:22:00:33:44', 'DHCP-Bootp-Extensions-Path', '=', 'modem.acf');
         INSERT INTO `radreply` (`username`, `attribute`, `op`, `value`) VALUES ('00:11:22:00:33:44', 'DHCP-TFTP-Server-Name', '=', '172.31.1.1');
@@ -103,42 +102,42 @@ This use mac-address as username.
             interface = eth1
             broadcast = yes
     }
-
+    
     dhcp DHCP-Discover {
         update reply {
             DHCP-Message-Type = DHCP-Offer
         }
-
+    
         update reply {
             DHCP-Domain-Name-Server = 0.0.0.0
             DHCP-IP-Address-Lease-Time = 7200
             DHCP-DHCP-Server-Identifier = 192.168.10.1
         }
-
+    
         sql.authorize
         ok
     }
-
+    
     dhcp DHCP-Request {
         update reply {
             DHCP-Message-Type = DHCP-Ack
         }
-
+    
         update reply {
             DHCP-Domain-Name-Server = 0.0.0.0
             DHCP-IP-Address-Lease-Time = 7200
             DHCP-DHCP-Server-Identifier = 192.168.10.1
         }
-
+    
         sql.authorize
         sql.post-auth
         ok
     }
-
+    
     dhcp {
         reject
     }
-
+    
     }
 
 - Start testing:
