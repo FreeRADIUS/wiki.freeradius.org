@@ -90,8 +90,7 @@ for...
     sql_user_name = "%{DHCP-Client-Hardware-Address}"
 This use mac-address as username.
 
-- create a /usr/local/etc/raddb/sites-enabled/dhcp_static and add this:
-(you can find the original example in /usr/local/etc/raddb/sites-available/dhcp)
+- create a /usr/local/etc/raddb/sites-enabled/dhcp_static and add this (you can find the original example in /usr/local/etc/raddb/sites-available/dhcp):
     server dhcp {
         listen {
             type = dhcp
