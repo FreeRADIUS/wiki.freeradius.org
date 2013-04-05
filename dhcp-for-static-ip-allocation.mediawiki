@@ -93,7 +93,6 @@ This use mac-address as username.
 - create a /usr/local/etc/raddb/sites-enabled/dhcp_static and add this:
 (you can find the original example in
 /usr/local/etc/raddb/sites-available/dhcp)
-
     server dhcp {
         listen {
             type = dhcp
@@ -101,7 +100,9 @@ This use mac-address as username.
             port = 67
             interface = eth1
             broadcast = yes
-        }        dhcp DHCP-Discover {
+        }
+
+    dhcp DHCP-Discover {
             update reply {
                 DHCP-Message-Type = DHCP-Offer
             }
