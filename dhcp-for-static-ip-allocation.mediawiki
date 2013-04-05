@@ -150,8 +150,8 @@ file or directory_
 this solves the problem:
     /sbin/ldconfig -v
 
-- _ Could not link driver rlm_sql_mysql: rlm_sql_mysql.so: cannot open
-shared object file: No such file or directory _
+_Could not link driver rlm_sql_mysql: rlm_sql_mysql.so: cannot open
+shared object file: No such file or directory_
     Missing mysql devel extra packages. Install before compile!
 
 '''TIP:''' You can use dhcpdump to see DHCP request and responses in your server.
