@@ -1,4 +1,4 @@
-=='''Why using Freeradius as a DHCP instead of the traditional ISC DHCP server?'''==
+==='''Why using Freeradius as a DHCP instead of the traditional ISC DHCP server?'''===
 
 -'''Because it has the possibility to manage IP's configuration of each host directly from a DB, while ISC only accepts text archives.'''
 In places with many hosts is more natural to add a couple of registers on a database than writing and maintain text archives. Develop management ISP software it's easier too.
