@@ -29,9 +29,11 @@ FreeRADIUS 3.x.x
         # e.g. "multiotp_prefix = 'otp:'" 
         multiotp_prefix = ''
         multiotp.authorize {
+           # This test is for decimal OTP code only, otherwise you will have to change it
+           # Try for example this simple test: if (!control:Auth-Type) {
             if (!control:Auth-Type && User-Password =~ /^${policy.multiotp_prefix}([0-9]{10})$/) {
                 update control {
-                    Auth-Type := ntlm_auth
+                    Auth-Type := multiotp
                 }
             }
         }
