@@ -8,7 +8,7 @@ Main configuration files
 ---------------------------
 
 * [[radiusd.conf|https://github.com/FreeRADIUS/freeradius-server/blob/master/raddb/radiusd.conf.in]]
-* [[clients.conf|https://github.comFreeRADIUS/freeradius-server/blob/master/raddb/clients.conf]]
+* [[clients.conf|https://github.com/FreeRADIUS/freeradius-server/blob/master/raddb/clients.conf]]
 * [[modules configuration|pages/modules/]]
 * [[sites configuration|config/sites configuration]]
 * [[proxy.conf|https://github.com/FreeRADIUS/freeradius-server/blob/master/raddb/proxy.conf]]
