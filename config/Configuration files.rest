@@ -12,14 +12,14 @@ Main configuration files
 * [[modules configuration|pages/modules/]]
 * [[sites configuration|config/sites configuration]]
 * [[proxy.conf|https://github.com/FreeRADIUS/freeradius-server/blob/master/raddb/proxy.conf]]
-* [[policy.conf|https://github.com/FreeRADIUS/freeradius-server/blob/v2.1.x/raddb/policy.conf]] (now [[policy.d|https://github.com/FreeRADIUS/freeradius-server/blob/master/raddb/policy.d]] in >= 3.0.0)
+* [[policy.conf|https://github.com/FreeRADIUS/freeradius-server/blob/v2.x.x/raddb/policy.conf]] (now [[policy.d|https://github.com/FreeRADIUS/freeradius-server/blob/master/raddb/policy.d]] in >= 3.0.0)
 
 Common module configuration
 -----------------------------------
 
-* [[users|https://github.com/FreeRADIUS/freeradius-server/blob/master/raddb/users]]
-* [[hints|https://github.com/FreeRADIUS/freeradius-server/blob/master/raddb/hints]]
-* [[huntgroups|https://github.com/FreeRADIUS/freeradius-server/blob/master/raddb/huntgroups]]
+* [[users|https://github.com/FreeRADIUS/freeradius-server/blob/v2.x.x/raddb/users]]
+* [[hints|https://github.com/FreeRADIUS/freeradius-server/blob/v2.x.x/raddb/hints]]
+* [[huntgroups|https://github.com/FreeRADIUS/freeradius-server/blob/v2.x.x/raddb/huntgroups]]
 
 Old-style (<= 1.x.x) configuration files
 --------------------------------
