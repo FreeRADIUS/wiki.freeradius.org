@@ -50,26 +50,25 @@ Except for SSH if the switch obtained an IP address via DHCP, then SSH will be a
     Service type = Ssh
      1st authentication server  = local
 
-On the switch, configure the following ...
+**On the switch, configure the following ...**
 
     -> aaa radius-server freeradius host 192.168.2.103 key verysecret
     -> aaa authentication ssh freeradius local
-    xyu
 
-On the Radius ...
+**On the Radius ...**
 
-clients.conf
+**clients.conf**
 
-client 192.168.2.106/24 {
-        secret          = verysecret
-        shortname       = OmniSwitch
-}
+    client 192.168.2.106/24 {
+            secret          = verysecret
+            shortname       = OmniSwitch
+    }
 
-users
+**users**
 
 Let us assume you want to create a "read-only" user that can see all aspects of the configuration.
 
-(This is the the bad example!)
+(This is the **bad** example!)
 
     readadmin       Cleartext-Password := "password"
                 Xylan-Asa-Access = "all",
@@ -114,7 +113,28 @@ Instead the entry needs to look like this:
        1    std   on     on     on    on     off    on   off     on   VLAN 1                          
       10    std   on    off     on    on     off   off   off     on   VLAN 10                          
     
+Although we just want to give "read-only" access to the OmniSwitch, we'll need to allow "read-write" for the access method, in this case SSH. The domains/command family values are simply added to the read-only or read-write entries.
 
+You can get the values for the various commands/domains either via the CLI or by using the "Bitmap Calculator" that is accessible through the WebView of the AOS.
+
+     -> show aaa priv hexa ?
+                     ^
+                     WEBMGT VRRP VLAN UDLD TFTP-CLIENT TELNET SYSTEM STP SSH 
+                     SNMP SESSION SCP-SFTP RMON RIP RDP QOS PORT-MAPPING 
+                     POLICY PMM NTP NONE MODULE LOOPBACK-DETECTION LLDP 
+                     LINKAGG IPV6 IPMS IPMR IP-ROUTING IP-HELPER IP INTERFACE 
+                     HEALTH FILE DSHELL DOMAIN-SYSTEM DOMAIN-SERVICE 
+                     DOMAIN-SECURITY DOMAIN-POLICY DOMAIN-PHYSICAL 
+                     DOMAIN-NETWORK DOMAIN-LAYER2 DOMAIN-ADMIN DNS DHCP-SERVER 
+                     DEBUG CONFIG CHASSIS BRIDGE AVLAN ALL AIP AAA 802.1Q <cr> 
+     (AAA & Configuration Mgr Command Set)
+    
+    
+    -> show aaa priv hexa ssh 
+    0x00000002 0x00000000
+
+
+----- Insert Webview picture here -----
 
 
 ***
