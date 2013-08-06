@@ -204,6 +204,7 @@ Brainstorm/TODO by Benny:
 * Auth-Server-Down
 * Unique Session ID for Accounting
 * Accounting in general
+* Filter-ID for UNPs
 * MAC-ADDRESS format command switch for UPPER or lower case of MAc-ADddreSSes ;)
 * User Community @ http://www.alcatelunleashed.com
-* German DokuWiki @ http://dokuwiki.alu4u.com*
+* German DokuWiki @ http://dokuwiki.alu4u.com
