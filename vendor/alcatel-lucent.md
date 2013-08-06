@@ -2,17 +2,18 @@
 
 >
 > This page is currently: "Work in Progress"
+>
 > If you have questions or suggestions, you can reach me via Twitter: BennyE_HH
 >
 
-[Alcatel-Lucent Enterprise](http://enterprise.alcatel-lucent.com/) runs various product lines. In the beginning this page will focus on the configuration for OmniSwitch products.
+[Alcatel-Lucent Enterprise](http://enterprise.alcatel-lucent.com/) runs various product lines. In the beginning this page will focus on the configuration of/for OmniSwitch products.
 
 ## OmniSwitch
-The Alcatel-Lucent OmniSwitch Vendor-Specific-Attributes (VSA) run under "Vendor ID" 800, hence you'll have to use the "XYLAN" dictionary.
+The Alcatel-Lucent OmniSwitch Vendor-Specific-Attributes (VSA) run as "Vendor ID" 800, hence you'll have to use the "XYLAN" dictionary.
 
 The products run the "Alcatel-Lucent Operating System" (AOS) in two major release trees.
 
-**Note:** Not all features are shared/available across the product lines, I'll do my best to pin-point what works where!
+**Note:** Not all features are shared/available across the product lines, I'll do my best to pin-point what works in which release!
 
 **AOS Release 6**
 * AOS Release 6.4.x
@@ -189,7 +190,6 @@ TODO
 ### Chapter 3
 TODO
 
-
 ***
 
 Brainstorm/TODO by Benny:
@@ -204,6 +204,6 @@ Brainstorm/TODO by Benny:
 * Auth-Server-Down
 * Unique Session ID for Accounting
 * Accounting in general
-* 
+* MAC-ADDRESS format command switch for UPPER or lower case of MAc-ADddreSSes ;)
 * User Community @ http://www.alcatelunleashed.com
 * German DokuWiki @ http://dokuwiki.alu4u.com*
