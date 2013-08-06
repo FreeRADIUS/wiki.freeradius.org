@@ -57,14 +57,14 @@ Except for SSH if the switch obtained an IP address via DHCP, then SSH will be a
 
 **On the Radius ...**
 
-**clients.conf**
+**/etc/freeradius/clients.conf**
 
     client 192.168.2.106/24 {
             secret          = verysecret
             shortname       = OmniSwitch
     }
 
-**users**
+**/etc/freeradius/users**
 
 To create an admin account that has full read-write privileges is straight forward:
 
@@ -78,9 +78,9 @@ Now let us assume you want to create an "read-only" user that can see all aspect
 (This is the **bad** example! Showcasing the most common mistake ...)
 
     readadmin       Cleartext-Password := "password"
-                Xylan-Asa-Access = "all",
-                Xylan-Acce-Priv-R1 = 0xFFFFFFFF,
-                Xylan-Acce-Priv-R2 = 0xFFFFFFFF
+                    Xylan-Asa-Access = "all",
+                    Xylan-Acce-Priv-R1 = 0xFFFFFFFF,
+                    Xylan-Acce-Priv-R2 = 0xFFFFFFFF
 
 If you just use the configuration above, you'll see the following error message:
 
@@ -92,11 +92,11 @@ If you just use the configuration above, you'll see the following error message:
 Instead the entry needs to look like this:
 
     readadmin       Cleartext-Password := "password"
-                Xylan-Asa-Access = "all",
-                Xylan-Acce-Priv-F-R1 = 0xFFFFFFFF,
-                Xylan-Acce-Priv-F-R2 = 0xFFFFFFFF,
-                Xylan-Acce-Priv-F-W1 = 0x00000002,
-                Xylan-Acce-Priv-F-W2 = 0x00000000
+                    Xylan-Asa-Access = "all",
+                    Xylan-Acce-Priv-F-R1 = 0xFFFFFFFF,
+                    Xylan-Acce-Priv-F-R2 = 0xFFFFFFFF,
+                    Xylan-Acce-Priv-F-W1 = 0x00000002,
+                    Xylan-Acce-Priv-F-W2 = 0x00000000
 
 The result should look like this:
 
@@ -126,6 +126,9 @@ Although we just want to give "read-only" access to the OmniSwitch, we'll need t
 
 You can get the values for the various commands/domains either via the CLI or by using the "Bitmap Calculator" that is accessible through the WebView of the AOS.
 
+![webview.png](http://dokuwiki.alu4u.com/dokuwiki/lib/exe/fetch.php?t=1375813412&tok=845290&media=webview.png)
+**TODO** ----- @freeRADIUS Administrator: Can we maybe host the pictures here? -----
+
      -> show aaa priv hexa ?
                      ^
                      WEBMGT VRRP VLAN UDLD TFTP-CLIENT TELNET SYSTEM STP SSH 
@@ -142,18 +145,41 @@ You can get the values for the various commands/domains either via the CLI or by
     -> show aaa priv hexa ssh 
     0x00000002 0x00000000
 
+    -> show aaa priv hexa telnet
+    0x00000008 0x00000000
+
+    -> show aaa priv hexa ssh telnet
+    0x0000000a 0x00000000
+
 The first value goes in R1/W1 and the second value in R2/W2, pretty easy (if you once figured it out).
 The advantage is that at login the "allowed set of commands" is known by the switch without any further interaction with the Radius during the session.
 
-![webview.png](http://dokuwiki.alu4u.com/dokuwiki/lib/exe/fetch.php?t=1375813412&tok=845290&media=webview.png)
------ @freeRADIUS Administrator: Can we maybe host the pictures here? -----
+As you can see above, you can do the calculation on the switch as well if you provide the commands/domains.
 
+That said, a read-only user for all domains with SSH + Telnet access would look like this:
+
+        readadmin       Cleartext-Password := "password"
+                        Xylan-Asa-Access = "all",
+                        Xylan-Acce-Priv-F-R1 = 0xFFFFFFFF,
+                        Xylan-Acce-Priv-F-R2 = 0xFFFFFFFF,
+                        Xylan-Acce-Priv-F-W1 = 0x0000000A,
+                        Xylan-Acce-Priv-F-W2 = 0x00000000
+
+Please don't forget that you'll have to add the following command on your OmniSwitch if you want Telnet to query the Radius.
+
+    -> aaa authentication telnet freeradius local 
+
+### Chapter 2
+TODO
+
+### Chapter 3
+TODO
 
 
 ***
 
-Brainstorm:
-Authorise the user access to the switch via RADIUS
+Brainstorm/TODO by BennyE:
+DONE: Authorise the user access to the switch via RADIUS
 Authorise MAC (non-supplicant)
 Authorise 802.1x (supplicant)
 Authorise Captive Portal
@@ -162,11 +188,5 @@ service-type (call check, framed user)
 radius test tool
 Remote-Configuration-Download
 Auth-Server-Down
-
-
-> abc
-
-`asdfasdf`
-
-asdfasdfa
-
+User Community @ http://www.alcatelunleashed.com
+German DokuWiki @ http://dokuwiki.alu4u.com
