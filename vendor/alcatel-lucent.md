@@ -2,13 +2,17 @@
 
 >
 > This page is currently: "Work in Progress"
+> If you have questions or suggestions, you can reach me via Twitter: BennyE_HH
 >
 
 [Alcatel-Lucent Enterprise](http://enterprise.alcatel-lucent.com/) runs various product lines. In the beginning this page will focus on the configuration for OmniSwitch products.
 
 ## OmniSwitch
 The Alcatel-Lucent OmniSwitch Vendor-Specific-Attributes (VSA) run under "Vendor ID" 800, hence you'll have to use the "XYLAN" dictionary.
+
 The products run the "Alcatel-Lucent Operating System" (AOS) in two major release trees.
+
+**Note:** Not all features are shared/available across the product lines, I'll do my best to pin-point what works where!
 
 **AOS Release 6**
 * AOS Release 6.4.x
@@ -54,6 +58,16 @@ Except for SSH if the switch obtained an IP address via DHCP, then SSH will be a
 
     -> aaa radius-server freeradius host 192.168.2.103 key verysecret
     -> aaa authentication ssh freeradius local
+    -> show aaa server freeradius
+    Server name = freeradius
+      Server type         = RADIUS,
+      IP Address 1        = 192.168.2.103,
+      Retry number        = 3,
+      Time out (sec)      = 2,
+      Authentication port = 1812,
+      Accounting port     = 1813
+
+Note: Please don't use "verysecret" as your key, it is just meant as a placeholder!
 
 **On the Radius ...**
 
@@ -178,15 +192,18 @@ TODO
 
 ***
 
-Brainstorm/TODO by BennyE:
-DONE: Authorise the user access to the switch via RADIUS
-Authorise MAC (non-supplicant)
-Authorise 802.1x (supplicant)
-Authorise Captive Portal
-Bandwidth Management
-service-type (call check, framed user)
-radius test tool
-Remote-Configuration-Download
-Auth-Server-Down
-User Community @ http://www.alcatelunleashed.com
-German DokuWiki @ http://dokuwiki.alu4u.com
+Brainstorm/TODO by Benny:
+* **DONE:** Authorise the user access to the switch via RADIUS
+* Authorise MAC (non-supplicant)
+* Authorise 802.1x (supplicant)
+* Authorise Captive Portal
+* Bandwidth Management
+* service-type (call check, framed user)
+* radius test tool
+* Remote-Configuration-Download
+* Auth-Server-Down
+* Unique Session ID for Accounting
+* Accounting in general
+* 
+* User Community @ http://www.alcatelunleashed.com
+* German DokuWiki @ http://dokuwiki.alu4u.com*
