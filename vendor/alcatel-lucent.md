@@ -66,9 +66,16 @@ Except for SSH if the switch obtained an IP address via DHCP, then SSH will be a
 
 **users**
 
-Let us assume you want to create a "read-only" user that can see all aspects of the configuration.
+To create an admin account that has full read-write privileges is straight forward:
 
-(This is the **bad** example!)
+     admin           Cleartext-Password := "password"
+                     Xylan-Asa-Access = "all",
+                     Xylan-Acce-Priv-F-W1 = 0xFFFFFFFF,
+                     Xylan-Acce-Priv-F-W2 = 0xFFFFFFFF
+
+Now let us assume you want to create an "read-only" user that can see all aspects of the configuration.
+
+(This is the **bad** example! Showcasing the most common mistake ...)
 
     readadmin       Cleartext-Password := "password"
                 Xylan-Asa-Access = "all",
@@ -91,6 +98,8 @@ Instead the entry needs to look like this:
                 Xylan-Acce-Priv-F-W1 = 0x00000002,
                 Xylan-Acce-Priv-F-W2 = 0x00000000
 
+The result should look like this:
+
     Benny$ ssh readadmin@192.168.2.106
     readadmin's password for keyboard-interactive method: 
     
@@ -110,8 +119,8 @@ Instead the entry needs to look like this:
                                   stree                 mble   src        
      vlan  type  admin   oper   1x1   flat   auth   ip   tag   lrn   name
     -----+-----+------+------+------+------+----+-----+-----+------+----------
-       1    std   on     on     on    on     off    on   off     on   VLAN 1                          
-      10    std   on    off     on    on     off   off   off     on   VLAN 10                          
+       1    std   on     on     on    on     off    on   off     on   VLAN 1 
+      10    std   on    off     on    on     off   off   off     on   VLAN 10
     
 Although we just want to give "read-only" access to the OmniSwitch, we'll need to allow "read-write" for the access method, in this case SSH. The domains/command family values are simply added to the read-only or read-write entries.
 
@@ -133,8 +142,12 @@ You can get the values for the various commands/domains either via the CLI or by
     -> show aaa priv hexa ssh 
     0x00000002 0x00000000
 
+The first value goes in R1/W1 and the second value in R2/W2, pretty easy (if you once figured it out).
+The advantage is that at login the "allowed set of commands" is known by the switch without any further interaction with the Radius during the session.
 
------ Insert Webview picture here -----
+![webview.png](http://dokuwiki.alu4u.com/dokuwiki/lib/exe/fetch.php?t=1375813412&tok=845290&media=webview.png)
+----- @freeRADIUS Administrator: Can we maybe host the pictures here? -----
+
 
 
 ***
