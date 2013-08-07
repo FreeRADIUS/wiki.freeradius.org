@@ -249,16 +249,68 @@ The authentication should now be successful, verify like this:
     -----+-----------------+----------------+-------------------+--------
     01/02 00:1e:ec:aa:aa:aa Authenticated    Basic-Dft VLAN      1 
     
+Now let us assume that you want to place the user in a different VLAN (Dynamic VLAN Assignment) via Radius.
+There are two ways to do that ... (VLAN 20 is our plan)
+
+1.) Use the Vendor-Specific-Attribute (Xylan-Auth-Group)
+
+The entry in /etc/freeradius/users for that MAC-ADDRESS should look like this:
+
+    001EECAAAAAA    Cleartext-Password := "001EECAAAAAA"
+                    Xylan-Auth-Group = 20
+
+The following looks good ...
+
+    Sending Access-Accept of id 22 to 192.168.2.106 port 1029
+	Xylan-Auth-Group = 20
+
+Here is the confirmation:
+
+    -> show 802.1x non-supplicant 
+    
+    Slot  MAC               MAC Authent      Classification      Vlan      
+    Port  Address           Status           Policy              Learned   
+    -----+-----------------+----------------+-------------------+--------
+    01/02 00:1e:ec:aa:aa:aa Authenticated    Basic-Auth Svr      20 
+
+2.) Use the standardised way (IEEE)
+
+The entry in /etc/freeradius/users for that MAC-ADDRESS should look like this:
+
+    001EECAAAAAA    Cleartext-Password := "001EECAAAAAA"
+                    Tunnel-Medium-Type = IEEE-802,
+                    Tunnel-Type = VLAN,
+                    Tunnel-Private-Group-ID = 20
+
+The following looks good ...
+
+    Sending Access-Accept of id 23 to 192.168.2.106 port 1029
+	Tunnel-Medium-Type:0 = IEEE-802
+	Tunnel-Type:0 = VLAN
+	Tunnel-Private-Group-Id:0 = "20"
+
+Here is the confirmation:
+
+    -> show 802.1x non-supplicant 
+    
+    Slot  MAC               MAC Authent      Classification      Vlan      
+    Port  Address           Status           Policy              Learned   
+    -----+-----------------+----------------+-------------------+--------
+    01/02 00:1e:ec:aa:aa:aa Authenticated    Basic-Auth Svr      20 
 
 
-### Chapter 3
+### 802.1X Authentication (aka supplicant authentication)
 TODO
+
+**Work in Progress**
 
 ***
 
 Brainstorm/TODO by Benny:
 * **DONE:** Authorise the user access to the switch via RADIUS
 * **DONE:** Authorise MAC (non-supplicant)
+* **DONE:** Dynamic VLAN Assignment / VSA
+* **DONE:** Dynamic VLAN Assignment / IEEE
 * Authorise 802.1x (supplicant)
 * Authorise Captive Portal
 * Bandwidth Management
