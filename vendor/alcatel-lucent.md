@@ -188,6 +188,7 @@ Please don't forget that you'll have to add the following command on your OmniSw
 Read this if you want to authenticate MAC-ADDRESSES through the Radius server.
 
 **On OmniSwitch:**
+
     -> aaa radius-server "freeradius" host 192.168.2.103 key verysecret
     -> vlan port mobile 1/2
     -> vlan port 1/2 802.1x enable 
