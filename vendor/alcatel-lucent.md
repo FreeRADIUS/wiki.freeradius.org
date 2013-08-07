@@ -184,8 +184,71 @@ Please don't forget that you'll have to add the following command on your OmniSw
 
     -> aaa authentication telnet freeradius local 
 
-### Chapter 2
-TODO
+### MAC-ADDRESS Authentication (aka non-supplicant authentication)
+Read this if you want to authenticate MAC-ADDRESSES through the Radius server.
+
+**On OmniSwitch:**
+    -> aaa radius-server "freeradius" host 192.168.2.103 key verysecret
+    -> vlan port mobile 1/2
+    -> vlan port 1/2 802.1x enable 
+    -> aaa authentication 802.1x freeradius
+    -> aaa authentication mac freeradius
+
+The OmniSwitch created the following template automatically for you:
+
+    -> show configuration snapshot aaa
+    ...
+    ! 802.1x :
+    802.1x 1/2 direction both port-control auto quiet-period 60 tx-period 30 supp-timeout 30 server-timeout 30 max-req 2 re-authperiod 3600 no reauthentication
+    802.1x 1/2 captive-portal session-limit 12 retry-count 3 
+    802.1x 1/2 supp-polling retry 2 
+    802.1x 1/2 captive-portal inactivity-logout disable
+    802.1x 1/2 supplicant policy authentication pass group-mobility default-vlan fail block
+    802.1x 1/2 non-supplicant policy block
+    802.1x 1/2 captive-portal policy authentication pass default-vlan fail block
+
+This is a secure (802.1x enabled) starting point, but we want to look at MAC-ADDRESS (non-supplicant) authentication first.
+
+    -> 802.1x 1/2 non-supplicant policy authentication pass default-vlan fail block 
+
+It is important to note the "policy authentication" keyword, as otherwise the MAC-ADDRESS will not be sent for verification to the Radius. In case of success we'll place the user in default-vlan, if not block.
+
+If you now connect your workstation to the port, you'll see a request like the following at the Radius
+
+    rad_recv: Access-Request packet from host 192.168.2.106 port 1028, id=6, length=76
+	User-Name = "001EECAAAAAA"
+	User-Password = "001EECAAAAAA"
+	NAS-IP-Address = 192.168.2.106
+	NAS-Port = 1002
+	NAS-Port-Type = Ethernet
+	Service-Type = Call-Check
+
+Note that the OmniSwitch sends the MAC-ADDRESS in UPPERCASE for username/password.
+TODO: Document how to change that... (it is possible)
+
+In case that the authentication failed, you can verify the same on AOS CLI:
+
+    -> show 802.1x non-supplicant 
+    
+    Slot  MAC               MAC Authent      Classification      Vlan      
+    Port  Address           Status           Policy              Learned   
+    -----+-----------------+----------------+-------------------+--------
+    01/02 00:1e:ec:aa:aa:aa Failed           Basic-Blk           1 
+
+Now we add an entry to the /etc/freeradius/users for that MAC-ADDRESS:
+
+    001EECAAAAAA    Cleartext-Password := "001EECAAAAAA"
+    
+The authentication should now be successful, verify like this:
+
+    -> show 802.1x non-supplicant 
+    
+    Slot  MAC               MAC Authent      Classification      Vlan      
+    Port  Address           Status           Policy              Learned   
+    -----+-----------------+----------------+-------------------+--------
+    01/02 00:1e:ec:aa:aa:aa Authenticated    Basic-Dft VLAN      1 
+    
+
 
 ### Chapter 3
 TODO
@@ -194,7 +257,7 @@ TODO
 
 Brainstorm/TODO by Benny:
 * **DONE:** Authorise the user access to the switch via RADIUS
-* Authorise MAC (non-supplicant)
+* **DONE:** Authorise MAC (non-supplicant)
 * Authorise 802.1x (supplicant)
 * Authorise Captive Portal
 * Bandwidth Management
