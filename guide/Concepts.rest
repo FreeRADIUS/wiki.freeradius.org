@@ -8,9 +8,9 @@ The client sends you a radius authentication request, you don't decide what's in
 
 Picking an Auth-Type
 ====================
-The radius server looks the request and says::
+The radius server looks at the request and says::
 
-  Hmmm... can I do with this request?
+  Hmmm... can I deal with this request?
 
 The answer to that depends on what authentication types you have enabled, what the server can look up in a DB, and what is in the request.
 
@@ -42,7 +42,7 @@ At the end of authorize, the server will check if anything set the Auth-Type.
 
 If nothing did, it immediately rejects the request.
 
-Lets suppose that the client sends a request with a User-Password attribute, and pap is enabled, the pap module will have then set ``Auth-Type = pap``.
+Lets suppose that the client sends a request with a User-Password attribute, and pap is enabled, the pap module will then have set ``Auth-Type = pap``.
 
 So in authenticate, the server will call the pap module again::
 
@@ -67,9 +67,9 @@ But WAIT! What if the client sends a MSCHAP request? What does the radius server
   Well that's a fine kettle of fish! 
   That client has really really tied my hands on this one!
 
-In this case, the mschap module looks the request, and finds the MS-CHAP attributes.  It sets the *Auth-Type* to itself (mschap).  A database modules (such as LDAP, above) gets the "known good" password, and adds it to the request.  The mschap module is then run for authentication.  It looks for either a clear text password or nt-hash (why? look at the [[protocol table|http://deployingradius.com/documents/protocols/compatibility.html]]). If one of those haven't been added by a datastore, the mschap module says::
+In this case, the mschap module looks at the request, and finds the MS-CHAP attributes.  It sets the *Auth-Type* to itself (mschap).  A database module (such as LDAP, above) gets the "known good" password, and adds it to the request.  The mschap module is then run for authentication.  It looks for either a clear text password or nt-hash (why? look at the [[protocol table|http://deployingradius.com/documents/protocols/compatibility.html]]). If one of those hasn't been added by a datastore, the mschap module says::
 
   Sorry, I can't authenticate the user,
   because I don't have the information I need to validate MSCHAP
 
-But now the server has run out of options, it's only choice was mschap because that's what the client sent in the request.  The mschap module can't do anything because you didn't give it a useful "known good" password . So the server has no choice but to reject the request.  The MSCHAP data might be correct, but the server has no way to know that.  So it replies with a reject.
+But now the server has run out of options, its only choice was mschap because that's what the client sent in the request.  The mschap module can't do anything because you didn't give it a useful "known good" password . So the server has no choice but to reject the request.  The MSCHAP data might be correct, but the server has no way to know that.  So it replies with a reject.
