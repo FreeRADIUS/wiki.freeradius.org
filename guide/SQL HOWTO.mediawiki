@@ -35,7 +35,18 @@ Next up, you need to create the schema for your database. There is an SQL script
  cd /usr/share/doc/packages/freeradius/doc/examples/ *(Sorry, I can't find this directory in my centOS + freeradius 2.1.10)
  mysql -uroot -p radius < mysql.sql
 
-(I think you're probably needing to look for /etc/raddb/sql/mysql/schema.sql on CentOS/RHEL)
+'''Note:''' CentOS/RHEL Schema Files Location:
+/etc/raddb/sql/mysql/schema.sql
+
+'''Note:''' Ubuntu Schema Files Location:
+Ubuntu schema files are not called mysql.sql, but schema.sql. The location is:
+/etc/freeradius/sql/mysql/
+
+ mysql -u root -p radius < /etc/freeradius/sql/mysql/schema.sql
+
+You might to additionally create this table if you're managing your NASses with FreeRadius:
+
+ mysql -u root -p radius < /etc/freeradius/sql/mysql/nas.sql
 
 ===Create PostgreSQL Database===
 
