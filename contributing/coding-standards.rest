@@ -31,12 +31,12 @@ Name components should be separated by underscores.
 Prefixes / namespaces
 =====================
 
-Protocol library
-^^^^^^^^^^^^^^^^
+Protocol library ``ol_``
+^^^^^^^^^^^^^^^^^^^^^^^^
 All functions in the protocol library should be prefixed with ``ol_``. ``fr_`` should be replaced when found.  The rationale is that as liboctopusd (previously libfreeradius) is a library intended to be used by 3rd party applications it requires a namespace to avoid conflicts.
 
-Server library
-^^^^^^^^^^^^^^
+Server library ``<group>_``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Functions in the server library should not have a global prefix, but should use a common prefix i.e. functions which manipulate value pairs should use the ``pair_`` prefix, dictionary functions should use the ``dict_`` prefix.
 
 Modules
