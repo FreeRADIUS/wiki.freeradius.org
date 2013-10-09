@@ -1,8 +1,8 @@
 Function naming conventions
 ---------------------------
 
-Verb/noun order
-===============
+Verb / noun order
+=================
 Nouns should always precede verbs ``<prefix>_<noun>_<verb>[_<verb qualifiers>]``.
 
 Good
