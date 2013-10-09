@@ -1,0 +1,52 @@
+Function naming conventions
+---------------------------
+
+Verb/noun order
+===============
+Nouns should always precede verbs ``<prefix>_<noun>_<verb>[_<verb qualifiers>]``.
+
+Good
+```
+ol_request_alloc()
+ol_dict_find_by_name()
+python_interp_exec()
+```
+
+Bad
+```
+do_python()
+rest_parse_pairs()
+```
+
+Name component separation 
+=========================
+
+Name components should be separated by underscores.
+
+- olPairFind -> bad
+- olpairfind -> bad
+- ol_pairfind -> bad
+- ol_pair_find -> good
+
+Prefixes / namespaces
+=====================
+
+Protocol library
+^^^^^^^^^^^^^^^^
+All functions in the protocol library should be prefixed with ``ol_``. ``fr_`` should be replaced when found.  The rationale is that as liboctopusd (previously libfreeradius) is a library intended to be used by 3rd party applications it requires a namespace to avoid conflicts.
+
+Server library
+^^^^^^^^^^^^^^
+Functions in the server library should not have a global prefix, but should use a common prefix i.e. functions which manipulate value pairs should use the ``pair_`` prefix, dictionary functions should use the ``dict_`` prefix.
+
+Modules
+^^^^^^^
+Public functions should use the ``mod_`` prefix, e.g. ``mod_authorize``, ``mod_authentication``, ``mod_instantiate``. If the module uses its own library, those functions should be prefixed with the name of the module e.g. ``python_``, ``rest_``, ``eap_``.
+
+Instantiation and destruction
+=============================
+Library initialisations functions should use the verb ``init``.
+Structure allocation functions should use the verb ``alloc``. ``create`` should not be used.
+
+Explicit ``free`` or ``destroy`` functions should be avoided, and talloc destructors used wherever possible. Talloc destructor functions should be static and be prefixed with ``_`` to mark them as private e.g. ``_ol_pair_free()``
+
