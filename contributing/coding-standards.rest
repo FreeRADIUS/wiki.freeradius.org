@@ -7,8 +7,8 @@ Nouns should always precede verbs ``<prefix>_<noun>_<verb>[_<verb qualifiers>]``
 
 Good
 ```
-ol_request_alloc()
-ol_dict_find_by_name()
+fr_request_alloc()
+fr_dict_find_by_name()
 python_interp_exec()
 ```
 
