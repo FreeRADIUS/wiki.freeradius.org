@@ -23,17 +23,17 @@ Name component separation
 
 Name components should be separated by underscores.
 
-- olPairFind -> bad
-- olpairfind -> bad
-- ol_pairfind -> bad
-- ol_pair_find -> good
+- frPairFind -> bad
+- frpairfind -> bad
+- fr_pairfind -> bad
+- fr_pair_find -> good
 
 Prefixes / namespaces
 =====================
 
-Protocol library ``ol_``
+Protocol library ``fr_``
 ^^^^^^^^^^^^^^^^^^^^^^^^
-All functions in the protocol library should be prefixed with ``ol_``. ``fr_`` should be replaced when found.  The rationale is that as liboctopusd (previously libfreeradius) is a library intended to be used by 3rd party applications it requires a namespace to avoid conflicts.
+All functions in the protocol library should be prefixed with ``fr``. The rationale is that as libfreeradius is a library intended to be used by 3rd party applications it requires a namespace to avoid conflicts.
 
 Server library ``<group>_``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -48,5 +48,5 @@ Instantiation and destruction
 Library initialisations functions should use the verb ``init``.
 Structure allocation functions should use the verb ``alloc``. ``create`` should not be used.
 
-Explicit ``free`` or ``destroy`` functions should be avoided, and talloc destructors used wherever possible. Talloc destructor functions should be static and be prefixed with ``_`` to mark them as private e.g. ``_ol_pair_free()``
+Explicit ``free`` or ``destroy`` functions should be avoided, and talloc destructors used wherever possible. Talloc destructor functions should be static and be prefixed with ``_`` to mark them as private e.g. ``_fr_pair_free()``
 
