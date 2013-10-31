@@ -1,1 +1,0 @@
-How to read Certificate document of freeradius
