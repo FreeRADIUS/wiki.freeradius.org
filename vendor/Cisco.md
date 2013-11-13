@@ -209,6 +209,14 @@ If you don't want to use the loopback interface of course you can set the source
 
 According to [some reports](https://list.xs4all.nl/pipermail/freeradius-users/2006-November/058449.html), the Aironet 1200 series of access points works well, and fully supports RADIUS.
 
+The Cisco WLC/WISM apparently use a single UDP socket for all radius requests to a single server - auth and acct - and thus there's a 255-packet limit for in-progress requests. If the WLC reaches that limit, it just starts re-using IDs aggressively, instead of opening a socket, which is nice - if you're in the middle of processing a conflicted request, you still burn the work you're currently doing, and the result is never used.
+
+This behavior causes issues during the traffic spikes. It is certainly a problem if you run an eduroam server, where proxied traffic can have very large RTTs. They're apparently going to "improve" this in 7.6 - there will be a separate UDP socket for auth/acct!
+
+### Comments by the FreeRADIUS Team
+
+The above behavior is *horrifically* bad.  Clients should open as many sockets as necessary to handle the load.  Using only one socket is a sign of laziness, and of bad design.  If the vendor doesn't fix basic RADIUS issues like this, we recommend people complain loudly, and then buy from another vendor.
+
 ## See Also
 
 * [[HP]]
