@@ -44,7 +44,7 @@ Make sure to have radiusd running properly under sql and there must be a "sql" e
 	#  The 'query' parameter specifies the SQL query used to get
 	#  the current Counter value from the database. There are 3
 	#  parameters that can be used in the query:
-	#		%k	'key' parameter
+	#		${key}	'key' parameter
 	#		%b	unix time value of beginning of reset period
 	#		%e	unix time value of end of reset period
 	#
@@ -69,13 +69,13 @@ Make sure to have radiusd running properly under sql and there must be a "sql" e
 		# For mysql:
 		query = "SELECT SUM(AcctSessionTime - \
                  GREATEST((%b - UNIX_TIMESTAMP(AcctStartTime)), 0)) \
-                 FROM radacct WHERE UserName='%{%k}' AND \
+                 FROM radacct WHERE UserName='%{${key}}' AND \
                  UNIX_TIMESTAMP(AcctStartTime) + AcctSessionTime > '%b'"
 
 		# For postgresql:
 #		query = "SELECT SUM(AcctSessionTime - \
 #                GREATER((%b - AcctStartTime::ABSTIME::INT4), 0)) \
-#                FROM radacct WHERE UserName='%{%k}' AND \
+#                FROM radacct WHERE UserName='%{${key}}' AND \
 #                AcctStartTime::ABSTIME::INT4 + AcctSessionTime > '%b'"
 
 		# This query ignores calls that started in a previous
@@ -83,23 +83,23 @@ Make sure to have radiusd running properly under sql and there must be a "sql" e
 		# is a little easier on the SQL server
 		# For mysql:
 #		query = "SELECT SUM(AcctSessionTime) FROM radacct WHERE \
-#                UserName='%{%k}' AND AcctStartTime > FROM_UNIXTIME('%b')"
+#                UserName='%{${key}}' AND AcctStartTime > FROM_UNIXTIME('%b')"
 
 		# For postgresql:
 #		query = "SELECT SUM(AcctSessionTime) FROM radacct WHERE \
-#                UserName='%{%k}' AND AND AcctStartTime::ABSTIME::INT4 > '%b'"
+#                UserName='%{${key}}' AND AND AcctStartTime::ABSTIME::INT4 > '%b'"
 
 		# This query is the same as above, but demonstrates an
 		# additional counter parameter '%e' which is the
 		# timestamp for the end of the period
 		# For mysql:
 #		query = "SELECT SUM(AcctSessionTime) FROM radacct \
-#                WHERE UserName='%{%k}' AND AcctStartTime BETWEEN \
+#                WHERE UserName='%{${key}}' AND AcctStartTime BETWEEN \
 #                FROM_UNIXTIME('%b') AND FROM_UNIXTIME('%e')"
 
 		# For postgresql:
 #		query = "SELECT SUM(AcctSessionTime) FROM radacct \
-#                WHERE UserName='%{%k}' AND AcctStartTime::ABSTIME::INT4 \
+#                WHERE UserName='%{${key}}' AND AcctStartTime::ABSTIME::INT4 \
 #                BETWEEN '%b' AND '%e'"
 	}
 
@@ -118,20 +118,20 @@ Make sure to have radiusd running properly under sql and there must be a "sql" e
 		# versus postgres queries apply here.
 		query = "SELECT SUM(AcctSessionTime - \
                  GREATEST((%b - UNIX_TIMESTAMP(AcctStartTime)), 0)) \
-                 FROM radacct WHERE UserName='%{%k}' AND \
+                 FROM radacct WHERE UserName='%{${key}}' AND \
                  UNIX_TIMESTAMP(AcctStartTime) + AcctSessionTime > '%b'"
 
 		# This query ignores calls that started in a previous
 		# reset period and continue into into this one. But it
 		# is a little easier on the SQL server
 #		query = "SELECT SUM(AcctSessionTime) FROM radacct WHERE \
-#                UserName='%{%k}' AND AcctStartTime > FROM_UNIXTIME('%b')"
+#                UserName='%{${key}}' AND AcctStartTime > FROM_UNIXTIME('%b')"
 
 		# This query is the same as above, but demonstrates an
 		# additional counter parameter '%e' which is the
 		# timestamp for the end of the period
 #		query = "SELECT SUM(AcctSessionTime) FROM radacct \
-#                WHERE UserName='%{%k}' AND AcctStartTime BETWEEN \
+#                WHERE UserName='%{${key}}' AND AcctStartTime BETWEEN \
 #                FROM_UNIXTIME('%b') AND FROM_UNIXTIME('%e')"
 	}
 </pre>
@@ -163,34 +163,34 @@ Make sure to have radiusd running properly under sql and there must be a "sql" e
 ::: sqlmod-inst = sql
 ::: key = User-Name
 ::: reset = never
-::: query = "SELECT SUM(AcctSessionTime) FROM radacct WHERE UserName='%{%k}'"
+::: query = "SELECT SUM(AcctSessionTime) FROM radacct WHERE UserName='%{${key}}'"
 :: }
 
 :: sqlcounter dailycounter {
 ::: driver = "rlm_sqlcounter"
 ::: counter-name = Daily-Session-Time
 ::: check-name = Max-Daily-Session
-::: sqlmod-inst = sqlcca3
+::: sqlmod-inst = sql
 ::: key = User-Name
 ::: reset = daily
-::: query = "SELECT SUM(AcctSessionTime - GREATEST((%b - UNIX_TIMESTAMP(AcctStartTime)), 0)) FROM radacct WHERE UserName='%{%k}' AND UNIX_TIMESTAMP(AcctStartTime) + AcctSessionTime > '%b'"
+::: query = "SELECT SUM(AcctSessionTime - GREATEST((%b - UNIX_TIMESTAMP(AcctStartTime)), 0)) FROM radacct WHERE UserName='%{${key}}' AND UNIX_TIMESTAMP(AcctStartTime) + AcctSessionTime > '%b'"
 :: }
 
 :: sqlcounter monthlycounter {
 ::: counter-name = Monthly-Session-Time
 ::: check-name = Max-Monthly-Session
-::: sqlmod-inst = sqlcca3
+::: sqlmod-inst = sql
 ::: key = User-Name
 ::: reset = monthly
-::: query = "SELECT SUM(AcctSessionTime - GREATEST((%b - UNIX_TIMESTAMP(AcctStartTime)), 0)) FROM radacct WHERE UserName='%{%k}' AND UNIX_TIMESTAMP(AcctStartTime) + AcctSessionTime > '%b'"
+::: query = "SELECT SUM(AcctSessionTime - GREATEST((%b - UNIX_TIMESTAMP(AcctStartTime)), 0)) FROM radacct WHERE UserName='%{${key}}' AND UNIX_TIMESTAMP(AcctStartTime) + AcctSessionTime > '%b'"
 :: }
 
 * If you are using postgresql then the query lines would have to be replaced by the following:
-:: query = "SELECT SUM(AcctSessionTime) FROM radacct WHERE UserName='%{%k}'"
+:: query = "SELECT SUM(AcctSessionTime) FROM radacct WHERE UserName='%{${key}}'"
 
-:: query = "SELECT SUM(AcctSessionTime - GREATER((%b - AcctStartTime::ABSTIME::INT4), 0)) FROM radacct WHERE UserName='%{%k}' AND AcctStartTime::ABSTIME::INT4 + AcctSessionTime > '%b'"
+:: query = "SELECT SUM(AcctSessionTime - GREATER((%b - AcctStartTime::ABSTIME::INT4), 0)) FROM radacct WHERE UserName='%{${key}}' AND AcctStartTime::ABSTIME::INT4 + AcctSessionTime > '%b'"
 
-:: query = "SELECT SUM(AcctSessionTime - GREATER((%b - AcctStartTime::ABSTIME::INT4), 0)) FROM radacct WHERE UserName='%{%k}' AND AcctStartTime::ABSTIME::INT4 + AcctSessionTime > '%b'"
+:: query = "SELECT SUM(AcctSessionTime - GREATER((%b - AcctStartTime::ABSTIME::INT4), 0)) FROM radacct WHERE UserName='%{${key}}' AND AcctStartTime::ABSTIME::INT4 + AcctSessionTime > '%b'"
 
 * If you are running postgres 7.x, you may not have a GREATER function.  An example of one is:
 
