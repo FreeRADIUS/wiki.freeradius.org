@@ -1,3 +1,13 @@
+## Why?
+On UDP buffer exhaustion FreeRADIUS has no idea that packets are being dropped as it's not informed, it only knows then it has dropped packets due to the packet queue being full. There's no way around this other than by having an external process snooping on the traffic.
+
+radsniff should also work fine with other RADIUS servers. So where vendors have failed to provide sufficient instrumentation in their products, you can use radsniff to monitor their product's reliability and performance.
+
+## What packet rate can radsniff deal with?
+That is entirely dependent on your machine. But on a modern intel i7 processor it seems to be able to handle between 25k-30k PPS before libpcap starts reporting packet loss. This should be fine for the majority of installations, it's very unlikely that a real world FreeRADIUS installation (which will usually involve coupling FreeRADIUS with a directory or database component) would be able to handle 30k PPS anyway.
+
+When libpcap starts reporting loss, radsniff will mute itself, that is stop writing stats out to the collectd socket, and stop writing stats to stdout. The time it's muted for will be double the timeout period.
+
 ## Building radsniff
 Currently only the version of radsniff in the master (3.1.x) branch supports statistics, which means you'll need to build the server from source.
 
