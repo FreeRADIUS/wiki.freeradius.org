@@ -45,9 +45,12 @@ and it'll build libfreeradius, the radsniff binary, and not the entire server.
 Unfortunately there's no specific install target for radsniff, so for now it's best to copy the binary directly from ``./build/bin/radsniff`` to wherever you want it ``/usr/local/bin/`` for example...
 
 ### Running
-3.1.x radsniff now has two main modes of operation, packet decode and output, and statistics generation. By default radsniff will decode packets, but not output any statistics.
+3.1.x radsniff has two main modes of operation, packet decode and output, and statistics generation. By default radsniff will decode packets, but not output any statistics.
 
-There are three arguments we need to pass to radsniff to get it send stats to collectd:
-* ``-W`` To turn on statistics the ``-W <period>`` flag is used. For integrating with collectd ``<period>`` should match your collectd interval (which is by default 10 seconds).
-* ``-O`` To direct stats to a collectd instance ``-O <server>``, is used ``<server>`` can be an IP address, FQDN, or UNIX Socket. For this guide we'll need be using the collectd sock ``/var/run/collectdsock``.
+There two arguments we need to pass to radsniff to get it send stats to collectd:
+* ``-W`` - To turn on statistics the ``-W <period>`` flag is used. For integrating with collectd ``<period>`` should match your collectd interval (which is by default 10 seconds).
+* ``-O`` - To direct stats to a collectd instance ``-O <server>``, is used. ``<server>`` can be an IP address, FQDN, or UNIX Socket. For this guide we'll need be using a UNIX socket ``/var/run/collectdsock``.
 
+You may also (optionally) pass one or more ``-i <interface>`` arguments to specify interfaces to listen on. If no ``-i`` flags are passed radsniff will listen on all interfaces it can, opening separate PCAP sessions for each interface.
+
+You may also (optionally) pass ``-P <pidfile>`` to make radsniff daemonize and write out a pid file. This is primarily for use in init scripts.
