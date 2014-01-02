@@ -1,1 +1,0 @@
-So we're supposed to follow the official instructions, but the installation page is missing?
