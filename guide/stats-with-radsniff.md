@@ -1,12 +1,12 @@
 ## Why?
-On UDP buffer exhaustion FreeRADIUS has no idea that packets are being dropped as it's not informed, it only knows then it has dropped packets due to the packet queue being full. There's no way around this other than by having an external process snooping on the traffic.
+On UDP buffer exhaustion FreeRADIUS has no idea that packets are being dropped as it's not informed, it only knows then it's dropped packets due to the packet queue being full (or timeouts). There's no way around this other than by having an external process snooping on the traffic.
 
 radsniff should also work fine with other RADIUS servers. So where vendors have failed to provide sufficient instrumentation in their products, you can use radsniff to monitor their product's reliability and performance.
 
 ## What packet rate can radsniff deal with?
 That is entirely dependent on your machine. But on a modern intel i7 processor it seems to be able to handle between 25k-30k PPS before libpcap starts reporting packet loss. This should be fine for the majority of installations, it's very unlikely that a real world FreeRADIUS installation (which will usually involve coupling FreeRADIUS with a directory or database component) would be able to handle 30k PPS anyway.
 
-When libpcap starts reporting loss, radsniff will mute itself, that is stop writing stats out to the collectd socket, and stop writing stats to stdout. The time it's muted for will be double the timeout period.
+When libpcap starts reporting loss, radsniff will mute itself, that is stop writing stats out to the collectd socket, and stop writing stats to stdout. The time it's muted for will be double the timeout period (``radsniff -h | grep timeout``).
 
 ## Building radsniff
 Currently only the version of radsniff in the master (3.1.x) branch supports statistics, which means you'll need to build the server from source.
@@ -66,7 +66,7 @@ You may also (optionally) pass one or more ``-i <interface>`` arguments to speci
 
 You may also (optionally) pass ``-P <pidfile>`` to make radsniff daemonize and write out a pid file. This is primarily for use in init scripts.
 
-An example invocation for running radsniff as stats daemon would be something like:
+An example invocation for manually running radsniff as stats daemon would be something like:
 ```bash
 radsniff -q -i eth0 -P /var/run/freeradius/radsniff.pid -W 10 -O /var/run/collectd-sock > /var/log/radsniff.log 2>&1
 ```
@@ -86,15 +86,58 @@ If you need to run multiple instances of radsniff, simply ``ln -s /etc/init.d/ra
 ## collectd
 To date I haven't managed to get radsniff to connect to collectd over UDP (keep getting connection refused errors, suspect libcollectdclient bug), but have been successful getting it work over unix socket.
 
-Nothing special is required 
+Nothing special is required other than enabling the unix socket plugin. To do that edit ``/etc/collectd/collectd.conf`` and uncomment ``LoadPlugin unixsock`` and
+```bash
+<Plugin unixsock>
+       SocketFile "/var/run/collectd-unixsock"
+       SocketGroup "collectd"
+       SocketPerms "0660"
+</Plugin>
+```
+
+and restart collectd.
 
 ## munin
-_But I don't use collectd, I use munin!_. Munin only provides an interface to pull stats from it's various plugins, this makes integrating it with radsniff more difficult (it would have to write stats out to a file which would then be consumed by a munin plugin).
+_But I don't use collectd, I use munin!_.
+
+Munin only provides an interface to pull stats from it's various plugins, this makes integrating it with radsniff more difficult.
 
 Although both munin and collectd use rrdtool, there doesn't appear to be an easy way to read stats directly from RRD files (or create graphs from them directly). It seems like the simplest way of pulling the statistics across, is with a plugin wrapping rrdtool, which consolidates stats from the collectd RRD files, mangles the field names a bit, and writes them out in the format munin expects.
 
 So [here's a plugin](https://raw.github.com/FreeRADIUS/freeradius-server/master/scripts/munin/radsniff) which does just that.
 
-There are a few caveats when interpreting stats from it. Firstly the resolution is very different between collectd (10 seconds) and munin (300 seconds). This means the stats you see in munin are AVERAGED from 5mins worth of collectd stats.
+### Configuration
+```bash
+cp scripts/munin/radsniff /usr/share/munin/plugins/radsniff
+ln -s /usr/share/munin/plugins/radsniff /etc/munin/plugins/radsniff_accounting_counters
+ln -s /usr/share/munin/plugins/radsniff /etc/munin/plugins/radsniff_accounting_latency
+ln -s /usr/share/munin/plugins/radsniff /etc/munin/plugins/radsniff_accounting_rtx
 
-If packet loss or retransmissions occur you may see a deceptively small spike on the munin graph. To 
+cat > /etc/munin/plugin-conf.d/radsniff <<DELIM
+[radsniff_accounting_latency]
+        env.type radius_latency
+        env.pkt_type accounting_response
+
+[radsniff_accounting_counters]
+        env.type radius_count
+        env.pkt_type accounting_request
+
+[radsniff_accounting_rtx]
+        env.type radius_rtx
+        env.pkt_type accounting_request
+DELIM
+```
+
+Then restart munin-node.
+
+To monitor multiple packet types create additional symlinks to the radsniff plugin, and alter ``env.pkt_type``. If running multiple instances of radsniff you should also set ``env.instance`` to the ``<instance name>`` used above.
+
+If collectd is aggregating stats from multiple hosts you'll also need to set ``env.host``. 
+
+### Caveats
+Firstly the resolution is very different between collectd (10 seconds) and munin (300 seconds). This means most of the stats you see in munin are AVERAGED from 5mins worth of collectd stats.
+
+If a spike in packet loss or retransmissions occurs you may see a deceptively small spike on the munin graph. This is because that spike is averaged out over munin's polling interval. To get the actual number of packets lost, multiply the value from the graph by 300. If you have sustained packet loss or retransmissions it should should show up fine in munin.
+
+Although the majority of GUAGE values are created using the AVERAGE consolidation function, the 'min' latency and 'max' latency use MIN and MAX respectively. It seemed more useful to know the extremes during the polling interval, especially when using the values to trigger warnings when latency gets close to the point where the NAS will start timing out requests.
+
