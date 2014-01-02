@@ -85,7 +85,7 @@ By default the init script will pass the following arguments to radsniff:
 -P "$PIDFILE"-N "$PROG" -q -W 10 -O /var/run/collectd-unixsock
 ```
 
-``-P`` and ``-N`` cannot be changed, but the other arguments can be overridden by creating ``/etc/default/radsniff`` and adding ``RADSNIFF_OPTIONS=<your options>``.
+``-P`` and ``-N`` cannot be changed (without editing the init script), but the other arguments can be overridden by creating ``/etc/default/radsniff`` and adding ``RADSNIFF_OPTIONS=<your options>``.
 
 If you need to run multiple instances of radsniff, simply ``ln -s /etc/init.d/radsniff /etc/init.d/<instance name>``. ``PIDFILE`` will then be set to ``/var/run/freeradius/<instance name>.pid``, and the init script will load ``/etc/default/<instance name>``.
 
