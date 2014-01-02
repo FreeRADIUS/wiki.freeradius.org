@@ -191,6 +191,6 @@ If collectd is aggregating stats from multiple hosts you'll also need to set ``e
 ### Caveats
 Firstly the resolution is very different between collectd (10 seconds) and munin (300 seconds). This means most of the stats you see in munin are AVERAGED from 5mins worth of collectd stats.
 
-If a spike in packet loss or retransmissions occurs you may see a deceptively small spike on the munin graph. This is because that spike is averaged out over munin's polling interval. To get the actual number of packets lost, multiply the value from the graph by 300. If you have sustained packet loss or retransmissions it should should show up fine in munin.
+If a spike in packet loss or retransmissions occurs you may see a deceptively small spike on the munin graph. This is because that spike is averaged out over munin's polling interval. To get the actual number of packets lost, multiply the value from the graph by 300. Though if you have sustained packet loss or retransmissions it should should show up fine in munin.
 
 Although the majority of GUAGE values are created using the AVERAGE consolidation function, the 'low' latency and 'high' latency use MIN and MAX respectively. It seemed more useful to know the extremes during the polling interval, especially when using the values to trigger warnings when latency gets close to the point where the NAS will start timing out requests.
