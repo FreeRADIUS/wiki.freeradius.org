@@ -14,7 +14,7 @@ Currently only the version of radsniff in the master (3.1.x) branch supports sta
 Static builds do work on the master branch, meaning you can build radsniff as a standalone binary and not have issues with libfreeradius conflicts if you're running a stable version of the FreeRADIUS server on the same host.
 
 ### Dependencies
-radsniff depends on _libpcap_ and _libcollectclient_. If _libpcap_ isn't available then radsniff will not be built. If _libcollectdclient_ isn't available radsniff will be build but without support for writing statistics out to a collectd socket.
+radsniff depends on libpcap and libcollectclient. If libpcap isn't available then radsniff will not be built. If libcollectdclient isn't available radsniff will be build but without support for writing statistics out to a collectd socket.
 
 On Debian/Ubuntu systems you can use apt to pull in the required packages:
 ```bash
@@ -50,17 +50,51 @@ The new build framework in 3.x has sufficient levels of awesome, to autocreate m
 ```bash
 make radsniff
 ```
-and it'll build libfreeradius, the radsniff binary, and not the entire server.
+and it'll just build libfreeradius, the radsniff binary, and not the entire server.
 
 Unfortunately there's no specific install target for radsniff, so for now it's best to copy the binary directly from ``./build/bin/radsniff`` to wherever you want it ``/usr/local/bin/`` for example...
 
 ### Running
+#### Manually
 3.1.x radsniff has two main modes of operation, packet decode and output, and statistics generation. By default radsniff will decode packets, but not output any statistics.
 
-There two arguments we need to pass to radsniff to get it send stats to collectd:
+There two arguments required to switch radsniff to stats mode and get it to write those stats to collect:
 * ``-W`` - To turn on statistics the ``-W <period>`` flag is used. For integrating with collectd ``<period>`` should match your collectd interval (which is by default 10 seconds).
-* ``-O`` - To direct stats to a collectd instance ``-O <server>``, is used. ``<server>`` can be an IP address, FQDN, or UNIX Socket. For this guide we'll need be using a UNIX socket ``/var/run/collectdsock``.
+* ``-O`` - To direct stats to a collectd instance ``-O <server>``, is used. ``<server>`` can be an IP address, FQDN, or UNIX Socket. For this guide we'll need be using a UNIX socket ``/var/run/collectd-sock`` (the collectd default).
 
 You may also (optionally) pass one or more ``-i <interface>`` arguments to specify interfaces to listen on. If no ``-i`` flags are passed radsniff will listen on all interfaces it can, opening separate PCAP sessions for each interface.
 
 You may also (optionally) pass ``-P <pidfile>`` to make radsniff daemonize and write out a pid file. This is primarily for use in init scripts.
+
+An example invocation for running radsniff as stats daemon would be something like:
+```bash
+radsniff -q -i eth0 -P /var/run/freeradius/radsniff.pid -W 10 -O /var/run/collectd-sock > /var/log/radsniff.log 2>&1
+```
+
+#### Via init script
+Bundled in the ``scripts/`` directory of the freeradius tarball is ``radsniff.init``. This is intended for use on Debian systems.
+
+By default the init script will pass the following arguments:
+```bash
+-P "$PIDFILE"-N "$PROG" -q -W 10 -O /var/run/collectd-unixsock
+```
+
+``-P`` and ``-N`` cannot be changed, but the other arguments can be overridden by creating ``/etc/default/radsniff`` and adding ``RADSNIFF_OPTIONS=<your options>``.
+
+If you need to run multiple instances of radsniff, simply ``ln -s /etc/init.d/radsniff /etc/init.d/<instance name>``. ``PIDFILE`` will then be set to ``/var/run/freeradius/<instance name>.pid``, and the init script will load ``/etc/default/<instance name>``.
+
+## collectd
+To date I haven't managed to get radsniff to connect to collectd over UDP (keep getting connection refused errors, suspect libcollectdclient bug), but have been successful getting it work over unix socket.
+
+Nothing special is required 
+
+## munin
+_But I don't use collectd, I use munin!_. Munin only provides an interface to pull stats from it's various plugins, this makes integrating it with radsniff more difficult (it would have to write stats out to a file which would then be consumed by a munin plugin).
+
+Although both munin and collectd use rrdtool, there doesn't appear to be an easy way to read stats directly from RRD files (or create graphs from them directly). It seems like the simplest way of pulling the statistics across, is with a plugin wrapping rrdtool, which consolidates stats from the collectd RRD files, mangles the field names a bit, and writes them out in the format munin expects.
+
+So [here's a plugin](https://raw.github.com/FreeRADIUS/freeradius-server/master/scripts/munin/radsniff) which does just that.
+
+There are a few caveats when interpreting stats from it. Firstly the resolution is very different between collectd (10 seconds) and munin (300 seconds). This means the stats you see in munin are AVERAGED from 5mins worth of collectd stats.
+
+If packet loss or retransmissions occur you may see a deceptively small spike on the munin graph. To 
