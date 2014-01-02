@@ -72,9 +72,9 @@ radsniff -q -i eth0 -P /var/run/freeradius/radsniff.pid -W 10 -O /var/run/collec
 ```
 
 #### Via init script
-Bundled in the ``scripts/`` directory of the freeradius tarball is ``radsniff.init``. This is intended for use on Debian systems.
+Bundled in the ``scripts/`` directory is ``radsniff.init``. This is intended for use on Debian systems.
 
-By default the init script will pass the following arguments:
+By default the init script will pass the following arguments to radsniff:
 ```bash
 -P "$PIDFILE"-N "$PROG" -q -W 10 -O /var/run/collectd-unixsock
 ```
