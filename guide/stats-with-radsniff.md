@@ -74,6 +74,12 @@ radsniff -q -i eth0 -P /var/run/freeradius/radsniff.pid -W 10 -O /var/run/collec
 #### Via init script
 Bundled in the ``scripts/`` directory is ``radsniff.init``. This is intended for use on Debian systems.
 
+To install:
+```
+sudo cp scripts/radsniff.init /etc/init.d/
+sudo update-rc.d radsniff defaults
+```
+
 By default the init script will pass the following arguments to radsniff:
 ```bash
 -P "$PIDFILE"-N "$PROG" -q -W 10 -O /var/run/collectd-unixsock
@@ -94,8 +100,56 @@ Nothing special is required other than enabling the unix socket plugin. To do th
        SocketPerms "0660"
 </Plugin>
 ```
+then restart collectd.
 
-and restart collectd.
+
+### rrdtool graph definitions
+#### Counters
+```
+-l 0 --vertical-label "PPS"
+DEF:received=/var/lib/collectd/rrd/<host>/<instance>-exchanged/radius_count-<packet type>.rrd:received:AVERAGE 
+DEF:linked=/var/lib/collectd/rrd/<host>/<instance>-exchanged/radius_count-<packet type>.rrd:linked:AVERAGE 
+DEF:unlinked=/var/lib/collectd/rrd/<host>/<instance>-exchanged/radius_count-<packet type>.rrd:unlinked:AVERAGE 
+DEF:reused=/var/lib/collectd/rrd/<host>/<instance>exchanged/radius_count-<packet type>.rrd:reused:AVERAGE
+AREA:received#DD44CC:received
+AREA:linked#66BBCC:linked
+STACK:unlinked#7FFF00:unlinked
+STACK:reused#FF8C00:reused
+```
+
+#### Latency
+```
+-l 0  --vertical-label "Latency (ms)"
+DEF:high=/var/lib/collectd/rrd/<host>/<instance>-exchanged/radius_latency-<packet type>.rrd:high:MAX
+DEF:low=/var/lib/collectd/rrd/<host>/<instance>-exchanged/radius_latency-<packet type>.rrd:low:MIN
+DEF:avg=/var/lib/collectd/rrd/<host>/<instance>-exchanged/radius_latency-<packet type>.rrd:avg:AVERAGE
+CDEF:trend1800=avg,1800,TRENDNAN
+CDEF:trend86400=avg,86400,TRENDNAN
+LINE:high#66BBCC:high
+LINE:low#DD44CC:low
+LINE:avg#7FFF00:avg
+LINE:trend1800#718D00:avg_30m
+LINE:trend86400#946A00:avg_day
+```
+
+#### RTX
+```
+-l 0  --vertical-label "Requests completed per second"
+DEF:none=/var/lib/collectd/rrd/<host>/<instance>-exchanged/radius_rtx-<packet type>.rrd:none:AVERAGE 
+DEF:1=/var/lib/collectd/rrd/<host>/<instance>-exchanged/radius_rtx-<packet type>.rrd:1:AVERAGE 
+DEF:2=/var/lib/collectd/rrd/<host>/<instance>-exchanged/radius_rtx-<packet type>.rrd:2:AVERAGE 
+DEF:3=/var/lib/collectd/rrd/<host>/<instance>-exchanged/radius_rtx-<packet type>.rrd:3:AVERAGE
+DEF:4=/var/lib/collectd/rrd/<host>/<instance>-exchanged/radius_rtx-<packet type>.rrd:4:AVERAGE
+DEF:more=/var/lib/collectd/rrd/<host>/<instance>-exchanged/radius_rtx-<packet type>.rrd:more:AVERAGE
+DEF:lost=/var/lib/collectd/rrd/<host>/<instance>-exchanged/radius_rtx-<packet type>.rrd:lost:AVERAGE 
+AREA:none#2AD400:none
+STACK:1#4DB000:1
+STACK:2#718D00:2
+STACK:3#946A00:3
+STACK:4#B84600:4
+STACK:more#DB2300:more
+STACK:lost#FF0000:lost
+```
 
 ## munin
 _But I don't use collectd, I use munin!_.
@@ -139,5 +193,4 @@ Firstly the resolution is very different between collectd (10 seconds) and munin
 
 If a spike in packet loss or retransmissions occurs you may see a deceptively small spike on the munin graph. This is because that spike is averaged out over munin's polling interval. To get the actual number of packets lost, multiply the value from the graph by 300. If you have sustained packet loss or retransmissions it should should show up fine in munin.
 
-Although the majority of GUAGE values are created using the AVERAGE consolidation function, the 'min' latency and 'max' latency use MIN and MAX respectively. It seemed more useful to know the extremes during the polling interval, especially when using the values to trigger warnings when latency gets close to the point where the NAS will start timing out requests.
-
+Although the majority of GUAGE values are created using the AVERAGE consolidation function, the 'low' latency and 'high' latency use MIN and MAX respectively. It seemed more useful to know the extremes during the polling interval, especially when using the values to trigger warnings when latency gets close to the point where the NAS will start timing out requests.
