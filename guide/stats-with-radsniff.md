@@ -87,8 +87,6 @@ By default the init script will pass the following arguments to radsniff:
 
 ``-P`` and ``-N`` cannot be changed (without editing the init script), but the other arguments can be overridden by creating ``/etc/default/radsniff`` and adding ``RADSNIFF_OPTIONS=<your options>``.
 
-If you need to run multiple instances of radsniff, simply ``ln -s /etc/init.d/radsniff /etc/init.d/<instance name>``. ``PIDFILE`` will then be set to ``/var/run/freeradius/<instance name>.pid``, and the init script will load ``/etc/default/<instance name>``.
-
 ## collectd
 To date I haven't managed to get radsniff to connect to collectd over UDP (keep getting connection refused errors, suspect libcollectdclient bug), but have been successful getting it work over unix socket.
 
