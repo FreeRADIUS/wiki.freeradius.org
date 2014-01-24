@@ -15,10 +15,6 @@ Most commonly used VoIP protocols (SIP and H.323) use a small number of Authenti
 
 [http://jradius.sourceforge.net JRadius] is a Java plugin for FreeRADIUS, which talks to a Java server, allowing you to write RADIUS handlers in Java.
 
-==See Also==
-
-* [[RADIUS Clients]]
-
 =Defunct RADIUS Servers=
 
 There have been a number of Open Source RADIUS servers developed over the years.  Some are no longer in active development, and are listed below.
@@ -54,3 +50,7 @@ Although Lucent no longer supports this code, a number of security patches and o
 ==YARD RADIUS==
 
 [http://sourceforge.net/projects/yardradius Yet Another Radius Daemon] (i.e. YARD RADIUS) is a free RADIUS RFC compliant daemon for accounting and authorization which is derived from original Livingston Enterprise Inc. RADIUS daemon release 2.1. It adds a number of useful features to the Livingston daemon.  It is not actively maintained, and has not had a release in many years.
+
+==See Also==
+
+* [[RADIUS Clients]]
