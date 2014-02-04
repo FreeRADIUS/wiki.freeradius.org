@@ -210,7 +210,7 @@ DEFAULT Service-Type == Outbound-User, User-Profile := "uid=outbound-dialup,dc=c
 
 ### Group Support
 
-The module supports searching for ldap groups by use of the Ldap-Group attribute. As long as the module has been instanciated it can be used to do group membership checks through other modules. For example in the users file:
+The module supports searching for ldap groups by use of the Ldap-Group attribute. As long as the module has been instantiated it can be used to do group membership checks through other modules. For example in the users file:
 
 <pre>
 DEFAULT Ldap-Group == "disabled", Auth-Type := Reject
@@ -247,6 +247,8 @@ post-auth {
         }
 }
 </pre>
+
+Note: In 2.x.x the module LDAP-Group was associated with, was largely random and dependent on module instantiation order. In 3.x.x LDAP-Group will always refer to the ``ldap {}`` instance.
 
 ### USERDN Attribute
 
