@@ -78,7 +78,6 @@ If you're stripping all realm names (i.e. you want user joe@domain.com to authen
  
              sql_user_name = '%{Stripped-User-Name}'
 
- 
 ...and comment out the following line referring to just User-Name. If you want to see what's happening here, switch on all the logging options in radiusd.conf and run radiusd in debug mode (-X) to see what's happening : you'll see " user@domain" being passed to SQL when using User-Name, but just "user" when using Stripped-User-Name. Using the latter, realms worked for me (basically, I strip everything, as all user names are unique on the server anyway). Of course, set all your other SQL options as needed (database login details, etc)
 
 Edit /etc/raddb/sites-available/default and uncomment the line containing 'sql' in the authorize{} section. The best place to put it is just after the 'files' entry. Indeed, if you'll just be using SQL, and not falling back to text files, you could comment out or delete the 'files' entry altogether.
