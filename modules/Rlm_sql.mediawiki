@@ -136,9 +136,9 @@ In FreeRADIUS 2 > pre1, sql xlat strings can also be used in conditional stateme
 For example:
 The following statement checks to see if a user has entitlement information in SQL groups, before running the many expensive queries of the SQL module. 
 
-if("%{sql:SELECT COUNT(UserName) FROM `radusergroup` WHERE UserName ="'%{User-Name}'}" > 0){
-      sql
-}
+  if("%{sql:SELECT COUNT(UserName) FROM `radusergroup` WHERE UserName ="'%{User-Name}'}" > 0){
+    sql
+  }
 
 ==See Also==
 
