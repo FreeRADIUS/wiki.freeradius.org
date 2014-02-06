@@ -228,10 +228,10 @@ Symptom: you are seeing lots of duplicate requests in radius.log, yet users can 
 Perhaps your server has multiple IP addresses, perhaps even multiple network cards. If a request comes in on IP address a.b.c.d but the server replies with as source IP address w.x.y.z most NAS won't accept the answer.
 
 The simplest solution is to have radiusd bind to a specific address.
-It will only listen to that address and replies will always go out with that address as the source address. See [[#Is there a way to bind FreeRADIUS to a specific IP address?]]
+It will only listen to that address and replies will always go out with that address as the source address. See [[Is there a way to bind FreeRADIUS to a specific IP address?|/guide/FAQ#Is there a way to bind FreeRADIUS to a specific IP address?]]
 
 The above solution is not always possible. If you have multiple IPs and want FreeRADIUS to listen on all of them. Make sure that `./configure  --with-udpfromto`
-was specified during compilation ([[#Is there a way to bind FreeRADIUS to a specific IP address?]]). On Linux and FreeBSD this will make FreeRADIUS to respond from the IP the initial request was received to.
+was specified during compilation (see [[Is there a way to bind FreeRADIUS to a specific IP address?|/guide/FAQ#Is there a way to bind FreeRADIUS to a specific IP address?]]). On Linux and FreeBSD this will make FreeRADIUS to respond from the IP the initial request was received to.
 
 ### VSA in Access-Reject
 
@@ -601,7 +601,7 @@ You may run a SQL query each time a user has an access denied. First you need to
 
 	postauth_query = "INSERT into radpostauth (user, pass, date) values ('%{User-Name}', '%{User-Password:-Chap-Password}', '%S')"
 
-Then add the [[sql]] module to the '''post-auth''' section of [[radiusd.conf|rlm_sql]]. Since we want to run the SQL query only on failed login, we need to use the sub-section [http://freeradius.org/radiusd/doc/Post-Auth-Type Post-Auth-Type REJECT]. For example:
+Then add the [[sql]] module to the '''post-auth''' section of [[radiusd.conf|rlm_sql]]. Since we want to run the SQL query only on failed login, we need to use the sub-section [[Post-Auth-Type REJECT|http://freeradius.org/radiusd/doc/Post-Auth-Type]]. For example:
 
 	post-auth {
 		# Login successful: get an address from the IP pool.
@@ -761,7 +761,7 @@ Note however, that this option is not available in freeradius 1.x. The freeradiu
 Use the following configuration :
 
 	Framed-Route := "10.130.1.252/32 0.0.0.0  5",
-	Framed-Route += "10.130.0.252/32 0.0.0.0 10",</pre>
+	Framed-Route += "10.130.0.252/32 0.0.0.0 10",
 
 Which gives : (tcpdump output)
 
@@ -855,4 +855,4 @@ FreeRADIUS Server 2.0.0 and greater has full support for both IPv6 attributes an
 
 FreeRADIUS is the result of the work done by a large number of people.
 
-The major contributors are listed on the [[Acknowledgments]] page.
+The major contributors are listed on the [[Acknowledgments|project/Acknowledgements]] page.
