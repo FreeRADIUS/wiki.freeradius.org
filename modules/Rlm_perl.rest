@@ -349,5 +349,4 @@ External examples
 ------------------
 
 * [[Examples from PacketFence|http://www.packetfence.org]]
-* [[VLAN assignment by SQL queries and local logic|http://mtn.inverse.ca/branch/head/file/org.packetfence.1_9/pf/addons/802.1X/rlm_perl_packetfence.pl]]
-* [[VLAN assignment by Web Services (SOAP) remote calls|http://mtn.inverse.ca/branch/head/file/org.packetfence.trunk/pf/addons/802.1X/rlm_perl_packetfence_soap.pl]]
+* [[VLAN assignment by Web Services (SOAP) remote calls|https://github.com/inverse-inc/packetfence/blob/stable/raddb/packetfence.pm]]
