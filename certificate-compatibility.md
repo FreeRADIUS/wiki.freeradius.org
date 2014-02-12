@@ -1,0 +1,1 @@
+http://wiki.freeradius.org/guide/Certificate%20Compatibility
