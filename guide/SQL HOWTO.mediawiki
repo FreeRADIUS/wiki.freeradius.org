@@ -32,7 +32,7 @@ Next up, you need to create the schema for your database. There is an SQL script
 
 '''Note:''' use a  more secure password than "radpass" in the above example
 
- cd /usr/share/doc/packages/freeradius/doc/examples/ *(Sorry, I can't find this directory in my centOS + freeradius 2.1.10)
+ cd /usr/share/doc/packages/freeradius/doc/examples/ *(Sorry, I can't find this directory in my centOS + freeradius 2.1.10. On CentOS 6.3 the schema can be found in /etc/raddb/sql/mysql/schema.sql, after installing the package freeradius-mysql )
  mysql -uroot -p radius < mysql.sql
 
 '''Note:''' CentOS/RHEL Schema Files Location:
