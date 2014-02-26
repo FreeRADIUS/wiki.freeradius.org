@@ -47,7 +47,7 @@ XSupplicant - freeradius (EAP/TLS) notes may be found at:
 
 ==rad_eap_test==
 
-[http://wiki.eduroam.cz/rad_eap_test/ rad_eap_test] is a tool for testing
+[http://www.eduroam.cz/rad_eap_test/ rad_eap_test] is a tool for testing
 EAP from the shell. Uses eapol_test from wpa_supplicant, and also works
 as a nagios plugin.
 
