@@ -1,7 +1,7 @@
 # rlm_sqlcounter
 The **rlm_sqlcounter** module enables a packet counter using accounting records written into an SQL database.
 
-Note: You must use SQL accounting for rlm_sqlcounter to work (list ``sql`` in the ``accounting {}`` section of your virtual server.
+Note: You must use SQL accounting for rlm_sqlcounter to work (list ``sql`` in the ``accounting {}`` section of your virtual server).
 
 ## Configuration
 
