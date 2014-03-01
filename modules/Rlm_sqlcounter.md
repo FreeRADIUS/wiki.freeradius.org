@@ -64,6 +64,7 @@ CREATE OR REPLACE FUNCTION "greater"(integer, integer) RETURNS integer AS '
         RETURN res;
     END;
 ' LANGUAGE 'plpgsql';
+```
 
 ## Scenarios
 ### Lifetime limit
@@ -116,7 +117,7 @@ A user with User-Name ``test0002`` has  online time limit of 3 hours per day.
 ```
 authorize {
     files
-    noresetcounter
+    dailycounter
 }
 ```
 
