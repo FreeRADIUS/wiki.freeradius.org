@@ -40,7 +40,7 @@ sqlcounter dailycounter {
 }
 ```
 
-Note: If you are running postgres 7.x, you may not have a GREATER function. A substitute user defined stored ``plsql`` procedure would be:
+Note: If you are running postgres 7.x, you may not have a GREATER function. A substitute user defined stored ``plpgsql`` procedure would be:
 ```sql
 CREATE OR REPLACE FUNCTION "greater"(integer, integer) RETURNS integer AS '
     DECLARE
