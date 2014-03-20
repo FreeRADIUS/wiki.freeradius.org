@@ -313,7 +313,7 @@ rewrite_called_station_id {
 }
 </pre>
 
-#### raddb/sites-available/default authorize{}
+#### raddb/sites-available/default authorize
 
 Add the a module call for 'rewrite_calling_station_id' to the authorize section directly above the call to 'rewrite_calling_station_id'.
 
@@ -366,7 +366,7 @@ As above.
 #### raddb/policy.conf
 
 As above.
-#### raddb/sites-available/default authorize{}
+#### raddb/sites-available/default authorize
 
 Add the a module call for 'rewrite_calling_station_id' to the authorize section directly above the call to 'rewrite_calling_station_id'.
 
