@@ -53,7 +53,7 @@ You can control what to return to FreeRadius with returning predefined values::
 
 For example if yout want to reject some user in authentication then your auth function should return RLM_MODULE_REJECT::
 
-    sub authentication {
+    sub authenticate {
         if ($RAD_REQUEST{'User-Name'} eq 'bad_user') 
             return RLM_MODULE_REJECT;
         return RLM_MODULE_OK;
