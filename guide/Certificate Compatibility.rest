@@ -50,7 +50,7 @@ If you are running version 2.1.10 or later, you may see the following message::
 
  WARNING: !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
  WARNING: !! EAP session for state 0x3e833be03884222b... did not finish!
- WARNING: !! Please read http://wiki.freeradius.org/Certificate_Compatibility
+ WARNING: !! Please read http://wiki.freeradius.org/guide/Certificate_Compatibility
  WARNING: !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 In that case
