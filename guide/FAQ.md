@@ -613,7 +613,7 @@ Then add the [[sql]] module to the '''post-auth''' section of [[radiusd.conf|rlm
 		}
 	}
 
-Note: This option is usable if you want to detect fraud or similar activities from your users. Keep in mind that this table can became a very large in case you disable to much user accounts, in case of ddos attack, etc. Every rejected attempt will be logged.
+Note: This option is usable if you want to detect fraud or similar activities from your users. Keep in mind that this table can become very large in case you disable too many user accounts, in case of ddos attack, etc. Every rejected attempt will be logged.
 
 ### How do I use Login-Time for groups, not for users?
 
