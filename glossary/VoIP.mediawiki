@@ -2,5 +2,4 @@ Voice over Internet Protocol, usually said as "Voice over IP" of "VOIP", is a te
 
 == References ==
 
-*[http://www.townsendassets.com/cisco/other/voip_gateway.htm VoIP Gateways]
 *[http://en.wiktionary.org/wiki/VoIP VoIP Wiktionary Entry]
