@@ -20,7 +20,7 @@ FreeRADIUS 3.x.x
     # Replace '/path/to' with the actual path to the multiotp.php file
     exec multiotp {
             wait = yes
-            program = "/path/to/multiotp.php %{User-Name} %{User-Password}"
+            program = "/path/to/multiotp.php %{User-Name} %{User-Password} -src=%{Packet-Src-IP-Address} -chap-challenge=%{CHAP-Challenge} -chap-password=%{CHAP-Password} -ms-chap-challenge=%{MS-CHAP-Challenge} -ms-chap-response=%{MS-CHAP-Response} -ms-chap2-response=%{MS-CHAP2-Response}"
     }
 2. Edit 'raddb/policy.conf' and add the following to override the authorize method of the exec module::
 
