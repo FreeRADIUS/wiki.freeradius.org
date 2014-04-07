@@ -5,7 +5,8 @@ Introduction
 ------------
 This guide shows the configuration necessary to make the [[multiOTP|http://www.multiotp.net/]] system work with recent versions of FreeRADIUS, it doesn't detail actually setting the tokens up, but there's plenty of documentation on that already.
 
-[[multiOTP|http://www.multiotp.net/]] tokens will work with any type of PAP based authentication, including EAP-TTLS-PAP. With the correct OS/Supplicant software tokens can be used for 802.1X authentication and well as for standard PAP authentication (just make the changes described in the inner server). This guide closely follows the [[NTLM Auth with PAP HOWTO|NTLM Auth with PAP HOWTO]] but with a little extra validation.
+[[multiOTP|http://www.multiotp.net/]] tokens will work with any type of PAP/CHAP/MS-CHAP/MS-CHAPv2 based authentication, including EAP-TTLS-PAP. With the correct OS/Supplicant software tokens can be used for 802.1X authentication and well as for standard PAP/CHAP/MS-CHAP/MS-CHAPv2 authentication (just make the changes described in the inner server). This guide closely follows the [[NTLM Auth with PAP HOWTO|NTLM Auth with PAP HOWTO]] but with a little extra validation.
+NT_KEY generation is also supported using the -request-nt-key option (like for ntlm_auth --request-nt-key option)
 
 Before starting or asking for help
 ----------------------------------
@@ -20,7 +21,7 @@ FreeRADIUS 3.x.x
     # Replace '/path/to' with the actual path to the multiotp.php file
     exec multiotp {
             wait = yes
-            program = "/path/to/multiotp.php %{User-Name} %{User-Password} -src=%{Packet-Src-IP-Address} -chap-challenge=%{CHAP-Challenge} -chap-password=%{CHAP-Password} -ms-chap-challenge=%{MS-CHAP-Challenge} -ms-chap-response=%{MS-CHAP-Response} -ms-chap2-response=%{MS-CHAP2-Response}"
+            program = "/path/to/multiotp.php %{User-Name} %{User-Password} -request-nt-key -src=%{Packet-Src-IP-Address} -chap-challenge=%{CHAP-Challenge} -chap-password=%{CHAP-Password} -ms-chap-challenge=%{MS-CHAP-Challenge} -ms-chap-response=%{MS-CHAP-Response} -ms-chap2-response=%{MS-CHAP2-Response}"
     }
 2. Edit 'raddb/policy.conf' and add the following to override the authorize method of the exec module::
 
