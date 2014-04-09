@@ -9,8 +9,7 @@ Authentication methods
 ======================
 The following authentication types are some of the methods which are supported by the server:
 
-* Clear-text password in local configuration file (PAP) (cf. [[users]] file)
-* Encrypted password in local configuration file
+* Plaintext-Authentication-Protocol (PAP)
 * CHAP
 * MS-CHAP
 * MS-CHAPv2
