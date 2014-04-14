@@ -252,6 +252,19 @@ post-auth {
 }
 </pre>
 
+By default, the LDAP group search will be done using the group's Common Name, and by appending the **groupmembership_filter** value as a search filter.  
+
+Modify the **groupmembership_filter** according to what will return a unique group membership from your specific LDAP server.  For example, a groupmembership_filter for a Windows 2008 R2 Active Directory server could be: 
+<pre>groupmembership_filter = "(|(&(objectClass=group)(member=%{control:Ldap-UserDn})))"</pre>
+
+Using the filter above, a group search for user "CN=test,CN=Users,DC=domain,dc=com" (which was populated from %{control:Ldap-UserDn}) and group "MyGroup" (taken from the LDAP-Group attribute) would yield a final search filter of:
+<pre>"(&(cn=MyGroup)(|(&(objectClass=group)(member=CN\3dtest\2cCN\3dUsers\2cDC\3ddomain\2cDC\3dcom))))"</pre>  
+
+If the ldap module returns <pre>rlm_ldap::ldap_groupcmp: Group MyGroup not found or user is not a member error</pre> then use ldapsearch with the final filter to troubleshoot why the group search returned no result (could a bad filter, no actual membership, searching for the wrong LDAP attribute, etc).  
+
+Example ldapsearch command to verify group attributes (Windows 2008 R2 Active Directory target):   
+<pre>ldapsearch -x -b "cn=Users,dc=domain,dc=com" -D "cn=test,cn=Users,dc=domain,dc=com" -h domain.com -w "password" "(&(cn=MyGroup))"</pre>
+
 Note: In 2.x.x the module LDAP-Group was associated with, was largely random and dependent on module instantiation order. In 3.x.x LDAP-Group will always refer to the ``ldap {}`` instance.
 
 ### USERDN Attribute
