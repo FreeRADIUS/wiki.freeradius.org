@@ -174,6 +174,10 @@ The following setup controls the rlm_ldap module.
 	}
 </pre>
 
+The **identity** and **password** values are used for the initial search to find the user's DN in the directory. If not set, the searches will be anonymous and may not work against various LDAP servers.
+
+Also pay special attention to the **filter** value; it is used to find the user in the directory and WILL change across different LDAP systems. For example, the default filter "(uid=%{Stripped-User-Name:-%{User-Name}})" will not return any results against a Windows 2008 R2 Active Directory, as "uid" is not a valid attribute.  The search filter should instead use another attribute, like sAMAccountName, the resulting filter being "(sAMAccountName=%{Stripped-User-Name:-%{User-Name}})"
+
 **NOTE**: As LDAP is case insensitive, you should probably also set "lower_user = yes" and "lower_time = before" in main section of radiusd.conf, to get limits on simultaneous logins working correctly. Otherwise, users will be able get large number of sessions, capitalizing parts of their login names.</p>
 
 ### LDAP Module Messages
