@@ -132,10 +132,18 @@ In the Authentication section add::
 
 Add a line containing 'perl' to the Accounting section.
 
-In the users file comment the 'DEFAULT  Auth-Type = System' lines, and then add::
+In case of FreeRADIUS 2.x: In the users file comment the 'DEFAULT  Auth-Type = System' lines, and then add::
 
     DEFAULT  Auth-Type = Perl
         Fall-Through = yes
+
+In case of FreeRADIUS 3.x: add the following lines under the perl statement in the authorize section
+
+    if (ok || updated) {
+        update control {
+            Auth-Type := Perl
+        }
+    }
 
 How fast is rlm_perl
 --------------------
