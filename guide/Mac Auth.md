@@ -8,6 +8,7 @@ NAS usually send the MAC address in the Calling-Station-ID attribute. There are 
 
  * 00:11:22:33:44:55
  * 00-11-22-33-44-55
+ * 0011.2233.4455
  * upper-case hex
  * lower-case hex
 
@@ -18,7 +19,7 @@ It is sensible to re-format these into a single format at the server.
 # Rewrite called station id attribute into a standard format.
 #
 rewrite_calling_station_id {
-        if (Calling-Station-Id =~ /([0-9a-f]{2})[-:]?([0-9a-f]{2})[-:]?([0-9a-f]{2})[-:]?([0-9a-f]{2})[-:]?([0-9a-f]{2})[-:]?([0-9a-f]{2})/i){
+        if (Calling-Station-Id =~ /([0-9a-f]{2})[-:]?([0-9a-f]{2})[-:.]?([0-9a-f]{2})[-:]?([0-9a-f]{2})[-:.]?([0-9a-f]{2})[-:]?([0-9a-f]{2})/i) {
                 update request {
                         Calling-Station-Id := "%{tolower:%{1}-%{2}-%{3}-%{4}-%{5}-%{6}}"
                 }
