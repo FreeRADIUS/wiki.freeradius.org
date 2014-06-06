@@ -139,7 +139,7 @@ In case of FreeRADIUS 2.x: In the users file comment the 'DEFAULT  Auth-Type = S
     DEFAULT  Auth-Type = Perl
         Fall-Through = yes
 
-In case of FreeRADIUS 3.x: add the following lines under the perl statement in the authorize section
+In case of FreeRADIUS 3.x: add the following lines under the perl statement in the authorize section::
 
     if (ok || updated) {
         update control {
