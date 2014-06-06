@@ -53,7 +53,7 @@ You can control what to return to FreeRadius with returning predefined values::
       RLM_MODULE_NUMCODES =>  9, #  How many return codes there are
     };
 
-For example if yout want to reject some user in authentication then your auth function should return RLM_MODULE_REJECT:
+For example if yout want to reject some user in authentication then your auth function should return RLM_MODULE_REJECT::
 
     sub authenticate {
         if ($RAD_REQUEST{'User-Name'} eq 'bad_user') {
