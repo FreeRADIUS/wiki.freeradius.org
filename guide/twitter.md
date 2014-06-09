@@ -12,10 +12,15 @@ pairs in the correct order.
 Follow the link [here](https://dev.twitter.com/docs/auth/tokens-devtwittercom) signing up 
 for an account and creating a new application if necessary.
 
+## Understanding how signing works
+Twitter has some excellent documents on [authorizing](https://dev.twitter.com/docs/auth/authorizing-request) and [signing](https://dev.twitter.com/docs/auth/creating-signature) requests.
+
+The policies below implement signing for simple status updates. It's not currently possible to write a generic signing policy.
+
 ## Dictionary attributes
 
 Add the following to your custom dictionary 
-```
+```text
 ATTRIBUTE	Twitter-API-Method			<next #>	integer
 ATTRIBUTE	Twitter-API-URL				<next #>	string
 ATTRIBUTE	Twitter-API-Data			<next #>	string
@@ -24,8 +29,11 @@ VALUE	Twitter-API-Method		GET			1
 VALUE	Twitter-API-Method		POST			2
 VALUE	Twitter-API-Method		PUT			3
 VALUE	Twitter-API-Method		DELETE			4
-``
 ```
+
+## The policy
+And add this to policy.d/twitter
+```text
 #
 #  Basic integration with the twitter API
 #
@@ -112,7 +120,7 @@ twitter_tweet {
 
 	# Stage 3.0 - Sending the request
 	update request {
-		Tmp-String-6 := "%{rest:%{Twitter-API-Method} %{Twitter-API-URL} status=%{Twitter-API-Data}}"
+		Tmp-String-5 := "%{rest:%{Twitter-API-Method} %{Twitter-API-URL} status=%{Twitter-API-Data}}"
 	}
 }
 ```
