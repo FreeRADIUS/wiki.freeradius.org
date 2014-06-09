@@ -8,6 +8,8 @@ of writing there is no xlat method to sort values lexicographically. So in order
 the more complex API calls, you will need to modify Stage 1.1 and add your other post data
 pairs in the correct order.
 
+Note: The required functionality is only available in FreeRADIUS v3.0.4
+
 ## Getting the tokens
 Follow the link [here](https://dev.twitter.com/docs/auth/tokens-devtwittercom) signing up 
 for an account and creating a new application if necessary.
