@@ -1,14 +1,17 @@
+Note: The required functionality to do basic twitter operations is only available in FreeRADIUS >= v3.0.4
+
 # Overview
 The difficult part in twitter integration is signing the requests. If a single character
 is incorrect, the signature won't match, and the Twitter API will return an authentication
 error.
 
-The config snipped below shows how this can be done for simple status updated. At the time
+The config snippet below shows how this can be done for a simple status update. At the time
 of writing there is no xlat method to sort values lexicographically. So in order to use
 the more complex API calls, you will need to modify Stage 1.1 and add your other post data
-pairs in the correct order.
+pairs, maintaining lexicographic attribute order manually.
 
-Note: The required functionality is only available in FreeRADIUS v3.0.4
+This is all very much a work in progress, and whether additional example operations get added here will
+depend on the actual demand for twitter integration.
 
 ## Getting the tokens
 Follow the link [here](https://dev.twitter.com/docs/auth/tokens-devtwittercom) signing up 
