@@ -29,8 +29,9 @@ Radius logging choices - Commented lines are not required::
 Restart the syslog daemon
 =========================
 On the distro we use it is - services restart sysklogd
+
 * RedHat - service syslog restart
-* Ubuntu - ?
+* Debian/Ubuntu - /etc/init.d/rsyslog restart
 * FreeBSD - /etc/rc.d/syslogd restart
 
 Modify ``/etc/raddb/radiusd.conf``
