@@ -50,7 +50,7 @@ Putting these options in the startup script is different for each distribution.
 
 * Ours is in /etc/sysconf/options/radiusd
 * Redhat - ?
-* Ubuntu - ?
+* Debian/Ubuntu - /etc/default/freeradius
 
 Syslog Priorities
 =================
