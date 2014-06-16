@@ -2,7 +2,7 @@ Pre-built binary packages for a number of operating systems are available from t
 
 The officially supported list of third-party sites is at http://freeradius.org/download.html and also as follows:
 
-* [[Red Hat FAQ#wiki-Current_Prebuilt_RPMs_for_RHEL_5_and_CentOS_5|CentOS]] 
+* [[Red Hat FAQ#Current-Pre-built-RPMs-for-RHEL-5-and-CentOS-5|CentOS]] 
 * [http://freeradius.net Cygwin]
 * [http://packages.debian.org/freeradius Debian] ([[building/Debian|with backports]])
 * [http://pkgsrc.se/net/freeradius DragonFlyBSD] (via NetBSD pkgsrc)
