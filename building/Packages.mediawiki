@@ -15,7 +15,7 @@ The officially supported list of third-party sites is at http://freeradius.org/d
 * [[guide/Red Hat FAQ|Red Hat Enterprise Linux]]
 * [[Solaris#wiki-Solaris_Packages|Solaris]]
 * [http://download.opensuse.org/repositories/network:/aaa/ SUSE and openSUSE] (the Network:AAA repository of the [http://www.opensuse.org OpenSUSE Project])
-* [http://packages.ubuntu.com/freeradius Ubuntu] (or via [https://launchpad.net/~freeradius/+archive/stable unofficial PPA])
+* [http://packages.ubuntu.com/freeradius Ubuntu] (or via [https://launchpad.net/~freeradius/+archive/stable-3.0 unofficial PPA - v3.0.x] | [https://launchpad.net/~freeradius/+archive/stable v2.x.x])
 * [http://freeradius.org/business/roadmap.html#windows Windows]
 
 FreeRADIUS is shipped on the installation media of many of the above.
