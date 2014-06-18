@@ -14,8 +14,8 @@ The officially supported list of third-party sites is at http://freeradius.org/d
 * [http://ports.openbsd.nu/net/freeradius OpenBSD]
 * [[guide/Red Hat FAQ|Red Hat Enterprise Linux]]
 * [[Solaris#wiki-Solaris_Packages|Solaris]]
-* [http://download.opensuse.org/repositories/network:/aaa/ SUSE and openSUSE] (the Network:AAA repository of the [http://www.opensuse.org OpenSUSE Project]), or [http://software.opensuse.org/download.html?project=home%3Afreeradius%3A3.0.x%3Asuse&package=freeradius-server unofficial OBS repository - v3.0.x] | [http://software.opensuse.org/download.html?project=home%3Afreeradius%3A2.x.x%3Asuse&package=freeradius-server v2.x.x]
-* [http://packages.ubuntu.com/freeradius Ubuntu], or [https://launchpad.net/~freeradius/+archive/stable-3.0 unofficial PPA - v3.0.x] | [https://launchpad.net/~freeradius/+archive/stable v2.x.x]
+* [http://download.opensuse.org/repositories/network:/aaa/ SUSE and openSUSE] (the Network:AAA repository of the [http://www.opensuse.org OpenSUSE Project]), or via [http://software.opensuse.org/download.html?project=home%3Afreeradius%3A3.0.x%3Asuse&package=freeradius-server unofficial OBS repository - v3.0.x] | [http://software.opensuse.org/download.html?project=home%3Afreeradius%3A2.x.x%3Asuse&package=freeradius-server v2.x.x]
+* [http://packages.ubuntu.com/freeradius Ubuntu], or via [https://launchpad.net/~freeradius/+archive/stable-3.0 unofficial PPA - v3.0.x] | [https://launchpad.net/~freeradius/+archive/stable v2.x.x]
 * [http://freeradius.org/business/roadmap.html#windows Windows]
 
 FreeRADIUS is shipped on the installation media of many of the above.
