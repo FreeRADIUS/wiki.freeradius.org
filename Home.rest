@@ -55,6 +55,8 @@ Documentation
 -------------
 **Beginners are strongly recommended to read the short [[concepts|guide/Concepts]] page, which provides a very light overview of how the server works.**
 
+A short introduction to RADIUS concepts, and to FreeRADIUS is available [[here|http://networkradius.com/doc/FreeRADIUS%20Technical%20Guide.pdf]].
+
 This wiki collects a large amount of documentation relating to [[glossary|pages/glossary/]] together in one place. Pages of particular interest to newcomers will be the [[FAQ|guide/FAQ]] and [[HOWTO|guide/HOWTO]] sections, although the [[Traditional FreeRADIUS docs page|http://www.freeradius.org/doc/]] the [[docs|https://github.com/FreeRADIUS/freeradius-server/tree/master/doc]] folder included in the server distribution also include "man" pages, and other documentation.
 
 There are many third-party web sites and HOWTO's that give advice on FreeRADIUS.  They are usually years out of date, and refer to old versions. The advice that they give is also wrong.  We **strongly** recommend that you avoid most third-party documentation.

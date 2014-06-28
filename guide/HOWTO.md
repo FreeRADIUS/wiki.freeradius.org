@@ -10,6 +10,7 @@
 * [[SQL Huntgroup|guide/SQL Huntgroup HOWTO]] (How to implement huntgroups in SQL)
 * [[Lockout|guide/lockout]]
 * [[Mac-Auth|guide/Mac Auth]]
+* [[Twitter|guide/twitter]]
 
 Device configuration examples
 -----------------------------

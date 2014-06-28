@@ -5,7 +5,9 @@ Introduction
 ------------
 This guide shows the configuration necessary to make the [[multiOTP|http://www.multiotp.net/]] system work with recent versions of FreeRADIUS, it doesn't detail actually setting the tokens up, but there's plenty of documentation on that already.
 
-[[multiOTP|http://www.multiotp.net/]] tokens will work with any type of PAP based authentication, including EAP-TTLS-PAP. With the correct OS/Supplicant software tokens can be used for 802.1X authentication and well as for standard PAP authentication (just make the changes described in the inner server). This guide closely follows the [[NTLM Auth with PAP HOWTO|NTLM Auth with PAP HOWTO]] but with a little extra validation.
+[[multiOTP|http://www.multiotp.net/]] tokens will work with any type of PAP/CHAP/MS-CHAP/MS-CHAPv2 based authentication, including EAP-TTLS-PAP. With the correct OS/Supplicant software tokens can be used for 802.1X authentication and well as for standard PAP/CHAP/MS-CHAP/MS-CHAPv2 authentication (just make the changes described in the inner server). This guide closely follows the [[NTLM Auth with PAP HOWTO|NTLM Auth with PAP HOWTO]] but with a little extra validation.
+
+NT_KEY generation is also supported using the -request-nt-key option (like for ntlm_auth --request-nt-key option), which is needed in order to enable VPN (PPTP + MPPE) with MS-CHAP/MS-CHAPv2.
 
 Before starting or asking for help
 ----------------------------------
@@ -14,15 +16,35 @@ Before starting or asking for help
 
 FreeRADIUS 3.x.x
 ----------------
+
 1. Create 'raddb/modules/multiotp' and add the following, this will create a new instance of the exec module::
 
     # Exec module instance for multiOTP
     # Replace '/path/to' with the actual path to the multiotp.php file
     exec multiotp {
             wait = yes
-            program = "/path/to/multiotp.php %{User-Name} %{User-Password}"
+            input_pairs = request
+            output_pairs = reply
+            program = "/path/to/multiotp.php %{User-Name} %{User-Password} -request-nt-key -src=%{Packet-Src-IP-Address} -chap-challenge=%{CHAP-Challenge} -chap-password=%{CHAP-Password} -ms-chap-challenge=%{MS-CHAP-Challenge} -ms-chap-response=%{MS-CHAP-Response} -ms-chap2-response=%{MS-CHAP2-Response}"
+            shell_escape = yes
     }
-2. Edit 'raddb/policy.conf' and add the following to override the authorize method of the exec module::
+
+2. Copy module/mschap to module/multiotpmschap. Change the following line in multiotpmschap::
+
+    "mschap {"
+    to
+    "mschap multiotpmschap {"
+
+Also change ntlm_auth variable::
+
+    ntlm_auth = "/path/to/multiotp.php %{User-Name} %{User-Password}
+    -request-nt-key -src=%{Packet-Src-IP-Address}
+    -chap-challenge=%{CHAP-Challenge} -chap-password=%{CHAP-Password}
+    -ms-chap-challenge=%{MS-CHAP-Challenge}
+    -ms-chap-response=%{MS-CHAP-Response}
+    -ms-chap2-response=%{MS-CHAP2-Response}"
+
+3. Edit 'raddb/policy.conf' and add the following to override the authorize method of the exec module::
 
     policy {
         # Change to a specific prefix if you want to deal with normal PAP authentication as well as OTP
@@ -31,15 +53,22 @@ FreeRADIUS 3.x.x
         multiotp.authorize {
            # This test is for decimal OTP code only, otherwise you will have to change it
            # Try for example this simple test: if (!control:Auth-Type) {
-            if (!control:Auth-Type && User-Password =~ /^${policy.multiotp_prefix}([0-9]{10})$/) {
+            if (control:Auth-Type == 'MS-CHAP') {
+                  update control {
+                          Auth-Type := multiotpmschap
+                  }
+            }
+            else if (!control:Auth-Type && User-Password =~ /^${policy.multiotp_prefix}([0-9]{10})$/) {
                 update control {
                     Auth-Type := multiotp
                 }
             }
         }
     }
-3. Edit your virtual server file, the default for the outer server is 'raddb/sites-available/default'
-4. Add a call to multiotp **before** the pap module in authorize::
+
+4. Edit your virtual server file, the default for the outer server is 'raddb/sites-available/default'
+
+5. Add a call to multiotp **before** the pap module in authorize::
 
     authorize {
         ...
@@ -50,14 +79,19 @@ FreeRADIUS 3.x.x
         pap
         ...
     }
-5. Create the multiotp sub-section in authenticate::
+
+6. Create the multiotp sub-section in authenticate::
 
     authenticate {
         Auth-Type multiotp {
             multiotp
         }
+        Auth-Type multiotpmschap {
+            multiotpmschap
+        }
     }
-6. Start the server up in debug mode ``radiusd -X`` and test authentication
+
+7. Start the server up in debug mode ``radiusd -X`` and test authentication
 
 
     

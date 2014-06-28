@@ -192,7 +192,7 @@ If you're stripping all domain name elements from usernames via realms, remember
 Fire up radiusd again in debug mode (radiusd -X). The debug output should show it connecting to the SQL database. Use radtest (or NTradPing) to test again - the user should authenticate and the debug output should show FreeRADIUS talking to SQL.
 
 Congratulations. You're done!
- 
+
 ==Additional Snippets==
 
 * To use encrypted passwords in radcheck use the attribute 'Crypt-Password', instead of 'Cleartext-Password', and just put the encrypted password in the value field. ( i.e. UNIX crypt'd password). 

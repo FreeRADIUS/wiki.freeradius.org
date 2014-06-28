@@ -9,8 +9,7 @@ Authentication methods
 ======================
 The following authentication types are some of the methods which are supported by the server:
 
-* Clear-text password in local configuration file (PAP) (cf. [[users]] file)
-* Encrypted password in local configuration file
+* Plaintext-Authentication-Protocol (PAP)
 * CHAP
 * MS-CHAP
 * MS-CHAPv2
@@ -30,14 +29,15 @@ The following authentication types are some of the methods which are supported b
 * [[rlm_krb5|Kerberos]] authentication
 * X9.9 authentication token (e.g. [http://www.onlineshow.info CRYPTOCard])
 * [[rlm_eap|EAP]] wireless with embedded authentication methods 
-** EAP-MD5
-** Cisco LEAP
-** EAP-MSCHAP-V2 (as implemented by Microsoft),
-** EAP-GTC
-** EAP-SIM
-** EAP-TLS
-** EAP-TTLS (with any authentication protocol inside of the TLS tunnel)
-** EAP-PEAP (with tunnelled EAP)
+
+  * EAP-MD5
+  * Cisco LEAP
+  * EAP-MSCHAP-V2 (as implemented by Microsoft),
+  * EAP-GTC
+  * EAP-SIM
+  * EAP-TLS
+  * EAP-TTLS (with any authentication protocol inside of the TLS tunnel)
+  * EAP-PEAP (with tunnelled EAP)
 
 See Also
 ========

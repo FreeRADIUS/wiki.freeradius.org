@@ -220,10 +220,10 @@ See:  `List of modules
 See Also
 --------
 `Development Roadmap
-<http://wiki.freeradius.org/Development-Roadmap>`_
+<http://wiki.freeradius.org/project/Development%20Roadmap>`_
 
 `Modules1 (old 1.x module syntax)
-<http://wiki.freeradius.org/Modules1>`_
+<http://wiki.freeradius.org/contributing/Modules1>`_
 
-`CVSWeb
-<http://wiki.freeradius.org/CVSWeb>`_
+`GitHub
+<http://wiki.freeradius.org/contributing/GitHub>`_

@@ -8,6 +8,7 @@ NAS usually send the MAC address in the Calling-Station-ID attribute. There are 
 
  * 00:11:22:33:44:55
  * 00-11-22-33-44-55
+ * 0011.2233.4455
  * upper-case hex
  * lower-case hex
 
@@ -18,7 +19,7 @@ It is sensible to re-format these into a single format at the server.
 # Rewrite called station id attribute into a standard format.
 #
 rewrite_calling_station_id {
-        if (Calling-Station-Id =~ /([0-9a-f]{2})[-:]?([0-9a-f]{2})[-:]?([0-9a-f]{2})[-:]?([0-9a-f]{2})[-:]?([0-9a-f]{2})[-:]?([0-9a-f]{2})/i){
+        if (Calling-Station-Id =~ /([0-9a-f]{2})[-:]?([0-9a-f]{2})[-:.]?([0-9a-f]{2})[-:]?([0-9a-f]{2})[-:.]?([0-9a-f]{2})[-:]?([0-9a-f]{2})/i) {
                 update request {
                         Calling-Station-Id := "%{tolower:%{1}-%{2}-%{3}-%{4}-%{5}-%{6}}"
                 }
@@ -301,7 +302,7 @@ Add the following policy stanza to policy.conf.
 # If a 6th seperator is present, write the trailing chars into Called-Station-SSID
 #
 rewrite_called_station_id {
-        if(Called-Station-Id =~ /^([0-9a-f]{2})[-:]?([0-9a-f]{2})[-:]?([0-9a-f]{2})[-:]?([0-9a-f]{2})[-:]?([0-9a-f]{2})[-:]?([0-9a-f]{2})[-:]?([-a-z0-9_. ]*)?/i){
+        if(Called-Station-Id =~ /^([0-9a-f]{2})[-:]?([0-9a-f]{2})[-:.]?([0-9a-f]{2})[-:]?([0-9a-f]{2})[-:.]?([0-9a-f]{2})[-:]?([0-9a-f]{2})[-:]?([-a-z0-9_. ]*)?/i){
                 update request {
                         Called-Station-Id := "%{1}%{2}%{3}%{4}%{5}%{6}"
                         Called-Station-SSID := "%{7}"
@@ -313,7 +314,7 @@ rewrite_called_station_id {
 }
 </pre>
 
-#### raddb/sites-available/default authorize{}
+#### raddb/sites-available/default authorize
 
 Add the a module call for 'rewrite_calling_station_id' to the authorize section directly above the call to 'rewrite_calling_station_id'.
 
@@ -366,7 +367,7 @@ As above.
 #### raddb/policy.conf
 
 As above.
-#### raddb/sites-available/default authorize{}
+#### raddb/sites-available/default authorize
 
 Add the a module call for 'rewrite_calling_station_id' to the authorize section directly above the call to 'rewrite_calling_station_id'.
 

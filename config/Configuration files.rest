@@ -1,3 +1,6 @@
+Configuration files
+===================
+
 For every part of FreeRADIUS, in the configuration directory (``/etc/raddb``, ``/etc/freeradius`` or similar) there is a fully commented example file included, that explains what it does, and how to use it. Read those sample files too!
 
 Again, many of the configuration files are **ONLY** documented in the comments included in the files.
@@ -21,8 +24,8 @@ Common module configuration
 * [[hints|https://github.com/FreeRADIUS/freeradius-server/blob/v2.x.x/raddb/hints]]
 * [[huntgroups|https://github.com/FreeRADIUS/freeradius-server/blob/v2.x.x/raddb/huntgroups]]
 
-Old-style (<= 1.x.x) configuration files
---------------------------------
+1.x.x configuration files
+-------------------------
 
 * [[clients|https://github.com/FreeRADIUS/freeradius-server/blob/v1.1.x/raddb/clients]]
 * [[naslist|https://github.com/FreeRADIUS/freeradius-server/blob/v1.1.x/raddb/naslist]]

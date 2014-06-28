@@ -22,7 +22,7 @@ First we call the module in ``Cache-Status-Only`` mode, to find out whether it a
 
 This should be used where entire user entries from directories like LDAP are being cached, and multiple attributes are retrieved at once.
 
-```
+```text
 authorize {
     update control {
         Cache-Status-Only = 'yes'
@@ -39,13 +39,28 @@ authorize {
 
 ```
 
+In versions >= 3.0.4 you can use the slightly simpler syntax
+```text
+authorize {
+    update control {
+        Cache-Read-Only = 'yes'
+    }
+    cache
+    if (notfound) {
+        cache
+        ldap
+    }
+}
+
+```
+
 Deduplication
 ==========
 The cache module can also be used for de-duplication. If key is set to something like ``%{Acct-Unique-ID}.%{Acct-Status-Type}``, the number of interim-update packets may be limited to one every ``ttl``.
 
 For this an empty attribute list may be configured. 
 
-```
+```text
 accounting {
     # Limit the number of interim updates processed by our database
     cache
@@ -57,7 +72,7 @@ accounting {
 
 It may also be advisable to remove entries at the end of a session:
 
-```
+```text
 accounting {
     if (Acct-Status-Type == 'Interim-Update') {
         cache

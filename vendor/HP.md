@@ -130,11 +130,11 @@ RADIUS Attribute              |Times Used|Description                           
 :-----------------------------|:--------:|:-----------------------------------------------------|:------------|:------
 Tunnel-Type                   |1         |Type of tunnel                                        |VLAN         |13
 Tunnel-Medium-Type            |1         |Tunnel transport medium                               |IEEE-802     |6
-Tunnel-Private-Group-ID       |1         |Numeric ingress/egress VLAN ID to be assigned         |<vlan id>    |<vlan id>
+Tunnel-Private-Group-Id       |1         |Numeric ingress/egress VLAN ID to be assigned         |<vlan id>    |<vlan id>
 
-If the specified Tunnel-Private-Group-ID matches a VLAN present on the switch, the PVID of the port the client is connected to will be temporarily altered to reflect the assigned PVID. At the end of the session the port will revert back to its static PVID assignment.
+If the specified Tunnel-Private-Group-Id matches a VLAN present on the switch, the PVID of the port the client is connected to will be temporarily altered to reflect the assigned PVID. At the end of the session the port will revert back to its static PVID assignment.
 
-On session termination, the ports VLAN membership will revert back to it's statically assigned untagged VLAN. If the specified Tunnel-Private-Group-ID does not much a configured or learned VLAN, authentication will fail.
+On session termination, the ports VLAN membership will revert back to it's statically assigned untagged VLAN. If the specified Tunnel-Private-Group-Id does not much a configured or learned VLAN, authentication will fail.
 
 #### RFC 4675 (multiple tagged/untagged VLAN) Assignment
 
@@ -331,22 +331,22 @@ All CoA/DM requests must contain at least one set of Session-Identification attr
 RADIUS Attribute              |Times Used|Description                                                               |Value String | Value
 :-----------------------------|:--------:|:-------------------------------------------------------------------------|:------------|:------
 User-Name                     |1         |User-Name provided in Access-Accept, or used in Authentication            |-            |``<user-name>``
-Acct-session-ID               |1         |Accounting session ID provided in Accounting-Requests                     |-            |``<session_id>``
+Acct-session-Id               |1         |Accounting session ID provided in Accounting-Requests                     |-            |``<session_id>``
 
 **OR**
 
 RADIUS Attribute              |Times Used|Description                                                               |Value String | Value
 :-----------------------------|:--------:|:-------------------------------------------------------------------------|:------------|:------
 User-Name                     |1         |User-Name provided in Access-Accept, or used in Authentication            |-            |``<user-name>``
-Calling-Station-ID            |1         |Clients Mac-Address (hyphens must be used to delimit octets)              |-            |``<oct1>-<oct2>-<oct3>-<oct4>-<oct5>-<oct6>``
+Calling-Station-Id            |1         |Clients Mac-Address (hyphens must be used to delimit octets)              |-            |``<oct1>-<oct2>-<oct3>-<oct4>-<oct5>-<oct6>``
 
 **OR**
 
 RADIUS Attribute              |Times Used|Description                                                               |Value String | Value
 :-----------------------------|:--------:|:-------------------------------------------------------------------------|:------------|:------
 User-Name                     |1         |User-Name provided in Access-Accept, or used in Authentication            |-            |``<user-name>``
-Calling-Station-ID            |1         |Clients Mac-Address (hyphens must be used to delimit octets)              |-            |``<oct1>-<oct2>-<oct3>-<oct4>-<oct5>-<oct6>``
-NAS-Port-ID                   |1         |Port on which the client is authenticated e.g. 1 or A1 (modular)          |-            |``<port>``
+Calling-Station-Id            |1         |Clients Mac-Address (hyphens must be used to delimit octets)              |-            |``<oct1>-<oct2>-<oct3>-<oct4>-<oct5>-<oct6>``
+NAS-Port-Id                   |1         |Port on which the client is authenticated e.g. 1 or A1 (modular)          |-            |``<port>``
 
 If using Mac-Auth the User-Name attribute must match the User-Name provided in the Access-Request.
 
@@ -365,7 +365,7 @@ At least one of these attribute/attribute sets must be present in the CoA reques
 RADIUS Attribute                                                           |Times Used|Description                                                 
 :--------------------------------------------------------------------------|:--------:|:-----------------------------------------------------------
 Session-Timeout                                                            |1         |Number of seconds between client re-authentication (integer)
-Tunnel-Type=VLAN,Tunnel-Medium-Type=IEEE-802,Tunnel-Private-Group-ID=<int> |1         |PVID assignment/alteration
+Tunnel-Type=VLAN,Tunnel-Medium-Type=IEEE-802,Tunnel-Private-Group-Id=<int> |1         |PVID assignment/alteration
 Egress-VLANID                                                              |1+        |Tagged VLAN assignment (octets)
 Egress-VLAN-Name                                                           |1+        |Tagged VLAN assignment (string)
 HP-Bandwidth-Max-Ingress                                                   |1         |Percentage of port bandwidth allowed for ingress
@@ -415,7 +415,7 @@ exit
 echo "NAS-IP-Address = 172.0.0.1,\
 User-Name = 'example_user',\
 NAS-Port = 1,\
-Calling-Station-ID = '00-10-00-10-00-10'" | radclient 172.0.0.1:3799 40 testing123
+Calling-Station-Id = '00-10-00-10-00-10'" | radclient 172.0.0.1:3799 40 testing123
 
 Received response ID 114, code 41, length = 32
     Event-Timestamp = "Sep  2 2018 10:26:40 PDT"
@@ -428,7 +428,7 @@ This changes example_user's PVID to 2 and remaps all incoming 802.1p priorities 
 
 ```
 echo "User-Name = 'example_user',\
-Acct-Session-ID = '000100006F',\
+Acct-Session-Id = '000100006F',\
 Tunnel-Type = VLAN,\
 Tunnel-Medium-Type = IEEE-802,\
 Tunnel-Private-Group-Id = '2',\
