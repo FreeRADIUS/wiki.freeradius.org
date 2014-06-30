@@ -2,7 +2,7 @@ Disconnect Messages
 =================
 A Disconnect Message (sometimes known as [[Packet of Disconnect]]) is and unsolicited [[RADIUS]] [[Disconnect-Request]] packet (A special type of [[Change-of-Authorization]] packet) sent to a [[NAS]] in order to  terminate a user session and discard all associated session context. The [[Disconnect-Request]] packet is sent to UDP port 3799 (Although many NAS use port 1700 instead), and is intended to be used in situations where the [[AAA]] server wants to disconnect the user after the session has been accepted by the [[RADIUS]] [[Access-Accept]] packet.
 
-To prevent unauthorized servers from disconnecting users, the authorizing agent that issues the [[Disconnect-Request]] packet must include identification attributes (Usually three attributes) in its Disconnect-Request]] packet. For a session to be disconnected, all parameters must match their expected values at the [[NAS]]. If the parameters do not match, the [[NAS]] discards the [[Disconnect-Request]] packet and sends a [[Disconnect-NAK]] (negative acknowledgment message).
+To prevent unauthorized servers from disconnecting users, the authorizing agent that issues the [[Disconnect-Request]] packet must include identification attributes (Usually three attributes) in its [[Disconnect-Request]] packet. For a session to be disconnected, all parameters must match their expected values at the [[NAS]]. If the parameters do not match, the [[NAS]] discards the [[Disconnect-Request]] packet and sends a [[Disconnect-NAK]] (negative acknowledgment message).
 
 Disconnect Requests 
 ------------------------------
