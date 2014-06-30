@@ -54,4 +54,4 @@ See Also
 <http://www.cisco.com/en/US/docs/ios/12_2t/12_2t8/feature/guide/ft_pod1.html>`_
 
 `RFC 3576
-<http://http://www.ietf.org/rfc/rfc3576.txt>`_
+<http://www.ietf.org/rfc/rfc3576.txt>`_
