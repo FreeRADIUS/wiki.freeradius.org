@@ -113,6 +113,9 @@ The certficates are stored in the <span class="filename">raddb/certs/</span> dir
 
 See also [[http://deployingradius.com]].  That web page contains a simple series of steps that guide you through certificate creation.
 
+Great guide for installing Free Radius on Rasberry Pi running Raspbian
+http://binaryheartbeat.blogspot.com/2013/12/raspberry-pi-based-freeradius-server.html
+
 ==Step 2: Configure FreeRADIUS==
 
 ===Before You Proceed===
