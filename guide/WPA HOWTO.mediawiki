@@ -4,6 +4,9 @@
 
 This document is intended as a practical document with a view to getting WPA authentication up-and-running as quickly and as easily as possible. We therefore gloss over most of the theory behind 802.1x, WPA, cryptosystems, digital signatures and certificates, etc.
 
+Note: This guide is primarily focused on windows users.  For a linux-focused (Rasberry Pi running Raspbian) install guide, check out: 
+http://binaryheartbeat.blogspot.com/2013/12/raspberry-pi-based-freeradius-server.html
+
 ===Why Would I Want WPA?===
 
 In short &mdash; security. '''W'''i-Fi '''P'''rotected '''A'''ccess implements a sub-set (or instance, if you like) of the IEEE's 802.1x authentication standards for wireless networks, and does so in a method compliant with the (at time of writing) forthcoming 802.11i standard. WPA provides for both ''authentication'' (assuring the identity of a client machine, the ''supplicant'') and ''encryption'' (ensuring exchanges between the wireless access point and client are secure).
@@ -35,7 +38,7 @@ I am assuming a basic level of competence/experience with UNIX/Linux system admi
 
 ====Hardware====
 
-* Something running Linux. For an ideas on specifications, see [[WPA_HOWTO#Computers|&sect;&sect;1.4.1]]
+* Something running Linux. A Raspberry Pi is cheap and works well.  For detailed specifications, see [[WPA_HOWTO#Computers|&sect;&sect;1.4.1]]
 * A Wireless Access Point ([[AP]]) capable [[WPA]] (or 802.1x) authentication with [[RADIUS]]
 * A Wireless Network Adapter connected to the Windows XP machine (at present, I have no experience with Linux clients and so cannot document this) with [[WPA]] ("Wi-Fi") capability.
 
@@ -113,8 +116,6 @@ The certficates are stored in the <span class="filename">raddb/certs/</span> dir
 
 See also [[http://deployingradius.com]].  That web page contains a simple series of steps that guide you through certificate creation.
 
-Great guide for installing Free Radius on Rasberry Pi running Raspbian
-http://binaryheartbeat.blogspot.com/2013/12/raspberry-pi-based-freeradius-server.html
 
 ==Step 2: Configure FreeRADIUS==
 
