@@ -278,7 +278,11 @@ Uncomment it and set the correct path to the ntlm_auth binary
 
 You may also wish to add
 ::
-  --domain=%{mschap:NT-Domain} 
+  --domain=%{mschap:NT-Domain}
+
+When using machine authentication, you might want to try the following:
+::
+  --username=%{%{mschap:User-Name}:-00}
 
 mods-available/eap
 ==================
