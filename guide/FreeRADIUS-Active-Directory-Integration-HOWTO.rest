@@ -201,6 +201,8 @@ The ``radiusd.conf`` file sets the uid and gid your *radiusd* process will run a
 
 Or something similar. See [[http://www.suse.de/~agruen/acl/linux-acls/online/]] or ``man setfacl`` for more information on POSIX ACLs!
 
+(Under Debian Wheezy, there is no winbindd_privileged and everything works out of the box. This might also be true for more recent Redhat-bases system)
+
 Installation of FreeRADIUS
 ==========================
 
