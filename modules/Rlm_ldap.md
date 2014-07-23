@@ -271,7 +271,7 @@ Note: In 2.x.x the module LDAP-Group was associated with, was largely random and
 
 When rlm_ldap has found the DN corresponding to the username provided in the access-request (all this happens in the authorize section) it will add an Ldap-UserDN attribute in the check items list containing that DN. The attribute will be searched for in the authenticate section and if present will be used for authentication (ldap bind with the user DN/password). Otherwise a search will be performed to find the user dn. If the administrator wishes to use rlm_ldap only for authentication or does not wish to populate the identity,password configuration attributes he can set this attribute by other means and avoid the ldap search completely. For instance it can be set through the users file in the authorize section:
 <pre>
- DEFAULT Ldap-UserDN := `uid=%{User-Name},ou=people,dc=company,dc=com`
+ DEFAULT Ldap-UserDN := "uid=%{User-Name},ou=people,dc=company,dc=com"
 </pre>
 
 ### Directory Compatibility
