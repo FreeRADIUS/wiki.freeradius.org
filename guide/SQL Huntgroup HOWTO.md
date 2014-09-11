@@ -28,6 +28,7 @@ Populate the radhuntgroup table with your NAS information. For our example we'll
     INSERT INTO `radhuntgroup` (groupname, nasipaddress) VALUES ("example", "192.168.0.10");
  
 The contents of the table show now look like this
+
     SELECT * FROM `radhuntgroup`;
        +----+-----------+--------------+-----------+
        | id | groupname | nasipaddress | nasportid |
@@ -54,25 +55,31 @@ If the query did not find anything then the value is the empty string. You can c
 Suppose you want to only allow the group **site_a_admins** to be used when logging into a NAS' at **site_a** .
 
 Assuming **example_user** was already a member of **site_a_admins**, you would follow the steps below.
+
     SELECT * FROM `radusergroup`;
        +--------------+---------------+----------+
        | username     | groupname     | priority |
        +--------------+---------------+----------+
        | example_user | site_a_admins |        0 | 
        +---------------+---------------+----------+
-* First add a list of the IP addresses of NAS' at **site_a** into the `radhuntgroup` table.
-      INSERT INTO `radhuntgroup` (groupname, nasipaddress) VALUES ("site_a", "192.168.0.10");
-      INSERT INTO `radhuntgroup` (groupname, nasipaddress) VALUES ("site_a", "192.168.0.11");
-      INSERT INTO `radhuntgroup` (groupname, nasipaddress) VALUES ("site_a", "192.168.0.12");
-* Now add an entry in the `radgroupcheck` table which says for the **site_a_admins** group only matches, when a Huntgroup-Name attribute with a value of **site_a** exists in the request.
+
+First add a list of the IP addresses of NAS' at **site_a** into the `radhuntgroup` table.
+
+    INSERT INTO `radhuntgroup` (groupname, nasipaddress) VALUES ("site_a", "192.168.0.10");
+    INSERT INTO `radhuntgroup` (groupname, nasipaddress) VALUES ("site_a", "192.168.0.11");
+    INSERT INTO `radhuntgroup` (groupname, nasipaddress) VALUES ("site_a", "192.168.0.12");
+
+Now add an entry in the `radgroupcheck` table which says for the **site_a_admins** group only matches, when a Huntgroup-Name attribute with a value of **site_a** exists in the request.
 @todo insert query example
-      SELECT * FROM `radgroupcheck`
+
+    SELECT * FROM `radgroupcheck`
           +----+----------------+----------------+----+----------+
           | id | groupname      | attribute      | op | value    |
           +----+----------------+----------------+----+----------+
           |  1 | site_a_admins  | Huntgroup-Name | == | site_a   | 
           +----+----------------+----------------+----+----------+
-* @todo reply table example
+
+@todo reply table example
 
 ***
 
