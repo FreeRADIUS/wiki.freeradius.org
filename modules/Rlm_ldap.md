@@ -1,4 +1,4 @@
-The _rlm_ldap_ FreeRADIUS module enables authentication via [[LDAP]].
+The *rlm_ldap* FreeRADIUS module enables authentication via [[LDAP]].
 
 To enable LDAP in your FreeRADIUS server, you can:
 
