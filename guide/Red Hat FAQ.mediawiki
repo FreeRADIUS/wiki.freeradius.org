@@ -35,15 +35,15 @@ enterprises which must deploy software solutions which cannot tolerate
 the disruptions introduced by new software, they need to know if it's
 working today it's going to be working exactly the same way tomorrow,
 often on hundreds of different nodes. Updates are low volume and are
-meant to address bug fixes and security vulnerabilities. Updates are
+meant to address bugs and security vulnerabilities. Updates are
 seldom released to introduce new features, although this will
 occasionally happen on a case by case basis after careful deliberation
 considers the potential impact and rewards. 
 
 In practice the philosophical guidelines of an enterprise distribution
-means the base version of any given software package remains constant
+mean the base version of any given software package remains constant
 for the multi-year life of the distribution. When problems with a
-software package (bugs or security) has been identified the normal
+software package (bugs or security vulnerabilities) have been identified, the normal
 course of action is to "back port" the fix into the version of the
 package the enterprise distribution originally contained. This is how
 the goal of version stability is achieved and is in direct contrast to
@@ -61,8 +61,8 @@ very committed to the philosophy of open source and as a consequence
 the source code for every component in RHEL and every patch Red Hat has
 provided is available to anyone. The CentOS project takes the RHEL
 sources provided by Red Hat, rebuilds them after stripping out the Red
-Hat branding and makes the available for downloading. The downside of
-this that you lose support from Red Hat which is often regarded as
+Hat branding and makes them available for downloading. The downside of
+this is that you lose support from Red Hat which is often regarded as
 world class and an excellent value for enterprise customers.
 
 === Picking a distribution based on it's philosophy and your needs ===
@@ -91,33 +91,6 @@ will produce a collection of FreeRADIUS RPM's and should guarantee the
 resulting packages conform to the requirements of Red Hat based
 distributions. Instructions on how to do this and the reasons why can
 be found later in this FAQ, please see [[Red-Hat-FAQ#How-to-build-an-SRPM|How to build an SRPM]].
-
-== Current Pre-built RPMs for RHEL 5 and CentOS 5 ==
-
-As of the time of this writing the version of FreeRADIUS in RHEL 5 
-is a rather old 1.1.3 version.  RHEL has strict rules concerning package 
-upgrades. In particular it is not permitted to upgrade a package with a
-newer version if they are not configuration compatible. FreeRADIUS 1.x and
-2.x are NOT configuration compatible. It is also not permitted to remove a
-package from RHEL, customers may be running the 1.x version. Thus the version of FreeRADIUS in RHEL must stay at the 1.x level and must continue to use the package name "freeradius". However, many users want to install a current FreeRADIUS version on their RHEL5 system. The migration path to accomplish this is to introduce a new package called "freeradius2" into the RHEL5 update stream. It is anticipated this will occur in the RHEL 5.5 update. However to accommodate users wishing to install a current version on RHEL5 immediately a download site has been set up with pre-built FreeRADIUS 2.x packages on a tech preview basis. This will allow users to easily install a current version and to provide feedback on the tech preview in advance of the freeradius2 package becoming available in the RHEL5 update stream. It is important to note:
-
-* The freeradius2 RPM's are not part of an official release therefore Red Hat customers with support contracts may not receive support on this version.
-
-* These tech preview RPM's will be removed from the download site once freeradius2 enters the update stream, at that time the method to obtain the freeradius2 RPM's will be to utilize the normal software installation tools.
-
-The download site is:
-
-http://people.redhat.com/jdennis/freeradius-rhel-centos
-
-'''''Update: RHEL/CentOS Repository Deprecated, FreeRADIUS 2.x packages now in official channels'''''
-
-The freeradius2 RPM's which were available at the above location were made
-available on a tech preview basis to serve the needs of customers and
-user's who desired a 2.x version of FreeRADIUS on RHEL 5 until the
-freeradius2 RPM's were available in the normal and official
-distribution channels. The RHEL 5.5 update containing the freeradius2
-RPM's was released at the end of March 2010, as such the tech preview
-freeradius2 packages which were available here have been removed. Please use the normal distribution channels to obtain the freeradius2 RPM's for RHEL 5 and CentOS 5.
 
 == FreeRADIUS Red Hat FAQ ==
 
@@ -165,7 +138,7 @@ python, perl, etc.
 
 Your best bet and easiest solution is to install a prebuilt RPM
 package if it's available. This relieves you of having to build the
-package and properly configure it's installation. Plus it has the
+package and properly configure its installation. Plus it has the
 advantage of having been built in very controlled build environments.
 
 Use the yum rpm package manager to install or upgrade FreeRADIUS. If
@@ -184,7 +157,7 @@ to install an optional subpackage, for example MySQL support:
 
 === How do I update my version of FreeRADIUS to a pre-release testing version for my distribution? ===
 
-Software updates appear in repositories (i.e. repos) for specfic
+Software updates appear in repositories ("repos") for specific
 distributions. Each distribution contains two channels, testing and
 stable. Normally new package versions are placed in the testing
 channel for a period of time before being moved to stable. By default
@@ -202,11 +175,11 @@ promoted from testing to stable.
 
 === How do I report success/failure for a package uprade in Fedora? ===
 
-Use Bohdi, the Fedora Update System
+Use Bodhi, the Fedora Update System
 (https://admin.fedoraproject.org/updates). Locate the package via the
 search box, click on the link which has the exact same version
 identifier you installed. Toward the bottom you will see an area for
-comments. Bohdi also lets you see other peoples experiences with the
+comments. Bodhi also lets you see other peoples experiences with the
 package in question.
 
 === How do I report a bug against the Red Hat packaging of FreeRADIUS? ===
@@ -215,11 +188,11 @@ First, please note Red Hat repackages FreeRADIUS from the upstream
 FreeRADIUS project. If you believe the problem you are seeing is not
 specific to Red Hat but rather is an issue with FreeRADIUS in general
 then the issue should be raised on the FreeRADIUS user's mailing list
-or reported on the FreeRADIUS bug tracking tool. Bug reports of this
+or reported on the [http://bugs.freeradius.org/ FreeRADIUS bug tracker]. Bug reports of this
 nature should not be filed directly on the Red Hat Bugzilla. However,
 if you believe the problem you are seeing is specific to Red Hat
-systems only then please report the problem on the Red Hat Bugzilla:
-https://bugzilla.redhat.com
+systems only then please report the problem on the
+[https://bugzilla.redhat.com Red Hat Bugzilla].
 
 
 === How are configuration files handled during an RPM upgrade? ===
@@ -233,7 +206,7 @@ ignorant about configuration files it would overwrite the
 configuration files which might have been carefully tailored to the
 installation. If that were the case then upgrading to a new package
 version would erase the careful customizations implemented by the
-system administrator, clearly this is not desired behavior. To
+system administrator. Clearly this is not desired behavior. To
 overcome this problem the author of the rpm spec file can mark files
 as being a configuration file. This is done with the %config tag in
 the spec file and causes RPM to process the file specially during an
@@ -286,10 +259,10 @@ the new version of the package, in this instance the program may fail
 to operate as expected. '''''It is always the responsibility of the
 system administrator after an upgrade to verify the state of the
 configuration files by looking for .rpmnew or .rpmsave files and
-properly resolving the descrepancies.''''' As an aid in this task RPM
+properly resolving the discrepancies.''''' As an aid in this task RPM
 will always emit warnings any time it creates .rpmnew or .rpmsave
 files. The system administrator should carefully watch for these
-warnings during an package upgrade. Alternatively you can go back
+warnings during a package upgrade. Alternatively you can go back
 later and search the /etc/raddb tree for the presence of .rpmnew and
 .rpmsave files.
 
@@ -298,8 +271,6 @@ later and search the /etc/raddb tree for the presence of .rpmnew and
 Use the yum package installer to perform a query.
 
  % yum info freeradius\*
-
-However, RHEL5 and CentOS5 users should refer to [[Red-Hat-FAQ#Current-Pre-built-RPM|current pre-built RPM]].
 
 === How does RPM version naming work? How do I look at an RPM name and understand what FreeRADIUS version it represents? ===
 
@@ -364,7 +335,7 @@ However if you're trying to determine which package to install because you've go
  Filename    : /usr/lib/freeradius/rlm_sql_mysql.so
  Filename    : /usr/lib/freeradius/rlm_sql_mysql-2.1.1.so
 
-From above you'll see that yum has told you there are 3 different packages which contain the file. The important thing to note is the package name is identical in all cases, freeradius-mysql, they differ only by their version. What this tells you is you need to install the freeradius-mysql package. Don't worry about the version, yum will pick the correct version when you ask yum to install the package, which would be done like this:
+From above you'll see that yum has told you there are 3 different packages which contain the file. The important thing to note is the package name is identical in all cases, freeradius-mysql, they differ only by their version. What this tells you is you need to install the freeradius-mysql package. Don't worry about the version, yum will pick the correct version when you ask it to install the package, which would be done like this:
 
  % sudo yum install freeradius-mysql
 
@@ -383,7 +354,7 @@ Hat Package Manager (rpm) by overwriting files it thinks it owns. You
 might install files into locations which will then run afoul of the
 security configuration of the machine (SELinux file labeling). You
 might fail to recognize customizations which have been applied to the
-FreeRADIUS configuration files which tailor it Red Hat systems. Or you
+FreeRADIUS configuration files which tailor it to Red Hat systems. Or you
 might needlessly duplicate facilities that have already been provided
 for you in the Red Hat specific RPM's such as scripts to control the
 service, perform log rotations, etc. Also, the rpm spec files on Red Hat systems are peer reviewed and must conform to a wide range of "good practice"
@@ -400,8 +371,8 @@ installer to install either pre-built RPM's or any RPM you built
 locally.
 
 You should never run "make install" directly. Why? Because the rpm
-command enforces a wide range of constraints which if you want an easy
-to manage functioning system you'll need to observe. Paramount amongst
+command enforces a wide range of constraints which, if you want an easy
+to manage functioning system, you'll need to observe. Paramount amongst
 the reasons is rpm's ability to track the installed versions of every
 library your software has linked against. rpm will assure libraries
 will not be installed on your system or removed from your system if
@@ -410,18 +381,19 @@ there is no "DLL Hell" on Linux. rpm also manages configuration files
 preventing you from overwriting customized configuration files during
 installation. rpm assures files are installed with the correct SELinux
 security labeling. Because rpm knows the complete file manifest of a
-piece of software upgrades and downgrades can be performed without
+piece of software, upgrades and downgrades can be performed without
 leaving orphaned files behind. rpm can be aware of special
 installation requirements such as starting and stopping services,
-emitting messages to concerned parties, etc. Let rpm do it's job by
-not side stepping it's critical functionality by performing installs
-behind it's back with a "make install".
+emitting messages to concerned parties, etc. Let rpm do its job by
+not side stepping its critical functionality by performing installs
+behind its back with a "make install".
 
 === How do I start and stop the FreeRADIUS service? ===
 
-Fedora/RHEL/CentOS systems use Sytem V initscripts to control
-services. The name of the service is "radiusd" (radius daemon). Use
-the "service" command to invoke the radiusd initscript.
+Nowadays Fedora uses systemd units and older releases of RHEL and CentOS
+still use System V init-scripts to control services. However, on all of them
+the FreeRADIUS service is called "radiusd" and the "service" command can be
+equally used to manage it.
 
 To start the radiusd service:
 
@@ -436,7 +408,7 @@ To query the radiusd service status:
  % service radiusd status
 
 If you want the radiusd service to be automatically started
-everytime the system boots then you will need to use chkconfig to turn
+every time the system boots then you will need to use chkconfig to turn
 it on. chkconfig works by specifying what should happen at different
 run levels.
 
