@@ -1,7 +1,7 @@
 # -*- text -*-
 # dictionary.aruba
 #
-# Version:	$Id$
+# Version:	
 #
 #
 VENDOR	Aruba	14823
