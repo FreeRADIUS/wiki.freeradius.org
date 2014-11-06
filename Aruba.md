@@ -5,6 +5,7 @@
 #
 #
 VENDOR	Aruba	14823
+#
 BEGIN-VENDOR	Aruba
 
 ATTRIBUTE	Aruba-User-Role				1	String
