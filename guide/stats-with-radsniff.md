@@ -9,9 +9,9 @@ That is entirely dependent on your machine. But on a modern intel i7 processor i
 When libpcap starts reporting loss, radsniff will mute itself, that is stop writing stats out to the collectd socket, and stop writing stats to stdout. The time it's muted for will be double the timeout period (``radsniff -h | grep timeout``).
 
 ## Building radsniff
-Currently only the version of radsniff in the master (3.1.x) branch supports statistics, which means you'll need to build the server from source.
+Currently only the version of radsniff in the master (3.1.x) and v3.0.x branches support statistics, which means you'll probably need to build the server from source.
 
-Static builds do work on the master branch, meaning you can build radsniff as a standalone binary and not have issues with libfreeradius conflicts if you're running a stable version of the FreeRADIUS server on the same host.
+Static builds work on those branches, meaning you can build radsniff as a standalone binary and not have issues with libfreeradius conflicts if you're running a stable version of the FreeRADIUS server on the same host.
 
 ### Dependencies
 radsniff depends on libpcap and libcollectclient. If libpcap isn't available then radsniff will not be built. If libcollectdclient isn't available radsniff will be build but without support for writing statistics out to a collectd socket.
