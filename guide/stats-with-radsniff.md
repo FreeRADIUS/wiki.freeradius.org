@@ -75,7 +75,7 @@ radsniff -q -i eth0 -P /var/run/freeradius/radsniff.pid -W 10 -O /var/run/collec
 Bundled in the ``scripts/`` directory is ``radsniff.init``. This is intended for use on Debian systems.
 
 To install:
-```
+```bash
 sudo cp scripts/radsniff.init /etc/init.d/
 sudo update-rc.d radsniff defaults
 ```
@@ -91,19 +91,19 @@ By default the init script will pass the following arguments to radsniff:
 To date I haven't managed to get radsniff to connect to collectd over UDP (keep getting connection refused errors, suspect libcollectdclient bug), but have been successful getting it work over unix socket.
 
 Nothing special is required other than enabling the unix socket plugin. To do that edit ``/etc/collectd/collectd.conf`` and uncomment ``LoadPlugin unixsock`` and
-```bash
+```text
 <Plugin unixsock>
        SocketFile "/var/run/collectd-unixsock"
        SocketGroup "collectd"
        SocketPerms "0660"
 </Plugin>
 ```
-then restart collectd.
 
+You'll also need to add the type definitions from [here](https://raw.githubusercontent.com/FreeRADIUS/freeradius-server/master/scripts/collectd/radsniff_types.db) then restart collectd.
 
 ### rrdtool graph definitions
 #### Counters
-```
+```text
 -l 0 --vertical-label "PPS"
 DEF:received=/var/lib/collectd/rrd/<host>/<instance>-exchanged/radius_count-<packet type>.rrd:received:AVERAGE 
 DEF:linked=/var/lib/collectd/rrd/<host>/<instance>-exchanged/radius_count-<packet type>.rrd:linked:AVERAGE 
@@ -116,7 +116,7 @@ STACK:reused#FF8C00:reused
 ```
 
 #### Latency
-```
+```text
 -l 0  --vertical-label "Latency (ms)"
 DEF:high=/var/lib/collectd/rrd/<host>/<instance>-exchanged/radius_latency-<packet type>.rrd:high:MAX
 DEF:low=/var/lib/collectd/rrd/<host>/<instance>-exchanged/radius_latency-<packet type>.rrd:low:MIN
@@ -131,7 +131,7 @@ LINE:trend86400#946A00:avg_day
 ```
 
 #### RTX
-```
+```text
 -l 0  --vertical-label "Requests completed per second"
 DEF:none=/var/lib/collectd/rrd/<host>/<instance>-exchanged/radius_rtx-<packet type>.rrd:none:AVERAGE 
 DEF:1=/var/lib/collectd/rrd/<host>/<instance>-exchanged/radius_rtx-<packet type>.rrd:1:AVERAGE 
