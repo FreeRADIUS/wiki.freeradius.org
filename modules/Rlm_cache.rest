@@ -4,6 +4,8 @@ The key value itself is an xlat expansion, meaning it can be made up from multip
 
 Feel free to add additional use cases if you think of new and interesting ways to use this module.
 
+**Note**: Versions prior to v3.0.6 had different behaviour to that described here. Please update to v3.0.6 or later if you wish to use the rlm_cache module in the ways described below.
+
 Configuration
 ---------------
 See `here <https://github.com/alandekok/freeradius-server/blob/master/raddb/mods-available/cache>`_ for the default configuration file. The config file described the module operation adequately, so it won't be repeated here.
@@ -31,25 +33,7 @@ authorize {
     if (notfound) {
         ldap
     }
-    update control {
-        Cache-Status-Only := 'no'
-    }
     cache
-}
-
-```
-
-In versions >= 3.0.4 you can use the slightly simpler syntax
-```text
-authorize {
-    update control {
-        Cache-Read-Only = 'yes'
-    }
-    cache
-    if (notfound) {
-        cache
-        ldap
-    }
 }
 
 ```
@@ -76,7 +60,7 @@ It may also be advisable to remove entries at the end of a session:
 accounting {
     if (Acct-Status-Type == 'Interim-Update') {
         cache
-        if (updated) {
+        if (ok) {
             sql
         }
     }
