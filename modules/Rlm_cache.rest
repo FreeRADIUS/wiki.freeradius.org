@@ -64,7 +64,7 @@ For this an empty attribute list may be configured.
 accounting {
     # Limit the number of interim updates processed by our database
     cache
-    if (updated) {
+    if (ok) {
        sql
     }
 }
