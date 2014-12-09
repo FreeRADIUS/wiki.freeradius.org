@@ -68,8 +68,8 @@ See http://php.net/manual/en/ref.radius.php for current documentation.
 ==Dialup admin==
 
 [[Dialup admin]] is a web administration interface for the FreeRADIUS server.
-This is PHP software that is cared for by the FreeRADIUS Project.
-It is currently shipped with freeradius-server.
+This is PHP software that was cared for by the FreeRADIUS Project.
+The software is currently unmaintained, might not work using more recent PHP versions, and possibly has some security issues. Using this software is deprecated.
 
 ==See Also==
 
