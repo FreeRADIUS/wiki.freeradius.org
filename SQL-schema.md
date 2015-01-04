@@ -1,0 +1,5 @@
+student{
+   user,
+   password,
+   email
+}
