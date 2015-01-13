@@ -21,7 +21,7 @@ The ChilliSpot website is no longer active as the original author has abandoned 
 
 ==JRadius==
 
-[http://jradius.net/ JRadius] provides a full featured Java RADIUS client, in addition to a Java/FreeRADIUS module framework. The distribution also comes with a [http://coova.org/wiki/index.php/JRadius/Simulator RADIUS Simulator] testing tool with a graphical user interface.
+[http://www.coova.org/JRadius/ JRadius] provides a full featured Java RADIUS client, in addition to a Java/FreeRADIUS module framework. The distribution also comes with a [http://coova.org/wiki/index.php/JRadius/Simulator RADIUS Simulator] testing tool with a graphical user interface.
 
 ==mod_auth_radius==
 
