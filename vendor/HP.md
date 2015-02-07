@@ -28,7 +28,7 @@ As the switch is only acting as a pass-through, any EAP Method may be used, so l
 
 **Example Packet (Access-Request)**:
 
-```
+```text
 Framed-MTU = 1480            
 NAS-IP-Address = 192.168.0.1 
 NAS-Identifier = "hp-e-its-dev8021X-sw1" 
@@ -79,7 +79,7 @@ HP-Capability-Advert (11.255) |0+        |Capability advertisement |Binary encod
 
 #### Encoding - Standard attributes
 
-```
+```text
  0                   1
  0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
@@ -89,7 +89,7 @@ HP-Capability-Advert (11.255) |0+        |Capability advertisement |Binary encod
 
 #### Encoding - Vendor specific attributes
 
-```
+```text
  0                   1                   2                   3
  0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
@@ -212,7 +212,7 @@ In addition to being able to assign statically configured VLANs, GVRP learned VL
 
 #### Enable the use of GVRP learned VLANs with dynamic VLAN assignment
 
-``` 
+```text
 conf
     aaa port-access gvrp-vlans
     int <authenticated port range> unknown-vlans disable
@@ -237,7 +237,7 @@ When a user attempts to authenticate, the users password is encrypted (using a s
 
 _Example (PAP Login)_:
 
-```
+```text
 User-Name = "user"
 User-Password = "pasphrase"
 NAS-IP-Address = 192.168.0.1
@@ -248,7 +248,7 @@ Service-Type = NAS-Prompt-User
 
 _Example (PAP Enable)_:
 
-```
+```text
 User-Name = "user"
 User-Password = "pasphrase"
 NAS-IP-Address = 192.168.0.1
@@ -277,7 +277,7 @@ With all newer (>2600) ProCurve switches, the switch can be instructed to respec
 _Note: The privilege-mode feature is not included in the 2500/6108 series._
 #### Enable privilege-mode
 
-```
+```text
 conf
    aaa authentication login privilege-mode
 exit
@@ -293,7 +293,7 @@ _Note: The account command logging feature is not included in the 2500/6108 seri
 
 **Example:**
 
-```
+```text
 User-Name = "user"
 NAS-IP-Address = 192.168.0.1
 NAS-Identifier = "hp-e-its-dev8021x-sw1"
@@ -308,7 +308,7 @@ Acct-Delay-Time = 0
 
 #### Enable command logging
 
-```
+```text
 conf
    aaa accounting commands stop-only radius
 exit
@@ -378,7 +378,7 @@ _Note: ProCurve switches do not support reauthorization using the "Service-Type 
 
 #### Add radius-server as CoA originator
 
-```
+```text
 conf
     radius-server host <coa_originator_ip> key <coa_key>
     radius-server host <coa_originator_ip> dyn-authorization
@@ -387,7 +387,7 @@ exit
 
 #### Add dedicated CoA originator
 
-```
+```text
 conf
 radius-server host <auth_server_ip> key <auth_key>
 radius-server host <coa_originator_ip> key <coa_key>
@@ -403,7 +403,7 @@ exit
 
 #### Disable Event-Timestamp check (if required)
 
-```
+```text
 conf
     radius-server host <coa_originator_ip> time-window 0
 exit
@@ -411,7 +411,7 @@ exit
 
 ### Radclient DM example
 
-```
+```text
 echo "NAS-IP-Address = 172.0.0.1,\
 User-Name = 'example_user',\
 NAS-Port = 1,\
@@ -426,7 +426,7 @@ Received response ID 114, code 41, length = 32
 
 This changes example_user's PVID to 2 and remaps all incoming 802.1p priorities to 7.
 
-```
+```text
 echo "User-Name = 'example_user',\
 Acct-Session-Id = '000100006F',\
 Tunnel-Type = VLAN,\
@@ -447,20 +447,20 @@ Most ProCurve wired switches >= 2600 series will support all or a subset of thes
 
 ### Add servers
 
-```
+```text
 radius-server host <radius_server_ip1> auth-port 1812 acct-port 1813
 radius-server host <radius_server_ip2> auth-port 1812 acct-port 1813
 ```
 
 ### Set Server Parameters
 
-```
+```text
 radius-server key <radius_shared_secret>
 ```
 
 ### Set general port-access Parameters
 
-```
+```text
 aaa authentication port-access eap-radius
 aaa port-access gvrp-vlans
 ```
@@ -469,7 +469,7 @@ _Note: Enabling the use of GVRP vlans is optional._
 
 ### Enable RADIUS Authentication on administrative interfaces
 
-```
+```text
 aaa authentication ssh login radius local
 aaa authentication ssh enable radius local
 aaa authentication console login radius local
@@ -479,7 +479,7 @@ aaa authentication login privilege-mode
 
 ### Enabling 802.1X/MAC dual authentication on selected ports (single client)
 
-```
+```text
 aaa port-access authenticator <port range>
 aaa port-access authenticator <port range> logoff-period 862400
 aaa port-access authenticator <port range> quiet-period 30
@@ -494,7 +494,7 @@ aaa port-access <port range> controlled-direction in
 
 ### Enable Accounting
 
-```
+```text
 aaa accounting exec start-stop radius
 aaa accounting network start-stop radius
 aaa accounting system start-stop radius
