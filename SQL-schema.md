@@ -1,5 +1,0 @@
-student{
-   user,
-   password,
-   email
-}
