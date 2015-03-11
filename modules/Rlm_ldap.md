@@ -308,7 +308,7 @@ rlm_ldap (ldap): Opening connection failed (7)
 
 Consider switching to a version of libldap that uses OpenSSL. FreeRADIUS uses OpenSSL everywhere, and OpenSSL and NSS don't play well together. You may wish to encourage your distribution's vendor to switch their libldap implementation (or make an OpenSSL-built version of libldap available) by raising a bug report with them.
 
-In FreeRADIUS 3.x, you can set the **idle_timeout** setting in the **pool** section of the LDAP module to **zero** to keep the LDAPS connections open permanently to avoid this issue. 
+In FreeRADIUS 3.x, you can set the **uses**, **lifetime** and **idle_timeout** settings in the **pool** section of the LDAP module to **zero** to keep the LDAPS connections open permanently to avoid this issue. 
 
 # See Also
 
