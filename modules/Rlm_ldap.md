@@ -286,6 +286,30 @@ If you use LDAP only for authorization and authentication (e.g. you can not affo
 }
 </pre>
 
+### Errors with LDAP over TLS connections
+
+If your secure LDAP connection inexplicably fails with one or more of the below messages in the debug log, you are probably using a version of libldap that has been built with NSS:
+<pre>TLS: could not shutdown NSS - error -8053:NSS could not shutdown. Objects are still in use..
+rlm_ldap (ldap): Opening additional connection (7), 1 of 32 pending slots used
+rlm_ldap (ldap): Connecting to ldap://ldap.example.com:636
+TLS: could not find the slot for the certificate '/etc/raddb/certs/ldap-ca.pem' - error 
+-8127:The security card or token does not exist, needs to be initialized, or has been removed..
+TLS: /etc/raddb/certs/ldap-ca.pem is not a valid CA certificate file - error -8127:The 
+security card or token does not exist, needs to be initialized, or has been removed..
+TLS: could not perform TLS system initialization.
+TLS: error: could not initialize moznss security context - error -8127:The security card or 
+token does not exist, needs to be initialized, or has been removed.
+TLS: can't create ssl handle.
+rlm_ldap (ldap): Bind with cn=Radius,o=Example,c=XX to ldap://ldap.example.com:636 failed:
+Can't contact LDAP server
+TLS: could not shutdown NSS - error -8053:NSS could not shutdown. Objects are still in use..
+rlm_ldap (ldap): Opening connection failed (7)
+(28)     [ldap] = fail</pre>
+
+Consider switching to a version of libldap that uses OpenSSL. FreeRADIUS uses OpenSSL everywhere, and OpenSSL and NSS don't play well together. You may wish to encourage your distribution's vendor to switch their libldap implementation (or make an OpenSSL-built version of libldap available) by raising a bug report with them.
+
+In FreeRADIUS 3.x, you can set the **idle_timeout** setting in the **pool** section of the LDAP module to **zero** to keep the LDAPS connections open permanently to avoid this issue. 
+
 # See Also
 
 * [[LDAP]]
