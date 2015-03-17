@@ -1,11 +1,11 @@
-An alternative for freeradius 2.x is at: http://deployingradius.com/documents/configuration/active_directory.html
+An alternative for FreeRADIUS 2.x is at: http://deployingradius.com/documents/configuration/active_directory.html
 
 Introduction
 ------------
 
 This document describes how to set up FreeRADIUS server in order to authenticate Windows XP network users transparently against Active Directory.
 
-It is a step by step 'quick & dirty' guide to configure FreeRADIUS server, network Access Points and WindowsXP supplicants.
+It is a step by step 'quick & dirty' guide to configure FreeRADIUS server, Network Access Points and Windows XP supplicants.
 
 Principles
 ==========
@@ -166,9 +166,9 @@ The error is absolutely normal in this case because there are no cleartext user 
   challenge/response password authentication succeeded
 
 As cleartext authentication fails, wbinfo tries a challenge/response.
-If a challenge/response succeeds, the Linux server is configured correctly to authenticate users against Active Directory, however despite of the succes of this test, you may need to set some extra permissions on the winbindd_privileged directory (see below at WARNING)!
+If a challenge/response succeeds, the Linux server is configured correctly to authenticate users against Active Directory, however despite of the success of this test, you may need to set some extra permissions on the winbindd_privileged directory (see the WARNING below)!
 
-Let’s try to authenticate with NTLM, which is necessary for using FREERADIUS with Active Directory.
+Let’s try to authenticate with NTLM, which is necessary for using FreeRADIUS with Active Directory.
 
 Type the following line
 ::
@@ -195,7 +195,7 @@ __________
 
 When called by *radiusd* (thus directly setting the challenge value) the **ntlm_auth** program needs permission to access winbindd's ``winbindd_privileged`` directory (somewhere under ``/var``). Read access will usually be sufficient.
 
-The ``radiusd.conf`` file sets the uid and gid your *radiusd* process will run as (by the *user* and *group* directives, respectively). The *ntlm_auth* process will have the same identity. If your filesystem containing the *winbindd_privileged* directory supports POSIX ACLs, you can safely grant *ntlm_auth* the necessary permissions, in case your disribution's default setting were insufficient. If *radiusd* runs as the user *radiusd* for example, then you should use setfacl the following way
+The ``radiusd.conf`` file sets the uid and gid your *radiusd* process will run as (by the *user* and *group* directives, respectively). The *ntlm_auth* process will have the same identity. If your filesystem containing the *winbindd_privileged* directory supports POSIX ACLs, you can safely grant *ntlm_auth* the necessary permissions, in case your distribution's default setting were insufficient. If *radiusd* runs as the user *radiusd* for example, then you should use setfacl the following way
 ::
   setfacl -m u:radiusd:rx winbindd_privileged
 
@@ -317,7 +317,7 @@ Open your ``raddb/users`` file with your favorite editor and add one line per lo
 
 and so on (Obviously, set your own local username and passwords).
 
-Note the ``MS-CHAP-Use-NTLM-Auth := 0``, in this line we are telling to the FreeRADIUS that i.e, *username1* with password *user-password1*, will not be preprocessed by the ntlm_auth auxiliary program, this is, will not request the key to compare credentials against the Active Directory, but instead, compare against the users file of the freeradius configuration directory.
+Note the ``MS-CHAP-Use-NTLM-Auth := 0``; in this line we are telling FreeRADIUS that *username1* with password *user-password1* will not be pre-processed by the ntlm_auth auxiliary program, i.e. it will not request the key to compare credentials against Active Directory, but instead, compare against the users file of the FreeRADIUS configuration directory.
 
 It is important to verify that the line
 ::
@@ -328,7 +328,7 @@ It is important to verify that the line
       ...
   } 
 
-Is uncommented in the authorize section of the sites-avilable/inner-tunnel.
+Is uncommented in the authorize section of the sites-available/inner-tunnel.
 
 Configuration of the switch
 ===========================
@@ -416,7 +416,7 @@ Check if « Automatically use my Windows logon name and password (and domain if 
 IX Self-signed certificates
 
 
-TLS and PEAP require both server and client certificates. To generate the requested certificates, it is recommended to use the script « CA.all » that comes with FREERADIUS.
+TLS and PEAP require both server and client certificates. To generate the requested certificates, it is recommended to use the script « CA.all » that comes with FreeRADIUS.
 CA.all uses the configuration of the openssl.cnf file. It is possible to replace the certificates later by those obtained from a real certification authority.
 
 Open the file ``openssl.cnf``. It is located in ``/usr/local/openssl/ssl``
