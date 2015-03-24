@@ -33,16 +33,6 @@ Only strings should be wrapped in single quotes, other values should be left unq
 
 For binary attributes the value may be specified as an unquoted string with a 0x prefix e.g. ``0xffffff``
 
-### Example:
-An example test request might look like this:
-
-```bash
-Packet-Type=Access-Request
-User-Name='test_user001@test.realm.example.org'
-User-Password='testing123'
-NAS-IP-Address=127.0.0.1
-```
-
 ### Tags
 The following comment tags are supported. They should be placed at the top of the request file.
 
@@ -50,6 +40,20 @@ The following comment tags are supported. They should be placed at the top of th
 
 ### Comments
 Any line starting with ``#`` is treated as a comment.
+
+### Example:
+An example test request might look like this:
+
+```bash
+# serial
+# My test access request
+Packet-Type=Access-Request
+User-Name='test_user001@test.realm.example.org'
+User-Password='testing123'
+NAS-IP-Address=127.0.0.1
+```
+
+This test file would produce an ``Access-Request``, with the attributes `User-Name``, ``User-Password`` and ``NAS-IP-Address``.
 
 ## Creating a test filter
 Test filters check the response from the server is correct
