@@ -5,7 +5,6 @@ FR Configuration
 ^^^^^^^^^^^^
 * [[Configuration files]]
 * [[Mac-Auth]]
-* [[LDAP-Auth Example]]
 
 Device configuration examples
 ^^^^^^^^^^^^^^^^^^^^^^
@@ -16,4 +15,3 @@ Device configuration examples
 Recipes for 3rd party software
 ^^^^^^^^^^^^^^^^^^^^^^
 * [[guide/PopTop HOWTO]]
-* [[Git]]
