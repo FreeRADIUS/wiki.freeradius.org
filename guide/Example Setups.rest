@@ -2,16 +2,24 @@ Cookbook - Recipes and Examples
 ==========================
 
 FR Configuration
-^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^
+
 * [[Configuration files]]
 * [[Mac-Auth]]
 
+Integrating with Active Directory
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* [[Wired 802.1X authentication with FreeRADIUS 3 and Samba|FreeRADIUS-Active-Directory-Integration-HOWTO]]
+
 Device configuration examples
-^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 * [[HP ProCurve|HP]]
 * [[Cisco]]
 * [[Linksys]]
 
 Recipes for 3rd party software
-^^^^^^^^^^^^^^^^^^^^^^
-* [[guide/PopTop HOWTO]]
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* [[PPTP with PopTop and FreeRADIUS|guide/PopTop HOWTO]]
