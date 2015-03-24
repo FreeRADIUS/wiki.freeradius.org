@@ -1,6 +1,8 @@
-# radauth.sh
+# raduat
 
-Note: only ``radclient`` from version >= 3.0.7 will work correctly with ``raduat.sh``
+Note: only ``radclient`` from version >= 3.0.7 will work correctly with ``raduat``
+
+Latest version is available [here](https://raw.githubusercontent.com/FreeRADIUS/freeradius-server/v3.1.x/scripts/raduat)
 
 ## Overview
 Bundled with the server source is a small shell script for writing test suites. It uses ``radclient`` to send test requests, and validate responses.
@@ -133,4 +135,10 @@ User-Password=testing123" >> ./tests/static_ip/test001_check_static_ip
 echo "Response-Packet-Type==Access-Accept
 Framed-IP-address==192.168.0.2" >> ./tests/static_ip/test001_check_static_ip_expected
 ```
+
+## Running the tests
+
+By default radaut will execute tests in parallel batches of 20. If you want to execute tests one at a time, either add ``# serial`` to the top of the file, or pass ``-p 1``.
+
+
 
