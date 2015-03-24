@@ -82,15 +82,15 @@ Commonly used attributes are:
 ### Op
 
 Op should be one of the comparison operators:
-- ``<``
-- ``>``
-- ``<=``
-- ``>=``
-- ``==``
-- ``!=``
-- ``~=`` - Regex
-- ``!~`` - Regex
-- ``*= ANY`` - Presence
+- ``<`` - Less than
+- ``>`` - Greater than
+- ``<=`` - Less than or equal to
+- ``>=`` - Greater than or equal to
+- ``==`` - Equality
+- ``!=`` - Inequality
+- ``~=`` - Matches
+- ``!~`` - Does not match
+- ``*= ANY`` - Present
 - ``!* ANY`` - Not present
 
 ### Value
