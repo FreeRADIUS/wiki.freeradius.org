@@ -11,6 +11,7 @@
 * [[Lockout|guide/lockout]]
 * [[Mac-Auth|guide/Mac Auth]]
 * [[Twitter|guide/twitter]]
+* [[raduat|guide/raduat]]
 
 Device configuration examples
 -----------------------------
