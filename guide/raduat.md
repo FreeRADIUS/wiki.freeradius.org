@@ -106,11 +106,9 @@ Reply-Message=='Welcome to foocorp'
 ```
 
 ## Creating a test suite
-By default ``raduat`` will look for a folder in the current working directory called ``tests``.
+By default ``raduat`` will look for a folder relative to itself called ``tests``.
 
-If it finds one, it will attempt to execute each of the test requests in lexicographical order.
-
-``raduat`` isn't limited to a single directory, it will work perfectly happily with a directory hierarchy, in which case the tests are executed depth first then in lexicographical order.
+If it finds one, it will attempt to execute each of the test requests in lexicographical order. ``raduat`` will also work with fine with a directory hierarchy, in which case the tests are executed depth first then in lexicographical order. This is to allow easy organisation of tests.
 
 Only files with names that match the pattern ``test[0-9]{3}.*`` will be processed. Each request file must also be paired with a response file. A response file has the same name as the request, with an ``_expected`` suffix.
 
@@ -137,8 +135,16 @@ Framed-IP-address==192.168.0.2" >> ./tests/static_ip/test001_check_static_ip_exp
 ```
 
 ## Running the tests
-
 By default radaut will execute tests in parallel batches of 20. If you want to execute tests one at a time, either add ``# serial`` to the top of the file, or pass ``-p 1``.
 
+Command line arguments can be found with ``raduat -h``. They can be used to specify the server/port/secret to run the tests against. By default the server is ``127.0.0.1`` the port is automatically determined by ``Packet-Type`` and the secret is ``testing123``.
+
+raduat behaviour can also be modified by setting environmental variables.
+
+Supported ENV vars are:
+- ``TESTDIR`` - The directory containing the tests.
+- ``RADCLIENT`` - Path to the radclient binary.
+- ``FILTER_SUFFIX`` - The suffix added to the request file name to find response filters. Defaults to ``_EXPECTED``.
+- ``DICT_PATH`` - Path to alternative RADIUS dictionaries.
 
 
