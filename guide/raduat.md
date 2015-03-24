@@ -54,7 +54,7 @@ An example test request might look like this:
 # serial
 # My test access request
 Packet-Type=Access-Request
-User-Name='test_user001@test.realm.example.org'
+User-Name='test_user001@test.realm'
 User-Password='testing123'
 NAS-IP-Address=127.0.0.1
 ```
@@ -137,14 +137,34 @@ Framed-IP-address==192.168.0.2" >> ./tests/static_ip/test001_check_static_ip_exp
 ## Running the tests
 By default radaut will execute tests in parallel batches of 20. If you want to execute tests one at a time, either add ``# serial`` to the top of the file, or pass ``-p 1``.
 
+### Arguments
 Command line arguments can be found with ``raduat -h``. They can be used to specify the server/port/secret to run the tests against. By default the server is ``127.0.0.1`` the port is automatically determined by ``Packet-Type`` and the secret is ``testing123``.
 
-raduat behaviour can also be modified by setting environmental variables.
-
-Supported ENV vars are:
+### Environmental variables
 - ``TESTDIR`` - The directory containing the tests.
 - ``RADCLIENT`` - Path to the radclient binary.
 - ``FILTER_SUFFIX`` - The suffix added to the request file name to find response filters. Defaults to ``_EXPECTED``.
 - ``DICT_PATH`` - Path to alternative RADIUS dictionaries.
 
+### Example
 
+Running the above test requests/response filters against:
+
+```bash
+authorize {
+	switch &User-Name {
+		case 'test_user001@test.realm' {
+			update reply {
+				Framed-IP-Address := 192.168.0.1
+			}
+		}
+		case 'test_user002@test.realm' {
+			update reply {
+				Framed-IP-Address := 192.168.0.3
+			}
+		}
+	}
+	update control {
+		Auth-Type := Accept
+	}
+}
