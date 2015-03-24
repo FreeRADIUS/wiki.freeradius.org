@@ -150,7 +150,7 @@ Command line arguments can be found with ``raduat -h``. They can be used to spec
 
 Running the above test requests/response filters against a dummy configuration:
 
-```bash
+```text
 authorize {
 	switch &User-Name {
 		case 'test_user001@test.realm' {
@@ -191,7 +191,7 @@ $ echo $?
 Which is correct, as ``192.168.0.3`` != ``192.168.0.2``.
 
 Adding ``-v`` gives us more verbose output, and also a summary of packets sent/received.
-```bash
+```text
 ./raduat -v
 Executing 2 test(s) from ./tests
 Executing specified tests:
