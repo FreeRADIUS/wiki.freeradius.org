@@ -190,7 +190,7 @@ $ echo $?
 
 Which is correct, as ``192.168.0.3`` != ``192.168.0.2``.
 
-Adding ``-v`` gives us more verbose output, and also a summary of packets sent/received.
+Adding ``-v`` gives us more verbose output, and also a summary of packets sent/received:
 ```text
 ./raduat -v
 Executing 2 test(s) from ./tests
