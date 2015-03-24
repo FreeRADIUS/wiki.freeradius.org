@@ -148,7 +148,7 @@ Command line arguments can be found with ``raduat -h``. They can be used to spec
 
 ### Example
 
-Running the above test requests/response filters against:
+Running the above test requests/response filters against a dummy configuration:
 
 ```bash
 authorize {
@@ -168,3 +168,59 @@ authorize {
 		Auth-Type := Accept
 	}
 }
+```
+
+Produces this output:
+```bash
+$ ./raduat
+Executing 2 test(s) from ./tests
+Executing specified tests
+Use -v to see full list
+Sent Access-Request Id 197 from 0.0.0.0:55331 to 127.0.0.1:1812 length 63
+Sent Access-Request Id 149 from 0.0.0.0:55331 to 127.0.0.1:1812 length 63
+Received Access-Accept Id 197 from 127.0.0.1:1812 to 0.0.0.0:0 length 26
+Received Access-Accept Id 149 from 127.0.0.1:1812 to 0.0.0.0:0 length 26
+(1) ./tests/static_ip/test001_check_static_ip: Response for failed filter: Attribute value "192.168.0.3" didn't match filter: Framed-IP-Address == 192.168.0.2
+(Parallelised tests)
+
+One or more tests failed (radclient exited with 1)
+$ echo $?
+1
+```
+
+Which is correct, as ``192.168.0.3`` != ``192.168.0.2``.
+
+Adding ``-v`` gives us more verbose output, and also a summary of packets sent/received.
+```bash
+./raduat -v
+Executing 2 test(s) from ./tests
+Executing specified tests:
+./tests/static_ip/test000_check_static_ip
+./tests/static_ip/test001_check_static_ip
+Executing: radclient  -f "/var/folders/5_/k_q1ccb94p3gcgk8r9yc8ssh0000gn/T/raduatXXX.f2cB3Kek:/var/folders/5_/k_q1ccb94p3gcgk8r9yc8ssh0000gn/T/raduatXXX.1RX7R8aL" -x -s -t "2" -r "3" -p "40" "127.0.0.1" auto "testing123"
+Sent Access-Request Id 63 from 0.0.0.0:51512 to 127.0.0.1:1812 length 63
+	Packet-Type = Access-Request
+	User-Name = 'test_user001@test.realm'
+	User-Password = 'testing123'
+	Radclient-Test-Name := './tests/static_ip/test000_check_static_ip'
+Sent Access-Request Id 147 from 0.0.0.0:51512 to 127.0.0.1:1812 length 63
+	Packet-Type = Access-Request
+	User-Name = 'test_user002@test.realm'
+	User-Password = 'testing123'
+	Radclient-Test-Name := './tests/static_ip/test001_check_static_ip'
+Received Access-Accept Id 63 from 127.0.0.1:1812 to 0.0.0.0:0 length 26
+	Framed-IP-Address = 192.168.0.1
+(0) ./tests/static_ip/test000_check_static_ip: Response passed filter
+Received Access-Accept Id 147 from 127.0.0.1:1812 to 0.0.0.0:0 length 26
+	Framed-IP-Address = 192.168.0.3
+(1) ./tests/static_ip/test001_check_static_ip: Response for failed filter: Attribute value "192.168.0.3" didn't match filter: Framed-IP-Address == 192.168.0.2
+Packet summary:
+	Accepted      : 2
+	Rejected      : 0
+	Lost          : 0
+	Passed filter : 1
+	Failed filter : 1
+(Parallelised tests)
+
+One or more tests failed (radclient exited with 1)
+```
