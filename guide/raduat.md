@@ -45,7 +45,7 @@ The following comment tags are supported. They should be placed at the top of th
 ### Comments
 Any line starting with ``#`` is treated as a comment.
 
-### Example:
+### Example
 An example test request might look like this:
 
 ```bash
@@ -96,9 +96,41 @@ Op should be one of the comparison operators:
 ### Value
 Value format is the same as the request.
 
-### Example:
+### Example
 An example test response might look like this:
 ```bash
 Response-Packet-Type==Access-Accept
 Reply-Message=='Welcome to foocorp'
 ```
+
+## Creating a test suite
+By default ``raduat`` will look for a folder in the current working directory called ``tests``.
+
+If it finds one, it will attempt to execute each of the test requests in lexicographical order of the file names.
+
+``raduat`` isn't limited to a single directory, it will work perfectly happily with a directory hierarchy, in which case the tests are executed depth first then in lexicographical order.
+
+Only files with names that match the format ``test[0-9]{3}.*`` will be processed. Each request file must also be paired with a response file. A response file has the same name as the request, with an ``_expected`` suffix.
+
+For example the response file for ``test000_check_static_ip`` would be ``test000_check_static_ip_expected``.
+
+### Example
+
+```bash
+mkdir -p ./tests/static_ip
+
+echo "Packet-Type=Access-Request
+User-Name=test_user001@test.realm
+User-Password=testing123" >> ./tests/static_ip/test000_check_static_ip
+
+echo "Response-Packet-Type==Access-Accept
+Framed-IP-address=192.168.0.1" >> ./tests/static_ip/test000_check_static_ip_expected
+
+echo "Packet-Type=Access-Request
+User-Name=test_user002@test.realm
+User-Password=testing123" >> ./tests/static_ip/test001_check_static_ip
+
+echo "Response-Packet-Type==Access-Accept
+Framed-IP-address=192.168.0.2" >> ./tests/static_ip/test001_check_static_ip_expected
+```
+
