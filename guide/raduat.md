@@ -224,3 +224,10 @@ Packet summary:
 
 One or more tests failed (radclient exited with 1)
 ```
+
+The tests to run can be filtered using glob patterns:
+
+- ``./raduat -- 'static_ip/test000*'`` would execute only the first test in the static_ip suite.
+- ``./raduat -- 'static_ip/*'`` would execute all the static_ip tests.
+
+This can be used to drill down, and only run the failing tests.
