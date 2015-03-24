@@ -171,7 +171,7 @@ authorize {
 ```
 
 Produces the following output:
-```bash
+```text
 $ ./raduat
 Executing 2 test(s) from ./tests
 Executing specified tests
