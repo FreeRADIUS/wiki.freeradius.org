@@ -124,13 +124,13 @@ User-Name=test_user001@test.realm
 User-Password=testing123" >> ./tests/static_ip/test000_check_static_ip
 
 echo "Response-Packet-Type==Access-Accept
-Framed-IP-address=192.168.0.1" >> ./tests/static_ip/test000_check_static_ip_expected
+Framed-IP-address==192.168.0.1" >> ./tests/static_ip/test000_check_static_ip_expected
 
 echo "Packet-Type=Access-Request
 User-Name=test_user002@test.realm
 User-Password=testing123" >> ./tests/static_ip/test001_check_static_ip
 
 echo "Response-Packet-Type==Access-Accept
-Framed-IP-address=192.168.0.2" >> ./tests/static_ip/test001_check_static_ip_expected
+Framed-IP-address==192.168.0.2" >> ./tests/static_ip/test001_check_static_ip_expected
 ```
 
