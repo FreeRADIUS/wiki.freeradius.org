@@ -10,7 +10,9 @@ FR Configuration
 Integrating with Active Directory
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+* [[PAP or MSCHAP authentication with FreeRADIUS and ntlm_auth|http://deployingradius.com/documents/configuration/active_directory.html]]
 * [[Wired 802.1X authentication with FreeRADIUS 3 and Samba|FreeRADIUS-Active-Directory-Integration-HOWTO]]
+* [[FreeRADIUS 3 MSCHAP authentication to AD without using ntlm_auth|Active-Directory-direct-via-winbind]]
 
 Device configuration examples
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
