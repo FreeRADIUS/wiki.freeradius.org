@@ -1,11 +1,11 @@
 [[FreeRADIUS|glossary/FreeRADIUS]] HOWTOs
 -----------------------------------------
+
 * [[Basic configuration|guide/Basic configuration HOWTO]]
 * [[SQL|guide/SQL HOWTO]]
 * [[EAP/MD5|guide/EAPMD5 HOWTO]]
 * [[WPA|guide/WPA HOWTO]] (Using FreeRadius to secure your wireless network)
 * [[SNMP|guide/SNMP HOWTO]]
-* [[FreeRADIUS Active Directory Integration|guide/FreeRADIUS Active Directory Integration HOWTO]]
 * [[Syslog|guide/Syslog HOWTO]]
 * [[SQL Huntgroup|guide/SQL Huntgroup HOWTO]] (How to implement huntgroups in SQL)
 * [[Lockout|guide/lockout]]
@@ -13,16 +13,25 @@
 * [[Twitter|guide/twitter]]
 * [[raduat|guide/raduat]]
 
+Integrating with Active Directory
+---------------------------------
+
+* [[PAP or MSCHAP authentication with FreeRADIUS and ntlm_auth|http://deployingradius.com/documents/configuration/active_directory.html]]
+* [[FreeRADIUS Active Directory Integration|guide/FreeRADIUS Active Directory Integration HOWTO]] with example for wired 802.1X
+* [[FreeRADIUS 3 MSCHAP authentication to AD without using ntlm_auth|Active-Directory-direct-via-winbind]]
+
+
 Device configuration examples
 -----------------------------
 * [[HP ProCurve|vendor/HP]]
 * [[Cisco|vendor/Cisco]]
 * [[Linksys|vendor/Linksys]]
 
+
 Guides for 3rd party software
 -----------------------------
-* [[PopTop|guide/PopTop HOWTO]]
-* [[Git]]
+* [[PPTP with PopTop and FreeRADIUS|guide/PopTop HOWTO]]
+
 
 Offsite HOWTOs
 --------------
