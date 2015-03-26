@@ -79,7 +79,7 @@ Behind the scenes, the rlm_realm module is setting the <tt>Proxy-To-Realm</tt> c
 
 Therefore it can sometimes be useful or easier to skip use of the realm module entirely, and control proxying only by unlang. For example to proxy all unknown realms you may use something like:
 
-    if ("%{User-Name}" =~ /@local.domain.example$/) {
+    if ("%{User-Name}" =~ /@local\.domain\.example$/) {
         noop
     }
     else {
