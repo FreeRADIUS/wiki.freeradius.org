@@ -73,6 +73,28 @@ The exact thing that happens is this:
 
 * Then the users file is processed as usual. The username used at this point is the one after hints file processing (regardless of the "hints" option). It also includes the realm (regardless of the setting of the "nostrip" option) unless the realm is LOCAL.
 
+===Proxying from unlang===
+
+Behind the scenes, the rlm_realm module is setting the <tt>Proxy-To-Realm</tt> control attribute to tell the server which realm to proxy to. If this attribute is set at the end of processing the <tt>authorize</tt> section, the server will initiate proxying the request (sending via the <tt>pre-proxy</tt> section), rather than authenticating locally.
+
+Therefore it can sometimes be useful or easier to skip use of the realm module entirely, and control proxying only by unlang. For example to proxy all unknown realms you may use something like:
+
+    if ("%{User-Name}" =~ /@local.domain.example$/) {
+        noop
+    }
+    else {
+        update control {
+            Proxy-To-Realm := 'offsite'
+        }
+    }
+
+Then you may define a realm in [[proxy.conf]]:
+
+    realm offsite {
+        auth_pool = offsite_pool
+        ...
+    }
+
 ==See Also==
 
 * [[Configuration files]]
