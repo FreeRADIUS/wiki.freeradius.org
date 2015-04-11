@@ -1,8 +1,7 @@
 RADIUS Concepts
 ===============
 
-![FreeRADIUS flow diagram](/request_flow.svg "Railroad diagram")
-
+<a href="/request_flow.svg">![FreeRADIUS flow diagram](/request_flow.svg "Railroad diagram")</a>
 
 Many people have problems configuring FreeRADIUS.  These problems are often due to faulty concepts.  No amount of editing configuration files will correct the faulty concepts.  This page tries to correct that problem.
 
