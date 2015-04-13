@@ -11,8 +11,8 @@ How things work in RADIUS
 The client sends you a radius authentication request, you don't decide what's in the request, the client does.  The server doesn't decide what's in the request, the client does.  The client is 100% responsible for everything in the request.
 
 
-Picking an Auth-Type and marshalling data - authorize {}
-========================================================
+Picking an Auth-Type
+====================
 
 The radius server looks at the request and says:
 
