@@ -5,7 +5,7 @@ To install up-to-date FreeRADIUS packages on Debian stable systems, use the back
 * Add a [[backports mirror|http://backports.debian.org/Mirrors/]] to ``/etc/apt/sources.list`` like this:
 ::
 
- deb http://backports.debian.org/debian-backports lenny-backports main
+ deb http://backports.debian.org/debian-backports wheezy-backports main
 
 * Update the package indices:
 ::
@@ -15,17 +15,17 @@ To install up-to-date FreeRADIUS packages on Debian stable systems, use the back
 * Install FreeRADIUS packages:
 ::
 
- sudo apt-get -t lenny-backports install freeradius
+ sudo apt-get -t wheezy-backports install freeradius
 
 * If everything went all right, make sure you will upgrade these from the same repository, by pinning it through ``/etc/apt/preferences`` like this:
 ::
 
   Package: freeradius
-  Pin: release a=lenny-backports
+  Pin: release a=wheezy-backports
   Pin-Priority: 500
 
   Package: freeradius-common
-  Pin: release a=lenny-backports
+  Pin: release a=wheezy-backports
   Pin-Priority: 500
 
   [...]
