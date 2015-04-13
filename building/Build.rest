@@ -62,11 +62,7 @@ Please see: [[Solaris|building/Solaris]]
 Building Packages
 -----------------
 
-If your operating system has a packaging system (dpkg, rpm, tgz), its usually better to install the appropriate packages instead of directly installing from source.
-
-Note: Pre-built binary packages are available for a number of operating systems.
-
-It's usually easier and more reliable to use pre-built packages from standard repositories of the operating system vendor. Build your own packages only if you cannot find the former.
+If your operating system has a packaging system (dpkg, rpm, tgz), it is usually easier to install the appropriate packages instead of directly installing from source. However this may not always be the recommended approach as many systems seem to lag behind with very old versions of FreeRADIUS. In that case it may be better to build from source.
 
 Building Debian packages
 ^^^^^^^^^^^^^^^^^^^^^^^^
@@ -75,6 +71,7 @@ If you're using _Debian GNU/Linux_, you should first check whether your desired 
 
 Please see: [[http://packages.debian.org/freeradius]]
 
+As of writing (April 2015), Debian wheezy contains version 2.1.12 (very old), however wheezy-backports and jessie contain version 2.2.5. 
 For instructions how to set up Debian backports, see: [[Debian|building/Debian]]
 
 It is possible to build FreeRADIUS packages from the source, using *dpkg-buildpackage*. Using packages avoids installing directly from source, which would confuse *dpkg* about the files installed on the system and make it impossible to uninstall the files later.
