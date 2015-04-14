@@ -1,6 +1,6 @@
 The rlm_cache module allows values of arbitrary attributes to be stored against a key, and retrieved for future requests matching that key.
 
-The key value itself is an xlat expansion, meaning it can be made up from multiple attributes from any list, or from SQL queries, LDAP searches or any other module which registers an xlat function.
+The key value itself is an [[xlat expansion|Rlm_expr]], meaning it can be made up from multiple attributes from any list, or from SQL queries, LDAP searches or any other module which registers an xlat function.
 
 Feel free to add additional use cases if you think of new and interesting ways to use this module.
 
