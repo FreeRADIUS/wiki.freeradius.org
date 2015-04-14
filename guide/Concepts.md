@@ -12,7 +12,7 @@ and if working with EAP:
 - [RFC 3748 - Extensible Authentication Protocol (EAP)](https://tools.ietf.org/html/rfc3748)
 - [RFC 3579 - RADIUS (Remote Authentication Dial In User Service) Support For Extensible Authentication Protocol (EAP)](https://tools.ietf.org/html/rfc3579)
 
-This should provide a solid foundation in RADIUS' operational concepts.
+This should provide a solid foundation in RADIUS and EAP at a protocol level.
 
 How things work in RADIUS
 =========================
