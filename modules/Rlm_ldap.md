@@ -192,7 +192,7 @@ These messages will be visible in radius.log as additional information in "Login
 
 ### LDAP xlat
 
-The ldap module now supports LDAP URLs in xlat strings. That is you can now add LDAP URLs in the configuration options and hopefully shortly also in the users file. The strings will be of the following form:
+The ldap module now supports LDAP URLs in [[xlat strings|Rlm_expr]]. That is you can now add LDAP URLs in the configuration options and hopefully shortly also in the users file. The strings will be of the following form:
 <pre>
  %{ldap:ldap:///dc=company,dc=com?uid?sub?uid=%u}
 </pre>
