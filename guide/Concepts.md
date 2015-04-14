@@ -5,6 +5,12 @@ RADIUS Concepts
 
 Many people have problems configuring FreeRADIUS.  These problems are often due to faulty concepts.  No amount of editing configuration files will correct the faulty concepts.  This page tries to correct that problem.
 
+Users new to RADIUS, EAP or AAA in general are encouraged to read the following standards:
+- [RFC 2865 - Remote Authentication Dial In User Service (RADIUS)](https://tools.ietf.org/html/rfc2865)
+- [RFC 2866 - RADIUS Accounting](https://tools.ietf.org/html/rfc2866)
+- [RFC 3748 - Extensible Authentication Protocol (EAP)](https://tools.ietf.org/html/rfc3748)
+- [RFC 3579 - RADIUS (Remote Authentication Dial In User Service) Support For Extensible Authentication Protocol (EAP)](https://tools.ietf.org/html/rfc3579)
+
 How things work in RADIUS
 =========================
 
