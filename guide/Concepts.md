@@ -8,6 +8,7 @@ Users new to RADIUS, EAP or AAA in general are encouraged to read the following 
 - [RFC 2866 - RADIUS Accounting](https://tools.ietf.org/html/rfc2866)
 - [RFC 3748 - Extensible Authentication Protocol (EAP)](https://tools.ietf.org/html/rfc3748)
 - [RFC 3579 - RADIUS (Remote Authentication Dial In User Service) Support For Extensible Authentication Protocol (EAP)](https://tools.ietf.org/html/rfc3579)
+
 This should provide a solid foundation in RADIUS' operational concepts.
 
 How things work in RADIUS
