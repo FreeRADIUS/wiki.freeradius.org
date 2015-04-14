@@ -1,6 +1,8 @@
 RADIUS Concepts
 ===============
 
+<a href="/request_flow.svg">![FreeRADIUS flow diagram](/request_flow.svg "Railroad diagram")</a>
+
 Users new to RADIUS, EAP or AAA in general are encouraged to read the following standards:
 - [RFC 2865 - Remote Authentication Dial In User Service (RADIUS)](https://tools.ietf.org/html/rfc2865)
 - [RFC 2866 - RADIUS Accounting](https://tools.ietf.org/html/rfc2866)
@@ -84,5 +86,3 @@ In this case, the mschap module looks at the request, and finds the MS-CHAP attr
 >  because I don't have the information I need to validate MSCHAP
 
 But now the server has run out of options, its only choice was mschap because that's what the client sent in the request.  The mschap module can't do anything because you didn't give it a useful "known good" password . So the server has no choice but to reject the request.  The MSCHAP data might be correct, but the server has no way to know that.  So it replies with a reject.
-
-<a href="/request_flow.svg">![FreeRADIUS flow diagram](/request_flow.svg "Railroad diagram")</a>
