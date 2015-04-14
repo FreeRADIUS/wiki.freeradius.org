@@ -114,7 +114,7 @@ And then you can use a specific instance in [[radiusd.conf]], like so:
   }
 ===SQL xlat===
 
-The SQL module now supports SQL queries in xlat strings. That is you can extract  the value of a single field and use it, either as a check item, a request item or a reply item.
+The SQL module now supports SQL queries in [[Rlm_expr|xlat strings]]. That is you can extract  the value of a single field and use it, either as a check item, a request item or a reply item.
 The strings will be of the following form:
  %{sql:SELECT mytable.field1 FROM `mytable` WHERE 1}
 and you may nest xlat statements within SQL strings:
