@@ -143,7 +143,7 @@ Command line arguments can be found with ``raduat -h``. They can be used to spec
 ### Environmental variables
 - ``TESTDIR`` - The directory containing the tests.
 - ``RADCLIENT`` - Path to the radclient binary.
-- ``FILTER_SUFFIX`` - The suffix added to the request file name to find response filters. Defaults to ``_EXPECTED``.
+- ``FILTER_SUFFIX`` - The suffix added to the request file name to find response filters. Defaults to ``_expected``.
 - ``DICT_PATH`` - Path to alternative RADIUS dictionaries.
 
 ### Example
