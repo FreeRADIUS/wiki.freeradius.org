@@ -21,11 +21,11 @@ Unfortunately the new wiki needs some fixes. The mediawiki page format renderer 
 
 If you want to help out, please do the following:
 
-1. Sign up for Facebook, Twitter or GitHub
+1. Sign up for GitHub (or anything that supports oAuth)
 2. Pick a page where the MediaWiki format doesn't render correctly
 3. Click the 'Edit page' button
 4. Change edit mode from MediaWiki to reStructuredText or Markdown
-5. Convert markup to [reStructuredText](http://docutils.sourceforge.net/docs/user/rst/quickstart.html) or [Markdown](http://daringfireball.net/projects/markdown/syntax#precode) ([Tables](http://www.justatheory.com/computers/markup/markdown-table-rfc.html), [Cheat sheet](http://hw.libsyn.com/p/8/3/3/8339a864bb8faa83/Markdown_Cheat_Sheet.pdf))
+5. Convert markup to [Markdown](http://daringfireball.net/projects/markdown/syntax#precode) ([Tables](http://www.justatheory.com/computers/markup/markdown-table-rfc.html), [Cheat sheet](http://hw.libsyn.com/p/8/3/3/8339a864bb8faa83/Markdown_Cheat_Sheet.pdf))
 6. Save the page
 7. Get warm fuzzy glow from contributing to open source
 
@@ -46,13 +46,13 @@ Also please report any bugs here:
 * http://wiki.freeradius.org/Attribute%20support%20by%20processing%20list
 * http://wiki.freeradius.org/Attrs - JC 01/06/11
 
-### Pages to convert to RST
-* http://wiki.freeradius.org/Modules2 - JC 31/05/11
-* http://wiki.freeradius.org/Operators - ACB 01/06/11
-* http://wiki.freeradius.org/FreeRADIUS Active Directory Integration HOWTO - ACB 20/01/13
+### Pages to convert from RST to markdown
+* http://wiki.freeradius.org/Modules2
+* http://wiki.freeradius.org/Operators
+* http://wiki.freeradius.org/FreeRADIUS Active Directory Integration HOWTO
 
 ## Todo
-* Enable renaming wiki pages - JC
+* Enable renaming wiki pages - Arran CB - Done at some point in the distant past.
 * Fix external links - Arran CB - Done 31/05/11 (see here https://github.com/github/gollum/pull/166)
 * Fix per page committer info - Arran CB - Done 22/06/11 
 * Add google as omniauth provider - Arran CB
