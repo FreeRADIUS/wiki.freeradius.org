@@ -90,9 +90,9 @@ Op should be one of the comparison operators:
 - ``>=`` - Greater than or equal to
 - ``==`` - Equality
 - ``!=`` - Inequality
-- ``~=`` - Matches
+- ``=~`` - Matches
 - ``!~`` - Does not match
-- ``*= ANY`` - Present
+- ``=* ANY`` - Present
 - ``!* ANY`` - Not present
 
 ### Value
