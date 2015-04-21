@@ -26,7 +26,7 @@ Please compile from source with the configure flag ``--enable-developer``, and n
 Provide a backtrace using GDB::
   
   gdb <path to freeradius bin>
-  run -xl stdout
+  run -xlf stdout
   
   # Trigger the crash
   bt
