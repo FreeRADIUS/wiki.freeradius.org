@@ -6,7 +6,7 @@ Prerequisites
 
 * You must be running the latest minor and incremental version of a major release see http://freeradius.org/download.html
 * You must be running a version of the server compiled from an official tarball http://freeradius.org/download.html, not a packaged release
-* The major release must be currently supported (unless it's a major exploit), current supported major releases are 2.x.x and 3.x.x
+* The major release must be currently supported (unless it's a major exploit), current supported major releases are 2.x.x (security defects only) and 3.x.x
 
 How
 ^^^
