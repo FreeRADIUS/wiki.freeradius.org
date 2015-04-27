@@ -168,7 +168,7 @@ accounting {
 ```
 
 ## SQL xlat
-The SQL module now supports SQL queries in [rlm_expr](modules/rlm_expr). That is you can extract  the
+The SQL module now supports SQL queries in [rlm_expr](rlm_expr). That is you can extract  the
 value of a single field and use it, either as a check item, a request item or a reply item.
 The strings will be of the following form:
 
