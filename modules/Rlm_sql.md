@@ -55,8 +55,8 @@ like this:
   * There was not a match for the last group's check items OR
   * Fall-Through was set in the last group's reply items (The above is exactly the same as in the
     users file)
-* Finally, if the user has a User-Profile attribute set or the Default Profile option is set in the
-  sql.conf, then steps 4-6 are repeated for the groups that the profile is a member of.
+* Finally, if the user has a ``control:User-Profile`` attribute set or the Default Profile option is
+  set in the sql.conf, then steps 4-6 are repeated for the groups that the profile is a member of.
   
 For any fairly complex setup, it is likely that most of the actual processing will be done in the
 groups.  In these cases, the user entry in radcheck will be of limited use except for things like
