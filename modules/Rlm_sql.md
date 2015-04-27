@@ -43,7 +43,7 @@ like this:
   * The user IS NOT found in radcheck
   * The user IS found in radcheck, but the check items don't match
   * The user IS found in radcheck, the check items DO match AND Fall-Through is set in the radreply table
-  * The user IS found in radcheck, the check items DO match AND the [[read_groups]] directive is set to 'yes'
+  * The user IS found in radcheck, the check items DO match AND the read_groups directive is set to 'yes'
 * If groups are to be processed for this user, the first thing that is done is the list of groups
   this user is a member of is pulled from the usergroup table ordered by the priority field.  The
   priority field of the usergroup table allows us to control the order in which groups are processed,
@@ -168,7 +168,7 @@ accounting {
 ```
 
 ## SQL xlat
-The SQL module now supports SQL queries in [[Rlm_expr|xlat strings]]. That is you can extract  the
+The SQL module now supports SQL queries in [rlm_expr](modules/rlm_expr). That is you can extract  the
 value of a single field and use it, either as a check item, a request item or a reply item.
 The strings will be of the following form:
 
