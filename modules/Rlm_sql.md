@@ -212,5 +212,4 @@ In version <= 2 they cannot, and the expansion will fail.
 
 ## See Also
 
-* [[Modules]]
-* [[SQL]]
+* [Modules](modules/)
