@@ -8,11 +8,13 @@ Note: You must use SQL accounting for rlm_sqlcounter to work (list ``sql`` in th
 * check_name - This is the name of the attribute that is used to set the counter limit.
 * sql_module_instance - The instance of the rlm_sql that you wish to use to query.
 * key - The key field in the sql lookup - This is usually ``User-Name``.
-* reset - Specifies the frequency that the sqlcounter should be reset, possible values are:
-  - daily
-  - weekly
-  - monthly
-  - never
+* The 'reset' parameter defines when the counters are all reset to zero.  It can be hourly, daily, weekly, monthly or never.  It can also be user defined. It should be of the form: it's version 3.0.7
+  	num[hdwm] where:
+  	h: hours, d: days, w: weeks, m: months
+  	If the letter is ommited days will be assumed. In example:
+  	reset = 10h (reset every 10 hours)
+  	reset = 12  (reset every 12 days)
+
 * query - The sql query that is executed. The resulting value is compared with the attribute ``check_name``.
 
 ## Example Setup
