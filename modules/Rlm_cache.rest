@@ -8,7 +8,7 @@ Feel free to add additional use cases if you think of new and interesting ways t
 
 Configuration
 ---------------
-See `here <https://github.com/alandekok/freeradius-server/blob/master/raddb/mods-available/cache>`_ for the default configuration file. The config file described the module operation adequately, so it won't be repeated here.
+See `here <https://github.com/freeradius/freeradius-server/blob/master/raddb/mods-available/cache>`_ for the default configuration file. The config file described the module operation adequately, so it won't be repeated here.
 
 There are multiple interesting ways to use rlm_cache, here are some potentially useful ones...
 
