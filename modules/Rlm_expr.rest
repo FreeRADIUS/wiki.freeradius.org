@@ -3,7 +3,7 @@ The **rlm_expr** module enables 'xlat' handling.
 Configuration
 ---------------
 
-See [[default|https://github.com/alandekok/freeradius-server/blob/master/raddb/mods-available/expr]].
+See [[default|https://github.com/freeradius/freeradius-server/blob/master/raddb/mods-available/expr]].
 
 Expansions
 -------------
