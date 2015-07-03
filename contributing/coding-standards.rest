@@ -1,6 +1,10 @@
 Coding standards
 ----------------
 
+By and large, the goal is to have consistent, clear code.  All code should share a common style, format, choice of function / variable names, etc.  This means that people looking at the code see the *code*, and not the wildly different coding styles.
+
+Code should be commented.  There are over 100K LoC in the server, and it's impossible to always remember *why* things are done the way they are.  The comments should explain the choices behind the code, the goal, or philosophy, or the "gotcha's".
+
 Function naming conventions
 ===========================
 
@@ -46,6 +50,8 @@ Modules
 """""""
 Public functions should use the ``mod_`` prefix, e.g. ``mod_authorize``, ``mod_authentication``, ``mod_instantiate``. If the module uses its own library, those functions should be prefixed with the name of the module e.g. ``python_``, ``rest_``, ``eap_``.
 
+Ideally, all of the functions in a module should be ``static``.  If they cannot be that, the function name prefixes given above are *required*.
+
 Instantiation and destruction
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Library initialisations functions should use the verb ``init``.
@@ -76,7 +82,7 @@ Used only for allocation functions where there's a single simple failure mode (i
 e.g.
 
 ```c
-int complicated_memory_alloc(my_structure_t **out, TALLOC_CTX *ctx, int arg0, int arg1)
+int complicated_memory_alloc(TALLOC_CTX *ctx, my_structure_t **out, int arg0, int arg1)
 {
 	my_structure_t *structure.
 
