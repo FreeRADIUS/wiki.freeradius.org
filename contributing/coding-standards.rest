@@ -50,3 +50,52 @@ Structure allocation functions should use the verb ``alloc``. ``create`` should 
 
 Explicit ``free`` or ``destroy`` functions should be avoided, and talloc destructors used wherever possible. Talloc destructor functions should be static and be prefixed with ``_`` to mark them as private e.g. ``_fr_pair_free()``
 
+Return codes
+------------
+
+Boolean
+=======
+
+``bool`` is used where the function is answering a true/false question. A good example is the ``is_whitespace`` function, which checks if the entire string is made up of whitespace.
+
+Integer
+=======
+
+Should be used for most functions. Negative integers indicate failure, zero indicates success, positive integers indicate success with caveats.
+
+If you find a function returns significant (> 4) integer values, you should define C preprocess macros, and an enum type so that it's clear in calling code what the different values mean.
+
+Pointer
+=======
+
+Used only for allocation functions where there's a single simple failure mode (in which case NULL is returned). For more complicated failures the function should return an integer, and write a pointer to the allocated memory via one of the arguments.
+
+e.g.
+
+```c
+int complicated_memory_alloc(my_structure_t **out, TALLOC_CTX *ctx, int arg0, int arg1)
+{
+	my_structure_t *structure.
+
+	if (arg0 == 0) {
+		fr_strerror_printf("Invalid parameter, arg0 must be greater than 0");
+		return -2;
+	}	
+
+	structure = talloc(ctx, my_structure_t);
+	if (!structure) return -1;
+
+	return 0;
+}
+```
+
+Argument order
+--------------
+
+Arguments should be in the following order
+
+- TALLOC_CTX
+- Arguments that return data to the caller ([out] arguments in doxygen parlence)
+- Arguments for passing data to the function.
+
+For modules the instance data pointer should be directly before the ``REQUEST *`` pointer.
