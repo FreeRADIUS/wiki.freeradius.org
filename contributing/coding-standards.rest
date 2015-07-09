@@ -19,6 +19,9 @@ Function documentation should be doxygen style.  Below is an example of doxygen 
  *	- 0 if ip address was parsed successfully.
  *	- -1 on failure.
  */
+int fr_pton(fr_ipaddr_t *out, char const *value, ssize_t inlen, bool resolve)
+{
+}
 ```
 
 Function naming conventions
