@@ -84,6 +84,7 @@ my_structure_t *simple_memory_alloc(TALLOC_CTX *ctx, int arg0, int arg1)
 {
 	return talloc(ctx, my_structure_t);
 }
+```
 
 For more complicated failures the function should return an integer, and write a pointer to the allocated memory via one of the arguments.
 
