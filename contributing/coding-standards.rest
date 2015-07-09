@@ -30,10 +30,10 @@ Name component separation
 
 Name components should be separated by underscores.
 
-- frPairFind -> bad
-- frpairfind -> bad
-- fr_pairfind -> bad
-- fr_pair_find -> good
+- ``frPairFind`` -> bad
+- ``frpairfind`` -> bad
+- ``fr_pairfind`` -> bad
+- ``fr_pair_find`` -> good
 
 Prefixes / namespaces
 ^^^^^^^^^^^^^^^^^^^^^
@@ -67,12 +67,44 @@ Boolean
 
 ``bool`` is used where the function is answering a true/false question. A good example is the ``is_whitespace`` function, which checks if the entire string is made up of whitespace.
 
+```c
+bool is_whitespace(char const *value)
+{
+	do {
+		if (!isspace(*value)) return false;
+	} while (*++value);
+
+	return true;
+}
+```
+
 Integer
 ^^^^^^^
-
 Should be used for most functions. Negative integers indicate failure, zero indicates success, positive integers indicate success with caveats.
 
-If you find a function returns significant (> 4) integer values, you should define C preprocess macros, and an enum type so that it's clear in calling code what the different values mean.
+If you find a function returns significant (>= 4) numbers of different integer values, you should define C preprocessor macros, and an enum type so that it's clear in calling code what the different values mean.
+
+```c
+typedef enum {
+	FUNC_RCODE_SUCCESS = 0,
+	FUNC_RCODE_NO_MEMORY = -1,
+	FUNC_RCODE_BAD_ARGUMENTS0 = -2,
+	FUNC_RCODE_BAD_ARGUMENTS1 = -3
+} func_rcode_t;
+
+func_rcode_t my_function(int arg0, int arg1)
+{
+	void *mem;
+
+	mem = talloc(NULL, void);
+	if (!mem) return FUNC_RCODE_NO_MEMORY;
+
+	if (arg0 > 10) return FUNC_RCODE_BAD_ARGUMENTS0;
+	if (arg1 > 10) return FUNC_RCODE_BAD_ARGUMENTS1;
+
+	return FUNC_RCODE_SUCCESS;
+}
+```
 
 Pointer
 ^^^^^^^
@@ -87,8 +119,6 @@ my_structure_t *simple_memory_alloc(TALLOC_CTX *ctx, int arg0, int arg1)
 ```
 
 For more complicated failures the function should return an integer, and write a pointer to the allocated memory via one of the arguments.
-
-e.g.
 
 ```c
 int complicated_memory_alloc(TALLOC_CTX *ctx, my_structure_t **out, int arg0, int arg1)
