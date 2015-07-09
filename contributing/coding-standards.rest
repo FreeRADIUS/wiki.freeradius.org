@@ -1,9 +1,25 @@
 Coding standards
 ----------------
 
-By and large, the goal is to have consistent, clear code.  All code should share a common style, format, choice of function / variable names, etc.  This means that people looking at the code see the *code*, and not the wildly different coding styles.
+The goal is to have consistent, clear code.  All code should share a common style, format, choice of function / variable names, etc.  This means that people looking at the code see the *code*, and not the wildly different coding styles.
 
 Code should be commented.  There are over 100K LoC in the server, and it's impossible to always remember *why* things are done the way they are.  The comments should explain the choices behind the code, the goal, or philosophy, or the "gotcha's".
+
+Function documentation should be doxygen style.  Below is an example of doxygen function documentation, use it as a guide when writing your own.
+
+```c
+/** Simple wrapper to decide whether an IP value is v4 or v6 and call the appropriate parser
+ *
+ * @param out Where to write the ip address value.
+ * @param value to parse.
+ * @param inlen Length of value, if value is \0 terminated inlen may be -1.
+ * @param resolve If true and value doesn't look like an IP address, try and resolve value as a
+ *	hostname.
+ * @return
+ *	- 0 if ip address was parsed successfully.
+ *	- -1 on failure.
+ */
+```
 
 Function naming conventions
 ===========================
@@ -54,10 +70,16 @@ Ideally, all of the functions in a module should be ``static``.  If they cannot 
 
 Instantiation and destruction
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Library initialisations functions should use the verb ``init``.
+Library and structure initialisations functions should use the verb ``init``. Functions that initialise structures should expect them to contain garbage values (be uninitialised).
+
 Structure allocation functions should use the verb ``alloc``. ``create`` should not be used.
 
 Explicit ``free`` or ``destroy`` functions should be avoided, and talloc destructors used wherever possible. Talloc destructor functions should be static and be prefixed with ``_`` to mark them as private e.g. ``_fr_pair_free()``
+
+Callbacks
+^^^^^^^^^
+
+Callbacks should be prefixed with a ``_`` to mark them as private e.g. ``int _my_comparator(int a, int b)``.
 
 Return types
 ============
@@ -142,7 +164,7 @@ Argument order
 
 Arguments should be in the following order
 
-- TALLOC_CTX
+- TALLOC_CTX (if used).
 - Arguments that return data to the caller ([out] arguments in doxygen parlence)
 - Arguments for passing data to the function.
 
