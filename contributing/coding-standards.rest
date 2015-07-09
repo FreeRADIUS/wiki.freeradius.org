@@ -59,7 +59,7 @@ Structure allocation functions should use the verb ``alloc``. ``create`` should 
 
 Explicit ``free`` or ``destroy`` functions should be avoided, and talloc destructors used wherever possible. Talloc destructor functions should be static and be prefixed with ``_`` to mark them as private e.g. ``_fr_pair_free()``
 
-Return codes
+Return types
 ============
 
 Boolean
@@ -77,7 +77,15 @@ If you find a function returns significant (> 4) integer values, you should defi
 Pointer
 ^^^^^^^
 
-Used only for allocation functions where there's a single simple failure mode (in which case NULL is returned). For more complicated failures the function should return an integer, and write a pointer to the allocated memory via one of the arguments.
+Used only for allocation functions where there's a single simple failure mode (in which case NULL is returned).
+
+```c
+my_structure_t *simple_memory_alloc(TALLOC_CTX *ctx, int arg0, int arg1)
+{
+	return talloc(ctx, my_structure_t);
+}
+
+For more complicated failures the function should return an integer, and write a pointer to the allocated memory via one of the arguments.
 
 e.g.
 
