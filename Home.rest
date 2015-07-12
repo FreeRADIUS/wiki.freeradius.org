@@ -38,7 +38,7 @@ For major refactoring and new modules, add an issue to [[GitHub|https://github.c
 
 Bug reports
 -----------
-If you find an issue in the server please report it so that it can be fixed in a future release. The procedure for reporting defects can be found [[here|https://github.com/FreeRADIUS/freeradius-server/blob/master/doc/bugs]].
+If you find an issue in the server please report it so that it can be fixed in a future release. The procedure for reporting defects can be found [[here|project/bug-reports]].
 
 This Wiki
 ---------
