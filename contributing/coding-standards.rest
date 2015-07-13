@@ -232,7 +232,10 @@ while (foo())
 Return early
 ^^^^^^^^^^^^
 
-Avoid unnecessary condition nesting by returning as soon as there's an error.
+Avoid unnecessary condition nesting by returning as soon as there's an error, or the function has done its useful work.
+
+Gotos are a perfectly acceptable way to reduce the number of exit points.  You'll often see the ``finish`` or ``release``
+label used in module code for this purpose.
 
 **Good**
 ```c
