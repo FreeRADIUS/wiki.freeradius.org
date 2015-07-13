@@ -31,14 +31,14 @@ Verb / noun order
 ^^^^^^^^^^^^^^^^^
 Nouns should always precede verbs ``<prefix>_<noun>_<verb>[_<verb qualifiers>]``.
 
-Good
+**Good**
 ```c
 fr_request_alloc()
 fr_dict_find_by_name()
 python_interp_exec()
 ```
 
-Bad
+**Bad**
 ```c
 do_python()
 rest_parse_pairs()
@@ -49,12 +49,12 @@ Name component separation
 
 Name components should be separated by underscores.
 
-Good
+**Good**
 ```c
 fr_pair_find
 ```
 
-Bad
+**Bad**
 ```c
 frPairFind
 frpairfind
@@ -194,7 +194,7 @@ Always collapse bodies
 
 If a condition or loop and its body can be collapsed onto a single line, then do so.
 
-Good
+**Good**
 ```c
 if (foo && bar) baz();
 ```
@@ -202,7 +202,7 @@ if (foo && bar) baz();
 while (foo()) baz();
 ```
 
-Bad
+**Bad**
 ```c
 if (foo && bar) {
 	baz();
@@ -227,7 +227,7 @@ Return early
 
 Avoid unnecessary condition nesting by returning as soon as there's an error.
 
-Good
+**Good**
 ```c
 int my_func(char const *value)
 {
@@ -240,7 +240,7 @@ int my_func(char const *value)
 }
 ```
 
-Bad
+**Bad**
 ```c
 int my_func(char const *value)
 {
@@ -262,7 +262,7 @@ Error gotos jump backwards
 Error exit points and their goto labels should be defined the first time they occur in a function.
 
 
-Good
+**Good**
 ```c
 int my_func(char const *value)
 {
@@ -279,7 +279,7 @@ int my_func(char const *value)
 }
 ```
 
-Bad
+**Bad**
 ```c
 int my_func(char const *value)
 {
