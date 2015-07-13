@@ -49,10 +49,17 @@ Name component separation
 
 Name components should be separated by underscores.
 
-- ``frPairFind`` -> bad
-- ``frpairfind`` -> bad
-- ``fr_pairfind`` -> bad
-- ``fr_pair_find`` -> good
+Good
+```c
+fr_pair_find
+```
+
+Bad
+```c
+frPairFind
+frpairfind
+fr_pairfind
+```
 
 Prefixes / namespaces
 ^^^^^^^^^^^^^^^^^^^^^
