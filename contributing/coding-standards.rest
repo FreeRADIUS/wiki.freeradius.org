@@ -183,7 +183,7 @@ For modules the instance data pointer should be directly before the ``REQUEST *`
 Code style
 ==========
 
-FreeRADIUS indentation is very similar to K&R/Linux Kernel style https://www.kernel.org/doc/Documentation/CodingStyle.
+FreeRADIUS code style is very similar to K&R/Linux Kernel style https://www.kernel.org/doc/Documentation/CodingStyle.
 
 Linux Kernel style should be used as the base coding style (excluding chapters 5,9,11,13,20), with the rules described below taking precedence.
 
