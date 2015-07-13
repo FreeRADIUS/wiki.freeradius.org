@@ -1,5 +1,5 @@
 Coding standards
-================
+----------------
 
 The goal is to have consistent, clear code.  All code should share a common style, format, choice of function / variable names, etc.  This means that people looking at the code see the *code*, and not the wildly different coding styles.
 
