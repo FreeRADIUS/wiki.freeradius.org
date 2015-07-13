@@ -1,0 +1,603 @@
+Creating modules in FreeRADIUS v3.0.x
+=====================================
+
+This article covers the current stable FreeRADIUS version 3.0.x.
+
+The way modules are called in version 3 is very similar to version 2, but many of the 
+internal API calls have changed.
+
+Introduction
+------------
+FreeRADIUS provides several different mechanisms to add site specific authentication and
+accounting procedures.  The traditional approach was to create a shell script and
+execute it from the users file.  This approach is still available in FreeRADIUS but has been
+deprecated in favour of unlang and dynamic language modules.
+
+In addition there is the rlm_exec module provided by FreeRADIUS that permits a script or 
+program to be included in some of the ``radiusd.conf`` sections.  There have been a number 
+of problems discussed with this approach as it does not always provide all the flexibility 
+desired.
+
+Both of those approaches require that FreeRADIUS fork another process and incur
+all associated process startup overhead each time an authentication or accounting request is
+received.  On a high volume server this overhead can become significant and impact response
+times.  The approach that eliminates the overhead is the rlm (RADIUS Linked Module) approach
+where you create your own module and compile it directly against the core server libraries.
+
+While this sounds like a lot of work, its actually very straight forward.  However, the module 
+does have to be written in a real programming language AKA C.
+
+Build system integration
+------------------------
+
+Standalone Makefiles
+^^^^^^^^^^^^^^^^^^^^
+boilermake is a framework for automatically managing make file targets, prerequisites and 
+dependencies.  It was written by Dan Moulding in GNU Make and is available `here
+<https://github.com/dmoulding/boilermake>`_.  
+
+The version in FreeRADIUS is very similar, but has some additional functionality added by 
+FreeRADIUS project lead Alan DeKok.
+
+The boilermake build system used in v3.0.x makes it difficult to compile 3rd party modules
+separately from the server source.  If you wish to maintain your module separately, a
+standalone Makefile will be required.
+
+This Makefile should ensure that your module is linked both to ``libfreeradius-server`` 
+and ``libfreeradius-radius`` as this will provide symbols during linking for all internal
+API functions.
+
+The use of stand alone Makefiles will not be discussed further.  The rest of the document 
+assumes you will be using boilermake.
+
+Integrating with boilermake
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+The recommended way of building your module is to include your module src in the
+``src/modules`` directory of the server using Git submodules.  The boilermake 'magic' 
+used for the rest of the modules will then work with your module.
+
+You don't need to worry about much of the internals of boilermake to integrate new modules
+into the build system, and no additional files outside of your module's directory need be
+modified to build your module.  The build system will automatically scan for, and include, 
+files named ``all.mk`` in every directory under ``src/modules/``.
+
+If you will be using autoconf for dependency checks you should create an ``all.mk.in``,
+and ``all.mk`` should be added to the ``.gitignore`` file in your module's directory.
+If your module has no dependencies a static ``all.mk`` file should be created instead.
+
+In both instances, the following variables may be used to indicate which source files are
+to be included and which libraries need to be linked against.
+
+=====================  ================================
+Variable               Defines
+=====================  ================================
+TARGETNAME             Name of the module being built.
+TARGET                 Name of the static library file used to build the module shared library e.g. ``rlm_example.a``.  Usually derived from ``TARGETNAME``.
+SOURCES                Source ``.c`` files required to build your module.  Usually ``rlm_example.c`` but you may split your sources into several different files.  See ``rlm_ldap`` for an example of this.
+SRC_CFLAGS             Any special CFLAGS required to build your module.  Usually populated by an autoconf script, or omitted.
+SRC_INCDIRS            Additional directories to search for headers in.  Usually omitted.
+TGT_PREREQS            Names of any FreeRADIUS internal libraries this module must be linked against (in addition to the base server library and protocol libraries).  Common examples are ``libfreeradius-eap.a`` for EAP methods, and  ``libfreeradius-redis.a`` for Redis related modules.
+TGT_LDLIBS             Linker arguments, and 3rd party libraries (``-lfoo``) this module should be linked against.
+=====================  ================================
+
+``all.mk`` files need a minimum of ``TARGET`` and ``SOURCES`` defined.  
+
+As an example, this is the ``all.mk`` file for the ``rlm_always`` module.
+
+```make
+TARGET		:= rlm_always.a
+SOURCES		:= rlm_always.c
+```
+
+Using autoconf and boilermake together is more complex, and is easier to demonstrate
+than explain. Example / template files may be found `here
+<https://github.com/FreeRADIUS/freeradius-server/tree/v3.1.x/src/modules/rlm_example>`_.
+The ``configure.ac`` and ``all.mk.in`` files will be of the most interest.
+
+Note: When using autoconf to compile your ``configure.ac`` file, you should specify the
+FreeRADIUS base directory in the include path, this usually involves passing ``-I ../../../``
+to autoconf.
+
+Module development
+------------------
+
+Getting started
+^^^^^^^^^^^^^^^ 
+Start by copying ``rlm_example.c`` and editing it to create your module. 
+
+Define a new struct (e.g. ``typedef struct rlm_xxx rlm_xx_t``) to hold instance specific
+module configuration data.
+
+During module instantiation, the server will allocate structs of this type and pass them
+to the ``mod_instantiate`` callback.
+
+Instance of this struct are used primarily to store module configuration data, as well 
+as any persistent handles the module uses.
+
+```c
+/** Instance data struct for the rlm_example module
+ *
+ */
+typedef struct rlm_example_t {
+	bool		boolean;
+	uint32_t	value;
+	uint8_t const	*string;
+	fr_ipaddr_t	ipaddr;
+} rlm_example_t;
+```
+
+Defining configuration items
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The ``module_config`` array of CONF_PARSER_ structs is where the configuration items
+the module utilises are defined.  There needs to be an entry here for each configuration 
+item used by the module.
+
+Note there is a special entry for ending the list, the list terminator.  This must be the
+last entry in this list::
+
+  { NULL, -1, 0, NULL, NULL }
+
+Every other entry has a ``.name`` for the configuration item, then the ``.type``, instance
+struct type, ``.offset`` in that struct to write to and a ``.dflt`` value.
+
+This example maps the configuration item ``server`` and to the ``server`` field of a ``rlm_xxx_t`` struct ``::
+
+  { "server", FR_CONF_OFFSET(PW_TYPE_STRING | PW_TYPE_REQUIRED, rlm_xxx_t, server), NULL },
+
+The matching configuration file entry would look like this::
+
+  modules {
+    xxx {
+      server = "server"
+    }
+  }
+
+Note If no ``server`` configuration item was found in the config the ``PW_TYPE_REQUIRED`` flag
+would cause the server to error out on startup.  See the cf_item_parse_ documentation for
+other flags which may be ``|``'d with ``PW_TYPE_`` values.
+
+The ``.type``, ``.data`` and ``.offset`` fields should not be specified directly, but via the
+``FR_CONF_OFFSET`` macro.  This macro takes care of determining field offsets and performing
+compile time checking (that your ``PW_TYPE_STRING`` configuration item maps to a
+``char const *`` field for example).
+
+If a type mismatch is detected the compiler will produce an obscure error like the one
+below::
+
+  src/modules/rlm_example/rlm_example.c:51:14: error: initializing 'size_t'
+        (aka 'unsigned long') with an expression of incompatible type
+        'conf_type_mismatch' (aka 'void')
+    { "string", FR_CONF_OFFSET(PW_TYPE_STRING, rlm_example_t, string), NULL },
+          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  reeradius-server-fork/src/freeradius-devel/conffile.h:102:42: note: 
+        expanded from macro 'FR_CONF_OFFSET'
+    ...FR_CONF_TYPE_CHECK((_t), __typeof__(&(((_s *)NULL)->_f)), offsetof(_s, _f))...
+       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  freeradius-server-fork/src/freeradius-devel/conffile.h:57:2: note: 
+        expanded from macro 'FR_CONF_TYPE_CHECK'
+    __builtin_choose_expr((_t & PW_TYPE_TMPL),\
+    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+There is no useful information to be gleaned from the error other than the ``module_config``
+array element which produced it.  Use the documentation for the cf_item_parse_ function
+(which is responsible for performing the conversions) to determine the appropriate data type
+to use for the field. 
+
+.. _CONF_PARSER: http://doc.freeradius.org/conffile_8h.html#structCONF__PARSER
+
+.. _PW_TYPE: http://doc.freeradius.org/radius_8h.html#a54650692d6250e3adc885759e97a37fd
+
+.. _cf_item_parse: http://doc.freeradius.org/conffile_8c.html#a44b9e1cc2f42502db6c762543bf77a02
+
+
+
+module_t struct
+^^^^^^^^^^^^^^^
+
+Every module must define a variable of type module_t_ matching the name of the module,
+and mark it as extern (it must not be static).
+
+The module_t rlm_xxx definition establishes the connection between FreeRADIUS and the
+available services your module can provide.
+
+This definition is referenced (using ``dlsym``) after the server successfully loads the 
+module's shared object (using ``dlopen``).
+
+If a symbol matching the name of the module cannot be found, or is missing the magic
+initialization data defined by RLM_MODULE_INIT, the server will error out and refuse to
+start.
+
+The RLM_MODULE_INIT value is also used for cross platform version checking, to ensure that
+the modules and server are ABI compatible.
+
+Other fields in the module_t_ are described by the code documentation for module_t_.
+
+This is an example module_t_ definition::
+
+```c
+extern module_t rlm_xxx;
+module_t rlm_xxx = {
+	.magic		= RLM_MODULE_INIT,
+	.name		= "xxx",
+	.type		= RLM_TYPE_THREAD_SAFE,
+	.inst_size	= sizeof(rlm_xxx_t),
+	.config		= module_config,
+	.bootstrap      = mod_bootstrap,
+	.instantiate	= mod_instantiate,
+	.detach		= mod_detach
+	{
+		[MOD_AUTHENTICATE]	= mod_authenticate,
+		[MOD_AUTHORIZE]		= mod_authorize,
+	},
+};
+```
+
+See the documentation rlm_components_ for a complete list of the request processing 
+callback functions that a  module may provide.
+
+.. _rlm_components: http://doc.freeradius.org/modules_8h.html#a390dde0bbf527b9f0eda144be1492223
+
+Module functions
+^^^^^^^^^^^^^^^^
+
+mod_boostrap
+""""""""""""
+``mod_boostrap`` is called very early during module initialization.  If defined it should 
+register any module specific attributes that that particular module instance will use during
+it's lifetime, and any xlats.
+
+A good example is the rlm_sql module's bootstrap function, which amongst many other things
+creates a group attribute for group comparisons.
+
+```c
+static int mod_bootstrap(CONF_SECTION *conf, void *instance)
+{
+	...
+	if (inst->config->groupmemb_query) {
+		char buffer[256];
+
+		char const *group_attribute;
+
+		if (inst->config->group_attribute) {
+			group_attribute = inst->config->group_attribute;
+		} else if (cf_section_name2(conf)) {
+			snprintf(buffer, sizeof(buffer), "%s-SQL-Group", inst->name);
+			group_attribute = buffer;
+		} else {
+			group_attribute = "SQL-Group";
+		}
+
+		/*
+		 *	Checks if attribute already exists.
+		 */
+		if (paircompare_register_byname(group_attribute, dict_attrbyvalue(PW_USER_NAME, 0),
+						false, sql_groupcmp, inst) < 0) {
+			ERROR("Error registering group comparison: %s", fr_strerror());
+			return -1;
+		}
+		inst->group_da = dict_attrbyname(group_attribute);
+	}
+	...
+
+	return 0;
+}
+```
+
+If the module needs to load submodules (drivers or authentication mechanisms for example), this
+should also be done in the bootstrap section.
+
+mod_instantiate
+"""""""""""""""
+``mod_instantiate`` function is called each time a new instance is started during the initial
+configuration process.  Unlike previous versions parsing the ``module_config`` entries and
+allocating the module instance data struct are now performed by the server core, not the 
+individual modules.
+
+The work that should be performed in ``mod_instantiate`` is:
+
+- Sanity check the configuration provided by the user.
+- Populate any additional module instance data fields using derived data.
+- Initialise handles for databases (using the connection_pool_ API)
+- Get handles for other internal APIs (such as the exfile_ API).
+- Any other work that must be performed before the module is ready to handle requests.
+
+Note that the instantiate module is not called each time a request is received by the server
+and passed to a module. The data established during boostrap and instantiation is available
+for all requests at run time.  If you need to store data that is associated with a *particular*
+request, and is valid only for the lifetime of a request, use the request_data_add_ and
+request_data_get_ functions.
+
+Also note that if instance data is modified during request processing, a mutex, C11 atomics
+(v3.1.x only) or the ``PW_TYPE_UNSAFE`` flag must be used to prevent concurrent access.
+
+.. _request_data_add: http://doc.freeradius.org/radiusd_8h.html#a1bc4fe43bd2da008b850e7167ef1c849
+.. _request_data_get: http://doc.freeradius.org/radiusd_8h.html#a00ca23b562b4660822723fec312b3021
+.. _module_t: http://doc.freeradius.org/modules_8h.html#structmodule__t
+.. _exfile: http://doc.freeradius.org/exfile_8c.html
+.. _connection_pool: http://doc.freeradius.org/connection_8c.html
+
+mod_*
+"""""
+
+``mod_authorize``, ``mod_accounting``, ``mod_authenticate`` and others all act in a similar way
+though they all perform very different operations.  These are referred to as request time or 
+request processing callbacks, and are only called to process requests, never during module
+instantiation.
+
+See the examples in rlm_example for information on what operations should be completed by which
+request processing callbacks.
+
+Thread safety
+^^^^^^^^^^^^^
+
+There is an obscure note near the end of rlm_example.c that talks about global variables.
+What that really is telling you is that your rlm_xxx.c module must store all data within the 
+module's instance data structure.  If you use global (non const) variables your module may
+compile and seem to run, but it will not do what you want.
+
+Different instances of the same module should be unaware/unaffected by each others existence,
+other than possibly being aware of any 3rd party library initialization that's been
+performed.
+It is exceedingly rare that module instances sharing a mutex or global data is a sound
+architectural choice.
+
+Also, keep in mind that in general, modules must be thread safe.  There can be multiple threads
+using your module at any time.  The ``RLM_TYPE_THREAD_SAFE`` flag tells FreeRADIUS that
+this is a thread-safe rlm.  If you need to use a 3rd party library that cannot be made thread
+safe, then change ``RLM_TYPE_THREAD_SAFE`` to ``RLM_TYPE_THREAD_UNSAFE``.
+FreeRADIUS will then permit only one instance of that to module to be called concurrently.
+Be advised that this will adversely affect performance and response times.
+
+Module Return Codes
+-------------------
+There are a number of return codes that may be returned by the request processing callbacks.
+
+The complete list is here, which is duplicated by the documentation for the rlm_rcodes_ enum.
+
+=====================  ================================
+Return Code            Meaning
+=====================  ================================
+RLM_MODULE_REJECT      This request is not permitted under local policy.  FreeRADIUS responds immediately with a reject response.
+RLM_MODULE_FAIL        Processing of this request could not be completed.  Something is not working properly.  FreeRADIUS responds with a reject response.
+RLM_MODULE_OK          This request is permitted or this module has processed the request successfully.  The FreeRADIUS response will be determined by processing of later modules.  If this is the last module then the response will be an OK.
+RLM_MODULE_HANDLED     The module handled the request, so stop.
+RLM_MODULE_INVALID     The module considers the request invalid.
+RLM_MODULE_USERLOCK    Reject the request (user is locked out).
+RLM_MODULE_NOTFOUND    User not found.
+RLM_MODULE_NOOP        Module succeeded without doing anything.
+RLM_MODULE_UPDATED     OK (attributes modified).
+=====================  ================================
+
+.. _rlm_rcodes: http://doc.freeradius.org/radiusd_8h.html#a2cf86a287d2d29505c29aad4883533c9
+
+
+Accessing module configuration data
+-----------------------------------
+Configuration parameters are saved in the ``rlm_xxx_t`` instance data struct.  A pointer to this
+structure is passed to each request processing function.
+
+This must usually be cast to the correct type (it's a ``void *``) before the fields can be
+accessed, the convention for this is to declare a variable of the correct type as ``* inst``,
+and assign ``instance`` to it.
+
+Accessing Radius Request Attributes
+-----------------------------------
+v3.0.x uses a union the value_data_t_ struct to store all the possible data types for
+an attribute.  The C data types do not necessarily match those used for module instance
+data. For example ipv4 prefixes are an 8 byte ``uint8_t`` array in value_data_t_ but an
+fr_ipaddr_t_ in module data structs.
+
+This is mostly for legacy reasons - FreeRADIUS previously only supported RADIUS so it made
+sense to use data types which could be cast to offsets in a RADIUS packet.
+
+You can see the evolution of the types here:
+
+- In Version 1 the ipaddr field was a character string (e.g., ``xxx.xxx.xxx.xxx``).
+- In Version 2 the ipaddr field was returned as the binary 4 byte value.
+- In Version 3 the ipaddr field is still returned as the binary 4 byte value in a ``struct in_addr``.
+- In Version 4 the ipaddr field should be returned as an fr_ipaddr_t_.
+
+The following example shows how you could access and print the values of the
+Framed-IP-Address attribute:
+
+```c
+char buffer[INET_ADDRSTRLEN];
+VALUE_PAIR *vp;
+  
+vp = pairfind(request->packet->vps, PW_FRAMED_IP_ADDRESS);
+if (vp) {
+  	RDEBUG("rlm_xxx: Found IP Address %s", inet_netop(AF_INET, &vp->vp_ipaddr, buffer, sizeof(buffer));
+}
+```
+
+You may have noticed that in the above example we used ``vp_ipaddr`` to access the ipaddr
+field.  There are a series of macros with a ``vp_`` prefix, which expand to the correct field
+in the value_data_t_ part of the VALUE_PAIR_ struct.
+
+This is to avoid excessive code changes every time we re-arrange VALUE_PAIR_ structures
+(which is surprisingly often), and to avoid lengthly chains of field accessors. The complete
+list can be found in ``libfreeradius.h``
+
+Here is a sample of the type macros available:
+
+=============  ==================================
+Data Type      Content
+=============  ==================================
+vp_strvalue    A pointer to an arbitrarily large string buffer.
+vp_octets      A pointer to an arbitrarily large binary string buffer.
+vp_ip6addr     An IPv6 address in struct in6_addr format
+vp_ipv6prefix  An IPv6 network.
+vp_ether       A 6 byte ethernet address in octet format.
+vp_ipaddr      An IPv4 address in struct in_addr format
+vp_date        A date value.
+vp_integer     An integer value in octet format.
+=============  ==================================
+
+Although the above example showed using the raw value from the value_data_t_ directly, it is
+usually considerably easier however to use the provided VP prints functions. 
+vp_prints_value_ and vp_aprints_value_ will convert a VALUE_PAIR_ into its presentation
+format (the humanly readable format the server can re-ingest).
+
+Here's an example of using vp_prints_value_ to converted the ``Framed-IP-Address`` attribute
+into its presentation format.
+```c
+char buffer[INET_ADDRSTRLEN];
+VALUE_PAIR *vp;
+  
+vp = pairfind(request->packet->vps, PW_FRAMED_IP_ADDRESS, 0, TAG_ANY);
+if (vp) {
+	vp_prints_value(buffer, sizeof(buffer), vp, '"');
+	RDEBUG("rlm_xxx: Found IP Address %s", buffer);
+}
+```
+
+The standard radius dictionary items are prefixed by PW\_.  There's a build time process that
+converts the RFC attributes in the dictionaries into C preprocessor macros.
+
+It's very rare that you'll need to access vendor specific attributes within your module.
+
+If you do, the easiest way is via dict_attrbyname_ which takes in the string name of the
+attribute and resolves it (if it exists) to a DICT_ATTR_ entry in the global dictionary.
+
+For legacy functions which don't accept DICT_ATTR_ pointers, the ``.attr`` and ``.vendor``
+fields provide the necessary values.
+
+.. _value_data_t: http://doc.freeradius.org/libradius_8h.html#structvalue__data
+.. _VALUE_PAIR: http://doc.freeradius.org/libradius_8h.html#structvalue__pair
+.. _vp_prints_value: http://doc.freeradius.org/libradius_8h.html#a3bf61d7dd013e06de640e02c1b01b416
+.. _vp_aprints_value: http://doc.freeradius.org/libradius_8h.html#a227ff882a7cfae5828a3f2f29b72eb26
+.. _dict_attrbyname: http://doc.freeradius.org/libradius_8h.html#af151b8b727f666c067ac9f0c68da6148
+.. _DICT_ATTR: http://doc.freeradius.org/libradius_8h.html#structdict__attr
+
+Adding a reply attribute
+------------------------
+The following shows how to add a reply attribute (one that will be returned to the NAS).
+
+```c
+VALUE_PAIR *timeout;
+sprintf (auth_msg, "%d", sestime * 60);
+
+timeout = pairmake_reply("Session-Timeout", auth_msg, T_OP_SET);
+```
+        
+The first argument to ``pairmake_reply`` is the attribute name.  The second argument is its value,
+and the third argument is the operator.  ``T_OP_SET`` is equivalent to ``:=`` in unlang.
+
+A full list of the operators can be found in the documentation for fr_token_t_.
+
+.. _fr_token_t: http://doc.freeradius.org/token_8h.html#af52c716ee40e807384a050043564416a
+
+Creating debug and log entries
+------------------------------
+FreeRADIUS has a very helpful debug capability.  You can certainly use trace commands like
+ktrace, strace, or truss.  However, those are limited in what the show you about how your
+module is working.  It is much easier to add debug statements into your module.  If your
+FreeRADIUS is compiled with enable-debug then you can start it with::
+
+  radiusd -X
+
+and it will generate lots of debug entries on the console to show you what it is doing.  To
+add debug information to your modules you can use the following macro:
+
+```c
+DEBUG("format string", variables);
+```
+
+The format string and variable list are the same as for a printf statement (and are validated
+by the compiler as such).
+
+Use debug statements at critical places to show how the request is being processed.
+
+If you're in a request processing function and have access to the ``REQUEST *`` use the 
+``RDEBUG`` family of macros instead.  These will automatically prepend module instance data
+information to your debug messages.
+
+In general logging macros with an ``R`` prefix are used to create messages relating to the 
+current request, and those without an ``R`` prefix are used to create global log messages.
+
+An example of a request specific error, may be that the value of an attribute in the requests
+doesn't match what the module expects.
+
+An example of a global server error may be that there may be no connections left to a
+database.
+
+Which log macros should be used where is well documented the log.h_ header file.
+
+.. _log.h: http://doc.freeradius.org/log_8h.html
+
+Compiling Your Module
+---------------------
+All you need to do when everything is correct is enter::
+
+  make
+  make install
+
+Check errors very carefully. If you're not seeing your module being compiled, verify you
+ran the ``./configure`` script for your module, and that it found all the required
+dependencies.
+
+Including your module in an existing configuration
+--------------------------------------------------
+You need to make two modifications to the FreeRADIUS configuration files to add your module.
+
+First you need to create a module configuration file in the ``raddb/mods-available``
+directory and link it to ``raddb/mods-enabled```.
+
+The contents of the file should look something like::
+
+  xxx {
+  	server = "myhost"
+  }
+  
+This defines the configuration values for the module.
+
+Next you'll need to list the modules and sections where you want the file to be called.
+You can only list your module in sections matching the request processing callbacks
+you included in your ``module_t`` struct.
+
+If you try and list your module in the ``preacct`` section, but there's no ``mod_preacct``
+function defined or included in the ``module_t`` the server will error out and refuse
+to start.
+
+If you are only running one virtual server then you can use the default file in the
+``sites-available`` directory.  In that file you would add your module to the appropriate
+section. For example in this case::
+
+  # Authorization. First preprocess (hints and huntgroups files),
+  authorize {
+    	xxx
+  }
+  
+
+Testing
+-------
+At this point you are ready to test the server.  Make sure to start it with::
+
+  radiusd -X
+
+Check through the output to be sure the module loaded and initialized itself properly.
+
+If you're planning on contributing the module back to the FreeRADIUS project, please
+create unit tests to test various aspects of your module.
+
+See the ``src/tests/modules`` directory in the server repository for examples.
+
+Available Modules
+-----------------
+See:  `List of modules
+<http://wiki.freeradius.org/List-of-modules>`_
+
+See Also
+--------
+`Modules1 (old 1.x module syntax)
+<http://wiki.freeradius.org/contributing/Modules1>`_
+
+`Modules2 (old 2.x module syntax)
+<http://wiki.freeradius.org/contributing/Modules2>`_
+
+`GitHub
+<http://wiki.freeradius.org/contributing/GitHub>`_
+This article covers the current FreeRADIUS version 3.x.
+
+.. _fr_ipaddr_t: http://doc.freeradius.org/libradius_8h.html#structfr__ipaddr__t
