@@ -247,8 +247,10 @@ mod_boostrap
 register any module specific attributes that that particular module instance will use during
 it's lifetime, and any xlats.
 
-A good example is the rlm_sql module's bootstrap function, which amongst many other things
-creates a group attribute for group comparisons.
+A good example is the rlm_sql module's bootstrap function, which amongst many other things,
+creates a group attribute and registers a callback against it, for checking a user's group
+memberships.  This attribute is specific to each instance of rlm_sql as each instance of 
+rlm_sql may connect to a different database.
 
 ```c
 static int mod_bootstrap(CONF_SECTION *conf, void *instance)
