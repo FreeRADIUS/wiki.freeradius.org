@@ -179,3 +179,26 @@ Arguments should be in the following order
 - Arguments for passing data to the function.
 
 For modules the instance data pointer should be directly before the ``REQUEST *`` pointer.
+
+Indentation
+===========
+
+FreeRADIUS indentation is very similar to K&R/Linux Kernel style https://www.kernel.org/doc/Documentation/CodingStyle.
+
+Linux Kernel style should be used as the base coding style, with the rules described below taking precedence.
+
+The key differences are listed below.
+
+Collapse bodies
+^^^^^^^^^^^^^^^
+
+If a condition or loop and its body can be collapsed onto a single line, then do so.
+
+Good
+```c
+if (foo && bar) baz();
+while (foo()) baz();
+```
+
+Bad
+
