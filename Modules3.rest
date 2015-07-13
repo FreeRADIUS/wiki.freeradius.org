@@ -109,10 +109,11 @@ Define a new struct (e.g. ``typedef struct rlm_xxx rlm_xx_t``) to hold instance 
 module configuration data.
 
 During module instantiation, the server will allocate structs of this type and pass them
-to the ``mod_instantiate`` callback.
+to the bootstrap and instantiation callbacks for population.
 
-Instance of this struct are used primarily to store module configuration data, as well 
-as any persistent handles the module uses.
+Unlike earlier versions of the server in v3.0.x, the server core also takes care of applying
+the ``CONF_PARSER`` mappings.  When the module callbacks are executed, the instance data
+struct should already be populated with configuration data.
 
 ```c
 /** Instance data struct for the rlm_example module
@@ -189,7 +190,6 @@ to use for the field.
 .. _PW_TYPE: http://doc.freeradius.org/radius_8h.html#a54650692d6250e3adc885759e97a37fd
 
 .. _cf_item_parse: http://doc.freeradius.org/conffile_8c.html#a44b9e1cc2f42502db6c762543bf77a02
-
 
 
 module_t struct
