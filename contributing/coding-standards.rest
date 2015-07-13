@@ -10,7 +10,7 @@ Function documentation should be doxygen style.  Below is an example of doxygen 
 ```c
 /** Simple wrapper to decide whether an IP value is v4 or v6 and call the appropriate parser
  *
- * @param out Where to write the ip address value.
+ * @param out Where to write the parsed ip address.
  * @param value to parse.
  * @param inlen Length of value, if value is \0 terminated inlen may be -1.
  * @param resolve If true and value doesn't look like an IP address, try and resolve value as a
