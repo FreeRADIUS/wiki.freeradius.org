@@ -187,6 +187,13 @@ FreeRADIUS indentation is very similar to K&R/Linux Kernel style https://www.ker
 
 Linux Kernel style should be used as the base coding style, with the rules described below taking precedence.
 
+Hard break at 120 columns
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+It's not 1978, VT100 terminals have long been consigned to the electronics recycling bin (hopefully).
+
+We believe code is perfectly readable up to 120 columns, that and over application of hard line breaking at 80 columns reduces code readability instead of increasing it.
+
 Always collapse bodies
 ^^^^^^^^^^^^^^^^^^^^^^
 
