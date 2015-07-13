@@ -187,8 +187,6 @@ FreeRADIUS indentation is very similar to K&R/Linux Kernel style https://www.ker
 
 Linux Kernel style should be used as the base coding style, with the rules described below taking precedence.
 
-The key differences are listed below.
-
 Always collapse bodies
 ^^^^^^^^^^^^^^^^^^^^^^
 
@@ -294,4 +292,19 @@ error:
 	ERROR("Something bad happened");
 	return -1;
 }
+```
+
+Const on the right
+^^^^^^^^^^^^^^^^^^
+
+Allows const to be read consistently as applying to the type on the left.
+
+**Good**
+```c
+char const * const *
+```
+
+**Bad**
+```c
+const char * const *
 ```
