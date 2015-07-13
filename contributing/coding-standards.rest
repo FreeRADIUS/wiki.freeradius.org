@@ -180,8 +180,8 @@ Arguments should be in the following order
 
 For modules the instance data pointer should be directly before the ``REQUEST *`` pointer.
 
-Indentation
-===========
+Code style
+==========
 
 FreeRADIUS indentation is very similar to K&R/Linux Kernel style https://www.kernel.org/doc/Documentation/CodingStyle.
 
