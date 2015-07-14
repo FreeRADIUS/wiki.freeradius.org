@@ -115,13 +115,6 @@ Start by copying ``rlm_example.c`` and editing it to create your module.
 Define a new struct (e.g. ``typedef struct rlm_xxx rlm_xx_t``) to hold instance specific
 module configuration data.
 
-During module instantiation, the server will allocate structs of this type and pass them
-to the bootstrap and instantiation callbacks for population.
-
-Unlike earlier versions of the server in v3.0.x, the server core also takes care of applying
-the CONF_PARSER_ mappings (discussed below).  When the module callbacks are executed, the 
-instance data struct should already be populated with values from the configuration files.
-
 ```c
 /** Instance data struct for the rlm_example module
  *
@@ -133,6 +126,13 @@ typedef struct rlm_example_t {
 	fr_ipaddr_t	ipaddr;
 } rlm_example_t;
 ```
+
+During module instantiation, the server will allocate structs of this type and pass them
+to the bootstrap and instantiation callbacks for population.
+
+Unlike earlier versions of the server in v3.0.x, the server core also takes care of applying
+the CONF_PARSER_ mappings (discussed below).  When the module callbacks are executed, the 
+instance data struct should already be populated with values from the configuration files.
 
 Defining configuration items
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
