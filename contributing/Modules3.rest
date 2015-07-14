@@ -307,10 +307,10 @@ should also be done in the bootstrap callback.
 
 mod_instantiate
 """""""""""""""
-``mod_instantiate`` function is called each time a new instance is started during the initial
-configuration process.  Unlike previous versions parsing the ``module_config`` entries and
-allocating the module instance data struct are now performed by the server core, not the 
-individual modules.
+``mod_instantiate`` function is called each time a new instance of a module is created 
+during the initial startup process.  Unlike previous versions of FreeRADIUS, parsing the
+``module_config`` elements and allocating the module instance data struct are now performed 
+by the server core, not the individual modules.
 
 The work that should be performed in ``mod_instantiate`` is:
 
@@ -320,8 +320,8 @@ The work that should be performed in ``mod_instantiate`` is:
 - Get handles for other internal APIs (such as the exfile_ API).
 - Any other work that must be performed before the module is ready to handle requests.
 
-Note that the instantiate module is not called each time a request is received by the server
-and passed to a module. The data established during boostrap and instantiation, and is 
+Note that the instantiate function is not called each time a request is received by the server
+and passed to a module. The data established during boostrap and instantiation is 
 shared between all requests at run time.  If you need to store data that is associated with 
 a *particular* request, and is valid only for the lifetime of a request, use the 
 request_data_add_ and request_data_get_ functions.
