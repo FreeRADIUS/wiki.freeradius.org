@@ -25,7 +25,7 @@ against the core server libraries, and loaded it into the server at runtime.
 While creating new modules may sound like a lot of hassle, the process is actually fairly 
 straight forward.  The module, however does have to be written in C.  If this idea does not 
 sound palatable, and performance has become a critical issue, you may wish to request the 
-development of a new module (via a feature request) on the `GitHub issue tracker
+development of the new module (via a feature request) on the `GitHub issue tracker
 <https://github.com/FreeRADIUS/freeradius-server/issues>`_.
 Alternatively, if the development of the module is required for a mission critical project,
 you may wish to sponsor its development.  See the support tab on the freeradius.org site for
