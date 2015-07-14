@@ -13,20 +13,21 @@ accounting procedures.  The traditional approach was to create a shell script an
 execute it from the users file.  This approach is still available in FreeRADIUS but has been
 deprecated in favour of unlang and dynamic language modules.
 
-In addition there is the rlm_exec module provided by FreeRADIUS that permits a script or 
-program to be included in some of the ``radiusd.conf`` sections.  There have been a number 
-of problems discussed with this approach as it does not always provide all the flexibility 
-desired.
+Execs require that FreeRADIUS fork another process and incur all associated process startup 
+overhead each time an authentication or accounting request is received.  Dynamic language
+modules must martial/unmartial values to and from the server core.
+On a high volume server this overhead from either approach may become significant and impact
+response times.
 
-Both of those approaches require that FreeRADIUS fork another process and incur
-all associated process startup overhead each time an authentication or accounting request is
-received.  On a high volume server this overhead can become significant and impact response
-times.  The approach that eliminates the overhead is the rlm (RADIUS Linked Module) approach
-where you create your own module and compile it directly against the core server libraries.
+The approach that eliminates the overhead is the rlm (RADIUS Linked Module) approach where
+you create your own module, compile it directly against the core server libraries, then load
+it into the server at runtime.
 
-While this sounds like a lot of work, its actually very straight forward.  However, the module 
-does have to be written in C.  If this idea does not sound palatable you may wish to
-reconsider your approach and use rlm_perl or rlm_python instead.
+While this sounds like a lot of work, its actually very straight forward.  The module,
+however does have to be written in C.  If this idea does not sound palatable, and
+performance has become a critical issue, you may wish to request and/or sponsor the
+development of a new module. See the support tab on the freeradius.org site for more
+details.
 
 Build system integration
 ------------------------
