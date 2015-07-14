@@ -534,13 +534,13 @@ information to your debug messages.
 In general logging macros with an ``R`` prefix are used to create messages relating to the 
 current request, and those without an ``R`` prefix are used to create global log messages.
 
-An example of a request specific error, may be that the value of an attribute in the requests
+An example of a request specific error, might be that the value of an attribute in the requests
 doesn't match what the module expects.
 
-An example of a global server error may be that there may be no connections left to a
+An example of a global server error might be that there may be no connections left to a
 database.
 
-Which log macros should be used where is well documented the log.h_ header file.
+Which log macros should be used where is well documented in the log.h_ header file.
 
 .. _log.h: http://doc.freeradius.org/log_8h.html
 
