@@ -404,7 +404,7 @@ Accessing Radius Request Attributes
 v3.0.x uses a union the value_data_t_ struct to store all the possible data types for
 an attribute.  The C data types do not necessarily match those used for module instance
 data. For example ipv4 prefixes are an 8 byte ``uint8_t`` array in value_data_t_ but an
-fr_ipaddr_t_ in module data structs.
+fr_ipaddr_t_ in module instance data structs.
 
 This is mostly for legacy reasons - FreeRADIUS previously only supported RADIUS so it made
 sense to use data types which could be cast to offsets in a RADIUS packet.
