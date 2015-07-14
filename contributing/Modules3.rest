@@ -149,8 +149,8 @@ The ``module_config`` array of CONF_PARSER_ structs is where the configuration i
 the module utilises are defined.  There needs to be an entry here for each configuration 
 item used by the module.
 
-Note there is also a special special list terminator entry.  This must be the last entry
-in this list::
+Note there is also a special special list terminator element.  This must be the last element
+in the array::
 
   { NULL, -1, 0, NULL, NULL }
 
