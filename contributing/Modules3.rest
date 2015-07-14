@@ -27,10 +27,9 @@ Execs require that FreeRADIUS fork another process and incur all associated proc
 overhead each time an authentication or accounting request is received.  Dynamic language
 modules must martial/unmartial values to and from the server core.
 On a high volume server the overhead from either approach may become significant and impact
-response times.
-
-To eliminate this overhead you may create your own compiled modules.  These modules are linked
-against the core server libraries, and loaded it into the server at runtime.
+response times.  To eliminate this overhead you may create your own compiled modules.
+These modules are linked against the core server libraries, and loaded it into the server at 
+runtime.
 
 While creating new modules may sound like a lot of hassle, the process is actually fairly 
 straight forward.  The module, however does have to be written in C.  If this idea does not 
@@ -88,7 +87,7 @@ to be included and which libraries need to be linked against.
 =====================  ================================
 Variable               Defines
 =====================  ================================
-TARGETNAME             Name of the module being built.
+TARGETNAME             Name of the module being built e.g. ``rlm_xxx``.
 TARGET                 Name of the static library file used to build the module shared library e.g. ``rlm_xxx.a``.  Usually derived from ``TARGETNAME``.
 SOURCES                Source ``.c`` files required to build your module.  Usually ``rlm_xxx.c`` but you may split your sources into several different files.  See ``rlm_ldap`` for an example of this.
 SRC_CFLAGS             Any special CFLAGS required to build your module.  Usually populated by an autoconf script, or omitted.
