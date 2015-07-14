@@ -146,7 +146,7 @@ instance data struct should already be populated with values from the configurat
 Defining configuration items
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 The ``module_config`` array of CONF_PARSER_ structs is where the configuration items
-the module utilises are defined.  There needs to be an entry here for each configuration 
+the module utilises are defined.  There needs to be an element here for each configuration 
 item used by the module.
 
 Note there is also a special special list terminator element.  This must be the last element
@@ -154,9 +154,9 @@ in the array::
 
   { NULL, -1, 0, NULL, NULL }
 
-Every other entry has a ``.name`` for the configuration item, then a source ``.type``
+Every other element has a ``.name`` for the configuration item, then a source ``.type``
 which controls how the configuration item is parsed, an instance struct type, an
-``.offset`` in that struct, to write the parsed value to, and a ``.dflt`` value for if
+``.offset`` in that struct (to write the parsed value to), and a ``.dflt`` value for if
 the configuration item cannot be found.
 
 This example maps the configuration item ``server`` and to the ``server`` field of a ``rlm_xxx_t`` struct ``::
