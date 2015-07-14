@@ -16,17 +16,20 @@ deprecated in favour of unlang and dynamic language modules.
 Execs require that FreeRADIUS fork another process and incur all associated process startup 
 overhead each time an authentication or accounting request is received.  Dynamic language
 modules must martial/unmartial values to and from the server core.
-On a high volume server this overhead from either approach may become significant and impact
+On a high volume server the overhead from either approach may become significant and impact
 response times.
 
-To eliminate the overhead of calling out to a dynamic language, or executing scripts you 
-may create your own modules.  These modules are compiled against the core server libraries,
-and loaded it into the server at runtime.
+To eliminate this overhead you may create your own compiled modules.  These modules are linked
+against the core server libraries, and loaded it into the server at runtime.
 
-While this sounds like a lot of work, the process is actually fairly straight forward.
-The module, however does have to be written in C.  If this idea does not sound palatable, and
-performance has become a critical issue, you may wish to request and/or sponsor the development
-of a new module. See the support tab on the freeradius.org site for more information.
+While creating new modules may sound like a lot of hassle, the process is actually fairly 
+straight forward.  The module, however does have to be written in C.  If this idea does not 
+sound palatable, and performance has become a critical issue, you may wish to request the 
+development of a new module (via a feature request) on the `GitHub issue tracker
+<https://github.com/FreeRADIUS/freeradius-server/issues>`_.
+Alternatively, if the development of the module is required for a mission critical project,
+you may wish to sponsor its development.  See the support tab on the freeradius.org site for
+more information.
 
 Build system integration
 ------------------------
