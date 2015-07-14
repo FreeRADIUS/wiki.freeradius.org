@@ -54,14 +54,16 @@ assumes you will be using boilermake.
 
 Integrating with boilermake
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-The recommended way of building your module is to include your module src in the
-``src/modules`` directory of the server using Git submodules.  The boilermake 'magic' 
-used for the rest of the modules will then work with your module.
+If you wish to maintain your module outside of the FreeRADIUS source tree, the recommended
+way of building your module is to include your module in the ``src/modules`` directory of
+the server using Git submodules.  The boilermake build magic used for the rest of the 
+modules will then also work with your module.
 
 You don't need to worry about much of the internals of boilermake to integrate new modules
 into the build system, and no additional files outside of your module's directory need be
-modified to build your module.  The build system will automatically scan for, and include, 
-files named ``all.mk`` in every directory under ``src/modules/``.
+modified to build your module.  On ``make`` boilermake will automatically scan for, and 
+include, files named ``all.mk`` in every directory under ``src/modules/``, and build the 
+requisite targets.
 
 If you will be using autoconf for dependency checks you should create an ``all.mk.in``,
 and ``all.mk`` should be added to the ``.gitignore`` file in your module's directory.
