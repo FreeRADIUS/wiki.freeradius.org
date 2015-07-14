@@ -117,7 +117,7 @@ to the bootstrap and instantiation callbacks for population.
 
 Unlike earlier versions of the server in v3.0.x, the server core also takes care of applying
 the ``CONF_PARSER`` mappings (discussed below).  When the module callbacks are executed, the 
-instance data struct should already be populated with configuration data.
+instance data struct should already be populated with values from the configuration files.
 
 ```c
 /** Instance data struct for the rlm_example module
