@@ -19,15 +19,14 @@ modules must martial/unmartial values to and from the server core.
 On a high volume server this overhead from either approach may become significant and impact
 response times.
 
-The approach that eliminates the overhead is the rlm (RADIUS Linked Module) approach where
-you create your own module, compile it directly against the core server libraries, then load
-it into the server at runtime.
+To eliminate the overhead of calling out to a dynamic language, or executing scripts you 
+may create your own modules.  These modules are compiled against the core server libraries,
+and loaded it into the server at runtime.
 
-While this sounds like a lot of work, its actually very straight forward.  The module,
-however does have to be written in C.  If this idea does not sound palatable, and
-performance has become a critical issue, you may wish to request and/or sponsor the
-development of a new module. See the support tab on the freeradius.org site for more
-details.
+While this sounds like a lot of work, the process is actually fairly straight forward.
+The module, however does have to be written in C.  If this idea does not sound palatable, and
+performance has become a critical issue, you may wish to request and/or sponsor the development
+of a new module. See the support tab on the freeradius.org site for more information.
 
 Build system integration
 ------------------------
@@ -55,15 +54,16 @@ assumes you will be using boilermake.
 Integrating with boilermake
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 If you wish to maintain your module outside of the FreeRADIUS source tree, the recommended
-way of building your module is to include your module in the ``src/modules`` directory of
-the server using Git submodules.  The boilermake build magic used for the rest of the 
-modules will then also work with your module.
+way of building your module is to include it in the ``src/modules`` directory using Git 
+submodules.  The boilermake build magic used for the rest of the modules will then also 
+work with your module.
+
+On ``make`` boilermake will automatically scan for, and include, files named ``all.mk`` 
+in every directory under ``src/modules/``, and build the requisite targets.
 
 You don't need to worry about much of the internals of boilermake to integrate new modules
 into the build system, and no additional files outside of your module's directory need be
-modified to build your module.  On ``make`` boilermake will automatically scan for, and 
-include, files named ``all.mk`` in every directory under ``src/modules/``, and build the 
-requisite targets.
+modified to build your module. 
 
 If you will be using autoconf for dependency checks you should create an ``all.mk.in``,
 and ``all.mk`` should be added to the ``.gitignore`` file in your module's directory.
