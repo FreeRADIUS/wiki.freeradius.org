@@ -199,7 +199,7 @@ below::
 
 There is no useful information to be gleaned from the error other than the ``module_config``
 array element which produced it.  Use the documentation for the cf_item_parse_ function
-(which is responsible for performing the conversions) to determine the appropriate data type
+(which is responsible for performing the conversions) to determine the appropriate C data type
 to use for the field. 
 
 .. _CONF_PARSER: http://doc.freeradius.org/conffile_8h.html#structCONF__PARSER
