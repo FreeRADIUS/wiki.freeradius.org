@@ -412,9 +412,9 @@ sense to use data types which could be cast to offsets in a RADIUS packet.
 You can see the evolution of the types here:
 
 - In Version 1 the ipaddr field was a character string (e.g., ``xxx.xxx.xxx.xxx``).
-- In Version 2 the ipaddr field was returned as the binary 4 byte value.
-- In Version 3 the ipaddr field is still returned as the binary 4 byte value in a ``struct in_addr``.
-- In Version 4 the ipaddr field should be returned as an fr_ipaddr_t_.
+- In Version 2 the ipaddr field was a 4 byte binary value.
+- In Version 3 the ipaddr field is a ``struct in_addr``.
+- In Version 4 the ipaddr field should be a fr_ipaddr_t_.
 
 The following example shows how you could access and print the values of the
 ``Framed-IP-Address`` attribute:
