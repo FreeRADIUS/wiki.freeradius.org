@@ -457,7 +457,7 @@ usually considerably easier however to use the provided VP prints functions.
 vp_prints_value_ and vp_aprints_value_ will convert a VALUE_PAIR_ into its presentation
 format (the humanly readable format the server can re-ingest).
 
-Here's an example of using vp_prints_value_ to converte the ``Framed-IP-Address`` attribute
+Here's an example of using vp_prints_value_ to convert the ``Framed-IP-Address`` attribute
 into its presentation format:
 ```c
 char buffer[INET_ADDRSTRLEN];
