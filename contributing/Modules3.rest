@@ -423,7 +423,7 @@ The following example shows how you could access and print the values of the
 char buffer[INET_ADDRSTRLEN];
 VALUE_PAIR *vp;
   
-vp = pairfind(request->packet->vps, PW_FRAMED_IP_ADDRESS);
+vp = fr_pair_find_by_num(request->packet->vps, PW_FRAMED_IP_ADDRESS, 0, TAG_ANY);
 if (vp) {
   	RDEBUG("rlm_xxx: Found IP Address %s", inet_netop(AF_INET, &vp->vp_ipaddr, buffer, sizeof(buffer));
 }
@@ -463,7 +463,7 @@ into its presentation format:
 char buffer[INET_ADDRSTRLEN];
 VALUE_PAIR *vp;
   
-vp = pairfind(request->packet->vps, PW_FRAMED_IP_ADDRESS, 0, TAG_ANY);
+vp = fr_pair_find_by_num(request->packet->vps, PW_FRAMED_IP_ADDRESS, 0, TAG_ANY);
 if (vp) {
 	vp_prints_value(buffer, sizeof(buffer), vp, '"');
 	RDEBUG("rlm_xxx: Found IP Address %s", buffer);
