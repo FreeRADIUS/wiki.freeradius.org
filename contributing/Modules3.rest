@@ -1,10 +1,20 @@
 Creating modules for FreeRADIUS v3.0.x
 ======================================
 
+Preamble
+--------
+
 This article covers the current stable FreeRADIUS version 3.0.x.
 
 The way modules are called in version 3 is very similar to version 2, but many of the 
 internal API calls have changed.
+
+This is a very light overview of what's required to create a module.  Unfortunately much
+of the internal FreeRADIUS API still lacks documentation. The easiest way to learn how 
+develop modules, is to read the code of existing modules and modify it to suit your own purposes.
+
+There is also `doc.freeradius.org
+<http://doc.freeradius.org>`_ which contains documentation for some functions and APIs.
 
 Introduction
 ------------
@@ -130,24 +140,25 @@ typedef struct rlm_example_t {
 During module instantiation, the server will allocate structs of this type and pass them
 to the bootstrap and instantiation callbacks for population.
 
-Unlike earlier versions of the server in v3.0.x, the server core also takes care of applying
+Unlike earlier versions of the server, in v3.0.x, the server core also takes care of applying
 the CONF_PARSER_ mappings (discussed below).  When the module callbacks are executed, the 
 instance data struct should already be populated with values from the configuration files.
 
 Defining configuration items
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
 The ``module_config`` array of CONF_PARSER_ structs is where the configuration items
 the module utilises are defined.  There needs to be an entry here for each configuration 
 item used by the module.
 
-Note there is a special entry for ending the list, the list terminator.  This must be the
-last entry in this list::
+Note there is also a special special list terminator entry.  This must be the last entry
+in this list::
 
   { NULL, -1, 0, NULL, NULL }
 
-Every other entry has a ``.name`` for the configuration item, then the ``.type``, instance
-struct type, ``.offset`` in that struct to write to and a ``.dflt`` value.
+Every other entry has a ``.name`` for the configuration item, then a source ``.type``
+which controls how the configuration item is parsed, an instance struct type, an
+``.offset`` in that struct, to write the parsed value to, and a ``.dflt`` value for if
+the configuration item cannot be found.
 
 This example maps the configuration item ``server`` and to the ``server`` field of a ``rlm_xxx_t`` struct ``::
 
@@ -205,23 +216,22 @@ module_t struct
 Every module must define a variable of type module_t_ matching the name of the module,
 and mark it as extern (it must not be static).
 
-The module_t rlm_xxx definition establishes the connection between FreeRADIUS and the
-available services your module can provide.
+The ``module_t rlm_xxx {}`` definition establishes the connection between FreeRADIUS and
+the available services your module can provide.
 
-This definition is referenced (using ``dlsym``) after the server successfully loads the 
+This structure is referenced (using ``dlsym``) after the server successfully loads the 
 module's shared object (using ``dlopen``).
 
 If a symbol matching the name of the module cannot be found, or is missing the magic
-initialization data defined by RLM_MODULE_INIT, the server will error out and refuse to
-start.
+initialization data defined by ``RLM_MODULE_INIT``, the server will error out and refuse
+to start.
 
-The RLM_MODULE_INIT value is also used for cross platform version checking, to ensure that
-the modules and server are ABI compatible.
+The ``RLM_MODULE_INIT`` value is also used for cross platform version checking, to ensure
+that the modules and server are ABI compatible.
 
 Other fields in the module_t_ are described by the code documentation for module_t_.
 
-This is an example module_t_ definition::
-
+This is an example module_t_ definition:
 ```c
 extern module_t rlm_xxx;
 module_t rlm_xxx = {
@@ -254,10 +264,10 @@ mod_boostrap
 register any module specific attributes that that particular module instance will use during
 it's lifetime, and any xlats.
 
-A good example is the rlm_sql module's bootstrap function, which amongst many other things,
-creates a group attribute and registers a callback against it, for checking a user's group
-memberships.  This attribute is specific to each instance of rlm_sql as each instance of 
-rlm_sql may connect to a different database.
+A good example is the rlm_sql module's bootstrap callback, which amongst many other things,
+creates a group attribute and registers a callback against it.
+This attribute is specific to each instance of rlm_sql as each instance of rlm_sql may connect
+to a different database.
 
 ```c
 static int mod_bootstrap(CONF_SECTION *conf, void *instance)
@@ -294,7 +304,7 @@ static int mod_bootstrap(CONF_SECTION *conf, void *instance)
 ```
 
 If the module needs to load submodules (drivers or authentication mechanisms for example), this
-should also be done in the bootstrap section.
+should also be done in the bootstrap callback.
 
 mod_instantiate
 """""""""""""""
@@ -312,10 +322,10 @@ The work that should be performed in ``mod_instantiate`` is:
 - Any other work that must be performed before the module is ready to handle requests.
 
 Note that the instantiate module is not called each time a request is received by the server
-and passed to a module. The data established during boostrap and instantiation is available
-for all requests at run time.  If you need to store data that is associated with a *particular*
-request, and is valid only for the lifetime of a request, use the request_data_add_ and
-request_data_get_ functions.
+and passed to a module. The data established during boostrap and instantiation, and is 
+shared between all requests at run time.  If you need to store data that is associated with 
+a *particular* request, and is valid only for the lifetime of a request, use the 
+request_data_add_ and request_data_get_ functions.
 
 Also note that if instance data is modified during request processing, a mutex, C11 atomics
 (v3.1.x only) or the ``PW_TYPE_UNSAFE`` flag must be used to prevent concurrent access.
@@ -383,12 +393,12 @@ RLM_MODULE_UPDATED     OK (attributes modified).
 
 Accessing module configuration data
 -----------------------------------
-Configuration parameters are saved in the ``rlm_xxx_t`` instance data struct.  A pointer to this
-structure is passed to each request processing function.
+Configuration parameters are written to ad ``rlm_xxx_t`` instance data struct.  A pointer 
+to this structure is passed to each request processing function.
 
 This must usually be cast to the correct type (it's a ``void *``) before the fields can be
-accessed, the convention for this is to declare a variable of the correct type as ``* inst``,
-and assign ``instance`` to it.
+accessed, the convention for this is to declare a variable of the correct type as 
+``rlm_xxx_inst * inst``, and assign ``instance`` to it.
 
 Accessing Radius Request Attributes
 -----------------------------------
@@ -408,7 +418,7 @@ You can see the evolution of the types here:
 - In Version 4 the ipaddr field should be returned as an fr_ipaddr_t_.
 
 The following example shows how you could access and print the values of the
-Framed-IP-Address attribute:
+``Framed-IP-Address`` attribute:
 
 ```c
 char buffer[INET_ADDRSTRLEN];
@@ -420,7 +430,7 @@ if (vp) {
 }
 ```
 
-You may have noticed that in the above example we used ``vp_ipaddr`` to access the ipaddr
+You may have noticed that in the above example we used ``vp_ipaddr`` to access the ``ipaddr``
 field.  There are a series of macros with a ``vp_`` prefix, which expand to the correct field
 in the value_data_t_ part of the VALUE_PAIR_ struct.
 
@@ -449,7 +459,7 @@ vp_prints_value_ and vp_aprints_value_ will convert a VALUE_PAIR_ into its prese
 format (the humanly readable format the server can re-ingest).
 
 Here's an example of using vp_prints_value_ to converted the ``Framed-IP-Address`` attribute
-into its presentation format.
+into its presentation format:
 ```c
 char buffer[INET_ADDRSTRLEN];
 VALUE_PAIR *vp;
