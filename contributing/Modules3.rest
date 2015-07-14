@@ -156,10 +156,10 @@ in the array::
 
 Every other element has a ``.name`` for the configuration item, then a source ``.type``
 which controls how the configuration item is parsed, an instance struct type, an
-``.offset`` in that struct (to write the parsed value to), and a ``.dflt`` value for if
+``.offset`` in that struct (where the parsed value should be written to), and a ``.dflt`` value for if
 the configuration item cannot be found.
 
-This example maps the configuration item ``server`` and to the ``server`` field of a ``rlm_xxx_t`` struct ``::
+This example maps the configuration item ``server`` and to the ``server`` field of a ``rlm_xxx_t`` struct::
 
   { "server", FR_CONF_OFFSET(PW_TYPE_STRING | PW_TYPE_REQUIRED, rlm_xxx_t, server), NULL },
 
