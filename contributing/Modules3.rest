@@ -560,7 +560,7 @@ Including your module in an existing configuration
 You need to make two modifications to the FreeRADIUS configuration files to add your module.
 
 First you need to create a module configuration file in the ``raddb/mods-available``
-directory and link it to ``raddb/mods-enabled```.
+directory and link it to ``raddb/mods-enabled``.
 
 The contents of the file should look something like::
 
