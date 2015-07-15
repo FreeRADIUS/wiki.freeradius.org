@@ -359,3 +359,4 @@ inf func(int a, int b)
 	char *my_func_var = "foo";
 	return 0;
 }
+```
