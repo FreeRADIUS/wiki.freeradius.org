@@ -320,3 +320,42 @@ char const * const *
 ```c
 const char * const *
 ```
+
+Variable declarations at the top of blocks
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Variables don't have to be defined at the start of the function, but they should be defined at the start of a block.
+This can be any type of block, even an anonymous one ``{}``.
+
+Grouping declarations helps make the code more readable, and makes it easier to see the variables in use within certain areas of the code.
+
+**Good**
+```c
+int func(int a, int b)
+{
+	char *my_func_var;
+	
+	if (a) {
+		char *my_if_var;
+		
+		if (b) return -1;
+		my_if_var = "bar";
+	}
+
+	my_func_var = "foo";
+	return 0;
+}
+```
+
+**Bad**
+```c
+inf func(int a, int b)
+{
+	if (a) {
+		if (b) return 0;
+		char my_if_var = "bar";
+	}
+
+	char *my_func_var = "foo";
+	return 0;
+}
