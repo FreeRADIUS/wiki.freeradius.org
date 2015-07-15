@@ -194,8 +194,8 @@ Many editors support trimming trailing whitespace and adding a newline at the en
 
 You should enable these features.
 
-Tab indent to start of function arguments
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Arguments align with the end of the function name
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 This is true for function declarations, definitions, and calls. Grouping related arguments together on the same line is also preferred.
 
