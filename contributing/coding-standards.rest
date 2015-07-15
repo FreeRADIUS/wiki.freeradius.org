@@ -228,8 +228,8 @@ We believe code is perfectly readable up to 120 columns, that and over applicati
 
 Strings should also be broken at 120 columns for consistency.
 
-Always collapse bodies
-^^^^^^^^^^^^^^^^^^^^^^
+Always collapse bodies (where possible)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 If a condition or loop and its body can be collapsed onto a single line, then do so.
 
