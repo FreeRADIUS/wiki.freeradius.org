@@ -427,7 +427,7 @@ The most common problem with PEAP is that the client sends a series of Access-Re
 
 If you see this happening STOP!
 
-The RAIDUS server certificate has to have special OID's in it, or else the Microsoft clients will silently fail.  See the "scripts/xpextensions" file in the server "tar" file for examples, and the following page on Microsoft's site:
+The RADIUS server certificate has to have special OID's in it, or else the Microsoft clients will silently fail.  See the "scripts/xpextensions" file in the server "tar" file for examples, and the following page on Microsoft's site:
 
 [[http://support.microsoft.com/kb/814394/en-us]]
 
