@@ -249,7 +249,7 @@ Depending on your [[NAS]] type and it's configuration there are a number of ways
 
 #### Packet of Disconnect
 
-[[Packet of Disconnect]] is the standard and recommended method to disconnect users. It is supported by many newer [[NAS]] and uses a [[RADIUS]] packet (usually sent to port 3799 although some NAS use 1700 (Mikrotik for example)) to signal that a NAS should terminate an active session.
+[[Packet of Disconnect|Disconnect Messages]] is the standard and recommended method to disconnect users. It is supported by many newer [[NAS]] and uses a [[RADIUS]] packet (usually sent to port 3799 although some NAS use 1700 (Mikrotik for example)) to signal that a NAS should terminate an active session.
 
 #### SNMP
 
