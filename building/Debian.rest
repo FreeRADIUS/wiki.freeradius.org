@@ -1,5 +1,8 @@
 Debian Packages
 =============
+
+**Note:** This page is only relevant for Debian Wheezy (7.0). The version in wheezy-backports is the same as the version in Debian Jessie (8.0).
+
 To install up-to-date FreeRADIUS packages on Debian stable systems, use the backports repository. For example:
 
 * Add a [[backports mirror|http://backports.debian.org/Mirrors/]] to ``/etc/apt/sources.list`` like this:
