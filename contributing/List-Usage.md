@@ -30,7 +30,7 @@ Holds the attributes to return in response to the requests. e.g. ``&reply:Sessio
 Holds attributes which alter the behaviour of modules, and 'check' attributes, which contain 
 known good versions of things like User's passwords
 
-### ``&session-state:`` - Internal/Protocol attributes
+### ``&session-state:`` - Internal attributes
 The only list which persists between multiple requests.  It is linked by the ``&state`` attribute in the RADIUS protocol.
 
 Attributes which need to be accessed between multiple requests, at an unknown or indeterminate time in an authentication session's life cycle should be inserted here.
