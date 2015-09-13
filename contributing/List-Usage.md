@@ -9,7 +9,7 @@ These represent:
 - Attribute Value Pairs (_AVPs_) from requests, such as ``&User-Name``.
 - Attributes derived from fields in packets such as ``&DHCP-Gateway-Address`` (extracted from ``giaddr`` in DHCP packets).
 
-These may be forwarded in proxied requests, or send in response to requests (via the ``&reply:`` list).
+These may be forwarded in proxied requests, or sent in response to requests (via the ``&reply:`` list).
 
 ### Internal attributes
 These are created by the server's:
