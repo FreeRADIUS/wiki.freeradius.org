@@ -21,10 +21,10 @@ These will never be forwarded (except possibly in internal proxies), and never s
 
 ## Lists and their uses
 ### ``&request:`` - Protocol Attributes
-Holds the attributes created from an external, or internally proxied request. 
+Holds the attributes created from an externally generated (by a client), or internally proxied request. 
 
 ### ``&reply:`` - Protocol Attributes
-Holds the attributes to return in response to the requests.
+Holds the attributes to return in response to the requests. e.g. ``&reply:Session-Timeout``.
 
 ### ``&control:`` - Internal attributes (is never used for protocol attributes)
 Holds attributes which alter the behaviour of modules, and 'check' attributes, which contain 
