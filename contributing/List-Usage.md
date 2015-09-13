@@ -48,4 +48,4 @@ The result of deriving additional attributes from attributes in the request. e.g
 
 The results of validation requests e.g. OCSP are also inserted into this list.
 
-The results of operations are also inserted into this list.
+The results of operations (such as querying a HTTP server) are also inserted into this list.
