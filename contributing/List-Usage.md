@@ -42,3 +42,7 @@ Attributes which control how the response will be sent e.g. ``&reply:FreeRADIUS-
 
 ### ``&request:`` - Internal attributes
 The result of deriving additional attributes from attributes in the request. e.g. When looking up a user's group membership, the resulting ``LDAP-Group`` attributes (if caching is enabled) are inserted into the request list.
+
+The results of validation requests e.g. OCSP are also inserted into this list.
+
+The results of operations are also inserted into this list.
