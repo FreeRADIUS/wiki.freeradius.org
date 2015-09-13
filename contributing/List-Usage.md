@@ -33,7 +33,7 @@ known good versions of things like User's passwords
 ### ``&session-state:`` - Internal/Protocol attributes
 The only list which persists between multiple requests.  It is linked by the ``&state`` attribute in the RADIUS protocol.
 
-Attributes which need to be accessed between multiple requests, at an unknown or undetermined time in an authentication session's life cycle should be inserted here.
+Attributes which need to be accessed between multiple requests, at an unknown or indeterminate time in an authentication session's life cycle should be inserted here.
 
 A good example is ``TLS-Cert-*`` attributes, which are created during certificate validation, but used in multiple places during the lifetime of the request (mainly post-auth and the tls-verify virtual server).
 
