@@ -6,7 +6,7 @@ This page documents the different roles, so that new modules can use lists consi
 
 ## Attribute types
 ### Protocol attributes
-These represent:
+Protocol attributes represent:
 - Attribute Value Pairs (_AVPs_) from requests, such as ``&User-Name``.
 - Attributes derived from fields in packets such as ``&DHCP-Gateway-Address`` (extracted from ``giaddr`` in DHCP packets).
 
