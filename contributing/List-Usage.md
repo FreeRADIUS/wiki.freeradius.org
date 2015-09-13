@@ -1,11 +1,8 @@
 # List usage
 
-Each list in the server is used for a different purpose.
+Originally, each list in the server is used for a specific purpose. As the server had grown in complexity, some lists have take on multiple roles.
 
-As the server had grown in complexity, some lists have take on different roles.
-
-This page documents the different roles, so that new modules can use lists consistently,
-and so users know where to find attributes.
+This page documents the different roles, so that new modules can use lists consistently, and so users know where to find attributes.
 
 ## Attribute types
 ### Protocol attributes
