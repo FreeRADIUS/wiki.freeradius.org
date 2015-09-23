@@ -192,7 +192,7 @@ To see Cisco-AVPair attributes in the Cisco debugging log
 
 ## Static Loopback IP
 
-The Cisco 36/26 by default selects (it seems at random) any IP address assigned to it (serial, ethernet etc.) as it's RADIUS client source address, thus the access request may be dropped by the RADIUS server, because it can not verify the client. To make the cisco box always use one fixed address, add the following to your configuration:
+The Cisco 36/26 by default selects (it seems at random) any IP address assigned to it (serial, ethernet etc.) as its RADIUS client source address, thus the access request may be dropped by the RADIUS server, because it can not verify the client. To make the cisco box always use one fixed address, add the following to your configuration:
 
      ip radius source-interface Loopback0
 
