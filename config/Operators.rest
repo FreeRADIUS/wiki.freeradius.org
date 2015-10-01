@@ -1,6 +1,8 @@
 Operators
 =========
 
+Note - These apply to the ``rlm_files`` module only.  For operators in unlang see ``man unlang``.
+
 Additional operators other than = may be used for the attributes in either the check item, or reply item list.
 
 The following is a list of operators, and their meaning.
