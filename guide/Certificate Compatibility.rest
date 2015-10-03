@@ -61,3 +61,9 @@ In that case
 * Follow the instructions given above.
 * Consider to decreasing the tunnel MTU
 
+Creating compatible certificates
+================================
+
+Geant has a great resource which lists the different requirements regarding certificates that the various supplicants have.
+
+A copy can be found here https://wiki.geant.org/display/H2eduroam/EAP+Server+Certificate+considerations.
