@@ -1,7 +1,7 @@
 Certificate Compatibility
 =================
-The certificates created using the scripts in the `raddb/certs <https://github.com/FreeRADIUS/freeradius-server/tree/v3.0.x/raddb/certs>` directory are known to be compatible
-with **all** operating systems.  These scripts should be used to create certificates.
+The certificates created using the scripts in the ``raddb/certs`` directory (https://github.com/FreeRADIUS/freeradius-server/tree/v3.0.x/raddb/certs) are known to be compatible
+with **all** operating systems.  **These scripts should be used to create certificates.**
 
 *Debian and Ubuntu systems will have these scripts in the /usr/share/doc/freeradius/examples/certs directory, instead of raddb/certs.*
 
