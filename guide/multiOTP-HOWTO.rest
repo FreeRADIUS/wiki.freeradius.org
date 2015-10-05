@@ -58,7 +58,7 @@ Also change ntlm_auth variable::
                           Auth-Type := multiotpmschap
                   }
             }
-            else if (!control:Auth-Type && User-Password =~ /^${policy.multiotp_prefix}([0-9]{10})$/) {
+            elsif (!control:Auth-Type && User-Password =~ /^${policy.multiotp_prefix}([0-9]{10})$/) {
                 update control {
                     Auth-Type := multiotp
                 }
