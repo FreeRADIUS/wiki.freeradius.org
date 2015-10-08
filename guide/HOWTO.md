@@ -46,3 +46,4 @@ Here is a list of known offsite HOWTOs. Where ever possible (When the authors gi
 * [[FreeRADIUS, L2TPD and MySQL|http://blog.derjohn.de/snipsnap/space/start/2006-09-27/1#Freeradius_und_MySQL]]
 * [[FreeRADIUS and Informix|http://web.pip.com.au/brads-howtos/freeradius-informix.html]]
 * [[FreeRADIUS with Oracle support on Debian|http://www.horoa.net/2011/06/installation-de-freeradius-avec-le-support-oracle/?lang=eng]]
+* [[FreeRADIUS setup with Vagrant on Ubuntu 14.04 |https://github.com/haisum/vagrant-freeradius]]
