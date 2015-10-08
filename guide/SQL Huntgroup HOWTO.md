@@ -33,7 +33,7 @@ The contents of the table show now look like this
        +----+-----------+--------------+-----------+
        | id | groupname | nasipaddress | nasportid |
        +----+-----------+--------------+-----------+
-       |  1 | foo       | 2.2.2.2      | NULL      | 
+       |  1 | foo       | 192.168.0.10 | NULL      | 
        +----+-----------+--------------+-----------+
 
 ### Configuring FreeRADIUS
