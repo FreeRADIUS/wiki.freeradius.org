@@ -608,12 +608,6 @@ See:  `List of modules
 
 See Also
 --------
-`Modules1 (old 1.x module syntax)
-<http://wiki.freeradius.org/contributing/Modules1>`_
-
-`Modules2 (old 2.x module syntax)
-<http://wiki.freeradius.org/contributing/Modules2>`_
-
 `GitHub
 <http://wiki.freeradius.org/contributing/GitHub>`_
 This article covers the current FreeRADIUS version 3.x.
