@@ -386,7 +386,7 @@ to the entire hierachy must be synchronized.
 To work around this limitation, ``REQUEST *`` structures are allocated in the NULL context, meaning
 they are the top of their own talloc hierachy.
 
-There are some general rules for which context to use::
+There are some general rules for which context to use:
 
 - Memory tied to the lifecycle of the request should be parented by the ``REQUEST *request`` ctx.
 - Memory tied to the lifecycle of the module should be parented by the module instance data.
