@@ -388,7 +388,7 @@ they are the top of their own talloc hierachy.
 
 There are some general rules for which context to use:
 
-- Memory tied to the lifecycle of the request should be parented by the ``REQUEST *request`` ctx.
+- Memory tied to the lifecycle of the request should be parented by ``REQUEST *request``.
 - Memory tied to the lifecycle of the module should be parented by the module instance data.
 - Never allocate memory in threads (i.e. during request processing) in the context of the module
   instance data, or memory parented by it.
