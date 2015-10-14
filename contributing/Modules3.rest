@@ -367,6 +367,34 @@ safe, then change ``RLM_TYPE_THREAD_SAFE`` to ``RLM_TYPE_THREAD_UNSAFE``.
 FreeRADIUS will then permit only one instance of that to module to be called concurrently.
 Be advised that this will adversely affect performance and response times.
 
+talloc
+^^^^^^
+
+As of FreeRADIUS v3.0.0 we have moved memory allocation to talloc_.
+talloc is a hierarchical memory allocation system, which allows you to define parent/child 
+relationships between chunks of memory.
+
+The parent in these relationships is known as a context.  If a context is freed, all children
+parented by it are also freed.  Creating relationships between memory chunks greatly simplifies the
+cleanup of complex structures such as ``REQUEST *``.
+
+Talloc is not always thread safe.  Specifically; no two threads may modify a talloc hierarchy
+concurrently.  If multiple threads do modify the talloc hierarchy concurrently, corruption of the 
+talloc meta data may occur.  Locks around the immediate context are not sufficient, modifications 
+to the entire hierachy must be synchronized.
+
+To work around this limitation, ``REQUEST *`` structures are allocated in the NULL context, meaning
+they are the top of their own talloc hierachy.
+
+There are some general rules for which context to use::
+
+- Memory tied to the lifecycle of the request should be parented by the ``REQUEST *request`` ctx.
+- Memory tied to the lifecycle of the module should be parented by the module instance data.
+- Never allocate memory in threads (i.e. during request processing) in the context of the module
+  instance data, or memory parented by it.
+
+.. _talloc: https://talloc.samba.org/talloc/doc/html/group__talloc.html
+
 Module Return Codes
 -------------------
 There are a number of return codes that may be returned by the request processing callbacks.
