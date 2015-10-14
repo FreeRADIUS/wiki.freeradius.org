@@ -393,6 +393,10 @@ There are some general rules for which context to use:
 - Never allocate memory in threads (i.e. during request processing) in the context of the module
   instance data, or memory parented by it.
 
+Also note that malloced memory cannot be used to parent talloced memory, and that talloced memory
+must be managed using talloc library functions only.  It is not possible to call ``free()`` to
+free talloced memory, ``talloc_free()`` must be used instead.
+
 .. _talloc: https://talloc.samba.org/talloc/doc/html/group__talloc.html
 
 Module Return Codes
