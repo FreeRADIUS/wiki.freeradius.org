@@ -13,6 +13,8 @@
 * [[Twitter|guide/twitter]]
 * [[raduat|guide/raduat]]
 
+There is detailed documentation for most of the server available at [[Complete documentation|http://networkradius.com/doc/]]
+
 Integrating with Active Directory
 ---------------------------------
 
@@ -35,11 +37,14 @@ Guides for 3rd party software
 
 Offsite HOWTOs
 --------------
+
 Here is a list of known offsite HOWTOs. Where ever possible (When the authors give us permission) these have been incorporated into the wiki.
 
-* [[Deploying RADIUS - Practices and Principles for AAA solutions|http://deployingradius.com/documents/configuration/]]
+* [[Deploying RADIUS - WPA, EAP, and Active Directory guides|http://deployingradius.com/documents/configuration/]]
+
+Other, old guides may be available below.
+
 * [[WPA Authentication for Windows XP Clients with RADIUS HOWTO|http://www.hep.phys.soton.ac.uk/~jhe/documents/WPA-Authentication+RADIUS-HOWTO.html]]
-* [[HOWTO on EAP/TLS authentication between FreeRADIUS and XSupplicant|http://www.missl.cs.umd.edu/wireless/eaptls/]]
 * [[FreeRADIUS EAP/MD5: Windows XP as supplicant|http://www.freeradius.org/doc/EAP-MD5.html]]
 * [[EAP/TLS Setup for FreeRADIUS and Windows XP Supplicant|http://www.freeradius.org/doc/EAPTLS.pdf]]
 * [[Tutorial for AD integration|http://homepages.lu/charlesschwartz/radius/freeRadius_AD_tutorial.pdf]]
