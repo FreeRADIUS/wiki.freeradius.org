@@ -17,9 +17,9 @@ Note: You must use SQL accounting for rlm_sqlcounter to work (list ``sql`` in th
 
 * query - The sql query that is executed. The resulting value is compared with the attribute ``check_name``.
 There are 3 parameters that can be used in the query:
-- %k	'key' parameter
-- %b	unix time value of beginning of reset period
-- %e	unix time value of end of reset period
+  - %k	'key' parameter
+  - %b	unix time value of beginning of reset period
+  - %e	unix time value of end of reset period
 
 ## Example Setup
 The following ``rlm_sqlcounter`` instances are what are referred to by the rest of this document, they may differ from those bundled with the server, but the principle and operations will be similar.
