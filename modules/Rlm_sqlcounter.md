@@ -10,10 +10,10 @@ Note: You must use SQL accounting for rlm_sqlcounter to work (list ``sql`` in th
 * key - The key field in the sql lookup - This is usually ``User-Name``.
 * The 'reset' parameter defines when the counters are all reset to zero.  It can be hourly, daily, weekly, monthly or never.  It can also be user defined. It should be of the form: it's version 3.0.7 
 - num[hdwm] where:
-- h: hours, d: days, w: weeks, m: months
- * If the letter is ommited days will be assumed. In example:
-- reset = 10h (reset every 10 hours)
-- reset = 12  (reset every 12 days)
+  - h: hours, d: days, w: weeks, m: months
+   * If the letter is ommited days will be assumed. In example:
+  - reset = 10h (reset every 10 hours)
+  - reset = 12  (reset every 12 days)
 
 * query - The sql query that is executed. The resulting value is compared with the attribute ``check_name``.
 There are 3 parameters that can be used in the query:
