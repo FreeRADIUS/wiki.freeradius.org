@@ -9,7 +9,7 @@ Documentation
 
 A short introduction to RADIUS concepts, and to FreeRADIUS is available [[here|http://networkradius.com/doc/FreeRADIUS%20Technical%20Guide.pdf]].
 
-This wiki collects a large amount of documentation relating to [[glossary|pages/glossary/]] together in one place. Pages of particular interest to newcomers will be the [[FAQ|guide/FAQ]] and [[HOWTO|guide/HOWTO]] sections, although the [[Traditional FreeRADIUS docs page|http://www.freeradius.org/doc/]] the [[docs|https://github.com/FreeRADIUS/freeradius-server/tree/master/doc]] folder included in the server distribution also include "man" pages, and other documentation.
+This wiki collects a large amount of documentation relating to [[glossary|glossary/RADIUS]] together in one place. Pages of particular interest to newcomers will be the [[FAQ|guide/FAQ]] and [[HOWTO|guide/HOWTO]] sections, although the [[Traditional FreeRADIUS docs page|http://www.freeradius.org/doc/]] the [[docs|https://github.com/FreeRADIUS/freeradius-server/tree/master/doc]] folder included in the server distribution also include "man" pages, and other documentation.
 
 There are many third-party web sites and HOWTO's that give advice on FreeRADIUS.  They are usually years out of date, and refer to old versions. The advice that they give is also wrong.  We **strongly** recommend that you avoid most third-party documentation.
 
@@ -21,7 +21,7 @@ The following is an overview of the types of information available:
 * [[Radius Clients|glossary/Radius Clients]]
 * [[FAQ|guide/FAQ]]
 * [[HOWTO|guide/HOWTO]] example setups, vendor docs, and cookbooks.
-* [[glossary|pages/glossary/]]
+* [[glossary|glossary/RADIUS]]
 
 Contributing
 ------------
