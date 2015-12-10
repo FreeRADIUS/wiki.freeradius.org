@@ -46,11 +46,7 @@ The methods discussed in this document require at least the
 following software versions:
 
 * Samba 4.2.1 or greater
-* FreeRADIUS 3.0.8
-
-However, as of writing, neither of these versions have been
-released. Instructions for using the correct code is included
-below.
+* FreeRADIUS 3.0.8 or greater
 
 
 Compiling and installing Samba
