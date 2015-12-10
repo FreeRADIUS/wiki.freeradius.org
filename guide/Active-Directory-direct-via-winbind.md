@@ -161,7 +161,7 @@ previously installed Samba location:
 As part of the configure script you should see the following
 lines:
 
-</pre>
+<pre>
 === configuring in src/modules/rlm_mschap (.../freeradius-server/src/modules/rlm_mschap)
 ...
 checking for wbclient.h in /opt/samba4.2/include/... yes
