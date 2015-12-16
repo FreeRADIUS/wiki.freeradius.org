@@ -36,3 +36,4 @@ OS name: "mac os x", version: "10.7", arch: "x86_64", family: "mac"
 3.2 安装eclipse插件 m2eclipse
 
 4. startup sprint with a sample project download from spring.io: http://spring.io/guides/gs/rest-service/
+
