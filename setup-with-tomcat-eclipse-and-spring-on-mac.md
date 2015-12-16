@@ -10,4 +10,29 @@ thanks to others who provide content to related topic, for new comer's convenien
             use workspace metadata(does not modify tomcat instation),你应该选择第二个选项，use tomcat installation.然后你再启动服务就可以了。
             如果server location中的三个单选框呈灰色不可编辑，那么你就要把先前导入的删除掉，重新导入一次，修改server locatioins。
 
-3. startup sprint with a sample project download from spring.io: http://spring.io/guides/gs/rest-service/
+3. preparation: maven
+
+3.1下载maven的bin包，解压，配置到环境变量里面去
+1）、首先到Maven官网下载安装文件，比如 ，下载文件为apache-maven-3.0.3-bin.tar.gz
+2）、配置环境变量
+[android(0)@liangbingmatoMacBook-Pro ~]$ cd  ~
+[android(0)@liangbingmatoMacBook-Pro ~]$ open  -e .bash_profile 
+添加的环境变量如下：具体看你解压在哪里具体的配置
+MAVEN_HOME=/User/android/apache-maven-3.0.3
+export MAVEN_HOME
+export PATH=${PATH}:${MAVEN_HOME}/bin
+ 
+执行 [android(0)@liangbingmatoMacBook-Pro ~]$ source .bash_profile 保存环境变量
+ 
+检验是否成功：mvn  -v ，输出如下
+liangbingmatoMacBook-Pro:~ android$ mvn -v
+Apache Maven 3.0.3 (r1075438; 2011-03-01 01:31:09+0800)
+Maven home: /usr/share/maven
+Java version: 1.6.0_26, vendor: Apple Inc.
+Java home: /System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home
+Default locale: en_US, platform encoding: EUC_CN
+OS name: "mac os x", version: "10.7", arch: "x86_64", family: "mac"
+
+3.2 安装eclipse插件 m2eclipse
+
+4. startup sprint with a sample project download from spring.io: http://spring.io/guides/gs/rest-service/
