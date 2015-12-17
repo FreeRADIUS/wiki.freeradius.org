@@ -45,7 +45,7 @@ This is the equivalent of "Hello, world" in `rlm_python`. The next step is makin
 #### Writing the code
 Just a quick sidestep. To make the user authenticate with password 'Hello', we need to add the attribute `Cleartext-Password` with value 'Hello' to the config list. The give the user some feedback, we can add the `Reply-Message` attribute to the reply list.
 
-Let's construct the reply tuples first. Below the line `print p`, add the following two lines:
+Let's construct the reply tuples first. In the method `authorize`, below the line `print p`, add the following two lines:
 
     reply = ( ('Reply-Message', 'Hello from rlm_python'), )
     config = ( ('Cleartext-Password', 'hello'), )
