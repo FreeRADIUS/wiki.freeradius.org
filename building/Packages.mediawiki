@@ -7,13 +7,13 @@ The officially supported list of third-party sites is at http://freeradius.org/d
 * [[Red Hat FAQ#Current-Pre-built-RPMs-for-RHEL-5-and-CentOS-5|CentOS]], or via [http://software.opensuse.org/download.html?project=home%3Afreeradius%3A3.0.x%3Acentos&package=freeradius unofficial OBS repository - v3.0.x] | [http://software.opensuse.org/download.html?project=home%3Afreeradius%3A2.x.x%3Acentos&package=freeradius v2.x.x]
 * [http://freeradius.net Cygwin]
 * [http://packages.debian.org/freeradius Debian] ([[building/Debian|with backports]]), or via [http://software.opensuse.org/download.html?project=home%3Afreeradius%3A3.0.x%3Adebian&package=freeradius unofficial OBS repository - v3.0.x] | [http://software.opensuse.org/download.html?project=home%3Afreeradius%3A2.x.x%3Adebian&package=freeradius v2.x.x]
-* [http://pkgsrc.se/net/freeradius DragonFlyBSD] (via NetBSD pkgsrc)
+* [https://github.com/DragonFlyBSD/DPorts/tree/master/net DragonFly BSD] (via [https://www.dragonflybsd.org/docs/howtos/HowToDPorts/ dports or pkg])
 * [http://koji.fedoraproject.org/koji/packageinfo?packageID=298 Fedora]
-* [http://www.freebsd.org/cgi/ports.cgi?query=freeradius&amp;stype=all&amp;sektion=net FreeBSD]
+* [http://www.freebsd.org/cgi/ports.cgi?query=freeradius&amp;stype=all&amp;sektion=net FreeBSD] (via [https://www.freebsd.org/doc/handbook/ports-using.html ports] or [https://www.freebsd.org/doc/handbook/pkgng-intro.html pkg])
 * [http://freeradius.darwinports.com/ Mac OSX] (Leopard server [http://www.apple.com/opensource/ [1]] [http://www.apple.com/server/macosx/leopard/more.html [2]])
 * [http://download.opensuse.org/repositories/network:/aaa/ Mandriva]
 * [http://pkgsrc.se/net/freeradius NetBSD]
-* [http://ports.openbsd.nu/net/freeradius OpenBSD]
+* [http://openports.se/search.php?so=freeradius OpenBSD] (via [[http://www.openbsd.org/faq/faq15.html packages or ports)
 * [[guide/Red Hat FAQ|Red Hat Enterprise Linux]]
 * [[Solaris#wiki-Solaris_Packages|Solaris]]
 * [http://download.opensuse.org/repositories/network:/aaa/ SUSE and openSUSE] (the Network:AAA repository of the [http://www.opensuse.org OpenSUSE Project]), or via [http://software.opensuse.org/download.html?project=home%3Afreeradius%3A3.0.x%3Asuse&package=freeradius-server unofficial OBS repository - v3.0.x] | [http://software.opensuse.org/download.html?project=home%3Afreeradius%3A2.x.x%3Asuse&package=freeradius-server v2.x.x]
