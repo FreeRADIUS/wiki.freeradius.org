@@ -13,7 +13,7 @@ The officially supported list of third-party sites is at http://freeradius.org/d
 * [http://freeradius.darwinports.com/ Mac OSX] (Leopard server [http://www.apple.com/opensource/ [1]] [http://www.apple.com/server/macosx/leopard/more.html [2]])
 * [http://download.opensuse.org/repositories/network:/aaa/ Mandriva]
 * [http://pkgsrc.se/net/freeradius NetBSD]
-* [http://openports.se/search.php?so=freeradius OpenBSD] (via [[http://www.openbsd.org/faq/faq15.html packages or ports)
+* [http://openports.se/search.php?so=freeradius OpenBSD] (via [[http://www.openbsd.org/faq/faq15.html packages or ports]])
 * [[guide/Red Hat FAQ|Red Hat Enterprise Linux]]
 * [[Solaris#wiki-Solaris_Packages|Solaris]]
 * [http://download.opensuse.org/repositories/network:/aaa/ SUSE and openSUSE] (the Network:AAA repository of the [http://www.opensuse.org OpenSUSE Project]), or via [http://software.opensuse.org/download.html?project=home%3Afreeradius%3A3.0.x%3Asuse&package=freeradius-server unofficial OBS repository - v3.0.x] | [http://software.opensuse.org/download.html?project=home%3Afreeradius%3A2.x.x%3Asuse&package=freeradius-server v2.x.x]
