@@ -94,7 +94,7 @@ This below code was described by the friendly people at the Freeradius-mailingli
             }
           }
         # allow Groupname3 to only access Groupname1 and Groupname2 and Groupname3
-         elsif (SQL-Group == "3rdline") {
+         elsif (SQL-Group == "Groupname3") {
             if (Huntgroup-Name != "Groupname1" && Huntgroup-Name != "Groupname2" && Huntgroup-Name != "Groupname3") {
               reject
             }
