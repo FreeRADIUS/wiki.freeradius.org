@@ -81,6 +81,33 @@ Now add an entry in the `radgroupcheck` table which says for the **site_a_admins
 
 @todo reply table example
 
+### Example to allow users in Groups/Profiles access to different NAS.
+This below code was described by the friendly people at the Freeradius-mailinglist. Many people have looked for a solution like this before regarding denying access or allowing access to NAS-servers in a Huntgroup matching against Rad-users group/profile membership. This is to be put in the (Ubuntu) /etc/freeradius/sites-available/default config file or equvivalent. This example allows Radius users in the Group 1 and 2 to login to access NAS in the Huntgroup 1 and 2. Please note the security concern that users thats not in any huntgroup will be able to access any device, so make a group "restricted" and place any users there to prohibit access.
+
+        update request {
+                Huntgroup-Name := "%{sql:SELECT groupname FROM radhuntgroup WHERE nasipaddress='%{NAS-IP-Address}'}"
+        }
+        # only allow Groupname1 to Groupname1 and Groupename2
+          if (SQL-Group == "Groupname1") {
+            if (Huntgroup-Name != "Groupname1" && Huntgroup-Name != "Groupname2") {
+              reject
+            }
+          }
+        # allow Groupname3 to only access Groupname1 and Groupname2 and Groupname3
+         elsif (SQL-Group == "3rdline") {
+            if (Huntgroup-Name != "Groupname1" && Huntgroup-Name != "Groupname2" && Huntgroup-Name != "Groupname3") {
+              reject
+            }
+          }
+        # else user can by default access everything except "restricted"
+          else {
+            if (Huntgroup-Name == "restricted") {
+              reject
+            }
+          }
+
+This above works assuming the NAS and Huntgroups is set up correctly. Any user must be in the right Group/Profile, NAS must be connected to the right Huntgroups etc. Dont forget to restart the freeradius server, or use the debug Freeradius -X to debug.
+
 ***
 
 1. A new request arrives, in the request are the following attribute/value pairs (along with other attribute/value pairs)
