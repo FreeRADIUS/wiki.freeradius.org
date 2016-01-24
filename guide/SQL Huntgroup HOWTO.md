@@ -80,6 +80,16 @@ Now add an entry in the `radgroupcheck` table which says for the **site_a_admins
           +----+----------------+----------------+----+----------+
 
 @todo reply table example
+***
+
+1. A new request arrives, in the request are the following attribute/value pairs (along with other attribute/value pairs)
+      User-Name = "example_user"
+      NAS-IP-Address = 192.168.0.10
+1. The authorize section executes and the "update request" we added performs a SQL query on the `radhuntgroup table`. The variable `%{NAS-IP-Address}` is replaced with the value of NAS-IP-Address in the request.
+1. SQL XLAT query runs and matches the first row in our `radhuntgroup` table and returns **site_a** as the huntgroup name. The request is then updated with the attribute/value pair ``Huntgroup-Name = "site_a"``.
+1. SQL modules runs. If group checking is enabled the first thing it does is lookup the user name in the radusergroup table. In our example **example_user** is looked up and is found to belong to the group **site_a_admins**.
+* SQL group check runs. The `radgroupcheck` table is consulted; for every group the user is a member of a list of <attribute,operator,value> tuples are returned. These tuples are then compared to the attribute/value pairs in the request using the operator specified.
+* If all the check items match, the `radgroupreply` table is consulted, and all attributes listed there for the group are added to the reply.
 
 ### Example to allow users in Groups/Profiles access to different NAS.
 This below code was described by the friendly people at the Freeradius-mailinglist. Many people have looked for a solution like this before regarding denying access or allowing access to NAS-servers in a Huntgroup matching against Rad-users group/profile membership. This is to be put in the (Ubuntu) /etc/freeradius/sites-available/default config file or equvivalent. This example allows Radius users in the Group 1 and 2 to login to access NAS in the Huntgroup 1 and 2. Please note the security concern that users thats not in any huntgroup will be able to access any device, so make a group "restricted" and place any users there to prohibit access.
@@ -108,13 +118,3 @@ This below code was described by the friendly people at the Freeradius-mailingli
 
 This above works assuming the NAS and Huntgroups is set up correctly. Any user must be in the right Group/Profile, NAS must be connected to the right Huntgroups etc. Dont forget to restart the freeradius server, or use the debug Freeradius -X to debug.
 
-***
-
-1. A new request arrives, in the request are the following attribute/value pairs (along with other attribute/value pairs)
-      User-Name = "example_user"
-      NAS-IP-Address = 192.168.0.10
-1. The authorize section executes and the "update request" we added performs a SQL query on the `radhuntgroup table`. The variable `%{NAS-IP-Address}` is replaced with the value of NAS-IP-Address in the request.
-1. SQL XLAT query runs and matches the first row in our `radhuntgroup` table and returns **site_a** as the huntgroup name. The request is then updated with the attribute/value pair ``Huntgroup-Name = "site_a"``.
-1. SQL modules runs. If group checking is enabled the first thing it does is lookup the user name in the radusergroup table. In our example **example_user** is looked up and is found to belong to the group **site_a_admins**.
-* SQL group check runs. The `radgroupcheck` table is consulted; for every group the user is a member of a list of <attribute,operator,value> tuples are returned. These tuples are then compared to the attribute/value pairs in the request using the operator specified.
-* If all the check items match, the `radgroupreply` table is consulted, and all attributes listed there for the group are added to the reply.
