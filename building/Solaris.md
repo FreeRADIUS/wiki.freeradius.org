@@ -86,5 +86,73 @@ export LD_OPTIONS='-L/usr/local/openldap/lib/ -R/usr/local/openldap/lib -L/usr/l
 gmake
 gmake install
 ```
+### Method 3
+Building freeradius3 and dependencies from source
+
+Make sure you use FreeRadius 3.0.11 or later, earlier versions won't compile on Solaris 11.
+
+####  What is covered in this method
+Here, you can find instructions to compile a freeradius on solaris 11,
+with modules for rlm_ldap, rlm_sql_mysql, rlm_perl (threaded), rlm_eap (separate openssl)
+
+#### Buildtools
+Install sunstudio (used for openssl + perl) and gcc(used for LDAP libs + freeradius)
+
+#### Install dependencies
+```bash
+pkg install developer/gcc
+pkgadd -d http://get.opencsw.org/now/opt/csw/bin/pkgutil 
+vim /etc/opt/csw/pkgutil.conf -->  mirror=http://mirror.opencsw.org/opencsw/unstable
+/opt/csw/bin/pkgutil -U
+/opt/csw/bin/pkgutil -i CSWlibtalloc2
+/opt/csw/bin/pkgutil -i CSWlibtalloc-dev
+/opt/csw/bin/pkgutil -i mysql_dev libmysqlclient15 libmysqlclient_r15
+```
+
+#### OpenLDAP libraries
+Solaris LDAP libraries are non-standard and won't work with FreeRadius.
+To compile your own:
+Download[ OpenLDAP sources](http://www.openldap.org/software/download/) and compile with
+```bash
+./configure --enable-slapd=no --enable-backends=no --enable-overlays=no --prefix=/usr/local/freeradius_ldap
+gmake depend
+gmake
+gmake install
+```
+
+#### Perl with multiplicity and lib files
+Only of you need threaded/multiplicity in your perl module, otherwise standard perl libs will be just fine
+Download[ Perl sources](https://www.perl.org/get.html) and compile with
+```bash
+./Configure -Dprefix='/usr/local/freeradiusperl' -Dusethreads -Duselargefiles -Duse64bitint -Dusemultiplicity  -Dcf_email="webmaster@uzleuven.be" -Dldflags="-lsocket -lnsl -ldl -lm -lc" -Duseshrplib -d
+make
+make test
+make install
+```
+
+#### OpenSSL
+Only needed if you want seperate OpenSSL libraries
+Download[ OpenSSL sources](http://openssl.org/source/) and compile with
+```bash
+./Configure solaris-sparcv9-cc -m32 shared --openssldir=/usr/local/ssl --prefix=/usr/local/ssl
+make
+make test
+make install
+```
+
+#### FreeRadius
+To compile FreeRadius with all of the above:
+Download sources and compile with:
+```bash
+export PATH="/usr/local/freeradiusperl/bin:$PATH"
+mv /usr/bin/awk /usr/bin/awk_old
+ln -s /usr/bin/nawk /usr/bin/awk
+./configure --prefix=/usr/local/freeradius3 --with-ldap --with-mysql-lib-dir=/usr/sfw/lib --with-mysql-include-dir=/usr/sfw/include --with-rlm-perl-lib-dir=/usr/local/freeradiusperl/lib/5.20.1/sun4-solaris-thread-multi-64int/CORE --with-openssl-include=/usr/local/ssl/include --with-openssl-libraries=/usr/local/ssl/lib --includedir=/usr/local/ssl --with-mysql-lib-dir=/opt/csw/lib --with-mysql-include-dir=/opt/csw/include --with-talloc-lib-dir=/opt/csw/lib --with-talloc-include-dir=/opt/csw/include --with-udpfromto=no --with-rlm-ldap-lib-dir=/usr/local/freeradius_ldap/lib --with-rlm-ldap-include-dir=/usr/local/freeradius_ldap/include --enable-developer
+gmake
+gmake test
+gmake install
+```
+
+
 ## Running
 SMF manifest and installation instructions for Solaris 10 can be found [here](https://github.com/freeradius/freeradius-server/tree/master/scripts/solaris).
