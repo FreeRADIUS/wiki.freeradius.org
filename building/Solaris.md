@@ -124,7 +124,7 @@ gmake install
 Only of you need threaded/multiplicity in your perl module, otherwise standard perl libs will be just fine
 Download[ Perl sources](https://www.perl.org/get.html) and compile with
 ```bash
-./Configure -Dprefix='/usr/local/freeradiusperl' -Dusethreads -Duselargefiles -Duse64bitint -Dusemultiplicity  -Dcf_email="webmaster@uzleuven.be" -Dldflags="-lsocket -lnsl -ldl -lm -lc" -Duseshrplib -d
+./Configure -Dprefix='/usr/local/freeradiusperl' -Dusethreads -Duselargefiles -Duse64bitint -Dusemultiplicity  -Dcf_email="your@email.here" -Dldflags="-lsocket -lnsl -ldl -lm -lc" -Duseshrplib -d
 make
 make test
 make install
@@ -143,6 +143,9 @@ make install
 #### FreeRadius
 To compile FreeRadius with all of the above:
 Download sources and compile with:
+
+Moving the awk command is needed because of a borked/broken awk command is used as standard in Solaris.
+We replace it with a symlink to nawk, so the configure command can use it.
 ```bash
 export PATH="/usr/local/freeradiusperl/bin:$PATH"
 mv /usr/bin/awk /usr/bin/awk_old
