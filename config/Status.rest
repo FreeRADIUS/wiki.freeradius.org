@@ -42,4 +42,4 @@ Here is an example of querying the server to retrieve authentication counters wi
     FreeRADIUS-Total-Auth-Dropped-Requests = 3
     FreeRADIUS-Total-Auth-Unknown-Types = 0
 
-The same can also be done for accounting packets if you set ``FreeRADIUS-Statistics-Type = "2"``.
+The same can also be done for accounting packets if you set ``FreeRADIUS-Statistics-Type = "2"``. Proxy statistics use the values 4 and 8 respectively.
