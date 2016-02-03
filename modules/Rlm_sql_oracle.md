@@ -8,7 +8,9 @@ This procedure can be used where an rlm_sql_oracle package is not available, and
 3. Run ``configure`` with oracle-specific arguments.  You may need to change the paths to ones which are specific to your system and/or the Oracle version.
     * ``./configure --with-oracle-lib-dir=/usr/lib/oracle/11.2/client64/lib --with-oracle-include-dir=/usr/lib/oracle/11.2/client64``
     * ``make``.  You should see it making ``rlm_sql_oracle-<fr_version>.so``
+    * ``cd src/modules/rlm_sql/drivers/rlm_sql_oracle``
     * ``make install``
+That will install ONLY the Oracle module.  If you don't see it building or installing anything, edit the ``Makefile`` in the ``rlm_sql_oracle`` directory, and fix it to point to the correct directories.  You do not need to re-run ``configure``
 4. ``vi /etc/raddb/modules sql``
     *     :%s/database = ".*"/database = "oracle"/g
 5. From the decompressed archive ``cp -r raddb/sql/oracle /etc/raddb/sql/``
