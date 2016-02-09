@@ -8,7 +8,7 @@ To enable LDAP in your FreeRADIUS server, you can:
 
 # LDAP ATTRIBUTES
 
-The mapping between RADIUS [[attributes]] and [[LDAP]] attributes is in raddb/ldap.attrmap. You can edit that file and add any new mapping that you may need. The LDAP-schema file is located in doc/RADIUS-LDAPv3.schema. Before adding any radius attributes the ldap server schema should be updated.
+In version 2, the mapping between RADIUS [[attributes]] and [[LDAP]] attributes is in raddb/ldap.attrmap. You can edit that file and add any new mapping that you may need. The LDAP-schema file is located in doc/RADIUS-LDAPv3.schema. Before adding any radius attributes the ldap server schema should be updated.
 
 All ldap entries containing radius attributes should contain at least "objectclass: radiusprofile"
 
@@ -17,168 +17,12 @@ radiusCheckItem and radiusReplyItem are special. They allow the administrator to
  ldap-attribute: radius-attribute operator value
 </pre>
 
+The version 3 attribute mapping is in the module configuration file `raddb/mods-available/ldap`
+
 For Example:
 <pre>
  radiusReplyItem: Cisco-AVPair := "ip:addr-pool=dialin_pool"
 </pre>
-
-## CONFIGURATION
-
-The following setup controls the rlm_ldap module.
-
-<pre>
-	# Lightweight Directory Access Protocol (LDAP)
-	#  
-	#  This module definition allows you to use LDAP for
-	#  authorization and authentication.
-	#
-	#  See doc/rlm_ldap for description of configuration options 
-	#  and sample authorize{} and authenticate{} blocks 
-	#
-	#  However, LDAP can be used for authentication ONLY when the
-	#  Access-Request packet contains a clear-text User-Password
-	#  attribute.  LDAP authentication will NOT work for any other
-	#  authentication method.
-	#
-	#  This means that LDAP servers don't understand EAP.  If you
-	#  force "Auth-Type = LDAP", and then send the server a
-	#  request containing EAP authentication, then authentication
-	#  WILL NOT WORK.
-	#
-	#  The solution is to use the default configuration, which does
-	#  work.
-	#
-	#  Setting "Auth-Type = LDAP" is ALMOST ALWAYS WRONG.  We
-	#  really can't emphasize this enough.
-	#	
-	ldap {
-		server = "ldap.your.domain"
-		#identity = "cn=admin,o=My Org,c=UA"
-		#password = mypass
-		basedn = "o=My Org,c=UA"
-		filter = "(uid=%{Stripped-User-Name:-%{User-Name}})"
-		#base_filter = "(objectclass=radiusprofile)"
-
-		#  How many connections to keep open to the LDAP server.
-		#  This saves time over opening a new LDAP socket for
-		#  every authentication request.
-		ldap_connections_number = 5
-
-		timeout = 4
-		timelimit = 3
-		net_timeout = 1
-
-		#
-		#  This subsection configures the tls related items
-		#  that control how FreeRADIUS connects to an LDAP
-		#  server.  It contains all of the "tls_*" configuration
-		#  entries used in older versions of FreeRADIUS.  Those
-		#  configuration entries can still be used, but we recommend
-		#  using these.
-		#
-		tls {
-			# Set this to 'yes' to use TLS encrypted connections
-			# to the LDAP database by using the StartTLS extended
-			# operation.
-			#			
-			# The StartTLS operation is supposed to be
-			# used with normal ldap connections instead of
-			# using ldaps (port 689) connections
-			start_tls = no
-
-			# cacertfile	= /path/to/cacert.pem
-			# cacertdir		= /path/to/ca/dir/
-			# certfile		= /path/to/radius.crt
-			# keyfile		= /path/to/radius.key
-			# randfile		= /path/to/rnd
-			# require_cert	= "demand"
-		}
-
-		# default_profile = "cn=radprofile,ou=dialup,o=My Org,c=UA"
-		# profile_attribute = "radiusProfileDn"
-		# access_attr = "dialupAccess"
-
-		# Mapping of RADIUS dictionary attributes to LDAP
-		# directory attributes.
-		dictionary_mapping = ${raddbdir}/ldap.attrmap
-
-		#  Set password_attribute = nspmPassword to get the
-		#  user's password from a Novell eDirectory
-		#  backend. This will work ONLY IF FreeRADIUS has been
-		#  built with the --with-edir configure option.
-		#
-		# password_attribute = userPassword
-
-		#  As of 1.1.0, the LDAP module will auto-discover
-		#  the password headers (which are non-standard).
-		#  It will use the following table to map passwords
-		#  to RADIUS attributes.  The PAP module (see above)
-		#  can then automatically determine the hashing
-		#  method to use to authenticate the user.
-		#
-		#	Header		Attribute
-		#	------		---------
-		#	{clear}		User-Password
-		#	{cleartext}	User-Password
-		#	{md5}		MD5-Password
-		#	{smd5}		SMD5-Password
-		#	{crypt}		Crypt-Password
-		#	{sha}		SHA-Password
-		#	{ssha}		SSHA-Password
-		#	{nt}		NT-Password
-		#	{ns-mta-md5}	NS-MTA-MD5-Password
-		#		
-		#
-		#  The headers are compared in a case-insensitive manner.
-		#  The format of the password in LDAP (base 64-encoded, hex,
-		#  clear-text, whatever) is not that important.  The PAP
-		#  module will figure it out.
-		#
-		#  The default for "auto_header" is "no", to enable backwards
-		#  compatibility with the "password_header" directive,
-		#  which is now deprecated.  If this is set to "yes",
-		#  then the above table will be used, and the
-		#  "password_header" directive will be ignored.
-
-		#auto_header = yes
-
-		#  Un-comment the following to disable Novell
-		#  eDirectory account policy check and intruder
-		#  detection. This will work *only if* FreeRADIUS is
-		#  configured to build with --with-edir option.
-		#
-		#edir_account_policy_check = no
-
-		#
-		#  Group membership checking.  Disabled by default.
-		#
-		# groupname_attribute = cn
-		# groupmembership_filter = "(|(&(objectClass=GroupOfNames)(member=%{control:Ldap-UserDn}))(&(objectClass=GroupOfUniqueNames)(uniquemember=%{control:Ldap-UserDn})))"
-		# groupmembership_attribute = radiusGroupName
-
-		# compare_check_items = yes
-		# do_xlat = yes
-		# access_attr_used_for_allow = yes
-
-		#
-		#  By default, if the packet contains a User-Password,
-		#  and no other module is configured to handle the
-		#  authentication, the LDAP module sets itself to do
-		#  LDAP bind for authentication.
-		#
-		#  You can disable this behavior by setting the following
-		#  configuration entry to "no".
-		#
-		#  allowed values: {no, yes}
-		# set_auth_type = yes
-	}
-</pre>
-
-The **identity** and **password** values are used for the initial search to find the user's DN in the directory. If not set, the searches will be anonymous and may not work against various LDAP servers.
-
-Also pay special attention to the **filter** value; it is used to find the user in the directory and WILL change across different LDAP systems. For example, the default filter "(uid=%{Stripped-User-Name:-%{User-Name}})" will not return any results against a Windows 2008 R2 Active Directory, as "uid" is not a valid attribute.  The search filter should instead use another attribute, like sAMAccountName, the resulting filter being "(sAMAccountName=%{Stripped-User-Name:-%{User-Name}})"
-
-**NOTE**: As LDAP is case insensitive, you should probably also set "lower_user = yes" and "lower_time = before" in main section of radiusd.conf, to get limits on simultaneous logins working correctly. Otherwise, users will be able get large number of sessions, capitalizing parts of their login names.</p>
 
 ### LDAP Module Messages
 
