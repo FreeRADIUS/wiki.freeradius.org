@@ -520,6 +520,27 @@ fields provide the necessary values.
 .. _dict_attrbyname: http://doc.freeradius.org/libradius_8h.html#af151b8b727f666c067ac9f0c68da6148
 .. _DICT_ATTR: http://doc.freeradius.org/libradius_8h.html#structdict__attr
 
+Accessing RADIUS client additional attributes
+-----------------------------------------
+Configuration for a RADIUS client defined in clients.conf can hold arbitrary-named additional attributes. These
+attributes may be used for various reasons, for example, to specify client's group name.
+These additional attributes are accessible though XLAT expansion in radiusd.conf (``"%{client:...}"``). C module
+can access these attributes using:
+```c
+CONF_PAIR *mycp;
+const char *value;
+mycp = cf_pair_find(request->client->cs, "group");
+value = cf_pair_value(mycp);
+```
+It extracts value of ``group`` attribute defined as::
+
+  client TESTCLIENT {
+   ipv4addr       = 10.0.0.2
+   secret         = mysupersecret
+   nastype        = other
+   group          = "mygroup"
+  } 
+
 Adding a reply attribute
 ------------------------
 The following shows how to add a reply attribute (one that will be returned to the NAS).
