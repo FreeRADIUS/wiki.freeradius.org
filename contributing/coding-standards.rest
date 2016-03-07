@@ -13,8 +13,8 @@ Function documentation should be doxygen style.  Below is an example of doxygen 
  * @param out Where to write the parsed ip address.
  * @param value to parse.
  * @param inlen Length of value, if value is \0 terminated inlen may be -1.
- * @param resolve If true and value doesn't look like an IP address, try and resolve value as a
- *	hostname.
+ * @param resolve If true and value doesn't look like an IP address, try and resolve value as
+ *	a hostname.
  * @return
  *	- 0 if ip address was parsed successfully.
  *	- -1 on failure.
