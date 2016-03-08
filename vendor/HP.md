@@ -504,23 +504,23 @@ aaa accounting update periodic 15
 ### HP A5500 - Comware 5.20 and 7.
 
 **Switch side config:**
-
+```text
 system-view
-!#### Configure the RADIUS Scheme ####
+! Configure the RADIUS Scheme!
 radius scheme freeradius-scheme
  server-type extended
  primary authentication <primary_radius_server_ip>
  primary accounting <primary_radius_server_ip>
-_!# Optional: If Secondary RADIUS Server is planned and operational_
+_! Optional: If Secondary RADIUS Server is planned and operational_
 _ !secondary authentication <secondary_radius_server_ip>
  !secondary accounting <secondary_radius_server_ip>_
  key authentication <radius_key>
  key accounting <radius_key>
  user-name-format without-domain
-!# Note: This is the source IP connecting to the RADIUS Server(s)
+! Note: This is the source IP connecting to the RADIUS Server(s)
  nas-ip <network_device_management_ip like a loopback>
 !
-!#### Configure the Domain ####
+! Configure the Domain!
 domain freeradius-domain
  authentication login radius-scheme freeradius-scheme
  authorization login radius-scheme  freeradius-scheme
@@ -530,31 +530,36 @@ domain freeradius-domain
  idle-cut disable
  self-service-url disable
 !
-!#### Apply scheme to the remote access terminals
+! Apply scheme to the remote access terminals
 
 user-interface vty 0 15
  undo user privilege level 
  authentication-mode scheme
 !
-!# WARNING: Ensure RADIUS server is working properly prior activating this!
+! WARNING: Ensure RADIUS server is working properly prior activating this!
 domain default enable radius-domain
+```
 
 **Server-side setup:**
-
+```text
 client <network_device_management_ip> {
 secret = <radius_key>
 nastype = cisco
 shortname = <network_device_name>
 }
+```
 
-**User-configuration, set on user or group.**
+```text
+**User/group attribute configuration**
 netadmin Cleartext-Password := "netadmin"
 Service-Type = NAS-Prompt-User,
 RADIUS Attribute between 0-3, 0 visitor, 1 monitor, 2 system, 3 manager.
 Huawei-Exec-Privilege = "3",
-Login-Service 50 is for SSH, Login-Service 0 for Telnet, but not necessary to define.
-Login-Service = 50
+!Login-Service 50 is for SSH, Login-Service 0 for Telnet, but works without defining this
+!Login-Service = 50
+```
 
+```text
 **If running Comware 7**
 Still on user/group attribute settings
 netadmin Cleartext-Password := "netadmin"
@@ -563,7 +568,7 @@ netadmin Cleartext-Password := "netadmin"
     Huawei-Exec-Privilege = "3",
     Login-Service = 50,
     Cisco-AVPair = "shell:roles=\"network-admin\""
-
+```
 
 ### Hints and tips
 * If dual authentication is used with different logoff-period timer values, timer behaviour is unpredictable.
