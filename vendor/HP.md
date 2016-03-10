@@ -553,7 +553,7 @@ shortname = <network_device_name>
 **User/group attribute configuration**
 netadmin Cleartext-Password := "netadmin"
 Service-Type = NAS-Prompt-User,
-!RADIUS Attribute between 0-3, 0 visitor, 1 monitor, 2 system, 3 manager.
+!NOTE: RADIUS Attribute between 0-3, 0 visitor, 1 monitor, 2 system, 3 manager.
 Huawei-Exec-Privilege = "3",
 !Login-Service 50 is for SSH, Login-Service 0 for Telnet, but works without defining this
 !Login-Service = 50
