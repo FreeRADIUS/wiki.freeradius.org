@@ -1,4 +1,4 @@
-This article regards setting up freeradius auth on Brocade/Foundry hardware. Below example is on a MLX4 Netiron running OS Version 5.6.0T165.
+This article regards setting up freeradius auth on Brocade/Foundry hardware. Below example is on a MLX4 Netiron running OS Version 5.6.0T165. This procedure should be similar for most Brocade/Foundry close to 5.X version.
 
 **Switch side config:**
 ```text
