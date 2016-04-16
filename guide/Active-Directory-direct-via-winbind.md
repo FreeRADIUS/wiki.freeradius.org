@@ -55,8 +55,13 @@ Compiling and installing Samba
 If Samba 4.2.1 or greater has been released then either download
 the official tarball, or install distribution packages.
 
+Instructions for building Samba packages for Debian Jessie can be found
+on the [[Debian package page|Debian#building-debian-samba-packages-with-threaded-libwbclient-support]].
+
 To compile Samba 4.2 and apply the correct patches use the steps
-below:
+below. Alternatively, download the Samba source tarball and apply
+[[the libwbclient-ctx.patch file|https://gist.github.com/mcnewton/71865fc18215c740b084]]. The patches
+may apply to versions of Samba older than 4.2.0, but will not apply to Samba 3.
 
 <pre>
 git clone git://git.samba.org/samba.git

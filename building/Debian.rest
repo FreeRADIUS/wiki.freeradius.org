@@ -36,7 +36,56 @@ To install up-to-date FreeRADIUS 2.2.x packages on Debian stable systems, use th
 
 Add whichever other FR package you are using to the list in the same format.
 
-See also
-----------
 
-* [[How to build Debian packages of FreeRADIUS|Build#Building Debian packages]]
+Building Debian Samba packages with threaded libwbclient support
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Using the new FreeRADIUS 3 winbind method to contact Active Directory, rather than using ntlm_auth, requires an update to Samba. This has been available since Samba 4.2.1, but the version in Debian Jessie is only 4.1.17. These instructions for building *Samba* will add the required functionality to use this feature in FreeRADIUS versions 3.0.8 and above.
+
+These instructions have been tested with Debian's samba version 2:4.1.17+dfsg-2+deb8u2.
+
+First, download the two required [[patch and symbol files|https://gist.github.com/mcnewton/71865fc18215c740b084]] and save them in /tmp.
+
+Ensure you have source URIs in your /etc/apt/sources.list file, and download the Debian Samba package source:
+::
+
+    mkdir samba
+    cd samba
+    apt-get source samba
+
+Install the required build dependencies:
+::
+
+    sudo apt-get install build-essential
+    sudo apt-get build-dep samba
+
+
+Apply the downloaded libwbclient-ctx patch:
+::
+
+    cd samba-4.1.17+dfsg
+    quilt import /tmp/libwbclient-ctx.patch
+    quilt push
+
+Install the new symbols file, which lists symbols in each library:
+::
+
+    cp /tmp/libwbclient0.symbols debian/libwbclient0.symbols
+
+Set the new package version:
+::
+
+    dch -l wbclient "add libwbclient ctx patch"
+
+Build new Samba packages. On machines with multiple cores use the -j option with the number of available cores to speed up the build process. This process may take half an hour or more.
+::
+
+    debuild -us -uc -rfakeroot -j4
+
+Finally install the libwbclient packages that were created.
+::
+
+    cd ..
+    dpkg -i libwbclient0_*.deb libwbclient-dev_*.deb
+
+When this process is complete, build and install FreeRADIUS with the standard [[instructions above|Debian#building-debian-packages]]. If the FreeRADIUS packages are used on a different machine than they are built on, remember to also copy over and install the new libwbclient0 package as well.
