@@ -1,24 +1,33 @@
 NTLM Auth (Active Directory) with PAP
-=========================
-This guide assumes you have already have ntlm_auth configured correctly and working.  If you haven't and need instructions on setting it up, please follow the guide [[here|http://deployingradius.com/documents/configuration/active_directory.html]]  . 
+=====================================
 
-FreeRADIUS 2.1.11 and later
----------------------------
-1. Edit 'raddb/modules/ntlm_auth' to contain the correct path and domain
-2. Add the following to 'raddb/policy.conf'::
+This guide assumes you have already have ntlm_auth configured correctly and
+working. If you haven't and need instructions on setting it up, please follow
+the [[deployingradius guide|http://deployingradius.com/documents/configuration/active_directory.html]]. 
 
-    policy {
-        # Give the ntlm_auth exec module an "authorize" method that sets Auth-Type to itself
-        # but only if it's a valid PAP request, and Auth-Type is not already set to something
-        ntlm_auth.authorize {
-            if (!control:Auth-Type && User-Password) {
-                update control {
-                   Auth-Type := ntlm_auth
-                }
+
+FreeRADIUS 3.x
+--------------
+
+1. Edit ``raddb/mods-available/ntlm_auth`` to contain the correct path and domain;
+
+2. Create a symlink ``raddb/mods-enabled/ntlm_auth`` to
+   ``../mods-available/ntlm_auth`` to enable the new module configuration;
+
+3. Create a new policy file, ``raddb/policy.d/ntlm_auth``::
+
+    # Give the ntlm_auth exec module an "authorize" method that sets Auth-Type
+    # to itself but only if it's a valid PAP request, and Auth-Type is not
+    # already set to something
+    ntlm_auth.authorize {
+        if (!control:Auth-Type && User-Password) {
+            update control {
+                Auth-Type := ntlm_auth
             }
         }
     }
-3. Add the following to your outer server ('raddb/sites-enabled/default' by default)::
+
+4. Add the following to the outer server in ``raddb/sites-enabled/default``::
 
     authorize {
         ...
@@ -31,16 +40,58 @@ FreeRADIUS 2.1.11 and later
         }
         ...
     }
-4. Comment out the pap module in the ``authorize {}`` section of your outer server
+
+5. Comment out the ``pap`` module in the `authorize {}` section of your outer server.
+
+
+FreeRADIUS 2.1.11 and later
+---------------------------
+
+1. Edit ``raddb/modules/ntlm_auth`` to contain the correct path and domain;
+
+2. Add the following to ``raddb/policy.conf``::
+
+    policy {
+	# Give the ntlm_auth exec module an "authorize" method that sets
+	# Auth-Type to itself but only if it's a valid PAP request, and
+	# Auth-Type is not already set to something
+        ntlm_auth.authorize {
+            if (!control:Auth-Type && User-Password) {
+                update control {
+                   Auth-Type := ntlm_auth
+                }
+            }
+        }
+    }
+
+3. Add the following to your outer server (``raddb/sites-enabled/default`` by default)::
+
+    authorize {
+        ...
+        ntlm_auth
+    }
+    
+    authenticate {
+        Auth-Type ntlm_auth {
+            ntlm_auth
+        }
+        ...
+    }
+
+4. Comment out the ``pap`` module in the `authorize {}` section of your outer server
+
 
 FreeRADIUS 2.1.10 and earlier
 -----------------------------
+
 Use **one** of the methods listed below
 
 Unlang-based
 ~~~~~~~~~~~~
+
 1. Edit 'raddb/modules/ntlm_auth' to contain the correct path and domain
-2. Add the following to your outer server ('raddb/sites-enabled/default' by default)::
+
+2. Add the following to your outer server (``raddb/sites-enabled/default`` by default)::
 
     authorize {
         ...
@@ -60,7 +111,9 @@ Unlang-based
 
 Using the PAP module
 ~~~~~~~~~~~~~~~~~~~~
+
 1. Edit 'raddb/modules/ntlm_auth' to contain the correct path and domain
+
 2. Add the following to your outer server ('raddb/sites-enabled/default' by default)::
 
     authorize {
