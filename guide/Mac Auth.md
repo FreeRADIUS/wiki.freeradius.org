@@ -1,18 +1,22 @@
 ## Plain Mac-Auth
 
-This example assumes the server is only performing macauth. It checks MAC addresses against a [[users]] style file
+This first example assumes the server is only performing mac-auth.
+It checks MAC addresses against a [[users]] style file.
 
 ### raddb/policy.conf
 
-NAS usually send the MAC address in the Calling-Station-ID attribute. There are several common formats:
+Most NASes usually send the MAC address in the Calling-Station-ID attribute.
+There are several common formats:
 
  * 00:11:22:33:44:55
  * 00-11-22-33-44-55
  * 0011.2233.4455
- * upper-case hex
- * lower-case hex
 
-It is sensible to re-format these into a single format at the server.
+Again, depending on the NAS, these can be either upper-case or lower-case hex.
+
+It is sensible to re-format these into a single format at the server. The
+following policy is available in FreeRADIUS version 3 onwards, in
+`raddb/policy.d/canonicalization`.
 
 <pre>
 #
@@ -30,7 +34,9 @@ rewrite_calling_station_id {
 }
 </pre>
 
-### raddb/modules/file
+### raddb/mods-available/files
+
+Create a new instance of the files module to read a new file of permitted MAC addresses.
 
 <pre>
 files authorized_macs {
@@ -51,31 +57,38 @@ files authorized_macs {
 
 ### raddb/authorized_macs
 
+This is the list of permitted MAC addresses, as read by the new files configuration above.
+
 <pre>
 00-11-22-33-44-55
-  Reply-Message = "Device with MAC Address %{Calling-Station-Id} authorized for network access"
+        Reply-Message = "Device with MAC Address %{Calling-Station-Id} authorized for network access"
 </pre>
 
 ### raddb/sites-available/default
 
+Finally, call the canonicalisation policy and new files module from the authorize section:
+
 <pre>
 authorize {
-  preprocess
+        preprocess
 
-  # if cleaning up the Calling-Station-Id...
-  rewrite_calling_station_id
+        # If cleaning up the Calling-Station-Id...
+        rewrite_calling_station_id
 
-  # now check against the authorized_macs file
-  authorized_macs
-  if (!ok) {
-    reject
-  }
-  else {
-    # accept
-    update control {
-      Auth-Type := Accept
-    }
-  }
+        # Now check against the authorized_macs file
+        authorized_macs
+
+        if (!ok) {
+                # No match was found, so reject
+                reject
+        }
+        else {
+                # The MAC address was found, so update Auth-Type
+                # to accept this auth.
+                update control {
+                        Auth-Type := Accept
+                }
+        }
 }
 </pre>
 
