@@ -16,7 +16,7 @@ Again, depending on the NAS, these can be either upper-case or lower-case hex.
 
 It is sensible to re-format these into a single format at the server. The
 following policy is available in FreeRADIUS version 3 onwards, in
-`raddb/policy.d/canonicalization`.
+`[[raddb/policy.d/canonicalization|https://github.com/FreeRADIUS/freeradius-server/blob/v3.0.x/raddb/policy.d/canonicalization`.
 
 <pre>
 #
@@ -94,97 +94,85 @@ authorize {
 
 ## Mac-Auth or 802.1x
 
-This example shows how to mix 802.1x and macauth. The example does the following:
+This example shows how to mix 802.1x and mac-auth. The example does the following:
 
- 1. If not using 802.1x, mac address must be known
- 2. If using 802.1x, anyone with valid credentials can login (no mac address restrictions)
+ 1. If not using 802.1x, mac address must be known;
+ 2. If using 802.1x, anyone with valid credentials can login (no mac address restrictions).
 
-### raddb/policy.conf
-
-As per example 1
-
-### raddb/modules/file
-
-As per example 1 
-
-### raddb/authorized_macs
-
-As per example 1
+The files `raddb/policy.conf`, `raddb/mods-available/files` and `raddb/authorized_macs`
+are the same as the plain mac-auth examples above.
 
 ### raddb/sites-available/default
 
 <pre>
 authorize {
-  preprocess
+        preprocess
 
-  # if cleaning up the Calling-Station-Id...
-  rewrite_calling_station_id
+        # If cleaning up the Calling-Station-Id...
+        rewrite_calling_station_id
 
-  # If this is NOT 802.1x, assume mac-auth
-  if (!EAP-Message) {
-    # now check against the authorized_macs file
-    authorized_macs
-    if (!ok) {
-      reject
-    }
-    else {
-      # accept
-      update control {
-        Auth-Type := Accept
-      }
-    }
-  }
-  else {
-    # normal FreeRadius virtual server config goes here e.g.
-    eap
-  }
+        # If this is NOT 802.1x, assume mac-auth. We check this by testing
+        # for the presence of the EAP-Message attribute in the request.
+        if (!EAP-Message) {
+                # Now check against the authorized_macs file
+                authorized_macs
+
+                if (!ok) {
+                        reject
+                }
+                else {
+                        # accept
+                        update control {
+                                Auth-Type := Accept
+                        }
+                }
+        }
+
+        else {
+                # Normal FreeRADIUS virtual server config goes here e.g.
+                eap
+        }
 }
 </pre>
 
 ## Mac-Auth and 802.1x 
 
-This example shows how to perform both 802.1x and macauth. The example does the following:
+This example shows how to perform both 802.1x and mac-auth. The example does the following:
 
  1. If not using 802.1x, mac address must be known
  2. If using 802.1x, mac address must be known and valid credential given
 
-### raddb/policy.conf
-
-As per example 1
-
-### raddb/modules/file
-
-As per example 1 
-
-### raddb/authorized_macs
-
-As per example 1
+The files `raddb/policy.conf`, `raddb/mods-available/files` and `raddb/authorized_macs`
+are the same as the plain mac-auth examples above.
 
 ### raddb/sites-available/default
 
 <pre>
 authorize {
-  preprocess
+        preprocess
 
-  # if cleaning up the Calling-Station-Id...
-  rewrite_calling_station_id
+        # If cleaning up the Calling-Station-Id...
+        rewrite_calling_station_id
 
-  # always check against the authorized_macs file first
-  authorized_macs
-  if (!ok) {
-    reject
-  }
-  # If this is NOT 802.1x, mac-auth
-  if (!EAP-Message) {
-    # mac has already been checked, accept
-    update control {
-      Auth-Type := Accept
-    }
-  }
-  else {
-    # normal FreeRadius virtual server config goes here e.g.
-    eap
-  }
+        # always check against the authorized_macs file first
+        authorized_macs
+
+        if (!ok) {
+		# Reject if the MAC address was not permitted.
+                reject
+        }
+
+        # If this is NOT 802.1x, mac-auth
+        if (!EAP-Message) {
+                # MAC address has already been checked, so accept
+                update control {
+                        Auth-Type := Accept
+                }
+        }
+        else {
+                # Normal FreeRADIUS virtual server config goes here e.g.
+                eap
+        }
 }
 </pre>
 
