@@ -1,7 +1,7 @@
 NTLM Auth (Active Directory) with PAP
 =====================================
 
-This guide assumes you have already have ntlm_auth configured correctly and
+This guide assumes you have already have ``ntlm_auth`` configured correctly and
 working. If you haven't and need instructions on setting it up, please follow
 the [[deployingradius guide|http://deployingradius.com/documents/configuration/active_directory.html]]. 
 
@@ -87,7 +87,7 @@ FreeRADIUS 2.1.10 and earlier
 Use **one** of the methods listed below
 
 Unlang-based
-~~~~~~~~~~~~
+````````````
 
 1. Edit 'raddb/modules/ntlm_auth' to contain the correct path and domain
 
@@ -110,7 +110,7 @@ Unlang-based
     }
 
 Using the PAP module
-~~~~~~~~~~~~~~~~~~~~
+````````````````````
 
 1. Edit 'raddb/modules/ntlm_auth' to contain the correct path and domain
 
