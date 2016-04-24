@@ -5,10 +5,10 @@ Debian Packages
 
 To install up-to-date FreeRADIUS 2.2.x packages on Debian stable systems, use the backports repository. For example:
 
-* Add a [[backports mirror|http://backports.debian.org/Mirrors/]] to ``/etc/apt/sources.list`` like this:
+* Add a [[backports mirror|http://ftp.de.debian.org/debian/README.mirrors.html]] to ``/etc/apt/sources.list`` like this:
 ::
 
- deb http://backports.debian.org/debian-backports wheezy-backports main
+ deb http://ftp.us.debian.org/debian/ wheezy-backports main
 
 * Update the package indices:
 ::
