@@ -1,6 +1,200 @@
+
+/* Variables */
+/**
+ * Colours
+ */
+ /*
+$text-dark: #333333;
+$text-mid: #666666;
+$text-light: #A3A3A3;
+$text-white: #FFFFFF;
+$text-link: #01A5E0;
+$text-alert: #E53528;
+
+$text-nav: #505f66;
+
+$accent-blue: #01A5E0;
+$accent-light-blue: #67c9ec;
+$accent-dark-blue: #093448;
+$accent-yellow: #F4D642;
+$accent-green: #39B790;
+$accent-red: #E53528;
+$accent-orange: #E5772F;
+$accent-purple: #7056DB;
+$accent-grey: #B5C3C6;
+
+$block-dark: #051A24;
+$block-mid: #666666;
+$block-navy: $accent-dark-blue;
+$block-light: #FCFCFC;
+$block-hero: #F0FBFC;
+
+$stroke-light: #E1E7E8;
+*/
+/**
+ * Typography
+ */
+/*
+$h1Size: 36px;
+$h2Size: 28px;
+$h3Size: 28px;
+$h4Size: 21px;
+$h5Size: 14px;
+$h6Size: 14px;
+$bodyFontSize: 18px;
+$linkFontSize: 14px;
+$smallFontSize: 12px;
+*/
+
+/**
+ * Fonts
+ */
+
+@font-face {
+    font-family: 'FiraSans';
+    src: url('../fonts/firasans-bold.eot');
+    src: url('../fonts/firasans-bold.eot') format('embedded-opentype'),
+         url('../fonts/firasans-bold.woff2') format('woff2'),
+         url('../fonts/firasans-bold.woff') format('woff'),
+         url('../fonts/firasans-bold.ttf') format('truetype'),
+         url('../fonts/firasans-bold.svg#FirasansBold') format('svg');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'FiraSans';
+    src: url('../fonts/firaSans-bolditalic.eot');
+    src: url('../fonts/firasans-bolditalic.eot') format('embedded-opentype'),
+         url('../fonts/firasans-bolditalic.woff2') format('woff2'),
+         url('../fonts/firasans-bolditalic.woff') format('woff'),
+         url('../fonts/firasans-bolditalic.ttf') format('truetype'),
+         url('../fonts/firasans-bolditalic.svg#FiraSansBold') format('svg');
+    font-weight: 700;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'FiraSans';
+    src: url('../fonts/firasans-regular.eot');
+    src: url('../fonts/firasans-regular.eot') format('embedded-opentype'),
+         url('../fonts/firasans-regular.woff2') format('woff2'),
+         url('../fonts/firasans-regular.woff') format('woff'),
+         url('../fonts/firasans-regular.ttf') format('truetype'),
+         url('../fonts/firasans-regular.svg#FiraSansRegular') format('svg');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'FiraSans';
+    src: url('../fonts/firasans-italic.eot');
+    src: url('../fonts/firasans-italic.eot') format('embedded-opentype'),
+         url('../fonts/firasans-italic.woff2') format('woff2'),
+         url('../fonts/firasans-italic.woff') format('woff'),
+         url('../fonts/firasans-italic.ttf') format('truetype'),
+         url('../fonts/firasans-italic.svg#FiraSansBold') format('svg');
+    font-weight: 400;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Montserrat';
+    src: url('../fonts/montserrat-bold.eot');
+    src: url('../fonts/montserrat-bold.eot') format('embedded-opentype'),
+         url('../fonts/montserrat-bold.woff2') format('woff2'),
+         url('../fonts/montserrat-bold.woff') format('woff'),
+         url('../fonts/montserrat-bold.ttf') format('truetype'),
+         url('../fonts/montserrat-bold.svg#MontserratBold') format('svg');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Montserrat';
+    src: url('../fonts/montserrat-regular.eot');
+    src: url('../fonts/montserrat-regular.eot') format('embedded-opentype'),
+         url('../fonts/montserrat-regular.woff2') format('woff2'),
+         url('../fonts/montserrat-regular.woff') format('woff'),
+         url('../fonts/montserrat-regular.ttf') format('truetype'),
+         url('../fonts/montserrat-regular.svg#MontserratRegular') format('svg');
+    font-weight: 400;
+    font-style: normal;
+}
+
+body {
+    font-family: 'FiraSans';
+}
+
+a:link {
+    color: #01A5E0;
+}
+a:hover {
+    color: #093448;
+}
+
+.minibutton a {
+    border: none;
+    background: #01A5E0;
+    color: white;
+    text-shadow: none;
+    font-family: Montserrat;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 0.6em 1em 0.4em;
+    border-radius: 2px;
+}
+.minibutton a:hover, #search-submit:hover {
+    background: #67c9ec;
+    text-shadow: none;
+}
+#wiki-sidebar {
+    font-size: 1rem;
+}
+#wiki-toc-main, #wiki-sidebar {
+    border-radius: 0;
+    border: 1px solid #E1E7E8;
+    border-left: 5px solid #B5C3C6;
+    background: white;
+}
+#wiki-toc-main:hover, #wiki-sidebar:hover {
+    background: #FCFCFC;
+}
+.markdown-body h1, h1 {
+    font-family: 'FiraSans';
+    font-weight: bold;
+    padding-bottom: 30px;
+    font-size: 2.7em;
+}
 .markdown-body {
-    font-size: 1em;
-    line-height: 1.6;
+    font-size: 1.38em;
+    line-height: 1.4;
+}
+
+.markdown-body strong {
+    font-family: 'FiraSans';
+}
+
+.markdown-body h2, h2 {
+    font-size: 2.1em; /*28px*/
+    color: #333;
+    font-family: 'FiraSans';
+    font-weight: bold;
+    /*border-bottom-color: #E1E7E8;*/
+    border: none;
+}
+
+.markdown-body blockquote {
+    border-left: 6px solid #67c9ec;
+    padding-left: 15px;
+    font-style: iltalic;
+}
+.markdown-body pre {
+    border-radius: 0;
+    border: 1px solid #E1E7E8;
+    border-left: 5px solid #39B790;
+    background: #FCFCFC;
+    padding: 15px;
 }
 
 .compare .data tr td {
@@ -12,55 +206,61 @@
 }
 
 #gollum-editor #gollum-editor-function-bar #gollum-editor-format-selector label {
-        padding: 0 0.5em 0 0;
+    padding: 0 0.5em 0 0;
 }
 
 div#wiki-wrapper {
-        width: 1031px;
+    width: 1031px;
 }
+
 
 .toc-title {
-        color: black;
-        font-size: 24px;
-        font-weight: bold;
-
+    color: #333;
+    font-size: 2.1em; /*28px*/
+    font-family: 'FiraSans';
+    font-weight: bold;
+    border: none;
+    /*padding-bottom: 30px;*/
 }
-
+.toc {
+    background: transparent;
+}
 .toc ul li {
-        line-height: 1.75em;
-        font-size: 14px;
+    line-height: 1.75em;
+    font-size: 14px;
 }
 
 #logo {
-        padding-left: 2.5em;
-        padding-top: 0.9em;
-        padding-bottom: 0.5em;
+    padding-left: 2.5em;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    max-width: 200px;
 }
 
 #cust-header {
-        width: 100%;
-        margin: 0 auto;
-        background: transparent url('/w_images/header_bg.png') top center repeat-x;
-        height: 40px;
+    width: 100%;
+    margin: 0 auto;
+    background: #01A5E0;
+    height: 40px;
 }
 
 #cust-header h1 {
-        font-family: sans-serif;
-        padding: 1.1em 0 0 0;
-        height: 80px;
-        color: #eee;
-        font-size: 150%;
-        margin: 10px;
+    font-family: sans-serif;
+    padding: 1.1em 0 0 0;
+    height: 80px;
+    color: #eee;
+    font-size: 150%;
+    margin: 10px;
 }
 
 #cust-footer {
-        text-align: center;
-        margin: 10px;
-        font-weight: bold;
+    text-align: center;
+    margin: 10px;
+    font-weight: bold;
 }
 
 #cust-footer img {
-        padding-bottom: 0.3em
+    padding-bottom: 0.3em
 }
 
 /* @section user */
@@ -74,9 +274,20 @@ div#wiki-wrapper {
 
 /* Overide max width */
 @media all and (min-width: 940px) {
-  #wiki-wrapper {
-    max-width: 1031px;
-    padding-left:20px;
-    padding-right:20px;
-  }
+    #wiki-wrapper {
+        max-width: 1100px;
+        padding-left:30px;
+        padding-right:30px;
+    }
+    #head {
+        margin-bottom: 30px;
+        padding-bottom: 0;
+    }
+    #head h1 {
+        padding-bottom: 20px;
+        font-size: 2.7em;
+    }
+    #head ul.actions {
+        padding-top: 15px;
+    }
 }
