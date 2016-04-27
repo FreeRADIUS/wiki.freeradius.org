@@ -133,7 +133,7 @@ a:hover {
     color: #093448;
 }
 
-.minibutton a {
+.minibutton a, #gollum-dialog-dialog a.minibutton, #gollum-dialog-dialog a.minibutton:visited {
     border: none;
     background: #01A5E0;
     color: white;
@@ -144,7 +144,7 @@ a:hover {
     padding: 0.6em 1em 0.4em;
     border-radius: 2px;
 }
-.minibutton a:hover, #search-submit:hover {
+.minibutton a:hover, #search-submit:hover, #gollum-dialog-dialog a.minibutton:hover  {
     background: #67c9ec;
     text-shadow: none;
 }
@@ -187,7 +187,7 @@ a:hover {
 .markdown-body blockquote {
     border-left: 6px solid #67c9ec;
     padding-left: 15px;
-    font-style: iltalic;
+    font-style: italic;
 }
 .markdown-body pre {
     border-radius: 0;
@@ -202,7 +202,7 @@ a:hover {
 }
 
 #head #searchbar #searchbar-fauxtext {
-    height: 2em;
+    height: 2.2em;
 }
 
 #gollum-editor #gollum-editor-function-bar #gollum-editor-format-selector label {
@@ -271,7 +271,9 @@ div#wiki-wrapper {
     line-height: 2.0em;
     color: #999;
 }
-
+#gollum-dialog-dialog-inner {
+    background: white;
+}
 /* Overide max width */
 @media all and (min-width: 940px) {
     #wiki-wrapper {
