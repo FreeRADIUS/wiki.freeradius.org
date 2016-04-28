@@ -15,13 +15,13 @@ and if working with EAP:
 This should provide a solid foundation in RADIUS and EAP at a protocol level.
 
 How things work in RADIUS
-=========================
+-------------------------
 
 The client sends you a radius authentication request, you don't decide what's in the request, the client does.  The server doesn't decide what's in the request, the client does.  The client is 100% responsible for everything in the request.
 
 
 Picking an Auth-Type
-====================
+--------------------
 
 The radius server looks at the request and says:
 
@@ -52,7 +52,7 @@ If the module thinks it has a shot at authenticating the user it'll say:
 If the module doesn't see anything it recognizes, or knows it doesn't need to lookup anything, it does nothing.
 
 Authenticating a user - authenticate {}
-=======================================
+---------------------------------------
 
 At the end of authorize, the server will check if anything set the Auth-Type.
 
@@ -77,10 +77,10 @@ Lets suppose that the ldap module was listed in authorize it'll have run and che
 If so, it will have added the "known good" password to the request, so that another module in authenticate can use it.
 
 Insufficient information
-========================
+------------------------
 
 But WAIT! What if the client sends a MSCHAP request? What does the radius server say then?
-::
+
 >  Well that's a fine kettle of fish! 
 >  That client has really really tied my hands on this one!
 
