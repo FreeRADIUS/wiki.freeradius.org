@@ -26,6 +26,7 @@ deprecated in favour of unlang and interpreted language modules.
 Execs require that FreeRADIUS fork another process and incur all associated process startup 
 overhead each time an authentication or accounting request is received.  Interpreted language
 modules must martial/unmartial values to and from the server core.
+
 On a high volume server the overhead from either approach may become significant and impact
 response times.  To eliminate this overhead you may create your own compiled modules.
 These modules are linked against the core server libraries, and loaded it into the server at 
@@ -36,6 +37,7 @@ straight forward.  The module, however does have to be written in C.  If this id
 sound palatable, and performance has become a critical issue, you may wish to request the 
 development of the new module (via a feature request) on the `GitHub issue tracker
 <https://github.com/FreeRADIUS/freeradius-server/issues>`_.
+
 Alternatively, if the development of the module is required for a mission critical project,
 you may wish to sponsor its development.
 See the support tab on the http://www.freeradius.org site for more information.
