@@ -413,7 +413,6 @@ Either way, select « EAP-MSCHAP v2 » as authentication method. Click the « Co
 [[/1000000000000123000000ACD751931D.png]]
 
 Check if « Automatically use my Windows logon name and password (and domain if any) » is activated. Otherwise the user will be prompted to authenticate after Windows login.
-IX Self-signed certificates
 when using machine authentication, the following error might happen:
 ::
   ERROR: (4) eap_peap: TLS Alert read:fatal:unknown CA
@@ -422,11 +421,12 @@ when using machine authentication, the following error might happen:
   ERROR:  (4) eap: Failed Continuing EAP PEAP(25) session. EAP sub-module failed
 
 This is due to the fact that the FreeRadius server CA certificate was not "imported" correctly. Follow the following steps to import the CA server certificate into the local computer account:
-- open a new mmc (mmc.exe)
-- add "certificate (local computer)" to the console root 
-- import the CA certificate into the 'trusted CA root'. 
+:: 
+  - open a new mmc (mmc.exe)
+  - add "certificate (local computer)" to the console root 
+  - import the CA certificate into the 'trusted CA root'. 
 
-
+IX Self-signed certificates
 TLS and PEAP require both server and client certificates. To generate the requested certificates, it is recommended to use the script « CA.all » that comes with FreeRADIUS.
 CA.all uses the configuration of the openssl.cnf file. It is possible to replace the certificates later by those obtained from a real certification authority.
 
