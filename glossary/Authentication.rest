@@ -20,8 +20,8 @@ The following authentication types are some of the methods which are supported b
 * [[rlm_ldap|LDAP]] ([[PAP]] only)
 * [[rlm_pam|PAM]] ([[PAP]] only)
 * [[rlm_cram|CRAM]]
-* [[rlm_perl|Perl]] program
-* [[rlm_python|Python]] program
+* [[Perl|modules/Rlm_perl]] program
+* [[Python|modules/Rlm_python]] program
 * [[rlm_jradius|Java]] as a JRadius handler
 * [[SIP]] [[Digest]] ([[Cisco]] [[VoIP]] boxes, [http://www.iptel.org/ser/ SER])
 * A locally [[exec]]uted program. (like a CGI program.)
