@@ -33,7 +33,7 @@ Next up, you need to create the schema for your database. There is an SQL script
 '''Note:''' use a  more secure password than "radpass" in the above example
 
  cd /usr/share/doc/packages/freeradius/doc/examples/
- mysql -uroot -p radius < mysql.sql
+ mysql -uroot -p radius &lt; mysql.sql
 
 '''Note:''' CentOS/RHEL Schema Files Location:
 /etc/raddb/sql/mysql/schema.sql
@@ -42,11 +42,11 @@ Next up, you need to create the schema for your database. There is an SQL script
 Ubuntu schema files are not called mysql.sql, but schema.sql. The location is:
 /etc/freeradius/sql/mysql/
 
- mysql -u root -p radius < /etc/freeradius/sql/mysql/schema.sql
+ mysql -u root -p radius &lt; /etc/freeradius/sql/mysql/schema.sql
 
 You might to additionally create this table if you're managing your NASses with FreeRadius:
 
- mysql -u root -p radius < /etc/freeradius/sql/mysql/nas.sql
+ mysql -u root -p radius &lt; /etc/freeradius/sql/mysql/nas.sql
 
 ===Create PostgreSQL Database===
 
@@ -58,7 +58,7 @@ You might to additionally create this table if you're managing your NASses with 
 '''Note:''' choose a secure password when prompted for one by the ''createuser'' command.
 
  cd /usr/share/doc/packages/freeradius/doc/examples/
- psql -U radius radius < postgresql.sql
+ psql -U radius radius &lt; postgresql.sql
 
 ==Configuring FreeRadius to use SQL==
 
