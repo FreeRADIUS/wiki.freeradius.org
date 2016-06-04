@@ -1,6 +1,8 @@
 __NOTOC__
 ==Dialup Admin Web Administration Interface==
 
+The software is currently unmaintained, might not work using more recent PHP versions, and possibly has some security issues. Using this software is deprecated.
+
 The server includes [[dialup_admin]], a [http://www.php.net/ PHP4] based web administration interface for the server.
 Dialup Admin supports:
 * Users in LDAP database
