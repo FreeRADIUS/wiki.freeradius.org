@@ -15,10 +15,10 @@ pretty much a given in an Active Directory environment for user
 authentication (though this document does not go into the details
 of configuring EAP).
 
-The method given in this document is brand new (March 2015) and
-will currently require compiling code. It may still contain bugs.
-However, in testing performance has been shown to be greater than
-the existing methods to-date.
+_The method given in this document is new (March 2015) and may
+require compiling code and may also contain bugs. However, in
+testing, performance has been shown to be greater than other existing
+methods such as ntlm_auth._
 
 Other Active Directory authentication methods
 ---------------------------------------------
