@@ -55,8 +55,10 @@ Compiling and installing Samba
 If Samba 4.2.1 or greater has been released then either download
 the official tarball, or install distribution packages.
 
-Instructions for building Samba packages for Debian Jessie can be found
-on the [[Debian package page|Debian#building-debian-samba-packages-with-threaded-libwbclient-support]].
+Debian Jessie 8.4 now includes Samba 4.2.10. Instructions for
+building Samba packages for Debian Jessie can be found on the
+[[Debian package page|Debian#building-debian-samba-packages-with-threaded-libwbclient-support]]
+if needed.
 
 To compile Samba 4.2 and apply the correct patches use the steps
 below. Alternatively, download the Samba source tarball and apply
@@ -89,7 +91,7 @@ installed. You should be able to skip installing these packages by
 passing the --without-* options presented to you.
 
 For this example we will be installing into /opt/samba4.2. Using
--j on a multi-core machine will greatly speed up the compile.
+-j on a multi-core machine will greatly speed up the compile time.
 
 <pre>
 ./configure -C --prefix=/opt/samba4.2
