@@ -1,5 +1,6 @@
-# Introduction
+# Testing EAP-SIM and EAP-AKA
 
+## Introduction
 EAP-SIM/EAP-AKA and EAP-AKA' are very similar. The TLV and packet format are virtually identical.  The major differences are the pseudo random function used to generate sessions keys, and the format of the authentication vectors used.
 
 AKA also supports server authentication using the AUTN, a value sent from HLR -> AAA -> Supplicant, derived from the Ki and RAND value.
