@@ -11,7 +11,7 @@ This lets you run the entire EAP-SIM/EAP-AKA protcol against a smart card, with 
 
 It also lets you get SIM authentication vectors from the SIM card.  Unfortunately you can't get UMTS authentication vectors unless you have a valid AUTN for the SIM, and for that you need access to the HLR or a programmable SIM.  For testing AKA you may want to consider purchasing a [sysmocom](http://shop.sysmocom.de) sim, which allows you to set the Ki, and algorithms used.
 
-The SCM SCR3310 CCID reader and the mechanical adapter they sell, both work really well too.
+The SCM SCR3310 CCID reader and the mechanical adapter they sell both work very nicely (at least on OSX).
 
 ## PS/CS
 
