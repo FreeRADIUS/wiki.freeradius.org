@@ -26,7 +26,7 @@ Despite being able to theoretically use EAP-SIM with any SIM card in a local env
 
 Yes you *COULD* extract multiple authentication vectors from a SIM as some sort of onboarding process, and you *COULD* store those vectors, and then authenticate the SIM card locally on your wireless network.  But that's going to be quite a small pool of vectors, and you really shouldn't be repeating vectors as it can compromise the protocol.
 
-If you're intent on using EAP-SIM/EAP-AKA to provide local authentication, you should get some programmable SIM card, for which you know the Ki, and distribute those to your users.  On the GSM/UMTS side they'll be useless (unless you also happen to be running a cell service), but it's conceivable that you could put them in company iPads (if the user doesn't want to use the 3G/4G radio).
+If you're intent on using EAP-SIM/EAP-AKA to provide local authentication, you should get some programmable SIM cards, for which you know (or can set) the Ki, and distribute those to your users.  On the GSM/UMTS side they'll be useless (unless you also happen to be running a cell service), but it's conceivable that you could put them in company iPads (if the user doesn't want to use the 3G/4G radio).
 
 Using EAP-SIM/EAP-AKA with a HLR either via M3UA/SUA (Sigtran) or Diameter is the way to go if you want to perform wireless handoff. In that scenario instead of storing vectors, you call out to the HLR with the SIM's IMSI number, the HLR passes this to the AuC, and hands authentication vectors, which are passed back to the AAA server.
 
