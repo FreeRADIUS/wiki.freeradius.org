@@ -54,3 +54,23 @@ Documentation and files for creation of certificates are in :
 
 ### Installing from source :
 
+Installing from source can be daunting for people who never did it but as long as you read the output of the building process, it should tell you what went wrong or what is missing.
+
+First step is to get the source. 2 places that currently offer the material :
+FTP from freeradius.org via : [http://freeradius.org/download.html](http://freeradius.org/download.html)
+HTTP download from GitHub : [https://github.com/FreeRADIUS/freeradius-server](https://github.com/FreeRADIUS/freeradius-server)
+On GitHub select the branch you wish to install and press _clone or download_.
+
+
+     tar zxf freeradius-server-W.X.Y.tar.gz
+
+ 
+     cd freeradius-server-2.X.Y
+
+ 
+     fakeroot dpkg-buildpackage -b -uc	 
+
+ 
+     sudo dpkg -i ../*freeradius*_2.X.Y-*_*.deb
+
+ 
