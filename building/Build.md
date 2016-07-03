@@ -79,7 +79,7 @@ Building Ubuntu packages
 
 If you're using Ubuntu, you should first check whether your desired version of FreeRADIUS is available in the Ubuntu package repositories, because that will save you the trouble of building packages yourself. As of March 2016, the Ubuntu repositories contain only version 2 of the server, which is end-of-life. Please see: [[http://packages.ubuntu.com/freeradius]].
 
-For build instructions, please follow the instructions [[building Ubuntu Packages|#Building-Ubuntu-packages-from-source]] or follow the same directions as [[building Debian packages|Debian#building-debian-packages]] on the main Debian page.
+For build instructions, please follow the instructions [[building Ubuntu Packages|building/Building-Ubuntu-packages-from-source]] or follow the same directions as [[building Debian packages|Debian#building-debian-packages]] on the main Debian page.
 
 
 Building RedHat packages
