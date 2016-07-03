@@ -57,8 +57,8 @@ Documentation and files for creation of certificates are in :
 Installing from source can be daunting for people who never did it but as long as you read the output of the building process, it should tell you what went wrong or what is missing.
 
 First step is to get the source. 2 places that currently offer the material :
-FTP from freeradius.org via : [http://freeradius.org/download.html](http://freeradius.org/download.html)
-HTTP download from GitHub : [https://github.com/FreeRADIUS/freeradius-server](https://github.com/FreeRADIUS/freeradius-server)
+* freeradius.org : [http://freeradius.org/download.html](http://freeradius.org/download.html)
+* GitHub : [https://github.com/FreeRADIUS/freeradius-server](https://github.com/FreeRADIUS/freeradius-server)
 On GitHub select the branch you wish to install and press _clone or download_.
 
 Make sure unzip or any other utility that can extract the zip is installed. If not :
