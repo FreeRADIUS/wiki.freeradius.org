@@ -65,18 +65,18 @@ Make sure unzip or any other utility that can extract the zip is installed. If n
 
      sudo apt-get install unzip
 
-Here I download and extract the source to a temporary directory: (I'm using here a directory in my home folder.)
+Here I download and extract the source to a temporary directory: (I'm using here a directory in my home folder.) Make sure the filename is the same as your downloaded one.
 
      cd /home/myusername/
      mkdir freeradius
      cd freeradius
      wget https://github.com/FreeRADIUS/freeradius-server/archive/v3.0.x.zip
 
-     tar zxf freeradius-server-W.X.Y.tar.gz
+     unzip v3.0.x.zip
 
 or (depending on type of archive)
 
-      unzip v3.0.x.zip
+      tar zxf freeradius-server-W.X.Y.tar.gz
 
 Now we need to go into the directory containing the source.
 
@@ -92,7 +92,7 @@ Make sure fakeroot and build tools are installed (read the error message!!):
 
      sudo apt-get install fakeroot dpkg-dev quilt debhelper
 
-In the file _debian/rules_ we might need to make some changes depending on other packages we might not have installed or support that we do (not) need. In my own v2 install there is no iodbc database support for instance as I'm using ldap as a database backend. If I build it will give an error and fail to build because of that. You can modify your install in the following way to prevent the error.
+In the file _debian/rules_ we might need to make some changes depending on other packages we might not have installed or support that we do (not) need. In one of my own installs, there was no iodbc database support required as I'm using ldap as a database backend. If I build it will give an error and fail to build because of that. You can modify your install in the following way to prevent the error.
 
      pico debian/rules
 
@@ -108,7 +108,7 @@ You can remove and add any module that you (do not) require this way.
 
 It might also error with more unmet dependencies to be able to build. When you run the command to build the package but it errors out with a dependencies/conflict abortion, install them as well.
 
-In my Ubuntu 16.04 install that meant :
+In my clean Ubuntu 16.04 install that meant :
 
      sudo apt-get install libcurl4-openssl-dev libcap-dev libgdbm-dev libiodbc2-dev libjson0-dev libkrb5-dev libldap2-dev libpam0g-dev libpcap-dev libperl-dev libmysqlclient-dev libpq-dev libreadline-dev libsasl2-dev libsqlite3-dev libssl-dev libtalloc-dev libwbclient-dev libyubikey-dev libykclient-dev libmemcached-dev libhiredis-dev python-dev samba-dev
 
