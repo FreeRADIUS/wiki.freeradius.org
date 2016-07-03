@@ -60,29 +60,76 @@ First step is to get the source. 2 places that currently offer the material :
 FTP from freeradius.org via : [http://freeradius.org/download.html](http://freeradius.org/download.html)
 HTTP download from GitHub : [https://github.com/FreeRADIUS/freeradius-server](https://github.com/FreeRADIUS/freeradius-server)
 On GitHub select the branch you wish to install and press _clone or download_.
-From terminal :
-
-     wget https://github.com/FreeRADIUS/freeradius-server/archive/v3.0.x.zip
 
 Make sure unzip or any other utility that can extract the zip is installed. If not :
 
-     sudo apt install unzip
+     sudo apt-get install unzip
 
-Then extract the source to a temporary directory: (I'm using here a directory in my home folder.)
+Here I download and extract the source to a temporary directory: (I'm using here a directory in my home folder.)
 
      cd /home/myusername/
+     mkdir freeradius
+     cd freeradius
+     wget https://github.com/FreeRADIUS/freeradius-server/archive/v3.0.x.zip
+
      tar zxf freeradius-server-W.X.Y.tar.gz
 
-or 
+or (depending on type of archive)
 
-      cd /home/myusername/
       unzip v3.0.x.zip
 
+Now we need to go into the directory containing the source.
 
-      cd freeradius-server-2.X.Y
- 
+      cd freeradius-server-W.X.Y/
+
+And run the following :
+
+      fakeroot dpkg-buildpackage -b -uc
+
+It will probably error out on a clean system. Because the build tools are not installed or because not all dependencies are installed.
+
+Make sure fakeroot and build tools are installed (read the error message!!):
+
+     sudo apt-get install fakeroot dpkg-dev quilt debhelper
+
+In the file _debian/rules_ we might need to make some changes depending on other packages we might not have installed or support that we do (not) need. In my own v2 install there is no iodbc database support for instance as I'm using ldap as a database backend. If I build it will give an error and fail to build because of that. You can modify your install in the following way to prevent the error.
+
+     pico debian/rules
+
+And just before 
+
+     --without-rlm_eap_ikev2 \
+
+I create a new line :
+
+     --without-rml_sql_iodbc \
+
+You can remove and add any module that you (do not) require this way.
+
+It might also error with more unmet dependencies to be able to build. When you run the command to build the package but it errors out with a dependencies/conflict abortion, install them as well.
+
+In my Ubuntu 16.04 install that meant :
+
+     sudo apt-get install libcurl4-openssl-dev libcap-dev libgdbm-dev libiodbc2-dev libjson0-dev libkrb5-dev libldap2-dev libpam0g-dev libpcap-dev libperl-dev libmysqlclient-dev libpq-dev libreadline-dev libsasl2-dev libsqlite3-dev libssl-dev libtalloc-dev libwbclient-dev libyubikey-dev libykclient-dev libmemcached-dev libhiredis-dev python-dev samba-dev
+
+After that we try again to build.
+
      fakeroot dpkg-buildpackage -b -uc	 
- 
-     sudo dpkg -i ../*freeradius*_2.X.Y-*_*.deb
 
- 
+If it errors out after it has already started building the deb files, you are sometimes better off starting anew. If that happens :
+
+     cd /home/myusername/freeradius
+     rm -R freeradius-server-W.X.Y
+
+And unpack the archive again. I.e.
+
+     unzip v3.0.x.zip
+
+And edit the debian/rules commenting out or adding depending on the error it gave you at the end of the build.
+
+After build has completed without any errors we can finally install.
+
+     cd /home/myusername/freeradius
+     sudo dpkg -i *freeradius*_W.X.Y*_*.deb
+
+The install might show errors. Older v2 will fail install often on open_ssl issues. Quick thing to change to prevent just that error is to edit a config file so freeradius will not complain about ssl that might be vulnerable. 
