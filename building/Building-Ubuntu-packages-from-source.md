@@ -60,16 +60,28 @@ First step is to get the source. 2 places that currently offer the material :
 FTP from freeradius.org via : [http://freeradius.org/download.html](http://freeradius.org/download.html)
 HTTP download from GitHub : [https://github.com/FreeRADIUS/freeradius-server](https://github.com/FreeRADIUS/freeradius-server)
 On GitHub select the branch you wish to install and press _clone or download_.
+From terminal :
 
+     wget https://github.com/FreeRADIUS/freeradius-server/archive/v3.0.x.zip
 
+Make sure unzip or any other utility that can extract the zip is installed. If not :
+
+     sudo apt install unzip
+
+Then extract the source to a temporary directory: (I'm using here a directory in my home folder.)
+
+     cd /home/myusername/
      tar zxf freeradius-server-W.X.Y.tar.gz
 
- 
-     cd freeradius-server-2.X.Y
+or 
 
+      cd /home/myusername/
+      unzip v3.0.x.zip
+
+
+      cd freeradius-server-2.X.Y
  
      fakeroot dpkg-buildpackage -b -uc	 
-
  
      sudo dpkg -i ../*freeradius*_2.X.Y-*_*.deb
 
