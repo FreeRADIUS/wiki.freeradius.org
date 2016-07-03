@@ -132,4 +132,4 @@ After build has completed without any errors we can finally install.
      cd /home/myusername/freeradius
      sudo dpkg -i *freeradius*_W.X.Y*_*.deb
 
-The install might show errors. Older v2 will fail install often on open_ssl issues. Quick thing to change to prevent just that error is to edit a config file so freeradius will not complain about ssl that might be vulnerable. 
+The install might show errors. Read the error !! Ask questions on freeradius list if you cannot figure it out. v2 will fail install often on open_ssl issues. Quick thing to change to prevent just that error is to edit a config file so freeradius will not complain about ssl that might be vulnerable. ( /etc/freeradius/eap.conf (v2) or /etc/freeradius/modules-enabled/eap )
