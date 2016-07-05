@@ -1,91 +1,44 @@
 Debian Packages
-=============
+===============
 
-**Note:** This page is only relevant for Debian Wheezy (7.0). The version in wheezy-backports is the same as the version in Debian Jessie (8.0).
+FreeRADIUS shipped with the current versions of Debian (both `Jessie` and `Wheezy`) are several years out of date. This means that they are no longer officially supported by the FreeRADIUS project.
 
-To install up-to-date FreeRADIUS 2.2.x packages on Debian stable systems, use the backports repository. For example:
+However, building packages of the latest version is kept as simple as possible, and this is the recommended method on Debian and derivative distributions such as Ubuntu.
 
-* Add a [[backports mirror|http://ftp.de.debian.org/debian/README.mirrors.html]] to ``/etc/apt/sources.list`` like this:
+Building Debian packages
+------------------------
+
+Building Debian packages should be very simple. First obtain a copy of the source and unpack it.
+
+* From a zip file (version 3.0.x - most stable, but unreleased)
 ::
 
- deb http://ftp.us.debian.org/debian/ wheezy-backports main
+ $ wget https://github.com/FreeRADIUS/freeradius-server/archive/v3.0.x.zip
+ $ unzip v3.0.x.zip
+ $ cd freeradius-server-3.0.x/
 
-* Update the package indices:
+* From a zip file (version 3.0.11 - latest released version)
 ::
 
- sudo apt-get update
+ $ wget https://github.com/FreeRADIUS/freeradius-server/archive/v3.0.11.zip
+ $ unzip v3.0.11.zip
+ $ cd freeradius-server-3.0.11/
 
-* Install FreeRADIUS packages:
+* From the git repository
 ::
 
- sudo apt-get -t wheezy-backports install freeradius
+ $ git clone https://github.com/FreeRADIUS/freeradius-server.git
+ $ cd freeradius-server
+ $ git checkout v3.0.x
+ # - or for the latest stable version -
+ $ git checkout release_3_0_11
 
-* If everything went all right, make sure you will upgrade these from the same repository, by pinning it through ``/etc/apt/preferences`` like this:
+Finally, build the FreeRADIUS packages:
 ::
 
-  Package: freeradius
-  Pin: release a=wheezy-backports
-  Pin-Priority: 500
+ $ sudo apt-get install devscripts
+ $ sudo mk-build-deps -ir debian/control
+ $ dpkg-buildpackage -rfakeroot -b -uc
 
-  Package: freeradius-common
-  Pin: release a=wheezy-backports
-  Pin-Priority: 500
+This will build packages in the parent directory, which can be installed with `dpkg -i`.
 
-  [...]
-
-
-Add whichever other FR package you are using to the list in the same format.
-
-
-Building Debian Samba packages with threaded libwbclient support
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Using the new FreeRADIUS 3 winbind method to contact Active Directory, rather than using ntlm_auth, requires an update to Samba. This has been available since Samba 4.2.1, but the version in Debian Jessie is only 4.1.17. These instructions for building *Samba* will add the required functionality to use this feature in FreeRADIUS versions 3.0.8 and above.
-
-These instructions have been tested with Debian's samba version 2:4.1.17+dfsg-2+deb8u2.
-
-First, download the two required [[patch and symbol files|https://gist.github.com/mcnewton/71865fc18215c740b084]] and save them in /tmp.
-
-Ensure you have source URIs in your /etc/apt/sources.list file, and download the Debian Samba package source:
-::
-
-    mkdir samba
-    cd samba
-    apt-get source samba
-
-Install the required build dependencies:
-::
-
-    sudo apt-get install build-essential
-    sudo apt-get build-dep samba
-
-
-Apply the downloaded libwbclient-ctx patch:
-::
-
-    cd samba-4.1.17+dfsg
-    quilt import /tmp/libwbclient-ctx.patch
-    quilt push
-
-Install the new symbols file, which lists symbols in each library:
-::
-
-    cp /tmp/libwbclient0.symbols debian/libwbclient0.symbols
-
-Set the new package version:
-::
-
-    dch -l wbclient "add libwbclient ctx patch"
-
-Build new Samba packages. On machines with multiple cores use the -j option with the number of available cores to speed up the build process. This process may take half an hour or more.
-::
-
-    debuild -us -uc -rfakeroot -j4
-
-Finally install the libwbclient packages that were created.
-::
-
-    cd ..
-    dpkg -i libwbclient0_*.deb libwbclient-dev_*.deb
-
-When this process is complete, build and install FreeRADIUS with the standard [[instructions above|Debian#building-debian-packages]]. If the FreeRADIUS packages are used on a different machine than they are built on, remember to also copy over and install the new libwbclient0 package as well.
