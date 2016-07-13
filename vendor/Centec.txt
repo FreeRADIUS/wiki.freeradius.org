@@ -15,6 +15,7 @@ VENDOR      Centec              27975
 #
 BEGIN-VENDOR    Centec
 
-ATTRIBUTE   Ctc-Privelege-Level         1   string
+# Privilege Level: pri-level=4
+ATTRIBUTE       Ctc-AVPair         1    string
 
 END-VENDOR  Centec
