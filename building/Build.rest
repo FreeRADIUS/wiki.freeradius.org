@@ -76,6 +76,8 @@ RHE7 ships with GCC 4.8.5 but we require GCC >= 4.9.0 for FreeRADIUS >= v3.1.x.
 
 Fortunately the ``devtoolset-3`` series of packages provides a later version of GCC.
 
+Follow the instructions here to enable the devtoolset-3 repository https://www.softwarecollections.org/en/scls/rhscl/devtoolset-3/.
+
 To install::
 
     yum -y install devtoolset-3-gcc devtoolset-3-gcc-c++
