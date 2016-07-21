@@ -69,8 +69,8 @@ Building on Solaris
 
 Please see: [[Solaris|building/Solaris]]
 
-Building on RHEL7
-^^^^^^^^^^^^^^^^^
+Building on RHEL7 or Centos7
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 RHE7 ships with GCC 4.8.5 but we require GCC >= 4.9.0 for FreeRADIUS >= v3.1.x.
 
