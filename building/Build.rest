@@ -12,7 +12,7 @@ FreeRADIUS is known to run on a large number of 32 and 64bit [[platforms|buildin
 
         configure: error: FreeRADIUS requires support for the C11 _Generic keyword
 
-    That means your compiler does not support C11, and you'll need to upgrade to a version that does.
+    That means your compiler does not support C11, and you'll need to one that does.
 
 Building from Source
 --------------------
