@@ -61,6 +61,27 @@ Building on Solaris
 
 Please see: [[Solaris|building/Solaris]]
 
+Building on RHEL7
+^^^^^^^^^^^^^^^^^
+
+RHE7 ships with GCC xxx but we require GCC >= 4.9.0.
+
+Fortunately the ``devtoolset-3`` series of packages provides a later version of GCC.
+
+To install::
+
+    yum -y install devtoolset-3-gcc devtoolset-3-gcc-c++
+
+and then to get to a shell with the correct environment::
+
+    scl enable devtoolset-3 bash
+
+You can then perform the normal
+
+    ./configure --enable-developer
+    make
+    sudo make install
+
 Building Packages
 -----------------
 
