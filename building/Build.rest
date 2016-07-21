@@ -8,9 +8,9 @@ FreeRADIUS is known to run on a large number of 32 and 64bit [[platforms|buildin
 
 In all cases FreeRADIUS has a hard dependency on C11 support (available in GCC >= 4.9.0), and libtalloc.  Talloc is available as a packaged version on many distributions (just be sure to install the development headers too).
 
-If you see an error message like::
+    If you see an error message like::
 
-    configure: error: FreeRADIUS requires support for the C11 _Generic keyword
+        configure: error: FreeRADIUS requires support for the C11 _Generic keyword
 
 That means your compiler does not support C11, and you'll need to upgrade to a version that does.
 
