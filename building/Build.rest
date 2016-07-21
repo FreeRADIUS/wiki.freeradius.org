@@ -6,7 +6,7 @@ Supported Platforms
 
 FreeRADIUS is known to run on a large number of 32 and 64bit [[platforms|building/Platforms]], however building on some of them may require following special procedures here.
 
-Since v3.1.x FreeRADIUS has a hard dependency on C11 support (available in GCC >= 4.9.0).
+    Since v3.1.x FreeRADIUS has a hard dependency on C11 support (available in GCC >= 4.9.0).
 
     If you see an error message like::
 
