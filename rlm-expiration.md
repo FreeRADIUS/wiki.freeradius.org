@@ -1,11 +1,13 @@
-# Synopsis
+# rlm_expiration
+
+## Synopsis
 
 The expiration module implements support for the Expiration attribute.
 
 [Default configuration](https://github.com/FreeRADIUS/freeradius-server/blob/v3.0.x/raddb/mods-available/expiration)
 
-# Processing Sections
-## authorize
+## Processing Sections
+### authorize
 
 When listed in the authorize section, the expiration module enforces the Expiration attribute. When the user’s account has a limited range of validity, the Session-Timeout attribute is updated to reflect this limited range.
 
@@ -25,16 +27,16 @@ _**Return codes**_
 
 `ok` A `control:Expiration` attribute was found, and the user’s account is still active.
 
-# post-auth
+## post-auth
 
 Operates identically to the authorize section.
 
 _Available after version 3.0.4_
 
-# Expansions
+## Expansions
 
 _None._
 
-# Directives
+## Directives
 
 _None._
