@@ -1,5 +1,5 @@
 # Cisco IOS and Radius
-[[Cisco]] [[NAS]] equipment is quite popular, but being Cisco equipment running [[IOS]], the configuration can be a bit non-obvious to the unfamiliar. This document aims to describe the most common configuration options to make your Ciscos interoperate with [[radius]] as you would expect a well-behaved [[NAS]] to do.
+[[Cisco]] [[NAS]] equipment is quite popular, but being Cisco equipment running [[IOS]], the configuration can be a bit non-obvious to the unfamiliar. This document aims to describe the most common configuration options to make your Ciscos interoperate with [[RADIUS]] as you would expect a well-behaved [[NAS]] to do.
 
 ## Shell Access
 To use [[RADIUS]] to authenticate your inbound shell (telnet & ssh) connections you need to create an entry in your users file similar to the following
@@ -66,7 +66,7 @@ For Cisco 12.x ( 12.0 and 12.1 ), the following AAA configuration directives are
     aaa accounting network default start-stop group radius
     aaa processes 6
 
-this configuration works very well with most radius servers.  One of the more important configurations is:
+this configuration works very well with most RADIUS servers.  One of the more important configurations is:
 
     aaa accounting delay-start
 
@@ -155,7 +155,7 @@ You must reboot after entering this command to take effect otherwise you will ob
 
 ## IOS 11.x
 
-To get the For Cisco 11.1 to talk to a radius server you normally use
+To get the For Cisco 11.1 to talk to a RADIUS server you normally use
 
      aaa new-model
      aaa authentication ppp radppp if-needed radius
@@ -209,7 +209,7 @@ If you don't want to use the loopback interface of course you can set the source
 
 According to [some reports](https://list.xs4all.nl/pipermail/freeradius-users/2006-November/058449.html), the Aironet 1200 series of access points works well, and fully supports RADIUS.
 
-The Cisco WLC/WISM apparently use a single UDP socket for all radius requests to a single server - auth and acct - and thus there's a 255-packet limit for in-progress requests. If the WLC reaches that limit, it just starts re-using IDs aggressively, instead of opening a socket, which is nice - if you're in the middle of processing a conflicted request, you still burn the work you're currently doing, and the result is never used.
+The Cisco WLC/WISM apparently use a single UDP socket for all RADIUS requests to a single server - auth and acct - and thus there's a 255-packet limit for in-progress requests. If the WLC reaches that limit, it just starts re-using IDs aggressively, instead of opening a socket, which is nice - if you're in the middle of processing a conflicted request, you still burn the work you're currently doing, and the result is never used.
 
 This behavior causes issues during the traffic spikes. It is certainly a problem if you run an eduroam server, where proxied traffic can have very large RTTs. They're apparently going to "improve" this in 7.6 - there will be a separate UDP socket for auth/acct!
 
