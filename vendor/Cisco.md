@@ -15,13 +15,13 @@ See [Configuring Basic AAA on an Access Server](http://www.cisco.com/en/US/tech/
 
 ### Global Enable Password
 
-When a shell user attempts to **enable** (or **enable 15**) on a cisco device, the [[cisco]] issues a [[RADIUS]] [[authentication]] request for the user **$enable15$**
+When a shell user attempts to **enable** (or **enable 15**) on a cisco device, the [[cisco]] issues a [[RADIUS]] [[authentication]] request for the user **$enab15$**
 
 If you type **enable 2**, it will send request for user '$enab2$', if you type **enable 3** it will send a request for '$enab3$' and so on.
 
 These user(s) needs to to be configured on your [[RADIUS]] server with the password you wish to use to allow enable access.
 
-     $enable15$   Cleartext-Password := "someadminpass"
+     $enab15$   Cleartext-Password := "someadminpass"
               Service-Type = NAS-Prompt-User
 
 
