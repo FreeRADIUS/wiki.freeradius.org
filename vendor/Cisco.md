@@ -5,7 +5,7 @@
 To use [[RADIUS]] to authenticate your inbound shell (telnet & ssh) connections you need to create an entry in your users file similar to the following
 
     youruser   Cleartext-Password := "somepass"
-            Service-Type = NAS-Prompt-User
+               Service-Type = NAS-Prompt-User
 
 This will let a user (called _youruser_) in for the first level of access to your Cisco. You will still need to **enable** to perform any configuration changes or anything requiring a higher level of access.
 
@@ -21,8 +21,8 @@ If you type **enable 2**, it will send request for user '$enab2$', if you type *
 
 These user(s) needs to to be configured on your [[RADIUS]] server with the password you wish to use to allow enable access.
 
-     $enab15$   Cleartext-Password := "someadminpass"
-              Service-Type = NAS-Prompt-User
+    $enab15$   Cleartext-Password := "someadminpass"
+               Service-Type = NAS-Prompt-User
 
 
 ### Per User Privilege Level
@@ -32,8 +32,8 @@ You can also send the privilege level (enable mode is level 15) for individual u
 You can do this with an entry in your users file similar to the following
 
     youruser   Cleartext-Password := "somepass"
-            Service-Type = NAS-Prompt-User,
-            cisco-avpair = "shell:priv-lvl=15"
+               Service-Type = NAS-Prompt-User,
+               cisco-avpair = "shell:priv-lvl=15"
 
 For more information, see Cisco page ["How to Assign Privilege Levels with TACACS+ and RADIUS"](http://www.cisco.com/en/US/tech/tk59/technologies_tech_note09186a008009465c.shtml).
 
@@ -41,11 +41,11 @@ For more information, see Cisco page ["How to Assign Privilege Levels with TACAC
 
 Cisco claims that there is a complete mapping scheme to translate TACACS+ expressions into Cisco-AVPair Vendor-Specific. This works for example with the priv-lvl attribute:
 
-           cisco-avpair = "shell:priv-lvl=15"
+               cisco-avpair = "shell:priv-lvl=15"
 
 The two TACACS+ attributes "cmd" and "cmd-arg" would be needed for command authorization.There is a web page for [Cisco IOS](http://www.cisco.com/en/US/products/ps6350/products_configuration_guide_chapter09186a00804fe2d8.html) detailing which TACACS+ commands exist, and it suggests that
 
-           cisco-avpair = "shell:cmd=show"
+               cisco-avpair = "shell:cmd=show"
 
 would do the trick to authorize the "show" command. EXCEPT that there is a tiny note for the commands "cmd" and "cmd-arg" saying that they cannot be used for encapsulation in the Vendor-Specific space.
 
@@ -91,11 +91,11 @@ Note: Don't use the key of Cis$ko.  Make up your own.
     ip radius source-interface Loopback0
 
     aaa group server radius RadiusServers
-    server 192.168.1.10 auth-port 1812 acct-port 1813  
-    server 192.168.1.11 auth-port 1812 acct-port 1813  
+    server 192.168.1.10 auth-port 1812 acct-port 1813
+    server 192.168.1.11 auth-port 1812 acct-port 1813
     exit
 
-    aaa authentication login default group RadiusServers local 
+    aaa authentication login default group RadiusServers local
     exit
 
 This sample assumes the password-encryption service is started on the device, so that the shared secrets will be encrypted after they’re entered. It is also highly recommended that a local login exist in case there is a failure to communicate with the RADIUS servers for any reason (the authentication order in the configlet specifies falling back to the local database after the RadiusServers group).
@@ -119,7 +119,7 @@ Note: Don't use the key of Cis$ko.  Make up your own.
 IOS has a feature called the password-encryption service.
 
     service password-encryption
-    no service password-encryption 
+    no service password-encryption
 
 From the ["Cisco Guide to Harden Cisco IOS Devices"](http://www.cisco.com/en/US/tech/tk648/tk361/technologies_tech_note09186a0080120f48.shtml#plane).
 
@@ -157,26 +157,26 @@ You must reboot after entering this command to take effect otherwise you will ob
 
 To get the For Cisco 11.1 to talk to a RADIUS server you normally use
 
-     aaa new-model
-     aaa authentication ppp radppp if-needed radius
-     aaa authorization network radius none
-     aaa accounting network wait-start radius
+    aaa new-model
+    aaa authentication ppp radppp if-needed radius
+    aaa authorization network radius none
+    aaa accounting network wait-start radius
 
 
 With IOS 11.3 if you want the IP address of the user to show up in the radutmp file (and thus, the output of [[radwho]]), you need to add
 
-     aaa accounting update newinfo
+    aaa accounting update newinfo
 
 Note: on newer ciscos you will need to use the command
 
-     radius-server attribute 8 include-in-access-req
+    radius-server attribute 8 include-in-access-req
 
-This is because with IOS 11.3, the Cisco first sends a "Start" accounting packet without the IP address included. By setting "update newinfo" it will send an account "Alive" packet which updates the information. 
+This is because with IOS 11.3, the Cisco first sends a "Start" accounting packet without the IP address included. By setting "update newinfo" it will send an account "Alive" packet which updates the information.
 
 Also you might see a lot of "duplicates" in the logfile. That can be fixed by
 
-     aaa accounting network wait radius
-     radius-server timeout 3
+    aaa accounting network wait radius
+    radius-server timeout 3
 
 ## Ascend Style
 
@@ -194,12 +194,12 @@ To see Cisco-AVPair attributes in the Cisco debugging log
 
 The Cisco 36/26 by default selects (it seems at random) any IP address assigned to it (serial, ethernet etc.) as its RADIUS client source address, thus the access request may be dropped by the RADIUS server, because it can not verify the client. To make the cisco box always use one fixed address, add the following to your configuration:
 
-     ip radius source-interface Loopback0
+    ip radius source-interface Loopback0
 
 and configure the loopback interface on your router as follows:
 
-     interface Loopback0
-       ip address 192.168.0.250 255.255.255.255
+    interface Loopback0
+      ip address 192.168.0.250 255.255.255.255
 
 Use a real world IP address and check the Cisco documentation for why it is a good idea to have working loopback interface configured on your router.
 
