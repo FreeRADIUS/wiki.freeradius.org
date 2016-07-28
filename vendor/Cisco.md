@@ -207,7 +207,7 @@ If you don't want to use the loopback interface of course you can set the source
 
 ## Problems
 
-According to [some reports](https://list.xs4all.nl/pipermail/freeradius-users/2006-November/058449.html), the Aironet 1200 series of access points works well, and fully supports RADIUS.
+According to [some reports](http://lists.freeradius.org/pipermail/freeradius-users/2006-November/014423.html), the Aironet 1200 series of access points works well, and fully supports RADIUS.
 
 The Cisco WLC/WISM apparently use a single UDP socket for all RADIUS requests to a single server - auth and acct - and thus there's a 255-packet limit for in-progress requests. If the WLC reaches that limit, it just starts re-using IDs aggressively, instead of opening a socket, which is nice - if you're in the middle of processing a conflicted request, you still burn the work you're currently doing, and the result is never used.
 
