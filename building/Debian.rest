@@ -42,3 +42,23 @@ Finally, build the FreeRADIUS packages:
 
 This will build packages in the parent directory, which can be installed with `dpkg -i`.
 
+Getting GCC >= 4.9
+------------------
+
+Older version of Debian and Ubuntu use GCC < 4.8, which lacks support for the C11 features needed to build FreeRADIUS >= v3.1.x.
+
+In order to switch to GCC 4.9
+```bash
+sudo apt-get install software-properties-common python-software-properties
+sudo add-apt-repository ppa:ubuntu-toolchain-r/test
+sudo apt-get update
+sudo apt-get install g++-4.9
+
+# Then select GCC 4.9
+sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.8 100 --slave /usr/bin/g++ g++ /usr/bin/g++-4.8
+sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.9 50 --slave /usr/bin/g++ g++ /usr/bin/g++-4.9 
+sudo update-alternatives --config gcc
+
+# Choose option 3 from the dialogue
+```
+
