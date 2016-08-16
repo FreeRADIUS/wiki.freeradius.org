@@ -30,7 +30,7 @@ The long description of the likely causes is below
 
 * Windows does not support wildcard certificates
 
-* Windows XP post SP2 has a bug where it has problems with certificate chains.  i.e. if the server certificate is an intermediate one, and not a root one, then authentication will silently fail, as above.
+* Windows XP post SP2 has a bug where it has problems with certificate chains.  i.e. if the server certificate is issued by an intermediate certificate authority, and not a root certificate authority, then authentication will silently fail, as above.
 
 * Some versions of Windows CE cannot handle 4K RSA certificates.  They will (again) silently fail, as above.
 
