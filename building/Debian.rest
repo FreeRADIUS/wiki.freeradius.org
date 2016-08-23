@@ -37,6 +37,7 @@ Finally, build the FreeRADIUS packages:
 ::
 
  $ sudo apt-get install devscripts
+ $ fakeroot debian/rules clean
  $ sudo mk-build-deps -ir debian/control
  $ dpkg-buildpackage -rfakeroot -b -uc
 
