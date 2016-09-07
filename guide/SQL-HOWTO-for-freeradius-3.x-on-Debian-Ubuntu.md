@@ -1,6 +1,6 @@
 FreeRADIUS Server works out of the box with a [[rlm_sql|large list of SQL servers]]
 
-These instructions are based on the [[SQL HOWTO]] which is outdated for the 3.x versions and will discribe the configuration on Debian/Ubuntu.
+These instructions are based on the [[SQL HOWTO]] which is outdated for the 3.x versions and will discribe the configuration on Debian/Ubuntu (tested with freeradius 3.11 version).
 
 ##Before You Start##
 
