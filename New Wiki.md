@@ -48,7 +48,7 @@ Also please report any bugs here:
 
 ### Pages to convert from RST to markdown
 * http://wiki.freeradius.org/Modules2
-* http://wiki.freeradius.org/Operators
+* http://wiki.freeradius.org/Operators - DONE Michael P 07/09/16
 * http://wiki.freeradius.org/FreeRADIUS Active Directory Integration HOWTO
 
 ## Todo
