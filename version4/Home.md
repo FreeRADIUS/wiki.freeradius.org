@@ -299,37 +299,37 @@ The source code needs to be reorganized.  The following is a suggestion:
 
     src/  source code
         transport/    transport related code
-	    transport_tcp.c
-	    transport_udp.c
-	    transport_unix.c
-	    transport_tls.c
-	    transport_files.c
-	radius/
+            transport_tcp.c
+            transport_udp.c
+            transport_unix.c
+            transport_tls.c
+            transport_files.c
+        radius/
             server/
-	        radius_server_auth.c
-	        radius_server_acct.c
-	        radius_server_status.c
-	        radius_server_coa.c
+                radius_server_auth.c
+                radius_server_acct.c
+                radius_server_status.c
+                radius_server_coa.c
             
-	        transport_tcp_radius_server.c
-	        transport_udp_radius_server.c
-	        transport_tls_radius_server.c
-	        transport_files_radius_server.c
+                transport_tcp_radius_server.c
+                transport_udp_radius_server.c
+                transport_tls_radius_server.c
+                transport_files_radius_server.c
             
             client/
                 radius_client_auth.c
-	        radius_client_acct.c
-	        radius_client_status.c
-	        radius_client_coa.c
+                radius_client_acct.c
+                radius_client_status.c
+                radius_client_coa.c
             
-	        transport_tcp_radius_client.c
-	        transport_udp_radius_client.c
-	        transport_tls_radius_client.c
-	        transport_files_radius_client.c
+                transport_tcp_radius_client.c
+                transport_udp_radius_client.c
+                transport_tls_radius_client.c
+                transport_files_radius_client.c
         modules/
-	    rlm_*
+            rlm_*
         main/
-	    ...
+            ...
 
 
 That way when a new application is added to the server, it can go into it's own directory.
