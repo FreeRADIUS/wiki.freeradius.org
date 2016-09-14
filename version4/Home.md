@@ -332,6 +332,42 @@ The source code needs to be reorganized.  The following is a suggestion:
             ...
 
 
+Here's another:
+
+    src/  source code
+        io/    low level network IO
+            tcp.c
+            udp.c
+            unix.c
+            tls.c
+            files.c
+        radius/
+            server/
+                auth.c
+                acct.c
+                status.c
+                coa.c
+            
+                tcp_io_adapter.c
+                udp_io_adapter.c
+                tls_io_adapter.c
+                files_io_adapter.c
+            
+            client/
+                auth.c
+                acct.c
+                status.c
+                coa.c
+            
+                tcp_io_adapter.c
+                udp_io_adapter.c
+                tls_io_adapter.c
+                files_io_adapter.c
+        modules/
+            rlm_*
+        main/
+            ...
+
 That way when a new application is added to the server, it can go into it's own directory.
 
 ### Module organization
@@ -346,5 +382,4 @@ directory as the module source, perhaps in a `conf` subdirectory.  The
 build system can automatically determine which file goes where.  The
 main `conf` or `raddb` directory is thus empty, and people only ever
 see configurations for modules which they have installed.
-
 
