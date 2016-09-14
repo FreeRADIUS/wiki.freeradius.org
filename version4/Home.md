@@ -259,3 +259,92 @@ becomes easy to update the detail file to read CoA packets.  That's
 just a "files + CoA-Request" transport.  Even though this would still
 be new code, the new code would be small and simple.
 
+Where transports need to handle multiple applications
+(e.g. Access-Request and Status-Server), that knowledge is in the
+"transport + application" layer, and not in the application layer.
+
+## Processing Sections
+
+In current versions of the server, the processing sections are
+`authorize`, `authenticate`, etc.  The names are largely "ad hoc". and
+don't show any consistency.  Even worse, the processing of
+Access-Challenge and Access-Reject packets is, at best, a hack.  They
+are processing in the `post-auth` section, as a separate
+`Post-Auth-Type`.
+
+The processing sections for DHCP are a bit better named, but are still
+"surprising".  The design for version 4 has to do better.
+
+The solution is to note that the server is sending and receiving
+packets, and the packets have names.  The simple solution is to then
+name the sections for what they do, and what they process.
+
+For example, `recv Access-Request` is clearer than `authorize`.  and
+`send Access-Challenge` is clearer than `post-auth {
+... Post-Auth-Type Challenge { ... } }`.  There is some magic for the
+`authenticate` section, and the use of `Auth-Type`, but idea is sound.
+
+Similar rules apply for DHCP, VMPS, ARP, etc.  BFD is a little
+different, as it has timers which fire periodically.  We will have to
+re-visit that at a later date.  Perhaps via a `timer` subsection?
+
+There is some additional magic for the `do_not_reply` policies.  That
+is, if the server is not replying, it could still arguable process a
+`send nothing` section.  The exact functionality here is to be
+determined.
+
+## Code Organization
+
+The source code needs to be reorganized.  The following is a suggestion:
+
+    src/  source code
+        transport/    transport related code
+	    transport_tcp.c
+	    transport_udp.c
+	    transport_unix.c
+	    transport_tls.c
+	    transport_files.c
+	radius/
+            server/
+	        radius_server_auth.c
+	        radius_server_acct.c
+	        radius_server_status.c
+	        radius_server_coa.c
+            
+	        transport_tcp_radius_server.c
+	        transport_udp_radius_server.c
+	        transport_tls_radius_server.c
+	        transport_files_radius_server.c
+            
+            client/
+                radius_client_auth.c
+	        radius_client_acct.c
+	        radius_client_status.c
+	        radius_client_coa.c
+            
+	        transport_tcp_radius_client.c
+	        transport_udp_radius_client.c
+	        transport_tls_radius_client.c
+	        transport_files_radius_client.c
+        modules/
+	    rlm_*
+        main/
+	    ...
+
+
+That way when a new application is added to the server, it can go into it's own directory.
+
+### Module organization
+
+Right now, all of the module configuration is in the
+`raddb/mods-available` directory.  This ends up confusing people who
+install a package, and get configuration files for modules which they
+don't have.
+
+The solution is to put the module configuration into the same
+directory as the module source, perhaps in a `conf` subdirectory.  The
+build system can automatically determine which file goes where.  The
+main `conf` or `raddb` directory is thus empty, and people only ever
+see configurations for modules which they have installed.
+
+
