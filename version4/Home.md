@@ -73,7 +73,7 @@ and works well.  This development led to the next stage in the design.
 
 ## Threading
 
-Threading has always been a problematic issue in the server.  Each
+[Threading](threads) has always been a problematic issue in the server.  Each
 request coming in is assigned to a random thread.  When a packet is
 proxied, the response may come back to a different thread than the one
 which sent the proxied packet.  These issues mean that we either need
@@ -191,7 +191,7 @@ would divide the code into three logical pieces:
 
 ### IO
 
-The IO layer is responsible for abstracting the network protocols.  It
+The [IO layer](io) is responsible for abstracting the network protocols.  It
 exposes an API which has connect / accept / read / write / open /
 close / print / parse / debug , etc. for different protocols.
 Examples are TCP, UDP, TLS, files, unix sockets, etc.
@@ -207,7 +207,7 @@ to write as RADIUS over UDP.
 
 ### Application
 
-The application layer is responsbile for implementing the application
+The [application layer](application) is responsbile for implementing the application
 layer processing.  The worker threads spend the bulk of their time
 executing the state machines provided by the application layer.
 The API here is largely compile / debug / parse / process.
