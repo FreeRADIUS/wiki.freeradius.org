@@ -148,12 +148,12 @@ fill a 1G pipe with RADIUS traffic.  The hope is that version 4 can
 achieve this higher performance, in which case it would run into these
 issues with UDP sockets.
 
-## Transport Protocols and Application State Machines
+## Network Protocols and Application State Machines
 
-We would also like to be able to separate the transport protocols
+We would also like to be able to separate the network protocols
 (UDP, TCP, TLS, "detail" files) from the application state machines
 (Access-Request, Accounting-Request, etc.).  The current design has
-the state machines all in `process.c`, and the transports in
+the state machines all in `process.c`, and the network protocols in
 `listen.c`.  This design worked to hack things together, but it has
 become unsustainable and unmaintainable moving forward.
 
@@ -172,37 +172,37 @@ the main flow is "top to bottom", with a few caveats for yield /
 resume.  These files are significantly simpler than their equivalents
 in `process.c` and `auth.c`, while having the same functionality.
 
-At the time of writing those modules, the design of the transport
+At the time of writing those modules, the design of the IO
 layer was still undetermined.  Once the modules were written and
 integrated into the existing code, the next step became simpler.  We
 would divide the code into three logical pieces:
 
-* transport - abstracts the transport protocol (TCP, UDP, etc), by
+* io - abstracts the network protocol (TCP, UDP, etc), by
   exposing an API to connect / accept / read / write / close different
-  transport protocols.
+  protocols.
 
 * application - abstracts the application layer (Access-Request
   processing, etc.).  The API here is largely parse / process.
 
-* transport + application - glues the previous layers together.  This
-  layer is responsible for transport related issues which are
+* transport - glues the previous layers together.  This
+  layer is responsible for IO related issues which are
   application-specific.  e.g. de-dup of RADIUS requests for UDP, but
   not TCP.
 
-### Transport
+### IO
 
-The transport layer is responsible for abstracting the transport
-protocol.  It exposes an API which has connect / accept / read / write
-/ open / close / print / parse / debug , etc. for different protocols.  Example transports are TCP,
-UDP, TLS, files, unix sockets, etc.
+The IO layer is responsible for abstracting the network protocols.  It
+exposes an API which has connect / accept / read / write / open /
+close / print / parse / debug , etc. for different protocols.
+Examples are TCP, UDP, TLS, files, unix sockets, etc.
 
 TLS is a bit of a special case, because it sends its data over TCP /
 UDP.  But the general approach here is sound.
 
-The transport layer does not know about applications that use it,
-which enables the transports to be re-used across multiple
+The IO layer does not know about applications that use it, which
+enables the implementations to be re-used across multiple
 applications.  It also means that the applications don't know about
-the transports (mostly), so that RADIUS over TCP becomes about as easy
+the IO methods (mostly), so that RADIUS over TCP becomes about as easy
 to write as RADIUS over UDP.
 
 ### Application
@@ -212,10 +212,10 @@ layer processing.  The worker threads spend the bulk of their time
 executing the state machines provided by the application layer.
 The API here is largely compile / debug / parse / process.
 
-Crucially, the application layer is transport-independent.  It knows
-nothing about any transport.  It instead is called by the "transport +
+Crucially, the application layer is IO-independent.  It knows
+nothing about any IO method.  It instead is called by the "IO +
 application" layer when packets are received, and it in turn returns
-the replies to the "transport + application" layer.
+the replies to the "IO + application" layer.
 
 For various reasons, this layer also provides an asynchronous signal
 API.  This API is intended to send signals to the application layer
@@ -231,37 +231,37 @@ up / destroy the REQUEST.  The worker thread can then be free to do
 what it wishes with the `REQUEST`, secure in the knowledge that no
 other code in the server will be touching that `REQUEST`.
 
-### Transport + Application
+### IO + Application
 
-The "transport + application" layer is responsbile for gluing together
-the transport layer and the application layer.  It provides APIs which
-are largely identical to the transport layer.  The crucial difference
+The "IO + application" layer is responsbile for gluing together
+the IO layer and the application layer.  It provides APIs which
+are largely identical to the io layer.  The crucial difference
 is that it is application aware.
 
 For example, TCP sockets do not require de-dup of Access-Request
 packets, but UDP sockets do require such de-dup.  In contrast, de-dup
-is not necessary for Accounting-Request packets for either TCP or UDP
-transport.  However, if a TCP socket is unexpectedly closed, the
-"transport + application" layer should signal Access-Request packets
-to stop processing. The "transport + application" layer should
-probably allow Accounting-Request packets to continue being processed.
-The theory is that it is always useful to record accounting data, even
-if the NAS doesn't know you're doing this.
+is not necessary for Accounting-Request packets for either TCP or UDP.
+However, if a TCP socket is unexpectedly closed, the "io +
+application" layer should signal Access-Request packets to stop
+processing. The "io + application" layer should probably allow
+Accounting-Request packets to continue being processed.  The theory is
+that it is always useful to record accounting data, even if the NAS
+doesn't know you're doing this.
 
 In the current design of the server, there is little distinction
-between the transports.  All transports are (largely) treated
-identically, and all transports are strongly tied to applications.
+between the network protocols.  All protocols are (largely) treated
+identically, and all protocols are strongly tied to applications.
 
-Fixing that design means that the transports and applications are
+Fixing that design means that the protocols and applications are
 loosely coupled.  Which means that for example, a "detail" file reader
-just becomes a "files + Accounting-Request" transport.  It also
+just becomes a "files + Accounting-Request" implementation.  It also
 becomes easy to update the detail file to read CoA packets.  That's
-just a "files + CoA-Request" transport.  Even though this would still
+just a "files + CoA-Request" implementation.  Even though this would still
 be new code, the new code would be small and simple.
 
-Where transports need to handle multiple applications
-(e.g. Access-Request and Status-Server), that knowledge is in the
-"transport + application" layer, and not in the application layer.
+Where network protocols need to handle multiple applications
+(e.g. Access-Request and Status-Server), that knowledge is in the "io
++ application" layer, and not in the application layer.
 
 ## Processing Sections
 
@@ -296,44 +296,6 @@ determined.
 ## Code Organization
 
 The source code needs to be reorganized.  The following is a suggestion:
-
-    src/  source code
-        transport/    transport related code
-            transport_tcp.c
-            transport_udp.c
-            transport_unix.c
-            transport_tls.c
-            transport_files.c
-        radius/
-            server/
-                radius_server_auth.c
-                radius_server_acct.c
-                radius_server_status.c
-                radius_server_coa.c
-            
-                transport_tcp_radius_server.c
-                transport_udp_radius_server.c
-                transport_tls_radius_server.c
-                transport_files_radius_server.c
-            
-            client/
-                radius_client_auth.c
-                radius_client_acct.c
-                radius_client_status.c
-                radius_client_coa.c
-            
-                transport_tcp_radius_client.c
-                transport_udp_radius_client.c
-                transport_tls_radius_client.c
-                transport_files_radius_client.c
-        modules/
-            rlm_*
-        main/
-            ...
-
-
-Here's another:
-
     src/  source code
         io/    low level network IO
             tcp.c
@@ -348,10 +310,10 @@ Here's another:
                 status.c
                 coa.c
             
-                tcp_io_adapter.c
-                udp_io_adapter.c
-                tls_io_adapter.c
-                files_io_adapter.c
+                tcp_io.c
+                udp_io.c
+                tls_io.c
+                files_io.c
             
             client/
                 auth.c
@@ -359,16 +321,20 @@ Here's another:
                 status.c
                 coa.c
             
-                tcp_io_adapter.c
-                udp_io_adapter.c
-                tls_io_adapter.c
-                files_io_adapter.c
+                tcp_io.c
+                udp_io.c
+                tls_io.c
+                files_io.c
         modules/
             rlm_*
         main/
             ...
 
 That way when a new application is added to the server, it can go into it's own directory.
+
+The individual directories can have filenames which appear in other
+directories.  Stupid debuggers will get confused.  Reasonable ones
+will not get confused.
 
 ### Module organization
 

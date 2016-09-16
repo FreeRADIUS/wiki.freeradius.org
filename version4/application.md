@@ -1,7 +1,7 @@
 # Application Layer
 
 The application layer is responsible for all protocol-specific
-processing.  It is entirely unaware of any transport related issues.
+processing.  It is entirely unaware of any IO related issues.
 It exposes the following API.
 
 *We may not need the `fr_application_t`, as the unlang is cached in
