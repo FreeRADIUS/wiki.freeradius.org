@@ -58,18 +58,18 @@ It may also be advisable to remove entries at the end of a session:
 
 ```text
 accounting {
-    if (Acct-Status-Type == 'Interim-Update') {
-        cache
-        if (ok) {
-            sql
-        }
-    }
-    else {
+    if (Acct-Status-Type == 'Stop') {
         update control {
             Cache-TTL = 0
         }
         cache
         sql
+    }
+    else {
+        cache
+        if (ok) {
+            sql
+        }
     }
 }
 ```
