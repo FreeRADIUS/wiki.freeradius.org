@@ -212,10 +212,10 @@ layer processing.  The worker threads spend the bulk of their time
 executing the state machines provided by the application layer.
 The API here is largely compile / debug / parse / process.
 
-Crucially, the application layer is IO-independent.  It knows
-nothing about any IO method.  It instead is called by the "IO +
-application" layer when packets are received, and it in turn returns
-the replies to the "IO + application" layer.
+Crucially, the application layer is IO-independent.  It knows nothing
+about any IO method.  It instead is called by the transport layer when
+packets are received, and it in turn sends the replies back to the
+transport layer.
 
 For various reasons, this layer also provides an asynchronous signal
 API.  This API is intended to send signals to the application layer
@@ -231,19 +231,18 @@ up / destroy the REQUEST.  The worker thread can then be free to do
 what it wishes with the `REQUEST`, secure in the knowledge that no
 other code in the server will be touching that `REQUEST`.
 
-### IO + Application
+### Transport
 
-The "IO + application" layer is responsbile for gluing together
-the IO layer and the application layer.  It provides APIs which
-are largely identical to the io layer.  The crucial difference
-is that it is application aware.
+The transport layer is responsbile for gluing together the IO layer
+and the application layer.  It provides APIs which are largely
+identical to the io layer.  The crucial difference is that it is
+application aware.
 
 For example, TCP sockets do not require de-dup of Access-Request
 packets, but UDP sockets do require such de-dup.  In contrast, de-dup
 is not necessary for Accounting-Request packets for either TCP or UDP.
-However, if a TCP socket is unexpectedly closed, the "io +
-application" layer should signal Access-Request packets to stop
-processing. The "io + application" layer should probably allow
+However, if a TCP socket is unexpectedly closed, the transport layer should signal Access-Request packets to stop
+processing. The transport layer should probably allow
 Accounting-Request packets to continue being processed.  The theory is
 that it is always useful to record accounting data, even if the NAS
 doesn't know you're doing this.
@@ -260,8 +259,8 @@ just a "files + CoA-Request" implementation.  Even though this would still
 be new code, the new code would be small and simple.
 
 Where network protocols need to handle multiple applications
-(e.g. Access-Request and Status-Server), that knowledge is in the "io
-+ application" layer, and not in the application layer.
+(e.g. Access-Request and Status-Server), that knowledge is in the
+transport layer, and not in the application layer.
 
 ## Processing Sections
 
