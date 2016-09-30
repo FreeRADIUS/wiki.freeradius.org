@@ -137,8 +137,8 @@ listen NAME {
 	}
 
 }
-
 ````
+
 
 All transport configuration is in the `transport` reference, which points to a section. (or references a section???)
 
@@ -147,7 +147,7 @@ listen {
 	transport = ${udp}
 
 }
-```
+````
 
 Though that may confuse too many people, though.  It may be better to
 just leave it as-is, OR define a `CONF_PARSER` so that `transport` is
