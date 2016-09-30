@@ -85,7 +85,7 @@ Takes a `fr_transport_t *` and ???, and prints debugging information about the m
 
 ## Sample Configuration
 
-````unlang
+````
 listen NAME {
 	transport = files # files, udp, tcp, tls, ...
 
