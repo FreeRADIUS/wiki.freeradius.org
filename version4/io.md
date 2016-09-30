@@ -5,6 +5,11 @@ i.e. bare-bones IO.  All memory is talloc'd, and functions which
 require memory allocation take a `TALLOC_CTX *`.  Freeing is done via
 talloc.
 
+## Thread Safety
+
+The IO layer is not thread-safe.  That is, it is the callers
+responsbility to ensure that only one thread at a time uses the API.
+
 ### parse
 
 Takes a `CONF_SECTION` and returns a `fr_io_t *`.  It does all

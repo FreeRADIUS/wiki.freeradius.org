@@ -233,7 +233,7 @@ other code in the server will be touching that `REQUEST`.
 
 ### Transport
 
-The transport layer is responsbile for gluing together the IO layer
+The [transport layer](transport) is responsbile for gluing together the IO layer
 and the application layer.  It provides APIs which are largely
 identical to the io layer.  The crucial difference is that it is
 application aware.
