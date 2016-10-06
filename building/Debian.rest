@@ -10,7 +10,9 @@ Building Debian packages
 
 Building Debian packages should be very simple. First obtain a copy of the source and unpack it. Second, build the packages.
 
-### Getting the source
+::::::::::::::::::
+Getting the source
+::::::::::::::::::
 
 Do *one* of the following:
 
@@ -43,7 +45,9 @@ Do *one* of the following:
  $ unzip v3.0.11.zip
  $ cd freeradius-server-3.0.11/
 
-### Building the packages
+:::::::::::::::::::::
+Building the packages
+:::::::::::::::::::::
 
 Having retrieved whichever version of the source you require, build the FreeRADIUS packages:
 ::
