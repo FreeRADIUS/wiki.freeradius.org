@@ -10,14 +10,14 @@ Building Debian packages
 
 Building Debian packages should be very simple. First obtain a copy of the source and unpack it.
 
-* From a zip file (version 3.0.x - most stable, but unreleased)
+* From a zip file (version 3.0.x - most recent stable version, though unreleased)
 ::
 
  $ wget https://github.com/FreeRADIUS/freeradius-server/archive/v3.0.x.zip
  $ unzip v3.0.x.zip
  $ cd freeradius-server-3.0.x/
 
-* From a zip file (version 3.0.11 - latest released version)
+* From a zip file (version 3.0.11 - does not work with version 3.0.12 due to a minor packaging bug)
 ::
 
  $ wget https://github.com/FreeRADIUS/freeradius-server/archive/v3.0.11.zip
@@ -31,7 +31,8 @@ Building Debian packages should be very simple. First obtain a copy of the sourc
  $ cd freeradius-server
  $ git checkout v3.0.x
  # - or for the latest stable version -
- $ git checkout release_3_0_11
+ $ git checkout release_3_0_12
+ $ git cherry-pick e5cce05
 
 Finally, build the FreeRADIUS packages:
 ::
@@ -40,6 +41,9 @@ Finally, build the FreeRADIUS packages:
  $ fakeroot debian/rules clean
  $ sudo mk-build-deps -ir debian/control
  $ dpkg-buildpackage -rfakeroot -b -uc
+
+Note - a small error slipped into the release of 3.0.12 so the packages don't build cleanly.
+The instructions for building from git above pull in the correct fix.
 
 This will build packages in the parent directory, which can be installed with `dpkg -i`.
 
