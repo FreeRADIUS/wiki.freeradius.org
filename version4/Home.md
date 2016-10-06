@@ -20,12 +20,14 @@ everything in process.c is special-cased, and (for example) the
 "originate CoA" functionality is clearly a hack.
 
 On top of that, we would like to move all of the RADIUS knowledge
-outside of the server core.  This desire comes from a few experiences.
-One, hard-coding a protocol into the server core makes it easy to
-write hacks such as "originate CoA".  Two, we would like to add more
-protocols (e.g. DHCP and DHCPv6) to the server core.  Right now, the
-DHCP processing is done as if the packets were RADIUS.. which is not
-good.
+outside of the server core.  The rationale for this is as follows:
+
+1. Hard-coding a protocol into the server core makes it easy to
+write hacks such as "originate CoA".
+
+2. we would like to add more protocols (e.g. DHCP and DHCPv6) to the 
+server core. Right now, the DHCP processing is done as if the packets 
+were RADIUS.. which is not good.
 
 We would like to increase the performance of the server, and remove
 all internal locks / mutexes, issues that degrade performance.  We
@@ -51,7 +53,9 @@ v4.0.x branch.
 
 ### Unlang in v4.0.x
 
-The unlang interpreter in v4.0.x is iterative instead of recursive.
+The unlang interpreter in v4.0.x is iterative instead of recursive 
+(so we don't blow up the C stack).
+
 Each `REQUEST` has a stack associated with it.  That stack is used to
 push recursive unlang calls ("if" statements, blocks, modules, etc.).
 The interpreter is entirely iterative, where it loads a stack frame,
@@ -68,13 +72,13 @@ starting "top down".  These attempts failed, as they became too
 complex.  This attempt (bottom up) at fixing the interpreter first has
 allowed us to make good progress in a short period of time.
 
-A test implementation of yield / resume in the v4.0.x branch works,
-and works well.  This development led to the next stage in the design.
+A test implementation of yield / resume in the v4.0.x branch works today.
+This development led to the next stage in the design.
 
 ## Threading
 
-[Threading](threads) has always been a problematic issue in the server.  Each
-request coming in is assigned to a random thread.  When a packet is
+[Threading](threads) has always been a problematic issue in the server.
+Each request coming in is assigned to a random thread.  When a packet is
 proxied, the response may come back to a different thread than the one
 which sent the proxied packet.  These issues mean that we either need
 a lot of locks (which are slow) to manage threading issues, or we try
@@ -84,6 +88,8 @@ The changes to the unlang interpreter motivated related changes to the
 threading model.  As each `REQUEST` can be suspended and resumed, it
 is now possible for a worker thread to manage multiple `REQUEST`s
 itself.
+
+### Simplification of proxying
 
 In the case of proxying, the thread can now send the proxied packet,
 and yield on the current `REQUEST`.  When the reply comes in, the
@@ -147,6 +153,28 @@ issues, and gotten away with it, largely because the server cannot
 fill a 1G pipe with RADIUS traffic.  The hope is that version 4 can
 achieve this higher performance, in which case it would run into these
 issues with UDP sockets.
+
+### Frontend vs Backend
+
+The current system of HUPing the server does not work well.  In some cases
+it can cause the server to crash, and in others leak memory.
+
+With a distinction between I/O threads and worker threads, there's is a
+natural cleavage in process space.  I/O threads would exist only in the
+frontend process, worker threads in the backend.  This would allow the backend
+process to be restarted whilst maintaining connection state.
+
+### OpenSSL and mutex contention
+
+Experience with OpenSSL has also shown that there's a significant performance
+bottleneck imposed by internal mutexes.  These mutexes are used to protect
+reference counters for various OpenSSL structures.  In order to solve the 
+problem of mutex contention, we need to ensure each `SSL *` and 
+`SSL_CTX *` is only used by a single thread.  This would allow us to disable all 
+OpenSSL mutexes, removing the bottleneck.
+
+Pinning multiple related requests in the frontend, to a single worker in the
+backend would allow us to achieve the above.
 
 ## Network Protocols and Application State Machines
 
@@ -347,4 +375,3 @@ directory as the module source, perhaps in a `conf` subdirectory.  The
 build system can automatically determine which file goes where.  The
 main `conf` or `raddb` directory is thus empty, and people only ever
 see configurations for modules which they have installed.
-
