@@ -8,7 +8,26 @@ However, building packages of the latest version is kept as simple as possible, 
 Building Debian packages
 ------------------------
 
-Building Debian packages should be very simple. First obtain a copy of the source and unpack it.
+Building Debian packages should be very simple. First obtain a copy of the source and unpack it. Second, build the packages.
+
+### Getting the source
+
+Do *one* of the following:
+
+* From the git repository (version 3.0.x)
+::
+
+ $ git clone https://github.com/FreeRADIUS/freeradius-server.git
+ $ cd freeradius-server
+ $ git checkout v3.0.x
+
+* From the git repository (version 3.0.12 - latest released version)
+::
+
+ $ git clone https://github.com/FreeRADIUS/freeradius-server.git
+ $ cd freeradius-server
+ $ git checkout release_3_0_12
+ $ git cherry-pick e5cce05
 
 * From a zip file (version 3.0.x - most recent stable version, though unreleased)
 ::
@@ -24,17 +43,9 @@ Building Debian packages should be very simple. First obtain a copy of the sourc
  $ unzip v3.0.11.zip
  $ cd freeradius-server-3.0.11/
 
-* From the git repository
-::
+### Building the packages
 
- $ git clone https://github.com/FreeRADIUS/freeradius-server.git
- $ cd freeradius-server
- $ git checkout v3.0.x
- # - or for the latest stable version -
- $ git checkout release_3_0_12
- $ git cherry-pick e5cce05
-
-Finally, build the FreeRADIUS packages:
+Having retrieved whichever version of the source you require, build the FreeRADIUS packages:
 ::
 
  $ sudo apt-get install devscripts
