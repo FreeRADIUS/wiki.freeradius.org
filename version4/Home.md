@@ -133,7 +133,7 @@ that simple proxy configurations become more complex.  This is the
 price to pay for complex proxy configurations becoming simple, where
 they were previously impossible.
 
-### Network Threads Versus Worker Threads
+### Network Threads vs Worker Threads
 
 In the current model, we have a distinction between network threads;
 which read/write packets to the network, and worker threads; which run
@@ -154,7 +154,7 @@ fill a 1G pipe with RADIUS traffic.  The hope is that version 4 can
 achieve this higher performance, in which case it would run into these
 issues with UDP sockets.
 
-### Frontend vs Backend
+### Frontend/Backend Process Cleavage
 
 The current system of HUPing the server does not work well.  In some cases
 it can cause the server to crash, and in others leak memory.
