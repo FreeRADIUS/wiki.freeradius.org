@@ -1,0 +1,1 @@
+how it connection with weixin
