@@ -77,6 +77,9 @@ callbacks for read/write readiness.
 The read/write callbacks should be supplied by the caller, and will
 call the `read` and `write` routines to write to buffers.
 
+If `read` or `write` are NULL and exist in the event loop, the events
+are removed.  This lets the callback move between event loops.
+
 i.e. *all memory management is done by the caller*.
 
 ### debug
@@ -127,34 +130,41 @@ listen NAME {
 	radius {
 		clients = ...
 
+		server = default
+
+		type = Access-Request
+		type = Status-Server
+
 		Access-Request {
-			...
+			... # any necessary config here
 		}
 
-		Status-Server {
-			...
-		}
 	}
 }
 
 ````
 
 
-All transport configuration is in the `transport` reference, which points to a section. (or references a section???)
-
-````
-listen {
-	transport = ${udp}
-
-}
-````
-
-Though that may confuse too many people, though.  It may be better to
-just leave it as-is, OR define a `CONF_PARSER` so that `transport` is
-defined to be a reference, so the code doesn't have to dereference
-that itself.
-
-All application configuration is in the `application` reference.  There's probably not a better name.  Maybe `protocol`?
+All application configuration is in the `application` reference.
+There's probably not a better name.  Maybe `protocol`?
 
 All of the application-specific configuration is in a section,
 including clients, and which kind of packets it accepts.
+
+## Startup
+
+When the system starts up, it loads each listener and calls the parse
+API.  It then does...
+
+The transport bootstraps the IO layer, and calls any necessary
+messaging API to insert the application into the worker threads.
+
+The transport `read` function is called when the socket is ready.  The
+`read` function in turn calls the underlying `io read` handler to read
+from the socket.  When the transport function has determined it has a
+packet, it performs any transport-specific processing.  e.g. RADIUS
+de-dup, etc.
+
+The transport `read` function then sends a message with both the
+packet and the application layer to the worker thread, which processes
+the request.
