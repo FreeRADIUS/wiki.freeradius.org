@@ -5,6 +5,8 @@ i.e. bare-bones IO.  All memory is talloc'd, and functions which
 require memory allocation take a `TALLOC_CTX *`.  Freeing is done via
 talloc.
 
+Additional notes on UDP are in the [UDP](udp) page.
+
 ## Thread Safety
 
 The IO layer is not thread-safe.  That is, it is the callers
@@ -63,6 +65,9 @@ callbacks.  Inserts itself into the event loop, and sets up the callbacks for re
 
 The read/write callbacks should be supplied by the caller, and will
 call the `read` and `write` routines to write to buffers.
+
+If `read` or `write` are NULL and exist in the event loop, the events
+are removed.  This lets the callback move between event loops.
 
 i.e. *all memory management is done by the caller*.
 
