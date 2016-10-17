@@ -113,7 +113,7 @@ scl enable devtoolset-3 bash
 yum -y install libtalloc-dev
 ```
 
-#### libkqueue from release
+#### libkqueue
 Latest version can be found [here](https://github.com/mheily/libkqueue/releases).
 
 ```bash
