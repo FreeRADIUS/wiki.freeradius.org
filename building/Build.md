@@ -162,7 +162,7 @@ sudo make install
 
 ## Building on Solaris
 
-Please see: [Solaris](building/Solaris_
+Please see: [Solaris](building/Solaris)
 
 # Building Packages
 The FreeRADIUS source contains build rules for several different types of system packages. If your operating system has a packaging system (dpkg, rpm, tgz), it is usually easier to install the appropriate packages instead of directly installing from source. However this may not always be the recommended approach as many systems seem to lag behind with very old versions of FreeRADIUS. In that case it may be better to build packages from source.
