@@ -33,8 +33,6 @@ If you have problems when trying to run FreeRADIUS, and you see error messages l
 
 Then the shared libraries on your system are misconfigured.
 
-   Postgresql note: Copy rlm_sql_postgresql.so from FreeRadius build source to /usr/lib/rlm_sql_postgresql.so
-
 Building on MAC OSX
 ^^^^^^^^^^^^^^^^^^^
 ::
