@@ -63,13 +63,7 @@ make
 sudo make install	 
 ```
 
-Don't forget to read supplied documentation first, including the configuration files. As with many free software projects, FreeRADIUS could use more documentation. Until such documentation is available, the only place that configuration items are documented is in the configuration files themselves.	 
-	 
-If you have problems when trying to run FreeRADIUS, and you see error messages like:
-
-> rlm_sql: Could not link driver rlm_sql_mysql: file not found	 
-
-Then the shared libraries on your system are misconfigured.
+Don't forget to read supplied documentation first, including the configuration files. Many configuration options are documented inline, in the configuration files themselves. 
 
 ## Building on Debian or Ubuntu
 ### Dependencies
