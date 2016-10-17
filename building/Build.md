@@ -107,6 +107,10 @@ and then to get to a shell with the correct environment:
 scl enable devtoolset-3 bash
 ```
 
+Or can set ``CC=/opt/rh/devtoolset-3/root/usr/bin/gcc`` in your environment, which works just as well.
+
+If you're building on older versions of RedHat then you'll need to compile GCC from source.
+
 ### Dependencies
 
 ```bash
@@ -143,10 +147,6 @@ rpmbuild -ba ./libkqueue-${VERSION}/libkqueue.spec
 make
 sudo make install
 ```
-
-Or can set ``CC=/opt/rh/devtoolset-3/root/usr/bin/gcc`` in your environment, which works just as well.
-
-If you're building on older versions of RedHat then you'll need to compile GCC from source.
 
 ## Building on macOS
 
