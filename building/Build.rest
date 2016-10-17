@@ -130,7 +130,7 @@ Then simply run::
 
 ``rpmbuild`` will tell you if you are missing any build dependencies. If so, simply install them with ``yast2 -i packagename-devel`` then rerun ``rpmbuild``
 
-Building SUSE packages with Oracle Support
+Building RPM packages with Oracle Support
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 If you wish to use Oracle you will need to recompile FreeRADIUS on a machine 
@@ -138,11 +138,10 @@ that has Oracle development libraries installed. FreeRADIUS is known to work bot
 
 Most rpm packages available do not included oraclesql.conf due to the fact that they also don't contain the Oracle driver module (due to copyright reasons)
 
-On SUSE Linux if you have the Oracle header files in a sane location it should 
-be a simple matter of taking the latest FreeRADIUS release tarball and 
-dropping it in */usr/src/packages/SOURCES* along with the other files from the *suse/* directory inside the tarball with the exception of *freeradius.spec* which goes in */usr/src/packages/SPECS*
+If you have the Oracle header files in a sane location it should be a simple matter of taking the latest FreeRADIUS release tarball and 
+dropping it in ``/usr/src/packages/SOURCES`` along with the other files from the ``suse/`` or ``redhat/`` directory inside the tarball with the exception of ``freeradius.spec`` which goes in ``/usr/src/packages/SPECS``
 
-Then edit */usr/src/packages/SPECS/freeradius.spec* and change::
+Then edit ``/usr/src/packages/SPECS/freeradius.spec`` and change::
 
     %define _oracle_support 0
 to::
