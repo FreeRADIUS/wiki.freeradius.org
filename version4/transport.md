@@ -5,6 +5,10 @@ messaging / application layer.  All memory is talloc'd, and functions
 which require memory allocation take a `TALLOC_CTX *`.  Freeing is
 done via talloc.
 
+The transport layer (i.e. network thread) sends messages to the
+application layer (i.e. worker thread) via the (message API)[message].
+The process is reversed when receiving messages.
+
 ## Similarity to IO layer
 
 Many of the APIs are similar to the IO layer.  The transport layer

@@ -8,6 +8,10 @@ It exposes the following API.
  the `CONF_SECTION`, and the processing is entirely dependent on the
  state machine, and the `REQUEST`.
 
+The application layer (i.e. worker thread) receives messages from the
+transport layer (i.e. network thread) via the (message API)[message].
+The process is reversed when sending messages.
+
 ### bootstrap
 
 Takes a `CONF_SECTION *` and returns a `fr_application_t *`.  It
