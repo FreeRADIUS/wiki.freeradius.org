@@ -79,18 +79,6 @@ Platform specific instructions are available for:
 
 The FreeRADIUS source contains build rules for several different types of system packages. If your operating system has a packaging system (dpkg, rpm, tgz), it is usually easier to install the appropriate packages instead of directly installing from source. However this may not always be the recommended approach as many systems seem to lag behind with very old versions of FreeRADIUS. In that case it may be better to build packages from source.
 
-## Building SUSE packages
-
-On SUSE Linux it should be a simple matter of taking the latest FreeRADIUS release tarball and dropping it in ``/usr/src/packages/SOURCES`` along with the other files from the``suse/`` directory inside the tarball with the exception of ``freeradius.spec`` which goes in ``/usr/src/packages/SPECS``
-
-Then simply run:
-
-```bash
-rpmbuild -ba /usr/src/packages/SPECS/freeradius.spec
-```
-
-``rpmbuild`` will tell you if you are missing any build dependencies. If so, simply install them with ``yast2 -i packagename-devel`` then rerun ``rpmbuild``
-
 ## Building RPM packages with Oracle Support
 
 If you wish to use Oracle you will need to recompile FreeRADIUS on a machine 
