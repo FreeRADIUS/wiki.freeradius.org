@@ -38,7 +38,7 @@ For Linux users, this means there's a hard dependency on them shim library, libk
 ## Building from Source
 
 ```bash
-tar zxvf freeradius-<version>.tar.gz	 
+tar -zxvf freeradius-<version>.tar.gz	 
 ./configure	 
 make	  
 sudo make install	 
