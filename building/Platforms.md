@@ -25,7 +25,7 @@ FreeRADIUS is reported to run on the following Operating Systems:
   * [Red Hat](http://www.redhat.com/)
   * [SUSE](http://www.opensuse.org/)
   * [Turbolinux](http://www.turbolinux.com/)
-  * [Ubuntu](http://www.ubuntu.com/))
+  * [Ubuntu](http://www.ubuntu.com/)
 * [macOS](http://www.apple.com/)
 * [NetBSD](http://www.netbsd.org/)
 * [OpenBSD](http://www.openbsd.org/)
