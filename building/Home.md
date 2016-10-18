@@ -1,7 +1,7 @@
 # Building FreeRADIUS
 ## Supported Platforms
 
-FreeRADIUS is known to run on a large number of 32 and 64bit [platforms](building/Platforms). In general the build procedure between platforms is very similar, the main differences are how to satisfy dependencies, and how to [build packages](building/Packages).
+FreeRADIUS is known to run on a large number of 32 and 64bit [platforms](Platforms). In general the build procedure between platforms is very similar, the main differences are how to satisfy dependencies, and how to build packages.
 
 ## FreeRADIUS hard dependencies
 
