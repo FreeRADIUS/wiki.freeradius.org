@@ -4,26 +4,14 @@
 FreeRADIUS is known to run on a large number of 32 and 64bit [platforms](building/Platforms). In general the build procedure between platforms is very similar, the main differences are how to satisfy dependencies, and how to [build packages](building/Packages).
 
 ## FreeRADIUS hard dependencies
+
+See [platform specific build instructions](#building-from-source) for how to satisfy these dependencies on your platform.
+
 ### libtalloc (since >= v3.0.x)
 
 [Talloc](https://talloc.samba.org/talloc/doc/html/index.html) is a hierachical memory allocator used/created by the Samba project.
 
 It is used **heavily** in version >= v3.0.x and greatly simplifies managing complex trees of memory allocation, and local slab allocation.
-
-On Centos/Suse/RHEL install with
-```bash
-sudo yum install libtalloc-devel libtalloc
-```
-
-On Debian/Ubuntu install with
-```bash
-sudo apt-get install libtalloc-dev libtalloc
-```
-
-On OSX install with
-```bash
-brew install talloc
-```
 
 ### C11 (since >= v3.1.x)
 
@@ -42,15 +30,6 @@ For clang this means versions >= 3.0 (released 2011-12-01), and GCC versions >= 
 kqueue is the eventing interface used by the BSDs (including OSX).  After evaluating the native eventing APIs of different operating systems and wrappers such as libuv, libev, libevent[2] etc... the FreeRADIUS core team decided to standardise on kqueue.
 
 For Linux users, this means there's a hard dependency on them shim library, libkqueue, which wraps epoll (the native Linux eventing API), providing a kqueue compatible interface.
-
-On Centos/Suse/RHEL see the build instructions here.
-
-On Debian/Ubuntu install with
-```bash
-sudo apt-get install libkqueue-dev libkqueue
-```
-
-On macOS, FreeBSD, OpenBSD etc... no additional dependencies are required.
 
 ## Getting the source
 
