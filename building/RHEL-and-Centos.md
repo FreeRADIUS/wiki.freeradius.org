@@ -30,7 +30,9 @@ yum -y install libtalloc-devel
 ```
 
 ### libkqueue
-Latest version can be found [here](https://github.com/mheily/libkqueue/releases).
+Unfortunately neither RHEL nor Centos provide an RPM for libkqueue.  The instructions below will produce a libkqueue RPM, which can then be installed for building from source, or distributed with the FreeRADIUS RPMs when building packages.
+
+Latest version of libkqueue can be found [here](https://github.com/mheily/libkqueue/releases).
 
 ```bash
 # Replace v2.1.0 with latest version
