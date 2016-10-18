@@ -9,6 +9,13 @@ The transport layer (i.e. network thread) sends messages to the
 application layer (i.e. worker thread) via the (message API)[message].
 The process is reversed when receiving messages.
 
+*The followng API proposal is not set in stone.  It may change,
+ depending on the needs of the worker threads.*
+
+The transports need to be parsed, and associated with a thread / event
+loop.  They need to in turn send packets to worker threads.  All other
+APIs are likely not necessary.
+
 ## Similarity to IO layer
 
 Many of the APIs are similar to the IO layer.  The transport layer
@@ -29,6 +36,9 @@ of the work of parsing type-specific information.
 
 Takes a `fr_transport_t *` and returns a `char const *`, which is
 talloc'd.  The string is a short description of the transport.
+
+*We may want this to be a debug only call?  i.e. the `parse` routine
+ should just set a name in the `fr_transport_t` structure.*
 
 ### open
 
