@@ -48,7 +48,6 @@ FreeRADIUS shipped with the current versions of Debian (both `Jessie` and `Wheez
 
 Building Debian packages should be very simple. First obtain a copy of the source and unpack it. Second, build the packages.
 
-### Building .deb files
 Having retrieved whichever version of the source you require, build the FreeRADIUS packages:
 
 ```bash
