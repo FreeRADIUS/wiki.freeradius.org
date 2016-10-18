@@ -1,4 +1,3 @@
-
 # Building FreeRADIUS
 ## Supported Platforms
 
@@ -51,7 +50,7 @@ On Debian/Ubuntu install with
 sudo apt-get install libkqueue-dev libkqueue
 ```
 
-On OSX, FreeBSD, OpenBSD etc no additional dependencies are required.
+On macOS, FreeBSD, OpenBSD etc... no additional dependencies are required.
 
 ## Building from Source
 
