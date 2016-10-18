@@ -54,8 +54,6 @@ On macOS, FreeBSD, OpenBSD etc... no additional dependencies are required.
 
 ## Building from Source
 
-If your operating system has support for a package manager such as .deb or .rpm file format, we recommend that you follow the instructions in the [next section](Build#building-packages) instead:
-
 ```bash
 tar zxvf freeradius-<version>.tar.gz	 
 ./configure	 
@@ -65,44 +63,17 @@ sudo make install
 
 Don't forget to read supplied documentation first, including the configuration files. Many configuration options are documented inline, in the configuration files themselves. 
 
-## Building on Debian or Ubuntu
-### Dependencies
+Platform specific instructions are available for:
 
-```bash
-sudo apt-get install libtalloc-dev libkqueue-dev
-```
+- [macOS](macOS)
+- [RHEL and Centos](RHEL and Centos)
+- [Debian and Ubuntu](Debian and Ubuntu)
+- [Solaris](Solaris)
+- [Suse](Suse)
 
-### Building/Installing
-```bash
-# Use ./configure --enable-developer if you're debugging issues, or using unstable code.
-./configure
-make
-sudo make install
-```
+## Building Packages
 
-
-## Building on macOS
-
-If you don't have homebrew package manager installed, [do it now](http://brew.sh)... it'll make your life on macOS far simpler.
-
-```bash
-brew install talloc
-# Use ./configure --enable-developer if you're debugging issues, or using unstable code.
-./configure
-make
-sudo make install
-```
-
-## Building on Solaris
-
-Please see: [Solaris](building/Solaris)
-
-# Building Packages
 The FreeRADIUS source contains build rules for several different types of system packages. If your operating system has a packaging system (dpkg, rpm, tgz), it is usually easier to install the appropriate packages instead of directly installing from source. However this may not always be the recommended approach as many systems seem to lag behind with very old versions of FreeRADIUS. In that case it may be better to build packages from source.
-
-## Building RedHat packages
-
-Please refer to the information on the Red Hat specific page (Red Hat FAQ)[guide/Red Hat FAQ].
 
 ## Building SUSE packages
 
