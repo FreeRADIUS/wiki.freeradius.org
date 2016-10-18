@@ -15,7 +15,7 @@ There are many third-party web sites and HOWTO's that give advice on FreeRADIUS.
 
 The following is an overview of the types of information available:
 
-* [[Building and installing|building/Build]]
+* [[Building and installing|building/Home]]
 * [[Configuration|config/Configuration files]]
 * [[Base Modules|project/List of Modules]]
 * [[Radius Clients|glossary/Radius Clients]]
