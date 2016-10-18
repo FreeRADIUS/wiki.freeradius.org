@@ -1,4 +1,3 @@
-
 ## Building on RHEL7 or Centos7
 ### Upgrading GCC
 
@@ -27,7 +26,7 @@ If you're building on older versions of RedHat then you'll need to compile GCC f
 ### Dependencies
 
 ```bash
-yum -y install libtalloc-dev
+yum -y install libtalloc-devel
 ```
 
 #### libkqueue
