@@ -11,7 +11,7 @@ If you are not constrained in your choice of operating systems, for maximum perf
   * [Debian](http://www.debian.org/)
   * [Ubuntu](http://www.ubuntu.com/)
 * [macOS](http://www.apple.com/)
-* [Solaris](hhttp://www.oracle.com/technetwork/server-storage/solaris11/overview/index.html)
+* [Solaris](http://www.oracle.com/technetwork/server-storage/solaris11/overview/index.html)
 
 ## Reported to work by the community
 FreeRADIUS is reported to run on the following Operating Systems:
@@ -22,7 +22,7 @@ FreeRADIUS is reported to run on the following Operating Systems:
 * [Linux](http://www.kernel.org/)
   * [CentOS](http://www.centos.org/)
   * [Debian](http://www.debian.org/)
-  * [Mandriva](http://www.mandriva.com/)
+  * [Open Mandriva](https://www.openmandriva.org/)
   * [Red Hat](http://www.redhat.com/)
   * [SUSE](http://www.opensuse.org/)
   * [Turbolinux](http://www.turbolinux.com/)
@@ -31,7 +31,7 @@ FreeRADIUS is reported to run on the following Operating Systems:
 * [NetBSD](http://www.netbsd.org/)
 * [OpenBSD](http://www.openbsd.org/)
 * OSF/Unix
-* [Solaris](hhttp://www.oracle.com/technetwork/server-storage/solaris11/overview/index.html)
+* [Solaris](http://www.oracle.com/technetwork/server-storage/solaris11/overview/index.html)
 
 Porting to other unix-like platforms should be easy. Due to the limited resources of the FreeRADIUS development team, we are not able to test each version on all platforms before release.
 
