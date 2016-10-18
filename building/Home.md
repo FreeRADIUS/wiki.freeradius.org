@@ -52,6 +52,10 @@ sudo apt-get install libkqueue-dev libkqueue
 
 On macOS, FreeBSD, OpenBSD etc... no additional dependencies are required.
 
+## Getting the source
+
+[[include:Getting-the-Source]]
+
 ## Building from Source
 
 ```bash
