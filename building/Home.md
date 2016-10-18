@@ -1,4 +1,9 @@
+
 # Building FreeRADIUS
+## Supported Platforms
+
+FreeRADIUS is known to run on a large number of 32 and 64bit [platforms](building/Platforms). In general the build procedure between platforms is very similar, the main differences are how to satisfy dependencies, and how to [build packages](building/Packages).
+
 ## FreeRADIUS hard dependencies
 ### libtalloc (since >= v3.0.x)
 
@@ -47,10 +52,6 @@ sudo apt-get install libkqueue-dev libkqueue
 ```
 
 On OSX, FreeBSD, OpenBSD etc no additional dependencies are required.
-
-## Supported Platforms
-
-FreeRADIUS is known to run on a large number of 32 and 64bit [platforms](building/Platforms), however building on some of them may require following special procedures here.
 
 ## Building from Source
 
