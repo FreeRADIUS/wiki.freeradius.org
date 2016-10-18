@@ -17,6 +17,10 @@ sudo update-alternatives --config gcc
 # Choose option 3 from the dialogue
 ```
 
+## Getting the source
+
+[[include:Getting-the-Source]]
+
 ## Building from source
 ### Dependencies
 
@@ -44,10 +48,6 @@ If you're using Ubuntu, you should first check whether your desired version of F
 FreeRADIUS shipped with the current versions of Debian (both `Jessie` and `Wheezy`) are several years out of date. This means that they are no longer officially supported by the FreeRADIUS project.
 
 Building Debian packages should be very simple. First obtain a copy of the source and unpack it. Second, build the packages.
-
-### Getting the source
-
-[[include:Getting-the-Source]]
 
 ### Building the packages
 
