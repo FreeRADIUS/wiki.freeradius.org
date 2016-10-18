@@ -48,11 +48,11 @@ Don't forget to read supplied documentation first, including the configuration f
 
 Platform specific instructions are available for:
 
-- [Debian and Ubuntu](Debian and Ubuntu#building-from-source)
-- [macOS](macOS#building-from-source)
-- [RHEL and Centos](RHEL and Centos#building-from-source)
-- [Solaris](Solaris#building-from-source)
-- [Suse](Suse#building-from-source)
+- [Debian and Ubuntu](Debian and Ubuntu)
+- [macOS](macOS)
+- [RHEL and Centos](RHEL and Centos)
+- [Solaris](Solaris)
+- [Suse](Suse)
 
 ## Building Packages
 
