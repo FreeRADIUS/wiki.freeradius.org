@@ -23,7 +23,7 @@ Or can set ``CC=/opt/rh/devtoolset-3/root/usr/bin/gcc`` in your environment, whi
 
 If you're building on older versions of RedHat then you'll need to compile GCC from source.
 
-## Dependencies
+## Hard dependencies
 
 ```bash
 yum -y install libtalloc-devel
