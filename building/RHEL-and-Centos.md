@@ -1,5 +1,5 @@
-## Building on RHEL7 or Centos7
-### Upgrading GCC
+# Building on RHEL7 or Centos7
+## Upgrading GCC
 
 RHE7 ships with GCC 4.8.5 but we require GCC >= 4.9.0 for FreeRADIUS >= v3.1.x.
 
@@ -23,6 +23,7 @@ Or can set ``CC=/opt/rh/devtoolset-3/root/usr/bin/gcc`` in your environment, whi
 
 If you're building on older versions of RedHat then you'll need to compile GCC from source.
 
+## Building from source
 ### Dependencies
 
 ```bash
