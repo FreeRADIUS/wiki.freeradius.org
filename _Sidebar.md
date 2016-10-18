@@ -3,7 +3,7 @@
 * [[Concepts for beginners|guide/Concepts]]
 * [[Basic Configuration|guide/Basic configuration Howto]]
 * [[Pre-built packages|building/Packages]]
-* [[Installing from source code|building/]]
+* [[Installing from source code|building/Home]]
 * [[Troubleshooting|guide/Troubleshooting]]
 * [[Contributing with GitHub|contributing/GitHub]]
 * [[Browse the Source|https://github.com/FreeRADIUS/freeradius-server]]
