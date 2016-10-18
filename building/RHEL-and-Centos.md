@@ -42,7 +42,7 @@ tar -xvzf v${VERSION}.tar.gz
 cd ./libkqueue-${VERSION}
 sed -ie "s/Version:.*/Version:    ${VERSION}/" ./libkqueue.spec
 sed -ie "s/%{_mandir}\/man2\/kevent.2.*//" ./libkqueue.spec
-sed -ie "s/^%{make_install}.*/%{make_install}\nrm -rf \${RPM_BUILD_ROOT}\/%{_libdir}\/*.a\nrm -rf \${RPM_BUILD_ROOT}\/%{_libdir}\/*.la/" ./libkqueue.spec
+sed -ie "s/^%{make_install}.*/%{make_install} \&\& rm -rf \${RPM_BUILD_ROOT}\/%{_libdir}\/*.a \&\& rm -rf \${RPM_BUILD_ROOT}\/%{_libdir}\/*.la/" ./libkqueue.spec
 autoreconf -i
 cd ..
 tar -czf ./libkqueue-${VERSION}.tar.gz ./libkqueue-${VERSION}
