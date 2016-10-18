@@ -2,55 +2,69 @@
 
 Version 4 should be async by default.  There should be minimal
 communication between threads.  All necessary communication should be
-through thread-safe queues.
+through [messages](message).
 
-We need a threading API which is separate from everything else.  It
-takes care of queueing requests, signalling them, etc.
+There are network threads, which read / write to the network.  There
+are worker threads, which process packets (unlang, SQL, etc).
 
-### create
+We probbly want thread affinity, where a network thread preferentially
+sends packets to one worker thread.  In the common case, a worker
+thread processes packets faster than they arrive.  So distributing
+packets among worker threads isn't necessary.
 
-Takes `CONF_SECTION *` and returns `fr_worker_thread_t *`.
+In the high performance case, there may be bursts where offered load
+is higher than accepted load.  The packets should then probably wbe
+distributed among worker threads.
 
-### kill
+We would also like affinity for EAP authentications.  i.e. All packets
+for an EAP-TLS conversastion should go to one worker thread.  Doing so
+means that we can get rid of most OpenSSL mutexes, as each `SSL_CTX`
+is thread-local.
 
-Takes `fr_worker_thread_t *`, and ???, and signals the thread to exit.
-The signals can be NOW, or terminate gracefully.
+## Notes on UDP writes
 
-### enqueue
+In many cases, worker threads can write replies directly to the UDP
+socket.  This is especially true for accounting packets, where there
+is no de-dup and no cleanup delay.  Where there is no de-dup or
+cleanup delay, the [transport](transport) front-end can receive a
+packet, send it to the worker thread, and then forget all about the
+packet.
 
-Takes `fr_thread_t *` and `REQUEST *`, and enqueues the request for the thread to process.
-
-*Maybe we just need one enqueue function, which enqueues a request and a signal?*
-
-And the default is `FR_ACTION_QUEUE` ?
-
-### signal
-
-Takes `fr_thread_t *` and `REQUEST *`, and `fr_action_t *`, and signals the request.
-
-*We need this to be async safe, so we may need a REQUEST from the
-network thread, which is then duplicated as a child REQUEST in the
-worker thread?*`
+Things get more difficult for authentication packets, which are
+required to de-dup and have cleanup delay.  We would like to avoid
+mutexes where possible, so the question is which is cheaper?  Sending
+the reply from the worker to network thread, and doing de-dup updates
+/ cleanup delay there?  Or having network + worker thread both access
+a mutex-protected dedup tree?  The issue with mutexes is that every
+*access* to the tree has to be mutex protected, which is very bad...
 
 ## Notes on TCP Writes
 
-The usual way to handle TCP writes for multiple worker threads
-(e.g. radsecproxy), is to have (a) a thread each to read/write the
-socket, and (b) worker threads.  Each thread has a queue associated
-with it.  Packets which are read go to a queue on a worker thread.
-When the packets are read to be written, the worker thread places them
-onto the queue for the writer thread.
+The current proposal is to use [messages](message) to exchange
+packets.  The worker thread builds the raw packet, and sends it to the
+network thread.  In the general case, the network thread writes the
+packet to the socket and it's done.  If the socket isn't ready, (or
+auth de-dup / cleanup delay), the packet has to be copied out of the
+message buffer into a local buffer for later writes.  At that point,
+the network thread can just try to write all available data, and can
+ignore packet boundaries.
 
-This can cause issues:  https://www.socallinuxexpo.org/sites/default/files/presentations/2014SCALE-hyc.pdf
+This kind of design can cause issues, though. See:
+https://www.socallinuxexpo.org/sites/default/files/presentations/2014SCALE-hyc.pdf
 
-A different design is to get rid of the writer thread entirely.  In
-this model, when a worker thread needs to write to a TCP connection,
-it grabs a "write context" for that TCP connection.  This means that
-it is the thread which is writing to the TCP connection.
+A different design would be to get rid of the writer thread entirely.
+In this model, when a worker thread needs to write to a TCP
+connection, it grabs a "write context" for that TCP connection.  This
+means that it is the thread which is writing to the TCP connection.
 
 The main utility here is for slow clients.  Instead of having a writer
 thread which is mostly idle, you can have worker threads which do
 other things.
+
+i.e. if the socket is writable (which is the general case), the worker
+thread just writes to the socket.  (with caveats for packet
+boundaries, threading issues, etc).  If the socket isn't writable, the
+worker thread can add it's raw packet to the outbound queue.
 
 When the socket becomes writable, the worker thread writes all pending
 packets to the socket, and then goes on with other business.  Again,
@@ -73,7 +87,7 @@ We may want to fix this in v4. :)
 One way (for UDP sockets) is to note that we can have multiple readers
 on the same socket.  There is no way around the "thundering herd"
 problem, where if one packet is available... all sockets get woken up.
-But it may be useful to do.
+But it may be useful to do. See [UDP](udp) for more notes on RSS.
 
 We also have the issue that in the common case (probably 90% of
 deployments), the incoming packet rate is very low.  i.e. a packet
