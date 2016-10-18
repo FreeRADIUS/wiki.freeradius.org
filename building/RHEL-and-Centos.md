@@ -60,3 +60,10 @@ rpmbuild -ba ./libkqueue-${VERSION}/libkqueue.spec
 make
 sudo make install
 ```
+
+## Building Packages
+
+
+### With Oracle support
+
+[[include:RPMs-with-Oracle-support]]
