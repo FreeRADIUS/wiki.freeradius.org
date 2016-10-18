@@ -65,4 +65,4 @@ Platform specific instructions are available for:
 - [Suse](Suse#building-packages)
 
 # See Also
-* [Pre-Built Packages](building/pre-built-packages)
+* [Pre-Built Packages](pre-built-packages)
