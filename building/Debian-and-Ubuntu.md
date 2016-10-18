@@ -1,8 +1,5 @@
 # Building on Debian or Ubuntu
-
-## Building from source
-### Upgrading GCC
-
+## Upgrading GCC
 Older versions of Debian and Ubuntu use GCC < 4.8, which lacks support for the C11 features needed to build FreeRADIUS >= v3.1.x.
 
 In order to switch to GCC 4.9
@@ -20,6 +17,7 @@ sudo update-alternatives --config gcc
 # Choose option 3 from the dialogue
 ```
 
+## Building from source
 ### Dependencies
 
 ```bash
