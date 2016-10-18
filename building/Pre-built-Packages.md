@@ -24,4 +24,4 @@ Pre-built binary packages for a number of operating systems are available from t
 
 # See Also
 
-* [building/Home](Building FreeRADIUS)
+* [Building FreeRADIUS](building/Home)
