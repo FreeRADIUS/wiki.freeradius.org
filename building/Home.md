@@ -23,7 +23,7 @@ If you see an error message like
 
 That means your compiler does not support C11, and you'll need to one that does.
 
-For clang this means versions >= 3.0 (released 2011-12-01), and GCC versions >= 4.9 (released 2014-04-22).
+For clang this means versions >= 3.0 (released after 2011-12-01), and GCC versions >= 4.9 (released after 2014-04-22).
 
 ### libkqueue or native kqueue support (since >= v4.0.x)
 
