@@ -1,5 +1,7 @@
 # Building on Debian or Ubuntu
-## Upgrading GCC
+
+## Building from source
+### Upgrading GCC
 
 Older versions of Debian and Ubuntu use GCC < 4.8, which lacks support for the C11 features needed to build FreeRADIUS >= v3.1.x.
 
@@ -18,7 +20,7 @@ sudo update-alternatives --config gcc
 # Choose option 3 from the dialogue
 ```
 
-## Dependencies
+### Dependencies
 
 ```bash
 sudo apt-get install libtalloc-dev libkqueue-dev
@@ -37,7 +39,7 @@ make
 sudo make install
 ```
 
-## Packages
+## Building Packages
 
 If you're using Ubuntu, you should first check whether your desired version of FreeRADIUS is available in the Ubuntu package repositories, because that will save you the trouble of building packages yourself. As of March 2016, the Ubuntu repositories contain only version 2 of the server, which is end-of-life. Please see: http://packages.ubuntu.com/freeradius.
 
