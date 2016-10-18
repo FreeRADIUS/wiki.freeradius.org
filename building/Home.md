@@ -79,32 +79,5 @@ Platform specific instructions are available for:
 
 The FreeRADIUS source contains build rules for several different types of system packages. If your operating system has a packaging system (dpkg, rpm, tgz), it is usually easier to install the appropriate packages instead of directly installing from source. However this may not always be the recommended approach as many systems seem to lag behind with very old versions of FreeRADIUS. In that case it may be better to build packages from source.
 
-## Building RPM packages with Oracle Support
-
-If you wish to use Oracle you will need to recompile FreeRADIUS on a machine 
-that has Oracle development libraries installed. FreeRADIUS is known to work both with a full Oracle installation as well as with the [Oracle Instant Client SDK](http://www.oracle.com/technology/tech/oci/instantclient/index.html). Once built the resulting RPM package can be deployed with just the [Oracle Instant Client](http://www.oracle.com/technology/tech/oci/instantclient/index.html) (No need for the SDK on production machines)
-
-Most rpm packages available do not included oraclesql.conf due to the fact that they also don't contain the Oracle driver module (due to copyright restrictions).
-
-If you have the Oracle header files in a sane location it should be a simple matter of taking the latest FreeRADIUS release tarball and 
-dropping it in ``/usr/src/packages/SOURCES`` along with the other files from the ``suse/`` or ``redhat/`` directory inside the tarball with the exception of ``freeradius.spec`` which goes in ``/usr/src/packages/SPECS``
-
-Then edit ``/usr/src/packages/SPECS/freeradius.spec`` and change:
-
-```
-%define _oracle_support 0
-```
-
-to:
-
-```
-%define _oracle_support 1
-```
-
-Then simply run:
-
-```
-rpmbuild -ba /usr/src/packages/SPECS/freeradius.spec
-```
 # See Also
-* (Standard package)[building/packages]
+* [Building packages](building/packages)
