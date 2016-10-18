@@ -17,12 +17,7 @@ sudo update-alternatives --config gcc
 # Choose option 3 from the dialogue
 ```
 
-## Getting the source
-
-[[include:Getting-the-Source]]
-
-## Building from source
-### Dependencies
+## Dependencies
 
 ```bash
 sudo apt-get install libtalloc-dev libkqueue-dev
@@ -32,7 +27,11 @@ Building Debian packages of FreeRADIUS from source is kept as simple as possible
 
 The above page also includes instructions on building with Oracle support or installing Debian **backports** packages for older systems.
 
-### Building/Installing
+## Getting the source
+
+[[include:Getting-the-Source]]
+
+## Building from source
 
 ```bash
 # Use ./configure --enable-developer if you're debugging issues, or using unstable code.
