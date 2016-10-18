@@ -64,6 +64,8 @@ and returns a `ssize_t` of data read, or `-ERROR`.
 Note that unlike the IO layer, the transport layer reads application
 data.  This is because it needs to be application aware.
 
+*probably not what we want...see updates [messages](message) doc*
+
 ### write
 
 Takes a `fr_transport_t *`, `RADIUS_PACKET *`
@@ -71,6 +73,8 @@ and returns a `ssize_t` of data written, or `-ERROR`.
 
 Note that unlike the IO layer, the transport layer writes application
 data.  This is because it needs to be application aware.
+
+*probably not what we want...see updates [messages](message) doc*
 
 ### event
 
@@ -85,6 +89,18 @@ If `read` or `write` are NULL and exist in the event loop, the events
 are removed.  This lets the callback move between event loops.
 
 i.e. *all memory management is done by the caller*.
+
+### message_recv
+
+Receives a message from another subsystem.  This API is required
+because we may have transport-specific logic on sending packets.
+
+e.g. for UDP + accounting packets, the "send packet" call can be done
+by a worker thread.  If the socket is busy (or TCP / TLS / auth), the
+worker thread calling the transport layer instead sends the message,
+which is picked up by the network thread, and processed.
+
+We need a similar `message_recv()` call for worker [threads](threads).
 
 ### debug
 

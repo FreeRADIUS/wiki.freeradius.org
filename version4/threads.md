@@ -72,6 +72,15 @@ this is mainly useful for slow connections.  For fast connections, the
 worker thread can probably just grab a mutex, write the data, and be
 done.
 
+This design means that the worker threads would not call the message
+API to send a message to the network threads inbound message
+queue. Instead, they would call a transport API (which is almost
+identical to the message API) to send the message.
+e.g. `transport_msg(transport, ....)`.  This API means that the
+transport can choose to send the message to the network thread via the
+message API, or (if allowed by the transport), it camn just send the
+message and avoid the overhead of messaging.
+
 ## Notes on Performance
 
 Not withstanding the OpenLDAP experience, we may want to do something
