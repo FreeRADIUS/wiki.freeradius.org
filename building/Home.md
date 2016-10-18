@@ -52,7 +52,7 @@ Platform specific instructions are available for:
 - [macOS](macOS)
 - [RHEL and Centos](RHEL and Centos)
 - [Solaris](Solaris)
-- [Suse](Suse and OpenSuse)
+- [Suse and OpenSuse](Suse and OpenSuse)
 
 ## Building Packages
 
@@ -62,7 +62,7 @@ Platform specific instructions are available for:
 
 - [Debian and Ubuntu](Debian and Ubuntu#building-packages)
 - [RHEL and Centos](RHEL and Centos#building-packages)
-- [Suse](Suse#building-packages)
+- [Suse and OpenSuse](Suse and OpenSuse#building-packages)
 
 # See Also
 * [Pre-Built Packages](pre-built-packages)
