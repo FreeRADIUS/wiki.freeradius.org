@@ -1,3 +1,14 @@
+## Hard dependencies
+
+```bash
+yum -y install libtalloc-devel
+```
+
+### libkqueue
+Unfortunately neither Suse nor OpenSuse provide an RPM for libkqueue.  The instructions below will produce a libkqueue RPM, which can then be installed for building from source, or distributed with the FreeRADIUS RPMs when building packages.
+
+[[include:libkqueue-rpm]]
+
 ## Getting the source
 
 [[include:Getting-the-Source]]
