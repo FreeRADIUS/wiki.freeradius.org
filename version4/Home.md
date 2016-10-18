@@ -39,6 +39,18 @@ are moved out of the server core and into plugins.  The core becomes a
 configuration file loader, thread manager, and policy language
 interpreter.  Nothing more.
 
+Data is read from the [IO layer](io).
+
+Data is turned into packets in the [Transport layer](transport).
+
+Packets are processed by the [Application Layer](application).
+
+Processing is done by [Threads](threads), both worker threads
+(policies) and network threads (read/write).
+
+Threads exchange information via [Messages](message).
+
+
 ## Unlang Interpreter
 
 The unlang interpreter has had a few major rewrites over the years.

@@ -56,7 +56,8 @@ subsystem to somewhere else.
 
 The queue of messages is a simple FIFO set of pointers.  Where
 possible, this is done via a lockless queue.  Otherwise, mutexes are
-used.
+used.  We may also want a ring buffer for the queue, as it's just
+pointers.  Then, CAS for updates...
 
 Queues are owned by the recipient of the messages.  i.e. multiple
 originators send messages to one queue.  Each recipient (worker
@@ -88,6 +89,10 @@ write the reply.  **Lowering this overhead is of high priority.**
 
 The message headers are allocated via a slab allocator, possibly a
 ring buffer.  The message headers are fixed size.
+
+We can't put messages into the ring buffer because of issues with TCP.
+We want to be able to read lots of TCP data into a buffer, and that
+data may encompass multiple RADIUS packets.
 
 The message API allows for the allocation of a message, possibly with
 bulk data.  This allocation just grabs the next free header.  The bulk
@@ -185,17 +190,28 @@ it is discarded.
 
 The message API keeps track of the current and old ring buffers.
 
+Data is read into the buffer via an underlying [IO](io)
+implementation.  Then, packets are decoded from the ring buffwr.
+
 Packet allocations from the ring buffer are rounded up to the nearest
 cache line size (64 bytes).  This prevents false sharing.
 
 * create - create a ring buffer
 * destroy - free a ring buffer (maybe talloc?)
-* write - alloc room for N bytes from the ring buffer
-* read - read N bytes from the start of the ring buffer
+* used - tell the ring buffer that N bytes of data have been used from the ring buffer
+* unused - tell the ring buffer than N bytes of data are unused at the start.
 
-Note that the read / write is done on raw sizes (e.g. 11 bytes), but
-the updates to the ring buffer are done internally on cache aligned
-sizes (64 bytes, for an 11-byte read/write).
+Note that the read / write is done on raw sizes (e.g. 11 bytes).  If
+the caller needs cache line alignment, it does so itself.  This is
+because the ring buffer is for both UDP (where each packet is
+individual), and for TCP (packets are streamed together).
+
+We don't use `recvmmsg()`, because it's broken.  The timeout is
+checked only after a packet is received.  So if you ask for N packets,
+and it receives M<N packets... it never returns (even if the timeout
+hits), until the next packet is received.  *Maybe `MSG_WAITFORONE` is
+better?* If that's true, then we don't want a ring buffer, as it's
+possible to receive multiple messages.
 
 Note that the ring buffer doesn't keep track of where the packet start
 / end is.  It trusts the caller to track that information.
