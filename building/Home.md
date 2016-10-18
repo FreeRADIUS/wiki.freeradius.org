@@ -79,5 +79,10 @@ Platform specific instructions are available for:
 
 The FreeRADIUS source contains build rules for several different types of system packages. If your operating system has a packaging system (dpkg, rpm, tgz), it is usually easier to install the appropriate packages instead of directly installing from source. However this may not always be the recommended approach as many systems seem to lag behind with very old versions of FreeRADIUS. In that case it may be better to build packages from source.
 
+Platform specific instructions are available for:
+
+- [RHEL and Centos](RHEL and Centos#Building Packages)
+- [Debian and Ubuntu](Debian and Ubuntu#Building Packages)
+
 # See Also
 * [Building packages](building/packages)
