@@ -69,9 +69,9 @@ Don't forget to read supplied documentation first, including the configuration f
 
 Platform specific instructions are available for:
 
+- [Debian and Ubuntu](Debian and Ubuntu#building-from-source)
 - [macOS](macOS#building-from-source)
 - [RHEL and Centos](RHEL and Centos#building-from-source)
-- [Debian and Ubuntu](Debian and Ubuntu#building-from-source)
 - [Solaris](Solaris#building-from-source)
 - [Suse](Suse#building-from-source)
 
@@ -81,8 +81,9 @@ The FreeRADIUS source contains build rules for several different types of system
 
 Platform specific instructions are available for:
 
-- [RHEL and Centos](RHEL and Centos#building-packages)
 - [Debian and Ubuntu](Debian and Ubuntu#building-packages)
+- [RHEL and Centos](RHEL and Centos#building-packages)
+- [Suse](Suse#building-packages)
 
 # See Also
 * [Building packages](building/packages)
