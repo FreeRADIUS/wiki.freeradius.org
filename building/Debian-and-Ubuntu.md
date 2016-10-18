@@ -17,7 +17,7 @@ sudo update-alternatives --config gcc
 # Choose option 3 from the dialogue
 ```
 
-## Dependencies
+## Hard dependencies
 
 ```bash
 sudo apt-get install libtalloc-dev libkqueue-dev
