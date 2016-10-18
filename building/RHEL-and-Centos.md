@@ -29,7 +29,7 @@ If you're building on older versions of RedHat then you'll need to compile GCC f
 yum -y install libtalloc-devel
 ```
 
-#### libkqueue
+### libkqueue
 Latest version can be found [here](https://github.com/mheily/libkqueue/releases).
 
 ```bash
@@ -50,6 +50,10 @@ mkdir -p ~/rpmbuild/{BUILD,RPMS,SOURCES,SPECS,SRPMS}
 cp ./libkqueue-${VERSION}.tar.gz ~/rpmbuild/SOURCES/libkqueue-${VERSION}.tar.gz
 rpmbuild -ba ./libkqueue-${VERSION}/libkqueue.spec
 ```
+
+## Getting the source
+
+[[include:Getting-the-Source]]
 
 ## Building from source
 
