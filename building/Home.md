@@ -100,18 +100,6 @@ Please see: [Solaris](building/Solaris)
 # Building Packages
 The FreeRADIUS source contains build rules for several different types of system packages. If your operating system has a packaging system (dpkg, rpm, tgz), it is usually easier to install the appropriate packages instead of directly installing from source. However this may not always be the recommended approach as many systems seem to lag behind with very old versions of FreeRADIUS. In that case it may be better to build packages from source.
 
-## Debian
-
-Building Debian packages of FreeRADIUS from source is kept as simple as possible. Please refer to the [Debian package](Debian) page for full instructions.
-
-The above page also includes instructions on building with Oracle support or installing Debian **backports** packages for older systems.
-
-## Building Ubuntu packages
-
-If you're using Ubuntu, you should first check whether your desired version of FreeRADIUS is available in the Ubuntu package repositories, because that will save you the trouble of building packages yourself. As of March 2016, the Ubuntu repositories contain only version 2 of the server, which is end-of-life. Please see: [[http://packages.ubuntu.com/freeradius]].
-
-For build instructions, please follow the instructions (building Ubuntu Packages)[building/Building-Ubuntu-packages-from-source] or follow the same directions as [building Debian packages](Debian#building-debian-packages) on the main Debian page.
-
 ## Building RedHat packages
 
 Please refer to the information on the Red Hat specific page (Red Hat FAQ)[guide/Red Hat FAQ].
