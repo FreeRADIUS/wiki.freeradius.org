@@ -1,3 +1,7 @@
+## Getting the source
+
+[[include:Getting-the-Source]]
+
 ## Building SUSE packages
 
 On SUSE Linux it should be a simple matter of taking the latest FreeRADIUS release tarball and dropping it in ``/usr/src/packages/SOURCES`` along with the other files from the``suse/`` directory inside the tarball with the exception of ``freeradius.spec`` which goes in ``/usr/src/packages/SPECS``
