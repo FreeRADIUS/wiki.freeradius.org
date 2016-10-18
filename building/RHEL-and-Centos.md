@@ -23,8 +23,7 @@ Or can set ``CC=/opt/rh/devtoolset-3/root/usr/bin/gcc`` in your environment, whi
 
 If you're building on older versions of RedHat then you'll need to compile GCC from source.
 
-## Building from source
-### Dependencies
+## Dependencies
 
 ```bash
 yum -y install libtalloc-devel
@@ -52,7 +51,7 @@ cp ./libkqueue-${VERSION}.tar.gz ~/rpmbuild/SOURCES/libkqueue-${VERSION}.tar.gz
 rpmbuild -ba ./libkqueue-${VERSION}/libkqueue.spec
 ```
 
-### Building/Installing
+## Building from source
 
 ```bash
 # Use ./configure --enable-developer if you're debugging issues, or using unstable code.
