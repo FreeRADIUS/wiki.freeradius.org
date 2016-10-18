@@ -10,9 +10,10 @@ If you are not constrained in your choice of operating systems, for maximum perf
   * [Red Hat](http://www.redhat.com/)
   * [Debian](http://www.debian.org/)
   * [Ubuntu](http://www.ubuntu.com/)
+* [macOS](http://www.apple.com/)
 * [Solaris](hhttp://www.oracle.com/technetwork/server-storage/solaris11/overview/index.html)
 
-## Reported by the community
+## Reported to work by the community
 FreeRADIUS is reported to run on the following Operating Systems:
 * [AIX](http://www.ibm.com/aix)
 * [Cygwin](http://www.cygwin.com/)
