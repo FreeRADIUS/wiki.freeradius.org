@@ -24,4 +24,4 @@ Pre-built binary packages for a number of operating systems are available from t
 
 # See Also
 
-* [Building from Source Code](Home)
+* [Building from source code](Home)
