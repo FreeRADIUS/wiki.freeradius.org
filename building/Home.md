@@ -44,8 +44,6 @@ make
 sudo make install	 
 ```
 
-Don't forget to read supplied documentation first, including the configuration files. Many configuration options are documented inline, in the configuration files themselves. 
-
 Platform specific instructions are available for:
 
 - [Debian and Ubuntu](Debian and Ubuntu)
