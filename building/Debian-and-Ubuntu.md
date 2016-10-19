@@ -1,5 +1,8 @@
 # Building on Debian or Ubuntu
 ## Upgrading GCC
+
+> GCC upgrade only required for versions >= v3.1.x you can skip this step for v3.0.x and below.
+
 Older versions of Debian and Ubuntu use GCC < 4.8, which lacks support for the C11 features needed to build FreeRADIUS >= v3.1.x.
 
 In order to switch to GCC 4.9
