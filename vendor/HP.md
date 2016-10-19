@@ -1,4 +1,4 @@
-_The content on this page refers to HP ProCurve switches only, not switching products from companies acquired by HP (3Com, H3C)._
+_The content on this page refers to HP ProCurve switches only, not switching products from companies acquired by HP (3Com, H3C, Aruba)._
 
 ## Port authentication mechanisms
 
