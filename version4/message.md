@@ -147,6 +147,92 @@ Since the "create message" API is used only by one caller
 (e.g. network thread or worker thread), there is no issue with
 overlapping / simultaneous calls to allocate messages.
 
+## Implementation Trade-offs
+
+Ring buffers / message APIs are tied to a socket (for network
+threads), or to a source+socket (worker threads).  i.e. a worker has
+one outbound message set per network destination.  A network
+destination only has one outbound message set, over all workers.
+
+There is no perfect solution here.  The messages are intended to be
+short-lived, *but* may be long-lived for things like `cleanup_delay`.
+Messages to worker threads are short-lived, hence only one outgoing
+message set.
+
+If the message set is full, it is doubled in size (up to a limit),
+which gives room for more messages.
+
+The memory and structures are owned by the originator, and only
+cleaned up by the originator.  The recipient of the messages accesses
+the data, but doesn't write to it.  i.e. it only writes to the message
+header as an async signal saying "done with this message".
+
+In order to prevent cache line thrashing, the originator only checks
+for "done" messages when (1) too many messages are outstanding, or (2)
+when the ring buffer / message array is full.
+
+When those limits are set, the message API tries to clean up old
+messages.  If it's successful, allocation proceeds with the current
+ring buffer / message array.  Otherwise, a new message array and/or
+ring buffer is allocated, at double the size of the old one.
+
+Message arrays (MA) and ring buffers (RB) are tracked in a fixed-size
+array (not linked list).  An array size of 20 should be enough for 20
+doublings... at which point the system is likely out of memory.
+
+For consolidation, if we have more than two (2) array MA/RB entries
+available, and the first N are free, we free the smallest ones, and
+coalesce the array entries so that we have the smallest number of
+MA/RB entries, each of which is as large as possible.
+
+If the network thread needs to perform de-dup, `cleanup_delay`, or
+other "wait on socket", it just leaves the reply packets in the
+messages.  The worker thread will then allocate larger buffers if
+necessary, *or* just start tossing replies.
+
+If the network thread can't write to TCP socket, it also removes the
+socket from the "read" portion of the event loop.  This change ensures
+that the server isn't reading packets faster than the other end can
+receive replies.  We then rely on TCP for flow control back to the
+sender.  When the socket becomes ready for writing, it is also added
+back to the "read" portion of the event loop.
+
+TCP sockets will need to track ongoing packets, so that they can be
+messaged "stop" when the TCP socket goes away.  UDP sockets need this
+for authentication packets, but also for accounting, with conflicting
+packets.  i.e. "you can keep processing the old packet, but don't
+bother sending the reply, as the client will not accept it"
+
+When the UDP sockets do accounting tracking, they just track the
+minimum information necessary to detect duplicates.  When a reply
+comes from a conflicting packet, the network thread can quench the
+reply by noticing it's for an old packet, and not for the new one
+(???)  Or, the network thread has to track the old packet (??) and
+send an sync signal to the worker that the request is dead, and the
+worker should stop processing it.
+
+When UDP sockets do dedup / `cleanup_delay` detection, they track the
+minimum information necessary to detect duplicates, along with a
+pointer to the message for the reply.  If a new packet comes in, the
+old message is marked "done".  If a dup comes in, the same reply is
+sent.
+
+For outgoing packets, if the server is lightly loaded, caching packets
+for ~5s isn't an issue.  And uses less memory than what we use now,
+where we cache all of the incoming packet, `REQUEST`, and outgoing
+packet.
+
+If the server is heavily loaded, then in the general case, new packets
+coming in will clear the outgoing packets.  When outgoing packets
+aren't cleared, we can just take the 1/1000 one, copy it to a local
+buffer, and then clear the incoming message.
+
+This tracking could be done by delays (i.e. if packets sit in the
+outoging buffer for "too long"), tho it's hard to tell what "too long"
+means.  Instead, it should be self-clocked.  i.e. if 99% of outgoing
+packets have been cleaned up, we should probably take the 1%, and
+"localize" them.
+
 ## API
 
 The APIs here are documented in reverse order.
@@ -154,20 +240,7 @@ The APIs here are documented in reverse order.
 ### Ring Buffer API
 
 The ring buffers are only used by the message layer, and aren't
-directly accessible by the message creators.
-
-    typedef struct fr_ring_buffer_t {
-        uint8_t               *buffer;
-        size_t                size;
-
-        size_t                reader;
-        size_t                writer;
-
-        # Maybe don't need these?
-        size_t                num_active_messages;
-        fr_ring_buffer_t      *next;
-        bool                  should_be_freed;
-    }  fr_ring_buffer_t;
+directly accessible by the message originator.
 
 Each message API has one ring buffer associated with it, as above.
 The buffer has a fixed size.  The `reader` offset is where messages
