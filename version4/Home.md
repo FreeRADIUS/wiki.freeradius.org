@@ -335,36 +335,38 @@ determined.
 ## Code Organization
 
 The source code needs to be reorganized.  The following is a suggestion:
-    src/  source code
-        io/    low level network IO
-            tcp.c
-            udp.c
-            unix.c
-            tls.c
-            files.c
-        radius/
-            server/
-                auth.c
-                acct.c
-                status.c
-                coa.c
-                tcp_io.c
-                udp_io.c
-                tls_io.c
-                files_io.c
-            client/
-                auth.c
-                acct.c
-                status.c
-                coa.c
-                tcp_io.c
-                udp_io.c
-                tls_io.c
-                files_io.c
-        modules/
-            rlm_*
-        main/
-            ...
+```text
+src/  source code
+    io/    # low level network IO
+        tcp.c
+        udp.c
+        unix.c
+        tls.c
+        files.c
+    radius/
+    server/
+        auth.c
+        acct.c
+        status.c
+        coa.c
+        tcp_io.c
+        udp_io.c
+        tls_io.c
+        files_io.c
+    client/
+        auth.c
+        acct.c
+        status.c
+        coa.c
+        tcp_io.c
+        udp_io.c
+        tls_io.c
+        files_io.c
+    modules/
+        rlm_*
+    main/
+        ...
+```
 
 That way when a new application is added to the server, it can go into it's own directory.
 
