@@ -352,7 +352,6 @@ The source code needs to be reorganized.  The following is a suggestion:
                 udp_io.c
                 tls_io.c
                 files_io.c
-            
             client/
                 auth.c
                 acct.c
