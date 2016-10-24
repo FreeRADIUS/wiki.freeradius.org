@@ -344,24 +344,24 @@ src/  source code
         tls.c
         files.c
     radius/
-    server/
-        auth.c
-        acct.c
-        status.c
-        coa.c
-        tcp_io.c
-        udp_io.c
-        tls_io.c
-        files_io.c
-    client/
-        auth.c
-        acct.c
-        status.c
-        coa.c
-        tcp_io.c
-        udp_io.c
-        tls_io.c
-        files_io.c
+        server/
+            auth.c
+            acct.c
+            status.c
+            coa.c
+            tcp_io.c
+            udp_io.c
+            tls_io.c
+            files_io.c
+        client/
+            auth.c
+            acct.c
+            status.c
+            coa.c
+            tcp_io.c
+            udp_io.c
+            tls_io.c
+            files_io.c
     modules/
         rlm_*
     main/
