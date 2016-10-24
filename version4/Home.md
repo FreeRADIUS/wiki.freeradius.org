@@ -357,7 +357,6 @@ The source code needs to be reorganized.  The following is a suggestion:
                 acct.c
                 status.c
                 coa.c
-            
                 tcp_io.c
                 udp_io.c
                 tls_io.c
