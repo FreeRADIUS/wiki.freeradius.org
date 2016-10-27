@@ -56,3 +56,102 @@ process.  Maybe the network thread?
 It also likely means that this works for RFC 7542 style realms
 (`@example.com`).  Other kinds of realms do *not* get this tracking.
 Oh well, too bad for them.
+
+## Control socket
+
+i.e. sockets which send a lot of data.
+
+The state machine for the worker thread needs to be fully async.
+i.e. the underlying IO such as `cprintf` in `src/main/command.c` has
+to be able to `YIELD` and `RESUME`.
+
+The protocols that write lots of data need to be self-clocked with
+respect to the network.  They send data (10K, 100K, 1M, etc.) to the
+network thread, along with a message of "wake me up when at 50%" (for
+example).  The network thread writes the data, and when it reaches the
+previously-set mark, notifies the worker thread.
+
+This process means that the worker thread is async, and uses memory
+buffers to even out bursts of traffic.  The network thread is async in
+network IO, and just reads / writes messages internally.
+
+Or, we could just push the file descriptor to the worker thread, and
+have it do the blocking writes.
+
+## Timing and signaling for Queues
+
+When a message goes into a queue, the recipient generally needs to be
+signalled.  However, kqueue / select APIs don't work well with
+pthread_cond_wait().  So we need a solution.
+
+One solution is kqueue user signals, or self pipes.  The problem with
+this approach is that it involves a system call to send the signal,
+and a system call to receive it.  Which is huge overhead at high
+packet rates.
+
+A better approach for high packet rates is self-clocking.  When a
+network thread reads a packet, it also checks the incoming queues from
+the worker threads.  If the packets are coming in quickly enough, this
+(somewhat delayed) check will add minimal latency.
+
+Even better, for UDP sockets, the worker thread can just send the
+reply itself, and then send the message to the network thread.  If the
+network thread receives a new packet using the same ID, it will ignore
+the message.  Otherwise, it will put the packet into the dedup tree.
+
+The queue reader can put a timer in (say 1ms) so that if it doesn't
+get signalled by something else, it still wakes up to service the
+timer and check the queues.  If a few timers go off without there
+being anything in the queue, it sets a flag in the queue saying
+"signal me when there is a new queue entry".  And sets one last timer,
+and after that timer fires, goes to sleep.
+
+The last timer fire is there to (mostly) catch race conditions where
+the message originator doesn't see the flag, and therefore doesn't
+send a signal, even though the recipient is expecting one.
+
+The result of this design is that for high packet rates there is
+(perhaps) some small latency added, but not much.  For low packet
+rates, there is a small amount of busy polling before the system goes
+to sleep.
+
+### A better approach
+
+An even better approach is for the originator to have it's own queue
+of outstanding messages which it's sending to a particular
+destination.  Then, instead of sending messages, it sends the queue.
+
+i.e. it inserts objects into it's own local queue.  If the queue is
+empty, the originator inserts it's local queue into the receipients
+inbound xqueue, and then signals the recipient.
+
+If the local queue is non-empty, the originator assumes that the
+recipient has already picked up the message, and does not signal the
+recipient.
+
+We could also put the messages into a linked list, with head / tail /
+cleanup, but that would probably involve a lot more memory thrashing.
+
+The result *should* be massively reduced contention on the recipients
+inbound queue.
+
+When the recipient gets a signal, it pulls the originators queue off
+of the inbound queue, and caches it locally.  Any messages are then
+de-queued by the recipient, directly from the originators queue.  This
+design means that the recipient has to keep local references to each
+originators queue.  There are cleanup / timing issues associated with
+this, but are solvable.
+
+The recipient (if busy) then busy-polls the queues until they're
+empty.  At which point, it discards the queue, and waits for a new
+signal.  There should be some signal to the caller that it needs to
+re-start signalling?
+
+Or does it need to do that?  The only thing is that the recipient has
+to *not* check for signals in between the time the queue goes from
+1..0, and the time it drops the queue.
+
+Or, the recipient signals the caller via a message that it's dropping
+the queue.  e.g. mark messages "busy-looping", then "about to drop the
+queue", followed by "acked from the originator", and then it can drop
+the queue.
