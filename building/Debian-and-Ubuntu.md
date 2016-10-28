@@ -66,11 +66,9 @@ sudo update-alternatives --config gcc
 sudo apt-get install libtalloc-dev libkqueue-dev
 ```
 
-### Getting the source
-
-[[include:Getting-the-Source]]
-
 ### Building
+
+Get the source as described above, then:
 
 ```bash
 ./configure --enable-developer
