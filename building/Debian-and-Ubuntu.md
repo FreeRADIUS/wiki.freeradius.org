@@ -27,6 +27,8 @@ This will build packages in the parent directory, which can be installed with ``
 
 ### Building from source
 
+Alternatively, rather than building packages, you can build the source directly. Note that you will need to ensure all required dependencies are installed first (such as `libssl-dev`).
+
 ```bash
 # Use ./configure --enable-developer if you're debugging issues, or using unstable code.
 ./configure
