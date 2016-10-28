@@ -1,7 +1,45 @@
 # Building on Debian or Ubuntu
-## Upgrading GCC
 
-> GCC upgrade only required for versions >= v3.1.x you can skip this step for v3.0.x and below.
+Building Debian packages (including Ubuntu) of FreeRADIUS from source is kept as simple as possible.
+
+## Building the stable release (v3.0)
+
+At the time of writing (October 2016), the Debian and Ubuntu repositories contain only version 2 of the server, which is end-of-life and no longer officially supported by the FreeRADIUS project. You are therefore recommended to following the instructions here and build your own packages.
+
+Building packages should be very simple. First obtain a copy of the source and unpack it. Second, build the packages.
+
+### Getting the source
+
+[[include:Getting-the-Source]]
+
+### Building Packages
+
+Having retrieved whichever version of the source you require, build the FreeRADIUS packages:
+
+```bash
+sudo apt-get install devscripts
+fakeroot debian/rules clean
+sudo mk-build-deps -ir debian/control
+dpkg-buildpackage -rfakeroot -b -uc
+```
+
+This will build packages in the parent directory, which can be installed with ``dpkg -i``.
+
+### Building from source
+
+```bash
+# Use ./configure --enable-developer if you're debugging issues, or using unstable code.
+./configure
+make
+sudo make install
+```
+
+
+## Building development versions (v3.1 or v4.0)
+
+Note that version 3.1 and 4 are for developers only. **Do not use these versions unless you know what you are doing.**
+
+### Upgrading GCC
 
 Older versions of Debian and Ubuntu use GCC < 4.8, which lacks support for the C11 features needed to build FreeRADIUS >= v3.1.x.
 
@@ -20,44 +58,22 @@ sudo update-alternatives --config gcc
 # Choose option 3 from the dialogue
 ```
 
-## Hard dependencies
+### Installing hard dependencies
 
 ```bash
 sudo apt-get install libtalloc-dev libkqueue-dev
 ```
 
-Building Debian packages of FreeRADIUS from source is kept as simple as possible. Please refer to the [Debian package](Debian) page for full instructions.
-
-The above page also includes instructions on building with Oracle support or installing Debian **backports** packages for older systems.
-
-## Getting the source
+### Getting the source
 
 [[include:Getting-the-Source]]
 
-## Building from source
+### Building
 
 ```bash
-# Use ./configure --enable-developer if you're debugging issues, or using unstable code.
-./configure
+./configure --enable-developer
 make
 sudo make install
 ```
 
-## Building Packages
 
-If you're using Ubuntu, you should first check whether your desired version of FreeRADIUS is available in the Ubuntu package repositories, because that will save you the trouble of building packages yourself. As of March 2016, the Ubuntu repositories contain only version 2 of the server, which is end-of-life. Please see: http://packages.ubuntu.com/freeradius.
-
-FreeRADIUS shipped with the current versions of Debian (both `Jessie` and `Wheezy`) are several years out of date. This means that they are no longer officially supported by the FreeRADIUS project.
-
-Building Debian packages should be very simple. First obtain a copy of the source and unpack it. Second, build the packages.
-
-Having retrieved whichever version of the source you require, build the FreeRADIUS packages:
-
-```bash
-sudo apt-get install devscripts
-fakeroot debian/rules clean
-sudo mk-build-deps -ir debian/control
-dpkg-buildpackage -rfakeroot -b -uc
-```
-
-This will build packages in the parent directory, which can be installed with ``dpkg -i``.
