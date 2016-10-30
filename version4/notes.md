@@ -155,3 +155,23 @@ Or, the recipient signals the caller via a message that it's dropping
 the queue.  e.g. mark messages "busy-looping", then "about to drop the
 queue", followed by "acked from the originator", and then it can drop
 the queue.
+
+### After some discussion
+
+The signals should be limited to control-plane actions.
+
+* here's a new queue for you
+* please check the queue
+* I'm going to stop busy-polling the queue, please signal me when there's data in it
+* the queue should be deleted
+
+The recipient will always keep a copy of the queue, and will get
+signalled when there's data in it.
+
+Which means that all communication between threads is done via
+kqueues.  That makes thread discovery / interaction a lot easier.
+"Get me kqueue for X".
+
+And kqueues are thread-safe which is nice.  The downside is that if we
+want inter-process signalling, we'll need a different signalling
+mechanism.
