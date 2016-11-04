@@ -42,3 +42,5 @@ connection already in the wildcard packet queue, and the wildcard
 handler has to take care of manually sending them over to the new connection.
 
 In short, we can emulate (mostly) TCP connections via UDP.
+
+We do not need to use connected sockets for DHCP.
