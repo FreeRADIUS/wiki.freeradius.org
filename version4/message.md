@@ -292,9 +292,15 @@ Note that the ring buffer doesn't keep track of where the packet start
 Similarly, the ring buffer API doesn't track previous / next ring
 buffers, it relies on the caller to do that.
 
+![Diagram of Ring Buffers](ring_buffers.jpg)
+
+![Diagram of Ring Buffer alloc / free](ring_buffer_alloc.jpg)
+
 ### Message API
 
 The message API is about allocating a message, and filling it out.
+
+![Diagram of messages](message.jpg)
 
 ### Queue API
 

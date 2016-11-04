@@ -50,6 +50,7 @@ Processing is done by [Threads](threads), both worker threads
 
 Threads exchange information via [Messages](message).
 
+![Diagram of IO, Transport, Application, network / worker threads, and messaging](processing.jpg)
 
 ## Unlang Interpreter
 

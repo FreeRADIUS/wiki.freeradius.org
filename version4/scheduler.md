@@ -33,6 +33,8 @@ busy-polling.
 
 How to do this is non-trivial.
 
+![Diagram of signaling versus busy polling](signal_vs_busy_polling.jpg)
+
 ## Statistics
 
 We need delay statistics for slow modules (Hi, SQL!).  The best
@@ -123,3 +125,5 @@ yielded requests.
 This design goes along with the philosophy of the rest of the server
 of "track as little as possible, and do work asynchronously where
 possible".
+
+![Diagram of yield / resume timing](yield_resume_timing.jpg)
