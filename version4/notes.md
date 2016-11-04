@@ -163,6 +163,8 @@ The signals should be limited to control-plane actions.
 * here's a new queue for you
 * please check the queue
 * I'm going to stop busy-polling the queue, please signal me when there's data in it
+  - how does it know that the other end received the signal?
+* please stop polling the queue
 * the queue should be deleted
 
 The recipient will always keep a copy of the queue, and will get
@@ -175,3 +177,4 @@ kqueues.  That makes thread discovery / interaction a lot easier.
 And kqueues are thread-safe which is nice.  The downside is that if we
 want inter-process signalling, we'll need a different signalling
 mechanism.
+
