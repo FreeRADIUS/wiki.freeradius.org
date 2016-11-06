@@ -23,7 +23,7 @@ Each worker thread runs a scheduler.  Which does the following:
 
 ## Signaling
 
-See the [pipe](pipe) page for more details.
+See the [pipe](pipe) page for more details. And [signal](signal) page.
 
 The main problem we have with network / worker threads is signaling.
 If the packets are widely spaced, the network thread can signal the
@@ -32,8 +32,6 @@ However, if the packets arrive quickly, each end should switch to
 busy-polling.
 
 How to do this is non-trivial.
-
-![Diagram of signaling versus busy polling](signal_vs_busy_polling.jpg)
 
 ## Statistics
 
