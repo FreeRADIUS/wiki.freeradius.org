@@ -119,8 +119,8 @@ We discussed two ways of fixing this.
 
 * The second was - Write sequence numbers into the message structures.  When the
   consumer sends the kevent saying its going to stop servicing the
-  queue, in includes the last sequence number it processed.  When the
-  producer processes the consumers kevent, it checks the sequence
+  queue, it includes the last sequence number it processed.  When the
+  producer processes the consumer's kevent, it checks the sequence
   number, `if (signal.seq_number < last_wrote_to_queue.seq_number) send_kevent_to_consumer()`
 
 The advantages of the second method are fewer signals, and the
