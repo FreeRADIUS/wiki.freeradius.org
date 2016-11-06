@@ -3,22 +3,22 @@
 Each worker thread runs a scheduler.  Which does the following:
 
 * check the resumable queue for "too old" packets.
-* * once per second, and then check check all packets older than 1s.
-* * ideally printing out where the request is blocked (module, instance, name)
-* * See yield / resume, below
+  * once per second, and then check check all packets older than 1s.
+  * ideally printing out where the request is blocked (module, instance, name)
+  * See yield / resume, below
 * service the event list
-* * FD events first
-* * followed by timer events
-* * so that we read packets from sockets before they time out...
+  * FD events first
+  * followed by timer events
+  * so that we read packets from sockets before they time out...
 * service the incoming queue from network threads
-* * add packets to the "decode" list, which is run at a higher priority than other requests.
-* * the idea here is to quickly clean up the messages between network threads and worker threads
-* * push decoded packets onto the "runnable" priority heap, which is ordered by time.
+  * add packets to the "decode" list, which is run at a higher priority than other requests.
+  * the idea here is to quickly clean up the messages between network threads and worker threads
+  * push decoded packets onto the "runnable" priority heap, which is ordered by time.
 * grab a request from the "runnable" heap.
 * check `fr_status_continue()`
-* * if socket is closed, drop the request
-* * if conflicting packet has come in, drop the request
-* * process the packet until it's done, or until it yields
+  * if socket is closed, drop the request
+  * if conflicting packet has come in, drop the request
+  * process the packet until it's done, or until it yields
 * keep looping
 
 ## Signaling
