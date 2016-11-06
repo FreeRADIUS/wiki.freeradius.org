@@ -53,13 +53,14 @@ for.
 
 A thread's event loop is used for two things:
 
-* waiting on sockets (read / write availabilit)
-* wait for a timer event which needs servicing.
+* Waiting on sockets (read / write availability).
+* Wait for a timer event which needs servicing.
 
 When nothing is to be done, the thread blocks, waiting on the event
 loop.
 
-It is *not* used to process the atomic queues.
+The event loop is *not* used to directly process the atomic queues, though
+it may be used to communicate information about their states.
 
 If we do a busy loop over all the queues checking for new packets, and
 by calling kevent to check for I/O events, we use lots of CPU time, so
@@ -110,15 +111,13 @@ the queue, and there's a delay between that signal being sent, and it
 being acted on by the producer, and in that time the producer enqueues
 more packets.
 
-We discussed two ways of fixing this.  The first was:
+We discussed two ways of fixing this.
 
-* Have the producer ACK (with another signal, or packet in the queue)
+* The first was - Have the producer ACK (with another signal, or packet in the queue)
   that it received the notification.  When this was received by the
   consumer, the consumer could then stop servicing the thread.
 
-The second was:
-
-* Write sequence numbers into the message structures.  When the
+* The second was - Write sequence numbers into the message structures.  When the
   consumer sends the kevent saying its going to stop servicing the
   queue, in includes the last sequence number it processed.  When the
   producer processes the consumers kevent, it checks the sequence
@@ -128,13 +127,13 @@ The advantages of the second method are fewer signals, and the
 consumer can stop servicing the kqueue immediately, instead of having
 to wait for an acknowledgement from the producer.
 
-Because the second method is best method, we started considering what
-other useful things could we do with the sequence numbers.
+Because the second method appears to be the best method, we started 
+considering what other useful things could we do with the sequence numbers.
 
 One advantage is that if we have a second type of kevent, which is
 just used to inform the originator of the consumers progress, we can
 work out the number of outstanding packets in the queue, and use that
-for levelling information.  I don't thinking ACKing every packet is
+for levelling information.  I don't think ACKing every packet is
 sensible, but periodic ACKs to indicate progress could be useful.
 
 Another advantage of sequence numbers is it gives us an identifier for
@@ -183,4 +182,3 @@ thread.  This is done by taking the time we last received a reply from
 it, and adding to that time the total predicted CPU time for
 outstanding packets.  We then use that predicted number to choose a
 worker thread.
-
