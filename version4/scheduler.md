@@ -23,7 +23,7 @@ Each worker thread runs a scheduler.  Which does the following:
 
 ## Signaling
 
-See the [pipe](pipe) page for more details. And [signal](signal) page.
+See the [channel](channel) page for more details. And [signal](signal) page.
 
 The main problem we have with network / worker threads is signaling.
 If the packets are widely spaced, the network thread can signal the
@@ -32,6 +32,29 @@ However, if the packets arrive quickly, each end should switch to
 busy-polling.
 
 How to do this is non-trivial.
+
+## Scheduling
+
+Each network thread runs its own scheduler over the worker threads.
+Not that the network thread may be away of only a subset of worker
+threads.  Splitting the scheduler like this means there is minimal
+contention, and ideal scaling.
+
+The worker threads are weighted by total CPU time spent processing
+requests.  They are put into a priority heap, ordered by CPU time.
+This CPU time is not only the historical CPU time spent processing
+requests, but also the predicted CPU time based on current "live"
+requests.  This information is passed from the worker thread to the
+network thread on every reply.
+
+The network thread puts the workers into a priority heap.  When a
+packet comes in, the first element is popped off of the heap, the
+worker thread CPU time is updated (based on the predicted time spent
+processing the new packet), and the thread is inserted back into the
+priority heap.
+
+As the heap will generally be small, the overhead of this work will be
+small.
 
 ## Statistics
 

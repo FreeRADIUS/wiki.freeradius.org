@@ -1,4 +1,4 @@
-# Message Pipes
+# Message Channel
 
 We need a discovery mechanism for queues / threads, and a message exchange
 
@@ -43,7 +43,7 @@ The request has the incoming queue information.  It needs to be able
 to use that to find the outgoing queue information.
 
 ```
-typedef struct fr_pipe_end_t {
+typedef struct fr_channel_end_t {
 	int			kq;
 	intptr_t		id;
 	int			poll_state;	// signalling, busy-poll, etc.
@@ -51,19 +51,19 @@ typedef struct fr_pipe_end_t {
 	size_t			num_active	// managed by each end
 	fr_atomic_queue_t	*control;
 	fr_atomic_queue_t	*data;
-} fr_pipe_end_t;
+} fr_channel_end_t;
 
-typedef struct fr_pipe_t {
+typedef struct fr_channel_t {
 	intptr_t		id;		// copy for locality
 
-	fr_pipe_end_t	*remote;	// allocated and managed by them!
+	fr_channel_end_t	*remote;	// allocated and managed by them!
 
-	fr_pipe_t		*next;		// for the same ID?  so that the queues can grow
+	fr_channel_t		*next;		// for the same ID?  so that the queues can grow
 
 	rbtree_t		*tree;		// for active requests ??
 
-	fr_pipe_end_t	local;		// can be allocated here for locality
-} fr_pipe_t;
+	fr_channel_end_t	local;		// can be allocated here for locality
+} fr_channel_t;
 ```
 
 ## Queue specific signalling
@@ -71,9 +71,9 @@ typedef struct fr_pipe_t {
 ### new Q (KQ_n, CAQ, DAQ, ID) -> KQ_w
 
 network thread discovers a worker thread KQ (somehow), and sends it a
-signal of an `fr_pipe_end_t`.  The worker thread finds / allocates
-`fr_pipe_t` (with it's own end), and sends a pointer to it's own
-`fr_pipe_end_t` to the other.
+signal of an `fr_channel_end_t`.  The worker thread finds / allocates
+`fr_channel_t` (with it's own end), and sends a pointer to it's own
+`fr_channel_end_t` to the other.
 
 The worker thread tracks it's queues by ID.  There should be ~256 IDs
 maximum, one for each CPU on the system.  Which makes lookups O(1).
@@ -136,7 +136,7 @@ this point, the originator will signal the recipient every time data
 is ready.
 
 Since we have the queue, we don't really need this as a signal.  We
-can just busy-poll until we see the ACK in the `fr_pipe_end_t`.
+can just busy-poll until we see the ACK in the `fr_channel_end_t`.
 Which doesn't even have to be atomic, because only one thread is ever
 writing to it.  The other thread is only reading, and is OK with
 reading stale information.

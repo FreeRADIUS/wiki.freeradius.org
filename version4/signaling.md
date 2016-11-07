@@ -11,7 +11,7 @@ finish, and then do a blocking wait on the mutex.  Analysis shows that
 the mutex is highly contended, and under load, the network thread is
 busy while the worker threads are largely idle.
 
-A partial solution is the [message](message) and [pipe](pipe)
+A partial solution is the [message](message) and [channel](channel)
 subsystems.  They allows for zero-copy messages, which are sent via
 single-producer-single-consumer (SPSC) thread-safe atomic queues.
 
