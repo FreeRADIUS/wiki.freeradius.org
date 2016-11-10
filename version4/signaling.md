@@ -146,6 +146,89 @@ the sequence number from the channel, the network thread sends a "data
 ready" signal to the worker.
 
 This signal wakes up the worker, and informs it that the channels have
-to be serviced.
+to be serviced.  The worker then processes it's receive channel, and
+continues as before.
 
 ![Yield / Resume](yield.jpg)
+
+### Summary
+
+This design ensures that signals are only sent when the system
+transitions from idle to active, or active to idle.  All other signals
+are suppressed.
+
+## Worker to Network Signaling
+
+The remaining problem to be solved is worker to network signaling.
+This problem is not entirely the inverse of the network to worker
+problem, because the network thread is (in general) not doing
+anything.  i.e. We can rely on the worker thread to run the current
+request to completion, and then poll the channels.  The network thread
+is, in contrast, entirely event driven.
+
+### The one packet approach
+
+This scenario is covered above in the worker to network section.
+
+In the low-volume / simple scenario, we only have one packet being
+processed at a time.  The server starts in a steady state where all
+threads are idle and waitinf for events.  The packet is received,
+processed, and replied to.  The server then returns to the idle state.
+
+![Low-volume / simple case](simple.jpg)
+
+The worker thread receives the signal, processes the packet, and sends
+the reply.  On sending the reply, it notices that it now has no more
+work to do, so it must signal the network thread.
+
+### Overlapping Requests
+
+When there are overlapping requests, the worker thread has a little
+more work to do.
+
+The worker thread can trade speed for latency, by simply not signaling
+the network thread for a while.  e.g. buffer up the packets, and then
+signal the network thread when the number of outstanding requests
+transitions to zero.  That "works", but has potentially large latency.
+
+We note that we can rely on the network thread polling it's inbound
+channel (from the worker) on every packet it receives.  This polling
+can be signaled to the network thread in outbound channel, via ACKs in
+the packets.
+
+i.e. The network thread has sent 5 packets, and is sending it's
+sequence number of 5.  It has read 3 packets from the worker, and
+includes an ACK of value 3 in the next packet it sends to the worker.
+This information lets the worker know that the packets it sent have
+been received and processed, and that it does not have to signal the
+network thread for those earlier packets.
+
+Since the worker thread is busy in bursts (when processing requests),
+we can mostly rely on it to service the channels on a reasonably
+regular time frame.  It can then have additional metrics such as:
+
+* more than T time has passed since the network thread serviced the
+  channel, signal it
+
+* more than N packets have been sent to the network thread since it
+  last serviced the channel, signal it.
+
+There should be no need for the network thread to busy-poll the
+channel from the worker, *unless* the worker thread blocks completely.
+In that case, signaling the worker thread won't help, because the
+worker thread is blocked elsewhere, and isn't servicing the channels.
+The only real choice at that point is for the network thread to pull
+packets off of the outbound channel, and give the packets to another
+worker.
+
+This approach is effectively a "sliding window" method.  So long as
+the worker keeps getting told via the incoming packets that it's
+replies have been received (i.e. ACKed), the worker moves the sliding
+window of (time / packets) for the next time it is _required_ to
+signal the network thread.
+
+This design relies on the packet messages containing:
+
+* time stamp of the message
+* sequence number (outbound)
+* ACK (of inbound sequence number)
