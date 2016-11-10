@@ -1,4 +1,4 @@
-# Signalling
+# Signaling
 
 We need an efficient way to send information between threads.  Version
 2/3 has a single network thread, and multiple worker threads.  They
@@ -34,151 +34,118 @@ The diagram below shows this.
 
 Each boundary condition is simple to manage in and of itself.  In the
 low volume case, we just signal every packet and every reply.  In the
-high volume case, the threads just busy-poll the queues, (in between
+high volume case, the threads just busy-poll the channel, (in between
 processing other requests), because there will always be new packets
-in the queues.
+in the channel.
 
 We want to know when to transition from one state to another.  We also
 want to integrate this signaling into the threads event loop.
 
-## Event loop integration
+# Design
 
-So first just to explain the background behind the thinking.
+_Please see this files history for older designs.  They were discarded
+because they mostly worked, but had critical details unresolved._
 
-The issue with using these atomic queues over unix
-sockets/pipes/socket pairs is that they cannot be integrated into a
-thread's (either worker or network) event loop directly, because
-there's no FD for an event loop to report readable/writable states
-for.
+After much discussion, the design issues with older ideas were
+resolved through applying two key concepts:
 
-A thread's event loop is used for two things:
+1. Self-clocking, where we can rely on new events to help us service ongoing events
 
-* Waiting on sockets (read / write availability).
-* Wait for a timer event which needs servicing.
+2. Tracking the number of outstanding requests, and paying attention to the zero/non-zero transitions.
 
-When nothing is to be done, the thread blocks, waiting on the event
-loop.
+The explanation is that if there are events being processed, a thread
+is active, and will (at some point) get to servicing a channel.
+Critically, a thread always services *both* channels.  That is, when
+it's sending data, it also checks the receive side of the channel.
+Secondly, only the transitions 0 -> 1 and 1 -> 0 need to be explicitly
+signaled.  Almost all other signals can be suppressed, by relying on
+polling the receive side when writing to the send side.  The following
+diagrams shows the full design.  Subsequent diagrams will walk through
+the design in more detail.
 
-The event loop is *not* used to directly process the atomic queues, though
-it may be used to communicate information about their states.
+![Full Signaling design](full.jpg)
 
-If we do a busy loop over all the queues checking for new packets, and
-by calling kevent to check for I/O events, we use lots of CPU time, so
-the thread must sleep when there's nothing to do.
+## Network to Worker Signaling
 
-If the thread is sleeping, the question is, how do we wake it up when
-there are packets to be read from queues.
+This section describes the design of the network to worker signaling.
+The result of the design is that the system automatically transitions
+between signaling and busy polling, based on simple rules.
 
-The super stupid/simple approach is just to use a timer and wake up
-every N ms, then check all the queues for new packets. But this wastes
-CPU time, and we have select() like, O(n) performance issues with
-large numbers of queues.
+### The one packet approach
 
-We could have each producer signal the consumer whenever it puts new
-packets in its queue, but now we have massive overhead from all those
-signals (whichever form they're in), and we still have select() like,
-O(n) performance issues with large numbers of queues.
+In the low-volume / simple scenario, we only have one packet being
+processed at a time.  The server starts in a steady state where all
+threads are idle and waitinf for events.  The packet is received,
+processed, and replied to.  The server then returns to the idle state.
 
-So it seems like the requirements for this to be efficient are:
+![Low-volume / simple case](simple.jpg)
 
-* A signalling path for the producer to inform the consumer there are
-  new packets.
+In this diagram, time goes from left to right.  'N' is the network
+thread.  'W' is the worker thread.  We omit the time line for the
+worker thread, in order to highlight the fact that's it's busy only
+part of the time.  The black arrows are incoming / outgoing packets.
+The red arrows are signals between the threads.
 
-* A signalling path for the consumer to inform the producer it's not
-  going to check for new packets unless it's told explicitly that
-  there are some outstanding.
+When it recieves a packet, the network thread sees that there are no
+outstanding packets to the worker thread.  i.e. it believes that the
+worker thread is idle.  It therefore has to signal the worker thread
+that a new packet is ready.
 
-* The above need to be scoped in terms of queues, i.e. "the not
-  checking unless signalled state" needs to be communicated on a
-  per-queue basis.
+The worker thread receives the signal, processes the packet, and sends
+the reply.  On sending the reply, it notices that it now has no more
+work to do, so it must signal the network thread.
 
-This allows the producer/consumer to maintain a set of "active"
-queues, where the consumer does not need to be signalled, because it's
-doing whatever fancy busy wait/dequeuing behaviour it needs to, and a
-set of "inactive" queues, where, if there's a new packet, the consumer
-needs to be informed explicitly.
+This process works for the simple scenario.  We now see what happens
+when two packets arrive, one shortly after the other.
 
-The most obvious solution for this seems to be using kevent() for
-signalling, because it's relatively fast, and it's there... and it can
-be swapped out easily for unix sockets or pipes if we ever move to a
-split process model.
+### Overlapping Requests
 
-But using kevent introduces synchronisation problems.
+In this scenario, the network thread receives a second packet while
+the worker thread is processing the first one.  The diagram below
+shows this in more detail.
 
-The specific scenario we were considering was where the consumer,
-signals the producer (via kevent) that it's going to stop servicing
-the queue, and there's a delay between that signal being sent, and it
-being acted on by the producer, and in that time the producer enqueues
-more packets.
+![Overlapping requests](overlapping_requests.jpg)
 
-We discussed two ways of fixing this.
+When the network thread receives the second packet, it notices that
+the worker thread is busy.  The network thread does not signal the
+worker thread.  There is no point in such a signal, as the worker
+thread is busy doing other work.  We can rely on the fact that when
+the worker is finished other work, it will service it's receive channel.
 
-* The first was - Have the producer ACK (with another signal, or packet in the queue)
-  that it received the notification.  When this was received by the
-  consumer, the consumer could then stop servicing the thread.
+We can see that when request 1 is done, the worker thread sees that
+there is an additional request to service.  It picks up the request
+_without being signaled_, and runs it.  This process con continue for
+multiple overlapping requests.
 
-* The second was - Write sequence numbers into the message structures.  When the
-  consumer sends the kevent saying its going to stop servicing the
-  queue, it includes the last sequence number it processed.  When the
-  producer processes the consumer's kevent, it checks the sequence
-  number, `if (signal.seq_number < last_wrote_to_queue.seq_number) send_kevent_to_consumer()`
+For now, we ignore the problem of the worker thread signaling the
+network thread.  We just wave our hands and assume it works.
 
-The advantages of the second method are fewer signals, and the
-consumer can stop servicing the kqueue immediately, instead of having
-to wait for an acknowledgement from the producer.
+We can see, therefore, that our earlier assumptions simplify the
+design enormously.  The self-clocking mechanism ensures that the
+network thread knows the worker thread will be servicing the channels.
+Tracking the number of outstanding requests ensures that each end
+knows when the other end requires signals, or is busy-polling.
 
-Because the second method appears to be the best method, we started 
-considering what other useful things could we do with the sequence numbers.
+### Yield / Resume
 
-One advantage is that if we have a second type of kevent, which is
-just used to inform the originator of the consumers progress, we can
-work out the number of outstanding packets in the queue, and use that
-for levelling information.  I don't think ACKing every packet is
-sensible, but periodic ACKs to indicate progress could be useful.
+The above scenario requires modification for yield / resume.  In this
+scenario, the worker thread is idle, while the network thread believes
+that the worker is processing a request.  There is a race condition
+possible where the worker goes to sleep, at the same time the network
+thread sends it a new packet *without* an explicit signal.  We then
+have a situation where the worker waits for a long period of time
+without servicing it's input channel.
 
-Another advantage of sequence numbers is it gives us an identifier for
-debugging to track the packet as it progresses through the server.
+The solution is that when the worker is about to sleep, it sends a
+signal to the network thread.  This signal contains the sequence
+number of the last packet the worker read from it's receive channel.
+When the network thread receives this signal, it checks it's idea of
+the channel.  If the sequence numbers match, there is nothing else to
+do.  If, however, the sequence number from the signal is lower than
+the sequence number from the channel, the network thread sends a "data
+ready" signal to the worker.
 
-Those advantages are secondary though, even if we find better methods
-of load levelling and tracking packets, we'd still need sequence
-numbers unless there's a better way of doing this producer/consumer
-signalling and maintaining active/inactive sets of queues.
+This signal wakes up the worker, and informs it that the channels have
+to be serviced.
 
-## Transitioning
-
-The transition from one boundary condition to the other is done by the
-network thread tracking inter-packet spacing, and the worker thread
-tracking total CPU time spent processing requests.  Note that this is
-*not* time spent tracking requests from a particular source.  It's
-tracking *all* requests.
-
-We should have thread affinity.  This is where a network thread
-preferantially sends packets to one worker thread, until that worker
-thread is busy.  It then starts sending some packets to other worker
-threads.  But it still tries to keep the original worker thread busy.
-
-If the network thread isn't communicating with a worker thread, it
-generally has no idea how busy that thread is.  So we may need another
-way to order threads.  It's probably best for a network thread to only
-know about the worker threads it's using.  And to not even know if
-other threads exist.
-
-Each reply from a worker thread contains it's view of how much CPU
-time it has spent.  (So far?  Or in the last second?)  Ideally, it
-also includes the time spent to process this request.  Which lets the
-network thread predict the average time per request.  Perhaps the
-exponential moving average (EMA) is the best way to track / predict
-this.  Every new packet coming in gets an estimate of CPU time to
-process it, based on the EMA.
-
-If there are packets outstanding, the network thread can assume that
-the worker thread has been busy since the last packet sent to the
-worker thread.  This estimation is pessimistic, as the worker thread
-may, in fact, be idle, and waiting for an event to continue processing
-the request.  This is a simple assumption.
-
-The more complex assumption is predict the CPU time for the worker
-thread.  This is done by taking the time we last received a reply from
-it, and adding to that time the total predicted CPU time for
-outstanding packets.  We then use that predicted number to choose a
-worker thread.
+![Yield / Resume](yield.jpg)

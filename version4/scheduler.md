@@ -23,7 +23,8 @@ Each worker thread runs a scheduler.  Which does the following:
 
 ## Signaling
 
-See the [channel](channel) page for more details. And [signal](signal) page.
+See the [channel](channel) page for more details. And
+[signaling](signaling) page.
 
 The main problem we have with network / worker threads is signaling.
 If the packets are widely spaced, the network thread can signal the
