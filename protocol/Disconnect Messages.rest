@@ -26,7 +26,7 @@ If AAA is unsuccessful in disconnecting the user, the request is malformed, or t
 
 Example Disconnect-Request
 ----------------------------------------
-[[FreeRADIUS]] server ([[radiusd]]) does not currently have internal [[Disconnect-Request]] support however you can send disconnect packets to a Disconnect enabled [[NAS]] with [[radclient]] as follows::
+[[FreeRADIUS]] server ([[radiusd]]) supports sending [[Disconnect-Request]] via the ``update coa`` and ``update disconnect`` Unlang statements.  You can also send disconnect packets to a Disconnect enabled [[NAS]] with [[radclient]] as follows::
 
   # echo "Acct-Session-Id=D91FE8E51802097" > packet.txt
   # echo "User-Name=somebody" >> packet.txt
