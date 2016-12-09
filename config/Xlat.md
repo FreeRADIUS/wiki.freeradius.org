@@ -1,5 +1,27 @@
 # List of xlat expansions
 
+## Provided by the server core
+
+       name | description
+------------|------------
+attr        | attribute name of an attribute reference
+attr_num    | attribute number of an attribute reference
+debug_attr  | print to debug output all instances of current attribute, or all attributes in a list; expands to a zero-length string
+debug       | dynamically change the debug level for the current request
+hex         | convert to hex
+integer     | convert to integer
+length      | size of the given attributes in bytes
+map         | processes data as a map string and applies to the current request
+module      | returns current module processing the request
+regex       | return named subcapture value from previous regex
+string      | convert data to a string if possible
+strlen      | length of given string `"%{strlen:Hello}" == 5`
+tag         | tag of an attribute reference
+vendor_num  | vendor number of an attribute reference
+vendor      | vendor of an attribute reference
+xlat        | xlat expand given string value
+
+
 ## Provided by rlm_expr
 
        name | description
