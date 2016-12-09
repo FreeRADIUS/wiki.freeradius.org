@@ -4,7 +4,7 @@ As of FreeRADIUS 2.x.x virtual servers are located in the ``raddb/sites-availabl
 
 The files from ``raddb/sites-available`` are symbolically linked (symlinked) from the ``raddb/sites-enabled`` directory. This allows the administrator to selectively enable and disable virtual servers.
 
-Every file in ``raddb/sites-enabled` is `$INCLUDE``'d from [[radiusd.conf|https://github.com/freeradius/freeradius-server/blob/master/raddb/radiusd.conf.in]].
+Every file in ``raddb/sites-enabled`` is ``$INCLUDE``'d from [[radiusd.conf|https://github.com/freeradius/freeradius-server/blob/master/raddb/radiusd.conf.in]].
 
 See Also
 ----------
