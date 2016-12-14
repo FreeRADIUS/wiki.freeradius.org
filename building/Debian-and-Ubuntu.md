@@ -63,7 +63,7 @@ sudo update-alternatives --config gcc
 ### Installing hard dependencies
 
 ```bash
-sudo apt-get install libtalloc-dev libkqueue-dev
+sudo apt-get install libssl-dev libtalloc-dev libkqueue-dev
 ```
 
 ### Building
