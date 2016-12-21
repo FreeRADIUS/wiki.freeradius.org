@@ -22,13 +22,45 @@ vendor      | vendor of an attribute reference
 xlat        | xlat expand given string value
 
 
-## Provided by rlm_expr
+## Provided by modules
+
+The following xlats are provided by particular modules, so the module will need
+to be instantiated before the xlat will be available to use.
+
+xlat names marked with an asterisk (*) take the name of the module
+instantiation, so may change from that listed here if different instantiations
+are used.
+
+
+### rlm_cache
+
+       name | description
+------------|------------
+cache*      | retrieve single attribute values from the cache
+
+
+### rlm_date
+
+       name | description
+------------|------------
+date*       | convert dates between different formats
+
+
+### rlm_exec
+
+       name | description
+------------|------------
+exec*       | execute external program
+
+
+### rlm_expr
 
        name | description
 ------------|------------
 base64      | encode string as base64: `"%{base64:foo}" == "Zm9v"`
 base64tohex | convert base64 to hex: `"%{base64tohex:Zm9v}" == "666f6f"`
 escape      | escape string similar to rlm_sql 'safe_characters': `"%{escape:<img>foo.jpg</img>}" == "=60img=62foo.jpg=60/img=62" `
+expr*       | 
 explode     | split an attribute into multiple new attributes based on a delimiter: `"%{explode:&ref <delim>}"`
 hmacmd5     | generate HMAC-MD5 of string: `"%{hmacmd5:foo bar}" == "31b6db9e5eb4addb42f1a6ca07367adc"`
 hmacsha1    | generate HMAC-SHA1 of string: `"%{hmacsha1:foo bar}" == "85d155c55ed286a300bd1cf124de08d87e914f3a"`
@@ -49,7 +81,94 @@ urlquote    | quote special characters in URI: `"%{urlquote:http://example.org/}
 urlunquote  | unquote URL special characters: `"%{urlunquote:http%%3A%%47%%47example.org%%47}" == "http://example.org/"`
 
 
-### randstr
+### rlm_idn
+
+       name | description
+------------|------------
+idn*        | convert idn to ascii
+
+
+### rlm_ldap
+
+       name | description
+------------|------------
+ldap*       | do an LDAP query
+ldapquote   | safely quote string for use in ldap query
+
+
+### rlm_mschap
+
+       name | description
+------------|------------
+mschap*     | extract ms-chap data from the request
+
+
+### rlm_perl
+
+       name | description
+------------|------------
+perl*       |
+
+
+### rlm_redis
+
+       name | description
+------------|------------
+redis*      |
+
+
+### rlm_rest
+
+       name | description
+------------|------------
+rest*       |
+jsonquote   |
+
+
+### rlm_soh
+
+       name | description
+------------|------------
+soh*        |
+
+
+### rlm_sql
+
+       name | description
+------------|------------
+sql*        |
+
+
+### rlm_unbound
+
+       name | description
+------------|------------
+unbound*    |
+
+
+### rlm_unpack
+
+       name | description
+------------|------------
+unpack      |
+
+
+### rlm_yubikey
+
+       name | description
+------------|------------
+modhextohex |
+
+
+## Provided by proto_dhcp
+
+       name | description
+------------|------------
+dhcp        |
+dhcp_options|
+
+
+### rlm_expr 'randstr'
 
 Characters that can be used in `randstr` are:
 
