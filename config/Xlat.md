@@ -80,96 +80,6 @@ unescape    | reverse of escape: `"%{unescape:=60img=62foo.jpg=60/img=62}" == "<
 urlquote    | quote special characters in URI: `"%{urlquote:http://example.org/}" == "http%3A%47%47example.org%47"`
 urlunquote  | unquote URL special characters: `"%{urlunquote:http%%3A%%47%%47example.org%%47}" == "http://example.org/"`
 
-
-### rlm_idn
-
-       name | description
-------------|------------
-idn*        | convert idn to ascii
-
-
-### rlm_ldap
-
-       name | description
-------------|------------
-ldap*       | do an LDAP query
-ldapquote   | safely quote string for use in ldap query
-
-
-### rlm_mschap
-
-       name | description
-------------|------------
-mschap*     | extract ms-chap data from the request
-
-
-### rlm_perl
-
-       name | description
-------------|------------
-perl*       |
-
-
-### rlm_redis
-
-       name | description
-------------|------------
-redis*      |
-
-
-### rlm_rest
-
-       name | description
-------------|------------
-rest*       |
-jsonquote   |
-
-
-### rlm_soh
-
-       name | description
-------------|------------
-soh*        |
-
-
-### rlm_sql
-
-       name | description
-------------|------------
-sql*        |
-
-
-### rlm_unbound
-
-       name | description
-------------|------------
-unbound*    |
-
-
-### rlm_unpack
-
-       name | description
-------------|------------
-unpack      |
-
-
-### rlm_yubikey
-
-       name | description
-------------|------------
-modhextohex |
-
-
-## Provided by proto_dhcp
-
-       name | description
-------------|------------
-dhcp        |
-dhcp_options|
-
-
-### rlm_expr 'randstr'
-
 Characters that can be used in `randstr` are:
 
 character | class
@@ -190,4 +100,96 @@ Examples:
     "%{randstr:CCCC!!cccnnn}" == "IPFL>{saf874"
     "%{randstr:oooooooo}" == "rfVzyA4y"
     "%{randstr:hhhh}" == "68d60de3"
+
+
+### rlm_idn
+
+       name | description
+------------|------------
+idn*        | convert idn to ascii
+
+
+### rlm_ldap
+
+       name | description
+------------|------------
+ldap*       | do an LDAP query
+ldapquote   | safely quote string for use in ldap query
+
+
+### rlm_mschap
+
+       name | description
+------------|------------
+mschap*     | extract ms-chap data from the request, e.g. `"%{mschap:User-Name}"` or `"%{mschap:Challenge}"`
+
+
+### rlm_perl
+
+       name | description
+------------|------------
+perl*       | call perl xlat function defined in `func_xlat`
+
+
+### rlm_redis
+
+       name | description
+------------|------------
+redis*      | run a redis query: `"%{redis:GET mykey}"`
+
+
+### rlm_rest
+
+       name | description
+------------|------------
+rest*       | retrieve text data from a URL
+jsonquote   | quote data for use in JSON
+
+
+### rlm_soh
+
+       name | description
+------------|------------
+soh*        | translate SoH data, currently just `"%{soh:OS}"`
+
+
+### rlm_sql
+
+       name | description
+------------|------------
+sql*        | execute an SQL query, e.g. `"%{sql:SELECT user FROM users WHERE field = '%{Attribute-Name}';}%"
+
+
+### rlm_unbound
+
+         name | description
+--------------|------------
+unbound*-a    | lookup an A record in the DNS
+unbound*-aaaa | lookup an AAAA record in the DNS
+unbound*-ptr  | lookup a PTR record in the DNS
+
+
+### rlm_unpack
+
+       name | description
+------------|------------
+unpack      | unpack attribute data, e.g. `"%{unpack:&Class 0 integer}"` expands 4 octets at position 0 as an integer
+
+
+### rlm_yubikey
+
+       name | description
+------------|------------
+modhextohex | convert Yubikey modhex to standard hex, e.g. `"%{modhextohex:vvrbuctetdhc}" == "ffc1e0d3d260"`
+
+
+## Other xlat expansions
+
+These are provided by proto_dhcp:
+
+        name | description
+-------------|------------
+dhcp         |
+dhcp_options |
+
 
