@@ -58,3 +58,17 @@ One good use case for the expression syntax is being able to apply updates to a 
     }
 
 Here the '..' means change the ctx to the parent of the current attribute.
+
+### Comments...
+
+Selectors / xpath expressions have their pros and cons.  Pro: no conditional syntax, so no need to forbid conditions which don't make sense.  con: any xpath-style syntax is going to be very, very, complex.
+
+we could start out just by allowing conditions `(Foo == bar)`, and limiting the parser to require that the LHS is an attribute.  It's a bit of a hack, but easy to explain.
+
+For complex paths, it's probably easier for the poor administrator to just write nested cursors.
+
+    cursor (&foo[5]) {
+        cursor (.bar < 10) {
+            ...
+        }
+    }
