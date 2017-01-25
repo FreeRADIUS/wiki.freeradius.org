@@ -35,3 +35,26 @@ Or...if the attribute is not of type `group`, we need a special
 `cursor` attribute (ala `foreach`), which contains a *reference* to
 the given attribute.
 
+## Possible extension - expressions
+
+Implementing path expressions in a similar style to jpath and xpath may also be useful.
+
+i.e.
+
+	&foo[5].bar[<10]
+
+Would select all 'bar' sub-tlvs of the 5th instance of attribute 'foo' with a value less than 10 (i'm sure there's a better syntax).
+
+Much of the infrastructure to do this is already there, it'd just require extensions of the templates to allow a linked list of attribute references, enhancement of the attribute selector syntax, and adding evaluation code in the tmpl_cursor* functions.
+
+In the case of if conditions, the code already deals with multiple values for the LHS or RHS OK, so no modifications would need to be made to the condition evaluator.
+
+One good use case for the expression syntax is being able to apply updates to a subset of grouped TLVs.
+
+    cursor &[*].Tunnel-Medium-Type[==802] {
+	    update .. {
+	    	Tunnel-Type := VLAN
+	    }
+    }
+
+Here the '..' means change the ctx to the parent of the current attribute.
