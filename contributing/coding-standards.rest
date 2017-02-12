@@ -10,10 +10,10 @@ Function documentation should be doxygen style.  Below is an example of doxygen 
 ```c
 /** Simple wrapper to decide whether an IP value is v4 or v6 and call the appropriate parser
  *
- * @param out Where to write the parsed ip address.
- * @param value to parse.
- * @param inlen Length of value, if value is \0 terminated inlen may be -1.
- * @param resolve If true and value doesn't look like an IP address, try and resolve value as
+ * @param[out] out	Where to write the parsed ip address.
+ * @param[in] value	to parse.
+ * @param[in] inlen	Length of value, if value is \0 terminated inlen may be -1.
+ * @param[in] resolve	If true and value doesn't look like an IP address, try and resolve value as
  *	a hostname.
  * @return
  *	- 0 if ip address was parsed successfully.
@@ -31,7 +31,6 @@ Verb / noun order
 ^^^^^^^^^^^^^^^^^
 Nouns should always precede verbs ``<prefix>_<noun>_<verb>[_<verb qualifiers>]``.
 
-**Good**
 ```c
 fr_request_alloc()
 fr_dict_find_by_name()
@@ -183,9 +182,64 @@ For modules the instance data pointer should be directly before the ``REQUEST *`
 Code style
 ==========
 
-FreeRADIUS code style is very similar to K&R/Linux Kernel style https://www.kernel.org/doc/Documentation/CodingStyle.
+FreeRADIUS code style is very similar to 1TBS (one true brace style) with two major differences.
 
-Linux Kernel style should be used as the base coding style (excluding chapters 5,9,11,13,20), with the rules described below taking precedence.
+- Bodies may be collapsed i.e. ``if (foo) bar();`` is acceptable.
+- Case statements don't require indentation.
+
+**Good**
+```c
+if (foo) bar();
+
+if (foo) {
+	bar();
+	baz();
+}
+
+for (i = 0; i < 10; i++) bar();
+
+for (i = 0; i < 10; i++) {
+	bar();
+	baz();
+}
+
+switch (foo) {
+case 'bar':
+	break;
+
+case 'baz':
+	break;
+}
+```
+
+**Bad**
+```c
+if (foo)
+	bar();
+
+if (foo)
+	bar();
+else
+	baz();
+
+for (i = 0; i < 10; i++)
+	bar();
+
+switch (foo)
+{
+	case 'bar':
+		break;
+
+	case 'baz':
+		break;
+}
+```
+
+If in doubt the files below are good examples to follow:
+- https://github.com/FreeRADIUS/freeradius-server/blob/v4.0.x/src/modules/rlm_ldap/rlm_ldap.c
+- https://github.com/FreeRADIUS/freeradius-server/blob/v4.0.x/src/lib/dict.c
+- https://github.com/FreeRADIUS/freeradius-server/blob/v4.0.x/src/lib/radius_encode.c
+
 
 No trailing whitespace, newline at the end of the file
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
