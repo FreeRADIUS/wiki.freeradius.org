@@ -236,6 +236,7 @@ switch (foo)
 ```
 
 If in doubt the files below are good examples to follow:
+
 - https://github.com/FreeRADIUS/freeradius-server/blob/v4.0.x/src/modules/rlm_ldap/rlm_ldap.c
 - https://github.com/FreeRADIUS/freeradius-server/blob/v4.0.x/src/lib/dict.c
 - https://github.com/FreeRADIUS/freeradius-server/blob/v4.0.x/src/lib/radius_encode.c
