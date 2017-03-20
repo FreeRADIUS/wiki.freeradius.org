@@ -32,6 +32,18 @@ Many of these can be replaced by dynamic xlats (e.g. `Current-Time`)
 
 The various group functionalities could be replaced (badly) with xlat expansions: `%{ldap-group:%{User-Name} sales}` which is shit, but would work.
 
-It would be ideal to allow `LDAP-Group == sales` to still work.  But that means fixing all of the callers of `paircompare()` to allow for it to be async, too.  That's a lot of work.
+It would be ideal to allow `LDAP-Group == sales` to still work.  But that means fixing all of the callers of `paircompare()` to allow for it to be async, too.  That's a lot of work.  The better approach is just to replace comparison of virtual attributes with xlat expansions, *or* function calls.
 
-It's likely easier to fix the callers so that they call `unlang` functions, and then just get rid of the `paircompare()` functionality altogether.
+It's likely easier to fix the callers so that they call `map` functions, and then just get rid of the `paircompare()` functionality altogether.
+
+## Proposal
+
+Note: `paircompare()` is part condition, and part map.  i.e. the `paircompare()` functions *set* some attributes unconditionally, and return true/false for comparison of other attributes.  It also takes a list of `VALUE_PAIR`s, and thus is not really amenable to converting it to maps and conditions.
+
+* get rid of as many virtual attributes as possible first, e.g. `Prefix`.  People don't really use them
+* convert most of the rest to xlat expansions, and document that in `raddb/README`
+* get rid of `hints` and `huntgroups`.  Sorry.
+* update `paircompare()` to take a new data structure, which contains `fr_cond_t` and `vp_map_t`?
+
+* add callbacks to templates?  i.e. virtual attributes like `paircompare()`, with a duplicate API.
+
