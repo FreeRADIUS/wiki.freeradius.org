@@ -6,7 +6,7 @@ The SQL module needs to be async.  Which involves a lot of changes.  Philippe ha
 
 ## Xlats
 
-The underlying [[xlat]] code is still synchronous.  That needs to be updated before the SQL module will be full async.
+The underlying [xlat](/version4/xlat) code is still synchronous.  That needs to be updated before the SQL module will be full async.
 
 ## paircompare()
 
