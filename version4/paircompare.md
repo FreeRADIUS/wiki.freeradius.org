@@ -1,0 +1,37 @@
+# Async paircompare()
+
+`paircompare()` functionality returns a dynamic comparison for attributes.  It's like taking a dynamic value every time the attribute is referenced, except that the comparison is done in the `paircompare()` function.
+
+The underlying `paircompare()` function compares attributes to attributes in the request.  It doesn't handle lists.  It's called from:
+
+* `cond_eval.c` - compare one attribute in an `if` statement.  The list is handled by the `cond_eval` functionality.
+* `rlm_files.c` - users file comparisons
+* `rlm_preprocess.c`, hints and huntgroups comparisons
+* `rlm_sql.c` - compare `radcheck` and `radgroupcheck` items retrieved from SQL
+
+It's also referenced from:
+
+* `unlang_compile.c` comment as mark up paircompare fixups (?)
+
+Pair comparisons are registered by:
+
+* `src/main/pair.c` - `paircompare_register_byname()`
+* `rlm_expiration` - the `Expiration` attribute. *can be replaced by more unlang`
+* `rlm_expr` - `Prefix`, `Suffix`, `Connect-Rate`, `Packet-Type`, and `Response-Packet-Type`, src/dst ip/port, virtual server, packet processing stage, *Most of these can either be deleted, or replaced with dynamic xlats.*
+* `rlm_ldap` - `LDAP-Group`
+* `rlm_logintime` - `Current-Time`, and `Time-of-Day`, *can either be deleted, or replaced with dynamic xlats.*
+* `rlm_sql` - `SQL-Group`
+* `rlm_sqlcounter` - counter thing?
+* `rlm_test`
+* `rlm_unix`- `Unix-Group` *should probably be replaced with a map?*
+* `rlm_winbind` `Winbind-Group`
+
+## Suggestions
+
+Many of these can be replaced by dynamic xlats (e.g. `Current-Time`)
+
+The various group functionalities could be replaced (badly) with xlat expansions: `%{ldap-group:%{User-Name} sales}` which is shit, but would work.
+
+It would be ideal to allow `LDAP-Group == sales` to still work.  But that means fixing all of the callers of `paircompare()` to allow for it to be async, too.  That's a lot of work.
+
+It's likely easier to fix the callers so that they call `unlang` functions, and then just get rid of the `paircompare()` functionality altogether.
