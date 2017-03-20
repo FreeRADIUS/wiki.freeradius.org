@@ -43,7 +43,7 @@ Note: `paircompare()` is part condition, and part map.  i.e. the `paircompare()`
 * get rid of as many virtual attributes as possible first, e.g. `Prefix`.  People don't really use them
 * convert most of the rest to xlat expansions, and document that in `raddb/README`
 * get rid of `hints` and `huntgroups`.  Sorry.
-* update `paircompare()` to take a new data structure, which contains `fr_cond_t` and `vp_map_t`?
-
+* move the sql `radcheck` and `radgroupcheck` functions to return conditions and maps?
+* update `PAIR_LIST` to return conditions and maps?, and `pairlist_read()`, which is only called from `rlm_files` and `rlm_preprocess`
 * add callbacks to templates?  i.e. virtual attributes like `paircompare()`, with a duplicate API.
 
