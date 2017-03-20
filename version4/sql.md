@@ -10,7 +10,7 @@ The underlying [xlat](/version4/xlat) code is still synchronous.  That needs to 
 
 ## paircompare()
 
-The paircompare callbacks (e.g. `SQL-Group`) are still sync
+The [paircompare](/version4/paircompare) callbacks (e.g. `SQL-Group`) are still sync
 
 ## NAS from SQL
 
