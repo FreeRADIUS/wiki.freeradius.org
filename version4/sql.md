@@ -1,7 +1,5 @@
 # Async SQL
 
-Based on comments from Philippe Wooding.
-
 The SQL module needs to be async.  Which involves a lot of changes.  Philippe has start on changes https://github.com/pwdng/freeradius-server/tree/async_sql
 
 ## Xlats
