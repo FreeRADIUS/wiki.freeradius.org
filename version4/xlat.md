@@ -26,3 +26,18 @@ The `unlang_xlat()` function will keep calling `xlat_expand()` until there are n
 There are ~80 references to `xlat_eval()` and `xlat_aeval()` in the server.  Most of these should probably be converted to `tmpl_expand()`, and then `tmpl_expand()` also becomes an asynchronous yield point.
 
 This involves changing a lot of code...
+
+## Proposal
+
+`xlat_expand(request, xlat_exp_t, async)`, and the `xlat` functions have to be marked up as async-capable.
+
+We also need:
+
+`unlang_xlat(request, xlat_exp_t, resume_callback, action_callback, ctx)`, which is like `unlang_yield()`, except it also takes an `xlat_exp_`.  It calls `xlat_expand(request, xlat_exp_t, true)`, to do the expansion.
+
+The `xlat_expand()` function then checks:
+
+    if (async && !xlat->async) issue warning, because it means that the expansion will block an async caller
+    if (!async && xlat->async) fail, because the caller can't understand async calls?
+
+We can't have synchronous modules call async xlats, and it takes time to convert all of the modules.  So... we need a migration plan.
