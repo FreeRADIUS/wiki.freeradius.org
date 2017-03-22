@@ -387,3 +387,19 @@ directory as the module source, perhaps in a `conf` subdirectory.  The
 build system can automatically determine which file goes where.  The
 main `conf` or `raddb` directory is thus empty, and people only ever
 see configurations for modules which they have installed.
+
+## Other changes
+
+[xlat](version4/xlat) needs to be updated to integrate with the unlang interpreter, and to be async.
+
+[paircompare](version4/paircompare) should probably go away.
+
+Templates and maps need to be async.  All callers of them need to be updated to be async.  See [paircompare](version4/paircompare) for suggestions on how this can be done.
+
+[sql](version4/sql) needs to be async.
+
+"Read clients" needs to be moved from [sql](version4/sql), and into a [clients](version4/clients) virtual server.
+
+[clients](version4/clients) need to be in a virtual server.  The `dynamic_clients` needs to be renamed to `clients`.  The `clients.conf` file needs to in an `rlm_client` module.
+
+The [tls](version4/tls) needs to be it's own virtual server.
