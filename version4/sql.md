@@ -41,3 +41,10 @@ Currently, query timeouts are only supported for MySQL. The new async code makes
 * The last option is to simply close the socket and continue processing the request
 
 The last option is probably the best as there's no point in letting the query finish.
+
+## IP pool modules
+
+Both rlm_sqlippool & rlm_sqlhpwippool use some functions from the SQL module.
+They need updating to be compatible with the new async model.
+
+Instead of sharing the connection pool with the sql module instance as is the case now, we could share the thread specific data from the sql module to access the sql module's thread pool. Otherwise, it means having our own pool.
