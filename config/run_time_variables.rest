@@ -145,38 +145,42 @@ the file for a complete list of variables.
 
 One-character variables
 --------------------------------
-The following one-character variables are also defined.  However, they are duplicates of the previous general cases, and are only provided for backwards compatibility.  They WILL BE removed in a future release.  They also do NOT permit the use of conditional syntax (':-'), as described above.
+The following one-character variables are also defined.  However, they are duplicates of the previous general cases, and are only provided for backwards compatibility.  They WILL BE removed in a future release, many have already been removed from version 3, these are indicated below as (v2).  They also do NOT permit the use of conditional syntax (':-'), as described above.
 
 +-----------+---------------------------+-----------------------+
 | Variable  | Description               | Proper Equivalent     |
 +===========+===========================+=======================+
-|%a         |Protocol (SLIP/PPP)        |%{Framed-Protocol}	|
+|%a (v2)    |Protocol (SLIP/PPP)	|%{Framed-Protocol}	|
 +-----------+---------------------------+-----------------------+
-|%c         |Callback-Number		|%{Callback-Number}	|
+|%c (v2)    |Callback-Number		|%{Callback-Number}	|
 +-----------+---------------------------+-----------------------+
 |%d         |request day (DD)           |                 	|
 +-----------+---------------------------+-----------------------+
-|%f         |Framed IP address	  	|%{Framed-IP-Address}	|
+|%f (v2)    |Framed IP address		|%{Framed-IP-Address}	|
 +-----------+---------------------------+-----------------------+
-|%i         |Calling Station ID	  	|%{Calling-Station-Id}	|
+|%i (v2)    |Calling Station ID  	|%{Calling-Station-Id}	|
 +-----------+---------------------------+-----------------------+
 |%l         |request timestamp          |		        |
 +-----------+---------------------------+-----------------------+
 |%m         |request month (MM)         |	                |
 +-----------+---------------------------+-----------------------+
-|%n         |NAS IP address		|%{NAS-IP-Address}	|
+|%n (v2)    |NAS IP address		|%{NAS-IP-Address}	|
 +-----------+---------------------------+-----------------------+
-|%p         |Port number		|%{NAS-Port}            |
+|%n (v3)    |Request number		|			|
 +-----------+---------------------------+-----------------------+
-|%s         |Speed (PW_CONNECT_INFO)    |%{Connect-Info}	|
+|%p (v2)    |Port number		|%{NAS-Port}            |
++-----------+---------------------------+-----------------------+
+|%s (v2)    |Speed (PW_CONNECT_INFO)    |%{Connect-Info}	|
 +-----------+---------------------------+-----------------------+
 |%t         |request in ctime format	|		        |
 +-----------+---------------------------+-----------------------+
-|%u         |User name		  	|%{User-Name}           |
+|%u (v2)    |User name		  	|%{User-Name}           |
 +-----------+---------------------------+-----------------------+
-|%A         |radacct_dir		|%{config:radacctdir}	|
+|%v (v2)    |Server version		|${version.freeradius-server} (v3) |
 +-----------+---------------------------+-----------------------+
-|%C         |clientname	                |                       |
+|%A (v2)    |radacct_dir		|%{config:radacctdir}	|
++-----------+---------------------------+-----------------------+
+|%C (v2)    |clientname	                |                       |
 +-----------+---------------------------+-----------------------+
 |%D         |request date (YYYYMMDD)	|	                |
 +-----------+---------------------------+-----------------------+
@@ -186,11 +190,11 @@ The following one-character variables are also defined.  However, they are dupli
 +-----------+---------------------------+-----------------------+
 |%I         |request ID		  	|			|
 +-----------+---------------------------+-----------------------+
-|%L         |radlog_dir		  	|%{config:logdir}	|
+|%L (v2)    |radlog_dir		  	|%{config:logdir}	|
 +-----------+---------------------------+-----------------------+
-|%M         |MTU			|%{Framed-MTU}          |
+|%M (v2)    |MTU			|%{Framed-MTU}          |
 +-----------+---------------------------+-----------------------+
-|%R         |radius_dir		  	|%{config:raddbdir}	|
+|%R (v2)    |radius_dir		  	|%{config:raddbdir}	|
 +-----------+---------------------------+-----------------------+
 |%S         |request timestamp          |                       |
 |           |in SQL format              |                       |
@@ -198,14 +202,14 @@ The following one-character variables are also defined.  However, they are dupli
 |%T         |request timestamp          |                       |
 |           |in database format         |                       |
 +-----------+---------------------------+-----------------------+
-|%U         |Stripped User name	  	|%{Stripped-User-Name}	|
+|%U (v2)    |Stripped User name	  	|%{Stripped-User-Name}	|
 +-----------+---------------------------+-----------------------+
-|%V         |Request-Authenticator      |                       |
+|%V (v2)    |Request-Authenticator      |                       |
 |           |(Verified/None)            |                       |
 +-----------+---------------------------+-----------------------+
 |%Y         |request year (YYYY)        |                       |
 +-----------+---------------------------+-----------------------+
-|%Z         |All request attributes     |                       |
+|%Z (v2)    |All request attributes     |                       |
 |           |except password            |                       |
 |           |(must have a big buffer)   |                       |
 +-----------+---------------------------+-----------------------+
