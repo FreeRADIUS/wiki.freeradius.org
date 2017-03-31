@@ -33,7 +33,7 @@ Client-Shortname       The shortname assigned to the client, from which the pack
      %{config:section.subsection.item} Corresponding value in 'radiusd.conf'
                                        for the string value of that item.
 
-The %{config:...} variables should be used VERY carefully, as they may leak secret information from your RADIUS server, if you use them in reply attributes to the NAS!
+The %{config:...} variables should be used **very** carefully, as they may leak secret information from your RADIUS server, if you use them in reply attributes to the NAS!
 
 If your system supports regular expressions, then regular expression matching defines other special variables, just like in Perl.
 ::
@@ -44,7 +44,7 @@ If your system supports regular expressions, then regular expression matching de
      ...
      %{8}	The eight group which matched.
 
-These variables are defined during a regular expression match =~, and only when the expression matches.  They are NOT defined for the operator !~, or when =~ doesn't match.  Any use of =~ destroys all previous values of %{0}..%{8}, but the variables.
+These variables are defined during a regular expression match =~, and only when the expression matches.  They are **not** defined for the operator !~, or when =~ doesn't match.  Any use of =~ destroys all previous values of %{0}..%{8}, but the variables.
 
 Examples
 -------------
@@ -145,7 +145,7 @@ the file for a complete list of variables.
 
 One-character variables
 --------------------------------
-The following one-character variables are also defined. They also do NOT permit the use of conditional syntax (':-'), as described above.
+The following one-character variables are also defined. They also do **not** permit the use of conditional syntax (':-'), as described above.
 
 +-----------+---------------------------+---------------------------------------+
 | Variable  | Description               | Proper Equivalent     		|
@@ -177,7 +177,7 @@ The following one-character variables are also defined. They also do NOT permit 
 |%Y         |request year (YYYY)        |                       		|
 +-----------+---------------------------+---------------------------------------+
 
-The following variables are obsolete and have been removed from version 3 of the server. They are duplicates of the previous general cases, and were only provided for backwards compatibility.
+The following variables are **obsolete and have been removed** from version 3 of the server. They are duplicates of the previous general cases, and were only provided for backwards compatibility.
 
 +-----------+---------------------------+---------------------------------------+
 | Variable  | Description               | Proper Equivalent     		|
