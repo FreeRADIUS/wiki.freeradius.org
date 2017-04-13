@@ -23,4 +23,4 @@ sudo make install STRIP=''
 ./configure --with-libfreeradius-ldap-lib-dir=/usr/local/openldap/lib --with-libfreeradius-ldap-include-dir=/usr/local/openldap/include
 make
 make install
-``
+```
