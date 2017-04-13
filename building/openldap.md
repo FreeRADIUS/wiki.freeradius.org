@@ -18,7 +18,7 @@ make -j8
 sudo make install STRIP=''
 ```
 
-## Configure FreeRADIUS
+## Configure/build FreeRADIUS
 ```
 ./configure --with-libfreeradius-ldap-lib-dir=/usr/local/openldap/lib --with-libfreeradius-ldap-include-dir=/usr/local/openldap/include
 make
