@@ -20,7 +20,6 @@ sudo make install STRIP=''
 
 ## Tell FreeRADIUS where to find OpenLDAP libraries
 ```
-#
 ./configure --with-libfreeradius-ldap-lib-dir=/usr/local/openldap/lib --with-libfreeradius-ldap-include-dir=/usr/local/openldap/include
 make
 make install
