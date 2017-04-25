@@ -71,7 +71,7 @@ Optionally add or uncomment 'sql' to the post-auth{} section if you want to log 
 
 Your radiusd.conf should then look something like this:
 
- authorise {
+ authorize {
         preprocess
         chap
         mschap
