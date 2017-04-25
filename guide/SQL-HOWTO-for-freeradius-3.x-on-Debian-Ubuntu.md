@@ -45,17 +45,14 @@ The following section show how this can be done when using a MySQL database.
 
 ##Configuring FreeRADIUS to use SQL##
 
-Edit /etc/mods-available/sql module and enter the SQL dialect, server, username and password details to connect to your SQL server and the RADIUS database. The database and table names should be left at the defaults if you used the default schema. For testing/debug purposes, uncomment the `logfile = ...` line - FreeRADIUS will dump all SQL commands to the log file specified here.
+Edit /etc/mods-available/sql module and enter the SQL dialect, driver, server, username and password details to connect to your SQL server and the RADIUS database. The database and table names should be left at the defaults if you used the default schema. For testing/debug purposes, uncomment the `logfile = ...` line - FreeRADIUS will dump all SQL commands to the log file specified here.
 
 Next enable the sql module by executing
+
+<pre>
     cd /etc/raddb/mods-enabled
     ln -s ../mods-available/sql sql
-
-If you're stripping all realm names (i.e. you want user joe@domain.com to authenticate as just 'joe'), then in file /etc/raddb/mods-config/sql/main/*sql_dialect*/queries.conf , under the 'query config: username' section, you MAY need to adjust the line(s) referring to sql_user_name. For example, in uncomment the line:
- 
-    sql_user_name = '%{Stripped-User-Name}'
-
-...and comment out the following line referring to just User-Name. If you want to see what's happening here, switch on all the logging options in radiusd.conf and run radiusd in debug mode (-X) to see what's happening : you'll see " user@domain" being passed to SQL when using User-Name, but just "user" when using Stripped-User-Name. Of course, set all your other SQL options as needed (database login details, etc)
+</pre>
 
 Edit /etc/raddb/sites-available/default (or whatever site config you use) and uncomment the line containing 'sql' in the authorize{} section. The best place to put it is just after the 'files' entry. Indeed, if you'll just be using SQL, and not falling back to text files, you could comment out or delete the 'files' entry altogether.
 
@@ -67,10 +64,16 @@ Optionally add or uncomment 'sql' to the session{} section if you want to do Sim
 
 Optionally add or uncomment 'sql' to the post-auth{} section if you want to log all Authentication attempts to SQL.
 
+Optionally, if you want to strip all realm names (i.e. you want user joe@domain.com to authenticate as just 'joe'), then in file /etc/raddb/mods-config/sql/main/*sql_dialect*/queries.conf , under the 'query config: username' section, you MAY need to adjust the line(s) referring to sql_user_name. For example, in uncomment the line:
+ 
+    sql_user_name = '%{Stripped-User-Name}'
+
+...and comment out the following line referring to just User-Name. If you want to see what's happening here, switch on all the logging options in radiusd.conf and run radiusd in debug mode (-X) to see what's happening : you'll see " user@domain" being passed to SQL when using User-Name, but just "user" when using Stripped-User-Name. Of course, set all your other SQL options as needed (database login details, etc)
+
 '''You should not change/delete any other lines in the config file without reading and understanding the comments!'''
 
-Your radiusd.conf should then look something like this:
-
+The config you use (e.g. sites-enabled/default) should then look something like this:
+ <pre>
  authorize {
         preprocess
         chap
@@ -82,22 +85,34 @@ Your radiusd.conf should then look something like this:
         sql
         pap
  }
- 
  accounting {
         # We leave "detail" enabled to _additionally_ log accounting to /var/log/radius/radacct
         detail
         sql
  }
-
+</pre>
+ 
 ##Populating SQL##
 
-You should now created some dummy data in the database to test against. It goes something like this:
+Now we create some dummy data in the database to test against. 
+
+To check whether FreeRADIUS now properly works with the SQL database, we create a user entry in radcheck.
+
+<pre>
+mysql -u radius -p
+>  use radius;
+>  insert into radcheck (username,attribute,op,value) values("fredf", "Cleartext-Password", ":=", "wilma");
+</pre>
+
+Then try authenticating as the user with radtest. If you get Accept-Accept response, you can continue with group setup if you wish.
+
+To configure groups, we'll have to do these steps:
 * In usergroup, put entries matching a user account name to a group name.
 * In radcheck, put an entry for each user account name with a 'Cleartext-Password' attribute with a value of their password.
 * In radreply, create entries for each user-specific radius reply attribute against their username
 * In radgroupreply, create attributes to be returned to all group members
 
-Here's a dump of some example 'radius' tables from a MySQL database (With PostgreSQL the formating will look slightly different but it uses exactly the same content).
+Here's a dump of some example 'radius' tables from a MySQL database (With PostgreSQL the formatting will look slightly different but it uses exactly the same content).
 
 This example includes three users, one with a dynamically assigned IP by the NAS (fredf), one assigned a static IP (barney), and one representing a dial-up routed connection (dialrouter):
 
@@ -183,11 +198,12 @@ On the subject of backup servers. If you want to run TWO MySQL servers and have 
 * change the module names from `sql { ....` to something like `sql sql1 { ....` and `sql sql2 { ....`
 * edit the second copy to reflect connecting to your backup server  
 * in the different sections of your site config (eg. sites-enabled/default) change the 'sql' entry to a 'redundant sql' one, like this:
- 
+ <pre>
     redundant sql {
       sql1 
       sql2 
     }
+ </pre>
 
 Note that if FreeRADIUS fails over to the second MySQL server and tries to update the accounting table (radacct), nasty things might possibly happen to your replication setup and database integrity as the first MySQL server won't have got the updates...
 
