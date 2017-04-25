@@ -1,6 +1,6 @@
 FreeRADIUS Server works out of the box with a [[rlm_sql|large list of SQL servers]]
 
-These instructions are based on the [[SQL HOWTO]] which is outdated for the 3.x versions and will discribe the configuration on Debian/Ubuntu (tested with Freeradius 3.0.11 version).
+These instructions are based on the [[SQL HOWTO]] which is outdated for the 3.x versions and will discribe the configuration on Debian/Ubuntu (tested with FreeRADIUS 3.0.11 version).
 
 ##Before You Start##
 
@@ -23,8 +23,8 @@ First, you should create a new empty 'radius' database in SQL and create the sch
 Next create a database user with permissions to that database. You could of course call the database and the user anything you like but you probably should stick with 'radius' for the user to keep things simple. You can find sql statements to achieve this in /etc/raddb/mods-config/sql/main/*sql_dialect*/setup.sql
 
 
-##Example setup of MySql database##
-The following section show how this can be done when using a MySql database.
+##Example setup of MySQL database##
+The following section show how this can be done when using a MySQL database.
 
 ###Create MySQL Database###
 
@@ -43,9 +43,9 @@ The following section show how this can be done when using a MySql database.
 
     mysql -uroot -p radius < /etc/raddb/mods-config/sql/main/mysql/setup.sql
 
-##Configuring FreeRadius to use SQL##
+##Configuring FreeRADIUS to use SQL##
 
-Edit /etc/mods-available/sql module and enter the sql dialect, server, username and password details to connect to your SQL server and the RADIUS database. The database and table names should be left at the defaults if you used the default schema. For testing/debug purposes, uncomment the `logfile = ...` line - FreeRadius will dump all SQL commands to the log file specified here.
+Edit /etc/mods-available/sql module and enter the sql dialect, server, username and password details to connect to your SQL server and the RADIUS database. The database and table names should be left at the defaults if you used the default schema. For testing/debug purposes, uncomment the `logfile = ...` line - FreeRADIUS will dump all SQL commands to the log file specified here.
 
 Next enable the sql module by executing
     cd /etc/raddb/mods-enabled
@@ -178,7 +178,7 @@ Congratulations. You're done!
 
 * Running a backup FreeRADIUS server and need to replicate the RADIUS database to it? You can follow Colin Bloch's basic instructions at http://www.ls-l.net/mysql/ and got replication setup between two MySQL servers. Real easy. Read the MySQL docs on replication for more details.
 
-On the subject of backup servers. If you want to run TWO MySQL servers and have FreeRadius fall over between them, you'll need to do something like this: 
+On the subject of backup servers. If you want to run TWO MySQL servers and have FreeRADIUS fall over between them, you'll need to do something like this: 
 * duplicate your sql.conf twice
 * change the module names from `sql { ....` to something like `sql sql1 { ....` and `sql sql2 { ....`
 * edit the second copy to reflect connecting to your backup server  
@@ -189,10 +189,10 @@ On the subject of backup servers. If you want to run TWO MySQL servers and have 
       sql2 
     }
 
-Note that if FreeRadius fails over to the second MySQL server and tries to update the accounting table (radacct), nasty things might possibly happen to your replication setup and database integrity as the first MySQL server won't have got the updates...
+Note that if FreeRADIUS fails over to the second MySQL server and tries to update the accounting table (radacct), nasty things might possibly happen to your replication setup and database integrity as the first MySQL server won't have got the updates...
 
 ##Troubleshooting##
-If you think freeradius doesn't correctly process the sql authentication, accounting, etc. enable the query logging by uncommenting the `logfile = ...` line in the sql module and make sure that the user the radius server at has write permissions on that file. After restarting the radius server the sql queries should be written to that file. If it still isn't working use radiusd -X to look for error messages.
+If you think FreeRADIUS doesn't correctly process the sql authentication, accounting, etc. enable the query logging by uncommenting the `logfile = ...` line in the sql module and make sure that the user the radius server at has write permissions on that file. After restarting the radius server the sql queries should be written to that file. If it still isn't working use radiusd -X to look for error messages.
 
 ##See also##
 
