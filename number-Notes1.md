@@ -1,0 +1,1 @@
+$ radtest testing password localhost 0 testing123
