@@ -106,3 +106,18 @@ The extra complexity in the IO layer is worth it, as it is too difficult for now
 Once the `proto_radius_udp` IO module returns the triple of (socket, context, transport), the `proto_radius` main module is responsible for gluing together the state machine and IO pieces.
 
 ## Gluing it all together.
+
+The `proto_radius` main module now has all of the information it needs to create a listener.  It does the following, in pseudo-code
+
+    for each listen section
+        for each state machine sub-module
+            for each IO sub-module
+                allocate new `fr_transport_t`
+                copy IO `fr_transport_t` to the newly allocated one
+                update the `process` function with the one from the state machine submodule
+                allocate new context = (transport context, allowed packets)
+                insert (sockfd, context, transport) to the scheduler
+
+Note that the `context` here is one for the `proto_radius` module.  That context tracks which packets are allowed, and the underlying IO context, among other pieces of information.
+
+Once all of this work is done, the `proto_radius` main module returns to the server core, and the next virtual server is parsed.
