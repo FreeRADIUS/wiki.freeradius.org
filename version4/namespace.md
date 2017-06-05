@@ -73,6 +73,8 @@ The new configuration looks like this:
 
 Where the transports are typically `udp`, `tcp`, `file`, etc.
 
+Note also that there is only one IO submodule.  While it's likely not difficult to allow for multiple IO sub-modules, it's better to keep the initial design simple.
+
 The `proto_radius` module looks for the `transport` configuration, and loads the appropriate IO sub-module.  In this case, `proto_radius_udp`.
 
 There is typically transport-specific configuration, as follows:
@@ -111,7 +113,7 @@ The `proto_radius` main module now has all of the information it needs to create
 
     for each listen section
         for each state machine sub-module
-            for each IO sub-module
+            for the one IO sub-module
                 allocate new `fr_transport_t`
                 copy IO `fr_transport_t` to the newly allocated one
                 update the `process` function with the one from the state machine submodule
