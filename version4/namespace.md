@@ -53,4 +53,56 @@ There may be multiple `packet` configurations:
         packet = Access-Accept
         ...
 
-The `proto_radius` module verifies that all of the packets named here are appropriate, and loads all of the sub-modules.
+The `proto_radius` module verifies that all of the packets named here are appropriate, and loads all of the state machine sub-modules.
+
+Once each state machine sub-module has been loaded, the IO submodules are loaded.
+
+### IO Submodules
+
+Each `listen` section also has a `transport` configuration item.  This configuration controls what transport layer is being used for packets.
+
+The main goal of these changes is to enforce a hard separation between the state machines for processing packets, and how those packets are received or sent.  The v3 code did not have such a separation, which meant that proxying and "originate CoA" were one-offs.  They were welded into the server core, and could not be changed without major work.  In addition, we couldn't add new protocols without changing the server core, which meant (in all likelihood) accidentally breaking the existing state machines.
+
+The new configuration looks like this:
+
+    listen {
+        packet = Status-Server
+        ...
+        transport = udp
+        ...
+
+Where the transports are typically `udp`, `tcp`, `file`, etc.
+
+The `proto_radius` module looks for the `transport` configuration, and loads the appropriate IO sub-module.  In this case, `proto_radius_udp`.
+
+There is typically transport-specific configuration, as follows:
+
+    listen {
+        packet = Status-Server
+        ...
+        transport = udp
+        ...
+        udp {
+            ipaddr = 192.0.2.25
+            port = 1812
+            ...
+        }
+        ...
+
+The `proto_radius_udp` module is responsible for parsing the `udp` sub-section.  Once parsed, it returns:
+
+* socket FD
+* transport context
+* `fr_transport_t` data structure
+
+The `fr_transport_t` data structure contains all of the functions necessary to read/write the socket.  The transport context is transport-specific context, such as de-dup trees, etc.
+
+Note that the IO functions *must* be able to handle reading and writing all possible kinds of packets.  It has no knowledge as to whether or not the source IP is allowed (e.g. known clients).  It has no knowledge of which packets are allowed.  It has no knowledge of shared secrets, etc.
+
+The benefit of this division of responsibility is that the IO layer has a hard separation from the state machine.  The downside is that the IO layer has to do a bit more work, in that it has to handle all possible packet types.  e.g. do de-dup, cleanup delay, and reject delay for Access-Request, but not do that for Status-Server or Accounting-Request.
+
+The extra complexity in the IO layer is worth it, as it is too difficult for now to completely abstract the MxN matrix of packet code vs transport.
+
+Once the `proto_radius_udp` IO module returns the triple of (socket, context, transport), the `proto_radius` main module is responsible for gluing together the state machine and IO pieces.
+
+## Gluing it all together.
