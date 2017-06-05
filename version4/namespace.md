@@ -2,7 +2,7 @@
 
 Each virtual server section starts off with a namespace:
 
-   server foo {
+    server foo {
         namespace = radius
         ...
 
