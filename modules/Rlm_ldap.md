@@ -8,11 +8,11 @@ To enable LDAP in your FreeRADIUS server, you can:
 
 # LDAP ATTRIBUTES
 
-In version 2, the mapping between RADIUS [[attributes]] and [[LDAP]] attributes is in raddb/ldap.attrmap. You can edit that file and add any new mapping that you may need. The LDAP-schema file is located in doc/RADIUS-LDAPv3.schema. Before adding any radius attributes the ldap server schema should be updated.
+In version 2, the mapping between RADIUS [[attributes]] and [[LDAP]] attributes is in raddb/ldap.attrmap. You can edit that file and add any new mapping that you may need. The LDAP-schema file is located in doc/schemas/ldap/openldap/freeradius.schema. Before adding any radius attributes the ldap server schema should be updated.
 
 All ldap entries containing radius attributes should contain at least "objectclass: radiusprofile"
 
-radiusCheckItem and radiusReplyItem are special. They allow the administrator to add any check or reply item respectively without adding it in the ldap schema. The format should be:
+radiusControlAttribute and radiusReplyAttribute are special. They allow the administrator to add any control or reply item respectively without adding it in the ldap schema. The format should be:
 <pre>
  ldap-attribute: radius-attribute operator value
 </pre>
@@ -21,7 +21,7 @@ The version 3 attribute mapping is in the module configuration file `raddb/mods-
 
 For Example:
 <pre>
- radiusReplyItem: Cisco-AVPair := "ip:addr-pool=dialin_pool"
+ radiusReplyAttribute: Cisco-AVPair := "ip:addr-pool=dialin_pool"
 </pre>
 
 ### LDAP Module Messages
