@@ -23,5 +23,3 @@ The following operating systems are supported by FreeRADIUS.
 -   [DragonFlyBSD](http://pkgsrc.se/net/freeradius) (uses NetBSD pkgsrc)
 -   Solaris
 -   Cygwin
--   [Native Windows](/business/roadmap.html#windows) (in planning stages
-    via [MingW](http://www.mingw.org))
