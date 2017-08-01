@@ -37,7 +37,7 @@ and "carrier class" versions of their product, there is only one version
 of FreeRADIUS:
 
 *Carrier class stability and functionality for everyone.*
-We prefer to keep it [simple](simple.html).
+We prefer to keep it [simple](Simple).
 
 As proof of it's scalability, the server is currently deployed in
 multiple Fortune 500 companies, and Tier 1 ISPs and
