@@ -173,6 +173,7 @@ The reason why the FreeRADIUS core developers love GitHub is because of *pull re
 
 If your code merges cleanly, then its a couple of clicks to get it merged into the project repository. This is **significantly** easier for core developers, compared with applying mangled patches sent on the mailing lists.
 
-* Go to your fork on GitHub [[https://github.com/your github username/freeradius-server]]
+* Go to your fork on GitHub ``https://github.com/<your github username>/freeradius-server``
 * Click the 'Pull request' button 
 * Follow the instructions...
+
