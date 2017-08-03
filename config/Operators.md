@@ -1,4 +1,4 @@
-#Operators#
+Operators
 =========
 
 Note - These apply to the ``rlm_files`` module only.  For operators in unlang see ``man unlang``.
@@ -23,7 +23,8 @@ The following is a list of operators, and their meaning.
 | **=***   | Attribute =* Value      | As a check item, it matches if the request contains the named  attribute, no matter what the value is.                                                                                                                    | Not allowed as a reply item.   |
 | **!***   | Attribute !* Value      | As a check item, it matches if the request does not contain the named attribute, no matter what the value is.                                                                                                             | Not allowed as a reply item.   |
 
-#EXAMPLES#
+Examples
+--------
 
     bob  Cleartext-Password := "hello"
 
@@ -45,5 +46,7 @@ That is, give the user what they ask for.  This entry also shows how to specify 
 
 See the users file supplied with the server for more examples and comments.
 
-#See Also#
+See Also
+--------
+
 * RADIUS [[Attributes]]
