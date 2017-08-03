@@ -10,7 +10,7 @@ After cloning a repository you can create new branches and commit new revisions 
 
 Installing Git
 ==============
-See [[here|http://book.git-scm.com/2_installing_git.html]]
+See [[here|https://git-scm.com/book/en/v2/Getting-Started-Installing-Git]]
 
 Getting a GitHub account
 ========================
