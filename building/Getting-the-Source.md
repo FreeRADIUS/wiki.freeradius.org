@@ -8,12 +8,12 @@ cd freeradius-server
 git checkout v3.0.x
 ```
 
-* From the git repository (version 3.0.13 - latest released version)
+* From the git repository (version 3.0.15 - latest released version)
 
 ```bash
 git clone https://github.com/FreeRADIUS/freeradius-server.git
 cd freeradius-server
-git checkout release_3_0_13
+git checkout release_3_0_15
 ```
 
 * From a zip file (version 3.0.x - most recent stable version, though unreleased)
@@ -27,8 +27,8 @@ cd freeradius-server-3.0.x/
 * From a zip file
 
 ```bash
-wget https://github.com/FreeRADIUS/freeradius-server/archive/v3.0.13.zip
-unzip v3.0.13.zip
-cd freeradius-server-3.0.13/
+wget https://github.com/FreeRADIUS/freeradius-server/archive/v3.0.15.zip
+unzip v3.0.15.zip
+cd freeradius-server-3.0.15/
 ```
 
