@@ -134,7 +134,7 @@ Tunnel-Private-Group-Id       |1         |Numeric ingress/egress VLAN ID to be a
 
 If the specified Tunnel-Private-Group-Id matches a VLAN present on the switch, the PVID of the port the client is connected to will be temporarily altered to reflect the assigned PVID. At the end of the session the port will revert back to its static PVID assignment.
 
-On session termination, the ports VLAN membership will revert back to it's statically assigned untagged VLAN. If the specified Tunnel-Private-Group-Id does not much a configured or learned VLAN, authentication will fail.
+On session termination, the ports VLAN membership will revert back to it's statically assigned untagged VLAN. If the specified Tunnel-Private-Group-Id does not match a configured or learned VLAN, authentication will fail.
 
 #### RFC 4675 (multiple tagged/untagged VLAN) Assignment
 
