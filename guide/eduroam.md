@@ -1,4 +1,5 @@
-# Overview
+# A very basic (but functional) Eduroam configuration
+## Overview
 This guide is intended to help any site wishing to join eduroam implement the IdP and SP eduroam components.  It contains sample configuration files that may be used in place of the normal v3.0.x configuration.
 
 Logging, guest networks, and access point configuration are outside of the scope of this guide.
