@@ -152,11 +152,10 @@ server eduroam {
 			}
 		}
 
-		attr_filter
 		linelog_send_accept
 
 		Post-Auth-Type REJECT {
-			attr_filter
+			attr_filter.access_reject
 			linelog_send_reject
 		}
 	}
