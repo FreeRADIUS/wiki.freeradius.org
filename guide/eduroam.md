@@ -108,6 +108,7 @@ server eduroam {
 	}
 
 	pre-proxy {
+		attr_filter
 		linelog_send_proxy_request
 	}
 
