@@ -104,7 +104,7 @@ server eduroam {
 
 		# Send the request to the NRO for your region
 		# The details of the FLRs (Federation Level RADIUS servers).
-		if (Stripped-User-Domain != ${operator_name}) {
+		if (Stripped-User-Domain != "${operator_name}") {
 			update {
 				control:Load-Balance-Key := &Calling-Station-ID
 				control:Proxy-To-Realm := 'eduroam_flr'
