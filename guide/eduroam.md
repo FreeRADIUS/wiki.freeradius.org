@@ -1,6 +1,6 @@
 # A very basic (but functional) Eduroam configuration
 ## Overview
-This guide is intended to help any site wishing to join eduroam implement the IdP and SP eduroam components.  It contains sample configuration files that may be used in place of the normal v3.0.x configuration.
+This guide is intended to help any site wishing to join eduroam implement the IdP and SP eduroam components.  It contains sample configuration files that may be used in place of the normal v3.0.x configuration files that ship with the server.
 
 In addition to the configuration files here, you will need to configure a module to talk to your user store (LDAP, Novell, Active Directory, SQL).  See notes in the [inner-tunnel](#configuration_the-inner-virtual-server_sites-available-inner-tunnel) configuration.
 
