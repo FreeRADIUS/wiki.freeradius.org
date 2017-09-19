@@ -320,12 +320,14 @@ realm eduroam_flr {
 ```
 
 ***
+
 The ``clients.conf`` file determines which devices can talk to the RADIUS server.
 
 In most instances we need:
 - An entry for localhost (testing).
 - An entry for each of the FLRS.
 - An entry for the management subnet of your WLCs/Access points.
+
 ***
 
 #### ``clients.conf``
