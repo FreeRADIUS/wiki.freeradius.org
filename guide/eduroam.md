@@ -226,7 +226,6 @@ eap {
 }
 ```
 
-```
 ***
 
 All Eduroam members should log requests to/from their servers for compliance purposes and because it makes debugging much easier.
@@ -236,6 +235,7 @@ These logging module instances and the virtual server configuration above will m
 We recommend ingesting the messages into logstash or Splunk to make debugging/helpdesk activities easier.
 
 ***
+
 #### ``mods-available/linelog``
 ```
 linelog linelog_recv_request {
