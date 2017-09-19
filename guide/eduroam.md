@@ -224,8 +224,8 @@ server eduroam-inner {
 		mschap
 		pap
 
-		# Comment pap, and uncomment the stanza below if you're using Active Directory
-		# this will allow it to work with EAP-TTLS-PAP.
+		# Comment pap, and uncomment the stanza below if you're using 
+		# Active Directory this will allow it to work with EAP-TTLS-PAP.
 		#pap {
 		#	ntlm_auth
 		#}
