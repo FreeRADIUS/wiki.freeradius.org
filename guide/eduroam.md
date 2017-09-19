@@ -150,6 +150,70 @@ server eduroam {
 	}
 }
 ```
+***
+
+This is a stripped down EAP configuration that'll allow:
+- EAP-TTLS-PAP
+- EAP-TTLS-MSCHAPv2
+- PEAPv0
+- EAP-TLS
+
+***
+#### ``mods-available/eap``
+```
+eap {
+	# The initial EAP type requested.  Change this to peap if you're
+	# using peap, or tls if you're using EAP-TLS.
+	default_eap_type = ttls
+
+	# The maximum time an EAP-Session can continue for
+	timer_expire = 60
+
+	# The maximum number of ongoing EAP sessions
+	max_sessions = ${max_requests}
+
+	tls-config tls-common {
+		# The public certificate that your server will present
+		certificate_file = ${certdir}/server.pem
+
+		# The private key for the public certificate
+		private_key_file = ${certdir}/server.pem
+
+		# The password to decrypt 'private_key_file'
+		private_key_password = whatever
+
+		# The certificate of the authority that issued 'certificate_file'
+		ca_file = ${cadir}/ca.pem
+
+		# If your AP drops packets towards the client, try reducing this.
+		fragment_size = 1024
+
+		# When issuing client certificates embed the OCSP URL in the 
+		# certificate if you want to be able to revoke them later.
+		ocsp {
+			enable = yes
+			override_cert_url = no
+			use_nonce = yes
+		}
+	}
+
+	tls {
+		tls = tls-common
+	}
+
+	ttls {
+		tls = tls-common
+		default_eap_type = mschapv2
+		virtual_server = "eduroam-inner"
+	}
+
+	peap {
+		tls = tls-common
+		default_eap_type = mschapv2
+		virtual_server = "eduroam-inner"
+	}
+}
+```
 
 ### The Inner virtual Server
 
@@ -238,67 +302,3 @@ server eduroam-inner {
 	}
 }
 ```
-
-### Outer EAP configuration
-This is a stripped down configuration that'll allow:
-- EAP-TTLS-PAP
-- EAP-TTLS-MSCHAPv2
-- PEAPv0
-- EAP-TLS
-
-***
-#### ``mods-available/eap``
-eap {
-	# The initial EAP type requested.  Change this to peap if you're
-	# using peap, or tls if you're using EAP-TLS.
-	default_eap_type = ttls
-
-	# The maximum time an EAP-Session can continue for
-	timer_expire = 60
-
-	# The maximum number of ongoing EAP sessions
-	max_sessions = ${max_requests}
-
-	tls-config tls-common {
-		# The public certificate that your server will present to the supplicants
-		certificate_file = ${certdir}/server.pem
-
-		# The private key for the public certificate
-		# (may be a different file i.e. server.key).
-		private_key_file = ${certdir}/server.pem
-
-		# The password to decrypt 'private_key_file'
-		private_key_password = whatever
-
-		# The certificate of the authority that issued 'certificate_file'
-		ca_file = ${cadir}/ca.pem
-
-		# If your AP drops packets towards the supplicant, try reducing this.
-		fragment_size = 1024
-
-		# When issuing client certificates embed the OCSP URL
-		# in the certificate if you want to be able to revoke
-		# them later.
-		ocsp {
-			enable = yes
-			override_cert_url = no
-			use_nonce = yes
-		}
-	}
-
-	tls {
-		tls = tls-common
-	}
-
-	ttls {
-		tls = tls-common
-		default_eap_type = mschapv2
-		virtual_server = "eduroam-inner"
-	}
-
-	peap {
-		tls = tls-common
-		default_eap_type = mschapv2
-		virtual_server = "eduroam-inner"
-	}
-}
