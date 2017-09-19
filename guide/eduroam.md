@@ -36,7 +36,7 @@ You should now have a functional ``eapol_test`` in your path.
 ## Configuration
 You should replace existing configurations in their entirety with the configurations provided below.
 
-### The outer virtual server ``sites-available/default``
+### The outer virtual server
 
 This is a bare bones configuration file for the outer virtual-server.  This virtual-server handles
 the outer EAP conversation, i.e. data outside of the TLS tunnel.
@@ -49,6 +49,8 @@ It does the following:
 - Assigns a VLAN based on whether the user is a local user, or was authenticated by a remote IdP.
 - Logs authentication successes and failures.
 
+***
+**_sites-available/default_**
 ```text
 # The domain users will add to their username to have their credentials 
 # routed to your institution.  You will also need to register this
@@ -148,7 +150,7 @@ server eduroam {
 }
 ```
 
-### The Inner Virtual Server ``sites-available/inner-tunnel``
+### The Inner Virtual Server
 
 This is a bare bones configuration file for the outer virtual-server.  This virtual-server handles
 the inner EAP conversation, i.e. data inside of the TLS tunnel.
@@ -159,6 +161,8 @@ It does the following:
 - Retrieve's the users password/forwards credentials to ActiveDirectory (if used).
 - Authenticates the user.
 
+***
+**_sites-available/inner-tunnel_**
 ```
 server eduroam-inner {
 	listen {
