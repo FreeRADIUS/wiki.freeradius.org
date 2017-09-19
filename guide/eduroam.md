@@ -19,8 +19,8 @@ The general order of operations is:
 11. Replace the dummy certs in the ``certs`` directory (``/etc/raddb/certs`` || ``/etc/freeradius/certs/``) with ones issued by [edupki](https://www.edupki.org) or a commerical certification authority.
 12. Alter the ``eapol_test`` files so they specify a certification authority.
 13. Check that the ``eapol_test`` files work with a *REAL* certificate, and *REAL* credentials.
-14. Clone the config onto two servers (or clone the servers).
-15. Pass the server IP addresses to your NRO (National RADIUS Operator).  They will usually issue you secrets.
+14. Clone the config onto two servers (or clone the server).
+15. Pass the server IP addresses of those servers to your NRO (National RADIUS Operator).  They will usually issue you secrets and tell you the IP addresses of the FLRS (Federation Level RADIUS Servers), which you need to put in ``proxy.conf`` and ``clients.conf``
 
 ## Tooling
 ### eapol_test
