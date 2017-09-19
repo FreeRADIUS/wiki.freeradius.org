@@ -13,7 +13,7 @@ The general order of operations is:
 5. Stop the server.
 6. Remove the call to the ``files`` module in the [inner-tunnel](#configuration_the-inner-virtual-server_sites-available-inner-tunnel), and either configure ``ntlm_auth``, the ldap module, or the sql module.
 7. Modify the ``eapol_test`` files with real credentials in your user directory (preferably a test account).
-8. Start the server with ``radiusd -X`` or ``freeradius -X``
+8. Start the server with ``radiusd -X || freeradius -X``
 9. Check that the ``eapol_test`` files work with *REAL* credentials.
 10. Stop the server.
 11. Replace the dummy certs in the ``certs`` directory (``/etc/raddb/certs`` or ``/etc/freeradius/certs/``) with ones issued by [edupki](https://www.edupki.org) or a commerical certification authority.
