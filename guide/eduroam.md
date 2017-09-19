@@ -356,3 +356,24 @@ server eduroam-inner {
 	}
 }
 ```
+
+***
+
+This is a stripped inner-eap configuration that'll allow
+- EAP-MSCHAPv2 (inner of PEAPv0)
+
+***
+
+#### ``mods-available/inner-eap``
+
+```
+eap inner-eap {
+	default_eap_type = mschapv2
+	timer_expire = ${modules.eap.timer_expire}
+	max_sessions = ${modules.eap.max_sessions}
+
+	mschapv2 {
+		send_error = yes
+	}
+}
+```
