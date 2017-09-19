@@ -286,10 +286,12 @@ linelog linelog_send_proxy_request {
 }
 
 linelog linelog_recv_proxy_response {
+	filename = syslog
 	syslog_facility = local0
 	syslog_severity = debug
 	format = "action = Recv-Proxy-Response, %{pairs:proxy-reply:}"
 }
+
 ```
 
 ***
