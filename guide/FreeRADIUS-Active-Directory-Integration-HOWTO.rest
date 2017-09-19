@@ -330,59 +330,6 @@ It is important to verify that the line
 
 Is uncommented in the authorize section of the sites-available/inner-tunnel.
 
-Configuration of the switch
-===========================
-
-This configuration applies to the [[Cisco]] Catalyst 3750.
-It can also be used for Catalysts 29xx.
-Please read the software configuration guide of your switch for any details!
-
-Enter privileged EXEC mode of the switch.
-
-Below are the commands to enable [[802.1X]] port based authentication.
-
-Activate AAA (Authentication, Authorization, Accounting)
-::
-  enable aaa new-model
-
-Create a list of authentication methods by using Radius group as default.
-::
-  aaa authentication dot1x default group radius
-
-Activate authorization for using dynamic VLAN assignment by Radius.
-::
-  aaa authorization network default group radius
-
-Configure parameters of Radius server. In this case we use IP 192.168.2.16 and the default ports 1812 and 1813
-::
-  radius-server host 192.168.2.16 auth-port 1812 acct-port 1813 timeout 3
-
-Configure the maximum number of retransmissions to the server for the requests (if there is no response of the server or if the server is slow).
-::
-  radius server retransmit 3
-
-Configure the shared secret between switch and Radius server. Radius authentication can not work if the password does not match with the one of the Radius server.
-::
-  radius server key <mysharedsecret>
-
-Please use the secret that you have specified in the ``clients.conf`` file.
-
-Next we must configure each interface (port) to operate in [[802.1X]] mode.
-
-Repeat this procedure for each port that should do access control
-::
-  configure terminal
-  (config)#interface FastEthernet1/0/12
-  (config-if)# switchport mode access
-  (config-if)# dot1x port-control auto
-  (config-if)# end
-
-The command ``show dot1x<`` allows to check [[802.1X]] settings.
-
-Do not forget to save the configuration of your switch.
-::
-  copy running-config startup-config
-
 Configuration of the supplicant
 ===============================
 This chapter illustrates the configuration of a Windows XP supplicant. No additional installation is needed to do this.
