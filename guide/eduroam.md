@@ -9,7 +9,7 @@ The general order of operations is:
 1. Install FreeRADIUS >= 3.0.15 from packages or by building from source.
 2. Replace the relevant configuration files in ``/etc/raddb`` or ``/etc/freeradius`` with the ones found here.
 3. Start the server with ``radiusd -X || freeradius -X``
-4. Use the [test files](#Testing) with ``eapol_test`` to verify the server is functional.
+4. Use the [test files](#testing) with ``eapol_test`` to verify the server is functional.
 5. Stop the server.
 6. Remove the call to the ``files`` module in the [inner-tunnel](#configuration_the-inner-virtual-server_sites-available-inner-tunnel), and either configure ``ntlm_auth``, or the ldap, or SQL modules.
 7. Modify the ``eapol_test`` files with real credentials in your user directory (preferably a test account).
