@@ -171,7 +171,8 @@ server eduroam-inner {
 		# The outer username is considered garabage for autz purposes, but 
 		# the domain portion of the outer and inner identities must match.
 		split_username_nai
-		if (noop || !&Stripped-User-Domain || (&outer.Stripped-User-Domain != &Stripped-User-Domain)) {
+		if (noop || !&Stripped-User-Domain || \
+		    (&outer.Stripped-User-Domain != &Stripped-User-Domain)) {
 			reject
 		}
 
@@ -189,8 +190,8 @@ server eduroam-inner {
 
 		# THIS IS SITE SPECIFIC
 		#
-		# The files module is *ONLY* used for testing.  It lets you define credentials in a
-		# flat file, IT WILL NOT SCALE.
+		# The files module is *ONLY* used for testing.  It lets you define credentials
+		# in a flat file, IT WILL NOT SCALE.
 		#
 		# - If you use OpenLDAP with salted password hashes, you should 
  		#   call the 'ldap' module here and use EAP-TTLS-PAP as your EAP method.
@@ -209,9 +210,9 @@ server eduroam-inner {
 		#   or PEAPv0.
 		# - If you're using EAP-TLS (i'm impressed!) remove the call to files.
 		#
-		# EAP-TTLS-PAP and PEAPv0 are equally secure/insecure depending on how the supplicant is configured.
-		# PEAPv0 has a slight edge in that you need to crack MSCHAPv2 to get the user's password (but this
-		# is not hard).
+		# EAP-TTLS-PAP and PEAPv0 are equally secure/insecure depending on how the 
+		# supplicant is configured. PEAPv0 has a slight edge in that you need to crack 
+		# MSCHAPv2 to get the user's password (but this is not hard).
 		files
 
 		pap
