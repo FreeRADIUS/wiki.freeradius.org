@@ -387,7 +387,7 @@ eap inner-eap {
 DEFAULT Cleartext-Password := 'changeme'
 ```
 
-#### ``~/eapol_test/eap-ttls.conf
+#### ``~/eapol_test/eap-ttls.conf``
 
 
 #### ``~/eapol_test/peap.conf``
