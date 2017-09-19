@@ -265,18 +265,21 @@ linelog linelog_recv_request {
 }
 
 linelog linelog_send_accept {
+	filename = syslog
 	syslog_facility = local0
 	syslog_severity = debug
 	format = "action = Send-Accept, %{pairs:request:}"
 }
 
 linelog linelog_send_reject {
+	filename = syslog
 	syslog_facility = local0
 	syslog_severity = debug
 	format = "action = Send-Reject, %{pairs:request:}"
 }
 
 linelog linelog_send_proxy_request {
+	filename = syslog
 	syslog_facility = local0
 	syslog_severity = debug
 	format = "action = Send-Proxy-Request, %{pairs:proxy-request:}"
