@@ -452,6 +452,12 @@ eap inner-eap {
 
 ``eapol_test`` is the utility of choice when testing below are some basic config files for ``eapol_test`` which allow you to generate EAP-TTLS, EAP-PEAP and EAP-TLS requests.
 
+***
+This testing entry for the files module set the 'known-good' or 'reference' password to be 'changeme' for all users.
+
+The ``files`` module should be removed from the config before the server is placed into production.
+***
+
 #### ``mods-config/files/authorize``
 ```
 DEFAULT Cleartext-Password := 'changeme'
