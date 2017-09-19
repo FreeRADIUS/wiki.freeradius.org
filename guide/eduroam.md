@@ -88,6 +88,7 @@ server eduroam {
 		# The details of the FLRs (Federation Level RADIUS servers).
 		if (Stripped-User-Domain != ${operator_name}) {
 			update {
+				control:Load-Balance-Key := &Calling-Station-ID
 				control:Proxy-To-Realm := 'eduroam_flr'
 				
 				# Operator name (RFC 5580) identifies the network the 
@@ -224,6 +225,75 @@ eap {
 		virtual_server = "eduroam-inner"
 	}
 }
+```
+
+***
+A basic realm to forward requests to your NRO's FLRs'.
+***
+
+#### ``proxy.conf``
+```
+home_server eduroam_flr_server_1 {
+        ipaddr = <ip-address>
+        secret = <secret>
+	status_check = status-server
+}
+
+# Only uncomment if there are two FLRS
+#home_server eduroam_flr_server_2 {
+#	ipaddr = <ip-address>
+#	secret = <secret>
+#	status_check = status-server
+#}
+home_server_pool eduroam_flr_pool {
+        type = keyed-balance
+        home_server = eduroam_flr_server_1
+
+	# Only uncomment if there are two FLRS
+#	home_server = eduroam_flr_server_2
+}
+realm eduroam_flr {
+        auth_pool = eduroam_flr_pool
+}
+
+```
+
+***
+The clients.conf file determines which devices can talk to the RADIUS server.
+
+In most instances we need:
+- An entry for localhost (testing).
+- An entry for each of the FLRS.
+- An entry for the management subnet of your WLCs/Access points.
+***
+
+#### ``clients.conf``
+```
+client localhost {
+	ipaddr = 127.0.0.1
+	secret = testing123
+}
+
+client eduroam_flr_server_1 {
+        ipaddr = <ip-address>
+        secret = <secret>
+	nastype = 'eduroam_flr'
+}
+
+# As above, only uncomment if there are two federation level servers
+#client eduroam_flr_server_2 {
+#       ipaddr = <ip-address>
+#       secret = <secret>
+#	nastype = 'eduroam_flr'
+#}
+
+client wireless_access_points_mgmt {
+	ipaddr = <ip-address>/<cidr-mask>
+
+	# This should be long and random
+	secret = <secret>
+}	
+
 ```
 
 ***
@@ -380,7 +450,7 @@ eap inner-eap {
 
 ## Testing
 
-``eapol_test`` is the utility of choice when testing.
+``eapol_test`` is the utility of choice when testing below are some basic config files for ``eapol_test`` which allow you to generate EAP-TTLS, EAP-PEAP and EAP-TLS requests.
 
 #### ``mods-config/files/authorize``
 ```
@@ -388,6 +458,64 @@ DEFAULT Cleartext-Password := 'changeme'
 ```
 
 #### ``~/eapol_test/eap-ttls.conf``
+```
+#
+#   eapol_test -c ttls-pap.conf -s testing123
+#
+network={
+	key_mgmt=WPA-EAP
+	eap=TTLS
+	identity="a_user@<your-instiutions-domain>"
+	anonymous_identity="anonymous@<your-instiutions-domain>"
 
+	# Uncomment to validate the server's certificate by checking
+	# it was signed by this CA.
+	#ca_cert="raddb/certs/ca.pem"
+	password="changeme"
+	phase2="auth=PAP"
+}
+```
 
-#### ``~/eapol_test/peap.conf``
+#### ``~/eapol_test/peap-mschapv2.conf``
+
+```
+#
+#   eapol_test -c peap-mschapv2.conf -s testing123
+#
+network={
+	key_mgmt=WPA-EAP
+	eap=PEAP
+	identity="a_user@<your-instiutions-domain>"
+	anonymous_identity="anonymous@<your-instiutions-domain>"
+
+	# Uncomment to validate the server's certificate by checking
+	# it was signed by this CA.
+	#ca_cert="raddb/certs/ca.pem"
+	password="changeme"
+	phase2="auth=MSCHAPV2"
+	phase1="peapver=0"
+}
+```
+
+#### ``~/eapol_test/tls.conf``
+#
+#   eapol_test -c tls.conf -s testing123
+#
+network={
+        key_mgmt=WPA-EAP
+        eap=TLS
+	anonymous_identity="anonymous@<your-instiutions-domain>"
+
+	# Uncomment to validate the server's certificate by checking
+	# it was signed by this CA.
+	#ca_cert="raddb/certs/ca.pem"
+
+	# supplicant's public cert
+        client_cert="raddb/certs/client.crt"
+
+	# supplicant's private key
+        private_key="raddb/certs/client.key"
+
+	# password to decrypt private key
+        private_key_passwd="whatever"
+}
