@@ -498,6 +498,7 @@ network={
 ```
 
 #### ``~/eapol_test/tls.conf``
+```
 #
 #   eapol_test -c tls.conf -s testing123
 #
@@ -519,3 +520,4 @@ network={
 	# password to decrypt private key
         private_key_passwd="whatever"
 }
+```
