@@ -4,6 +4,24 @@ This guide is intended to help any site wishing to join eduroam implement the Id
 
 In addition to the configuration files here, you will need to configure a module to talk to your user store (LDAP, Novell, Active Directory, SQL).  See notes in the [inner-tunnel](#configuration_the-inner-virtual-server_sites-available-inner-tunnel) configuration.
 
+The general order of operations is:
+
+1. Install FreeRADIUS >= 3.0.15 from packages or by building from source.
+2. Replace the relevant configuration files in ``/etc/raddb`` or ``/etc/freeradius`` with the ones found here.
+3. Start the server with ``radiusd -X || freeradius -X``
+4. Use the [test files](#Testing) with ``eapol_test`` to verify the server is functional.
+5. Stop the server.
+6. Remove the call to the ``files`` module in the [inner-tunnel](#configuration_the-inner-virtual-server_sites-available-inner-tunnel), and either configure ``ntlm_auth``, or the ldap, or SQL modules.
+7. Modify the ``eapol_test`` files with real credentials in your user directory (preferably a test account).
+8. Start the server with ``radiusd -X || freeradius -X``
+9. Check that the ``eapol_test`` files work with *REAL* credentials.
+10. Stop the server.
+11. Replace the dummy certs in the ``certs`` directory (``/etc/raddb/certs`` || ``/etc/freeradius/certs/``) with ones issued by [edupki](https://www.edupki.org) or a commerical certification authority.
+12. Alter the ``eapol_test`` files so they specify a certification authority.
+13. Check that the ``eapol_test`` files work with a *REAL* certificate, and *REAL* credentials.
+14. Clone the config onto two servers (or clone the servers).
+15. Pass the server IP addresses to your NRO (National RADIUS Operator).  They will usually issue you secrets.
+
 ## Tooling
 ### eapol_test
 Before you begin you should build a copy of ``eapol_test``.  ``eapol_test`` is an extremely useful tool produced by the hostapd project which can simulate both a Wireless Access Point and a Supplicant (client).  Unfortunately it's not usually packaged and can be quite challenging to build manually.
@@ -451,6 +469,8 @@ eap inner-eap {
 ## Testing
 
 ``eapol_test`` is the utility of choice when testing below are some basic config files for ``eapol_test`` which allow you to generate EAP-TTLS, EAP-PEAP and EAP-TLS requests.
+
+### Test files
 
 ***
 This testing entry for the files module set the 'known-good' or 'reference' password to be 'changeme' for all users.
