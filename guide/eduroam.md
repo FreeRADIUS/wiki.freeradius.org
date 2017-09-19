@@ -258,6 +258,7 @@ We recommend ingesting the messages into logstash or Splunk to make debugging/he
 #### ``mods-available/linelog``
 ```
 linelog linelog_recv_request {
+	filename = syslog
 	syslog_facility = local0
 	syslog_severity = debug
 	format = "action = Recv-Request, %{pairs:request:}"
