@@ -228,6 +228,49 @@ eap {
 ```
 
 ***
+
+All Eduroam members should log requests to/from their servers for compliance purposes and because it makes debugging much easier.
+
+These logging module instances and the virtual server configuration above will make your site fully compliant, so long as the syslog messages are retained for the requisite period.
+
+We recommend ingesting the messages into logstash or Splunk to make debugging/helpdesk activities easier.
+
+***
+
+#### ``mods-available/linelog``
+```
+linelog linelog_recv_request {
+	syslog_facility = local0
+	syslog_severity = debug
+	format = "action = Recv-Request, %{pairs:request:}"
+}
+
+linelog linelog_send_accept {
+	syslog_facility = local0
+	syslog_severity = debug
+	format = "action = Send-Accept, %{pairs:request:}"
+}
+
+linelog linelog_send_reject {
+	syslog_facility = local0
+	syslog_severity = debug
+	format = "action = Send-Reject, %{pairs:request:}"
+}
+
+linelog linelog_send_proxy_request {
+	syslog_facility = local0
+	syslog_severity = debug
+	format = "action = Send-Proxy-Request, %{pairs:proxy-request:}"
+}
+
+linelog linelog_recv_proxy_response {
+	syslog_facility = local0
+	syslog_severity = debug
+	format = "action = Recv-Proxy-Response, %{pairs:proxy-reply:}"
+}
+```
+
+***
 A basic realm to forward requests to your NRO's FLRs'.
 ***
 
@@ -294,49 +337,6 @@ client wireless_access_points_mgmt {
 	secret = <secret>
 }	
 
-```
-
-***
-
-All Eduroam members should log requests to/from their servers for compliance purposes and because it makes debugging much easier.
-
-These logging module instances and the virtual server configuration above will make your site fully compliant, so long as the syslog messages are retained for the requisite period.
-
-We recommend ingesting the messages into logstash or Splunk to make debugging/helpdesk activities easier.
-
-***
-
-#### ``mods-available/linelog``
-```
-linelog linelog_recv_request {
-	syslog_facility = local0
-	syslog_severity = debug
-	format = "action = Recv-Request, %{pairs:request:}"
-}
-
-linelog linelog_send_accept {
-	syslog_facility = local0
-	syslog_severity = debug
-	format = "action = Send-Accept, %{pairs:request:}"
-}
-
-linelog linelog_send_reject {
-	syslog_facility = local0
-	syslog_severity = debug
-	format = "action = Send-Reject, %{pairs:request:}"
-}
-
-linelog linelog_send_proxy_request {
-	syslog_facility = local0
-	syslog_severity = debug
-	format = "action = Send-Proxy-Request, %{pairs:proxy-request:}"
-}
-
-linelog linelog_recv_proxy_response {
-	syslog_facility = local0
-	syslog_severity = debug
-	format = "action = Recv-Proxy-Response, %{pairs:proxy-reply:}"
-}
 ```
 
 ### The Inner virtual Server
