@@ -377,3 +377,17 @@ eap inner-eap {
 	}
 }
 ```
+
+## Testing
+
+``eapol_test`` is the utility of choice when testing.
+
+#### ``mods-config/files/authorize``
+```
+DEFAULT Cleartext-Password := 'changeme'
+```
+
+#### ``~/eapol_test/eap-ttls.conf
+
+
+#### ``~/eapol_test/peap.conf``
