@@ -73,6 +73,9 @@ server eduroam {
 	}
 
 	authorize {
+		# Log requests before we change them
+		linelog_recv_request
+
 		# split_username_nai is a policy in the default distribution to 
 		# split a username into username and domain.  We reject user-name 
 		# strings without domains, as they're not routable.
@@ -104,8 +107,13 @@ server eduroam {
 		}
 	}
 
+	pre-proxy {
+		linelog_send_proxy_request
+	}
+
 	post-proxy {
 		attr_filter
+		linelog_recv_proxy_response
 	}
 
 	authenticate {
@@ -113,8 +121,6 @@ server eduroam {
 	}
 
 	post-auth {
-		linelog_success
-
 		# To implement eduroam you must:
 		# - Use wireless access points or a controller which supports 
                 #   dynamic VLAN assignments.
@@ -145,8 +151,12 @@ server eduroam {
 			}
 		}
 
+		attr_filter
+		linelog_send_accept
+
 		Post-Auth-Type REJECT {
-			linelog_failure
+			attr_filter
+			linelog_send_reject
 		}
 	}
 }
@@ -213,6 +223,49 @@ eap {
 		default_eap_type = mschapv2
 		virtual_server = "eduroam-inner"
 	}
+}
+```
+
+```
+***
+
+All Eduroam members should log requests to/from their servers for compliance purposes and because it makes debugging much easier.
+
+These logging module instances and the virtual server configuration above will make your site fully compliant, so long as the syslog messages are retained for the requisite period.
+
+We recommend ingesting the messages into logstash or Splunk to make debugging/helpdesk activities easier.
+
+***
+#### ``mods-available/linelog``
+```
+linelog linelog_recv_request {
+	syslog_facility = local0
+	syslog_severity = debug
+	format = "action = Recv-Request, %{pairs:request:}"
+}
+
+linelog linelog_send_accept {
+	syslog_facility = local0
+	syslog_severity = debug
+	format = "action = Send-Accept, %{pairs:request:}"
+}
+
+linelog linelog_send_reject {
+	syslog_facility = local0
+	syslog_severity = debug
+	format = "action = Send-Reject, %{pairs:request:}"
+}
+
+linelog linelog_send_proxy_request {
+	syslog_facility = local0
+	syslog_severity = debug
+	format = "action = Send-Proxy-Request, %{pairs:proxy-request:}"
+}
+
+linelog linelog_recv_proxy_response {
+	syslog_facility = local0
+	syslog_severity = debug
+	format = "action = Recv-Proxy-Response, %{pairs:proxy-reply:}"
 }
 ```
 
