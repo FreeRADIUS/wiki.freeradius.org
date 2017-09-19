@@ -317,19 +317,19 @@ server eduroam-inner {
 		# The files module is *ONLY* used for testing.  It lets you define 
 		# credentials in a flat file, IT WILL NOT SCALE.
 		#
-		# - If you use OpenLDAP with salted password hashes, you should 
+		# - If you use OpenLDAP with salted password hashes you should 
  		#   call the 'ldap' module here and use EAP-TTLS-PAP as your EAP method.
-		# - If you use OpenLDAP with cleartext passwords, you should 
+		# - If you use OpenLDAP with cleartext passwords you should 
 		#   call the 'ldap' module here and use EAP-TTLS or PEAPv0.
-		# - If you use an SQL DB with salted password hashes, you should call 
+		# - If you use an SQL DB with salted password hashes you should call 
 		#   the 'sql' module here and use EAP-TTLS-PAP as your EAP method.
-		# - If you use an SQL DB with cleartext passwords, you should call 
+		# - If you use an SQL DB with cleartext passwords you should call 
 		#   the 'sql' module here and use EAP-TTLS or PEAPv0.
-		# - If you use Novell you should call the 'ldap' module here, and 
+		# - If you use Novell you should call the 'ldap' module here and 
 		#   set ``edir = yes`` in ``mods-available/ldap`` and use EAP-TTLS or
 		#   PEAPv0.
 		# - If you use Active Directory, you don't need anything here (remove 
-		#   the call to files), but you'll need to follow this 
+		#   the call to files) but you'll need to follow this 
 		#   [guide](freeradius-active-directory-integration-howto) and use 
 		#   EAP-TTLS-PAP or PEAPv0.
 		# - If you're using EAP-TLS (i'm impressed!) remove the call to files.
