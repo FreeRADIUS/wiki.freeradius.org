@@ -321,6 +321,7 @@ home_server_pool eduroam_flr_pool {
 }
 realm eduroam_flr {
         auth_pool = eduroam_flr_pool
+	nostrip
 }
 
 ```
