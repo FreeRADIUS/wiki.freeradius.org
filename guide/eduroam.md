@@ -376,6 +376,8 @@ It does the following:
 - Retrieve's the users password/forwards credentials to ActiveDirectory (if used).
 - Authenticates the user.
 
+NOTE: You may need to symlink ``mods-enabled/inner-eap`` to ``mods-available/inner-eap``. i.e. ``cd /etc/raddb; ln -s ./mods-available/inner-eap ./mods-enabled/inner-eap``.
+
 ***
 
 #### ``sites-available/inner-tunnel``
@@ -403,7 +405,7 @@ server eduroam-inner {
 		}
 
 		# EAP for PEAPv0 (EAP-MSCHAPv2)
-		eap-inner {
+		inner-eap {
 			ok = return
 			updated = return
 		}
@@ -440,7 +442,7 @@ server eduroam-inner {
 	}
 
 	authenticate {
-		eap-inner
+		inner-eap
 		mschap
 		pap
 
