@@ -127,12 +127,12 @@ server eduroam {
 	}
 
 	pre-proxy {
-		attr_filter
+		attr_filter.pre-proxy
 		linelog_send_proxy_request
 	}
 
 	post-proxy {
-		attr_filter
+		attr_filter.post-proxy
 		linelog_recv_proxy_response
 	}
 
@@ -403,7 +403,7 @@ server eduroam-inner {
 		}
 
 		# EAP for PEAPv0 (EAP-MSCHAPv2)
-		inner-eap {
+		eap-inner {
 			ok = return
 			updated = return
 		}
@@ -440,7 +440,7 @@ server eduroam-inner {
 	}
 
 	authenticate {
-		inner-eap
+		eap-inner
 		mschap
 		pap
 
