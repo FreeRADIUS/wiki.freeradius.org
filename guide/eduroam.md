@@ -393,8 +393,8 @@ server eduroam-inner {
 		# The outer username is considered garabage for autz purposes, but 
 		# the domain portion of the outer and inner identities must match.
 		split_username_nai
-		if (noop || !&Stripped-User-Domain || \
-		    (&outer.Stripped-User-Domain != &Stripped-User-Domain)) {
+		if (noop || (&Stripped-User-Domain && \
+		    (&outer.Stripped-User-Domain != &Stripped-User-Domain))) {
 			reject
 		}
 
