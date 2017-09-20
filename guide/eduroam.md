@@ -401,7 +401,7 @@ server eduroam-inner {
 		# Make the user's real identity available to anything that needs
 		# it in the outer server.
 		update {
-			&outer:session-state:Stripped-User-Name := &Stripped-User-Name
+			&outer.session-state:Stripped-User-Name := &Stripped-User-Name
 		}
 
 		# EAP for PEAPv0 (EAP-MSCHAPv2)
