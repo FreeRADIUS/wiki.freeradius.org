@@ -407,7 +407,6 @@ server eduroam-inner {
 		# EAP for PEAPv0 (EAP-MSCHAPv2)
 		inner-eap {
 			ok = return
-			updated = return
 		}
 
 		# THIS IS SITE SPECIFIC
