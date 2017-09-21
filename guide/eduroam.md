@@ -102,8 +102,12 @@ server eduroam {
 			reject
 		}
 
-		# Send the request to the NRO for your region
-		# The details of the FLRs (Federation Level RADIUS servers).
+		# Send the request to the NRO for your region.
+		# The details of the FLRs (Federation Level RADIUS servers)
+		# are in proxy.conf.
+		# You can make this condition as complex as you like, to 
+		# include subdomains or wildcard matches, just concatenate
+		# the conditions with ``&&``.
 		if (Stripped-User-Domain != "${operator_name}") {
 			update {
 				control:Load-Balance-Key := &Calling-Station-ID
