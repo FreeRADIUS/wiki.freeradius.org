@@ -106,8 +106,8 @@ server eduroam {
 		# The details of the FLRs (Federation Level RADIUS servers)
 		# are in proxy.conf.
 		# You can make this condition as complex as you like, to 
-		# include subdomains or wildcard matches, just concatenate
-		# the conditions with ``&&``.
+		# include additional subdomains just concatenate the conditions
+		# with &&.
 		if (Stripped-User-Domain != "${operator_name}") {
 			update {
 				control:Load-Balance-Key := &Calling-Station-ID
