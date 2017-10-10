@@ -1,1 +1,1 @@
-Hier könnte Ihre Werbung stehen
+This site was empty, please refer to the Wiki -> [Building from source](http://wiki.freeradius.org/building/Home#building-from-source)
