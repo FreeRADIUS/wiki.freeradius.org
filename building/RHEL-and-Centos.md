@@ -1,7 +1,35 @@
 # Building on RHEL7 or Centos7
-## Upgrading GCC
 
-> GCC upgrade only required for versions >= v3.1.x you can skip this step for v3.0.x and below.
+There are only a few requirements to building on RHEL, or CentoS
+
+## Hard dependencies
+
+```bash
+yum -y install libtalloc-devel
+```
+
+## Getting the source
+
+[[include:/building/Getting-the-Source]]
+
+## Building from source
+
+```bash
+# Use ./configure --enable-developer if you're debugging issues, or using unstable code.
+./configure
+make
+sudo make install
+```
+
+## Building Packages
+
+### With Oracle support
+
+[[include:RPMs-with-Oracle-support]]
+
+## Upgrading GCC (v4.0.x only)
+
+> GCC upgrade only required for versions >= v4.0.x you can skip this step for v3.0.x and below.
 
 RHE7 ships with GCC 4.8.5 but we require GCC >= 4.9.0 for FreeRADIUS >= v3.1.x.
 
@@ -25,36 +53,11 @@ Or can set ``CC=/opt/rh/devtoolset-3/root/usr/bin/gcc`` in your environment, whi
 
 If you're building on older versions of RedHat then you'll need to compile GCC from source.
 
-## Hard dependencies
-
-```bash
-yum -y install libtalloc-devel
-```
 
 ### libkqueue
 
-> libkqueue required for >= v4.0.x, you can skip this step for v3.1.x and below.
+> libkqueue required for >= v4.0.x, you can skip this step for v3.0.x and below.
 
 Unfortunately neither RHEL nor Centos provide an RPM for libkqueue.  The instructions below will produce a libkqueue RPM, which can then be installed for building from source, or distributed with the FreeRADIUS RPMs when building packages.
 
 [[include:libkqueue-rpm]]
-
-## Getting the source
-
-[[include:Getting-the-Source]]
-
-## Building from source
-
-```bash
-# Use ./configure --enable-developer if you're debugging issues, or using unstable code.
-./configure
-make
-sudo make install
-```
-
-## Building Packages
-
-
-### With Oracle support
-
-[[include:RPMs-with-Oracle-support]]
