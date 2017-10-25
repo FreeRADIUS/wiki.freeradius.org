@@ -13,9 +13,9 @@ See [platform specific build instructions](#building-from-source) for how to sat
 
 It is used **heavily** in version >= v3.0.x and greatly simplifies managing complex trees of memory allocation, and local slab allocation.
 
-### C11 (since >= v3.1.x)
+### C11 (since >= v4.0.x)
 
-Since v3.1.x  FreeRADIUS has a hard dependency on C11 support (available in GCC >= 4.9.0).
+Since v4.0.x (and the now deprecated v3.1.x) FreeRADIUS has a hard dependency on C11 support (available in GCC >= 4.9.0).
 
 If you see an error message like
 
@@ -29,7 +29,7 @@ For clang this means versions >= 3.0 (released after 2011-12-01), and GCC versio
 
 kqueue is the eventing interface used by the BSDs (including OSX).  After evaluating the native eventing APIs of different operating systems and wrappers such as libuv, libev, libevent[2] etc... the FreeRADIUS core team decided to standardise on kqueue.
 
-For Linux and Solaris users, this means there's a hard dependency on them shim library, libkqueue, which wraps epoll (the native Linux eventing API), providing a kqueue compatible interface.
+For Linux and Solaris users, this means there's a hard dependency on the shim library, libkqueue, which wraps epoll (the native Linux eventing API), providing a kqueue compatible interface.
 
 ## Getting the source
 
