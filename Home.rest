@@ -5,9 +5,12 @@ If you are new to FreeRADIUS, or wondering if it will be suitable for your requi
 
 Documentation
 -------------
-**Beginners are strongly recommended to read the short [[concepts|guide/Concepts]] page, which provides a very light overview of how the server works.**
+**Beginners are strongly recommended to read these two pages first:**
 
-A short introduction to RADIUS concepts, and to FreeRADIUS is available [[here|http://networkradius.com/doc/FreeRADIUS%20Technical%20Guide.pdf]].
+* **The [[concepts|guide/Concepts]] page, which provides a very light overview of how the server works.**
+* **The [[getting started|guide/Getting Started]] page, which gives an introduction to installing and configuring the server.**
+
+A short introduction to RADIUS concepts, and to FreeRADIUS itself, is also available [[in the technical guide|http://networkradius.com/doc/FreeRADIUS%20Technical%20Guide.pdf]] (PDF).
 
 This wiki collects a large amount of documentation relating to [[glossary|glossary/RADIUS]] together in one place. Pages of particular interest to newcomers will be the [[FAQ|guide/FAQ]] and [[HOWTO|guide/HOWTO]] sections, although the [[Traditional FreeRADIUS docs page|http://www.freeradius.org/doc/]] the [[docs|https://github.com/FreeRADIUS/freeradius-server/tree/master/doc]] folder included in the server distribution also include "man" pages, and other documentation.
 
