@@ -7,8 +7,8 @@ Documentation
 -------------
 **Beginners are strongly recommended to read these two pages first:**
 
-* **The [[concepts|guide/Concepts]] page, which provides a very light overview of how the server works.**
-* **The [[getting started|guide/Getting Started]] page, which gives an introduction to installing and configuring the server.**
+* **The [[concepts|guide/Concepts]] page**, which provides a very light overview of how the server works.
+* **The [[getting started|guide/Getting Started]] page**, which gives an introduction to installing and configuring the server.
 
 A short introduction to RADIUS concepts, and to FreeRADIUS itself, is also available [[in the technical guide|http://networkradius.com/doc/FreeRADIUS%20Technical%20Guide.pdf]] (PDF).
 
