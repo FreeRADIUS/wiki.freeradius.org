@@ -6,9 +6,17 @@ No RADIUS knowledge is required.
 
 ## Installing the Server
 
-Where possible, we recommend using the packaging system that is used by
-your operating system. The version that is supplied by your OS might be
-out of date, but it is likely to work "out of the box".
+Where possible, while learning the basics, it is suggested that
+beginners use the packaging system that is used by your operating
+system. The version that is supplied by your OS might be out of
+date, but it is likely to work "out of the box". The only
+exception to this is if your operating system supplies an older
+major version, as you will then be learning an obsolete
+configuration.
+
+Once you have learnt how FreeRADIUS works, it is then highly
+recommended to move to the latest released stable version before
+moving into production.
 
 If you need to install it yourself, the Wiki
 [installation](http://wiki.freeradius.org/Installation) page contains
@@ -19,9 +27,9 @@ Otherwise, we assume that you can install the server via something like
 
 Note that in Debian-based systems, the server daemon is called
 `freeradius` instead of `radiusd` The configuration files are also
-located in `/etc/freeradius` instead of `/etc/raddb/`. We use `radiusd`
-and `/etc/raddb/` in this guide, and trust that Debian administrators
-can translate to their system.
+located in `/etc/freeradius/` instead of `/etc/raddb/`. We use
+`radiusd` and `/etc/raddb/` in this guide, and trust that Debian
+administrators can translate to their system.
 
 ## Some background
 
@@ -46,22 +54,23 @@ of the configuration items are documented *only* in the comments in the
 configuration files.
 
 We recommend *reading the debug output of the server*. While it contains
-a lot of text, it usually contains error messages which describe exactly
-what went wrong, and how to fix it.
+a lot of text, it describes exactly what is happening within the server
+and usually contains error messages which describe what went wrong, and
+how to fix it.
 
 ## Starting the server
 
 When the server has been installed on a new machine, the first step is
 to start it in debugging mode, as user `root`:
 
-    $ radiusd -X
+    # radiusd -X
 
 This step demonstrates that the server is installed and configured
 properly. If the output says `Ready to process requests`, then all is
 well.
 
 Otherwise, typical errors include `Address already in use`, which means
-that there is another radius server already running. You will need to
+that there is another RADIUS server already running. You will need to
 find that one and stop it before running the server in debugging mode.
 
 ## Initial Tests
@@ -79,11 +88,11 @@ from another terminal window:
 
 You *should* see the server respond with an `Access-Accept`. If it
 doesn't, the debug log will show why. In version 2, you can paste the
-output into the [debug form](http://networkradius.com/freeradius.html),
-and a colorized HTML version will be produced. In version 3, the output
-will be colorized. Look for red or yellow text, and read the relevant
-messages. They should describe exactly what went wrong, and how to fix
-the problem.
+output into the [debug form](http://networkradius.com/freeradius-debugging/),
+and a colorized HTML version will be produced. In version 3, the
+output will already be colorized in the terminal. Look for red or
+yellow text, and read the relevant messages. They should describe
+exactly what went wrong, and how to fix the problem.
 
 If you do see an `Access-Accept`, then *congratulations*, the following
 authentication methods now work for the `testing` user:
@@ -95,6 +104,11 @@ steps are outside of the scope of this short web page, but the general
 method to use is important, and is outlined in the next section.
 
 ## Adding a client
+
+When we discuss clients, we mean clients of the RADIUS server, e.g.
+wireless access point, network switch or other form of NAS. NOT the
+network clients - such as laptops, tablets etc - they do not talk
+directly to the RADIUS server.
 
 The above test runs `radtest` from localhost. It is useful to add a new
 client, which can be done by editing the `clients.conf` file. Add the
@@ -110,13 +124,8 @@ client which will be sending `Access-Request` packets.
 
 The client should also be configured to talk to the RADIUS server, by
 using the IP address of the machine running the RADIUS server. The
-client should use the same secret as configured above in the `client`
+client must use the same secret as configured above in the `client`
 section.
-
-(NB: When we discuss clients, we mean clients of the RADIUS server i.e.
-Wireless Access Point, Switch or other form of NAS. NOT the network
-clients - such as laptops, tablets etc - they do not talk directly to
-the RADIUS server)
 
 Then restart the server in debugging mode, and run a simple test using
 the `testing` user. You should see an `Access-Accept` in the server
