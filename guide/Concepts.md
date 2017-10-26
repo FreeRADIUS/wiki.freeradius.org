@@ -17,19 +17,19 @@ This should provide a solid foundation in RADIUS and EAP at a protocol level.
 How things work in RADIUS
 -------------------------
 
-The client sends you a radius authentication request, you don't decide what's in the request, the client does.  The server doesn't decide what's in the request, the client does.  The client is 100% responsible for everything in the request.
+The client sends the server a RADIUS authentication request. You don't decide what's in the request, the client does.  The server doesn't decide what's in the request, the client does.  The client is 100% responsible for everything in the request.
 
 
-Picking an Auth-Type
---------------------
+Picking an Auth-Type - authorize {}
+-----------------------------------
 
 The radius server looks at the request and says:
 
 >  Hmmm... can I deal with this request?
 
-The answer to that depends on what authentication types you have enabled, what the server can look up in a DB, and what is in the request.
+The answer to that depends on what authentication types you have enabled in the server, what the server can look up in a database, and what is in the request.
 
-The server will then start querying the modules in the authorize::
+The server will then start querying the modules in the authorize section:
 
 >  Unix module, can you handle this one?
   
@@ -45,8 +45,8 @@ The module does this by looking in the request for key attributes, such as MS-CH
 
 If the module thinks it has a shot at authenticating the user it'll say:
 
->  I can't authenticate this user now (I was just told to authorize them)
->  But my pal in the Authenticate section can!
+>  I can't authenticate this user now (I was just told to authorize them),
+>  but my pal in the Authenticate section can!
 >  Hey, set the Auth-Type to me!
 
 If the module doesn't see anything it recognizes, or knows it doesn't need to lookup anything, it does nothing.
@@ -70,7 +70,7 @@ So it then compares the local "known good" password to the password as entered b
 
 The "known good" password comes from another module.  The pap module just does PAP authentication, and nothing more.  The benefit of this approach is that the "known good" password can come from the 'users' file, SQL, LDAP, ``/etc/passwd``, external program, etc.  i.e. pretty much anything.
 
-Lets suppose that the ldap module was listed in authorize it'll have run and checked:
+Lets suppose that the ldap module was listed in authorize. It will have run and checked:
 
 >  Hmm... Can I find a "known good" password for this user?
 
@@ -87,6 +87,6 @@ But WAIT! What if the client sends a MSCHAP request? What does the radius server
 In this case, the mschap module looks at the request, and finds the MS-CHAP attributes.  It sets the *Auth-Type* to itself (mschap).  A database module (such as LDAP, above) gets the "known good" password, and adds it to the request.  The mschap module is then run for authentication.  It looks for either a clear text password or nt-hash (why? look at the [[protocol table|http://deployingradius.com/documents/protocols/compatibility.html]]). If one of those hasn't been added by a datastore, the mschap module says:
 
 >  Sorry, I can't authenticate the user,
->  because I don't have the information I need to validate MSCHAP
+>  because I don't have the information I need to validate MSCHAP.
 
-But now the server has run out of options, its only choice was mschap because that's what the client sent in the request.  The mschap module can't do anything because you didn't give it a useful "known good" password . So the server has no choice but to reject the request.  The MSCHAP data might be correct, but the server has no way to know that.  So it replies with a reject.
+But now the server has run out of options! Its only choice was mschap because that's what the client sent in the request.  The mschap module can't do anything because you didn't give it a useful "known good" password . So the server has no choice but to reject the request.  The MSCHAP data might be correct, but the server has no way to know that.  So it replies with a reject.
