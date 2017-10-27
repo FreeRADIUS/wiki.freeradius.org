@@ -70,6 +70,8 @@ That way a module can request that all of the stats be merged from all threads.
 
 We will ignore thread-safety again here... locks are too expensive.  i.e. the stats will be updated millions of times per second, but read only once per second.  The reader doesn't care if the stats are off by 1, as there will always be "in flight" packets.  So this approach is likely correct.
 
+We would likely need protocol-specific modules... so that the `stats` module could be listed in a `recv Status-Server` section.  It would then look for queries, coalesce the stats, and update the reply as appropriate.  This would involve largely taking the v3 `stats.c` code, and moving it into a module.
+
 ### Historical data
 
 The server should only track "live" data.  If someone wants historical data, they should query the server periodically.
