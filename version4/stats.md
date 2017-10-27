@@ -55,6 +55,7 @@ For destination, we need to look at `dst IP + dst port`
 
 For dynamic clients, we need to look at `NAS-IP-Address` or `NAS-Identifier`, *instead* of `src IP`.  That's likely an optional additional key for the stats module.
 
+It's probably best to have protocol-specific stats modules, as different statistics will need different things.
 
 ### Querying the stats
 
