@@ -36,7 +36,7 @@ i.e. the stats API should
   * not thread-safe, but who care.  If the stats are off by 1 or 2 it doesn't matter
 * build up stats as TLVs and add them to the request
 
-## Stats tracking
+## Stats module
 
 Ideally, we allow the admin to track statistics by any metric.  Client IP, listener IP/port, home server IP/port, etc.
 
