@@ -24,11 +24,19 @@ i.e.
 * dropped for other reasons
 * packets we don't allow on this listener.
 
-Any protocol-specific statistics (e.g. Access-Accept vs Access-Challenge) are in a separate "stats" module.  The reason is that the module can count well-formed, real, accepted packets.  The network side, however, *must* also count "bad" packets.  i.e. ones which never reach the module.
+Any protocol-specific statistics (e.g. Access-Accept vs Access-Challenge) are in a separate protocol-specific data structure, also in the `proto_radius` code.
 
 The API to get these statistics can just be a method in `app_io`.  The worker can grab these stats directly, even if the memory is on the network side.  Since the statistics are being incremented only, just doing a `memcpy()` of the structure should be OK.  Any thread-safety issues can be ignored, as on x86-64, 64-bit writes are atomic.
 
-## Stats module
+i.e. the stats API should
+
+* be called from the work to the network side
+  * because the request is still alive, we know that the network side is still alive
+* `memcpy()` the stats from the network side instance to a thread-local variable on the stack
+  * not thread-safe, but who care.  If the stats are off by 1 or 2 it doesn't matter
+* build up stats as TLVs and add them to the request
+
+## Stats tracking
 
 Ideally, we allow the admin to track statistics by any metric.  Client IP, listener IP/port, home server IP/port, etc.
 
