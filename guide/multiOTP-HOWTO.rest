@@ -56,7 +56,7 @@ Also change ntlm_auth variable::
                           Auth-Type := multiotpmschap
                   }
             }
-            elif (control:Auth-Type == chap) {
+            elsif (control:Auth-Type == chap) {
                   update control {
                           Auth-Type := multiotp
                   }
