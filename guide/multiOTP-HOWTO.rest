@@ -51,18 +51,19 @@ Also change ntlm_auth variable::
         # e.g. "multiotp_prefix = 'otp:'" 
         multiotp_prefix = ''
         multiotp.authorize {
-            # This test force multiOTP for any MS-CHAP(v2),CHAP and PAP attempt
+            # This test force multiOTP for any MS-CHAP(v2) attempt
             if (control:Auth-Type == MS-CHAP) {
                   update control {
                           Auth-Type := multiotpmschap
                   }
             }
-            # This test force multiOTP for any MS-CHAP(v2),CHAP and PAP attempt
+            # This test force multiOTP for any MS-CHAP(v2) attempt
             elsif (control:Auth-Type == mschap) {
                   update control {
                           Auth-Type := multiotpmschap
                   }
             }
+            # This test force multiOTP for any CHAP attempt
             elsif (control:Auth-Type == chap) {
                   update control {
                           Auth-Type := multiotp
@@ -73,6 +74,7 @@ Also change ntlm_auth variable::
             #
             # Use this simple test for non decimal only OTP code: elsif (!control:Auth-Type) {
             #
+            # This test force multiOTP for any other attempt
             elsif (!control:Auth-Type) {
                 update control {
                     Auth-Type := multiotp
