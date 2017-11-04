@@ -51,13 +51,18 @@ Also change ntlm_auth variable::
         # e.g. "multiotp_prefix = 'otp:'" 
         multiotp_prefix = ''
         multiotp.authorize {
-           # This test is for decimal OTP code only, otherwise you will have to change it
-           # Try for example this simple test: if (!control:Auth-Type) {
-            if (control:Auth-Type == 'MS-CHAP') {
+            if (control:Auth-Type == mschap) {
                   update control {
                           Auth-Type := multiotpmschap
                   }
             }
+            elif (control:Auth-Type == chap) {
+                  update control {
+                          Auth-Type := multiotp
+                  }
+            }
+            # This test is for decimal OTP code only, otherwise you will have to change it
+            # Try for example this simple test: if (!control:Auth-Type) {
             elsif (!control:Auth-Type && User-Password =~ /^${policy.multiotp_prefix}([0-9]{10})$/) {
                 update control {
                     Auth-Type := multiotp
