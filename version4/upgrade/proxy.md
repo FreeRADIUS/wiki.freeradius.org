@@ -61,7 +61,7 @@ to the end of `authorize`, it will see that `Proxy-to-Realm` is
 set to "network.example". It will then skip authentication
 entirely and instead look up `realm network.example` in
 `proxy.conf`. From this it will find out that it needs to use pool
-"remote_radius_failover". This will tell it the home servers to
+`remote_radius_failover`. This will tell it the home servers to
 use, and the request will be sent off to one of them according to
 internal load-balancing or failover rules.
 
@@ -83,14 +83,15 @@ to choose the realm to proxy to.
 ## Changes in version 4
 
 Version 4 is completely different in practice, though the concept
-and operation is the same. The Proxy-to-Realm attribute has gone,
-as there is no longer any special hook in the server core to
-intercept the request before authentication and proxy instead.
-Therefore the proxy.conf file has also gone - proxy servers are
-now defined simply as instances of the `rlm_radius` module. All
-hidden complexity of proxy pools, load-balancing or failover are
-now in the open in unlang. Proxying is simply an alternative form
-of authentication - remote, rather than on the local server.
+is the same. The `Proxy-to-Realm` attribute has gone, as there is
+no longer any special hook in the server core to intercept the
+request before authentication and proxy instead.  Therefore the
+`proxy.conf` file has also gone - proxy servers are now defined
+simply as instances of the `rlm_radius` module. All hidden
+complexity of proxy pools, load-balancing or failover are now in
+the open in unlang. Proxying is simply an alternative form of
+authentication - it just happens to be remote, rather than on the
+local server.
 
 Therefore, rather than defining home servers in `proxy.conf`, home
 servers are created by new instances of `rlm_radius`. This may for
