@@ -185,18 +185,17 @@ define two policies, `proxy_pool_a` and `proxy_pool_b`:
         }
     }
 
-Now, in the authorize sections for each realm, just call the
+Now, in the authenticate sections for each realm, just call the
 appropriate policy:
 
-    authorize proxy-realm_1.example {
+    authenticate proxy-realm_1.example {
         proxy_pool_a
     }
 
-    authorize proxy-realm_2.example {
+    authenticate proxy-realm_2.example {
         proxy_pool_b
     }
 
 The policies are now equivalent to the old home server pools in
-version 3, and the the authorize sections are equivalent to
+version 3, and the named authenticate sections are equivalent to
 realms.
-
