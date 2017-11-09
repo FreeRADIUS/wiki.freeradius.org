@@ -101,7 +101,7 @@ example contain the following directives:
         transport = udp
         type = Access-Request
         udp {
-            ipaddr = aa
+            ipaddr = 192.0.2.1
             port = 1812
             secret = aS3cr3T
         }
