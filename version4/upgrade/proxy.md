@@ -199,3 +199,11 @@ appropriate policy:
 The policies are now equivalent to the old home server pools in
 version 3, and the named authenticate sections are equivalent to
 realms.
+
+## Why this change was made
+
+This change was made in order to permit new features which were long requested in previous versions of the server.  Due to design limitations, these features were impossible to implement.
+
+Until now.
+
+Please see the [Proxy Extensions](Proxy-Extensions) page for more information.
