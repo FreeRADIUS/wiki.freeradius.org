@@ -60,4 +60,10 @@ If you're building on older versions of RedHat then you'll need to compile GCC f
 
 Unfortunately neither RHEL nor Centos provide an RPM for libkqueue.  The instructions below will produce a libkqueue RPM, which can then be installed for building from source, or distributed with the FreeRADIUS RPMs when building packages.
 
+Building the libkqueue RPM will require these packages:
+
+````
+yum -y install wget automake autoconf libtool rpm-build
+````
+
 [[include:libkqueue-rpm]]
