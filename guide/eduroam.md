@@ -53,7 +53,7 @@ cp ./eapol_test/eapol_test /usr/local/bin/
 You should now have a functional ``eapol_test`` in your path.
 
 ## Configuration
-You should replace existing configurations in their entirety with the configurations provided below.
+You should replace existing configuration files in their entirety with the configuration file contents provided below.
 
 ### The outer virtual server
 
