@@ -167,7 +167,6 @@ function.
 
 * if !client->active
   * set `request->process` to `proto_radius_dynamic_client()`
-  * set methods to 'new client'
 
 ### function `mod_encode()`
 
@@ -194,7 +193,10 @@ function.
 * 1 = wrote data OK
 * 2 = WANT_READ
 
-### Function in network.c calling `write()`
+### proto_radius_dynamic_client()
 
-* if `write()` returns WANT_READ
-  * call `fr_network_read()` to empty the pending queue for this socket
+Add methods:
+
+* `new client` - 'recv' section
+* `add client  - 'send' section
+* `deny client` - 'send reject' section
