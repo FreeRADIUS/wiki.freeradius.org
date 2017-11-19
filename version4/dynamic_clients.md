@@ -198,5 +198,7 @@ function.
 Add methods:
 
 * `new client` - 'recv' section
-* `add client  - 'send' section
+* `add client`  - 'send' section
 * `deny client` - 'send reject' section
+
+It will also look at attributes necessary to define a client.  If they are missing or incomplete, it complains, and runs the 'deny client' section.
