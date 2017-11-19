@@ -15,26 +15,26 @@ In Phase 2, we will add per-connection dynamic clients.
 
 ## Phase 1
 
-The network side `proto_radius_udp` needs to be updated to have a
+1.1 The network side `proto_radius_udp` needs to be updated to have a
 local set of clients.
 
-These clients need "use" counters, so we know how many outstanding
+1.2. These clients need "use" counters, so we know how many outstanding
 requests are using them.  The clients can only be deleted when the
 user counter hits zero.
 
-The dynamic client code needs to be configurable, so that it can be
+1.3. The dynamic client code needs to be configurable, so that it can be
 enabled or disabled.
 
-The dynamic client code needs to have source network ranges where it
+1.4. The dynamic client code needs to have source network ranges where it
 accepts packets from.  This is a basic application-layer firewall...
 
-The dynamic clients need a separate virtual server to run for received
+1.5. The dynamic clients need a separate virtual server to run for received
 packets.  This virtual server looks at the decoded RADIUS packet, and
 returns FreeRADIUS VSAs as attributes in the reply.  These reply
 attributes are used to create a dynamic client.  The dynamic client is
 then inserted into the local tree, with a lifetime.
 
-When `proto_radius_udp` receives a packet from a previously unknown
+1.6. When `proto_radius_udp` receives a packet from a previously unknown
 source, it checks for dynamic clients enable.  If not enabled, it's
 rejected.  If enabled, it compares the source IP to the list of
 allowed source networks.  If there's no match, it's rejected.
@@ -44,31 +44,31 @@ For now, we don't check for NAT.  i.e. each client is distinguished
 only by source IP, not by port.  If we later add NAT capability,
 clients will be distinguished by *connection*, not by source port.
 
-The packet is added *immediately* as a dynamic client, but is marked
+1.7. The packet is added *immediately* as a dynamic client, but is marked
 with a "pending" flag.  Packets received from this client are *not*
 processed, but instead added to a pending queue.  This means having a
 local copy of the packets, probably via `talloc()` and memory copies.
 
-The number of these packets should be limited.  That limit should be
+1.8. The number of these packets should be limited.  That limit should be
 configurable.
 
-There should be a timer on these packets.  If the client is not
-defined within 1/10s, all of the packets should be discarded.  This
+1.9. There should be a timer on these packets.  If the client is not
+defined within 1/10s, all of the additional packets should be discarded.  This
 timer should be configurable.
 
-The first received packet is processed through the worker (exactly how
+1.10. The first received packet is processed through the worker (exactly how
 will be described later).
 
-If a NAK is received from the worker, the pending client definition is
+1.11. If a NAK is received from the worker, the pending client definition is
 removed, and all pending packets are discarded.
 
-If an ACK is received, the format is raw data (not VPs).  The worker
+1.12. If an ACK is received, the format is raw data (not VPs).  The worker
 will need to create a client definition, and send it to the network
 side as a reply packet.  The network side will then use those fields
 to update the "pending" client definition, and remove the "pending"
 flag.
 
-At that point, the pending packets are removed from the queue, and
+1.13. At that point, the pending packets are removed from the queue, and
 processed through the normal network side, by calling `fr_network_listen_read()`
 
 ### Corner cases
