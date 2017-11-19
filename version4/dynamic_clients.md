@@ -69,18 +69,7 @@ to update the "pending" client definition, and remove the "pending"
 flag.
 
 At that point, the pending packets are removed from the queue, and
-processed through the normal network side.
-
-*TODO* How to do that?  The `write()` function doesn't have access to
- anything except it's local socket data and the raw packet.  It can't
- poke the network...
-
-We can't rely on the `read()` routine being called, as we might not
-receive new packets for a while.  So we need some way to trigger the
-`read()` from the `write()` function.
-
-Maybe just change the `write()` API to return `WANT_READ`, ala
-OpenSSL.  That's by far and away the simplest approach.
+processed through the normal network side, by calling `fr_network_listen_read()`
 
 ### Corner cases
 
