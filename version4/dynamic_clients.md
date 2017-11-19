@@ -185,13 +185,7 @@ function.
     * set client to active
     * decrement inst->num_pending_clients
     * move list of pending packets to inst->list
-    * return WANT_READ
-
-*Note* we have to fix all mod_write() to return a status `int` instead of number of bytes written
-* <0 = error
-* 0 = close the socket
-* 1 = wrote data OK
-* 2 = WANT_READ
+    * call `fr_network_listen_read()`
 
 ### proto_radius_dynamic_client()
 
