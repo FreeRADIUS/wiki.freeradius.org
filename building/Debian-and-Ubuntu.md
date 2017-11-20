@@ -17,7 +17,7 @@ Building packages should be very simple. First obtain a copy of the source and u
 Having retrieved whichever version of the source you require, build the FreeRADIUS packages:
 
 ```bash
-sudo apt-get install devscripts quilt
+sudo apt-get install devscripts quilt debhelper fakeroot libsqlite3-dev libtalloc-dev libhiredis-dev unixodbc-dev libmysql++-dev libpqxx-dev libldap2-dev libgdbm-dev libkrb5-dev libsnmp-dev snmp libcollectdclient-dev libcap-dev
 fakeroot debian/rules clean
 sudo mk-build-deps -ir debian/control
 dpkg-buildpackage -rfakeroot -b -uc
