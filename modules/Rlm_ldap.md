@@ -154,6 +154,10 @@ Consider switching to a version of libldap that uses OpenSSL. FreeRADIUS uses Op
 
 In FreeRADIUS 3.x, you can set the **uses**, **lifetime** and **idle_timeout** settings in the **pool** section of the LDAP module to **zero** to keep the LDAPS connections open permanently to avoid this issue. 
 
+This problem was visible mainly with official RedHat packages, because they switched to NSS. Fortunately, this problem has been fixed in RHSA-2017:1852 / https://access.redhat.com/errata/RHSA-2017:1852
+
+**Updating package to openldap-2.4.44-5.el7.x86_64 solve this problem.**
+
 # See Also
 
 * [[LDAP]]
