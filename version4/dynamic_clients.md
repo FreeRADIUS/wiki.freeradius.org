@@ -128,15 +128,17 @@ function.
 * alloc the client, parented from the instance
 * fill in various fields (e.g. src IP)
 * set `client->active = false`
+* set `client->dynamic = true`
 * insert client into dynamic client list
-* call `new_struct_alloc()`
-* insert it into `client->list`
+* call `dynamic_client_save_packet()` to save the packet
 * return the packet to the network code
 
 
-### Function `new_struct_alloc()`
+### Function `dynamic_client_save_packe()`
 
-* allocate new structure, parented from dynamic client and fill it in
+* if too many saved packets, return -1
+
+* allocate new structure, parented from instance and fill it in
   * tracking table entry,
   * dlist
   * ptr to client
