@@ -89,7 +89,6 @@ function.
 
 ### Changes
 
-* new tracking table for pending entries
 * `fr_dlist_t` in inst, for pending packets
 * "active" flag in clients
 * `fr_dlist_t` in clients of pending packets
@@ -133,21 +132,7 @@ function.
 * call `dynamic_client_save_packet()` to save the packet
 * return the packet to the network code
 
-
-### Function `dynamic_client_save_packe()`
-
-* if too many saved packets, return -1
-
-* allocate new structure, parented from instance and fill it in
-  * tracking table entry,
-  * dlist
-  * ptr to client
-  * talloc_memdup() the packet
-
- * add to tail of `client->list`
-
-
-### Function `dynamic_client_check()`
+### Function `dynamic_client_save_packet()`
 
 * if client->num_pending_packets is too many, drop
 * look up packet in inst->dynamic_client_tracking
@@ -159,7 +144,14 @@ function.
   * other - drop packet
   * NEW, continue
 
-* call `new_struct_alloc()`
+* allocate new structure, parented from instance and fill it in
+  * tracking table entry,
+  * dlist
+  * ptr to client
+  * talloc_memdup() the packet
+
+ * add to tail of `client->list`
+
 * increment client->num_pending_packets
 
 * return 0
