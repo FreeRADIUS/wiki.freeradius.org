@@ -198,10 +198,10 @@ function.
 
 ### proto_radius_dynamic_client()
 
-Add methods:
+Has methods:
 
 * `new client` - 'recv' section
 * `add client`  - 'send' section
 * `deny client` - 'send reject' section
 
-It will also look at attributes necessary to define a client.  If they are missing or incomplete, it complains, and runs the 'deny client' section.
+*It will also look at attributes necessary to define a client.  If they are missing or incomplete, it complains, and runs the 'deny client' section.*
