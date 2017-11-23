@@ -70,11 +70,11 @@ configurable.
 defined within 1/10s, all of the additional packets should be discarded.  This
 timer should be configurable.*
 
-1.10. *The first received packet is processed through the worker (exactly how
+1.10. The first received packet is processed through the worker (exactly how
 will be described later).*
 
-1.11. *If a NAK is received from the worker, the pending client definition is
-removed, and all pending packets are discarded.*
+1.11. If a NAK is received from the worker, the pending client definition is
+removed, and all pending packets are discarded.
 
 1.12. *If an ACK is received, the format is raw data (not VPs).  The worker
 will need to create a client definition, and send it to the network
@@ -82,35 +82,14 @@ side as a reply packet.  The network side will then use those fields
 to update the "pending" client definition, and remove the "pending"
 flag.*
 
-1.13. *At that point, the pending packets are removed from the queue, and
-processed through the normal network side, by calling `fr_network_listen_read()`*
+1.13. At that point, the pending packets are removed from the queue, and
+processed through the normal network side, by calling `fr_network_listen_read()`
 
 ### Corner cases
 
-This code needs to use the standard packet tracking mechanisms.
+This code uses the standard packet tracking mechanisms.
 i.e. if a duplicate is received, ignore it.  If a conflicting packet
 is received, drop either the new one or the old one.
-
-But we don't want to pollute the main table with packets / IPs for
-unknown clients, so we use a special "pending" tracking table.  Then
-when pending packets are moved over, copy re-insert them into the main
-table.
-
-much of the bottom half of `proto_radius_udp`, function `mod_read()`
-can be turned into another function.  The "undo pending" then just
-pulls the pending packets off of a queue, and calls the bottom-half
-function.
-
-### Changes
-
-* `fr_dlist_t` in inst, for pending packets
-* "active" flag in clients
-* `fr_dlist_t` in clients of pending packets
-* new data structure for pending packets which holds:
-  * ptr to tracking table entry
-  * ptr to packet data
-  * `fr_dlist_t` for client entries
-  * ptr to client
 
 ## How things will work
 
@@ -119,9 +98,9 @@ function.
 * if inst->list (i.e. there are pending packets)
   * remove entry from list
   * copy address, client, packet
-  * return `mod_read_p2()`
+  * do bottom half of processing from `mod_read()`
 
-* otherwise read from socket, etc.
+* otherwise read from socket
 
 * look in global list.  If not found, look in dynamic client list
   * if !found && in allowed networks, return dynamic_client_alloc(inst, packet, length, address)
@@ -130,7 +109,7 @@ function.
   * if found, && !client->active, return `dynamic_client_check(inst, packet, length, address, client)`
     * otherwise it's an active dynamic client, it's OK
 
-* otherwise return `mod_read_p2(...)`
+* otherwise do bottom half of processing from `mod_read()`
 
 ### Function `dynamic_client_alloc()`
 
@@ -143,10 +122,10 @@ function.
 * set `client->active = false`
 * set `client->dynamic = true`
 * insert client into dynamic client list
-* call `dynamic_client_save_packet()` to save the packet
+* call `dynamic_client_packet_save()` to save the packet
 * return the packet to the network code
 
-### Function `dynamic_client_save_packet()`
+### Function `dynamic_client_packet_save()`
 
 * if client->num_pending_packets is too many, drop
 * look up packet in inst->dynamic_client_tracking
@@ -189,7 +168,7 @@ function.
   * if NAK, free all of the pending packets
     * set `client->unknown`, and set cleanup timer,
     * return
-  * if OK, update client definition
+  * *if OK, update client definition*
     * set client to active
     * decrement inst->num_pending_clients
     * move list of pending packets to inst->list
