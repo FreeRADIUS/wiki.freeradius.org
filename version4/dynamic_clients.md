@@ -182,4 +182,4 @@ Has methods:
 * `add client`  - 'send' section
 * `deny client` - 'send reject' section
 
-*It will also look at attributes necessary to define a client.  If they are missing or incomplete, it complains, and runs the 'deny client' section.*
+It also looks at the attributes necessary to define a client.  If they are missing or incomplete, it complains, and runs the 'deny client' section.
