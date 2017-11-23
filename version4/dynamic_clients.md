@@ -15,12 +15,11 @@ In Phase 2, we will add per-connection dynamic clients.
 
 ## Phase 1
 
-1.1 *The network side `proto_radius_udp` needs to be updated to have a
-local set of clients.*
+1.1 The network side `proto_radius_udp` has a
+local set of clients.
 
-1.2. *These clients need "use" counters, so we know how many outstanding
-requests are using them.  Even when expired, the clients can only be deleted when the
-use counter hits zero.*
+1.2. These clients have an "outsranding" counters, so we know how many outstanding
+requests are using them.  *Even when expired, the clients can only be deleted when this counter hits zero.*
 
 1.3. The dynamic client code is configurable, so that it can be
 enabled or disabled.
