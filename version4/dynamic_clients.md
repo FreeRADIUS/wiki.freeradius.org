@@ -37,9 +37,9 @@ accepts packets from.
         ...
     }
 
-1.5. *The dynamic clients need a separate virtual server to run for received
-packets.  This virtual server looks at the decoded RADIUS packet, and
-returns FreeRADIUS VSAs as attributes in the reply.  These reply
+1.5. The dynamic clients run a `new client` subsection of the current virtual server, for received
+packets.  This subsection looks at the decoded RADIUS packet, and
+returns FreeRADIUS VSAs as attributes in the reply.  *These reply
 attributes are used to create a dynamic client.  The dynamic client is
 then inserted into the local tree, with a lifetime.*
 
