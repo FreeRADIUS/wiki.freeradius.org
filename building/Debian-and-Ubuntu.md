@@ -37,13 +37,13 @@ sudo make install
 ```
 
 
-## Building development versions (v3.1 or v4.0)
+## Building development versions (v4.0)
 
-Note that version 3.1 and 4 are for developers only. **Do not use these versions unless you know what you are doing.**
+Note that version 4 is for developers only. **Do not use these versions unless you know what you are doing.**
 
 ### Upgrading GCC
 
-Older versions of Debian and Ubuntu use GCC < 4.8, which lacks support for the C11 features needed to build FreeRADIUS >= v3.1.x.
+Older versions of Debian and Ubuntu use GCC < 4.8, which lacks support for the C11 features needed to build FreeRADIUS >= v4.0.x.
 
 In order to switch to GCC 4.9
 ```bash
