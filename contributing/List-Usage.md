@@ -4,7 +4,7 @@ Originally, each list in the server is used for a specific purpose. As the serve
 
 This page documents the different roles, so that new modules can use lists consistently, and so users know where to find attributes.
 
-The roles described below are valid for versions v3.1.x or greater, but were followed to a lesser extent in previous versions or the server.
+The roles described below are valid for versions v4.0.x or greater, but were followed to a lesser extent in previous versions or the server.
 
 ## Attribute types
 ### Protocol attributes
