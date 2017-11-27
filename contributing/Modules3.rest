@@ -109,7 +109,7 @@ SOURCES		:= rlm_always.c
 
 Using autoconf and boilermake together is more complex, and is easier to demonstrate
 than explain. Example / template files may be found `here
-<https://github.com/FreeRADIUS/freeradius-server/tree/v3.1.x/src/modules/rlm_example>`_.
+<https://github.com/FreeRADIUS/freeradius-server/tree/v3.0.x/src/modules/rlm_example>`_.
 The ``configure.ac`` and ``all.mk.in`` files will be of the most interest.
 
 Note: When using autoconf to compile your ``configure.ac`` file, you should specify the
@@ -329,7 +329,7 @@ a *particular* request, and is valid only for the lifetime of a request, use the
 request_data_add_ and request_data_get_ functions.
 
 Also note that if instance data is modified during request processing, a mutex, C11 atomics
-(v3.1.x only) or the ``PW_TYPE_UNSAFE`` flag must be used to prevent concurrent access.
+(v4.0.x only) or the ``PW_TYPE_UNSAFE`` flag must be used to prevent concurrent access.
 
 .. _request_data_add: http://doc.freeradius.org/radiusd_8h.html#a1bc4fe43bd2da008b850e7167ef1c849
 .. _request_data_get: http://doc.freeradius.org/radiusd_8h.html#a00ca23b562b4660822723fec312b3021
