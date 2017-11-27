@@ -31,7 +31,7 @@ sudo make install
 
 > GCC upgrade only required for versions >= v4.0.x you can skip this step for v3.0.x and below.
 
-RHE7 ships with GCC 4.8.5 but we require GCC >= 4.9.0 for FreeRADIUS >= v3.1.x.
+RHE7 ships with GCC 4.8.5 but we require GCC >= 4.9.0 for FreeRADIUS >= v4.0.x.
 
 Fortunately the ``devtoolset-3`` series of packages provides a later version of GCC.
 
