@@ -32,7 +32,7 @@ The Milenage algorithm set outputs UMTS quintuplets consisting of:
 UMTS quintuplets can be folded into GSM triplets, and so can be used with EAP-SIM, EAP-AKA and EAP-AKA['].  The algorithm used for this is known as COMP128-4.
 
 ## High level overview
-EAP-SIM, EAP-AKA and EAP-AKA' are very similar. The TLV and packet format are virtually identical. The major differences are the pseudo-random function used to generate sessions keys, and the type of the authentication vectors used.
+EAP-SIM, EAP-AKA and EAP-AKA' are very similar. The TLV and packet format are virtually identical. The major differences are the Pseudo-Random Function (PRF) and Key Derivation Function (KDF) used to generate sessions keys, and the type of the authentication vectors used.
 
 All the SIM base EAP-Methods function in a similar way.  In each case, an AS (Authentication server - like FreeRADIUS), requests an authentication vector from an AuC with knowledge of a SIM's Ki.  The AuC generates a random challenge (RAND), feeds it and the Ki into a vector generation algorithm (COMP128-[1234], Milenage).  The vector generation algorithm produces multiple keys, which are passed back to the AS along with the challenge.
 
