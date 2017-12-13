@@ -22,7 +22,7 @@ The COMP128-1,2,3 algorithm sets output GSM triplets consisting of:
 
 _Note: Only the EAP-SIM method can function with GSM triplets, and even then each authentication attempt requires 2-3 sets of triplets as single triplet does not provide enough keying material._
 
-The Milenage algorithm outputs UMTS quintuplets consisting of:
+The Milenage algorithm set outputs UMTS quintuplets consisting of:
 - RAND a 128bit random input to the algorithm.
 - CK a 128bit confidentiality key (similar to Kc).
 - IK a 128bit integrity key.
