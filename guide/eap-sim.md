@@ -1,5 +1,4 @@
 # Testing EAP-SIM and EAP-AKA
-
 ## Introduction
 EAP-SIM/EAP-AKA and EAP-AKA' are EAP methods that allow a supplicant to gain access to a resource by using a SIM (Subscriber Identity Module) card. These EAP methods are usually deployed by MNOs (Mobile Network Operators), where the MNO or a partner or the MNO also operate a large scale WiFi network, and the MNO wishes to offload subscribers onto this WiFi network where available.
 
@@ -8,7 +7,29 @@ Interest in EAP-SIM/EAP-AKA/EAP-AKA' has been increasing in recent years, as wit
 ## Authentication vectors
 Authentication vectors are sets of cryptographically generated keys and challenges.  The authentication vectors themselves do not get sent over the wire, only the RAND (Random challenge) component of the vectors is sent between parties.
 
-The authentication vector is the output of an algorithm running on an AuC (Authentication Centre), and on the SIM of the subscriber. 
+The authentication vector is the output of an algorithm running on an AuC (Authentication Centre), and on the SIM of the subscriber. The AuC and SIM have knowledge of a secret subscriber key (Ki) and in the case of USIMs a key unique to the Operator and SIM (OPc).
+
+The fact that the AuC and SIM have knowledge of these keys, but the keys are never sent over the wire or revealed in some other manner, is what allows the supplicant to authenticate the AS, and the AS to authenticate the supplicant.
+
+When a supplicant wishes to authenticate, it signals the AS with its IMSI (subscriber ID), and the AS queries an AuC for an authentication vector.  These authentication vectors can be seen as temporary credentials, and should only be used once.
+
+The type of authentication vector generated depends on the algorithm running on the AuC and SIM card.
+
+The COMP128-1,2,3 algorithm sets output GSM triplets consisting of:
+- RAND a 128bit random input to the algorithm.
+- Kc a 64bit ciphering key used for encrypting data.
+- SRES a 32bit signed response, used for proving knowledge of the Ki that was used to generate the triplet.
+
+_Note: Only the EAP-SIM method can function with GSM triplets, and even then each authentication attempt requires 2-3 sets of triplets as single triplet does not provide enough keying material._
+
+The Milenage algorithm outputs UMTS quintuplets consisting of:
+- RAND a 128bit random input to the algorithm.
+- CK a 128bit confidentiality key (similar to Kc).
+- IK a 128bit integrity key.
+- XRES a 64bit signed response, used for proving knowledge of the Ki that was used to generate the quintuplet.
+- AUTN an authentication token used to authenticate the AuC and to prevent re-use of quintuplets.  The AuC is generated using an SQN (Sequence Number) that increments on the AuC and the SIM.  If the SQN on the SIM is greater than the one included in the AUTN then authentication fails.
+
+UMTS quintuplets can be folded into GSM triplets, and so can be used with EAP-SIM, EAP-AKA and EAP-AKA['].  The algorithm used for this is known as COMP128-4.
 
 ## High level overview
 EAP-SIM, EAP-AKA and EAP-AKA' are very similar. The TLV and packet format are virtually identical. The major differences are the pseudo-random function used to generate sessions keys, and the format of the authentication vectors used.
@@ -21,15 +42,31 @@ After the KDF has run, the AS will generate an EAP-[SIM|AKA] Challenge packet, e
 
 When the supplicant receives the Challenge packet, it feeds RAND into the same algorithm as used on the AuC, and then feeds to results of that algorithm into the method specific KDF.  The supplicant uses the ``K_aut`` value from the KDF it ran locally to generate its own HMAC digest and compares that to the one received from the AS. If the MACs match, it proves to the supplicant that the challenge packet was not tampered with and that the AS has an identical authentication vector to the one generated locally.
 
-The supplicant then constructs its challenge response, encapsulates it in an EAP-Response, and generates another HMAC over the packet.  In the case of EAP-SIM the key used for the HMAC, is the concatenation of 
+The supplicant then constructs its challenge response, encapsulates it in an EAP-Response, and generates another HMAC over the packet, the supplicant then sends the challenge response to the AS.
 
+The AS validates the response and sends an EAP-Success/EAP-Failure depending on the outcome of the validation.  These EAP-Methods also generate keying material used to encrypt the network session.  With RADIUS/802.1X these keys are distributed to the NAS by the AS in the RADIUS MPPE Key attributes sent with the EAP-Success, and derived by the supplicant locally.
 
 ## Which method should I use?
 
-In terms of security (key sizes, strength of authentication, MITM attack prevention), EAP-SIM is the weakest, and EAP-AKA' is the strongest.
+In terms of security (key sizes, the strength of authentication, MITM attack prevention), EAP-SIM is the weakest, and EAP-AKA' is the strongest.
 
 EAP-SIM should only be used with legacy 2G AuC that can only generate GSM authentication vectors. EAP-AKA should only be used where the supplicant does not support EAP-AKA'.
 
+### Advantages of EAP-SIM
+- Easy to test locally as vectors can be generated and re-used
+- Works with all SIM cards.
+
+### Advantages of EAP-AKA over EAP-SIM
+- Can optionally protect the identity negotiation portion of the exchange with a Checkcode (a digest of all identity packets).
+- Stronger authentication and ciphering keys.
+- AuC->Supplicant authentication
+- Authentication vector re-use prevention with SQN.
+
+### Advantages of EAP-AKA' over EAP-AKA
+- Stronger MAC digest (SHA-256[0..15] instead of SHA1).
+- Stronger Checkcode digest (SHA-256 instead of SHA1).
+- Stronger KDF (SHA-256 digest instead of SHA1).
+- Network ID binding.  Network ID is rolled into derived CK', IK' keys to prevent KDF output to prevent Network/SSID spoofing.
 
 ## Testing
 In practical terms, the best ways to develop an EAP-SIM/EAP-AKA['] service and perform testing, is to get eapol_test working with a smart card reader or to use eapol_test's virtual usim functionality. This lets you run the entire EAP-SIM/EAP-AKA protocol against a smart card, with no phones or access points needed.
@@ -40,7 +77,7 @@ If you're set on using physical hardware or have particular handsets you want to
 
 Smart card interfaces are remarkably well standardized. The PS/CS (Personal Computer/Smart Card) API is present on Windows by default and bundled OSX (as a framework). On Linux, PSCS lite can be installed to provide the API.
 
-This API should provide an abstraction over *all* PS/CS compatible devices.  eapol_test in fact, just links to a PS/CS library and calls a single initialisation function, for all Smart Card readers, on all operating systems. There's very little OS-specific boilerplate.
+This API should provide an abstraction over *all* PS/CS compatible devices.  eapol_test in fact, just links to a PS/CS library and calls a single initialization function, for all Smart Card readers, on all operating systems. There's very little OS-specific boilerplate.
 
 In addition to a C interface, there's also ``psyscard``, which is a python wrapper around the PSCS API.  Its used by the project osmocom utilities and would provide a good basis for building your own SIM utilities.
 
