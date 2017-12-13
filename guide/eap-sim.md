@@ -44,7 +44,9 @@ When the supplicant receives the Challenge packet, it feeds RAND into the same a
 
 The supplicant then constructs its challenge response, encapsulates it in an EAP-Response, and generates another HMAC over the packet, the supplicant then sends the challenge response to the AS.
 
-The AS validates the response and sends an EAP-Success/EAP-Failure depending on the outcome of the validation.  These EAP-Methods also generate keying material used to encrypt the network session.  With RADIUS/802.1X these keys are distributed to the NAS by the AS in the RADIUS MPPE Key attributes sent with the EAP-Success, and derived by the supplicant locally.
+The AS validates the response and sends an EAP-Success/EAP-Failure depending on the outcome of the validation.
+
+EAP-SIM, EAP-AKA, EAP-AKA', methods also generate keying material used to encrypt the network session.  With RADIUS/802.1X these keys are distributed to the NAS by the AS in the RADIUS MPPE Key attributes sent with the EAP-Success, and derived by the supplicant locally.
 
 ## Which method should I use?
 
