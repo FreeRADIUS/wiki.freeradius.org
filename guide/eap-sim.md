@@ -59,7 +59,7 @@ EAP-SIM should only be used with legacy 2G AuC that can only generate GSM authen
 ### Advantages of EAP-AKA over EAP-SIM
 - Can optionally protect the identity negotiation portion of the exchange with a Checkcode (a digest of all identity packets).
 - Stronger authentication and ciphering keys.
-- AuC->Supplicant authentication
+- AuC->Supplicant authentication.
 - Authentication vector re-use prevention with SQN.
 
 ### Advantages of EAP-AKA' over EAP-AKA
