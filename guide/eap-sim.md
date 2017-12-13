@@ -34,7 +34,7 @@ UMTS quintuplets can be folded into GSM triplets, and so can be used with EAP-SI
 ## High level overview
 EAP-SIM, EAP-AKA and EAP-AKA' are very similar. The TLV and packet format are virtually identical. The major differences are the pseudo-random function used to generate sessions keys, and the type of the authentication vectors used.
 
-All the SIM base EAP-Methods function in a similar way.  In each case, an AS (Authentication server - like FreeRADIUS), requesting an authentication vector from an AuC with knowledge of a SIM's Ki.  The AuC generates a random challenge (RAND), feeds it and the Ki into a vector generation algorithm (COMP128-[1234], Milenage).  The vector generation algorithm produces multiple keys, which are passed back to the AS along with the challenge.
+All the SIM base EAP-Methods function in a similar way.  In each case, an AS (Authentication server - like FreeRADIUS), requests an authentication vector from an AuC with knowledge of a SIM's Ki.  The AuC generates a random challenge (RAND), feeds it and the Ki into a vector generation algorithm (COMP128-[1234], Milenage).  The vector generation algorithm produces multiple keys, which are passed back to the AS along with the challenge.
 
 The AS then runs a KDF (Key derivation function), which performs additional cryptographic operations on the keys received from the AuC.  The purpose of this KDF is usually to increase the key size, to modify the keys in such a way that they can't be reused, and in the case of AKA' to bind the use of the keys to a particular network.
 
