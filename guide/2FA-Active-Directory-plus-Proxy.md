@@ -1,6 +1,6 @@
 # 2FA AD and Proxy
 
-# Introduction
+## Introduction
 
 This document describes how to set up FreeRADIUS server in order to facilitate 2FA where the initial request is authenticated against Active Directory and then proxied to an external RADIUS server for the second step.
 
