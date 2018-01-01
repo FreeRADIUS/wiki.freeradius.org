@@ -1,10 +1,8 @@
-# 2FA - AD password and External OTP via RADIUS proxy
-
-### This guide is under construction...
+# 2FA - AD password and external OTP via RADIUS proxy
 
 This document describes how to set up FreeRADIUS to authenticate users in two steps. First the username/password is authenticated against Active Directory. If successful, an Access-Challenge message is returned to the client requesting it to send a second Access-Request with an OTP code. The second request is then proxied by FreeRADIUS to an external RADIUS OTP service for verification.
 
-This guide was tested and verified using Gemalto Safenet Authentication Services (SAS) as the OTP service. However Gemalto SAS currently don't support pre-authenticating users AD-password before OTP, which is why I added a FreeRADIUS server in front of the SAS service to add AD-auth.
+This guide was tested and verified using Gemalto Safenet Authentication Services (SAS) as the OTP service. As Gemalto SAS currently doesn't support pre-authenticating users AD-password before OTP, we add a FreeRADIUS server in front of the SAS service to pre-authenticate the users AD credentials.
 
 ## Prerequisites
 
@@ -16,11 +14,11 @@ yum install -y freeradius freeradius-ldap freeradius-utils
 
 ## FreeRADIUS Configuration
 
-### LDAP Module
+### LDAP Authentication
 
 In this guide we'll use the LDAP module to perform AD authentication. To perform LDAP authentication against Active Directory, FreeRADIUS must know the users ClearText password, meaning the client must be configured to use PAP authentication. 
 
-If you require supporting MS-CHAPv2 authentication, you should look into using Samba and winbind for authentication instead. Please see the following HOWTO:
+If you require supporting MS-CHAPv2 authentication, you should look into using Samba and winbind for authentication instead of LDAP. Please see the following HOWTO:
 
 [http://wiki.freeradius.org/guide/Active-Directory-direct-via-winbind](http://wiki.freeradius.org/guide/Active-Directory-direct-via-winbind)
 
@@ -30,7 +28,7 @@ Authenticating using LDAP can take a few different approaches:
 2. Bind with an admin-user, perform a search for auth-user and then attempt to re-bind as authenticating user.
 3. Attempt a direct bind as the authenticating user.
 
-Method #1 doesn't work with Active Directory as the LDAP source as it doesn't allow you to poll user passwords, and #2 doesn't really gain us anything in this scenario, so in this guide we'll use method #3 which requires a minimal configuration and no admin/service-account is needed in the AD.
+Method #1 doesn't work with Active Directory as LDAP source as it doesn't allow you to poll user passwords, and #2 doesn't really gain us anything in this scenario, so in this guide we'll use method #3 which requires minimal configuration and no admin/service-account is needed in the AD.
 
 Edit `/etc/raddb/modules-available/ldap`:
 
@@ -50,6 +48,10 @@ home_server test {
         port            = 1812
         secret          = testing123
         type            = auth
+
+        # By explicitly setting our SourceIP we can define multiple different 
+        # Proxy Realms and proxy with different SourceIPs to differentiate between
+        # multiple different customers:
         src_ipaddr      = 10.0.0.10
 }
 
@@ -62,9 +64,9 @@ realm proxy-test {
 }
 </pre>
 
-### Authentication / Authorization
+### Virtual Server configuration
 
-Create a new site-file in `/etc/raddb/sites-available` or edit the `default` site:
+Create a new Virtual Server site configuration file in `/etc/raddb/sites-available` or edit the `default` site:
 
 <pre>
 authorize {
@@ -133,13 +135,13 @@ As we only support PAP authentication, if check for the existence of the <b>User
                                 Ldap-UserDN := "%{User-Name}@my-domain.com"
 </pre>
 
-To force a direct LDAP bind using the authenticating user we explicitly set the <b>Ldap-UserDN</b> attribute. For Active Directory LDAP the syntax username@my-domain.com is usually working.
+To force a direct LDAP bind using the authenticating users credentials we explicitly set the <b>Ldap-UserDN</b> attribute. For Active Directory LDAP the syntax username@my-domain.com is usually working.
 
 <pre>
                                 Auth-Type := LDAP
 </pre>
 
-Force authentication to be done using LDAP Auth-Type.
+Force authentication to be done using Auth-Type LDAP.
 
 <pre>
         else {
