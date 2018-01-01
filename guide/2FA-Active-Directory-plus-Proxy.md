@@ -90,15 +90,17 @@ authorize {
 
 authenticate {
         Auth-Type LDAP {
+                # Attempt authentication with a direct LDAP bind:
                 ldap
                 if (ok) {
+                        # Create a random <b>State</b> attribute:
                         update session-state {
                                 State := "%{randstr:aaaaaaaaaaaaaaaa}"
                         }
                         update reply {
                                 Reply-Message := "Please enter OTP"
-                                Fortinet-FAC-Challenge-Code := "101010"
                         }
+                        # Return Access-Challenge:
                         challenge
                 }
         }
@@ -110,3 +112,70 @@ pre-proxy {
 }
 
 </pre>
+
+So, what is actually happening here? Lets break it down:
+
+<pre>
+        if (!State) {
+</pre>
+
+First we check if this is the first Access-Request packet we receive by checking for the existence of a <b>State</b> attribute. If it's absent that means this is the initial request.
+
+<pre>
+                if (&User-Password) {
+</pre>
+
+As we only support PAP authentication, if check for the existence of the <b>User-Password</b> attribute. If it's available we proceed:
+
+<pre>
+                                Ldap-UserDN := "%{User-Name}@my-domain.com"
+</pre>
+
+To force a direct LDAP bind using the authenticating user we explicitly set the <b>Ldap-UserDN</b> attribute. For Active Directory LDAP the syntax username@my-domain.com is usually working.
+
+<pre>
+                                Auth-Type := LDAP
+</pre>
+
+Force authentication to be done using LDAP Auth-Type.
+
+<pre>
+        else {
+                # If State, then proxy request:
+                update control {
+                        Proxy-To-Realm := "proxy-test"
+                }
+</pre>
+
+We did have a <b>State</b> attribute available meaning this is the second Access-Request we receive, so lets proxy it to our external OTP service provider by manually specifying the Realm we want to proxy it to.
+
+<pre>
+authenticate {
+        Auth-Type LDAP {
+                # Attempt authentication with a direct LDAP bind:
+                ldap
+                if (ok) {
+                        # Create a random <b>State</b> attribute:
+                        update session-state {
+                                State := "%{randstr:aaaaaaaaaaaaaaaa}"
+                        }
+                        update reply {
+                                Reply-Message := "Please enter OTP"
+                        }
+                        # Return Access-Challenge:
+                        challenge
+                }
+        }
+}
+</pre>
+
+In the <b>authenticate</b> section we send the request off to the <b>ldap</b> module for authentication by testing a direct bind using the credentials we received in the request. If it succeeds we create a new random <b>State</b> attribute and tell FreeRADIUS to return an <b>Access-Challenge</b> message to the client.
+
+<pre>
+pre-proxy {
+        # Enable pre-proxy to filter State attribute from proxied requests:
+        attr_filter.pre-proxy
+}
+</pre>
+
+As our external OTP service provider only sees the second Access-Request message we need to filter out the <b>State</b> attribute from the proxied requests. We accomplish this by enabling `attr_filter.pre-proxy`.
