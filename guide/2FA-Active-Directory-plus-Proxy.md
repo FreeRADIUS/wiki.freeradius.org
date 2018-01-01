@@ -175,6 +175,10 @@ authenticate {
 
 In the <b>authenticate</b> section we send the request off to the <b>ldap</b> module for authentication by testing a direct bind using the credentials we received in the request. If it succeeds we create a new random <b>State</b> attribute and tell FreeRADIUS to return an <b>Access-Challenge</b> message to the client.
 
+### Pre-Proxy Attributes filter
+
+As our external OTP service provider only sees the second Access-Request message we need to filter out the <b>State</b> attribute from the proxied requests. We accomplish this by enabling `attr_filter.pre-proxy` in the <b>pre-proxy</b> section:
+
 <pre>
 pre-proxy {
         # Enable pre-proxy to filter State attribute from proxied requests:
@@ -182,4 +186,23 @@ pre-proxy {
 }
 </pre>
 
-As our external OTP service provider only sees the second Access-Request message we need to filter out the <b>State</b> attribute from the proxied requests. We accomplish this by enabling `attr_filter.pre-proxy`.
+And comment out <b>State</b> in `/etc/raddb/mods-config/attr_filter`:
+
+<pre>
+DEFAULT
+        User-Name =* ANY,
+        User-Password =* ANY,
+        CHAP-Password =* ANY,
+        CHAP-Challenge =* ANY,
+        MS-CHAP-Challenge =* ANY,
+        MS-CHAP-Response =* ANY,
+        EAP-Message =* ANY,
+        Message-Authenticator =* ANY,
+        <b>#State =* ANY,</b>
+        NAS-IP-Address =* ANY,
+        NAS-Identifier =* ANY,
+        Operator-Name =* ANY,
+        Calling-Station-Id =* ANY,
+        Chargeable-User-Identity =* ANY,
+        Proxy-State =* ANY
+</pre>
