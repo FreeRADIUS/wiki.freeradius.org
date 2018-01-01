@@ -32,6 +32,13 @@ Authenticating using LDAP can take a few different approaches:
 
 Method #1 doesn't work with Active Directory as the LDAP source as it doesn't allow you to poll user passwords, and #2 doesn't really gain us anything in this scenario, so in this guide we'll use method #3 which requires a minimal configuration and no admin/service-account is needed in the AD.
 
+Edit `/etc/raddb/modules-available/ldap`:
+
+```text
+ldap {
+        server = '**<IP of Domain Controller>**'
+}
+```
 
 
 ### Authentication / Authorization
