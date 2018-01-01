@@ -4,9 +4,29 @@ This document describes how to set up FreeRADIUS to authenticate users in two st
 
 This guide was tested and verified using Gemalto Safenet Authentication Services (SAS) as the OTP service. However Gemalto SAS currently don't support pre-authenticating users AD-password before OTP, which is why I added FreeRADIUS server in front of the SAS service to add AD-auth.
 
+## Prerequisites
 
-## Authentication
+Install FreeRADIUS on your favourite Linux distribution. In this example we used CentOS 7, and FreeRADIUS v3.0.13 that is available in the CentOS repos:
 
+```text
+yum install -y freeradius freeradius-ldap freeradius-utils
+```
+
+## FreeRADIUS Configuration
+
+### LDAP Module
+
+In this guide we'll use the LDAP module to perform AD authentication. Authenticating using LDAP can use a few different approaches:
+
+1. Bind with an admin-user, perform a search for auth-user and return the Cleartext-Password. Verfify with PAP module.
+2. Bind with an admin-user, perform a search for auth-user and then attempt to re-bind as authenticating user.
+3. Attempt a direct bind as the authenticating user.
+
+#1 doesn't work with Active Directory as the LDAP source as it doesn't allow you to poll user passwords, and #2 doesn't really gain us anything in this scenario, so in this guide we'll use method #3 which requires a minimal configuration and no admin/service-account is needed in the AD.
+
+
+
+### Authentication / Authorization
 ```text 
 authorize {
         if (!State) {
