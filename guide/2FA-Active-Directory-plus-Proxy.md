@@ -113,6 +113,8 @@ pre-proxy {
 
 </pre>
 
+#### Configuration break-down
+
 So, what is actually happening here? Lets break it down:
 
 <pre>
@@ -155,7 +157,7 @@ authenticate {
                 # Attempt authentication with a direct LDAP bind:
                 ldap
                 if (ok) {
-                        # Create a random <b>State</b> attribute:
+                        # Create a random State attribute:
                         update session-state {
                                 State := "%{randstr:aaaaaaaaaaaaaaaa}"
                         }
