@@ -1,8 +1,8 @@
-# 2FA AD and Proxy
+# 2FA - AD password and External OTP via RADIUS proxy
 
-## Introduction
+This document describes how to set up FreeRADIUS to authenticate users in two steps. First the username and password is authenticated against their password in Active Directory. If successful, an Access-Challenge message is returned to the client requesting it to provide an OTP code. The second request from the client containing the OTP is then proxied by FreeRADIUS to an external RADIUS OTP service for verification.
 
-This document describes how to set up FreeRADIUS server in order to facilitate 2FA where the initial request is authenticated against Active Directory and then proxied to an external RADIUS server for the second step.
+This guide was tested and verified using Gemalto Safenet Authentication Services (SAS) as the OTP service. However Gemalto SAS currently don't support true 2FA, where the users
 
 
 ## Authentication
