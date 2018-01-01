@@ -177,7 +177,7 @@ In the <b>authenticate</b> section we send the request off to the <b>ldap</b> mo
 
 ### Pre-Proxy Attributes filter
 
-As our external OTP service provider only sees the second Access-Request message we need to filter out the <b>State</b> attribute from the proxied requests. We accomplish this by enabling `attr_filter.pre-proxy` in the <b>pre-proxy</b> section:
+As our external OTP service provider only sees the second Access-Request message and is unaware that we've created a State, we need to filter out the <b>State</b> attribute from the proxied requests. We accomplish this by enabling `attr_filter.pre-proxy` in the <b>pre-proxy</b> section:
 
 <pre>
 pre-proxy {
