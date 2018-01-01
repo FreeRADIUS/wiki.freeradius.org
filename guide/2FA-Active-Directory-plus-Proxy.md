@@ -22,7 +22,7 @@ In this guide we'll use the LDAP module to perform AD authentication. Authentica
 2. Bind with an admin-user, perform a search for auth-user and then attempt to re-bind as authenticating user.
 3. Attempt a direct bind as the authenticating user.
 
-#1 doesn't work with Active Directory as the LDAP source as it doesn't allow you to poll user passwords, and #2 doesn't really gain us anything in this scenario, so in this guide we'll use method #3 which requires a minimal configuration and no admin/service-account is needed in the AD.
+Method #1 doesn't work with Active Directory as the LDAP source as it doesn't allow you to poll user passwords, and #2 doesn't really gain us anything in this scenario, so in this guide we'll use method #3 which requires a minimal configuration and no admin/service-account is needed in the AD.
 
 
 
