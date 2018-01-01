@@ -10,9 +10,9 @@ This guide was tested and verified using Gemalto Safenet Authentication Services
 
 Install FreeRADIUS on your favourite Linux distribution. In this guide we have used CentOS 7, and FreeRADIUS v3.0.13 that is available in the CentOS repos:
 
-```text
+<pre>
 yum install -y freeradius freeradius-ldap freeradius-utils
-```
+</pre>
 
 ## FreeRADIUS Configuration
 
@@ -34,42 +34,79 @@ Method #1 doesn't work with Active Directory as the LDAP source as it doesn't al
 
 Edit `/etc/raddb/modules-available/ldap`:
 
-```text
+<pre>
 ldap {
-        server = '**<IP of Domain Controller>**'
+        server = '<b>IP of Domain Controller</b>'
 }
-```
+</pre>
 
+### Proxy Realm
+
+Edit `/etc/raddb/proxy.conf` and configure a <b>home_server</b>, <b>home_server_pool</b> and <b>realm</b>:
+
+<pre>
+home_server test {
+        ipaddr          = 10.0.0.100
+        port            = 1812
+        secret          = testing123
+        type            = auth
+        src_ipaddr      = 10.0.0.10
+}
+
+home_server_pool test_pool {
+        home_server     = test
+}
+
+realm proxy-test {
+        auth_pool       = test_pool
+}
+</pre>
 
 ### Authentication / Authorization
-```text 
+
+Create a new site-file in `/etc/raddb/sites-available` or edit the `default` site:
+
+<pre>
 authorize {
         if (!State) {
-                update control {
-                        Ldap-UserDN := "%{User-Name}@mydomain.com"
-                        Auth-Type := LDAP
+                if (&User-Password) {
+                        # If !State and User-Password (PAP), then force LDAP:
+                        update control {
+                                Ldap-UserDN := "%{User-Name}@my-domain.com"
+                                Auth-Type := LDAP
+                        }
+                }
+                else {
+                        reject
                 }
         }
         else {
+                # If State, then proxy request:
                 update control {
-                        Proxy-To-Realm := "test"
+                        Proxy-To-Realm := "proxy-test"
                 }
         }
 }
 
 authenticate {
         Auth-Type LDAP {
-                ldap-test
+                ldap
                 if (ok) {
                         update session-state {
                                 State := "%{randstr:aaaaaaaaaaaaaaaa}"
                         }
                         update reply {
                                 Reply-Message := "Please enter OTP"
+                                Fortinet-FAC-Challenge-Code := "101010"
                         }
                         challenge
                 }
         }
 }
 
-```
+pre-proxy {
+        # Enable pre-proxy to filter State attribute from proxied requests:
+        attr_filter.pre-proxy
+}
+
+</pre>
