@@ -21,7 +21,7 @@ Integrating with Active Directory
 * [[PAP or MSCHAP authentication with FreeRADIUS and ntlm_auth|http://deployingradius.com/documents/configuration/active_directory.html]]
 * [[FreeRADIUS Active Directory Integration|guide/FreeRADIUS Active Directory Integration HOWTO]] with example for wired 802.1X
 * [[FreeRADIUS 3 MSCHAP authentication to AD without using ntlm_auth|Active-Directory-direct-via-winbind]]
-
+* [[2FA - AD password and external OTP via RADIUS proxy|2FA-Active-Directory-plus-Proxy]]
 
 Device configuration examples
 -----------------------------
