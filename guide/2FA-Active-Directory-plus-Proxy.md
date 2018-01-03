@@ -95,11 +95,9 @@ authenticate {
                 # Attempt authentication with a direct LDAP bind:
                 ldap
                 if (ok) {
-                        # Create a random <b>State</b> attribute:
-                        update session-state {
-                                State := "%{randstr:aaaaaaaaaaaaaaaa}"
-                        }
                         update reply {
+                                # Create a random <b>State</b> attribute:
+                                State := "%{randstr:aaaaaaaaaaaaaaaa}"
                                 Reply-Message := "Please enter OTP"
                         }
                         # Return Access-Challenge:
@@ -159,11 +157,9 @@ authenticate {
                 # Attempt authentication with a direct LDAP bind:
                 ldap
                 if (ok) {
-                        # Create a random State attribute:
-                        update session-state {
-                                State := "%{randstr:aaaaaaaaaaaaaaaa}"
-                        }
                         update reply {
+                                # Create a random State attribute:
+                                State := "%{randstr:aaaaaaaaaaaaaaaa}"
                                 Reply-Message := "Please enter OTP"
                         }
                         # Return Access-Challenge:
