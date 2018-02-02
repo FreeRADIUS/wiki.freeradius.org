@@ -13,11 +13,23 @@ It's really hard to try and help when vague questions are asked
 and no debug output is included, and you are likely to be told
 this.
 
+Your post should include the following information:
+
+* What you are trying to do
+* why you are trying to do it
+* what you expect the server to do
+* what the server does instead (i.e. debug output).
+
+When you give this information, it means that we can help you quickly and efficiently.  When you don't give this information, the usual response to your post will be a request for this information.  You can get answers more quickly by starting off with good questions.
 
 ## Full server debug output
 
 This is really important. The server produces comprehensive
-information on what it is doing, for a reason. The **whole** debug
+information on what it is doing, for a reason.  In 99% of the situations, the debug output contains the information needed to solve the problem.
+
+We understand that the debug output is complex and full of what seems like magical text.  You don't need to understand all of it.  But the people on the mailing list *do* understand it, and can use it to help you.
+
+When you post the debug output, the **whole** debug
 output needs to be included.
 
 **Run `radiusd -X` only** (`freeradius -X` on Debian based
@@ -33,11 +45,14 @@ you think are useful.
 any packets have been received, nobody can tell what happens to
 the packets.
 
+Don't post the debug output where the last line is **Ready to process requests.**  This means that the server hasn't received any packets.  If you post that, the only thing that will happen is that people will ask you to post the debug output, **again**, but this time where it receives packets.
+
 **Include the right packet**, in other words, include the one with
 the problem. If you've got some authentication that works, and
 another that doesn't, then include an authentication attempt for
 both.
 
+**Don't include unimportant packets**  If you have a problem with Access-Request packets, don't post a debug output which contains Accounting-Request packets, or packets for users who authenticate successfully.
 
 ## Getting debug output
 
