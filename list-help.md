@@ -70,8 +70,11 @@ then perform an authentication. Once this has taken place, press
 `debugfile` file in your e-mail, in its entirety. The list is used
 to long debug outputs, don't worry about it being too big.
 
+**Please** post the debug output in-line in the email.  **Do not** add it as an attachment.  The more steps people have to take to read your message, the less likely it is that they will help you.
 
-A good debug output will look something like the following:
+**Please** do not post PNG screen captures of a terminal window showing the debug output.
+
+A good debug output will look something like the following, which is explained [here](radiusd-X)
 
     $ /opt/fr30x/sbin/radiusd -X 2>&1 | tee debugfile
     FreeRADIUS Version 3.0.17
