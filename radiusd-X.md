@@ -2,6 +2,14 @@ This page explains how to read the output of `radiusd -X`.  The example debug ou
 
 The first part of the debug output is the *startup* text.  Once the server is started, it prints `Ready to receive requests`.  The next part of the debug output is the *packet processing* text.
 
+### If it doesn't start
+
+If the server does not start up correctly, **the debug output will tell you why**.  It will produce long descriptive error messages, telling you exactly what's wrong.  In some cases, it will tell you how to fix it.
+
+Look for messages like **Error** or **Warning**.  If you are running the server in a terminal console, those messages will appear in red or yellow.  It should be simple to scroll through the output, ignoring most of it, and looking for red **Error** text.
+
+Fixing those errors will usually allow the server to start correctly.
+
 ## Startup text
 
 We start the server with `-X`.  This option gives us the best combination of useful output, and readable output.  Adding more `-x` gives *more complex output*,  not *more useful output*.
