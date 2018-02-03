@@ -6,7 +6,7 @@ The first part of the debug output is the *startup* text.  Once the server is st
 
 We start the server with `-X`.  This option gives us the best combination of useful output, and readable output.  Adding more `-x` gives *more complex output*,  not *more useful output*.
 
-    $ /opt/fr30x/sbin/radiusd -X 2>&1 | tee debugfile
+    $ radiusd -X 2>&1 | tee debugfile
 
 The server prints out the version number, copyright, and license information:
 
@@ -267,13 +267,36 @@ Each module will print out it's configuration, along with any errors or warnings
 
     radiusd: #### Instantiating modules ####
      modules {
+
+Here is loads the `pap` module.  There are multiple lines being printed at each stage of the process.
+
+First, it discovers it has to load the `pap` module, and decides to do that.
+
       # Loaded module rlm_pap
+
+Second, it tells you which files is used to read the `pap` module configuration.
+
       # Loading module "pap" from file /opt/fr30x/etc/raddb/mods-enabled/pap
+
+Finally, it prints out the configuration that is used by the `pap` module.
+
+When you are editing a module configuration, it is good to check the debug output for that module, to see:
+
+* was the module loaded?
+* is it using the file you edited?
+* are the configuration changes you made showing up in the debug output?
+
       pap {
       	normalise = yes
       }
+
+Some modules like `expiration` do not have any configuration items, and therefore don't print out any configuration when they are loaded.
+
       # Loaded module rlm_expiration
       # Loading module "expiration" from file /opt/fr30x/etc/raddb/mods-enabled/expiration
+
+This module loads the `users` file.
+
       # Loaded module rlm_files
       # Loading module "files" from file /opt/fr30x/etc/raddb/mods-enabled/files
       files {
@@ -281,456 +304,34 @@ Each module will print out it's configuration, along with any errors or warnings
       	acctusersfile = "/opt/fr30x/etc/raddb/mods-config/files/accounting"
       	preproxy_usersfile = "/opt/fr30x/etc/raddb/mods-config/files/pre-proxy"
       }
-      # Loaded module rlm_linelog
-      # Loading module "linelog" from file /opt/fr30x/etc/raddb/mods-enabled/linelog
-      linelog {
-      	filename = "/opt/fr30x/var/log/radius/linelog"
-      	escape_filenames = no
-      	syslog_severity = "info"
-      	permissions = 384
-      	format = "This is a log message for %{User-Name}"
-      	reference = "messages.%{%{reply:Packet-Type}:-default}"
-      }
-      # Loading module "log_accounting" from file /opt/fr30x/etc/raddb/mods-enabled/linelog
-      linelog log_accounting {
-      	filename = "/opt/fr30x/var/log/radius/linelog-accounting"
-      	escape_filenames = no
-      	syslog_severity = "info"
-      	permissions = 384
-      	format = ""
-      	reference = "Accounting-Request.%{%{Acct-Status-Type}:-unknown}"
-      }
-      # Loaded module rlm_soh
-      # Loading module "soh" from file /opt/fr30x/etc/raddb/mods-enabled/soh
-      soh {
-      	dhcp = yes
-      }
-      # Loaded module rlm_attr_filter
-      # Loading module "attr_filter.post-proxy" from file /opt/fr30x/etc/raddb/mods-enabled/attr_filter
-      attr_filter attr_filter.post-proxy {
-      	filename = "/opt/fr30x/etc/raddb/mods-config/attr_filter/post-proxy"
-      	key = "%{Realm}"
-      	relaxed = no
-      }
-      # Loading module "attr_filter.pre-proxy" from file /opt/fr30x/etc/raddb/mods-enabled/attr_filter
-      attr_filter attr_filter.pre-proxy {
-      	filename = "/opt/fr30x/etc/raddb/mods-config/attr_filter/pre-proxy"
-      	key = "%{Realm}"
-      	relaxed = no
-      }
-      # Loading module "attr_filter.access_reject" from file /opt/fr30x/etc/raddb/mods-enabled/attr_filter
-      attr_filter attr_filter.access_reject {
-      	filename = "/opt/fr30x/etc/raddb/mods-config/attr_filter/access_reject"
-      	key = "%{User-Name}"
-      	relaxed = no
-      }
-      # Loading module "attr_filter.access_challenge" from file /opt/fr30x/etc/raddb/mods-enabled/attr_filter
-      attr_filter attr_filter.access_challenge {
-      	filename = "/opt/fr30x/etc/raddb/mods-config/attr_filter/access_challenge"
-      	key = "%{User-Name}"
-      	relaxed = no
-      }
-      # Loading module "attr_filter.accounting_response" from file /opt/fr30x/etc/raddb/mods-enabled/attr_filter
-      attr_filter attr_filter.accounting_response {
-      	filename = "/opt/fr30x/etc/raddb/mods-config/attr_filter/accounting_response"
-      	key = "%{User-Name}"
-      	relaxed = no
-      }
-      # Loaded module rlm_exec
-      # Loading module "ntlm_auth" from file /opt/fr30x/etc/raddb/mods-enabled/ntlm_auth
-      exec ntlm_auth {
-      	wait = yes
-      	program = "/path/to/ntlm_auth --request-nt-key --domain=MYDOMAIN --username=%{mschap:User-Name} --password=%{User-Password}"
-      	shell_escape = yes
-      }
-      # Loading module "exec" from file /opt/fr30x/etc/raddb/mods-enabled/exec
-      exec {
-      	wait = no
-      	input_pairs = "request"
-      	shell_escape = yes
-      	timeout = 10
-      }
-      # Loaded module rlm_preprocess
-      # Loading module "preprocess" from file /opt/fr30x/etc/raddb/mods-enabled/preprocess
-      preprocess {
-      	huntgroups = "/opt/fr30x/etc/raddb/mods-config/preprocess/huntgroups"
-      	hints = "/opt/fr30x/etc/raddb/mods-config/preprocess/hints"
-      	with_ascend_hack = no
-      	ascend_channels_per_line = 23
-      	with_ntdomain_hack = no
-      	with_specialix_jetstream_hack = no
-      	with_cisco_vsa_hack = no
-      	with_alvarion_vsa_hack = no
-      }
-      # Loaded module rlm_radutmp
-      # Loading module "sradutmp" from file /opt/fr30x/etc/raddb/mods-enabled/sradutmp
-      radutmp sradutmp {
-      	filename = "/opt/fr30x/var/log/radius/sradutmp"
-      	username = "%{User-Name}"
-      	case_sensitive = yes
-      	check_with_nas = yes
-      	permissions = 420
-      	caller_id = no
-      }
-      # Loaded module rlm_chap
-      # Loading module "chap" from file /opt/fr30x/etc/raddb/mods-enabled/chap
-      # Loaded module rlm_digest
-      # Loading module "digest" from file /opt/fr30x/etc/raddb/mods-enabled/digest
-      # Loaded module rlm_expr
-      # Loading module "expr" from file /opt/fr30x/etc/raddb/mods-enabled/expr
-      expr {
-      	safe_characters = "@abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.-_: /äéöüàâæçèéêëîïôœùûüaÿÄÉÖÜßÀÂÆÇÈÉÊËÎÏÔŒÙÛÜŸ"
-      }
-      # Loading module "echo" from file /opt/fr30x/etc/raddb/mods-enabled/echo
-      exec echo {
-      	wait = yes
-      	program = "/bin/echo %{User-Name}"
-      	input_pairs = "request"
-      	output_pairs = "reply"
-      	shell_escape = yes
-      }
-      # Loaded module rlm_unpack
-      # Loading module "unpack" from file /opt/fr30x/etc/raddb/mods-enabled/unpack
-      # Loaded module rlm_detail
-      # Loading module "detail" from file /opt/fr30x/etc/raddb/mods-enabled/detail
-      detail {
-      	filename = "/opt/fr30x/var/log/radius/radacct/%{%{Packet-Src-IP-Address}:-%{Packet-Src-IPv6-Address}}/detail-%Y%m%d"
-      	header = "%t"
-      	permissions = 384
-      	locking = no
-      	escape_filenames = no
-      	log_packet_header = no
-      }
-      # Loaded module rlm_always
-      # Loading module "reject" from file /opt/fr30x/etc/raddb/mods-enabled/always
-      always reject {
-      	rcode = "reject"
-      	simulcount = 0
-      	mpp = no
-      }
-      # Loading module "fail" from file /opt/fr30x/etc/raddb/mods-enabled/always
-      always fail {
-      	rcode = "fail"
-      	simulcount = 0
-      	mpp = no
-      }
-      # Loading module "ok" from file /opt/fr30x/etc/raddb/mods-enabled/always
-      always ok {
-      	rcode = "ok"
-      	simulcount = 0
-      	mpp = no
-      }
-      # Loading module "handled" from file /opt/fr30x/etc/raddb/mods-enabled/always
-      always handled {
-      	rcode = "handled"
-      	simulcount = 0
-      	mpp = no
-      }
-      # Loading module "invalid" from file /opt/fr30x/etc/raddb/mods-enabled/always
-      always invalid {
-      	rcode = "invalid"
-      	simulcount = 0
-      	mpp = no
-      }
-      # Loading module "userlock" from file /opt/fr30x/etc/raddb/mods-enabled/always
-      always userlock {
-      	rcode = "userlock"
-      	simulcount = 0
-      	mpp = no
-      }
-      # Loading module "notfound" from file /opt/fr30x/etc/raddb/mods-enabled/always
-      always notfound {
-      	rcode = "notfound"
-      	simulcount = 0
-      	mpp = no
-      }
-      # Loading module "noop" from file /opt/fr30x/etc/raddb/mods-enabled/always
-      always noop {
-      	rcode = "noop"
-      	simulcount = 0
-      	mpp = no
-      }
-      # Loading module "updated" from file /opt/fr30x/etc/raddb/mods-enabled/always
-      always updated {
-      	rcode = "updated"
-      	simulcount = 0
-      	mpp = no
-      }
-      # Loaded module rlm_eap
-      # Loading module "eap" from file /opt/fr30x/etc/raddb/mods-enabled/eap
-      eap {
-      	default_eap_type = "md5"
-      	timer_expire = 60
-      	ignore_unknown_eap_types = no
-      	cisco_accounting_username_bug = no
-      	max_sessions = 16384
-      }
-      # Loaded module rlm_mschap
-      # Loading module "mschap" from file /opt/fr30x/etc/raddb/mods-enabled/mschap
-      mschap {
-      	use_mppe = yes
-      	require_encryption = no
-      	require_strong = no
-      	with_ntdomain_hack = yes
-       passchange {
-       }
-      	allow_retry = yes
-      	winbind_retry_with_normalised_username = no
-      }
-      # Loaded module rlm_unix
-      # Loading module "unix" from file /opt/fr30x/etc/raddb/mods-enabled/unix
-      unix {
-      	radwtmp = "/opt/fr30x/var/log/radius/radwtmp"
-      }
-    Creating attribute Unix-Group
-      # Loading module "auth_log" from file /opt/fr30x/etc/raddb/mods-enabled/detail.log
-      detail auth_log {
-      	filename = "/opt/fr30x/var/log/radius/radacct/%{%{Packet-Src-IP-Address}:-%{Packet-Src-IPv6-Address}}/auth-detail-%Y%m%d"
-      	header = "%t"
-      	permissions = 384
-      	locking = no
-      	escape_filenames = no
-      	log_packet_header = no
-      }
-      # Loading module "reply_log" from file /opt/fr30x/etc/raddb/mods-enabled/detail.log
-      detail reply_log {
-      	filename = "/opt/fr30x/var/log/radius/radacct/%{%{Packet-Src-IP-Address}:-%{Packet-Src-IPv6-Address}}/reply-detail-%Y%m%d"
-      	header = "%t"
-      	permissions = 384
-      	locking = no
-      	escape_filenames = no
-      	log_packet_header = no
-      }
-      # Loading module "pre_proxy_log" from file /opt/fr30x/etc/raddb/mods-enabled/detail.log
-      detail pre_proxy_log {
-      	filename = "/opt/fr30x/var/log/radius/radacct/%{%{Packet-Src-IP-Address}:-%{Packet-Src-IPv6-Address}}/pre-proxy-detail-%Y%m%d"
-      	header = "%t"
-      	permissions = 384
-      	locking = no
-      	escape_filenames = no
-      	log_packet_header = no
-      }
-      # Loading module "post_proxy_log" from file /opt/fr30x/etc/raddb/mods-enabled/detail.log
-      detail post_proxy_log {
-      	filename = "/opt/fr30x/var/log/radius/radacct/%{%{Packet-Src-IP-Address}:-%{Packet-Src-IPv6-Address}}/post-proxy-detail-%Y%m%d"
-      	header = "%t"
-      	permissions = 384
-      	locking = no
-      	escape_filenames = no
-      	log_packet_header = no
-      }
-      # Loaded module rlm_passwd
-      # Loading module "etc_passwd" from file /opt/fr30x/etc/raddb/mods-enabled/passwd
-      passwd etc_passwd {
-      	filename = "/etc/passwd"
-      	format = "*User-Name:Crypt-Password:"
-      	delimiter = ":"
-      	ignore_nislike = no
-      	ignore_empty = yes
-      	allow_multiple_keys = no
-      	hash_size = 100
-      }
-      # Loaded module rlm_date
-      # Loading module "date" from file /opt/fr30x/etc/raddb/mods-enabled/date
-      date {
-      	format = "%b %e %Y %H:%M:%S %Z"
-      	utc = no
-      }
-      # Loaded module rlm_logintime
-      # Loading module "logintime" from file /opt/fr30x/etc/raddb/mods-enabled/logintime
-      logintime {
-      	minimum_timeout = 60
-      }
-      # Loaded module rlm_utf8
-      # Loading module "utf8" from file /opt/fr30x/etc/raddb/mods-enabled/utf8
-      # Loaded module rlm_dynamic_clients
-      # Loading module "dynamic_clients" from file /opt/fr30x/etc/raddb/mods-enabled/dynamic_clients
-      # Loading module "radutmp" from file /opt/fr30x/etc/raddb/mods-enabled/radutmp
-      radutmp {
-      	filename = "/opt/fr30x/var/log/radius/radutmp"
-      	username = "%{User-Name}"
-      	case_sensitive = yes
-      	check_with_nas = yes
-      	permissions = 384
-      	caller_id = yes
-      }
-      # Loaded module rlm_realm
-      # Loading module "IPASS" from file /opt/fr30x/etc/raddb/mods-enabled/realm
-      realm IPASS {
-      	format = "prefix"
-      	delimiter = "/"
-      	ignore_default = no
-      	ignore_null = no
-      }
-      # Loading module "suffix" from file /opt/fr30x/etc/raddb/mods-enabled/realm
-      realm suffix {
-      	format = "suffix"
-      	delimiter = "@"
-      	ignore_default = no
-      	ignore_null = no
-      }
-      # Loading module "realmpercent" from file /opt/fr30x/etc/raddb/mods-enabled/realm
-      realm realmpercent {
-      	format = "suffix"
-      	delimiter = "%"
-      	ignore_default = no
-      	ignore_null = no
-      }
-      # Loading module "ntdomain" from file /opt/fr30x/etc/raddb/mods-enabled/realm
-      realm ntdomain {
-      	format = "prefix"
-      	delimiter = "\\"
-      	ignore_default = no
-      	ignore_null = no
-      }
-      # Loaded module rlm_cache
-      # Loading module "cache_eap" from file /opt/fr30x/etc/raddb/mods-enabled/cache_eap
-      cache cache_eap {
-      	driver = "rlm_cache_rbtree"
-      	key = "%{%{control:State}:-%{%{reply:State}:-%{State}}}"
-      	ttl = 15
-      	max_entries = 0
-      	epoch = 0
-      	add_stats = no
-      }
-      # Loaded module rlm_replicate
-      # Loading module "replicate" from file /opt/fr30x/etc/raddb/mods-enabled/replicate
-      instantiate {
-      }
-      # Instantiating module "pap" from file /opt/fr30x/etc/raddb/mods-enabled/pap
-      # Instantiating module "expiration" from file /opt/fr30x/etc/raddb/mods-enabled/expiration
-      # Instantiating module "files" from file /opt/fr30x/etc/raddb/mods-enabled/files
-    reading pairlist file /opt/fr30x/etc/raddb/mods-config/files/authorize
-    reading pairlist file /opt/fr30x/etc/raddb/mods-config/files/accounting
-    reading pairlist file /opt/fr30x/etc/raddb/mods-config/files/pre-proxy
-      # Instantiating module "linelog" from file /opt/fr30x/etc/raddb/mods-enabled/linelog
-      # Instantiating module "log_accounting" from file /opt/fr30x/etc/raddb/mods-enabled/linelog
-      # Instantiating module "attr_filter.post-proxy" from file /opt/fr30x/etc/raddb/mods-enabled/attr_filter
-    reading pairlist file /opt/fr30x/etc/raddb/mods-config/attr_filter/post-proxy
-      # Instantiating module "attr_filter.pre-proxy" from file /opt/fr30x/etc/raddb/mods-enabled/attr_filter
-    reading pairlist file /opt/fr30x/etc/raddb/mods-config/attr_filter/pre-proxy
-      # Instantiating module "attr_filter.access_reject" from file /opt/fr30x/etc/raddb/mods-enabled/attr_filter
-    reading pairlist file /opt/fr30x/etc/raddb/mods-config/attr_filter/access_reject
-    [/opt/fr30x/etc/raddb/mods-config/attr_filter/access_reject]:11 Check item "FreeRADIUS-Response-Delay" 	found in filter list for realm "DEFAULT". 
-    [/opt/fr30x/etc/raddb/mods-config/attr_filter/access_reject]:11 Check item "FreeRADIUS-Response-Delay-USec" 	found in filter list for realm "DEFAULT". 
-      # Instantiating module "attr_filter.access_challenge" from file /opt/fr30x/etc/raddb/mods-enabled/attr_filter
-    reading pairlist file /opt/fr30x/etc/raddb/mods-config/attr_filter/access_challenge
-      # Instantiating module "attr_filter.accounting_response" from file /opt/fr30x/etc/raddb/mods-enabled/attr_filter
-    reading pairlist file /opt/fr30x/etc/raddb/mods-config/attr_filter/accounting_response
-      # Instantiating module "preprocess" from file /opt/fr30x/etc/raddb/mods-enabled/preprocess
-    reading pairlist file /opt/fr30x/etc/raddb/mods-config/preprocess/huntgroups
-    reading pairlist file /opt/fr30x/etc/raddb/mods-config/preprocess/hints
-      # Instantiating module "detail" from file /opt/fr30x/etc/raddb/mods-enabled/detail
-      # Instantiating module "reject" from file /opt/fr30x/etc/raddb/mods-enabled/always
-      # Instantiating module "fail" from file /opt/fr30x/etc/raddb/mods-enabled/always
-      # Instantiating module "ok" from file /opt/fr30x/etc/raddb/mods-enabled/always
-      # Instantiating module "handled" from file /opt/fr30x/etc/raddb/mods-enabled/always
-      # Instantiating module "invalid" from file /opt/fr30x/etc/raddb/mods-enabled/always
-      # Instantiating module "userlock" from file /opt/fr30x/etc/raddb/mods-enabled/always
-      # Instantiating module "notfound" from file /opt/fr30x/etc/raddb/mods-enabled/always
-      # Instantiating module "noop" from file /opt/fr30x/etc/raddb/mods-enabled/always
-      # Instantiating module "updated" from file /opt/fr30x/etc/raddb/mods-enabled/always
-      # Instantiating module "eap" from file /opt/fr30x/etc/raddb/mods-enabled/eap
-       # Linked to sub-module rlm_eap_md5
-       # Linked to sub-module rlm_eap_leap
-       # Linked to sub-module rlm_eap_gtc
-       gtc {
-       	challenge = "Password: "
-       	auth_type = "PAP"
-       }
-       # Linked to sub-module rlm_eap_tls
-       tls {
-       	tls = "tls-common"
-       }
-       tls-config tls-common {
-       	verify_depth = 0
-       	ca_path = "/opt/fr30x/etc/raddb/certs"
-       	pem_file_type = yes
-       	private_key_file = "/opt/fr30x/etc/raddb/certs/server.pem"
-       	certificate_file = "/opt/fr30x/etc/raddb/certs/server.pem"
-       	ca_file = "/opt/fr30x/etc/raddb/certs/ca.pem"
-       	private_key_password = <<< secret >>>
-       	dh_file = "/opt/fr30x/etc/raddb/certs/dh"
-       	fragment_size = 1024
-       	include_length = yes
-       	auto_chain = yes
-       	check_crl = no
-       	check_all_crl = no
-       	cipher_list = "DEFAULT"
-       	cipher_server_preference = no
-       	ecdh_curve = "prime256v1"
-       	tls_max_version = ""
-       	tls_min_version = "1.0"
-        cache {
-        	enable = no
-        	lifetime = 24
-        	max_entries = 255
-        }
-        verify {
-        	skip_if_ocsp_ok = no
-        }
-        ocsp {
-        	enable = no
-        	override_cert_url = yes
-        	url = "http://127.0.0.1/ocsp/"
-        	use_nonce = yes
-        	timeout = 0
-        	softfail = no
-        }
-       }
-       # Linked to sub-module rlm_eap_ttls
-       ttls {
-       	tls = "tls-common"
-       	default_eap_type = "md5"
-       	copy_request_to_tunnel = no
-       	use_tunneled_reply = no
-       	virtual_server = "inner-tunnel"
-       	include_length = yes
-       	require_client_cert = no
-       }
-    tls: Using cached TLS configuration from previous invocation
-       # Linked to sub-module rlm_eap_peap
-       peap {
-       	tls = "tls-common"
-       	default_eap_type = "mschapv2"
-       	copy_request_to_tunnel = no
-       	use_tunneled_reply = no
-       	proxy_tunneled_request_as_eap = yes
-       	virtual_server = "inner-tunnel"
-       	soh = no
-       	require_client_cert = no
-       }
-    tls: Using cached TLS configuration from previous invocation
-       # Linked to sub-module rlm_eap_mschapv2
-       mschapv2 {
-       	with_ntdomain_hack = no
-       	send_error = no
-       }
-      # Instantiating module "mschap" from file /opt/fr30x/etc/raddb/mods-enabled/mschap
-    rlm_mschap (mschap): using internal authentication
-      # Instantiating module "auth_log" from file /opt/fr30x/etc/raddb/mods-enabled/detail.log
-    rlm_detail (auth_log): 'User-Password' suppressed, will not appear in detail output
-      # Instantiating module "reply_log" from file /opt/fr30x/etc/raddb/mods-enabled/detail.log
-      # Instantiating module "pre_proxy_log" from file /opt/fr30x/etc/raddb/mods-enabled/detail.log
-      # Instantiating module "post_proxy_log" from file /opt/fr30x/etc/raddb/mods-enabled/detail.log
-      # Instantiating module "etc_passwd" from file /opt/fr30x/etc/raddb/mods-enabled/passwd
-    rlm_passwd: nfields: 3 keyfield 0(User-Name) listable: no
-      # Instantiating module "logintime" from file /opt/fr30x/etc/raddb/mods-enabled/logintime
-      # Instantiating module "IPASS" from file /opt/fr30x/etc/raddb/mods-enabled/realm
-      # Instantiating module "suffix" from file /opt/fr30x/etc/raddb/mods-enabled/realm
-      # Instantiating module "realmpercent" from file /opt/fr30x/etc/raddb/mods-enabled/realm
-      # Instantiating module "ntdomain" from file /opt/fr30x/etc/raddb/mods-enabled/realm
-      # Instantiating module "cache_eap" from file /opt/fr30x/etc/raddb/mods-enabled/cache_eap
-    rlm_cache (cache_eap): Driver rlm_cache_rbtree (module rlm_cache_rbtree) loaded and linked
+
+The server loads a large number of modules, so we will omit them here.
+
+Finally, it is done loading all modules, and prints this:
+
      } # modules
+
+### Virtual Servers
+
+Next, it loads "virtual servers".
+
     radiusd: #### Loading Virtual Servers ####
-    server { # from file /opt/fr30x/etc/raddb/radiusd.conf
-    } # server
+
+It prints out the server, and name, along with which file it was loaded from.
+
     server default { # from file /opt/fr30x/etc/raddb/sites-enabled/default
+
+It then double-checks the various processing sections.
+
      # Loading authenticate {...}
      # Loading authorize {...}
      # Loading preacct {...}
      # Loading accounting {...}
+
+The `sql` module is in the default configuration, even if the `sql` module is not enabled.  This warning message is then printed out.
+
+It can be ignored, or, in a production environment where you don't use `sql`, you can just remove references to `sql` from the virtual servers.
+
     Ignoring "sql" (see raddb/mods-available/README.rst)
      # Loading post-proxy {...}
      # Loading post-auth {...}
@@ -740,9 +341,20 @@ Each module will print out it's configuration, along with any errors or warnings
      # Loading authorize {...}
      # Loading session {...}
      # Loading post-auth {...}
+
+In some situations, it tells you where the configuration can be simplified.
+
      # Skipping contents of 'if' as it is always 'false' -- /opt/fr30x/etc/raddb/sites-enabled/inner-tunnel:335
     } # server inner-tunnel
+
+### Listen Sections
+
+After loading all of the virtual servers, it then opens the various network sockets used to read and write packets.
+
     radiusd: #### Opening IP addresses and Ports ####
+
+First, it prints out the configuration for the listen sections.
+
     listen {
       	type = "auth"
       	ipaddr = *
@@ -788,6 +400,9 @@ Each module will print out it's configuration, along with any errors or warnings
       	ipaddr = 127.0.0.1
       	port = 18120
     }
+
+After reading all of the configuration, it opens the ports, and prints out a list of IP addresses and ports which it is using.
+
     Listening on auth address * port 1812 bound to server default
     Listening on acct address * port 1813 bound to server default
     Listening on auth address :: port 1812 bound to server default
@@ -795,26 +410,72 @@ Each module will print out it's configuration, along with any errors or warnings
     Listening on auth address 127.0.0.1 port 18120 bound to server inner-tunnel
     Listening on proxy address * port 39556
     Listening on proxy address :: port 52609
+
+And we finally get to this line.
+
     Ready to process requests
+
+Once this has been printed, the debug output changes to packet processing.
+
+Note that if *nothing* is ever printed after this line, then the server is not receiving any packets.  No amount of changing the server configuration will solve that problem.  Instead, you must fix the firewall, SeLinux configuration, network routing, etc. so that the OS delivers RADIUS packets to the server.
+
+## Packet Processing
+
+Each line (or most of them) of the packet processing output starts with a request number, e.g. `(0)`.  This number lets you track debug messages which are all for one packet.  Messages from different packets may be inter-mingled, due to threading or proxying.  Prefixing the messages with a number allows the messages to be easily differentiated.
+
+### Receiving a packet
+
+The first message for a packet tells you what type of packet was received, what it's RADIUS ID is, and the source / destination IP / port information.
+
     (0) Received Access-Request Id 104 from 127.0.0.1:33278 to 127.0.0.1:1812 length 73
+
+After that, it prints out all of the attributes which were received in the packet.
+
     (0)   User-Name = "bob"
     (0)   User-Password = "wrongpassword"
     (0)   NAS-IP-Address = 127.0.1.1
     (0)   NAS-Port = 0
     (0)   Message-Authenticator = 0x3d27116b37323e4f629b4e8217fc25c8
+
+Note that if an attribute is not printed here, then *it does not exist*.  If you need the packet to contain an attribute, then you must **fix the NAS** so that the NAS sends the attribute.
+
+Once the packet is received, it is run through the various processing sections of the server.  For Access-Request packets, these are `authorize`, `authenticate`, and `post-auth`.
+
     (0) # Executing section authorize from file /opt/fr30x/etc/raddb/sites-enabled/default
     (0)   authorize {
+
+The `authorize` section contains a number of modules, along with unlang keywords like `if`, `update`, etc.
+
+Each module prints out what it is doing, and why.  For example, the `suffix` module here is looking for `User-Name` attributes which contain `user@domain`.
+
     (0) suffix: Checking for suffix after "@"
     (0) suffix: No '@' in User-Name = "bob", looking up realm NULL
     (0) suffix: No such realm "NULL"
+
+The server core then prints out the "return code" of the module.  See `man unlang` for a deeper explanation of return codes.
+
     (0)     [suffix] = noop
     (0)     [files] = noop
+
+The `authorize` section also has a return code.
+
     (0)   } # authorize = noop
+
+In this case, the user is unknown, so they will be rejected.
+
     (0) ERROR: No Auth-Type found: rejecting the user via Post-Auth-Type = Reject
     (0) Failed to authenticate the user
+
+The packet is processed through the `Post-Auth-Type REJECT` section
+
     (0) Using Post-Auth-Type Reject
     (0) # Executing group from file /opt/fr30x/etc/raddb/sites-enabled/default
     (0)   Post-Auth-Type REJECT {
+
+That section contains more modules and unlang statements.
+
+Here, the `attr_filter` module is removing attributes which are forbidden from appearing in an Access-Reject packet.
+
     (0) attr_filter.access_reject: EXPAND %{User-Name}
     (0) attr_filter.access_reject:    --> bob
     (0) attr_filter.access_reject: Matched entry DEFAULT at line 11
@@ -827,13 +488,40 @@ Each module will print out it's configuration, along with any errors or warnings
     (0)         [noop] = noop
     (0)       } # else = noop
     (0)     } # policy remove_reply_message_if_eap = noop
+
+Finally, the `Post-Auth-Type REJECT` section is done.
+
     (0)   } # Post-Auth-Type REJECT = updated
+
+Since this is an Access-Reject, it is delayed for one second to prevent password attacks.  The `reject_delay` configuration above control this delay.
+
     (0) Delaying response for 1.000000 seconds
+
+The server then sleeps for a while, waking up periodically to deal with internal book-keeping.
+
     Waking up in 0.3 seconds.
     Waking up in 0.6 seconds.
+
+Finally after a one-second delay, the server wakes up and sends the Access-Reject packet.
+
     (0) Sending delayed response
+
+The IP / port printed here is the mirror of the one printed for the Access-Request, above.  This indicates that it's a reply to an earlier request.
+
     (0) Sent Access-Reject Id 104 from 127.0.0.1:1812 to 127.0.0.1:33278 length 20
+
+If there are any attributes in the reply packet, they will be printed here.  In this case, there are non.
+
+Note that you **should** check the reply attributes to see if the server is sending the reply you expect.  If it is not sending the correct reply. you will need to fix the configuration to do so.
+
+If it is sending the correct reply, but the user is not getting the expected service, then the problem is the NAS.  No amount of changing the server configuration will make the NAS behave.
+
+The server then sleeps for a while:
+
     Waking up in 3.9 seconds.
+
+And then cleans up the request and it's associated response.  This delay is controlled by `cleanup_delay`, which was seen earlier in the debug output.
+
     (0) Cleaning up request packet ID 104 with timestamp +23
     Ready to process requests
     (1) Received Access-Request Id 146 from 127.0.0.1:40967 to 127.0.0.1:1812 length 73
