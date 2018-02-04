@@ -531,58 +531,49 @@ The server then sleeps for a while:
 And then cleans up the request and it's associated response.  This delay is controlled by `cleanup_delay`, which was seen earlier in the debug output.
 
     (0) Cleaning up request packet ID 104 with timestamp +23
+
+Since there's nothing more to do, we're back to this message.
+
     Ready to process requests
+
+The debug log has another packet, which we will skip, as it's largely the same as the previous one.
+
     (1) Received Access-Request Id 146 from 127.0.0.1:40967 to 127.0.0.1:1812 length 73
     (1)   User-Name = "bob"
     (1)   User-Password = "wrongagain"
     (1)   NAS-IP-Address = 127.0.1.1
     (1)   NAS-Port = 0
-    (1)   Message-Authenticator = 0xa5390786792b1de136fa519bc0c2421c
-    (1) # Executing section authorize from file /opt/fr30x/etc/raddb/sites-enabled/default
-    (1)   authorize {
-    (1) suffix: Checking for suffix after "@"
-    (1) suffix: No '@' in User-Name = "bob", looking up realm NULL
-    (1) suffix: No such realm "NULL"
-    (1)     [suffix] = noop
-    (1)     [files] = noop
-    (1)   } # authorize = noop
-    (1) ERROR: No Auth-Type found: rejecting the user via Post-Auth-Type = Reject
-    (1) Failed to authenticate the user
-    (1) Using Post-Auth-Type Reject
-    (1) # Executing group from file /opt/fr30x/etc/raddb/sites-enabled/default
-    (1)   Post-Auth-Type REJECT {
-    (1) attr_filter.access_reject: EXPAND %{User-Name}
-    (1) attr_filter.access_reject:    --> bob
-    (1) attr_filter.access_reject: Matched entry DEFAULT at line 11
-    (1)     [attr_filter.access_reject] = updated
-    (1)     [eap] = noop
-    (1)     policy remove_reply_message_if_eap {
-    (1)       if (&reply:EAP-Message && &reply:Reply-Message) {
-    (1)       if (&reply:EAP-Message && &reply:Reply-Message)  -> FALSE
-    (1)       else {
-    (1)         [noop] = noop
-    (1)       } # else = noop
-    (1)     } # policy remove_reply_message_if_eap = noop
-    (1)   } # Post-Auth-Type REJECT = updated
-    (1) Delaying response for 1.000000 seconds
-    Waking up in 0.3 seconds.
-    Waking up in 0.6 seconds.
-    (1) Sending delayed response
-    (1) Sent Access-Reject Id 146 from 127.0.0.1:1812 to 127.0.0.1:40967 length 20
-    Waking up in 3.9 seconds.
-    (1) Cleaning up request packet ID 146 with timestamp +37
-    Ready to process requests
+
+The debug log then shows a successful authentication.
+
+The input packet is largely the same, but has a different `User-Name` and `User-Password` attribute.
+
     (2) Received Access-Request Id 135 from 127.0.0.1:40344 to 127.0.0.1:1812 length 77
     (2)   User-Name = "bob@int"
     (2)   User-Password = "test"
     (2)   NAS-IP-Address = 127.0.1.1
     (2)   NAS-Port = 0
+
+The `Message-Authenticator` attribute is a cryptographic signature of the packet, and has no other meaning.
+
     (2)   Message-Authenticator = 0x3b3f4cf11005dcccfe78bb4a5830dd52
+
+We start the `authorize` section again/
+
     (2) # Executing section authorize from file /opt/fr30x/etc/raddb/sites-enabled/default
     (2)   authorize {
+
+This time the `suffix` module does find a suffix.
+
     (2) suffix: Checking for suffix after "@"
     (2) suffix: Looking up realm "int" for User-Name = "bob@int"
+
+The realm `int` is defined above in the `realm` configuration.
+
     (2) suffix: Found realm "int"
+
+The `suffix` module splits the `User-Name` into a `Stripped-User-Name` and `Realm` attributes.  The `Stripped-User-Name` is used by subsequent modules to match the user's name.
+
     (2) suffix: Adding Stripped-User-Name = "bob"
     (2) suffix: Adding Realm = "int"
     (2) suffix: Proxying request from user bob to realm int
@@ -591,21 +582,41 @@ And then cleans up the request and it's associated response.  This delay is cont
     (2)     [files] = noop
     (2)   } # authorize = updated
     (2) Starting proxy to home server (null) port 1812
+
+This configuration has been changed from the default configuration to proxy packets to the `inner-tunnel` virtual server.  This change was done here strictly for demonstration purposes.  It is not necessary (and you should not do it!) in normal configurations.
+
     Proxying to virtual server inner-tunnel
     (2) # Executing section authorize from file /opt/fr30x/etc/raddb/sites-enabled/inner-tunnel
     (2)   authorize {
+
+The `files` module matches the user name and realm, at `line 1` of the `users` file.  This output lets you know exactly which entry was matched.
+
+If the server does not do what you expect it to do, you should read `line 1` of the `users` file (or whatever entry matched), to verify that the entry is what you expect it to be.
+
     (2) files: users: Matched entry bob@int at line 1
     (2)     [files] = ok
+
+The `pap` module sees the `Cleartext-Password` which was set in the `users` file, along with the `User-Password` that came from the packet.  The module then sets `Auth-Type := PAP`.  This is so that the `authenticate` section will run the `pap` module, which will then authenticate the user.
+
     (2)     [pap] = updated
     (2)   } # authorize = updated
+
+It now runs `Auth-Type PAP`
+
     (2) Found Auth-Type = PAP
     (2) # Executing group from file /opt/fr30x/etc/raddb/sites-enabled/inner-tunnel
     (2)   Auth-Type PAP {
+
+The `pap` module tells you that everything is OK.
+
     (2) pap: Login attempt with password
     (2) pap: Comparing with "known good" Cleartext-Password
     (2) pap: User authenticated successfully
     (2)     [pap] = ok
     (2)   } # Auth-Type PAP = ok
+
+It now runs the normal `post-auth` section
+
     (2) # Executing section post-auth from file /opt/fr30x/etc/raddb/sites-enabled/inner-tunnel
     (2)   post-auth {
     (2)     update reply {
@@ -616,6 +627,9 @@ And then cleans up the request and it's associated response.  This delay is cont
     (2)   } # post-auth = noop
     (2) Finished internally proxied request.
     (2) Clearing existing &reply: attributes
+
+Because this is a proxied request, it now runs the `post-proxy` section of the `default` virtual server.
+
     (2) # Executing section post-proxy from file /opt/fr30x/etc/raddb/sites-enabled/default
     (2)   post-proxy {
     (2)     policy debug_reply {
@@ -629,8 +643,14 @@ And then cleans up the request and it's associated response.  This delay is cont
     (2)         } # if ("%{debug_attr:reply:}" == '')  = noop
     (2)       } # policy debug_reply = noop
     (2)     } # post-proxy = noop
+
+This `Auth-Type = Accept` is added by the server code when proxying.  Since the proxied request returned an Access-Accept, the `default` virtual server treats that as a successful authentication.
+
     (2)   Found Auth-Type = Accept
     (2)   Auth-Type = Accept, accepting the user
+
+It then runs the `post-auth` section from the `default` virtual server.
+
     (2)   # Executing section post-auth from file /opt/fr30x/etc/raddb/sites-enabled/default
     (2)     post-auth {
     (2)       update {
@@ -645,6 +665,9 @@ And then cleans up the request and it's associated response.  This delay is cont
     (2)         } # else = noop
     (2)       } # policy remove_reply_message_if_eap = noop
     (2)     } # post-auth = noop
+
+And finally returns an Access-Accept to the client.  The `Reply-Message` here was take from `line 1` of the `users` file, when it matched above.
+
     (2)   Sent Access-Accept Id 135 from 127.0.0.1:1812 to 127.0.0.1:40344 length 0
     (2)     Reply-Message := "hello"
     (2)   Finished request
@@ -653,3 +676,4 @@ And then cleans up the request and it's associated response.  This delay is cont
     Ready to process requests
     ^C
 
+That is a *lot* of information to go through.  We hope that this page has been useful.
