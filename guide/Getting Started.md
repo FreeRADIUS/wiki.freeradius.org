@@ -73,6 +73,10 @@ Otherwise, typical errors include `Address already in use`, which means
 that there is another RADIUS server already running. You will need to
 find that one and stop it before running the server in debugging mode.
 
+The output from `radiusd -X` can sometimes be confusing at first,
+so there is a page with an [explanation of the debug output](/radiusd-X).
+
+
 ## Initial Tests
 
 Testing authentication is simple. Edit the `users` file (in v3 this has
@@ -161,21 +165,23 @@ steps:
 5.  If everything is OK, save a copy of the configuration, go back to
     step (2), and make another change.
 6.  If anything goes wrong,
-    -   double-check the configuration
+    -   double-check the configuration;
     -   read the *entire* debug output, looking for words like `error`
         or `warning`. These messages usually contain descriptions of
-        what went wrong, and suggestions for how it can be fixed. (see
-        also the [debug form](http://networkradius.com/freeradius.html))
-    -   Try replacing your configuration with a saved copy of a "known
+        what went wrong, and suggestions for how it can be fixed.
+        Also see [an explanation of the debug output](/radiusd-X) and
+        the [debug form](http://networkradius.com/freeradius-debugging/);
+    -   try replacing your configuration with a saved copy of a "known
         working" configuration, and start again. This process can clean
         up errors caused by temporary edits, or edits that you have
-        forgotten about.
-    -   Ask for help on the [freeradius-users](/list/users.html) mailing
+        forgotten about;
+    -   ask for help on the
+        [freeradius-users](http://freeradius.org/support/) mailing
         list. Include a description of what you are trying to do, and
         the *entire debugging output*, especially output showing the
         server receiving and processing test packets. You may want to
-        scrub "secret" information from the output before posting it.
-        (Shared secrets, passwords, etc.)
+        scrub "secret" information from the output before posting it
+        (shared secrets, passwords, etc).
 
 ## Other Resources
 
