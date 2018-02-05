@@ -194,6 +194,6 @@ If a spike in packet loss or retransmissions occurs you may see a deceptively sm
 Although the majority of GUAGE values are created using the AVERAGE consolidation function, the 'low' latency and 'high' latency use MIN and MAX respectively. It seemed more useful to know the extremes during the polling interval, especially when using the values to trigger warnings when latency gets close to the point where the NAS will start timing out requests.
 
 ## Example graphs
-![Accounting Request counters](/radsniff_accounting_counters-day.png "Accounting Request counters")
-![Accounting Request latency](/radsniff_accounting_latency-day.png "Accounting Request latency")
-![Accounting Request RTC](/radsniff_accounting_rtx-day.png "Accounting RTX")
+![Accounting Request counters](radsniff_accounting_counters-day.png "Accounting Request counters")
+![Accounting Request latency](radsniff_accounting_latency-day.png "Accounting Request latency")
+![Accounting Request RTC](radsniff_accounting_rtx-day.png "Accounting RTX")

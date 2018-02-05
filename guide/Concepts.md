@@ -1,7 +1,7 @@
 RADIUS Concepts
 ===============
 
-<a href="/request_flow.svg">![FreeRADIUS flow diagram](/request_flow.svg "Railroad diagram")</a>
+<a href="request_flow.svg">![FreeRADIUS flow diagram](request_flow.svg "Railroad diagram")</a>
 
 Users new to RADIUS, EAP or AAA in general are encouraged to read the following standards:
 - [RFC 2865 - Remote Authentication Dial In User Service (RADIUS)](https://tools.ietf.org/html/rfc2865)
