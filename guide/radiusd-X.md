@@ -43,70 +43,70 @@ This output lets you check that the server is loading the files which you think 
 
 It then reads the dictionaries.  It does not print out the name of every dictionary file it reads, as there are over 100 files, but they are never the less still loaded.
 
-    including dictionary file /opt/fr30x/share/freeradius/dictionary
-    including dictionary file /opt/fr30x/share/freeradius/dictionary.dhcp
-    including dictionary file /opt/fr30x/share/freeradius/dictionary.vqp
-    including dictionary file /opt/fr30x/etc/raddb/dictionary
+    including dictionary file /usr/share/freeradius/dictionary
+    including dictionary file /usr/share/freeradius/dictionary.dhcp
+    including dictionary file /usr/share/freeradius/dictionary.vqp
+    including dictionary file /etc/raddb/dictionary
 
 Next is loads the main `radiusd.conf` file, and some associated ones like `proxy.conf` and `clients.conf`
 
-    including configuration file /opt/fr30x/etc/raddb/radiusd.conf
-    including configuration file /opt/fr30x/etc/raddb/proxy.conf
-    including configuration file /opt/fr30x/etc/raddb/clients.conf
+    including configuration file /etc/raddb/radiusd.conf
+    including configuration file /etc/raddb/proxy.conf
+    including configuration file /etc/raddb/clients.conf
 
 It now loads all of the modules.  The module configuration is usually stored in `raddb/mods-enabled/`, with one module configuration per file in that directory.
 
 Sometimes the module you're using does not seem to be loaded or used.  In that case, you should check this section to see that the file is loaded.
 
-    including files in directory /opt/fr30x/etc/raddb/mods-enabled/
-    including configuration file /opt/fr30x/etc/raddb/mods-enabled/pap
-    including configuration file /opt/fr30x/etc/raddb/mods-enabled/expiration
-    including configuration file /opt/fr30x/etc/raddb/mods-enabled/files
-    including configuration file /opt/fr30x/etc/raddb/mods-enabled/linelog
-    including configuration file /opt/fr30x/etc/raddb/mods-enabled/soh
-    including configuration file /opt/fr30x/etc/raddb/mods-enabled/attr_filter
-    including configuration file /opt/fr30x/etc/raddb/mods-enabled/ntlm_auth
-    including configuration file /opt/fr30x/etc/raddb/mods-enabled/exec
-    including configuration file /opt/fr30x/etc/raddb/mods-enabled/preprocess
-    including configuration file /opt/fr30x/etc/raddb/mods-enabled/sradutmp
-    including configuration file /opt/fr30x/etc/raddb/mods-enabled/chap
-    including configuration file /opt/fr30x/etc/raddb/mods-enabled/digest
-    including configuration file /opt/fr30x/etc/raddb/mods-enabled/expr
-    including configuration file /opt/fr30x/etc/raddb/mods-enabled/echo
-    including configuration file /opt/fr30x/etc/raddb/mods-enabled/unpack
-    including configuration file /opt/fr30x/etc/raddb/mods-enabled/detail
-    including configuration file /opt/fr30x/etc/raddb/mods-enabled/always
-    including configuration file /opt/fr30x/etc/raddb/mods-enabled/eap
-    including configuration file /opt/fr30x/etc/raddb/mods-enabled/mschap
-    including configuration file /opt/fr30x/etc/raddb/mods-enabled/unix
-    including configuration file /opt/fr30x/etc/raddb/mods-enabled/detail.log
-    including configuration file /opt/fr30x/etc/raddb/mods-enabled/passwd
-    including configuration file /opt/fr30x/etc/raddb/mods-enabled/date
-    including configuration file /opt/fr30x/etc/raddb/mods-enabled/logintime
-    including configuration file /opt/fr30x/etc/raddb/mods-enabled/utf8
-    including configuration file /opt/fr30x/etc/raddb/mods-enabled/dynamic_clients
-    including configuration file /opt/fr30x/etc/raddb/mods-enabled/radutmp
-    including configuration file /opt/fr30x/etc/raddb/mods-enabled/realm
-    including configuration file /opt/fr30x/etc/raddb/mods-enabled/cache_eap
-    including configuration file /opt/fr30x/etc/raddb/mods-enabled/replicate
+    including files in directory /etc/raddb/mods-enabled/
+    including configuration file /etc/raddb/mods-enabled/pap
+    including configuration file /etc/raddb/mods-enabled/expiration
+    including configuration file /etc/raddb/mods-enabled/files
+    including configuration file /etc/raddb/mods-enabled/linelog
+    including configuration file /etc/raddb/mods-enabled/soh
+    including configuration file /etc/raddb/mods-enabled/attr_filter
+    including configuration file /etc/raddb/mods-enabled/ntlm_auth
+    including configuration file /etc/raddb/mods-enabled/exec
+    including configuration file /etc/raddb/mods-enabled/preprocess
+    including configuration file /etc/raddb/mods-enabled/sradutmp
+    including configuration file /etc/raddb/mods-enabled/chap
+    including configuration file /etc/raddb/mods-enabled/digest
+    including configuration file /etc/raddb/mods-enabled/expr
+    including configuration file /etc/raddb/mods-enabled/echo
+    including configuration file /etc/raddb/mods-enabled/unpack
+    including configuration file /etc/raddb/mods-enabled/detail
+    including configuration file /etc/raddb/mods-enabled/always
+    including configuration file /etc/raddb/mods-enabled/eap
+    including configuration file /etc/raddb/mods-enabled/mschap
+    including configuration file /etc/raddb/mods-enabled/unix
+    including configuration file /etc/raddb/mods-enabled/detail.log
+    including configuration file /etc/raddb/mods-enabled/passwd
+    including configuration file /etc/raddb/mods-enabled/date
+    including configuration file /etc/raddb/mods-enabled/logintime
+    including configuration file /etc/raddb/mods-enabled/utf8
+    including configuration file /etc/raddb/mods-enabled/dynamic_clients
+    including configuration file /etc/raddb/mods-enabled/radutmp
+    including configuration file /etc/raddb/mods-enabled/realm
+    including configuration file /etc/raddb/mods-enabled/cache_eap
+    including configuration file /etc/raddb/mods-enabled/replicate
 
 Next, some policies are loaded.  These policies are ones which the server uses (for example) to canonicalize user names, and to do things like attribute re-writes, sanity checks, etc.
 
-    including files in directory /opt/fr30x/etc/raddb/policy.d/
-    including configuration file /opt/fr30x/etc/raddb/policy.d/control
-    including configuration file /opt/fr30x/etc/raddb/policy.d/cui
-    including configuration file /opt/fr30x/etc/raddb/policy.d/debug
-    including configuration file /opt/fr30x/etc/raddb/policy.d/moonshot-targeted-ids
-    including configuration file /opt/fr30x/etc/raddb/policy.d/eap
-    including configuration file /opt/fr30x/etc/raddb/policy.d/filter
-    including configuration file /opt/fr30x/etc/raddb/policy.d/canonicalization
-    including configuration file /opt/fr30x/etc/raddb/policy.d/abfab-tr
-    including configuration file /opt/fr30x/etc/raddb/policy.d/operator-name
-    including configuration file /opt/fr30x/etc/raddb/policy.d/dhcp
-    including configuration file /opt/fr30x/etc/raddb/policy.d/accounting
-    including files in directory /opt/fr30x/etc/raddb/sites-enabled/
-    including configuration file /opt/fr30x/etc/raddb/sites-enabled/default
-    including configuration file /opt/fr30x/etc/raddb/sites-enabled/inner-tunnel
+    including files in directory /etc/raddb/policy.d/
+    including configuration file /etc/raddb/policy.d/control
+    including configuration file /etc/raddb/policy.d/cui
+    including configuration file /etc/raddb/policy.d/debug
+    including configuration file /etc/raddb/policy.d/moonshot-targeted-ids
+    including configuration file /etc/raddb/policy.d/eap
+    including configuration file /etc/raddb/policy.d/filter
+    including configuration file /etc/raddb/policy.d/canonicalization
+    including configuration file /etc/raddb/policy.d/abfab-tr
+    including configuration file /etc/raddb/policy.d/operator-name
+    including configuration file /etc/raddb/policy.d/dhcp
+    including configuration file /etc/raddb/policy.d/accounting
+    including files in directory /etc/raddb/sites-enabled/
+    including configuration file /etc/raddb/sites-enabled/default
+    including configuration file /etc/raddb/sites-enabled/inner-tunnel
 
 ### Server Configuration
 
@@ -121,13 +121,13 @@ This is the "main" server configuration:
 
 Which directories the server is using,
 
-    	prefix = "/opt/fr30x"
-    	localstatedir = "/opt/fr30x/var"
-    	sbindir = "/opt/fr30x/sbin"
-    	logdir = "/opt/fr30x/var/log/radius"
-    	run_dir = "/opt/fr30x/var/run/radiusd"
-    	libdir = "/opt/fr30x/lib"
-    	radacctdir = "/opt/fr30x/var/log/radius/radacct"
+    	prefix = "/"
+    	localstatedir = "/var"
+    	sbindir = "/usr/sbin"
+    	logdir = "/var/log/radius"
+    	run_dir = "/var/run/radiusd"
+    	libdir = "/usr/lib"
+    	radacctdir = "/var/log/radius/radacct"
 
 Next we have some generic configuration settings which don't belong anywhere else.
 
@@ -135,8 +135,8 @@ Next we have some generic configuration settings which don't belong anywhere els
     	max_request_time = 30
     	cleanup_delay = 5
     	max_requests = 16384
-    	pidfile = "/opt/fr30x/var/run/radiusd/radiusd.pid"
-    	checkrad = "/opt/fr30x/sbin/checkrad"
+    	pidfile = "/var/run/radiusd/radiusd.pid"
+    	checkrad = "/sbin/checkrad"
     	debug_level = 0
     	proxy_requests = yes
 
@@ -286,7 +286,7 @@ First, it discovers it has to load the `pap` module, and decides to do that.
 
 Second, it tells you which files is used to read the `pap` module configuration.
 
-      # Loading module "pap" from file /opt/fr30x/etc/raddb/mods-enabled/pap
+      # Loading module "pap" from file /etc/raddb/mods-enabled/pap
 
 Finally, it prints out the configuration that is used by the `pap` module.
 
@@ -303,16 +303,16 @@ When you are editing a module configuration, it is good to check the debug outpu
 Some modules like `expiration` do not have any configuration items, and therefore don't print out any configuration when they are loaded.
 
       # Loaded module rlm_expiration
-      # Loading module "expiration" from file /opt/fr30x/etc/raddb/mods-enabled/expiration
+      # Loading module "expiration" from file /etc/raddb/mods-enabled/expiration
 
 This module loads the `users` file.
 
       # Loaded module rlm_files
-      # Loading module "files" from file /opt/fr30x/etc/raddb/mods-enabled/files
+      # Loading module "files" from file /etc/raddb/mods-enabled/files
       files {
-      	filename = "/opt/fr30x/etc/raddb/mods-config/files/authorize"
-      	acctusersfile = "/opt/fr30x/etc/raddb/mods-config/files/accounting"
-      	preproxy_usersfile = "/opt/fr30x/etc/raddb/mods-config/files/pre-proxy"
+      	filename = "/etc/raddb/mods-config/files/authorize"
+      	acctusersfile = "/etc/raddb/mods-config/files/accounting"
+      	preproxy_usersfile = "/etc/raddb/mods-config/files/pre-proxy"
       }
 
 The server loads a large number of modules, so we will omit them here.
@@ -329,7 +329,7 @@ Next, it loads "virtual servers".
 
 It prints out the server, and name, along with which file it was loaded from.
 
-    server default { # from file /opt/fr30x/etc/raddb/sites-enabled/default
+    server default { # from file /etc/raddb/sites-enabled/default
 
 It then double-checks the various processing sections.
 
@@ -346,7 +346,7 @@ It can be ignored, or, in a production environment where you don't use `sql`, yo
      # Loading post-proxy {...}
      # Loading post-auth {...}
     } # server default
-    server inner-tunnel { # from file /opt/fr30x/etc/raddb/sites-enabled/inner-tunnel
+    server inner-tunnel { # from file /etc/raddb/sites-enabled/inner-tunnel
      # Loading authenticate {...}
      # Loading authorize {...}
      # Loading session {...}
@@ -354,7 +354,7 @@ It can be ignored, or, in a production environment where you don't use `sql`, yo
 
 In some situations, it tells you where the configuration can be simplified.
 
-     # Skipping contents of 'if' as it is always 'false' -- /opt/fr30x/etc/raddb/sites-enabled/inner-tunnel:335
+     # Skipping contents of 'if' as it is always 'false' -- /etc/raddb/sites-enabled/inner-tunnel:335
     } # server inner-tunnel
 
 ### Listen Sections
@@ -451,7 +451,7 @@ Note that if an attribute is not printed here, then *it does not exist*.  If you
 
 Once the packet is received, it is run through the various processing sections of the server.  For Access-Request packets, these are `authorize`, `authenticate`, and `post-auth`.
 
-    (0) # Executing section authorize from file /opt/fr30x/etc/raddb/sites-enabled/default
+    (0) # Executing section authorize from file /etc/raddb/sites-enabled/default
     (0)   authorize {
 
 The `authorize` section contains a number of modules, along with unlang keywords like `if`, `update`, etc.
@@ -479,7 +479,7 @@ In this case, the user is unknown, so they will be rejected.
 The packet is processed through the `Post-Auth-Type REJECT` section
 
     (0) Using Post-Auth-Type Reject
-    (0) # Executing group from file /opt/fr30x/etc/raddb/sites-enabled/default
+    (0) # Executing group from file /etc/raddb/sites-enabled/default
     (0)   Post-Auth-Type REJECT {
 
 That section contains more modules and unlang statements.
@@ -562,7 +562,7 @@ The `Message-Authenticator` attribute is a cryptographic signature of the packet
 
 We start the `authorize` section again/
 
-    (2) # Executing section authorize from file /opt/fr30x/etc/raddb/sites-enabled/default
+    (2) # Executing section authorize from file /etc/raddb/sites-enabled/default
     (2)   authorize {
 
 This time the `suffix` module does find a suffix.
@@ -588,7 +588,7 @@ The `suffix` module splits the `User-Name` into a `Stripped-User-Name` and `Real
 This configuration has been changed from the default configuration to proxy packets to the `inner-tunnel` virtual server.  This change was done here strictly for demonstration purposes.  It is not necessary (and you should not do it!) in normal configurations.
 
     Proxying to virtual server inner-tunnel
-    (2) # Executing section authorize from file /opt/fr30x/etc/raddb/sites-enabled/inner-tunnel
+    (2) # Executing section authorize from file /etc/raddb/sites-enabled/inner-tunnel
     (2)   authorize {
 
 The `files` module matches the user name and realm, at `line 1` of the `users` file.  This output lets you know exactly which entry was matched.
@@ -606,7 +606,7 @@ The `pap` module sees the `Cleartext-Password` which was set in the `users` file
 It now runs `Auth-Type PAP`
 
     (2) Found Auth-Type = PAP
-    (2) # Executing group from file /opt/fr30x/etc/raddb/sites-enabled/inner-tunnel
+    (2) # Executing group from file /etc/raddb/sites-enabled/inner-tunnel
     (2)   Auth-Type PAP {
 
 The `pap` module tells you that everything is OK.
@@ -619,7 +619,7 @@ The `pap` module tells you that everything is OK.
 
 It now runs the normal `post-auth` section
 
-    (2) # Executing section post-auth from file /opt/fr30x/etc/raddb/sites-enabled/inner-tunnel
+    (2) # Executing section post-auth from file /etc/raddb/sites-enabled/inner-tunnel
     (2)   post-auth {
     (2)     update reply {
     (2)       Reply-Message := "hello"
@@ -632,7 +632,7 @@ It now runs the normal `post-auth` section
 
 Because this is a proxied request, it now runs the `post-proxy` section of the `default` virtual server.
 
-    (2) # Executing section post-proxy from file /opt/fr30x/etc/raddb/sites-enabled/default
+    (2) # Executing section post-proxy from file /etc/raddb/sites-enabled/default
     (2)   post-proxy {
     (2)     policy debug_reply {
     (2)       if ("%{debug_attr:reply:}" == '') {
@@ -653,7 +653,7 @@ This `Auth-Type = Accept` is added by the server code when proxying.  Since the 
 
 It then runs the `post-auth` section from the `default` virtual server.
 
-    (2)   # Executing section post-auth from file /opt/fr30x/etc/raddb/sites-enabled/default
+    (2)   # Executing section post-auth from file /etc/raddb/sites-enabled/default
     (2)     post-auth {
     (2)       update {
     (2)         No attributes updated
