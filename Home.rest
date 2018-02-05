@@ -18,8 +18,9 @@ There are many third-party web sites and HOWTO's that give advice on FreeRADIUS.
 
 The following is an overview of the types of information available:
 
-* [[How to user the User's mailing list|guide/The Users Mailing List]]
 * [[Building and installing|building/Home]]
+* [[How to user the User's mailing list|guide/The Users Mailing List]]
+* [[Interpreting debug mode output (radiusd -X)|guide/radiusd-X]] 
 * [[Configuration|config/Configuration files]]
 * [[Base Modules|project/List of Modules]]
 * [[Radius Clients|glossary/Radius Clients]]
