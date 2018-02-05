@@ -1,4 +1,4 @@
-# Mailing List Help
+# Posting questions to the User's mailing list
 
 Many people ask questions on the FreeRADIUS users mailing list.
 Good questions get good answers. Bad questions or those lacking
