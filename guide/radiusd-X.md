@@ -1,6 +1,6 @@
 # How to use `radiusd -X` (debug mode)
 
-This page explains how to read the output of `radiusd -X`.  The example debug output listed here is taken from the [list help](list-help) page.
+This page explains how to read the output of `radiusd -X`.  The example debug output listed here is taken from the [User's mailing list](The Users Mailing List) page.
 
 The first part of the debug output is the *startup* text.  Once the server is started, it prints `Ready to receive requests`.  The next part of the debug output is the *packet processing* text.  Both parts need to be read (and posted to the list!) in order to solve issues.
 
