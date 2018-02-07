@@ -54,6 +54,8 @@ both.
 
 **Don't include unimportant packets**  If you have a problem with Access-Request packets, don't post a debug output which contains Accounting-Request packets, or packets for users who authenticate successfully.
 
+**Don't send configuration files to the list**.  All of the relevant information is in the debug output. 
+
 ## Getting debug output
 
 The most basic method of getting the required debug output is to
