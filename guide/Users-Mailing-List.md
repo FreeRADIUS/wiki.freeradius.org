@@ -27,7 +27,7 @@ When you give this information, it means that we can help you quickly and effici
 This is really important. The server produces comprehensive
 information on what it is doing, for a reason.  In 99% of the situations, the debug output contains the information needed to solve the problem.
 
-We understand that the debug output is complex and full of what seems like (magical text)[radiusd-X].  You don't need to understand all of it.  But the people on the mailing list *do* understand it, and can use it to help you.
+We understand that the debug output is complex and full of what seems like [magical text](radiusd-X).  You don't need to understand all of it.  But the people on the mailing list *do* understand it, and can use it to help you.
 
 When you post the debug output, the **whole** debug
 output needs to be included.
