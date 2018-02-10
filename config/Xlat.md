@@ -189,7 +189,7 @@ These are provided by proto_dhcp:
 
         name | description
 -------------|------------
+client       | provides per-client config options i.e. %{client:ipaddr} or %{client:mymadeupoption}
 dhcp         |
 dhcp_options |
-
 
