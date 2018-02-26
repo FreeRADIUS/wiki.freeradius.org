@@ -12,7 +12,7 @@ The process to get FreeRADIUS to start using syslog is fairly straight forward. 
 * Modify ``/etc/syslog.conf``
 * Restart the syslog daemon 
 * Modify ``/etc/raddb/radiusd.conf``
-* Start radius with the ``-l syslog and -g <facility>``
+* Restart the FreeRADIUS daemon
  
 Modify /etc/syslog.conf
 =======================
@@ -39,18 +39,10 @@ Modify ``/etc/raddb/radiusd.conf``
 
 Set the following options::
 
-  logdir = syslog
-  log_destination = syslog
-
-Because of the logdir entry above, you must locate all references to ``${logdir}``, comment the line out and replace it with an absolute path.  There must be better ways to do this, but it isn't immediately obvious.
-
-Start radius with the -l syslog and -g <facility>
-=================================================
-Putting these options in the startup script is different for each distribution.
-
-* Ours is in /etc/sysconf/options/radiusd
-* Redhat - ?
-* Debian/Ubuntu - /etc/default/freeradius
+  log {
+    destination = syslog
+    syslog_facility = local1
+  }
 
 Syslog Priorities
 =================
