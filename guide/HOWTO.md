@@ -2,18 +2,19 @@
 -----------------------------------------
 
 * [[Basic configuration|guide/Basic configuration HOWTO]]
-* [[SQL|guide/SQL HOWTO]]
 * [[EAP/MD5|guide/EAPMD5 HOWTO]]
-* [[WPA|guide/WPA HOWTO]] (Using FreeRadius to secure your wireless network)
-* [[SNMP|guide/SNMP HOWTO]]
-* [[Syslog|guide/Syslog HOWTO]]
-* [[SQL Huntgroup|guide/SQL Huntgroup HOWTO]] (How to implement huntgroups in SQL)
+* [[eduroam|guide/eduroam]] - a very basic [eduroam](https://www.eduroam.org/) configuration guide
 * [[Lockout|guide/lockout]]
 * [[Mac-Auth|guide/Mac Auth]]
-* [[Twitter|guide/twitter]]
 * [[raduat|guide/raduat]]
+* [[SNMP|guide/SNMP HOWTO]] (old documentation)
+* [[SQL|guide/SQL HOWTO]] - configuring connection to an SQL database
+* [[SQL Huntgroup|guide/SQL Huntgroup HOWTO]] (How to implement huntgroups in SQL)
+* [[Syslog|guide/Syslog HOWTO]]
+* [[Twitter|guide/twitter]]
+* [[WPA|guide/WPA HOWTO]] (Using FreeRADIUS to secure your wireless network)
 
-There is detailed documentation for most of the server available at [[Complete documentation|http://networkradius.com/doc/]]
+There is detailed documentation for most of the server available at [[complete documentation|http://networkradius.com/doc/]]
 
 Integrating with Active Directory
 ---------------------------------
