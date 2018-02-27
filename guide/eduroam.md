@@ -1,6 +1,6 @@
-# A very basic (but functional) Eduroam configuration
+# A very basic (but functional) eduroam configuration
 ## Overview
-This guide is intended to help any site wishing to join eduroam implement the IdP and SP eduroam components.  It contains sample configuration files that may be used in place of the normal v3.0.x configuration files that ship with the server.
+This guide is intended to help any site wishing to join eduroam implement the IdP (home service) and SP (visited service) eduroam components.  It contains sample configuration files that may be used in place of the normal v3.0.x configuration files that ship with the server.
 
 In addition to the configuration files here, you will need to configure a module to talk to your user store (LDAP, Novell, Active Directory, SQL).  See notes in the [inner-tunnel](#configuration_the-inner-virtual-server_sites-available-inner-tunnel) configuration.
 
@@ -24,9 +24,9 @@ The general order of operations is:
 
 ## Tooling
 ### eapol_test
-Before you begin you should build a copy of ``eapol_test``.  ``eapol_test`` is an extremely useful tool produced by the hostapd project which can simulate both a Wireless Access Point and a Supplicant (client).  Unfortunately it's not usually packaged and can be quite challenging to build manually.
+Before you begin you should build a copy of ``eapol_test``.  ``eapol_test`` is an extremely useful tool produced by the [hostapd project](https://w1.fi/hostapd/) which can simulate both a Wireless Access Point and a Supplicant (client).  Unfortunately it's not usually packaged and can be quite challenging to build manually.
 
-As part of the FreeRADIUS CIT suite we include a script to automatically build ``eapol_test``.  You should use this script.
+A script is included in the FreeRADIUS CIT suite that will automatically build ``eapol_test``, which you should use. Instructions on building it are as follows:
 
 #### Dependencies
 ##### Centos/RHEL
@@ -151,7 +151,7 @@ server eduroam {
 		# - Have that feature enabled.
 		# - Have the guest_vlan/local_vlan available to the controller,
                 #   or to all your access points.
-		# Eduroam user traffic *MUST* be segregated, this is *NOT* optional.
+		# eduroam user traffic *MUST* be segregated, this is *NOT* optional.
 		update reply {
 			Tunnel-Type := VLAN
 			Tunnel-Medium-Type := IEEE-802
@@ -251,7 +251,7 @@ eap {
 
 ***
 
-All Eduroam members should log requests to/from their servers for compliance purposes and because it makes debugging much easier.
+All eduroam members should log requests to/from their servers for compliance purposes and because it makes debugging much easier.
 
 These logging module instances and the virtual server configuration above will make your site fully compliant, so long as the syslog messages are retained for the requisite period.
 
@@ -482,7 +482,7 @@ eap inner-eap {
 
 ## Testing
 
-``eapol_test`` is the utility of choice when testing below are some basic config files for ``eapol_test`` which allow you to generate EAP-TTLS, EAP-PEAP and EAP-TLS requests.
+``eapol_test`` is the utility of choice when testing. Some basic config files for ``eapol_test`` are given below, which allow you to generate EAP-TTLS, EAP-PEAP and EAP-TLS requests.
 
 ### Test files
 
