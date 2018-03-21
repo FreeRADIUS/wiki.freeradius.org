@@ -1,5 +1,7 @@
 # List of xlat expansions
 
+Also see the related list of [run-time variables](/config/run_time_variables).
+
 ## Provided by the server core
 
        name | description
