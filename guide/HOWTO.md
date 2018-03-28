@@ -4,6 +4,7 @@
 * [[Basic configuration|guide/Basic configuration HOWTO]]
 * [[EAP/MD5|guide/EAPMD5 HOWTO]]
 * [[eduroam|guide/eduroam]] - a very basic [eduroam](https://www.eduroam.org/) configuration guide
+* [[eduroam logging|guide/eduroam-logging]] - logging in eduroam, useful for other EAP setups
 * [[Lockout|guide/lockout]]
 * [[Mac-Auth|guide/Mac Auth]]
 * [[raduat|guide/raduat]]

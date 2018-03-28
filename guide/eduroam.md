@@ -22,6 +22,8 @@ The general order of operations is:
 14. Clone the config onto two servers (or clone the server).
 15. Pass the server IP addresses of those servers to your NRO (National RADIUS Operator).  They will usually issue you secrets and tell you the IP addresses of the FLRS (Federation Level RADIUS Servers), which you need to put in ``proxy.conf`` and ``clients.conf``
 
+A [separate page](/guide/eduroam-logging) gives more detail on configuring efficient logging for eduroam.
+
 ## Tooling
 ### eapol_test
 Before you begin you should build a copy of ``eapol_test``.  ``eapol_test`` is an extremely useful tool produced by the [hostapd project](https://w1.fi/hostapd/) which can simulate both a Wireless Access Point and a Supplicant (client).  Unfortunately it's not usually packaged and can be quite challenging to build manually.
