@@ -99,7 +99,7 @@ Nothing special is required other than enabling the unix socket plugin. To do th
 </Plugin>
 ```
 
-You'll also need to add the type definitions from [here](https://raw.githubusercontent.com/FreeRADIUS/freeradius-server/master/scripts/collectd/radsniff_types.db) then restart collectd.
+You'll also need to add the type definitions from [here](https://raw.githubusercontent.com/FreeRADIUS/freeradius-server/v4.0.x/scripts/collectd/radsniff_types.db) then restart collectd.
 
 ### rrdtool graph definitions
 #### Counters
