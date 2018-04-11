@@ -9,9 +9,8 @@ The most important things are to **clearly state your problem**
 (not the problem with your solution) and to **include full debug
 output** from the server.
 
-It's really hard to try and help when vague questions are asked
-and no debug output is included, and you are likely to be told
-this.
+It is hard to help you when the post is only a vague question,
+and no debug output is included.
 
 Your post should include the following information:
 
@@ -52,9 +51,19 @@ the problem. If you've got some authentication that works, and
 another that doesn't, then include an authentication attempt for
 both.
 
+### Things to avoid
+
+While there are recommendations for what you should do, there are also recommendations for things you *shouldn't* do.
+
 **Don't include unimportant packets**  If you have a problem with Access-Request packets, don't post a debug output which contains Accounting-Request packets, or packets for users who authenticate successfully.
 
-**Don't send configuration files to the list**.  All of the relevant information is in the debug output. 
+**Don't send configuration files to the list**.  All of the information we need is in the debug output.  Which is why we ask for the debug output.
+
+**Don't post screen captures of a terminal window which contains the debug output**.  Honestly, we shouldn't even have to say this.  It's not hard to cut & paste text from a terminal window into a mail message.
+
+**Don't post the same message multiple times.**  Everyone got your first message.  There's no reason to send it again.  If no one responded to your message, it's likely because the message is missing critical information.  See above.
+
+**Don't complain about any help you receive.**  The people replying are trying to help you, even if you don't understand their replies.  Ask more questions.  Ask for clarification.  Do the things they tell you to do.  Complaining about their free help is not a good idea.  It's the number one way to get banned from the list.
 
 ## Getting debug output
 
