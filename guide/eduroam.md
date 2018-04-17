@@ -213,7 +213,7 @@ eap {
 		certificate_file = ${certdir}/server.pem
 
 		# The private key for the public certificate
-		private_key_file = ${certdir}/server.pem
+		private_key_file = ${certdir}/server.key
 
 		# The password to decrypt 'private_key_file'
 		private_key_password = whatever
