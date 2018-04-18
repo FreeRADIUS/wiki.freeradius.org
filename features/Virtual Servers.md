@@ -39,29 +39,27 @@ following configuration enables the server to listen on two IP
 addresses, and to apply independent policies to packets received on each
 IP address.
 
-``` {.config}
-listen {
-    ipaddr = 192.0.2.1
-    port = 1812
-    type = auth
-    virtual_server = one
-}
-
-listen {
-    ipaddr = 192.0.2.2
-    port = 1812
-    type = auth
-    virtual_server = two
-}
-
-server one {
-    ...
-}
-
-server two {
-    ...
-}
-```
+    listen {
+        ipaddr = 192.0.2.1
+        port = 1812
+        type = auth
+        virtual_server = one
+    }
+    
+    listen {
+        ipaddr = 192.0.2.2
+        port = 1812
+        type = auth
+        virtual_server = two
+    }
+    
+    server one {
+        ...
+    }
+    
+    server two {
+        ...
+    }
 
 When packets are received on the IP address `192.0.2.1`, they will be
 processed through the `server one` virtual server. When packets are
@@ -81,32 +79,29 @@ example, the following configuration enables the server to have two
 clients, and to apply independent policies to packets received from each
 IP address.
 
-``` {.config}
-listen {
-    ipaddr = 192.0.2.3
-    port = 1812
-    type = auth
-    # no server section is defined here
-    clients = disambiguate
-}
-
-clients disambiguate {
-    client one {
-        ipaddr = 192.0.2.4
-        secret = testing123
-        virtual_server = one
+    listen {
+        ipaddr = 192.0.2.3
+        port = 1812
+        type = auth
+        # no server section is defined here
+        clients = disambiguate
     }
-
-    client two {
-        ipaddr = 192.0.2.5
-        secret = testing567
-        virtual_server = two
+    
+    clients disambiguate {
+        client one {
+            ipaddr = 192.0.2.4
+            secret = testing123
+            virtual_server = one
+        }
+        client two {
+            ipaddr = 192.0.2.5
+            secret = testing567
+            virtual_server = two
+        }
     }
-}
-...
-# server one as above
-# server two as above
-```
+    ...
+    # server one as above
+    # server two as above
 
 When packets are received on the IP address `192.0.2.3`, they will be
 processed through the `server one` virtual server if they are received
@@ -129,42 +124,41 @@ following configuration enables the server to have two home server
 pools, and to apply independent policies to packets that are proxied to
 home servers in each pool.
 
-``` {.config}
+
+        ...
+        home_server_pool one {
+            type = fail-over
+            home_server = 192.0.2.10
+            home_server = 192.0.2.11
+            home_server = 192.0.2.12
+            virtual_server = proxy-pool-one
+        }
+        home_server_pool two {
+            type = fail-over
+            home_server = 192.0.2.13
+            home_server = 192.0.2.14
+            home_server = 192.0.2.15
+            virtual_server = proxy-pool-two
+        }
+        ...
+    }
     ...
-    home_server_pool one {
-        type = fail-over
-        home_server = 192.0.2.10
-        home_server = 192.0.2.11
-        home_server = 192.0.2.12
-        virtual_server = proxy-pool-one
+    server proxy-pool-one {
+        pre-proxy {
+            ...
+        }
+        post-proxy {
+            ...
+        }
     }
-    home_server_pool two {
-        type = fail-over
-        home_server = 192.0.2.13
-        home_server = 192.0.2.14
-        home_server = 192.0.2.15
-        virtual_server = proxy-pool-two
+    server proxy-pool-two {
+        pre-proxy {
+            ...
+        }
+        post-proxy {
+            ...
+        }
     }
-    ...
-}
-...
-server proxy-pool-one {
-    pre-proxy {
-        ...
-    }
-    post-proxy {
-        ...
-    }
-}
-server proxy-pool-two {
-    pre-proxy {
-        ...
-    }
-    post-proxy {
-        ...
-    }
-}
-```
 
 When requests are sent to one of the home servers listed in the pool,
 they will be processed through the `server proxy-pool-one`, or the
@@ -179,26 +173,24 @@ tunneled requests to a virtual server. This mapping enables *completely
 independent* policies for each of the outer and inner tunneled sessions.
 This configuration was not possible in earlier versions of FreeRADIUS.
 
-``` {.config}
-modules {
-    ...
-    eap {
-        ttls {
-            ...
-            virtual_server = inner-tunnel
+    modules {
+        ...
+        eap {
+            ttls {
+                ...
+                virtual_server = inner-tunnel
+            }
+            peap {
+                ...
+                virtual_server = inner-tunnel
+            }
         }
-        peap {
-            ...
-            virtual_server = inner-tunnel
-        }
+        ...
     }
     ...
-}
-...
-server inner-tunnel {
-    ...
-}
-```
+    server inner-tunnel {
+        ...
+    }
 
 When requests are received inside of a TTLS or PEAP tunnel, they will be
 processed through the `server inner-tunnel` virtual server.
