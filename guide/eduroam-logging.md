@@ -132,7 +132,7 @@ place. An example linelog configuration could be something like
         messages {
             request = "%T request %{User-Name} %{Calling-Station-Id} ..."
             accept = "%T accept %{User-Name} %{session-state:User-Name} %{Calling-Station-Id} ..."
-            reject = "%T accept %{User-Name} %{session-state:User-Name} %{Calling-Station-Id} ..."
+            reject = "%T reject %{User-Name} %{session-state:User-Name} %{Calling-Station-Id} ..."
         }
     }
 
