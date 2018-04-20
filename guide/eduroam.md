@@ -383,7 +383,7 @@ It does the following:
 - Retrieve's the users password/forwards credentials to ActiveDirectory (if used).
 - Authenticates the user.
 
-NOTE: You may need to symlink ``mods-enabled/inner-eap`` to ``mods-available/inner-eap``. i.e. ``cd /etc/raddb/mods-available; ln -s mods-available/inner-eap ../mods-enabled/inner-eap``.
+NOTE: You may need to symlink ``mods-enabled/inner-eap`` to ``mods-available/inner-eap``. i.e. ``cd /etc/raddb/mods-available; ln -s ../mods-available/inner-eap ../mods-enabled/inner-eap``.
 
 ***
 
