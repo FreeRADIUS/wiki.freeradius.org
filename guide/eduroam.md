@@ -534,7 +534,7 @@ network={
 	# it was signed by this CA.
 	#ca_cert="raddb/certs/ca.pem"
 	password="changeme"
-	phase2="auth=MSCHAPV2"
+	phase2="auth=MSCHAPV2 mschapv2_retry=0"
 	phase1="peapver=0"
 }
 ```
