@@ -1,6 +1,6 @@
 # Introduction
 
-xlat expansions refer to the alternation and interpolation format used in all versions of the server.  xlat expansions the server to dynamically construct strings from the values of attributes and the output of various xlat C functions.  These xlat C functions allow data to be retrieved from various sources, or transformed (escaped, unescaped, encoded, decoded etc...).
+xlat expansions refer to the alternation and interpolation format used in all versions of the server.  xlat expansions the server to dynamically construct strings from the values of attributes and the output of various xlat C functions.  These xlat C functions allow data to be retrieved from various sources or transformed (escaped, unescaped, encoded, decoded etc...).
 
 When used in the server configuration xlat expansions usually look like this ``%{My-Attribute}``  or in the case of functions ``%{my_func:%{My-Attribute}}``.  xlat expansions can be nested to any depth.
 
@@ -60,11 +60,12 @@ There are two primary limitations of this method.
 
 ### Output
 
-In v3 output is either to a pre-allocated buffer (the length of which was determined at time of registration), or alternatively, the xlat function can allocate its own output buffers.  Unfortunately in both these cases the xlat evaluation code wouldn't necessarily treat the output buffers in a binary safe way, so xlat functions could not output binary data, this has lead to horrible hacks like xlat expansions creating attributes directly.
+In v3 output is either to a pre-allocated buffer (the length of which was determined at the time of registration) or alternatively, the xlat function can allocate its own output buffers.  Unfortunately, in both these cases, the xlat evaluation code wouldn't necessarily treat the output buffers in a binary safe way, so xlat functions could not output binary data, this has lead to horrible hacks like xlat expansions creating attributes directly.
 
-When xlat functions finish they return the number of bytes they wrote to the output buffer, or a negative integer if an error occurred. Unfortunately this change was introduced quite late in the v3.0.x branch and the xlat evaluation code was never updated to take advantage of it. 
+When xlat functions finish they return the number of bytes they wrote to the output buffer, or a negative integer if an error occurred. Unfortunately, this change was introduced quite late in the v3.0.x branch and the xlat evaluation code was never updated to take advantage of it. 
 
 ## How xlat functions work in v4
+
 ```c
 static xlat_action_t xlat_base64(TALLOC_CTX *ctx, fr_cursor_t *out,
                  REQUEST *request, UNUSED void const *xlat_inst, UNUSED void *xlat_thread_inst,
@@ -108,6 +109,55 @@ static xlat_action_t xlat_base64(TALLOC_CTX *ctx, fr_cursor_t *out,
     return XLAT_ACTION_DONE;
 }
 ```
+
+## Instances and Instantiation
+
+In FreeRADIUS <= 3 xlat functions were created and registered primarily by modules so it made sense to pass module instance data to the xlats.  This has changed in v4 and module instance data is not provided directly to xlat expansions.  If module instance data is still required it can be passed to the `xlat_register_async()` function and stored by the per-use instantiation function in per-use instance data.
+
+At registration time per-use global, and per-use thread-specific instantiation functions can be provided, these are used to create per-use instance data, which can be used by xlat functions to pre-compile literal components of input data, or store handles to things like stored procedures.
+
+For the majority of internal xlat functions the per-use xlat instance data is not used and can be marked as `UNUSED`.
+
+## Input
+
+v4 xlat functions get a linked list of boxed values (`fr_value_box_t`) as input.  These value boxes are basically a C union and a bit of additional data like taint state, and length (for variable length buffers).  They're a convenient way of emulating dynamic typing.  The individual chunks of input data passed into the xlat function are *not* concatenated by the calling code.  This is pretty useful for a few reasons.
+
+- The taint status (whether it came from a trusted source) of the different input values is maintained.  The new style xlat functions can emulate the escaping behaviour of the old ones by calling an escape function on any tainted input boxes.
+- You can emulate arguments by looking for boxes containing only whitespace.  More work needs to be done on this, but it is functional today.
+- Non-String/buffer types don't automatically get smashed into their string representations, meaning the code can be more efficient.
+
+Because many functions operate with a single argument there's a function provided to concatenate all the input arguments to a string if required.  It does this in place for efficiency reasons, and the xlat evaluation code does not expect input arguments to be in a sane/usable state once the xlat function has returned. See the call to `fr_value_box_list_concat` in the above base64 code for an example.
+
+After concatenation you can access the input data as a single string with `(*in)->vb_strvalue` and get the length with `(*in)->vb_length`. You must only use binary safe functions to operate on these strings as they could contain embedded `\0` bytes.
+
+If an xlat function wants to process the individual discreet chunks of input it can either traverse each box's `->next` pointer manually or use a `fr_cursor_t` and the associated functions.
+
+```
+fr_cursor_t cursor;
+fr_value_box_t *vb;
+
+vb = fr_cursor_init(&cursor, in);
+if (!vb) {
+	// Missing first argument
+}
+
+vb = fr_cursor_next(&cursor);
+if (!vb) {
+	// Missing second argument
+}
+```
+_An example of using a cursor to traverse input values_
+
+Note: The discreet boxes don't actually map to arguments.  This is likely to change in future where literals will be broken out into separate boxes on whitespace by the xlat evaluation code.
+
+## Output
+In v4 all xlat functions must allocate their own output memory.  A talloc context `ctx` is provided for this.
+
+Function output should be zero or more `fr_value_box_t`.  A cursor `out` is provided to insert additional values into.  When the xlat function is called the cursor will be at the end of any previously output.  You can use the full range of functions on this cursor, but it's recommended not to advance it, and to `fr_cursor_append(&cursor, <vb>)` any values your function produces.  If xlat function errors during its execution you can then call `fr_cursor_list_free(&cursor)` to free any values that have already been added to the output cursor so execution is idempotent.
+
+See `src/lib/util/value.c` and `src/lib/util/cursor.c` for value box and cursor manpulation functions and documentation.
+
+xlat functions should return `XLAT_ACTION_DONE` on success or `XLAT_ACTION_FAIL` on failure.  Exactly what happens on failure depends on where the expansion was called.  For example, if an xlat expansion is called as part of an update block and it fails, then the entire update block is rolled back.
 
 
 
