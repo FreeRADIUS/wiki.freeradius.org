@@ -6,7 +6,7 @@ When used in the server configuration xlat expansions usually look like this ``%
 
 You should not need to alter the xlat evaluation or parsing code itself as the xlat framework is extensible via runtime registered xlat functions.
 
-## How xlat functions work in v3
+# How xlat functions work in v3
 
 In v3 the base64 encoding function looked like this:
 
@@ -58,13 +58,13 @@ There are two primary limitations of this method.
 1. It is not possible to determine which fmt components were derived from expansions and which ones were provided as part of the configuration as literal strings.
 2. As the fmt string is not binary safe, any binary values must be passed in as attribute references `%{base64:&Attr-To-Encode}` which are then expanded by the xlat function itself.  That's what the `VALUE_FROM_FMT(tmp_ctx, p, inlen, request, fmt);` macro does in the above `base64` code.
 
-### Output
+## Output
 
 In v3 output is either to a pre-allocated buffer (the length of which was determined at the time of registration) or alternatively, the xlat function can allocate its own output buffers.  Unfortunately, in both these cases, the xlat evaluation code wouldn't necessarily treat the output buffers in a binary safe way, so xlat functions could not output binary data, this has lead to horrible hacks like xlat expansions creating attributes directly.
 
 When xlat functions finish they return the number of bytes they wrote to the output buffer, or a negative integer if an error occurred. Unfortunately, this change was introduced quite late in the v3.0.x branch and the xlat evaluation code was never updated to take advantage of it. 
 
-## How xlat functions work in v4
+# How xlat functions work in v4
 
 ```c
 static xlat_action_t xlat_base64(TALLOC_CTX *ctx, fr_cursor_t *out,
