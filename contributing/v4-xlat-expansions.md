@@ -160,5 +160,9 @@ See `src/lib/util/value.c` and `src/lib/util/cursor.c` for value box and cursor 
 
 xlat functions should return `XLAT_ACTION_DONE` on success or `XLAT_ACTION_FAIL` on failure.  Exactly what happens on failure depends on where the expansion was called.  For example, if an xlat expansion is called as part of an update block and it fails, then the entire update block is rolled back.
 
+## Helping out with conversion
 
+There are many xlat functions that need to be converted from the old style to the new style.  If you want to help out, pick an unconverted function in `src/main/xlat_func.c`, and send a pull request.
+
+Here's an [example commit]( https://github.com/FreeRADIUS/freeradius-server/commit/fcdce5cbbea1e1500ee46f4b14e2593b0b58fc3c) for converting the base64 xlat.
 
