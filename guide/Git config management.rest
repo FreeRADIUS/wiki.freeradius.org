@@ -44,7 +44,7 @@ To install it convert your raddb folder to a git repository (as show above)
 Copy the post-receive hook script to the .git/hooks dir::
 
  cd <config_dir>/raddb/.git/hooks
- wget https://github.com/freeradius/freeradius-server/blob/v4.0.x/scripts/git/post-receive
+ https://raw.githubusercontent.com/FreeRADIUS/freeradius-server/v4.0.x/scripts/git/post-receive
  chmod +x post-receive
 
 Edit parameters at the top of the file to work with with your system (defaults are for Ubuntu 10.04 LTS)
@@ -104,7 +104,7 @@ Extending the idea further you can add multiple cluster servers as remotes and p
      git push $remote master
  done
 
-.. _example: https://github.com/freeradius/freeradius-server/blob/v4.0.x/scripts/git/post-receive
+.. _example: https://raw.githubusercontent.com/FreeRADIUS/freeradius-server/v4.0.x/scripts/git/post-receive
 
 See Also
 ^^^^^^^^
