@@ -1,10 +1,9 @@
-Wiki Home
-=========
+# Wiki Home
 
 If you are new to FreeRADIUS, or wondering if it will be suitable for your requirements, please see **[[the overview and features|Overview-and-Features]]** that it provides.
 
-Documentation
--------------
+## Documentation
+
 **Beginners are strongly recommended to read these two pages first:**
 
 * **The [[concepts|guide/Concepts]] page**, which provides a very light overview of how the server works.
@@ -28,8 +27,7 @@ The following is an overview of the types of information available:
 * [[HOWTO|guide/HOWTO]] example setups, vendor docs, and cookbooks.
 * [[glossary|glossary/RADIUS]]
 
-Contributing
-------------
+## Contributing
 FreeRADIUS is an open source project and as such depends on contributions from its users. Even if you don't know C you can still contribute to the project by editing documentation on the wiki, posting bugs on [[GitHub|https://github.com/FreeRADIUS/freeradius-server/issues]] or helping out on the [[users mailing list|Mailing-list#Users+list]].
 
 If you are comfortable coding in C and have a patch or new module you'd like to see included in the main distribution, please see the [[submitting patches via GitHub|contributing/GitHub]] page for instructions on generating a 'pull request'. See also:
@@ -40,16 +38,14 @@ If you are comfortable coding in C and have a patch or new module you'd like to 
 
 For major refactoring and new modules, add an issue to [[GitHub|https://github.com/FreeRADIUS/freeradius-server/issues]], so that the core project team can comment on the proposed work.
 
-Bug reports
------------
+## Bug reports
 If you find an issue in the server please report it so that it can be fixed in a future release. The procedure for reporting defects can be found [[here|project/bug-reports]].
 
-This Wiki
----------
+## This Wiki
 This Wiki is now hosted on a FreeRADIUS project server, with a gollum front end backed by "git".  It is now easier to login and make changes.  Please see the [[New Wiki]] Page for details.
 
-.. A read only version of the wiki can be checked out using git::
-.. 
-..     git clone git://git.freeradius.org/wiki.freeradius.org.git
-.. (note, doesn't currently work)
+A read only version of the wiki can be checked out using git:
 
+```bash
+git clone git://git.freeradius.org/wiki.freeradius.org.git
+```
