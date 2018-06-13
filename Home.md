@@ -26,7 +26,7 @@ The following is an overview of the types of information available:
 * [[FAQ|guide/FAQ]]
 * [[HOWTO|guide/HOWTO]] example setups, vendor docs, and cookbooks.
 * [[glossary|glossary/RADIUS]]
-* [[Upgrading|upgrading/]]
+* [[Upgrading|upgrading/Home]]
 
 ## Contributing
 FreeRADIUS is an open source project and as such depends on contributions from its users. Even if you don't know C you can still contribute to the project by editing documentation on the wiki, posting bugs on [[GitHub|https://github.com/FreeRADIUS/freeradius-server/issues]] or helping out on the [[users mailing list|Mailing-list#Users+list]].
