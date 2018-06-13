@@ -47,5 +47,5 @@ This Wiki is now hosted on a FreeRADIUS project server, with a gollum front end 
 A read only version of the wiki can be checked out using git:
 
 ```bash
-git clone git://git.freeradius.org/wiki.freeradius.org.git
+git clone git@git.freeradius.org:wiki.freeradius.org
 ```
