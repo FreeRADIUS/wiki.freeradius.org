@@ -5,4 +5,4 @@ Information for upgrading between versions can be found in the ``raddb/README.rs
 Instructions by version:
 
 - [v2.2.x ➝ v3.0.x](https://github.com/FreeRADIUS/freeradius-server/blob/v3.0.x/raddb/README.rst).
-- [v3.0.x ➝ v4.0.x](https://github.com/FreeRADIUS/freeradius-server/blob/master/raddb/README.rst) with worked examples [here](/upgrading/version4/).
+- [v3.0.x ➝ v4.0.x](https://github.com/FreeRADIUS/freeradius-server/blob/master/raddb/README.md) with worked examples [here](/upgrading/version4/).
