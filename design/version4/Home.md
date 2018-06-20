@@ -3,6 +3,49 @@
 This document describes the history of the server, and the rationale
 behind the design decisions in version 4.
 
+## Release checklist
+
+| Feature				| Needed for release	| Complete		| Comments								
+|---					|---			|---			| ---									
+| Inline documentation			| Yes			| No			| Marking up existing FreeRADIUS configs with asciidoc syntax and setting up renderer
+| Migration guides			| Yes			| No			| Some already exist like proxy migration
+| Protocol dictionaries			| Yes			| Partial		|									
+| Multiple network threads		| No			| No			|									
+| Radmin/stats				| Yes			| In progress		| Widely used feature									
+| Sync/Async shim			| Yes			| In progress		| Allows async code to be called synchronously				
+| Async xlat conversions		| Yes			| In progress		| Changes behaviour of xlats/escaping so should be there before release 
+| Async unlang keyword - update		| Yes			| Yes			|
+| Async unlang keyword - switch		| No			| No			|
+| Async unlang keyword - foreach	| No			| No			|
+| Async unlang keyword - map		| No			| No			|
+| Async conditions			| No			| No			| Supported by shim
+| xlat function calling convention	| Yes			| No			| %{xlat(arg0, arg2)} - Major behaviour change - required for some async xlats to be functional
+| rlm_cache - async			| No			| No			|
+| rlm_couchbase - async			| No			| No			|
+| rlm_detail - async			| No			| No			|
+| rlm_krb5 - async			| No			| No			|
+| rlm_ldap - async			| No			| No			|
+| rlm_linelog - async			| No			| Yes			|
+| rlm_lua - async			| No			| No			|
+| rlm_mruby - async			| No			| No			|
+| rlm_opendirectory - async		| No			| No			|
+| rlm_pam - async			| No			| No			|
+| rlm_passwd - async			| No			| No			|
+| rlm_perl - async			| No			| No			|
+| rlm_python - async			| No			| No			|
+| rlm_redis - async			| No			| No			|
+| rlm_redis_ippool - async		| No			| No			|
+| rlm_rediswho - async			| No			| No			|
+| rlm_rest - async			| No			| Yes			|
+| rlm_securid - async			| No			| No			|
+| rlm_sigtran - async			| No			| No			|
+| rlm_sql - async			| No			| No			|
+| rlm_sqlcounter - async		| No			| No			|
+| rlm_sqlippool - async			| No			| No			|
+| rlm_unbound - async			| No			| No			|
+| rlm_winbind - async			| No			| No			|
+| rlm_yubikey - async			| No			| No			|
+
 ## Problem Statement
 
 The core of the server has grown in complexity over time.  There have
