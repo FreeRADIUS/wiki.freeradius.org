@@ -206,4 +206,4 @@ This change was made in order to permit new features which were long requested i
 
 Until now.
 
-Please see the [Proxy Extensions](proxy-extensions) page for more information.
+Please see the [Proxy Extensions](proxy-extensions) page for new proxy features.  These include proxying to multiple destinations, failing over to local authentication if proxying fails, and more.
