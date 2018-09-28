@@ -18,9 +18,9 @@ See [[Basic configuration HOWTO]]
 
 ##Setting up the RADIUS database##
 
-First, you should create a new empty 'radius' database in SQL and create the schema for the database. There is an SQL script file for each SQL type in /etc/raddb/mods-config/sql/main/*sql_dialect*/schema.sql (or where you installed FreeRADIUS to).
+First, you should create a new empty 'radius' database in SQL and create the schema for the database. There is an SQL script file for each SQL type in `mods-config/sql/main/*sql_dialect*/schema.sql` (or where you installed FreeRADIUS to).
 
-Next create a database user with permissions to that database. You could of course call the database and the user anything you like but you probably should stick with 'radius' for the user to keep things simple. You can find sql statements to achieve this in /etc/raddb/mods-config/sql/main/*sql_dialect*/setup.sql
+Next create a database user with permissions to that database. You could of course call the database and the user anything you like but you probably should stick with 'radius' for the user to keep things simple. You can find sql statements to achieve this in `mods-config/sql/main/*sql_dialect*/setup.sql`
 
 
 ##Example setup of MySQL database##
@@ -35,13 +35,13 @@ The following section show how this can be done when using a MySQL database.
 ###Create SQL schema###
  Execute the following command to create the database schema
 
-    mysql -uroot -p radius < /etc/raddb/mods-config/sql/main/mysql/schema.sql
+    mysql -uroot -p radius < mods-config/sql/main/mysql/schema.sql
 
 
 ###Create MySQL User and grant permissions###
- In the file /etc/raddb/mods-config/sql/main/mysql/setup.sql set a more secure password than 'radpass'. If your SQL server is running on a different machine you also have to replace the `localhost` with your radius server.
+ In the file `mods-config/sql/main/mysql/setup.sql` set a more secure password than 'radpass'. If your SQL server is running on a different machine you also have to replace the `localhost` with your radius server.
 
-    mysql -uroot -p radius < /etc/raddb/mods-config/sql/main/mysql/setup.sql
+    mysql -uroot -p radius < `mods-config/sql/main/mysql/setup.sql`
 
 ##Configuring FreeRADIUS to use SQL##
 
@@ -50,13 +50,13 @@ Edit /etc/mods-available/sql module and enter the SQL dialect, driver, server, u
 Next enable the sql module by executing
 
 <pre>
-    cd /etc/raddb/mods-enabled
+    cd mods-enabled
     ln -s ../mods-available/sql sql
 </pre>
 
-Edit /etc/raddb/sites-available/default (or whatever site config you use) and uncomment the line containing 'sql' in the authorize{} section. The best place to put it is just after the 'files' entry. Indeed, if you'll just be using SQL, and not falling back to text files, you could comment out or delete the 'files' entry altogether.
+Edit /`sites-available/default` (or whatever site config you use) and uncomment the line containing `sql` in the `authorize{}` section. 
 
-Additionally, edit /etc/raddb/sites-available/inner-tunnel and uncomment the line containing 'sql' under "authorize {}".
+Additionally, edit `sites-available/inner-tunnel` and uncomment the line containing 'sql' under "authorize {}".
 
 Also uncomment the line saying 'sql' in the accounting{} section to tell FreeRADIUS to store accounting records in SQL as well.
 
@@ -64,7 +64,7 @@ Optionally add or uncomment 'sql' to the session{} section if you want to do Sim
 
 Optionally add or uncomment 'sql' to the post-auth{} section if you want to log all Authentication attempts to SQL.
 
-Optionally, if you want to strip all realm names (i.e. you want user joe@domain.com to authenticate as just 'joe'), then in file /etc/raddb/mods-config/sql/main/*sql_dialect*/queries.conf , under the 'query config: username' section, you MAY need to adjust the line(s) referring to sql_user_name. For example, in uncomment the line:
+Optionally, if you want to strip all realm names (i.e. you want user joe@domain.com to authenticate as just 'joe'), then in file `mods-config/sql/main/*sql_dialect*/queries.conf` , under the 'query config: username' section, you MAY need to adjust the line(s) referring to sql_user_name. For example, in uncomment the line:
  
     sql_user_name = '%{Stripped-User-Name}'
 
@@ -80,7 +80,7 @@ The config you use (e.g. sites-enabled/default) should then look something like 
         mschap
         suffix
         eap
-        # We leave "files" enabled to allow creation of test users in /etc/raddb/users
+        # We leave "files" enabled to allow creation of test users in the "users" file
         files
         sql
         pap
@@ -194,7 +194,7 @@ Congratulations. You're done!
 * Running a backup FreeRADIUS server and need to replicate the RADIUS database to it? You can follow Colin Bloch's basic instructions at http://www.ls-l.net/mysql/ and got replication setup between two MySQL servers. Real easy. Read the MySQL docs on replication for more details.
 
 On the subject of backup servers. If you want to run TWO MySQL servers and have FreeRADIUS fall over between them, you'll need to do something like this: 
-* duplicate your sql.conf twice
+* duplicate your `mods-enabled/sql` file twice
 * change the module names from `sql { ....` to something like `sql sql1 { ....` and `sql sql2 { ....`
 * edit the second copy to reflect connecting to your backup server  
 * in the different sections of your site config (eg. sites-enabled/default) change the 'sql' entry to a 'redundant sql' one, like this:
