@@ -40,9 +40,9 @@ help.
 **Capture right from the starting banner**, not just the few lines
 you think are useful.
 
-**Include a packet** being processed. If you stop capturing before
-any packets have been received, nobody can tell what happens to
-the packets.
+**Include a packet** being processed. If you post the debug output
+which doesn't show any packets being received, nobody can tell what
+happens when the server receives packets.
 
 Don't post the debug output where the last line is **Ready to process requests.**  This means that the server hasn't received any packets.  If you post that, the only thing that will happen is that people will ask you to post the debug output, **again**, but this time where it receives packets.
 
