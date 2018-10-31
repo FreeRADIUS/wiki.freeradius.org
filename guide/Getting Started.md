@@ -19,8 +19,8 @@ recommended to move to the latest released stable version before
 moving into production.
 
 If you need to install it yourself, the Wiki
-[installation](http://wiki.freeradius.org/Installation) page contains
-detailed instructions for a number of platforms.
+[building and installing](http://wiki.freeradius.org/building/Home)
+page contains detailed instructions for a number of platforms.
 
 Otherwise, we assume that you can install the server via something like
 `yum install freeradius`, or `apt-get install freeradius`.
