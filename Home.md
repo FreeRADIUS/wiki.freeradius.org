@@ -46,8 +46,3 @@ If you find an issue in the server please report it so that it can be fixed in a
 ## This Wiki
 This Wiki is now hosted on a FreeRADIUS project server, with a gollum front end backed by "git".  It is now easier to login and make changes.  Please see the [[New Wiki]] Page for details.
 
-A read only version of the wiki can be checked out using git:
-
-```bash
-git clone git@git.freeradius.org:wiki.freeradius.org
-```
