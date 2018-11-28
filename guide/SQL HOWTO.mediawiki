@@ -46,9 +46,7 @@ Ubuntu schema files are not called mysql.sql, but schema.sql. The location is:
 
  mysql -u root -p radius &lt; /etc/freeradius/sql/mysql/schema.sql
 
-You might to additionally create this table if you're managing your NASses with FreeRadius:
-
- mysql -u root -p radius &lt; /etc/freeradius/sql/mysql/nas.sql
+If you're managing your NASses with FreeRadius, the nas table is already included in schema.sql.
 
 ===Create PostgreSQL Database===
 
