@@ -482,8 +482,6 @@ eap inner-eap {
 }
 ```
 
-**NB** : The error message sent by MSCHAP (i.e. E=691 R=1 C=479ca6c6e0f664724d0a7f9eebc916d6 V=3 M=Authentication failed) when the user fails to authenticate may be interpreted (it is left to determine in which circumstances) by the EAP (i.e. : Found new challenge from MS-CHAP-Error), so the authentication cycle doesn't succeed but repeats endlessly.
-
 ## Testing
 
 ``eapol_test`` is the utility of choice when testing. Some basic config files for ``eapol_test`` are given below, which allow you to generate EAP-TTLS, EAP-PEAP and EAP-TLS requests.
