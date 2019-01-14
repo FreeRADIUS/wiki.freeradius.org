@@ -177,7 +177,7 @@ Exemple for single tagged VLAN, MAC-based:
     Egress-VLANID = `%{expr: 0x31000000 + 451}`
 ```
 
-This entry will assign the port to the single tagged VLAN of ID 451. With use of an expr, it is possible to use integer addition to show the composition of the bit string, with the leading `0x31` for tagged VLAN, the `0x000` padding and the VLAN ID. 
+This entry will assign the port to the single tagged VLAN of ID 451. With use of an [expr](https://freeradius.org/radiusd/man/rlm_expr.html), it is possible to use integer addition to show the composition of the bit string, with the leading `0x31` for tagged VLAN, the `0x000` padding and the VLAN ID. 
 
 Exemple for single untagged and multiple tagged VLANs, MAC-based:
 
