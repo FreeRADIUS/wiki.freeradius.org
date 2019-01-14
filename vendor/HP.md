@@ -193,7 +193,7 @@ Exemple for single untagged and multiple tagged VLANs, MAC-based:
 
 ```
 
-This entry will assign the port to the single untagged VLAN of ID 664 and to four tagged VLAN of IDs 451 to 454. Note the use of the `+=` operator for multiple instances of the same attribute.
+This entry will assign the port to the single untagged VLAN of ID 664 and to four tagged VLAN of IDs 451 to 454. Note the use of the `+=` [[operator|Operators]] for multiple instances of the same attribute.
 
 ### Dynamic CoS (802.1p) Remapping
 
