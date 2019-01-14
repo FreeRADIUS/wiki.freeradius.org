@@ -136,6 +136,17 @@ If the specified Tunnel-Private-Group-Id matches a VLAN present on the switch, t
 
 On session termination, the ports VLAN membership will revert back to it's statically assigned untagged VLAN. If the specified Tunnel-Private-Group-Id does not match a configured or learned VLAN, authentication will fail.
 
+Exemple for single untagged VLAN, MAC-based:
+
+```
+"b0b867cf9b62" Cleartext-Password := "b0b867cf9b62"
+    Tunnel-Type = VLAN,
+    Tunnel-Medium-Type = IEEE-802,
+    Tunnel-Private-Group-ID = 664
+```
+
+This entry will assign the port to the single untagged VLAN of ID 664.
+
 #### RFC 4675 (multiple tagged/untagged VLAN) Assignment
 
 RADIUS Attribute              |Times Used|Description                                           |Value String | Value
@@ -158,6 +169,31 @@ _Note: It is not possible to specify the ingress untagged VLAN with RFC 4675 att
 ###### Ingress-Filters VSA is ignored by all HP ProCurve switches #####
 The default switching 'philosophy' of ProCurve switches is to filter ingress packets based on the egress VLAN membership of a port, this goes against the 802.1Q standard, which requires that frames be allowed to ingress, even if their tag does not match a VLAN the port is a member of.
 Supporting this attribute (i.e. allowing promiscuous ingress) would break the ProCurve switching philosophy, and so this attribute is ignored.
+
+Exemple for single tagged VLAN, MAC-based:
+
+```
+"b0b867cf9b62" Cleartext-Password := "b0b867cf9b62"
+    Egress-VLANID = `%{expr: 0x31000000 + 451}`
+```
+
+This entry will assign the port to the single tagged VLAN of ID 451. With use of an expr, it is possible to use integer addition to show the composition of the bit string, with the leading `0x31` for tagged VLAN, the `0x000` padding and the VLAN ID. 
+
+Exemple for single untagged and multiple tagged VLANs, MAC-based:
+
+```
+"b0b867cf9b62" Cleartext-Password := "b0b867cf9b62"
+    Tunnel-Type = VLAN,
+    Tunnel-Medium-Type = IEEE-802,
+    Tunnel-Private-Group-ID = 664,
+    Egress-VLANID += `%{expr: 0x31000000 + 451}`,
+    Egress-VLANID += `%{expr: 0x31000000 + 452}`,
+    Egress-VLANID += `%{expr: 0x31000000 + 453}`,
+    Egress-VLANID += `%{expr: 0x31000000 + 454}`
+
+```
+
+This entry will assign the port to the single untagged VLAN of ID 664 and to four tagged VLAN of IDs 451 to 454. Note the use of the `+=` operator for multiple instances of the same attribute.
 
 ### Dynamic CoS (802.1p) Remapping
 
