@@ -307,18 +307,22 @@ A basic realm to forward requests to your NRO's FLRs'.
 #### ``proxy.conf``
 ```
 home_server eduroam_flr_server_1 {
-        ipaddr = <ip-address>
-        secret = <secret>
-	status_check = status-server
-	response_window = 5
+        ipaddr = '36.66.7.251'
+        secret = 'jangantanyasaya'
+        status_check = status-server
+        response_window = 5
+        check_interval = 10
+        check_timeout = 5
 }
 
 # Only uncomment if there are two FLRS
 #home_server eduroam_flr_server_2 {
-#	ipaddr = <ip-address>
-#	secret = <secret>
-#	status_check = status-server
-#	response_window = 5
+#       ipaddr = <ip-address>
+#       secret = <secret>
+#       status_check = status-server
+#       response_window = 5
+#       check_interval = 10
+#       check_timeout = 5
 #}
 home_server_pool eduroam_flr_pool {
         type = keyed-balance
@@ -331,7 +335,6 @@ realm eduroam_flr {
         auth_pool = eduroam_flr_pool
 	nostrip
 }
-
 ```
 
 ***
