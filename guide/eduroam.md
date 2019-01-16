@@ -310,6 +310,7 @@ home_server eduroam_flr_server_1 {
         ipaddr = <ip-address>
         secret = <secret>
 	status_check = status-server
+	response_window = 5
 }
 
 # Only uncomment if there are two FLRS
@@ -317,6 +318,7 @@ home_server eduroam_flr_server_1 {
 #	ipaddr = <ip-address>
 #	secret = <secret>
 #	status_check = status-server
+#	response_window = 5
 #}
 home_server_pool eduroam_flr_pool {
         type = keyed-balance
