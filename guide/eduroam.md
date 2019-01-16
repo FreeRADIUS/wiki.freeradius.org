@@ -160,12 +160,12 @@ server eduroam {
 		}
 		if (&control:Proxy-To-Realm) {
 			update reply {
-				Tunnel-Private-Group-ID = ${eduroam_guest_vlan}
+				Tunnel-Private-Group-ID = ${eduroam_default_guest_vlan}
 			}
 		}
 		else {
 			update reply {
-				Tunnel-Private-Group-ID = ${eduroam_local_vlan}
+				Tunnel-Private-Group-ID = ${eduroam_default_local_vlan}
 			}
 		}
 
