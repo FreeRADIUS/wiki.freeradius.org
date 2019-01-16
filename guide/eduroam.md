@@ -307,8 +307,8 @@ A basic realm to forward requests to your NRO's FLRs'.
 #### ``proxy.conf``
 ```
 home_server eduroam_flr_server_1 {
-        ipaddr = '36.66.7.251'
-        secret = 'jangantanyasaya'
+        ipaddr = <ip-address>
+        secret = <secret>
         status_check = status-server
         response_window = 5
         check_interval = 10
