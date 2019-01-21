@@ -297,9 +297,9 @@ linelog linelog_recv_proxy_response {
 	syslog_severity = debug
 	format = "messages.%{proxy-reply:Response-Packet-Type}"
 	messages {
-		Access-Accept = "action = Recv-Proxy-Accept, User-Name = %{User-Name}, Called-Station-ID = %{Calling-Station-ID}, %{pairs:proxy-reply:}"
-		Access-Reject = "action = Recv-Proxy-Reject, User-Name = %{User-Name}, Called-Station-ID = %{Calling-Station-ID}, %{pairs:proxy-reply:}"
-		Access-Challenge = "action = Recv-Proxy-Challenge, User-Name = %{User-Name}, Called-Station-ID = %{Calling-Station-ID}, %{pairs:proxy-reply:}"
+		Access-Accept = "action = Recv-Proxy-Accept, User-Name = %{User-Name}, Calling-Station-Id = %{Calling-Station-Id}, %{pairs:proxy-reply:}"
+		Access-Reject = "action = Recv-Proxy-Reject, User-Name = %{User-Name}, Calling-Station-Id = %{Calling-Station-Id}, %{pairs:proxy-reply:}"
+		Access-Challenge = "action = Recv-Proxy-Challenge, User-Name = %{User-Name}, Calling-Station-ID = %{Calling-Station-Id}, %{pairs:proxy-reply:}"
 	}
 }
 
