@@ -295,7 +295,12 @@ linelog linelog_recv_proxy_response {
 	filename = syslog
 	syslog_facility = local0
 	syslog_severity = debug
-	format = "action = Recv-Proxy-Response, %{pairs:proxy-reply:}"
+	format = "messages.%{proxy-reply:Response-Packet-Type}"
+	messages {
+		Access-Accept = "action = Recv-Proxy-Accept, User-Name = %{User-Name}, Called-Station-ID = %{Calling-Station-ID}, %{pairs:proxy-reply:}"
+		Access-Reject = "action = Recv-Proxy-Reject, User-Name = %{User-Name}, Called-Station-ID = %{Calling-Station-ID}, %{pairs:proxy-reply:}"
+		Access-Challenge = "action = Recv-Proxy-Challenge, User-Name = %{User-Name}, Called-Station-ID = %{Calling-Station-ID}, %{pairs:proxy-reply:}"
+	}
 }
 
 ```
