@@ -300,6 +300,16 @@ linelog linelog_recv_proxy_response {
 
 ```
 
+You will also need to configure your local syslog deaemon to log these messages.
+
+For rsyslogd you could do that with the following:
+
+```
+echo "local0.debug					/var/log/radius_auth.log" > /etc/rsyslog.d/radiusd.conf
+```
+
+Then setup the appropriate log rotation rules.
+
 ***
 A basic realm to forward requests to your NRO's FLRs'.
 ***
