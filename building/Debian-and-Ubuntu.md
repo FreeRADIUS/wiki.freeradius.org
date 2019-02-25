@@ -12,18 +12,28 @@ Building packages should be very simple. First obtain a copy of the source and u
 
 [[include:Getting-the-Source]]
 
-### Building Packages
+### Installing build dependencies
 
-Having retrieved whichever version of the source you require, build the FreeRADIUS packages:
+Use the following to make sure that all build dependencies are all installed:
 
 ```bash
 sudo apt-get install devscripts quilt debhelper fakeroot equivs
+fakeroot debian/rules debian/control
 fakeroot debian/rules clean
 sudo mk-build-deps -ir debian/control
-dpkg-buildpackage -rfakeroot -b -uc
 ```
 
-This will build packages in the parent directory, which can be installed with ``dpkg -i``.
+### Building Packages
+
+Having retrieved whichever version of the source you require and installed dependencies, build the FreeRADIUS packages:
+
+```bash
+make deb
+```
+
+This will build packages in the parent directory, which can be installed with ``dpkg -i`` or ``apt install``.
+
+On recent releases you should ensure the source tree is completely clean before running `make deb`, e.g. do not run `./configure` first. (However, on releases before 3.0.16 you _must_ run `./configure` first.)
 
 ### Building from source
 
