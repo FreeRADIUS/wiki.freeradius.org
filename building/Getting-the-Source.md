@@ -28,7 +28,7 @@ cd freeradius-server-3.0.x/
 
 ```bash
 wget https://github.com/FreeRADIUS/freeradius-server/archive/release_3_0_18.zip
-unzip v3.0.18.zip
-cd freeradius-server-3.0.18/
+unzip release_3_0_18.zip
+cd freeradius-server-release_3_0_18/
 ```
 
