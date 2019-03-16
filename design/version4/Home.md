@@ -9,7 +9,7 @@ behind the design decisions in version 4.
 |---					|---			|---			| ---									
 | Inline documentation			| Yes			| No			| Marking up existing FreeRADIUS configs with asciidoc syntax and setting up renderer
 | Migration guides			| Yes			| No			| Some already exist like proxy migration
-| Protocol dictionaries			| Yes			| Partial		|									
+| Protocol dictionaries			| Yes			| Yes			|									
 | Multiple network threads		| No			| No			|									
 | Radmin/stats				| Yes			| In progress		| Widely used feature									
 | Sync/Async shim			| Yes			| In progress		| Allows async code to be called synchronously				
