@@ -1,7 +1,7 @@
 Latest version of libkqueue can be found [here](https://github.com/mheily/libkqueue/releases).
 
 ```bash
-# Replace v2.1.0 with latest version
+# Replace v2.3.1 with latest version
 VERSION=2.3.1
 wget https://github.com/mheily/libkqueue/archive/v${VERSION}.tar.gz
 tar -xvzf v${VERSION}.tar.gz
