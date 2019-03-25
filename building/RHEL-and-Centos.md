@@ -63,7 +63,7 @@ Unfortunately neither RHEL nor Centos provide an RPM for libkqueue.  The instruc
 Building the libkqueue RPM will require these packages:
 
 ````
-yum -y install wget automake autoconf libtool rpm-build
+yum -y install cmake3
 ````
 
 [[include:libkqueue-rpm]]
