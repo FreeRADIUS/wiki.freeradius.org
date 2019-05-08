@@ -22,22 +22,22 @@ behind the design decisions in version 4.
 | xlat function calling convention	| Yes			| No			| %{xlat(arg0, arg2)} - Major behaviour change - required for some async xlats to be functional
 | rlm_cache - async			| No			| No			|
 | rlm_couchbase - async			| No			| No			|
-| rlm_detail - async			| No			| No			|
+| rlm_detail - async			| No			| No			| We will likely need to print to a memory buffer, and then call `write()` all in one shot.  It's almost impossible to have async file IO operations.
 | rlm_krb5 - async			| No			| No			|
 | rlm_ldap - async			| No			| No			|
 | rlm_linelog - async			| No			| Yes			|
 | rlm_lua - async			| No			| No			|
 | rlm_mruby - async			| No			| No			|
 | rlm_opendirectory - async		| No			| No			|
-| rlm_pam - async			| No			| No			|
-| rlm_passwd - async			| No			| No			|
+| rlm_pam - async			| No			| Yes			| PAM doesn't provide an async API.  This will need to be noted in the documentation.
+| rlm_passwd - async			| No			| Yes			| The module just looks up hashes in memory.  It's already async.
 | rlm_perl - async			| No			| No			|
 | rlm_python - async			| No			| No			|
 | rlm_redis - async			| No			| No			|
 | rlm_redis_ippool - async		| No			| No			|
 | rlm_rediswho - async			| No			| No			|
 | rlm_rest - async			| No			| Yes			|
-| rlm_securid - async			| No			| No			|
+| rlm_securid - async			| No			| Yes			| RSA does not provide an async API.  This will need to be noted in the documentation.
 | rlm_sigtran - async			| No			| No			|
 | rlm_sql - async			| No			| No			|
 | rlm_sqlcounter - async		| No			| No			|
