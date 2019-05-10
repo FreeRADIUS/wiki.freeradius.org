@@ -45,7 +45,7 @@ We would like to publicly thank the following major contributors:
 +------------------------------+-----------------------------------------------------------+----------------+
 | Jochen Friedrich             | v1 SMUX / SNMP support (since removed).                   | no             |
 +------------------------------+-----------------------------------------------------------+----------------+
-| John Dennis                  | Maintains RHEL RPMs and acts as liaison with RH.          | yes            |
+| John Dennis                  | Maintained RHEL RPMs and acted as liaison with RH.        | no             |
 +------------------------------+-----------------------------------------------------------+----------------+
 | Kostas Kalevras              | Contributed the 'dialup_admin' PHP server administration  | no             |
 |                              | code.                                                     |                |
