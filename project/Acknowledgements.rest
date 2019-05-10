@@ -63,10 +63,10 @@ We would like to publicly thank the following major contributors:
 +------------------------------+-----------------------------------------------------------+----------------+
 | Nathan Neulinger             | pre v3 rlm_krb5                                           | no             |
 +------------------------------+-----------------------------------------------------------+----------------+
-| Peter Nixon                  | Maintains rlm_sqlippool and hacks on other SQL related    | yes            |
-| http://www.peternixon.net    | code, maintains openSUSE binary packages.                 |                |
+| Peter Nixon                  | Maintained rlm_sqlippool and hacks on other SQL related   | no             |
+| http://www.peternixon.net    | code, maintained openSUSE binary packages.                |                |
 +------------------------------+-----------------------------------------------------------+----------------+
-| Phil Mayers                  | - Wrote the SoH code.                                     | yes            |
+| Phil Mayers                  | - Wrote the SoH code.                                     | no             |
 | http://github.com/philmayers | - Added many enhancements to rlm_eap.                     |                |
 |                              | - Started the code documentation effort.                  |                |
 +------------------------------+-----------------------------------------------------------+----------------+
