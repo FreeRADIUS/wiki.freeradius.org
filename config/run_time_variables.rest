@@ -112,10 +112,6 @@ String Lengths
 ----------------------
 The dynamic translations support a few additional operations, too::
 
-  ; %{#string}
-  : The number of characters in %{string}.  If %{string} is not set, then the length is not set.  This will NOT work for the one-character variables defined below.
-  : e.g. %{#Junk-junk:-foo} will yield the string "foo".
-  
   ; %{Attribute-Name[index]}
   : Reference the N'th occurance of the given attribute.  The indexes start at zero.  This feature is NOT available for non-attribute dynamic translations, like %{sql:...}.
   : e.g. %{User-Name[0]} is the same as %{User-Name}
@@ -127,9 +123,6 @@ The dynamic translations support a few additional operations, too::
   
   ; %{Attribute-Name[*]}
   : Expands to a single string, with the value of each array member separated by a newline.
-
-  ; %{#Attribute-Name[index]}
-  : Expands to the length of the string %{Attribute-Name[index]}.
 
 Attributes as environment variables in executed programs
 -----------------------------------------------------------------------------
