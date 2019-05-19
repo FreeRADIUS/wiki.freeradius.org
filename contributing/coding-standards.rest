@@ -60,6 +60,56 @@ frpairfind
 fr_pairfind
 ```
 
+Variable names
+^^^^^^^^^^^^^^
+
+Variable names should be unambiguous, and should describe the thing they represent in plain english.  Contractions should be avoided in the majority of cases, especially if there are multiple ways of writing them.
+
+If acronyms must be used, they should usually be formed of the first letter of each of the name components of the structure they represent.
+
+**Good**
+_There's internal debate about which one of these is more appropriate, this is one of the few cases where you'll likely see inconsistency, if in doubt, stick with whatever format is used in the source file you're editing_
+```c
+eap_session_t *eap_session;
+eap_session_t *es;
+```
+
+***Bad**
+```c
+eap_session_t *eps;
+eap_session_t *eap_sess;
+```
+
+Function names
+^^^^^^^^^^^^^^
+
+Should describe the operation they perform in plain english.  Contractions should be avoided in the majority of cases, especially if there are multiple ways of writing them.
+
+Generally function names should not contain acronyms, unless they are in general use, required by a protocol, or match a common acronym used for variables representing a particular type of structure (``da`` is a very common one here, and expands to dictionary attribute, or ``fr_dict_attr_t``.
+
+Search functions will generally be in the format of ``<prefix>_<noun>_<preposition>_<noun>``, e.g. ``fr_pair_find_by_da``.
+
+Conversion or wrapping functions will generally be in the same form, but with ``from`` and ``to`` used as the preposition, e.g. ``fr_tmpl_from_str``.  Where the preposition is prefixed with an 'a' (alloc) it means the resulting object will be allocated on the heap.
+
+In all cases unnecessary acronyms and contractions should be avoided, i.e. if you're using calling the function once, and the rest of the body of the code you're working in doesn't contain contractions or acronyms, don't use then.
+
+***Good***
+```c
+fr_pair_find_by_num
+fr_packet_list_alloc
+map_proc_find_by_name
+fr_pair_afrom_da
+```
+
+***Bad***
+```c
+fr_pair_search  	/* What are we searching with? */
+fr_packet_list  	/* No idea what action is being performed */
+proc_find_by_name	/* Proc is ambiguous - Stands for processor in this context, but what kind of processor? */
+fr_pair_alloc_with_da   /* Non standard preposition */
+mod_ms_aa               /* Gratuitous and unnecessary use of non-standard and ambiguous acronyms */
+```
+
 Prefixes / namespaces
 ^^^^^^^^^^^^^^^^^^^^^
 
