@@ -163,7 +163,7 @@ Integer
 ^^^^^^^
 ``int`` should be used for most functions. Negative integers indicate failure, zero indicates success, positive integers indicate success with caveats.
 
-If you find a function returns significant (>= 4) numbers of different integer values, you should define C preprocessor macros, and an enum type so that it's clear in calling code what the different values mean.
+If you find a function returns significant (>= 4) numbers of different integer values, you should define an enum type so that it's clear in calling code what the different values mean.
 
 ```c
 typedef enum {
