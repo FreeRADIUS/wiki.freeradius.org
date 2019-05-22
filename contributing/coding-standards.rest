@@ -93,7 +93,7 @@ Conversion or wrapping functions will generally be in the same form, but with ``
 
 In all cases unnecessary acronyms and contractions should be avoided, i.e. if you're using calling the function once, and the rest of the body of the code you're working in doesn't contain contractions or acronyms, don't use then.
 
-***Good***
+**Good**
 ```c
 fr_pair_find_by_num
 fr_packet_list_alloc
@@ -101,7 +101,7 @@ map_proc_find_by_name
 fr_pair_afrom_da
 ```
 
-***Bad***
+**Bad**
 ```c
 fr_pair_search  	/* What are we searching with? */
 fr_packet_list  	/* No idea what action is being performed */
