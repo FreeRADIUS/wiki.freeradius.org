@@ -343,7 +343,7 @@ Strings should also be broken at 120 columns for consistency.
 Always collapse or omit bodies (where possible)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-If a condition or loop and its body can be collapsed onto a single line, then do so.
+If a condition or loop and its body can be collapsed onto a single line, or omitted, then do so.
 
 **Good**
 ```c
