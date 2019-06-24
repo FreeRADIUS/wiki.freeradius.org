@@ -240,21 +240,26 @@ FreeRADIUS code style is very similar to 1TBS (one true brace style) with two ma
 **Good**
 ```c
 if (foo) bar();
-
+```
+```c
 if (foo) {
 	bar();
 	baz();
 }
-
+```
+```c
 for (i = 0; i < 10; i++) bar();
-
+```
+```c
 for (i = 0; i < 10; i++);
-
+```
+```c
 for (i = 0; i < 10; i++) {
 	bar();
 	baz();
 }
-
+```
+```c
 switch (foo) {
 case 'bar':
 	break;
@@ -268,17 +273,21 @@ case 'baz':
 ```c
 if (foo)
 	bar();
-
+```
+```c
 if (foo)
 	bar();
 else
 	baz();
-
+```
+```c
 for (i = 0; i < 10; i++)
 	bar();
-
+```
+```c
 for (i = 0; i < 10; i++) {}
-
+```
+```c
 switch (foo)
 {
 	case 'bar':
