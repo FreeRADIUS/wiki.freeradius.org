@@ -251,9 +251,6 @@ if (foo) {
 for (i = 0; i < 10; i++) bar();
 ```
 ```c
-for (i = 0; i < 10; i++);
-```
-```c
 for (i = 0; i < 10; i++) {
 	bar();
 	baz();
@@ -283,9 +280,6 @@ else
 ```c
 for (i = 0; i < 10; i++)
 	bar();
-```
-```c
-for (i = 0; i < 10; i++) {}
 ```
 ```c
 switch (foo)
@@ -358,6 +352,9 @@ if (foo && bar) baz();
 ```c
 while (foo()) baz();
 ```
+```c
+for (i = 0; i < 10; i++);
+```
 
 **Bad**
 ```c
@@ -377,6 +374,9 @@ while (foo()) {
 ```c
 while (foo())
 	baz();
+```
+```c
+for (i = 0; i < 10; i++) {}
 ```
 
 Return early
