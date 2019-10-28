@@ -4,7 +4,7 @@ Tagged attributes are a horrible hack that breaks all kinds of things
 and makes the internal API more complex.  e.g. `TAG_ANY`.  The
 solution appears to be to use re-use [[groups]].
 
-We would create 30 attributes, `Tag-0` though `Tag-31`.  These
+We would create 32 attributes, `Tag-0` though `Tag-31`.  These
 attributes would be of type `group`, as with Diameter.
 
 The tagged attributes would then be put into the appropriate group by
