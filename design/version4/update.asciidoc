@@ -223,16 +223,20 @@ leaving only the domain.
 
 == Attribute overwriting
 
+```
 update {
 	&User-Name[~= /bob/] := 'john'
 }
+```
 
 All values containing 'bob' would be set to 'john'
 
 == Selective addition
 
+```
 update {
 	&User-Name[~= /bob/] = 'john'
 }
+```
 
 John would only be added if no User-Name values contained 'bob'
