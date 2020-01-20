@@ -2,6 +2,7 @@
 -----------------------------------------
 
 * [[Basic configuration|guide/Basic configuration HOWTO]]
+* [[Data usage reporting|guide/data-usage-reporting]]
 * [[EAP/MD5|guide/EAPMD5 HOWTO]]
 * [[eduroam|guide/eduroam]] - a very basic [eduroam](https://www.eduroam.org/) configuration guide
 * [[eduroam logging|guide/eduroam-logging]] - logging in eduroam, useful for other EAP setups
