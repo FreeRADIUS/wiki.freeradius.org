@@ -64,13 +64,17 @@ users.
 Solution
 --------
 
-FreeRADIUS is distributed with a schema extension which introduces a
+Forthcoming verions of FreeRADIUS will be distributed with a schema extension which introduces a
 `data_usage_by_period` table containing data usage keyed by time-period and
 user, and provides the means of “running an update process” to correctly
 populate this table, either by calling a stored procedure or running a seperate
 script:
 
     [raddb]/mods-config/sql/main/[database]/process-radacct.sql
+
+NOTE: Since this schema extension is independent of the server it can be downloaded directly from GitHub and used with an existing version of FreeRADIUS. For example, for MySQL download the following file in "raw" format: 
+
+https://github.com/FreeRADIUS/freeradius-server/blob/master/raddb/mods-config/sql/main/mysql/process-radacct.sql
 
 Rather than burdening the server with populating per-user, time-period data in
 real time, the standard `radacct` table is periodically processed to extract the
