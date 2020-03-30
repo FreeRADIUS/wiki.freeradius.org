@@ -416,16 +416,10 @@ int my_func(char const *value)
 }
 ```
 
-Goto labels are one level of indentation lower than the code they label
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Exdent goto labels
+^^^^^^^^^^^^^^^^^^
 
-**Good**
-```
-
-Error gotos jump backwards
-^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Error exit points and their goto labels should be defined the first time they occur in a function.
+Goto labels are one level of indentation lower than the code they label.
 
 **Good**
 ```c
@@ -460,6 +454,12 @@ int my_func(char const *value)
 	return 0;
 }
 ```
+
+
+Error gotos jump backwards
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Error exit points and their goto labels should be defined the first time they occur in a function.
 
 **Good**
 ```c
