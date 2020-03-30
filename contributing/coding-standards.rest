@@ -416,11 +416,50 @@ int my_func(char const *value)
 }
 ```
 
+Goto labels are one level of indentation lower than the code they label
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**Good**
+```
+
 Error gotos jump backwards
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Error exit points and their goto labels should be defined the first time they occur in a function.
 
+**Good**
+```c
+int my_func(char const *value)
+{
+	void *out;
+
+	if (input_parse(&out, value) < 0) {
+	error:
+		ERROR("Something bad happened");
+		return -1;
+	}
+	if (output_write(out) < 0) goto error;
+
+	return 0;
+}
+```
+
+**Bad**
+```c
+int my_func(char const *value)
+{
+	void *out;
+
+	if (input_parse(&out, value) < 0) {
+		error:
+		ERROR("Something bad happened");
+		return -1;
+	}
+	if (output_write(out) < 0) goto error;
+
+	return 0;
+}
+```
 
 **Good**
 ```c
