@@ -461,6 +461,8 @@ Error gotos jump backwards
 
 Error exit points and their goto labels should be defined the first time they occur in a function.
 
+The exception is when all uses of the goto are in a macro, in which case the goto label should be placed after the last return statement in the function.
+
 **Good**
 ```c
 int my_func(char const *value)
