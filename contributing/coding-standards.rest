@@ -416,8 +416,8 @@ int my_func(char const *value)
 }
 ```
 
-Exdent goto labels
-^^^^^^^^^^^^^^^^^^
+Outdent goto labels
+^^^^^^^^^^^^^^^^^^^
 
 Goto labels are one level of indentation lower than the code they label.
 
