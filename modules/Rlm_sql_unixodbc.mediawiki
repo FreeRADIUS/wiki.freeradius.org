@@ -1,3 +1,0 @@
-This is the driver of the [[rlm_sql]] [[module]] that connects to [[SQL]] databases using the unixODBC package.
-
-{{Default in the server source|src/modules/rlm_sql/drivers/rlm_sql_unixodbc/}}
