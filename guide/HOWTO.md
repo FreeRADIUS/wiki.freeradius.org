@@ -50,7 +50,6 @@ Other, old guides may be available below.
 * [[WPA Authentication for Windows XP Clients with RADIUS HOWTO|http://www.hep.phys.soton.ac.uk/~jhe/documents/WPA-Authentication+RADIUS-HOWTO.html]]
 * [[FreeRADIUS EAP/MD5: Windows XP as supplicant|http://www.freeradius.org/doc/EAP-MD5.html]]
 * [[EAP/TLS Setup for FreeRADIUS and Windows XP Supplicant|http://www.freeradius.org/doc/EAPTLS.pdf]]
-* [[Tutorial for AD integration|http://homepages.lu/charlesschwartz/radius/freeRadius_AD_tutorial.pdf]]
 * [[FreeRADIUS, L2TPD and MySQL|http://blog.derjohn.de/snipsnap/space/start/2006-09-27/1#Freeradius_und_MySQL]]
 * [[FreeRADIUS and Informix|http://web.pip.com.au/brads-howtos/freeradius-informix.html]]
 * [[FreeRADIUS with Oracle support on Debian|http://www.horoa.net/2011/06/installation-de-freeradius-avec-le-support-oracle/?lang=eng]]
