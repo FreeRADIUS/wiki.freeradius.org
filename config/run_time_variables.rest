@@ -33,6 +33,10 @@ Client-Shortname       The shortname assigned to the client, from which the pack
      %{config:section.subsection.item} Corresponding value in 'radiusd.conf'
                                        for the string value of that item.
 
+     %{config:modules.modulename[instance].item} Corresponding value from the 
+                                       configuration of a named instance of a
+                                       particular module.
+
 The %{config:...} variables should be used **very** carefully, as they may leak secret information from your RADIUS server, if you use them in reply attributes to the NAS!
 
 If your system supports regular expressions, then regular expression matching defines other special variables, just like in Perl.
