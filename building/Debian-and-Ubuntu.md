@@ -4,8 +4,6 @@ Building Debian packages (including Ubuntu) of FreeRADIUS from source is kept as
 
 ## Building the stable release (v3.0)
 
-At the time of writing (October 2016), the Debian and Ubuntu repositories contain only version 2 of the server, which is end-of-life and no longer officially supported by the FreeRADIUS project. You are therefore recommended to following the instructions here and build your own packages.
-
 Building packages should be very simple. First obtain a copy of the source and unpack it. Second, build the packages.
 
 ### Getting the source
