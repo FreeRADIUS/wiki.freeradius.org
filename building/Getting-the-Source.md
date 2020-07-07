@@ -6,7 +6,7 @@ http://https://freeradius.org/ftp/pub/freeradius/
 
 Look for `freeradius-server-3.0.*.tar.gz`
 
-* From the git repository (version 3.0.x)
+* OR the latest development version from the git repository (version 3.0.x)
 
 ```bash
 git clone https://github.com/FreeRADIUS/freeradius-server.git
@@ -14,7 +14,7 @@ cd freeradius-server
 git checkout v3.0.x
 ```
 
-* From a zip file (version 3.0.x - most recent stable version, though unreleased)
+* OR the latest development version from a zip file (version 3.0.x)
 
 ```bash
 wget https://github.com/FreeRADIUS/freeradius-server/archive/v3.0.x.zip
