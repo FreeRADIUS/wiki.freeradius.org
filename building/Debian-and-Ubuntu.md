@@ -35,7 +35,7 @@ On recent releases you should ensure the source tree is completely clean before 
 
 ### Building from source
 
-Alternatively, rather than building packages, you can build the source directly. Note that you will need to ensure all required dependencies are installed first (such as `libssl-dev`).
+Alternatively, rather than building packages, you can build the source directly. Note that you will need to ensure all required dependencies are installed first (such as `libkqueue-dev`, `libtalloc-dev`, and `libssl-dev`).
 
 ```bash
 # Use ./configure --enable-developer if you're debugging issues, or using unstable code.
