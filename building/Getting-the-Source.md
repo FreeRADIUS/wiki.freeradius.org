@@ -2,7 +2,7 @@ Do *one* of the following:
 
 * Get the latest stable release
 
-http://https://freeradius.org/ftp/pub/freeradius/
+https://freeradius.org/ftp/pub/freeradius/
 
 Look for `freeradius-server-3.0.*.tar.gz`
 
