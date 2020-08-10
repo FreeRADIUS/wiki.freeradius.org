@@ -51,7 +51,7 @@ where -r 1 means retry only once and give up.
 See Also
 -------------
 `RADIUS Packet of Disconnect with Cisco equipment
-<http://www.cisco.com/en/US/docs/ios/12_2t/12_2t8/feature/guide/ft_pod1.html>`_
+<https://content.cisco.com/chapter.sjs?uri=/searchable/chapter/content/en/us/td/docs/ios-xml/ios/sec_usr_aaa/configuration/xe-3s/sec-usr-aaa-xe-3s-book/sec-rad-pack-disctnt.html.xml>`_
 
 `RFC 3576
 <http://www.ietf.org/rfc/rfc3576.txt>`_
