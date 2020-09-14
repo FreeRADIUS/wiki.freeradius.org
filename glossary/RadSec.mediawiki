@@ -1,4 +1,4 @@
-RadSec is a RADIUS extension developed by Open Systems Consultants Pty Ltd and implemented in Radiator 3.11 and onwards. It provides a TCP or SCTP connection between a RADIUS client and a RADIUS server. It allows any type of radius request to be proxied from the AuthBy RADSEC to the ServerRADSEC  and 
+RadSec is a RADIUS extension originally proposed by Open Systems Consultants Pty Ltd, and standardized in RFC 6614. It provides a TCP or SCTP connection between a RADIUS client and a RADIUS server. It allows any type of radius request to be proxied from the AuthBy RADSEC to the ServerRADSEC  and 
 then handled as configured in the RadSec server. Replies will be carried back 
 to the RadSec client and thence to the original requester. It was designed to work as similarly to standard RADIUS as possible.
 
