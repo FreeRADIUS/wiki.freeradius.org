@@ -297,7 +297,7 @@ When you are editing a module configuration, it is good to check the debug outpu
 * are the configuration changes you made showing up in the debug output?
 
       pap {
-      	normalise = yes
+        normalise = yes
       }
 
 Some modules like `expiration` do not have any configuration items, and therefore don't print out any configuration when they are loaded.
