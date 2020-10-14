@@ -290,15 +290,15 @@ Second, it tells you which files is used to read the `pap` module configuration.
 
 Finally, it prints out the configuration that is used by the `pap` module.
 
+      pap {
+        normalise = yes
+      }
+
 When you are editing a module configuration, it is good to check the debug output for that module, to see:
 
 * was the module loaded?
 * is it using the file you edited?
 * are the configuration changes you made showing up in the debug output?
-
-      pap {
-        normalise = yes
-      }
 
 Some modules like `expiration` do not have any configuration items, and therefore don't print out any configuration when they are loaded.
 
