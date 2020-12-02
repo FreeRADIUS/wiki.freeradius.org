@@ -28,7 +28,7 @@ The long description of the likely causes is below
 
 * Windows requires the root certificates to be on the client PC.  If it doesn't have them, you will see the same issue as above.
 
-* Windows does not support wildcard certificates
+* Windows does not support certificates with a wildcard CN, even if the certificate includes non-wildcard SANs. (This is true as of December 2020; tested with Windows 10.)
 
 * Windows XP post SP2 has a bug where it has problems with certificate chains.  i.e. if the server certificate is signed by an intermediate certificate authority, and not a root certificate authority, then authentication will silently fail, as above.
 
