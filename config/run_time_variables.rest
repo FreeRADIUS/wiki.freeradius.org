@@ -79,20 +79,7 @@ Conditional syntax
 Additionally, you can use conditional syntax similar to ${foo:-bar} as
 defined in 'sh'.  For example::
 
-  # %{Foo:-bar}
-  #    When attribute Foo is set:    returns value of Foo
-  #    When attribute Foo is unset:  returns literal string 'bar'
-  # %{Foo:-%{Bar}}
-  #    When attribute Foo is set:    returns value of attribute Foo
-  #    When attribute Foo is unset:  returns value of attribute Bar (if any)
-  # %{Foo:-%{Bar:-baz}}
-  #    When attribute Foo is set:    returns value of attribute Foo
-  #    When attribute Foo is unset:  returns value of attribute Bar (if any)
-  #    When attribute Bar is unset:  returns literal string 'baz'
-
-As of 2.0 pre2 the syntax has changed to a more easily parse-able format::
-
-  # %{Foo:-bar}
+  # %{%{Foo}:-bar}
   #    When attribute Foo is set:    returns value of Foo
   #    When attribute Foo is unset:  returns literal string 'bar'
   # %{%{Foo}:-%{Bar}}
