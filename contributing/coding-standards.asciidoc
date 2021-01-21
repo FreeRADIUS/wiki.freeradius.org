@@ -1,5 +1,4 @@
-Coding standards
-----------------
+# Coding standards
 
 The goal is to have consistent, clear code.  All code should share a common style, format, choice of function / variable names, etc.  This means that people looking at the code see the *code*, and not the wildly different coding styles.
 
@@ -24,11 +23,9 @@ int fr_pton(fr_ipaddr_t *out, char const *value, ssize_t inlen, bool resolve)
 }
 ```
 
-Function naming conventions
-===========================
+## Function naming conventions
+### Verb / noun order
 
-Verb / noun order
-^^^^^^^^^^^^^^^^^
 Nouns should always precede verbs ``<prefix>_<noun>_<verb>[_<verb qualifiers>]``.
 
 ```c
@@ -43,8 +40,7 @@ do_python()
 rest_parse_pairs()
 ```
 
-Name component separation 
-^^^^^^^^^^^^^^^^^^^^^^^^^
+### Name component separation 
 
 Name components should be separated by underscores.
 
@@ -60,8 +56,7 @@ frpairfind
 fr_pairfind
 ```
 
-Variable names
-^^^^^^^^^^^^^^
+### Variable names
 
 Variable names should be unambiguous, and should describe the thing they represent in plain english.  Contractions should be avoided in the majority of cases, especially if there are multiple ways of writing them.
 
@@ -80,8 +75,7 @@ eap_session_t *eps;
 eap_session_t *eap_sess;
 ```
 
-Function names
-^^^^^^^^^^^^^^
+### Function names
 
 Should describe the operation they perform in plain english.  Contractions should be avoided in the majority of cases, especially if there are multiple ways of writing them.
 
@@ -110,41 +104,31 @@ fr_pair_alloc_with_da   /* Non standard preposition */
 mod_ms_aa               /* Gratuitous and unnecessary use of non-standard and ambiguous acronyms */
 ```
 
-Prefixes / namespaces
-^^^^^^^^^^^^^^^^^^^^^
-
-Protocol library ``fr_``
-""""""""""""""""""""""""
+### Prefixes / namespaces
+#### Protocol library ``fr_``
 All functions in the protocol library should be prefixed with ``fr``. The rationale is that as libfreeradius is a library intended to be used by 3rd party applications it requires a namespace to avoid conflicts.
 
-Server library ``<group>_``
-"""""""""""""""""""""""""""
+#### Server library ``<group>_``
 Functions in the server library should not have a global prefix, but should use a common prefix i.e. functions which manipulate value pairs should use the ``pair_`` prefix, dictionary functions should use the ``dict_`` prefix.
 
-Modules
-"""""""
+#### Modules
 Public functions should use the ``mod_`` prefix, e.g. ``mod_authorize``, ``mod_authentication``, ``mod_instantiate``. If the module uses its own library, those functions should be prefixed with the name of the module e.g. ``python_``, ``rest_``, ``eap_``.
 
 Ideally, all of the functions in a module should be ``static``.  If they cannot be that, the function name prefixes given above are *required*.
 
-Instantiation and destruction
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+### Instantiation and destruction
 Library and structure initialisations functions should use the verb ``init``. Functions that initialise structures should expect them to contain garbage values (be uninitialised).
 
 Structure allocation functions should use the verb ``alloc``. ``create`` should not be used.
 
 Explicit ``free`` or ``destroy`` functions should be avoided, and talloc destructors used wherever possible. Talloc destructor functions should be static and be prefixed with ``_`` to mark them as private e.g. ``_fr_pair_free()``
 
-Callbacks
-^^^^^^^^^
+### Callbacks
 
 Callbacks should be prefixed with a ``_`` to mark them as private e.g. ``int _my_comparator(int a, int b)``.
 
-Return types
-============
-
-Boolean
-^^^^^^^
+## Return types
+### Boolean
 
 ``bool`` is used where the function is answering a true/false question (is a predicate). A good example is the ``is_whitespace`` function, which checks if the entire string is made up of whitespace.
 
@@ -159,8 +143,7 @@ bool is_whitespace(char const *value)
 }
 ```
 
-Integer
-^^^^^^^
+### Integer
 ``int`` should be used for most functions. Negative integers indicate failure, zero indicates success, positive integers indicate success with caveats.
 
 If you find a function returns significant (>= 4) numbers of different integer values, you should define an enum type so that it's clear in calling code what the different values mean.
@@ -187,9 +170,7 @@ func_rcode_t my_function(int arg0, int arg1)
 }
 ```
 
-Pointer
-^^^^^^^
-
+### Pointer
 Used only for allocation functions where there's a single simple failure mode (in which case NULL is returned).
 
 ```c
@@ -218,8 +199,7 @@ int complicated_memory_alloc(TALLOC_CTX *ctx, my_structure_t **out, int arg0, in
 }
 ```
 
-Argument order
-==============
+## Argument order
 
 Arguments should be in the following order
 
@@ -229,8 +209,7 @@ Arguments should be in the following order
 
 For modules the instance data pointer should be directly before the ``REQUEST *`` pointer.
 
-Code style
-==========
+## Code style
 
 FreeRADIUS code style is very similar to 1TBS (one true brace style) with two major differences.
 
@@ -299,15 +278,13 @@ If in doubt the files below are good examples to follow:
 - https://github.com/FreeRADIUS/freeradius-server/blob/master/src/lib/protocol/radius/encode.c
 
 
-No trailing whitespace, newline at the end of the file
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+### No trailing whitespace, newline at the end of the file
 
 Many editors support trimming trailing whitespace and adding a newline at the end of the file automatically.
 
 You should enable these features.
 
-Arguments align with the end of the function name
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+### Arguments align with the end of the function name
 
 This is true for function declarations, definitions, and calls. Grouping related arguments together on the same line is also preferred.
 
@@ -331,8 +308,7 @@ int my_function_with_lots_of_args(fr_ipaddr_t *src, uint16_t src_port, fr_ipaddr
 
 ```
 
-Hard break at 120 columns
-^^^^^^^^^^^^^^^^^^^^^^^^^
+### Hard break at 120 columns
 
 It's not 1978, 80x24 VT100 terminals have long been consigned to the electronics recycling bin (hopefully).
 
@@ -340,8 +316,7 @@ We believe code is perfectly readable up to 120 columns, that and over applicati
 
 Strings should also be broken at 120 columns for consistency.
 
-Always collapse or omit bodies (where possible)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+### Always collapse or omit bodies (where possible)
 
 If a condition or loop and its body can be collapsed onto a single line, or omitted, then do so.
 
@@ -379,8 +354,7 @@ while (foo())
 for (i = 0; i < 10; i++) {}
 ```
 
-Return early
-^^^^^^^^^^^^
+### Return early
 
 Avoid unnecessary condition nesting by returning as soon as there's an error, or the function has done its useful work.
 
@@ -416,8 +390,7 @@ int my_func(char const *value)
 }
 ```
 
-Outdent goto labels
-^^^^^^^^^^^^^^^^^^^
+### Outdent goto labels
 
 Goto labels are one level of indentation lower than the code they label.
 
@@ -456,8 +429,7 @@ int my_func(char const *value)
 ```
 
 
-Error gotos jump backwards
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+### Error gotos jump backwards
 
 Error exit points and their goto labels should be defined the first time they occur in a function.
 
@@ -497,8 +469,7 @@ error:
 }
 ```
 
-Const on the right
-^^^^^^^^^^^^^^^^^^
+### Const on the right
 
 Allows const to be read consistently as applying to the type on the left.
 
@@ -512,8 +483,7 @@ char const * const *
 const char * const *
 ```
 
-Variable declarations at the top of blocks
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+### Variable declarations at the top of blocks
 
 Variables don't have to be defined at the start of the function, but they should be defined at the start of a block.
 This can be any type of block, even an anonymous one ``{}``.
