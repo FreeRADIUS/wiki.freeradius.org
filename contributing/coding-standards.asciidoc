@@ -521,3 +521,38 @@ inf func(int a, int b)
 	return 0;
 }
 ```
+
+## Use of __attribute__
+
+
+
+## Disabling compiler warnings
+
+The only time it's acceptable to disable compiler warnings is where they're being produced by 3rd party libraries, or when there is absolutely no other way to deal with them. If at all possible code in FreeRADIUS should be fixed not to produce compiler warnings.
+
+Six diagnostic control macros are available in all FreeRADIUS source files:
+
+- `DIAG_OFF(<diagnostic>)` ignores a diagnostic.
+- `DIAG_ON(<diagnostic>)` sets the specified diagnostic to produce a warning.
+- `DIAG_OFF_OPTIONAL(<diagnostic>)` ignores a diagnostic, and will not produce a warning itself if the diagnostic is unknown by the compiler.
+- `DIAG_ON_OPTIONAL(<diagnostic>)` sets the specified diagnostic to produce a warning, and will not produce a warning itself if the diagnostic is unknown by the compiler.
+- `DIAG_PUSH()` stores the current state of all diagnostics.
+- `DIAG_POP()` restores the previous state of all diagnostics.
+
+`DIAG_ON[_OPTIONAL]` and `DIAG_OFF[_OPTIONAL]` macros should be used to wrap an area of code.  They should used in balanced pairs in the majority of cases.
+
+**Example**
+```c
+DIAG_OFF_OPTIONAL(documentation)
+#include <mruby.h>
+#include <mruby/compile.h>
+#include <mruby/array.h>
+#include <mruby/hash.h>
+#include <mruby/numeric.h>
+#include <mruby/string.h>
+#include <mruby/variable.h>
+DIAG_ON_OPTIONAL(documentation)
+```
+
+The pair of macro uses above disable the `-Wdocumentation` diagnostic for mruby headers. `-Wdocumentation` will produce a warning if doxygen style comment blocks are not correctly composed.  We don't control the mruby headers and we will not be calling doxygen to build documentation based on them, so it's fine to disable the warning.  `-Wdocumentation` is only emitted by clang hence the use of `DIAG_(OFF|ON)_OPTIONAL`.
+
