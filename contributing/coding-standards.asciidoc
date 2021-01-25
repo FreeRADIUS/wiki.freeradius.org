@@ -522,7 +522,9 @@ inf func(int a, int b)
 }
 ```
 
-## Use of __attribute__
+## Use of `__attribute__` (`CC_HINT()`)
+
+
 
 
 
@@ -539,9 +541,16 @@ Six diagnostic control macros are available in all FreeRADIUS source files:
 - `DIAG_PUSH()` stores the current state of all diagnostics.
 - `DIAG_POP()` restores the previous state of all diagnostics.
 
+[NOTE]
+====
+For compilers other than GCC > 4.2 and clang > 2.8 these macros will be disabled.
+====
+
 `DIAG_ON[_OPTIONAL]` and `DIAG_OFF[_OPTIONAL]` macros should be used to wrap an area of code.  They should used in balanced pairs in the majority of cases.
 
-**Example**
+.Disabling warnings for 3rd party headers
+[example]
+====
 ```c
 DIAG_OFF_OPTIONAL(documentation)
 #include <mruby.h>
@@ -555,4 +564,4 @@ DIAG_ON_OPTIONAL(documentation)
 ```
 
 The pair of macro uses above disable the `-Wdocumentation` diagnostic for mruby headers. `-Wdocumentation` will produce a warning if doxygen style comment blocks are not correctly composed.  We don't control the mruby headers and we will not be calling doxygen to build documentation based on them, so it's fine to disable the warning.  `-Wdocumentation` is only emitted by clang hence the use of `DIAG_(OFF|ON)_OPTIONAL`.
-
+====
