@@ -634,8 +634,8 @@ Six diagnostic control macros are available in all FreeRADIUS source files:
 
 - `DIAG_OFF(<diagnostic>)` ignores a diagnostic.
 - `DIAG_ON(<diagnostic>)` sets the specified diagnostic to produce a warning.
-- `DIAG_OFF_OPTIONAL(<diagnostic>)` ignores a diagnostic, and will not produce a warning itself if the diagnostic is unknown by the compiler.
-- `DIAG_ON_OPTIONAL(<diagnostic>)` sets the specified diagnostic to produce a warning, but will not produce a warning itself if the diagnostic is unknown by the compiler.
+- `DIAG_OFF_OPTIONAL(<diagnostic>)` ignores a diagnostic, and will not produce a warning itself if the diagnostic is unknown to the compiler.
+- `DIAG_ON_OPTIONAL(<diagnostic>)` sets the specified diagnostic to produce a warning, but will not produce a warning itself if the diagnostic is unknown to the compiler.
 - `DIAG_PUSH()` stores the current state of all diagnostics.
 - `DIAG_POP()` restores the previous state of all diagnostics.
 
