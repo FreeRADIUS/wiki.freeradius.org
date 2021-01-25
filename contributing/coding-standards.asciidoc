@@ -646,7 +646,7 @@ For compilers other than GCC > 4.2 and clang > 2.8 these macros will be disabled
 
 `DIAG_ON[_OPTIONAL]` and `DIAG_OFF[_OPTIONAL]` macros should be used to wrap an area of code.  They should used in balanced pairs in the majority of cases.
 
-.Disabling warnings for 3rd party headers
+.Disabling `-Wdocumentation` diagnostics for 3rd party headers
 [example]
 ====
 ```c
@@ -661,5 +661,5 @@ DIAG_OFF_OPTIONAL(documentation)
 DIAG_ON_OPTIONAL(documentation)
 ```
 
-The pair of macro uses above disable the `-Wdocumentation` diagnostic for mruby headers. `-Wdocumentation` will produce a warning if doxygen style comment blocks are not correctly composed.  We don't control the mruby headers and we will not be calling doxygen to build documentation based on them, so it's fine to disable the warning.  `-Wdocumentation` is only emitted by clang hence the use of `DIAG_(OFF|ON)_OPTIONAL`.
+The pair of macro calls above disable and re-enable the `-Wdocumentation` diagnostic for mruby headers. `-Wdocumentation` will produce a warning if doxygen style comment blocks are not correctly composed.  We don't control the mruby headers and we will not be calling doxygen to build documentation based on them, so it's fine to disable the warning.  `-Wdocumentation` is only emitted by clang hence the use of `DIAG_(OFF|ON)_OPTIONAL`.
 ====
