@@ -630,7 +630,7 @@ static uint64_t trunk_requests_per_connection(uint16_t *conn_count_out, uint32_t
 
 The only time it's acceptable to disable compiler warnings is where they're being produced by 3rd party libraries, or when there is absolutely no other way to deal with them. If at all possible code in FreeRADIUS should be fixed not to produce compiler warnings.
 
-Six diagnostic control macros are available in all FreeRADIUS source files:
+Six diagnostic control macros are available to all FreeRADIUS source files:
 
 - `DIAG_OFF(<diagnostic>)` ignores a diagnostic.
 - `DIAG_ON(<diagnostic>)` sets the specified diagnostic to produce a warning.
