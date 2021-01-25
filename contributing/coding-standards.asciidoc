@@ -522,7 +522,8 @@ inf func(int a, int b)
 }
 ```
 
-## Use of `__attribute__` (`CC_HINT()`)
+## Managing compiler warnings and behaviour
+### Use of `__attribute__` (`CC_HINT()`)
 
 The `CC_HINT(<attribute>)` macro is used in FreeRADIUS code to pass `__attribute__` hints to the compiler.
 
@@ -530,7 +531,8 @@ The use of a macro was done mostly for legacy reasons to allow `CC_HINT` to disa
 
 Common compiler attributes/equivalent macros in the FreeRADIUS source are:
 
-- `CC_HINT(nonnull)`, `CC_HINT(nonnull(<arg_num0>, <arg_num1>, <arg_numN>))` marks up all arguments, or specific arguments to a function as being nonnull.  The compiler will then warn if a NULL pointer value is passed explicitly in a `nonnull` argument. Clang's `ubsan` (when enabled) will abort executing if a NULL pointer value is passed to a `nonnull` argument. arg_nums are indexed from 1.
+#### `CC_HINT(nonnull)` and `CC_HINT(nonnull(<arg_num0>, <arg_num1>, <arg_numN>))`
+Marks up all arguments `nonnull`, or specific arguments to a function as being nonnull `nonnull(<arg_num...)`, as being non-NULL.  The compiler will warn if a NULL pointer value is passed explicitly in a `nonnull` argument. Clang's `ubsan` (when enabled) will abort executing the program if a NULL pointer is passed to a `nonnull` argument. arg_nums are indexed from 1.
 
 .Marking arguments up as non-null
 [example]
@@ -548,7 +550,8 @@ int fr_control_callback_add(fr_control_t *c, uint32_t id, void *ctx, fr_control_
 Arguments `c` and `callback` are required to be non-NULL. `ctx` may still be NULL.
 ====
 
-* `CC_HINT(warn_unused_result)` require that the return value of a function be assigned to something.  This is particularly useful for:
+#### `CC_HINT(warn_unused_result)`
+Requires that the return value of a function be assigned to something.  This is particularly useful for:
 ** functions returning resources such as handles which will need to be released.
 ** functions returning memory that will need to be freed.
 ** functions returning error codes which must be checked.
@@ -561,7 +564,8 @@ fr_pair_t *fr_pair_afrom_da(TALLOC_CTX *ctx, fr_dict_attr_t const *da) CC_HINT(w
 ```
 ====
 
-* `CC_HINT(format (printf, <arg_num_fmt>, <arg_num_variadic>))` mark up a function as accepting a fmt string and arguments.  `arg_num`s are indexes from 1. `<arg_num_fmt>` is the argument number of the format string, `<arg_num_variadic>` is the argument number variadic arguments start at (`...` in the function signature).
+#### `CC_HINT(format (printf, <arg_num_fmt>, <arg_num_variadic>))`
+Marks up a function as accepting a fmt string and arguments. `<arg_num_fmt>` is the argument number of the format string, `<arg_num_variadic>` is the argument number variadic arguments start at (`...` in the function signature).  arg_nums are indexed from 1.
 
 .Hinting to the compiler that the `cf_log` function accepts printf style arguments
 [example]
@@ -570,7 +574,8 @@ fr_pair_t *fr_pair_afrom_da(TALLOC_CTX *ctx, fr_dict_attr_t const *da) CC_HINT(w
 void cf_log(fr_log_type_t type, CONF_ITEM const *ci, char const *file, int line, char const *fmt, ...) CC_HINT(format (printf, 5, 6));
 ```
 ====
-* `NEVER_RETURNS` marks up a function as causing the process to exit.
+#### `NEVER_RETURNS`
+Marks up a function as causing the process to exit.
 
 .Usage functions generally never return and cause the program to exit
 [example]
@@ -588,7 +593,8 @@ static void NEVER_RETURNS usage(void)
 ```
 ====
 
-* `UNUSED marks` up an argument as being unused (thus avoiding unused argument warnings).
+#### `UNUSED`
+Marks up an argument as being unused (thus avoiding unused argument warnings).
 
 .`radmin_help` is a callback in the control socket API, it doesn't use all the arguments passed to it
 [example]
@@ -599,7 +605,8 @@ static int radmin_help(UNUSED int count, UNUSED int key)
 ```
 ====
 
-* `NDEBUG_UNUSED` marks up an argument as being unused for non-debug builds only.
+#### `NDEBUG_UNUSED`
+Marks up an argument as being unused for non-debug builds only.
 
 .In this function the `verify` argument is only used in debug builds
 [example]
@@ -611,8 +618,7 @@ static uint64_t trunk_requests_per_connection(uint16_t *conn_count_out, uint32_t
 ```
 ====
 
-
-## Disabling compiler warnings
+### Disabling compiler warnings
 
 The only time it's acceptable to disable compiler warnings is where they're being produced by 3rd party libraries, or when there is absolutely no other way to deal with them. If at all possible code in FreeRADIUS should be fixed not to produce compiler warnings.
 
