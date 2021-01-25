@@ -559,9 +559,10 @@ Arguments `c` and `callback` are required to be non-NULL. `ctx` may still be NUL
 
 #### `CC_HINT(warn_unused_result)`
 Requires that the return value of a function be assigned to something.  This is particularly useful for:
-** functions returning resources such as handles which will need to be released.
-** functions returning memory that will need to be freed.
-** functions returning error codes which must be checked.
+
+* functions returning resources such as handles which will need to be released.
+* functions returning memory that will need to be freed.
+* functions returning error codes which must be checked.
 
 .`fr_pair_afrom_da` returns a new `fr_pair_t` which must be recorded somewhere otherwise there'll be a memory leak.
 [example]
