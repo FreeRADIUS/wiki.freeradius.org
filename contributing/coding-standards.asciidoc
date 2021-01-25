@@ -630,14 +630,14 @@ static uint64_t trunk_requests_per_connection(uint16_t *conn_count_out, uint32_t
 
 The only time it's acceptable to disable compiler warnings is where they're being produced by 3rd party libraries, or when there is absolutely no other way to deal with them. If at all possible code in FreeRADIUS should be fixed not to produce compiler warnings.
 
-Six diagnostic control macros are available to all FreeRADIUS source files:
+Four diagnostic control macros are available to all FreeRADIUS source files:
 
 - `DIAG_OFF(<diagnostic>)` ignores a diagnostic.
 - `DIAG_ON(<diagnostic>)` sets the specified diagnostic to produce a warning.
-- `DIAG_OFF_OPTIONAL(<diagnostic>)` ignores a diagnostic, and will not produce a warning itself if the diagnostic is unknown to the compiler.
-- `DIAG_ON_OPTIONAL(<diagnostic>)` sets the specified diagnostic to produce a warning, but will not produce a warning itself if the diagnostic is unknown to the compiler.
 - `DIAG_PUSH()` stores the current state of all diagnostics.
 - `DIAG_POP()` restores the previous state of all diagnostics.
+
+If a diagnostic that may not be implemented by the compiler is being used, the `DIAG_ON`, `DIAG_OFF` calls can be wrapped with `DIAG_OFF(DIAG_UNKNOWN_PRAGMAS)`, `DIAG_ON(DIAG_UNKNOWN_PRAGMAS)` calls.  An initial attempt was made to implement `DIAG_(ON|OFF)_OPTIONAL` macros, but GCC doesn't seem to support multiple `_Pragma()` calls on the same line correctly.
 
 [NOTE]
 ====
