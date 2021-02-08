@@ -527,7 +527,7 @@ inf func(int a, int b)
 
 The `CC_HINT(<attribute>)` macro is used in FreeRADIUS code to pass `+__attribute__+` hints to the compiler.
 
-We wrap `+__attribute__+` with `CC_HINT` for legacy reasons, as it provided compatibility with compilers that did not support the `+__attribute__+` markup.  `CC_HINT` has been as it's shorter and easier to type.
+We wrap `+__attribute__+` with `CC_HINT` for legacy reasons, as it provided compatibility with compilers that did not support the `+__attribute__+` markup.  `CC_HINT` has been retained as it's shorter and easier to type.
 
 Common compiler attributes/equivalent macros in the FreeRADIUS source are:
 
