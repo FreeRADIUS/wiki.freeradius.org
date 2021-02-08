@@ -657,20 +657,21 @@ Four diagnostic control macros are available to all FreeRADIUS source files:
 - `DIAG_PUSH()` stores the current state of all diagnostics.
 - `DIAG_POP()` restores the previous state of all diagnostics.
 
-If a diagnostic that may not be implemented by the compiler is being used, the `DIAG_ON`, `DIAG_OFF` calls can be wrapped with `DIAG_OFF(DIAG_UNKNOWN_PRAGMAS)`, `DIAG_ON(DIAG_UNKNOWN_PRAGMAS)` calls.  An initial attempt was made to implement `DIAG_(ON|OFF)_OPTIONAL` macros, but GCC doesn't seem to support multiple `_Pragma()` calls on the same line correctly.
+If a diagnostic that may not be implemented by the compiler is being used, `DIAG_ON`, `DIAG_OFF` calls can be wrapped with `DIAG_OFF(DIAG_UNKNOWN_PRAGMAS)` and `DIAG_ON(DIAG_UNKNOWN_PRAGMAS)`.
 
 [NOTE]
 ====
 For compilers other than GCC > 4.2 and clang > 2.8 these macros will be disabled.
 ====
 
-`DIAG_ON[_OPTIONAL]` and `DIAG_OFF[_OPTIONAL]` macros should be used to wrap an area of code.  They should used in balanced pairs in the majority of cases.
+`DIAG_ON` and `DIAG_OFF` macros should be used to wrap an area of code producing warnings.  They should used in balanced pairs in the vast majority of cases.
 
 .Disabling `-Wdocumentation` diagnostics for 3rd party headers
 [example]
 ====
 ```c
-DIAG_OFF_OPTIONAL(documentation)
+DIAG_OFF(DIAG_UNKNOWN_PRAGMAS) /* -Wdocumentation is not available in GCC */
+DIAG_OFF(documentation)
 #include <mruby.h>
 #include <mruby/compile.h>
 #include <mruby/array.h>
