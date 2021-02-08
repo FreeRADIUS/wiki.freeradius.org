@@ -638,10 +638,12 @@ If `UNCONST` is used to remove const protection to a const'd global, and you the
 .Using `UNCONST` to pass `const` strings to 3rd party API
 [example]
 ====
+```c
 row = SQLConnect(conn->dbc_handle,
 		 UNCONST(SQLCHAR *, config->sql_server), SQL_NTS,
 		 UNCONST(SQLCHAR *, config->sql_login), SQL_NTS,
 		 UNCONST(SQLCHAR *, config->sql_password), SQL_NTS);
+```
 ====
 
 ### Disabling compiler warnings
