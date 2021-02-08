@@ -629,7 +629,7 @@ static uint64_t trunk_requests_per_connection(uint16_t *conn_count_out, uint32_t
 #### `UNCONST`
 An `UNCONST(_type, _const_ptr)` macro is available in all compilation units. It works by first casting the pointer value to a `uintptr_t` i.e. a integer type wide enough to hold a pointer value, and then, to the type specified by `_type`.
 
-The reason why our `UNCONST` macro has a `_type` argument, is that it's slightly safer than casting to `void *` in terms of having the compiler find type issues, and that it allows inline dereferencing of fields in the `UNCONST` 'd pointer (`UNCONST(a_type_t *, foo)->bar`).
+The reason why our `UNCONST` macro has a `_type` argument, is that it's slightly safer than casting to `void *` in terms of having the compiler find type issues, and that it allows inline dereferencing of fields in the `UNCONST` 'd pointer.
 
 Think carefully before using the `UNCONST` macro.  Try and solve the `const` issues in another way first.  For dictionaries and dictionary attributes `fr_dict_attr_unconst` and `fr_dict_unconst` should be used instead.  These functions will ensure the dictionaries are not in the read-only state before passing back a mutable pointer.
 
