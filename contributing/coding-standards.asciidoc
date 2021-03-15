@@ -525,7 +525,7 @@ inf func(int a, int b)
 ### If arguments should never be NULL, mark with `CC_HINT(nonnull)`
 
 If an argument should never be NULL, the function declaration should be marked up with `CC_HINT(nonnull)`.
-The function _should not_ test the arguments for NULLness.
+The function should not test the arguments for NULLness.
 
 The rationale for this, is marking arguments as `nonnull` makes it easier for static analysis tools to find code paths where `nonnull` arguments are NULL, and produce diagnostic errors at build time.
 
