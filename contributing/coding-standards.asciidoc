@@ -522,7 +522,7 @@ inf func(int a, int b)
 }
 ```
 
-## If arguments should never be NULL, mark with `CC_HINT(nonnull)`
+### If arguments should never be NULL, mark with `CC_HINT(nonnull)`
 
 If an argument should never be NULL, the function declaration should be marked up with `CC_HINT(nonnull)`.
 The function _should not_ test the arguments for NULLness.
