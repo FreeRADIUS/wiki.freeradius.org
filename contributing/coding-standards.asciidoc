@@ -63,11 +63,15 @@ Variable names should be unambiguous, and should describe the thing they represe
 If acronyms must be used, they should usually be formed of the first letter of each of the name components of the structure they represent.
 
 **Good**
-There's internal debate about which one of these is more appropriate, this is one of the few cases where you'll likely see inconsistency, if in doubt, stick with whatever format is used in the source file you're editing.
 ```c
 eap_session_t *eap_session;
 eap_session_t *es;
 ```
+
+[NOTE]
+====
+There's internal debate about which one of these is more appropriate, this is one of the few cases where you'll likely see inconsistency, if in doubt, stick with whatever format is used in the source file you're editing.
+====
 
 **Bad**
 ```c
