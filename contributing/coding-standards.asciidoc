@@ -529,7 +529,7 @@ The function should not test the arguments for NULLness.
 
 The rationale for this, is marking arguments as `nonnull` makes it easier for static analysis tools to find code paths where `nonnull` arguments are NULL, and produce diagnostic errors at build time.
 
-For runtime evaluation, llvm's ubsan can be used to catch NULL `nonnull` arguments.  If you're developing code, use `llvm` and pass `--enable-llvm-undefined-behaviour-sanitizer`, ubsan will then abort if it finds a pointer which should not be NULL.
+For runtime evaluation, llvm's ubsan can be used to catch NULL `nonnull` arguments.  If you're developing code, use `llvm` and pass `--enable-llvm-undefined-behaviour-sanitizer` to `./configure`, ubsan will then abort if it finds a NULL pointer which should not be NULL.
 
 **Good**
 ```c
