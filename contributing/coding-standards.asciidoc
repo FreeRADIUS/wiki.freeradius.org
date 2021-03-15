@@ -2,7 +2,7 @@
 
 The goal is to have consistent, clear code.  All code should share a common style, format, choice of function / variable names, etc.  This means that people looking at the code see the *code*, and not the wildly different coding styles.
 
-Code should be commented.  There are over 100K LoC in the server, and it's impossible to always remember *why* things are done the way they are.  The comments should explain the choices behind the code, the goal, or philosophy, or the "gotcha's".
+Code should be commented.  There are over 100K LoC in the server, and it's impossible to always remember *why* things are done the way they are.  The comments should explain the choices behind the code, the goal, philosophy, or the "gotcha's".
 
 Function documentation should be doxygen style.  Below is an example of doxygen function documentation, use it as a guide when writing your own.
 
