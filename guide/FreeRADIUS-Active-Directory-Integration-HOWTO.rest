@@ -1,4 +1,4 @@
-An alternative for FreeRADIUS 2.x is at: http://deployingradius.com/documents/configuration/active_directory.html
+The definitive guide by Alan DeKok is at: http://deployingradius.com/documents/configuration/active_directory.html
 
 Introduction
 ------------
