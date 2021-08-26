@@ -1,4 +1,4 @@
-Smsotp (Short Message Service One Time Password) is a freeradius module written by Holger Wollf from Siemens which implements two-factor authentication using login/password and an otp (one time password) delivered via SMS: After the user logged in using the correct username and password, a SMS with an otp (one time password) is send to the user's phone. The user is required to enter the otp in order to successfully authenticate himeself.
+Smsotp (Short Message Service One Time Password) is a freeradius module written by Holger Wollf from Siemens which implements two-factor authentication using login/password and an otp (one time password) delivered via SMS: After the user logged in using the correct username and password, a SMS with an otp (one time password) is sent to the user's phone. The user is required to enter the otp in order to successfully authenticate himeself.
 
 # Architecture
 Smsotp ships as a module which can be compiled and dynamically loaded. It connects to a unix domain socket where a daemon (smsotpd) listens. Holger Wollf did not provide his deamon,
