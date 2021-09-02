@@ -45,7 +45,7 @@ sudo apt-get install git libssl-dev devscripts pkg-config libnl-3-dev libnl-genl
 ```
 git clone --depth 1 --no-single-branch https://github.com/FreeRADIUS/freeradius-server.git
 
-cd freeradius-server/scripts/travis/
+cd freeradius-server/scripts/ci/
 
 ./eapol_test-build.sh
 
