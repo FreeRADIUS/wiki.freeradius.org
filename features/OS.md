@@ -16,8 +16,7 @@ The following operating systems are supported by FreeRADIUS.
     [Fedora
     Core](http://download.opensuse.org/repositories/network:/aaa/), etc.)
 -   [FreeBSD](http://portsmon.freebsd.org/portoverview.py?category=net&portname=freeradius)
--   [Mac OSX](http://freeradius.darwinports.com/) (or, in [Leopard
-    Server](http://www.apple.com/opensource/))
+-   [Mac OSX](https://formulae.brew.sh/formula/freeradius-server)
 -   [NetBSD](http://pkgsrc.se/net/freeradius)
 -   [OpenBSD](http://ports.openbsd.nu/net/freeradius)
 -   [DragonFlyBSD](http://pkgsrc.se/net/freeradius) (uses NetBSD pkgsrc)
