@@ -1,1 +1,1 @@
-doc/antora/modules/tutorials/pages/unlang_policies.adoc
+doc/antora/modules/reference/pages/policy/index.adoc
