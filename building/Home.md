@@ -1,1 +1,1 @@
-doc/antora/modules/ROOT/pages/index.adoc
+doc/antora/modules/installation/pages/source.adoc
