@@ -1,1 +1,1 @@
-doc/antora/modules/ROOT/pages/index.adoc
+doc/antora/modules/reference/pages/policy/index.adoc
