@@ -1,1 +1,1 @@
-doc/antora/modules/howto/pages/os/index.adoc
+doc/antora/modules/ROOT/pages/index.adoc
