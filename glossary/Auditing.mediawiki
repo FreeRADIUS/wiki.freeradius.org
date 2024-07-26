@@ -1,1 +1,1 @@
-doc/antora/modules/howto/pages/modules/ldap/authentication.adoc
+doc/antora/modules/ROOT/pages/index.adoc
