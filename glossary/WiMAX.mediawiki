@@ -1,4 +1,1 @@
-''WiMAX''' is defined as '''W'''orldwide '''I'''nteroperability for '''M'''icrowave '''Acc'''ess by the WiMAX Forum, formed in June 2001 to promote conformance and interoperability of the [[IEEE 802.16]] standard, officially known as WirelessMAN. The Forum describes WiMAX as "a standards-based technology enabling the delivery of last mile wireless broadband access as an alternative to cable and DSL".
-
-==See Also==
-* [[Wi-Fi]]
+doc/antora/modules/ROOT/pages/index.adoc
