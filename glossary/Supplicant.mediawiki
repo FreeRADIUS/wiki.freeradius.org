@@ -1,6 +1,1 @@
-The term '''supplicant''' is used in the [[IEEE 802.1X]] standard, where the supplicant is an entity at one end of a point-to-point LAN segment that seeks to be authenticated by an [[authenticator]] attached to the other end of that link.
-
-==See Also==
-
-* [[IEEE 802.1X]]
-* [[WPA Supplicant]]
+doc/antora/modules/ROOT/pages/index.adoc
