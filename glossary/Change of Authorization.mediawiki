@@ -1,4 +1,1 @@
-==See Also==
-
-* [[Disconnect Messages]]
-* RFC 3576
+doc/antora/modules/ROOT/pages/index.adoc
