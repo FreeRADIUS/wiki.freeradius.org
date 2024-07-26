@@ -1,16 +1,1 @@
-The open-source [[DIAMETER]] implementation based on RFC 3588 designed by the IETF AAA Working Group. 
-
-The source code of the Open Diameter software is available under the combination of Lesser GNU Public License and GNU Public License. The base protocol implementation is available as a C++ library and  currently supports Linux, BSD and Windows systems.
-
-This implementation is not maintained anymore. 
-
-==External Links==
-
-* [http://www.opendiameter.org/ Open Diameter Website]
-* [http://www.freediameter.net/ freeDiameter Website, another implementation in C]
-* [http://www.openaaa.org/ Open Source Diameter Java IMS optimised (hosted by Traffix Systems)]
-
-==See Also==
-
-* [[DIAMETER]]
-* [[RADIUS]]
+doc/antora/modules/ROOT/pages/index.adoc
