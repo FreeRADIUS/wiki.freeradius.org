@@ -1,16 +1,1 @@
-==PLUGGABLE AUTHENTICATION MODULES (PAM)==
-
-PAM is basically a flexible mechanism for authenticating users on the UNIX Operating System family. Since the beginnings of UNIX, authenticating a user has been accomplished via the user entering a password and the system checking if the entered password corresponds to the encrypted official password that is stored in /etc/passwd . The idea being that the user *is* really that user if and only if they can correctly enter their secret password.
-
-That was in the beginning. Since then, a number of new ways of authenticating users have become popular. Including more complicated replacements for the /etc/passwd file, and hardware devices Smart cards etc.. 
-
-The problem is that each time a new authentication scheme is developed, it requires all the necessary programs (login, ftpd etc...) to be rewritten to support it. 
-
-PAM provides a way to develop programs that are independent of authentication scheme. These programs need "authentication modules" to be attached to them at run-time in order to work. Which authentication module is to be attached is dependent upon the local system setup and is at the discretion of the local system administrator.
-
-==See Also==
-
-* [[rlm_pam]]
-* [http://www.opengroup.org/tech/rfc/rfc86.0.html RFC 86.0 ]
-* [http://www.kernel.org/pub/linux/libs/pam/ Linux PAM]
-* [http://www.sun.com/software/solaris/pam/ Solaris PAM Documentation]
+doc/antora/modules/ROOT/pages/index.adoc
