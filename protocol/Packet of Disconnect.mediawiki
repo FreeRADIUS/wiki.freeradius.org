@@ -1,1 +1,1 @@
-#REDIRECT [[Disconnect Messages]]
+doc/antora/modules/howto/pages/protocols/Disconnect Messages
