@@ -1,11 +1,1 @@
-== JRadius module for freeradius ==
-
-=== PURPOSE ===
-
-To allow module writers to write modules in the Java language.
-
-=== NOTE ===
-
-The rlm_jradius module is only available in the CVS head (FreeRADIUS 2.0).
-
-See [http://coova.org/JRadius/FreeRADIUS http://coova.org/JRadius/FreeRADIUS] for details.
+doc/antora/modules/ROOT/pages/index.adoc
