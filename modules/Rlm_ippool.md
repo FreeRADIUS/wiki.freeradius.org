@@ -1,3 +1,6 @@
+doc/antora/modules/raddb/pages/mods-available/redis_ippool.adoc
+
+
 The '''rlm_ippool''' [[module]] helps manage [[IP Pool]]s.
 
 {{Default in the server source|src/modules/rlm_ippool}}
