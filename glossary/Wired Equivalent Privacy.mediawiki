@@ -1,1 +1,1 @@
-doc/antora/modules/howto/pages/Wired Equivalent Privacy
+doc/antora/modules/concepts/pages/wep.adoc
