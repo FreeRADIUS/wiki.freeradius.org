@@ -1,1 +1,1 @@
-doc/antora/modules/howto/pages/NAC
+doc/antora/modules/concepts/pages/nac.adoc
