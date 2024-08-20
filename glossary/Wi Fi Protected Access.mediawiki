@@ -1,1 +1,1 @@
-doc/antora/modules/howto/pages/WPA
+doc/antora/modules/concepts/pages/wpa.adoc
