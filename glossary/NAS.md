@@ -1,1 +1,1 @@
-doc/antora/modules/raddb/pages/sites-available/NAS
+doc/antora/modules/concepts/pages/nas.adoc
