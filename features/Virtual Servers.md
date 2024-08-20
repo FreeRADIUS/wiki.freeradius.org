@@ -1,1 +1,1 @@
-doc/antora/modules/howto/pages/Virtual Servers
+doc/antora/modules/concepts/pages/virtual_servers.adoc
