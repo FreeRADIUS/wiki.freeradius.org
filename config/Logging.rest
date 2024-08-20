@@ -1,1 +1,1 @@
-doc/antora/modules/reference/pages/xlat/log.adoc
+doc/antora/modules/reference/pages/xlat/index.adoc
