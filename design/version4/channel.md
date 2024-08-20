@@ -1,1 +1,1 @@
-doc/antora/modules/howto/pages/Message Channel
+doc/antora/modules/ROOT/pages/index.adoc
