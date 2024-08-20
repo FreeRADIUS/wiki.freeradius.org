@@ -1,1 +1,1 @@
-doc/antora/modules/howto/pages/Application Layer
+doc/antora/modules/ROOT/pages/index.adoc
