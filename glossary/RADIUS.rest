@@ -1,1 +1,1 @@
-doc/antora/modules/concepts/pages/RADIUS
+doc/antora/modules/concepts/pages/radius.adoc
