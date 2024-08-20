@@ -1,1 +1,1 @@
-doc/antora/modules/reference/pages/xlat/List of xlat expansions
+doc/antora/modules/reference/pages/xlat/index.adoc
