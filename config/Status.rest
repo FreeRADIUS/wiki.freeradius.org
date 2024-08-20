@@ -1,1 +1,1 @@
-doc/antora/modules/raddb/pages/sites-available/status.adoc
+doc/antora/modules/raddb/pages/sites-available/index.adoc
