@@ -1,1 +1,1 @@
-doc/antora/modules/howto/pages/Performance
+doc/antora/modules/concepts/pages/performance.adoc
