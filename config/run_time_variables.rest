@@ -1,1 +1,1 @@
-doc/antora/modules/raddb/pages/Run-time variables
+doc/antora/modules/raddb/pages/index.adoc
