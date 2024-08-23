@@ -1,1 +1,1 @@
-doc/antora/modules/raddb/pages/sites-available/dynamic-clients.adoc
+doc/antora/modules/raddb/pages/sites-available/index.adoc
