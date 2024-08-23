@@ -1,1 +1,1 @@
-doc/antora/modules/concepts/pages/AAAA
+doc/antora/modules/concepts/pages/aaa.adoc
