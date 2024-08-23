@@ -1,1 +1,1 @@
-doc/antora/modules/howto/pages/The IO Layer
+doc/antora/modules/ROOT/pages/index.adoc
