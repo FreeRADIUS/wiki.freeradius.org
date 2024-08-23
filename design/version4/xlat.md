@@ -1,1 +1,1 @@
-doc/antora/modules/howto/pages/Async xlat in v4
+doc/antora/modules/ROOT/pages/index.adoc
