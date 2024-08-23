@@ -1,1 +1,1 @@
-doc/antora/modules/howto/pages/Async Paircompare
+doc/antora/modules/ROOT/pages/index.adoc
