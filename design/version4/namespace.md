@@ -1,1 +1,1 @@
-doc/antora/modules/howto/pages/Namespaces
+doc/antora/modules/ROOT/pages/index.adoc
