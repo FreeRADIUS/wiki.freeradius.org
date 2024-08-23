@@ -1,1 +1,1 @@
-doc/antora/modules/howto/pages/Named Subattributes
+doc/antora/modules/ROOT/pages/index.adoc
