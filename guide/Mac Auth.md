@@ -1,1 +1,1 @@
-doc/antora/modules/howto/pages/os/Mac Auth
+doc/antora/modules/ROOT/pages/index.adoc
