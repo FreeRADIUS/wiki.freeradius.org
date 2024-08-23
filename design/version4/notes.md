@@ -1,1 +1,1 @@
-doc/antora/modules/raddb/pages/sites-available/Miscellaneous Notes
+doc/antora/modules/raddb/pages/sites-available/index.adoc
