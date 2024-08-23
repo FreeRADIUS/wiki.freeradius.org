@@ -1,1 +1,1 @@
-doc/antora/modules/howto/pages/Signaling
+doc/antora/modules/ROOT/pages/index.adoc
