@@ -1,1 +1,1 @@
-doc/antora/modules/howto/pages/Network stats
+doc/antora/modules/ROOT/pages/index.adoc
