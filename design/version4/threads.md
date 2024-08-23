@@ -1,1 +1,1 @@
-doc/antora/modules/howto/pages/Threading
+doc/antora/modules/ROOT/pages/index.adoc
