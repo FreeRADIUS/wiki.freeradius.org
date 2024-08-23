@@ -1,1 +1,1 @@
-doc/antora/modules/raddb/pages/mods-available/linelog.adoc
+doc/antora/modules/raddb/pages/index.adoc
