@@ -1,1 +1,1 @@
-doc/antora/modules/howto/pages/IPpool and radius clients
+doc/antora/modules/ROOT/pages/index.adoc
