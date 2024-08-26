@@ -1,8 +1,1 @@
-An AAA Server is a server or servers that provide [[authentication|glossary/authentication]], [[authorization|glossary/authorization]] and [[accounting|glossary/accounting]] services. These may be co-located with the [[NAS|glossary/NAS]], or more typically, are located on a separate server and communicate with the [[NAS|glossary/NAS]]'s User Management Interface via an AAA protocol.  The three AAA functions may be located on a single server, or may be broken up among multiple servers.
-
-See Also
-----------
-* [[AAAA|glossary/AAAA]]
-* [[RADIUS|glossary/RADIUS]]
-* [[DIAMETER|glossary/DIAMETER]]
-* TACAS
+doc/antora/modules/concepts/pages/aaa.adoc

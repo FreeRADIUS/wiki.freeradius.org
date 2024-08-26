@@ -1,4 +1,1 @@
-# Worked examples on upgrading to version 4
-
- * [Proxy configuration](proxy)
-
+doc/antora/modules/installation/pages/upgrade.adoc

@@ -1,3 +1,1 @@
-This is the driver of the [[rlm_sql]] [[module]] that connects to Firebird [[SQL]] databases.
-
-{{Default in the server source|src/modules/rlm_sql/drivers/rlm_sql_firebird/}}
+doc/antora/modules/howto/pages/modules/sql/index.adoc

@@ -1,5 +1,1 @@
-Auditing refers to the tracking of activity by users.  As opposed to [[accounting]], where the purpose is to track consumption of resources, the purpose of auditing is to determine the nature of a user's network activity.  Examples of auditing information include the identity of the user, the nature of the services used, what hosts were accessed when, what protocols were used, etc.
-
-==See Also==
-
-* [[AAAA]]
+doc/antora/modules/ROOT/pages/index.adoc

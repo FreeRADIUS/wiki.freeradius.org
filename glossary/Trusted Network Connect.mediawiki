@@ -1,8 +1,1 @@
-The Trusted Network Connect Sub Group (TNC-SG) has defined and released an open architecture and a growing set of standards for endpoint integrity. The TNC architecture enables network operators to enforce policies regarding endpoint integrity at or after network connection. The standards ensure multi-vendor interoperability across a wide variety of endpoints, network technologies, and policies.
-
-==See Also==
-
-* [https://www.trustedcomputinggroup.org/groups/network/ Trusted Network Connect Subgroup]
-* [[Network Access Protection]]
-* [[Network Admission Control]]
-* [[Network Access Control]]
+doc/antora/modules/ROOT/pages/index.adoc

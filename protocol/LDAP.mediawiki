@@ -1,8 +1,1 @@
-In FreeRADIUS, the [[rlm_ldap]] module implements LDAP.
-
-==External Links==
-
-* [http://www.novell.com/coolsolutions/feature/15359.html An Introduction to LDAP: Part 1-LDAP Primer]
-* [https://www.netiq.com/documentation/edir_radius/ Integrating Novell eDirectory with FreeRADIUS]
-* [http://www.novell.com/coolsolutions/feature/15383.html Addendum to Integrating Novell eDirectory with FreeRADIUS] (Note: FreeRADIUS 1.x - old)
-* [http://confluence.diamond.ac.uk/display/PAAUTH/Using+LDAP+as+authentication+source Using LDAP pass-through authentication with FreeRADIUS]
+doc/antora/modules/howto/pages/modules/ldap/index.adoc

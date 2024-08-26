@@ -1,9 +1,1 @@
-The '''clients''' file in the FreeRADIUS configuration directory (raddb/) used to contain the list of every client.
-
-'''This file is obsolete and has been removed in all current releases.'''
-
-The old-style FreeRADIUS needed to have clients (portmasters, Linux with portslave etc) configured in this file, and for every client, their "secret password".
-
-Usually this was the same list as in the "[[naslist]]" file, but not every NAS is a client and not every client is a NAS.
-
-'''This functionality is now in /etc/raddb/[[clients.conf]]'''
+doc/antora/modules/ROOT/pages/index.adoc

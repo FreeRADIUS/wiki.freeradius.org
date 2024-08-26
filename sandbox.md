@@ -1,3 +1,2 @@
-# Sandboxed
-
-Test page for trying out the wiki....
+Removed.
+Redirect to /doc/antora/modules/ROOT/pages/index.adoc

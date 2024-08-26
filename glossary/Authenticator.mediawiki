@@ -1,8 +1,1 @@
-In telecommunications, an '''authenticator''' is a symbol or group of symbols, or a series of bits, selected or derived in a prearranged manner and usually inserted at a predetermined point within a smessage or transmission for the purpose of attesting to the validity of the message or transmission.  A letter, numeral, group of letters or numerals, or any combinations of these, attesting to the authenticity of a message or transmission.  
-
-In [[IEEE 802.1X]], an authenticator is an entity at one end of a point-to-point LAN segment that facilitates authentication of the entity attached to the other end of that link.
-
-==See Also==
-
-* [[Supplicant]]
-* [[IEEE 802.1X]]
+doc/antora/modules/ROOT/pages/index.adoc

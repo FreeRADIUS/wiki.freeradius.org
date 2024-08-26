@@ -1,13 +1,1 @@
-[[PANA]] is a draft IETF protocol designed for network access [[authentication]]. As an [[EAP]] transport protocol, it is much like IEEE [[802.1X]] only it is more capable and runs on any link-layer. Currently PANA has support in Linux, FreeBSD and Windows. Please see http://panasec.org/docs/PANA-FAQ.txt for a detailed FAQ.
-
-Note: PANA is not currently supported by [[FreeRADIUS]] but is supported by [[Open Diameter]]
-
-==External Links==
-
-* [http://panasec.org/docs/PANA-FAQ.txt PANA FAQ]
-* [http://panasec.org/ PANA Home Page]
-
-==See Also==
-
-* [[EAP]]
-* [[DIAMETER]]
+doc/antora/modules/ROOT/pages/index.adoc
