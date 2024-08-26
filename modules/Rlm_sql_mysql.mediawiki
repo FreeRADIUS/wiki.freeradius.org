@@ -1,1 +1,1 @@
-doc/antora/modules/howto/pages/modules/sql/mysql
+doc/antora/modules/raddb/pages/mods-available/index.adoc
