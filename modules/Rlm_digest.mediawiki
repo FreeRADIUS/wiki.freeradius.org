@@ -1,1 +1,1 @@
-doc/antora/modules/howto/pages/Digest
+doc/antora/modules/raddb/pages/mods-available/index.adoc
