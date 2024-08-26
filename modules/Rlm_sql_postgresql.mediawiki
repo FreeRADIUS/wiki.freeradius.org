@@ -1,1 +1,1 @@
-doc/antora/modules/howto/pages/modules/sql/SQL postgresql
+doc/antora/modules/raddb/pages/mods-available/index.adoc
