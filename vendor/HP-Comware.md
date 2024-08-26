@@ -1,1 +1,1 @@
-doc/antora/modules/howto/pages/vendors/HP Comware
+doc/antora/modules/ROOT/pages/index.adoc
