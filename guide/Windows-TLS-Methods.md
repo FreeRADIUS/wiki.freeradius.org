@@ -1,1 +1,1 @@
-doc/antora/modules/howto/pages/Windows TLS Methods
+doc/antora/modules/ROOT/pages/index.adoc
