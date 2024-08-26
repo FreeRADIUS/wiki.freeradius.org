@@ -1,1 +1,1 @@
-doc/antora/modules/howto/pages/Lockout
+doc/antora/modules/ROOT/pages/index.adoc
