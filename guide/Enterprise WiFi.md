@@ -132,8 +132,8 @@ configuration files for iOS devices and Mac OS computers.
 There are also web services which cater for a variety of platforms at
 the same time. Many of those are commercial, but some provide their
 services for free or freemium. One such example is the [Enterprise
-Network Configuration Assistant Tool (CAT)](https://802.1x-config.org)
-at <https://802.1x-config.org> - all basic end-user device provisioning
+Network Configuration Assistant Tool (CAT)]https://enterprise-wifi.net/)
+at <https://enterprise-wifi.net/> - all basic end-user device provisioning
 functionality on all supported platforms (Windows, Mac OS, iOS, Linux)
 is free; extra features such as custom branding or digitally signed
 installation programs are a paid-for extra.
